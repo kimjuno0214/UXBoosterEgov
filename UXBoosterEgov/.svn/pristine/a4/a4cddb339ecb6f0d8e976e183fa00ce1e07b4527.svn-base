@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+*
+* @filename mappers/safety/SafetyMapper.xml
+* @author 	safety
+* @since 	2023.01.19
+* @version 	1.0
+* @see
+*
+* << 변경 이력(Modification Information) >>
+*
+* 변경번호 : #1
+* 변경일자 : 2023.01.19
+* 변경사람 : safety
+* 변경내용 : 신규 생성
+ -->
+<mapper namespace="safety">
+
+	<select id="odrSelect" parameterType="map" timeout="0" resultType="map" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* safety.odrSelect 
+		* TB_ODR 조회
+		* @author dooresoft
+		* @since 2023.02.08
+		*/
+		]]>
+        SELECT  ODR_ID                                            -- 차수ID
+              , ODR_YR                                            -- 차수연도
+              , ODR_DIV_CD                                        -- 차수구분코드
+              , ODR                                               -- 차수
+              , CERT_FLD_CD                                       -- 인증분야코드
+              , THEMA                                             -- 테마
+              , TOTQY                                             -- 총수량
+              , BGNG_YMD                                          -- 시작일자
+              , PROGRS_STTUS_CD                                   -- 진행상태코드
+        FROM TB_ODR
+        WHERE 1 = 1
+        <if test=" ODR_ID != null and ODR_ID != '' " >
+        AND ODR_ID = #{ODR_ID}
+        </if>
+        ORDER BY ODR_YR, BGNG_YMD, ODR
+	</select>
+
+	<insert id="odrInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* safety.odrInsert 
+		* TB_ODR 등록
+		* @author dooresoft
+		* @since 2023.02.08
+		*/
+		]]>
+		INSERT INTO TB_ODR (
+                ODR_ID                                            -- 차수ID
+              , ODR_YR                                            -- 차수연도
+              , ODR_DIV_CD                                        -- 차수구분코드
+              , ODR                                               -- 차수
+              , CERT_FLD_CD                                       -- 인증분야코드
+              , THEMA                                             -- 테마
+              , TOTQY                                             -- 총수량
+              , BGNG_YMD                                          -- 시작일자
+              , PROGRS_STTUS_CD                                   -- 진행상태코드
+              , REG_DT                                            -- 등록일시
+              , RGTR_ID)                                          -- 등록자ID
+		VALUES (
+                #{ODR_ID}                                         -- 차수ID
+              , #{ODR_YR}                                         -- 차수연도
+              , #{ODR_DIV_CD}                                     -- 차수구분코드
+              , #{ODR}                                            -- 차수
+              , #{CERT_FLD_CD}                                    -- 인증분야코드
+              , #{THEMA}                                          -- 테마
+              , #{TOTQY}                                          -- 총수량
+              , #{BGNG_YMD}                                       -- 시작일자
+              , #{PROGRS_STTUS_CD}                                -- 진행상태코드
+              , NOW()                                             -- 등록일시
+              , #{_sessionUserCd}                                 -- 등록자ID
+		)
+	</insert>
+
+	<update id="odrUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* safety.odrUpdate 
+		* TB_ODR 수정
+		* @author dooresoft
+		* @since 2023.02.08
+		*/
+		]]>
+		UPDATE TB_ODR
+		SET    MDFCN_DT = NOW()
+		     , MDFR_ID = #{_sessionUserCd}
+		<if test=" ODR_YR != null and ODR_YR != '' ">
+		     , ODR_YR = #{ODR_YR}                                                              -- 차수연도
+		</if>
+		<if test=" ODR_DIV_CD != null and ODR_DIV_CD != '' ">
+		     , ODR_DIV_CD = #{ODR_DIV_CD}                                                      -- 차수구분코드
+		</if>
+		<if test=" ODR != null and ODR != '' ">
+		     , ODR = #{ODR}                                                                    -- 차수
+		</if>
+		<if test=" CERT_FLD_CD != null and CERT_FLD_CD != '' ">
+		     , CERT_FLD_CD = #{CERT_FLD_CD}                                                    -- 인증분야코드
+		</if>
+		<if test=" THEMA != null and THEMA != '' ">
+		     , THEMA = #{THEMA}                                                                -- 테마
+		</if>
+		<if test=" TOTQY != null and TOTQY != '' ">
+		     , TOTQY = #{TOTQY}                                                                -- 총수량
+		</if>
+		<if test=" BGNG_YMD != null and BGNG_YMD != '' ">
+		     , BGNG_YMD = #{BGNG_YMD}                                                          -- 시작일자
+		</if>
+		<if test=" PROGRS_STTUS_CD != null and PROGRS_STTUS_CD != '' ">
+		     , PROGRS_STTUS_CD = #{PROGRS_STTUS_CD}                                            -- 진행상태코드
+		</if>
+		WHERE  ODR_ID = #{ODR_ID}
+	</update>
+
+	<delete id="odrDelete" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* safety.odrDelete 
+		* TB_ODR 삭제
+		* @author dooresoft
+		* @since 2023.02.08
+		*/
+		]]>
+		DELETE FROM TB_ODR
+		WHERE  1 = 1
+		AND ODR_ID = #{ODR_ID}
+	</delete>
+	
+	<select id="odrCheckKey" parameterType="map" timeout="0" resultType="map" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* safety.odrCheckKey 
+		* TB_ODR 조회
+		* @author dooresoft
+		* @since 2023.02.08
+		*/
+		]]>
+        SELECT ODR_YR
+              ,ODR_DIV_CD
+              ,ODR
+              ,CERT_FLD_CD
+        FROM   TB_ODR
+	</select>	
+	
+	<select id="schdulSelect" parameterType="map" timeout="0" resultType="map" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* safety.schdulSelect 
+		* TB_SCHDUL 조회
+		* @author dooresoft
+		* @since 2023.02.08
+		*/
+		]]>
+        SELECT  SCHDUL_ID                                         -- 일정ID
+              , ODR_ID                                            -- 차수ID
+              , SCHDUL_CD                                         -- 일정코드
+              , SCHDUL_NM                                         -- 일정명
+              , PLAN_YMD                                          -- 계획일자
+              , RM                                                -- 비고
+              , SN                                                -- 순번              
+        FROM TB_SCHDUL A, CODE_INFO B
+        WHERE A.SCHDUL_CD = B.CODE_ID
+        AND   B.GROUP_ID = 'SCHDUL_CD'
+        <if test=" ODR_ID != null and ODR_ID != '' " >
+        AND ODR_ID = #{ODR_ID}
+        </if>
+        ORDER BY SN, PLAN_YMD
+	</select>
+	
+	<insert id="schdulSelectInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* safety.schdulSelectInsert 
+		* TB_SCHDUL 등록
+		* @author dooresoft
+		* @since 2023.02.08
+		*/
+		]]>	
+		INSERT INTO TB_SCHDUL
+		     (	SCHDUL_ID                                         -- 일정ID
+              , ODR_ID                                            -- 차수ID
+              , SCHDUL_CD                                         -- 일정코드
+              , SCHDUL_NM                                         -- 일정명
+              , PLAN_YMD                                          -- 계획일자
+              , RM                                                -- 비고
+              , SN												  -- 순번		  
+		      , REG_DT                                            -- 등록일시
+              , RGTR_ID)                                          -- 등록자ID
+		SELECT  FN_GET_KEY('TB_SCHDUL', 'SCH')
+	          , #{ODR_ID}
+	          , CODE_ID
+	          , CODE_NM
+	          , NULL
+			  , NULL
+			  , CODE_ORDER
+			  , NOW()
+			  , #{_sessionUserCd}                               
+		FROM    CODE_INFO 
+		WHERE   GROUP_ID = 'SCHDUL_CD' 
+		AND     USE_YN = 'Y' 
+		AND     CODE_ID <![CDATA[<>]]> '00000'
+	
+	</insert>
+
+	<insert id="schdulInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* safety.schdulInsert 
+		* TB_SCHDUL 등록
+		* @author dooresoft
+		* @since 2023.02.08
+		*/
+		]]>
+		INSERT INTO TB_SCHDUL (
+                SCHDUL_ID                                         -- 일정ID
+              , ODR_ID                                            -- 차수ID
+              , SCHDUL_CD                                         -- 일정코드
+              , SCHDUL_NM                                         -- 일정명
+              , PLAN_YMD                                          -- 계획일자
+              , RM                                                -- 비고
+              , SN                                                -- 순번              
+              , REG_DT                                            -- 등록일시
+              , RGTR_ID)                                          -- 등록자ID
+		VALUES (
+                FN_GET_KEY('TB_SCHDUL', 'SCH')                    -- 일정ID
+              , #{ODR_ID}                                         -- 차수ID
+              , #{SCHDUL_CD}                                      -- 일정코드
+              , #{SCHDUL_NM}                                      -- 일정명
+              , #{PLAN_YMD}                                       -- 계획일자
+              , #{RM}                                             -- 비고
+              , #{SN}                                             -- 순번              
+              , NOW()                                             -- 등록일시
+              , #{_sessionUserCd}                                 -- 등록자ID
+		)
+	</insert>
+
+	<update id="schdulUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* safety.schdulUpdate 
+		* TB_SCHDUL 수정
+		* @author dooresoft
+		* @since 2023.02.08
+		*/
+		]]>
+		UPDATE TB_SCHDUL
+		SET    MDFCN_DT =NOW()
+		     , MDFR_ID = #{_sessionUserCd}
+		<if test=" ODR_ID != null and ODR_ID != '' ">
+		     , ODR_ID = #{ODR_ID}                                                              -- 차수ID
+		</if>
+		<if test=" SCHDUL_CD != null and SCHDUL_CD != '' ">
+		     , SCHDUL_CD = #{SCHDUL_CD}                                                        -- 일정코드
+		</if>
+		<if test=" SCHDUL_NM != null and SCHDUL_NM != '' ">
+		     , SCHDUL_NM = #{SCHDUL_NM}                                                        -- 일정명
+		</if>
+		<if test=" PLAN_YMD != null and PLAN_YMD != '' ">
+		     , PLAN_YMD = #{PLAN_YMD}                                                          -- 계획일자
+		</if>
+		<if test=" RM != null and RM != '' ">
+		     , RM = #{RM}                                                                      -- 비고
+		</if>
+		<if test=" SN != null and SN != '' ">
+		     , SN = #{SN}                                                                      -- 순번
+		</if>		
+		WHERE  SCHDUL_ID = #{SCHDUL_ID}
+	</update>
+
+	<delete id="schdulDelete" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* safety.schdulDelete 
+		* TB_SCHDUL 삭제
+		* @author dooresoft
+		* @since 2023.02.08
+		*/
+		]]>
+		DELETE FROM TB_SCHDUL
+		WHERE  1 = 1
+		AND SCHDUL_ID = #{SCHDUL_ID}
+	</delete>	
+	
+	<select id="selectId" parameterType="map" timeout="0" resultType="map" useCache="false">
+		<![CDATA[
+		/*
+		 *
+		 * safety.selectId
+		 * 날짜조회
+		 * @author dooresoft
+		 * @since 2023.02.94
+		 */
+		]]>
+		SELECT FN_GET_KEY(#{PARAM1}, #{PARAM2}) RETURN_VALUE
+	</select>	
+
+</mapper>

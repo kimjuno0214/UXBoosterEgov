@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="AM010P02" width="460" height="222" titletext="그룹추가/수정" onload="Form_onload" background="white">
+    <Layouts>
+      <Layout height="222" mobileorientation="landscape" width="460">
+        <Div id="divSearch" taborder="37" left="10" top="20" right="10" text="" height="182" minwidth="440" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Static id="staGroupNmT" taborder="0" text="그룹명" left="10" top="48" width="100" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static10" taborder="1" left="108" top="48" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Static id="staGroupENmT" taborder="2" text="그룹영문명" left="10" top="78" width="100" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static01" taborder="3" left="108" top="78" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Static id="staGroupOrderT" taborder="4" text="그룹정렬순서" left="10" top="108" width="100" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static04" taborder="5" left="108" top="108" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Button id="btnCancle" taborder="6" text="닫기" width="58" height="23" cssclass="btn_WF_cancel01" right="10" onclick="btnCancle_onclick" bottom="0"/>
+              <Button id="btnAdd" taborder="7" text="저장" top="0" width="46" height="21" cssclass="btn_WF_save02" right="10" onclick="btnAdd_onclick"/>
+              <Static id="staTitle" taborder="8" text="기본 정보" left="10" top="25" height="21" cssclass="sta_WF_title02" right="0"/>
+              <Edit id="edtGroupNm" taborder="9" left="115" top="52" right="16" height="23" inputfilter="space" cssclass="edt_WF_essential"/>
+              <Edit id="edtGroupENm" taborder="10" left="115" top="82" height="23" right="16" inputfilter="space"/>
+              <Edit id="edtGroupOrder" taborder="11" left="115" top="112" height="23" right="16" inputtype="digit" inputfilter="space" maxlength="2" onchanged="divSearch_edtGroupOrder_onchanged"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsAddressbookGroup">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256" description="프로젝트 코드"/>
+          <Column id="MENU_CD" type="STRING" size="256" description="메뉴 코드"/>
+          <Column id="GROUP_CD" type="STRING" size="256" description="그룹코드(조회)"/>
+          <Column id="GROUP_NM" type="STRING" size="256" description="이름(조회)"/>
+          <Column id="GROUP_ENG_NM" type="STRING" size="256" description="메일(조회)"/>
+          <Column id="GROUP_ORDER" type="STRING" size="256" description="휴대전화(조회)"/>
+          <Column id="REG_CD" type="STRING" size="256" description="등록자"/>
+          <Column id="MOD_CD" type="STRING" size="256" description="수정자"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  그룹추가
+*
+*  @MenuPath    주소록 > 그룹추가
+*  @FileName    AM010P02.xfdl 
+*  @Creator     전영찬
+*  @CreateDate  2019.09.27
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2019.09.27      전영찬             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+//this.fv_nFormVal = null;     //용도
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.Form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+    if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+    {    
+        this.fnInit();
+    }
+}
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Select";
+    
+    var objParent = this.parent;
+    var sParam = "PROJECT_CD='" + objParent.sProjectCd + "' MENU_CD='" + objParent.sMenuCd + "' GROUP_CD='" + objParent.sGroupCd + "'";
+    
+    take.tranSelect(this, sTranId, "AddressbookManagement.addressbookGroupDetail", "", "dsAddressbookGroup", sParam, "fnCallback");
+}
+
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+this.fnSave = function(sTranId)
+{    
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Save";
+	
+	var objParent = this.parent;
+	
+	var sParam    = "PROJECT_CD='" + objParent.sProjectCd + "' MENU_CD='" + objParent.sMenuCd + "' GROUP_CD='" + objParent.sGroupCd + "'";
+    //take.tranSave(this, sTranId, "AddressbookManagement.addressbookGroup", "dsAddressbookGroup", "", sParam, "fnCallback");
+	take.transaction(this, sTranId, "SVC_LOC::ar/addressbookGroupSave.do", "dsAddressbookGroup=dsAddressbookGroup:U", "", sParam, "fnCallback");
+};
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+// 그룹추가 버튼 클릭이벤트
+this.btnAdd_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	if (this.fnCheckForm()) {
+        this.fnSave();
+	}
+};
+
+//취소버튼 클릭 이벤트
+this.btnCancle_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.close();
+};
+
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnInit : 초기화 함수
+ * @param  {String} N/A 
+ * @example this.fnInit();
+ */
+this.fnInit = function()
+{
+    this.divSearch.form.btnAdd.setFocus();
+    
+    if(this.parent.sTitle == "Add") {
+        this.dsAddressbookGroup.addRow();
+		this.dsAddressbookGroup.setColumn(0, "PROJECT_CD",  this.parent.sProjectCd);
+		this.dsAddressbookGroup.setColumn(0, "MENU_CD",     this.parent.sMenuCd);
+		this.divSearch.form.edtGroupNm.setFocus()
+    } else {
+        this.divSearch.form.btnAdd.set_text("수정");
+        this.fnSearch("Select");
+    }
+};
+
+/**
+ * fnCheckForm : 저장전 유효성 체크
+ * @param  {String} sParam N/A
+ * @example this.fnCheckForm();
+ */
+this.fnCheckForm = function()
+{   
+    var objDivSearch = this.divSearch.form;
+    var sGroupNm    = take.nvl(objDivSearch.edtGroupNm.text, "");
+    var sGroupENm   = take.nvl(objDivSearch.edtGroupENm.text, "");
+    var sGroupOrder = take.nvl(objDivSearch.edtGroupOrder.text, "");
+    
+    if(sGroupNm == ""){
+        take.alert(this, "Info", "그룹명을 작성해주세요.");
+        objDivSearch.edtGroupNm.setFocus();
+        return false;
+    } else {
+        if(take.getByteLength(sGroupNm) > 50){
+            take.alert(this, "Info", "그룹명을 15자 내외로 작성해주세요.");
+            objDivSearch.edtGroupNm.setFocus();
+            return false;
+        }
+    }
+    
+    if(sGroupENm != "" && take.getByteLength(sGroupENm) > 150){
+        take.alert(this, "Info", "그룹영문명 최대 길이를 초과했습니다.\n확인해주세요.");
+        objDivSearch.edtGroupENm.setFocus();
+        return false;
+    }
+    
+    if(sGroupOrder == ""){
+        var nOrder = parseInt(this.parent.sOrder) + 1;
+        this.dsAddressbookGroup.setColumn(0, "GROUP_ORDER", nOrder);
+    } else {
+        if(take.getByteLength(sGroupOrder) > 2){
+            take.alert(this, "Info", "그룹정렬순서를 확인해주세요.");
+            objDivSearch.edtGroupOrder.setFocus();
+            return false;
+        }
+    }
+    
+    return true;
+};
+
+// 팝업닫기 -> 사용자지정 팝업콜백함수
+this.fnGoList = function()
+{
+	this.opener.fnPopCallback("AM010P02");
+	this.close();
+};
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "Select" : //조회 콜백
+            //Script
+            break;
+        case "Save" :  //저장 콜백
+            take.alert(this, "Info", "그룹 저장이 완료되었습니다.");
+            this.fnGoList();
+            break;
+        default :
+            break;
+    }        
+};
+
+this.divSearch_edtGroupOrder_onchanged = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
+{
+	if(obj.value == "0") {
+        obj.set_value(1);
+    }
+};]]></Script>
+    <Bind>
+      <BindItem id="item1" compid="divSearch.form.edtGroupNm" propid="value" datasetid="dsAddressbookGroup" columnid="GROUP_NM"/>
+      <BindItem id="item0" compid="divSearch.form.edtGroupENm" propid="value" datasetid="dsAddressbookGroup" columnid="GROUP_ENG_NM"/>
+      <BindItem id="item2" compid="divSearch.form.edtGroupOrder" propid="value" datasetid="dsAddressbookGroup" columnid="GROUP_ORDER"/>
+    </Bind>
+  </Form>
+</FDL>

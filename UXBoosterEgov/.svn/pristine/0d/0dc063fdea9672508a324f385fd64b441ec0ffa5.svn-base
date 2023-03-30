@@ -1,0 +1,1300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="PatternGuide" width="1210" height="3400" titletext="GridGuide">
+    <Layouts>
+      <Layout height="3400" mobileorientation="landscape" width="1210">
+        <Static id="Static00" taborder="0" text="Pattern KIT" left="0" top="0" height="53" textAlign="center" background="#2a3b97" color="#ffffff" font="bold 11pt &quot;Gulim&quot;" right="0"/>
+        <Static id="Static26" taborder="1" text="normal" left="-181" top="698" width="60" height="21" color="#2c4898"/>
+        <Static id="Static237" taborder="2" text="Description" left="0" top="48" width="111" height="720" textAlign="center" background="#f8f8f8" border="1px solid #767676" font="bold 9pt &quot;Gulim&quot;" onclick="Static03_onclick"/>
+        <Static id="Static238" taborder="3" left="110" top="48" height="720" textAlign="center" background="#ffffff" border="1px solid #767676" font="bold 9pt &quot;Gulim&quot;" right="0" text=""/>
+        <Static id="Static239" taborder="4" text="중요 사항을 입력하여 주시기 바랍니다." left="155" top="68" width="270" height="21" cssclass="sta_WF_Help"/>
+        <Div id="Div04" taborder="5" text="Div04" left="153" top="364" width="500" height="75" cssclass="div_WF_Help">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="화면도움말" left="16" top="7" width="95" height="20" cssclass="sta_WF_Help2"/>
+              <Static id="Static01" taborder="1" text="화면도움말입니다.화면도움말입니다." left="19" top="22" width="450" height="48"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static240" taborder="6" text="No Data 이미지" left="0" top="3459" width="111" height="350" textAlign="center" background="#f8f8f8" border="1px solid #767676" font="bold 9pt &quot;Gulim&quot;" onclick="Static03_onclick"/>
+        <Static id="Static241" taborder="7" left="110" top="3459" height="350" textAlign="center" border="1px solid #767676" font="bold 9pt &quot;Gulim&quot;" right="0" text="" background="#ffffff"/>
+        <Grid id="Grid02" taborder="8" useinputpanel="false" left="373" top="3533" width="504" height="226" binddataset="Grid03" scrollbars="autoboth" autoenter="select" nodataimage="url('theme://images/Alert_nodataimage.png')" onclick="Grid02_onclick" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="Column0"/>
+                <Cell col="1" text="Column01"/>
+                <Cell col="2" text="Column02"/>
+                <Cell col="3" text="Column03"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0"/>
+                <Cell col="1" text="bind:순번"/>
+                <Cell col="2" text="bind:Column01"/>
+                <Cell col="3" text="bind:Column02"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static242" taborder="9" text="활용예시" left="371" top="3493" width="60" height="21" color="#2c4898"/>
+        <Static id="Static243" taborder="10" left="161" top="3534" width="160" height="41" background="url('theme://images/Alert_nodataimage.png') no-repeat"/>
+        <Static id="Static244" taborder="11" text="No Data 이미지" left="159" top="3493" width="110" height="21" color="#2c4898"/>
+        <Static id="Static40" taborder="12" text="Grid" left="0" top="767" width="111" height="2694" textAlign="center" background="#f8f8f8" border="1px solid #767676" font="bold 9pt &quot;Gulim&quot;" onclick="Static03_onclick"/>
+        <Static id="Static41" taborder="13" left="153" top="113" width="86" height="15" font="bold 9pt/normal &quot;Guliml&quot;" text="(Grid 예시)"/>
+        <Grid id="Grid00" taborder="14" left="154" top="136" width="280" height="148" binddataset="Dataset00" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="93"/>
+                <Column size="90"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+                <Row size="30" band="summ"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="텍스트"/>
+                <Cell col="1" text="숫자"/>
+                <Cell col="2" text="버튼"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0" textAlign="left"/>
+                <Cell col="1" text="bind:Column1" textAlign="right"/>
+                <Cell col="2" text="bind:Column2" displaytype="buttoncontrol" edittype="button"/>
+              </Band>
+              <Band id="summary">
+                <Cell colspan="2" text="총합계" textAlign="right"/>
+                <Cell col="2" text="2,754,532" textAlign="right"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static51" taborder="15" text="중요 사항을 입력하여 주시기 바랍니다." left="154" top="294" width="270" height="21" cssclass="sta_WF_Help"/>
+        <Static id="Static52" taborder="16" left="154" top="284" width="40" height="10" cssclass="sta_GD_Square" visible="false"/>
+        <Static id="Static62" taborder="17" text="10" left="135" top="280" width="20" height="15" cssclass="sta_Guide_Size" visible="false"/>
+        <Static id="Static63" taborder="18" left="146" top="68" width="7" height="21" cssclass="sta_Guide_Height"/>
+        <Static id="Static64" taborder="19" text="21" left="130" top="68" width="20" height="21" cssclass="sta_Guide_Size"/>
+        <Static id="Static65" taborder="20" left="499" top="112" width="86" height="15" font="bold 9pt/normal &quot;Guliml&quot;" text="(Input 예시)"/>
+        <Static id="Static247" taborder="21" left="498" top="136" height="29" cssclass="sta_WF_td01L" width="490"/>
+        <Static id="Static248" taborder="22" text="가나다라마바" left="498" top="136" width="115" cssclass="sta_WF_th01L" height="29"/>
+        <Static id="Static249" taborder="23" left="498" top="164" height="29" cssclass="sta_WF_td01L" width="490"/>
+        <Static id="Static250" taborder="24" text="가나다라마바" left="498" top="164" width="115" cssclass="sta_WF_th01L" height="29"/>
+        <Edit id="Edit28" taborder="25" left="620" top="140" width="100" height="21"/>
+        <Static id="Static251" taborder="26" text="중요 사항을 입력하여 주시기 바랍니다." left="732" top="138" width="230" height="21" cssclass="sta_WF_Help"/>
+        <Static id="Static252" taborder="27" left="720" top="129" width="12" height="35" cssclass="sta_GD_Square" visible="false"/>
+        <Static id="Static253" taborder="28" text="12" left="716" top="113" width="20" height="15" cssclass="sta_Guide_Size" visible="false"/>
+        <Edit id="Edit29" taborder="29" left="620" top="168" width="360" height="21"/>
+        <Grid id="Grid01" taborder="30" left="156" top="484" width="280" height="148" binddataset="Dataset00" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="50"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+                <Row size="30" band="summ"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="텍스트"/>
+                <Cell col="1" text="숫자"/>
+                <Cell col="2" text="버튼"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0" textAlign="left"/>
+                <Cell col="1" text="bind:Column1" textAlign="right"/>
+                <Cell col="2" text="bind:Column2" displaytype="buttoncontrol" edittype="button"/>
+              </Band>
+              <Band id="summary">
+                <Cell colspan="2" text="합계" textAlign="right"/>
+                <Cell col="2" text="2,754,532" textAlign="right"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static254" taborder="31" left="156" top="632" width="40" height="10" cssclass="sta_GD_Square" visible="false"/>
+        <Static id="Static255" taborder="32" text="10" left="137" top="628" width="20" height="15" cssclass="sta_Guide_Size" visible="false"/>
+        <Static id="Static256" taborder="33" left="155" top="461" width="86" height="15" font="bold 9pt/normal &quot;Guliml&quot;" text="(Grid 예시)"/>
+        <Static id="Static257" taborder="34" left="501" top="460" width="86" height="15" font="bold 9pt/normal &quot;Guliml&quot;" text="(Input 예시)"/>
+        <Static id="Static258" taborder="35" text="가나다라마바" left="500" top="484" width="115" cssclass="sta_WF_DataLabel" height="29"/>
+        <Static id="Static259" taborder="36" text="가나다라마바" left="500" top="512" width="115" cssclass="sta_WF_DataLabel" height="29"/>
+        <Static id="Static260" taborder="37" left="500" top="484" height="29" cssclass="sta_WF_td01L" width="490"/>
+        <Static id="Static261" taborder="38" left="500" top="512" height="29" cssclass="sta_WF_td01L" width="490"/>
+        <Edit id="Edit30" taborder="39" left="620" top="516" width="360" height="21"/>
+        <Edit id="Edit31" taborder="40" left="620" top="488" width="100" height="21"/>
+        <Div id="Div05" taborder="41" text="Div04" left="156" top="642" width="280" height="75" cssclass="div_WF_Help">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="화면도움말" left="16" top="7" width="95" height="20" cssclass="sta_WF_Help2"/>
+              <Static id="Static01" taborder="1" text="화면도움말입니다.화면도움말입니다." left="19" top="22" width="250" height="48"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static262" taborder="42" text="가나다라마바" left="500" top="484" width="115" cssclass="sta_WF_th01L" height="29"/>
+        <Static id="Static263" taborder="43" text="가나다라마바" left="500" top="512" width="115" cssclass="sta_WF_th01L" height="29"/>
+        <Static id="Static264" taborder="44" left="500" top="541" width="40" height="10" cssclass="sta_GD_Square" visible="false"/>
+        <Div id="Div06" taborder="45" text="Div04" left="500" top="551" width="492" height="75" cssclass="div_WF_Help">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="화면도움말" left="16" top="7" width="95" height="20" cssclass="sta_WF_Help2"/>
+              <Static id="Static01" taborder="1" text="화면도움말입니다.화면도움말입니다." left="19" top="22" width="250" height="48"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static265" taborder="46" text="10" left="481" top="539" width="20" height="15" cssclass="sta_Guide_Size" visible="false"/>
+        <Static id="Static267" taborder="47" left="124" top="363" width="25" height="75" cssclass="sta_Guide_Height2" text="75"/>
+        <Static id="Static268" taborder="48" left="110" top="767" height="2694" textAlign="center" background="#ffffff" border="1px solid #767676" font="bold 9pt &quot;Gulim&quot;" right="0" text=""/>
+        <Grid id="Grid03" taborder="49" useinputpanel="false" left="156" top="1230" width="844" height="166" binddataset="Grid" scrollbars="autoboth" autoenter="select" initvalueid="iv_Grid1">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="28"/>
+                <Column size="50"/>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="120"/>
+                <Column size="120"/>
+                <Column size="120"/>
+                <Column size="120"/>
+                <Column size="71"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+                <Row size="30" band="summ"/>
+              </Rows>
+              <Band id="head">
+                <Cell displaytype="checkboxcontrol" style="align:center middle;" edittype="checkbox"/>
+                <Cell col="1" text="순번"/>
+                <Cell col="2" text="Column01" cssclass="CellEssential"/>
+                <Cell col="3" text="Column02"/>
+                <Cell col="4" text="Column03"/>
+                <Cell col="5" text="Column04"/>
+                <Cell col="6" text="Column05"/>
+                <Cell col="7" text="Column06"/>
+                <Cell col="8" text="Column07"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="checkboxcontrol" edittype="checkbox" style="align:center middle;" text="bind:Column0"/>
+                <Cell col="1" style="align:center middle;" text="bind:순번" displaytype="text"/>
+                <Cell col="2" displaytype="editcontrol" edittype="normal" style="padding:3 3 3 3;" text="bind:Column01" editdisplay="display" expandshow="hide" cssclass="lineL"/>
+                <Cell col="3" displaytype="combocontrol" edittype="combo" style="padding:3 3 3 3;" text="bind:lev" combodataset="Combo" combocodecol="lev" combodatacol="txt" combodisplayrowcount="-1" combodisplay="display"/>
+                <Cell col="4" displaytype="calendarcontrol" edittype="date" style="padding:3 3 3 3;" text="bind:Column03" editdisplay="display" calendardisplay="display"/>
+                <Cell col="5" displaytype="editcontrol" edittype="normal" style="padding:3 0 3 2;" text="bind:Column04" editdisplay="display" expandshow="show" expandsize="21"/>
+                <Cell col="6" style="padding:0 9 0 9;" text="bind:Column05"/>
+                <Cell col="7" style="align:right middle;padding:0 9 0 9;" text="bind:Column06" mask="###,###,###" displaytype="number" maskeditformat="###,###"/>
+                <Cell col="8" displaytype="buttoncontrol" edittype="button" style="align:center middle;padding:3 3 3 3;" text="bind:Column07" editdisplay="edit"/>
+              </Band>
+              <Band id="summary">
+                <Cell colspan="7" style="align:center middle;" text="합계" displaytype="text"/>
+                <Cell col="7" colspan="2" style="align:right middle;padding:0 9 0 9;" text="321456789" mask="###,###,###" displaytype="number"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static270" taborder="50" left="130" top="1230" width="25" height="32" cssclass="sta_Guide_Height2" text="32"/>
+        <Grid id="Grid04" taborder="51" left="156" top="1470" width="844" height="208" binddataset="Dataset01" autofittype="none">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="28"/>
+                <Column size="150"/>
+                <Column size="164"/>
+                <Column size="400"/>
+                <Column size="100"/>
+              </Columns>
+              <Rows>
+                <Row size="52" band="head"/>
+                <Row size="48"/>
+              </Rows>
+              <Band id="head">
+                <Cell displaytype="checkboxcontrol"/>
+                <Cell col="1" text="Double&#13;&#10;Line"/>
+                <Cell col="2" text="Double&#13;&#10;Line"/>
+                <Cell col="3" text="Double&#13;&#10;Line"/>
+                <Cell col="4" text="Date"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0" displaytype="checkboxcontrol"/>
+                <Cell col="1" text="가나다라&#13;&#10;가나다라" textAlign="left"/>
+                <Cell col="2" text="가나다라&#13;&#10;가나다라" textAlign="left"/>
+                <Cell col="3" text="테스트테스트테스트&#13;&#10;테스트테스트테스트" textAlign="left"/>
+                <Cell col="4" text="0000-00-00"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static275" taborder="52" left="157" top="1449" width="120" height="15" font="bold 9pt/normal &quot;Guliml&quot;" text="(Head &amp; Body 2줄일 때)"/>
+        <Static id="Static277" taborder="53" left="128" top="1471" width="25" height="52" cssclass="sta_Guide_Height2" text="52"/>
+        <Static id="Static285" taborder="56" left="796" top="767" width="22" height="50" cssclass="sta_Guide_Flag"/>
+        <Static id="Static286" taborder="57" text="Grid 필수영역은 Cell 안에 클래스 지정&#13;&#13;&#10;class : grd_WF_essential" left="824" top="748" width="210" height="39" cssclass="sta_Guide_Size" textAlign="left" font="12PX/15PX &quot;Gulim&quot;"/>
+        <Static id="Static05" taborder="58" left="130" top="1261" width="25" height="30" cssclass="sta_Guide_Height2" text="30"/>
+        <Static id="Static16" taborder="59" left="128" top="1349" width="25" height="30" cssclass="sta_Guide_Height2" text="30"/>
+        <Static id="Static141" taborder="63" left="157" top="2354" width="120" height="15" font="bold 9pt/normal &quot;Guliml&quot;" text="(셀고정)"/>
+        <Static id="Static90_00" taborder="64" text="cell class 샘플" left="138" top="2623" width="100" height="18" color="#2c4898"/>
+        <Grid id="Grid05_00" taborder="65" left="138" top="2646" width="963" height="123" binddataset="Grid04_00">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="40"/>
+                <Column size="40"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="background"/>
+                <Cell col="1" text="border"/>
+                <Cell col="2" text="font-color"/>
+                <Cell col="3" text="font-size"/>
+                <Cell col="4" text="font-size_bold"/>
+                <Cell col="5" text="borderR"/>
+                <Cell col="6" text="borderL"/>
+                <Cell col="7" text="borderB"/>
+                <Cell col="8" text="borderT"/>
+                <Cell col="9" text="borderRL"/>
+                <Cell col="10" text="borderTB"/>
+                <Cell col="11" text="btn"/>
+                <Cell col="12" text="btn"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0" cssclass="grd_WF_Bg"/>
+                <Cell col="1" text="bind:Column1" cssclass="grd_WF_Border"/>
+                <Cell col="2" text="bind:Column2" cssclass="grd_WF_Fc"/>
+                <Cell col="3" text="bind:Column3" cssclass="grd_WF_Fs14"/>
+                <Cell col="4" text="bind:Column4" cssclass="grd_WF_Fs14B"/>
+                <Cell col="5" text="bind:Column0" cssclass="grd_WF_borderR"/>
+                <Cell col="6" text="bind:Column1" cssclass="grd_WF_borderL"/>
+                <Cell col="7" text="bind:Column2" cssclass="grd_WF_borderB"/>
+                <Cell col="8" text="bind:Column3" cssclass="grd_WF_borderT"/>
+                <Cell col="9" text="bind:Column4" cssclass="grd_WF_borderRL"/>
+                <Cell col="10" text="bind:Column4" cssclass="grd_WF_borderTB"/>
+                <Cell col="11" cssclass="grd_WF_trash" displaytype="buttoncontrol" edittype="button"/>
+                <Cell col="12" cssclass="grd_WF_pencil" displaytype="buttoncontrol" edittype="button"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="Grid08" taborder="66" left="138" top="2819" width="1060" height="334" binddataset="Grid05">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="70"/>
+                <Column size="70"/>
+                <Column size="70"/>
+                <Column size="70"/>
+                <Column size="70"/>
+                <Column size="70"/>
+                <Column size="70"/>
+                <Column size="70"/>
+                <Column size="70"/>
+                <Column size="70"/>
+                <Column size="70"/>
+                <Column size="70"/>
+                <Column size="70"/>
+                <Column size="70"/>
+                <Column size="70"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+                <Row size="30"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="body essential"/>
+                <Cell col="1" text="SUM color"/>
+                <Cell col="2" text="SUM color"/>
+                <Cell col="3" text="orange"/>
+                <Cell col="4" text="red"/>
+                <Cell col="5" text="blue"/>
+                <Cell col="6" text="green"/>
+                <Cell col="7" text="gray"/>
+                <Cell col="8" text="purple"/>
+                <Cell col="9" text="skin"/>
+                <Cell col="10" text="mint"/>
+                <Cell col="11" text="sky"/>
+                <Cell col="12" text="pink"/>
+                <Cell col="13" text="coffee"/>
+                <Cell col="14" text="navy"/>
+              </Band>
+              <Band id="body">
+                <Cell cssclass="grd_WF_essential"/>
+                <Cell col="1" text="bind:Column0" cssclass="grd_WF_Bg2"/>
+                <Cell col="2" text="bind:Column0" cssclass="grd_WF_Bg3"/>
+                <Cell col="3" text="bind:Column0" cssclass="grd_WF_orange2"/>
+                <Cell col="4" text="bind:Column1" cssclass="grd_WF_red2"/>
+                <Cell col="5" text="bind:Column2" cssclass="grd_WF_blue2"/>
+                <Cell col="6" text="bind:Column3" cssclass="grd_WF_green"/>
+                <Cell col="7" text="bind:Column4" cssclass="grd_WF_gray"/>
+                <Cell col="8" text="bind:Column5" cssclass="grd_WF_purple"/>
+                <Cell col="9" text="bind:Column6" cssclass="grd_WF_skin"/>
+                <Cell col="10" text="bind:Column7" cssclass="grd_WF_mint"/>
+                <Cell col="11" text="bind:Column8" cssclass="grd_WF_sky"/>
+                <Cell col="12" text="bind:Column9" cssclass="grd_WF_pink"/>
+                <Cell col="13" text="bind:Column10" cssclass="grd_WF_coffee"/>
+                <Cell col="14" text="bind:Column11" cssclass="grd_WF_navy"/>
+                <Cell row="1"/>
+                <Cell row="1" col="1"/>
+                <Cell row="1" col="2"/>
+                <Cell row="1" col="3" cssclass="grd_WF_orange2BD"/>
+                <Cell row="1" col="4" cssclass="grd_WF_red2BD"/>
+                <Cell row="1" col="5" cssclass="grd_WF_blue2BD"/>
+                <Cell row="1" col="6" cssclass="grd_WF_greenBD"/>
+                <Cell row="1" col="7" cssclass="grd_WF_grayBD"/>
+                <Cell row="1" col="8" cssclass="grd_WF_purpleBD"/>
+                <Cell row="1" col="9" cssclass="grd_WF_skinBD"/>
+                <Cell row="1" col="10" cssclass="grd_WF_mintBD"/>
+                <Cell row="1" col="11" cssclass="grd_WF_skyBD"/>
+                <Cell row="1" col="12" cssclass="grd_WF_pinkBD"/>
+                <Cell row="1" col="13" cssclass="grd_WF_coffeeBD"/>
+                <Cell row="1" col="14" cssclass="grd_WF_navyBD"/>
+                <Cell row="2"/>
+                <Cell row="2" col="1"/>
+                <Cell row="2" col="2"/>
+                <Cell row="2" col="3" cssclass="grd_WF_orange2FC" text="가나다라"/>
+                <Cell row="2" col="4" text="가나다라" cssclass="grd_WF_red2FC"/>
+                <Cell row="2" col="5" text="가나다라" cssclass="grd_WF_blue2FC"/>
+                <Cell row="2" col="6" text="가나다라" cssclass="grd_WF_greenFC"/>
+                <Cell row="2" col="7" text="가나다라" cssclass="grd_WF_grayFC"/>
+                <Cell row="2" col="8" text="가나다라" cssclass="grd_WF_purpleFC"/>
+                <Cell row="2" col="9" text="가나다라" cssclass="grd_WF_skinFC"/>
+                <Cell row="2" col="10" text="가나다라" cssclass="grd_WF_mintFC"/>
+                <Cell row="2" col="11" text="가나다라" cssclass="grd_WF_skyFC"/>
+                <Cell row="2" col="12" text="가나다라" cssclass="grd_WF_pinkFC"/>
+                <Cell row="2" col="13" text="가나다라" cssclass="grd_WF_coffeeFC"/>
+                <Cell row="2" col="14" text="가나다라" cssclass="grd_WF_navyFC"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="Grid05_00_00" taborder="67" left="138" top="3163" width="402" height="123" binddataset="Grid04_00">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="100"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="font-size 14"/>
+                <Cell col="1" text="font-size 14 Bold"/>
+                <Cell col="2" text="font-size 16"/>
+                <Cell col="3" text="font-size 16 Bold"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0" cssclass="grd_WF_Fs14"/>
+                <Cell col="1" text="bind:Column1" cssclass="grd_WF_Fs14B"/>
+                <Cell col="2" text="bind:Column2" cssclass="grd_WF_Fs16"/>
+                <Cell col="3" text="bind:Column3" cssclass="grd_WF_Fs16B"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="Grid05_00_00_00" taborder="68" left="590" top="3163" width="402" height="213" binddataset="Grid04_00">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="100"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+                <Row size="30" band="summ"/>
+                <Row size="30" band="summ"/>
+                <Row size="30" band="summ"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="font-size 14"/>
+                <Cell col="1" text="font-size 14 Bold"/>
+                <Cell col="2" text="font-size 16"/>
+                <Cell col="3" text="font-size 16 Bold"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0"/>
+                <Cell col="1" text="bind:Column1"/>
+                <Cell col="2" text="bind:Column2"/>
+                <Cell col="3" text="bind:Column3"/>
+              </Band>
+              <Band id="summary">
+                <Cell cssclass="grd_WF_sum3" text="123"/>
+                <Cell col="1" cssclass="grd_WF_sum3"/>
+                <Cell col="2" cssclass="grd_WF_sum3"/>
+                <Cell col="3" cssclass="grd_WF_sum3"/>
+                <Cell row="1" cssclass="grd_WF_sum2" text="1234"/>
+                <Cell row="1" col="1" cssclass="grd_WF_sum2"/>
+                <Cell row="1" col="2" cssclass="grd_WF_sum2"/>
+                <Cell row="1" col="3" cssclass="grd_WF_sum2"/>
+                <Cell row="2" text="12345"/>
+                <Cell row="2" col="1"/>
+                <Cell row="2" col="2"/>
+                <Cell row="2" col="3"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static53" taborder="69" text="summary3" left="1014" top="3218" width="120" height="30" background="#f3fbf3" border="1px solid #b1cfaf"/>
+        <Static id="Static53_00" taborder="70" text="summary2" left="1014" top="3247" width="120" height="30" background="#fbf3f3" border="1px solid #cfafaf"/>
+        <Static id="Static53_00_00" taborder="71" text="summary (기본)" left="1014" top="3276" width="120" height="30" background="#f3f9fb" border="1px solid #afc0cf"/>
+        <Grid id="Grid05_01" taborder="73" left="156" top="2080" width="844" height="208" binddataset="Dataset01" autofittype="none">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="28"/>
+                <Column size="150"/>
+                <Column size="140"/>
+                <Column size="140"/>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="71"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell rowspan="2" displaytype="checkboxcontrol"/>
+                <Cell col="1" rowspan="2" text="텍스트"/>
+                <Cell col="2" colspan="2" text="Column1"/>
+                <Cell col="4" colspan="3" text="Column2"/>
+                <Cell col="7" rowspan="2" text="Date"/>
+                <Cell row="1" col="2" text="Column1-1"/>
+                <Cell row="1" col="3" text="Column1-2"/>
+                <Cell row="1" col="4" text="Column2-1"/>
+                <Cell row="1" col="5" text="Column2-2"/>
+                <Cell row="1" col="6" text="Column2-3"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0" displaytype="checkboxcontrol"/>
+                <Cell col="1" textAlign="left"/>
+                <Cell col="2" textAlign="left"/>
+                <Cell col="3" textAlign="left"/>
+                <Cell col="4" textAlign="left"/>
+                <Cell col="5"/>
+                <Cell col="6"/>
+                <Cell col="7"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static278" taborder="54" left="157" top="2057" width="120" height="15" font="bold 9pt/normal &quot;Guliml&quot;" text="(Multiple Head)"/>
+        <Static id="Static282" taborder="55" left="307" top="2080" width="25" height="33" cssclass="sta_Guide_Height2" text="32"/>
+        <Static id="Static32" taborder="60" left="130" top="2080" width="25" height="65" cssclass="sta_Guide_Height2" text="65"/>
+        <Static id="Static38" taborder="61" left="307" top="2112" width="25" height="33" cssclass="sta_Guide_Height2" text="32"/>
+        <Static id="Static277_00" taborder="72" left="128" top="1522" width="25" height="48" cssclass="sta_Guide_Height2" text="48"/>
+        <Grid id="Grid00_00" taborder="74" useinputpanel="false" left="156" top="801" width="844" height="166" binddataset="Grid" scrollbars="autoboth" autoenter="select" initvalueid="iv_Grid1">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="28"/>
+                <Column size="50"/>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="120"/>
+                <Column size="120"/>
+                <Column size="120"/>
+                <Column size="120"/>
+                <Column size="71"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+                <Row size="30" band="summ"/>
+              </Rows>
+              <Band id="head">
+                <Cell displaytype="checkboxcontrol" style="align:center middle;" edittype="checkbox"/>
+                <Cell col="1" text="순번"/>
+                <Cell col="2" text="Column01" cssclass="CellEssential"/>
+                <Cell col="3" text="Column02"/>
+                <Cell col="4" text="Column03"/>
+                <Cell col="5" text="Column04"/>
+                <Cell col="6" text="Column05"/>
+                <Cell col="7" text="Column06" cssclass="grd_WF_essential"/>
+                <Cell col="8" text="Column07"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="checkboxcontrol" edittype="checkbox" style="align:center middle;" text="bind:Column0"/>
+                <Cell col="1" style="align:center middle;" text="bind:순번" displaytype="text"/>
+                <Cell col="2" displaytype="editcontrol" edittype="normal" style="padding:3 3 3 3;" text="bind:Column01" editdisplay="display" expandshow="hide"/>
+                <Cell col="3" displaytype="combocontrol" edittype="combo" style="padding:3 3 3 3;" text="bind:lev" combodataset="Combo" combocodecol="lev" combodatacol="txt" combodisplayrowcount="-1" combodisplay="display"/>
+                <Cell col="4" displaytype="calendarcontrol" edittype="date" style="padding:3 3 3 3;" text="bind:Column03" editdisplay="display" calendardisplay="display"/>
+                <Cell col="5" displaytype="editcontrol" edittype="normal" style="padding:3 0 3 2;" text="bind:Column04" editdisplay="display" expandshow="show" expandsize="21"/>
+                <Cell col="6" style="padding:0 9 0 9;" text="bind:Column05"/>
+                <Cell col="7" style="align:right middle;padding:0 9 0 9;" text="bind:Column06" mask="###,###,###" displaytype="number" maskeditformat="###,###"/>
+                <Cell col="8" displaytype="buttoncontrol" edittype="button" style="align:center middle;padding:3 3 3 3;" text="bind:Column07" editdisplay="edit"/>
+              </Band>
+              <Band id="summary">
+                <Cell colspan="7" style="align:center middle;" text="합계" displaytype="text"/>
+                <Cell col="7" colspan="2" style="align:right middle;padding:0 9 0 9;" text="321456789" mask="###,###,###" displaytype="number"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="Grid01_00" taborder="75" left="156" top="1017" width="182" height="156" cssclass="grd_WF_Tree" binddataset="Tree" autofittype="col" treeinitstatus="expand,all" treeuseimage="true" treeuseline="false" treeusebutton="use">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="168"/>
+              </Columns>
+              <Rows>
+                <Row size="26"/>
+              </Rows>
+              <Band id="body">
+                <Cell text="bind:txt" edittype="tree" displaytype="treeitemcontrol" treelevel="bind:lev"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static90" taborder="76" text="Tree Grid" left="156" top="993" width="100" height="18" color="#2c4898"/>
+        <Static id="Static96" taborder="77" left="130" top="801" width="25" height="32" cssclass="sta_Guide_Height2" text="32"/>
+        <Static id="Static98" taborder="78" left="130" top="832" width="25" height="30" cssclass="sta_Guide_Height2" text="30"/>
+        <Grid id="Grid02_00" taborder="79" useinputpanel="false" left="375" top="1017" width="182" height="156" binddataset="Grid" scrollbars="autoboth" autoenter="select" initvalueid="iv_Grid1" autofittype="col" cssclass="grd_WF_Chk">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="28"/>
+              </Columns>
+              <Rows>
+                <Row size="33" band="head"/>
+                <Row size="28"/>
+              </Rows>
+              <Band id="head">
+                <Cell displaytype="checkboxcontrol" style="align:center middle;" edittype="checkbox"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="checkboxcontrol" edittype="checkbox" style="align:center middle;" text="bind:Column0"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static107" taborder="80" text="체크박스에 라인이 있는 Grid" left="376" top="991" width="190" height="18" color="#2c4898"/>
+        <Static id="Static286_00" taborder="81" text="class : grd_WF_Chk" left="544" top="991" width="210" height="18" cssclass="sta_Guide_Size" textAlign="left" font="12PX/15PX &quot;Gulim&quot;"/>
+        <Static id="Static100" taborder="82" left="130" top="920" width="25" height="30" cssclass="sta_Guide_Height2" text="30"/>
+        <Static id="Static275_00" taborder="83" left="157" top="1739" width="120" height="15" font="bold 9pt/normal &quot;Guliml&quot;" text="(Head &amp; Body 3줄일 때)"/>
+        <Grid id="Grid04_01" taborder="84" left="156" top="1760" width="844" height="227" binddataset="Dataset01" autofittype="none">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="28"/>
+                <Column size="150"/>
+                <Column size="164"/>
+                <Column size="400"/>
+                <Column size="100"/>
+              </Columns>
+              <Rows>
+                <Row size="72" band="head"/>
+                <Row size="68"/>
+              </Rows>
+              <Band id="head">
+                <Cell displaytype="checkboxcontrol"/>
+                <Cell col="1" text="Double&#13;&#10;Double&#13;&#10;Line"/>
+                <Cell col="2" text="Double&#13;&#10;Double&#13;&#10;Line"/>
+                <Cell col="3" text="Double&#13;&#10;Double&#13;&#10;Line"/>
+                <Cell col="4" text="Date"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0" displaytype="checkboxcontrol"/>
+                <Cell col="1" text="가나다라&#13;&#10;가나다라&#13;&#10;가나다라" textAlign="left"/>
+                <Cell col="2" text="가나다라&#13;&#10;가나다라&#13;&#10;가나다라" textAlign="left"/>
+                <Cell col="3" text="테스트테스트테스트&#13;&#10;테스트테스트테스트&#13;&#10;테스트테스트테스트" textAlign="left"/>
+                <Cell col="4" text="0000-00-00"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static277_01" taborder="85" left="128" top="1761" width="25" height="72" cssclass="sta_Guide_Height2" text="72"/>
+        <Static id="Static277_00_00" taborder="86" left="128" top="1832" width="25" height="68" cssclass="sta_Guide_Height2" text="68"/>
+        <Grid id="Grid03_00" taborder="87" useinputpanel="false" left="530" top="2384" width="464" height="166" binddataset="Grid06" scrollbars="autoboth" autoenter="select" initvalueid="iv_Grid1">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="220"/>
+                <Column size="220"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="Progressbar_normal"/>
+                <Cell col="1" text="Progressbar_red"/>
+              </Band>
+              <Band id="body">
+                <Cell style="padding:0 9 0 9;" text="bind:Column0" displaytype="progressbarcontrol" edittype="normal"/>
+                <Cell col="1" style="align:right middle;padding:0 9 0 9;" text="bind:Column1" mask="###,###,###" displaytype="progressbarcontrol" maskeditformat="###,###" edittype="normal" cssclass="grd_WF_box"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="Grid06_00" taborder="87" useinputpanel="false" left="156" top="2384" width="324" height="120" binddataset="Dataset00" scrollbars="autoboth" autoenter="select" initvalueid="iv_Grid1" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="112"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="우측고정"/>
+                <Cell col="1" text="하단고정"/>
+                <Cell col="2" text="우측하단고정"/>
+              </Band>
+              <Band id="body">
+                <Cell text="lineR" cssclass="lineR"/>
+                <Cell col="1" text="lineB" cssclass="lineB"/>
+                <Cell col="2" text="lineRB" cssclass="lineRB"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static285_00" taborder="88" left="1039" top="2629" width="22" height="50" cssclass="sta_Guide_Flag"/>
+        <Static id="Static286_01" taborder="89" text="body size 40px&#13;&#13;&#10;class : grd_WF_trash" left="1067" top="2610" width="126" height="39" cssclass="sta_Guide_Size" textAlign="left" font="12PX/15PX &quot;Gulim&quot;"/>
+        <Grid id="Grid05_00_00_01" taborder="90" left="138" top="3296" width="202" height="123" binddataset="Grid04_00">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="100"/>
+                <Column size="100"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="ta : right"/>
+                <Cell col="1" text="ta : center"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0" cssclass="grd_WF_taR"/>
+                <Cell col="1" text="bind:Column1" cssclass="grd_WF_taC"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Combo">
+        <ColumnInfo>
+          <Column id="txt" type="STRING" size="256"/>
+          <Column id="lev" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="txt">전체</Col>
+            <Col id="lev">0</Col>
+          </Row>
+          <Row>
+            <Col id="txt">가</Col>
+            <Col id="lev">1</Col>
+          </Row>
+          <Row>
+            <Col id="txt">가나</Col>
+            <Col id="lev">2</Col>
+          </Row>
+          <Row>
+            <Col id="txt">가나다</Col>
+            <Col id="lev">3</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="Grid" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="순번" type="STRING" size="256"/>
+          <Column id="Column01" type="STRING" size="256"/>
+          <Column id="Column02" type="STRING" size="256"/>
+          <Column id="Column03" type="STRING" size="256"/>
+          <Column id="Column04" type="STRING" size="256"/>
+          <Column id="Column05" type="STRING" size="256"/>
+          <Column id="Column06" type="STRING" size="256"/>
+          <Column id="Column07" type="STRING" size="256"/>
+          <Column id="lev" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="순번">1</Col>
+            <Col id="Column05">가</Col>
+            <Col id="Column06">1234567890</Col>
+            <Col id="Column01">가</Col>
+            <Col id="Column04">expand</Col>
+            <Col id="Column02">전체</Col>
+            <Col id="lev">0</Col>
+            <Col id="Column07">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="순번">2</Col>
+            <Col id="Column05">가나</Col>
+            <Col id="Column06">1234567890</Col>
+            <Col id="Column01">가나</Col>
+            <Col id="Column04">expand</Col>
+            <Col id="Column02">가</Col>
+            <Col id="lev">0</Col>
+            <Col id="Column07">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="순번">3</Col>
+            <Col id="Column05">가나다</Col>
+            <Col id="Column06">1234567890</Col>
+            <Col id="Column01">가나다</Col>
+            <Col id="Column04">expand</Col>
+            <Col id="Column02">가나</Col>
+            <Col id="lev">0</Col>
+            <Col id="Column07">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="순번">4</Col>
+            <Col id="Column05">가나다라</Col>
+            <Col id="Column06">1234567890</Col>
+            <Col id="Column01">가나다라</Col>
+            <Col id="Column04">expand</Col>
+            <Col id="Column02">가나다</Col>
+            <Col id="lev">0</Col>
+            <Col id="Column07">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="순번">5</Col>
+            <Col id="Column05">가나다라마</Col>
+            <Col id="Column06">1234567890</Col>
+            <Col id="Column01">가나다라마</Col>
+            <Col id="Column04">expand</Col>
+            <Col id="Column07">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="순번">6</Col>
+            <Col id="Column05">가나다라마바</Col>
+            <Col id="Column06">1234567890</Col>
+            <Col id="Column01">가나다라마바</Col>
+            <Col id="Column04">expand</Col>
+            <Col id="Column07">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="순번">7</Col>
+            <Col id="Column05">가나다라마바사</Col>
+            <Col id="Column06">1234567890</Col>
+            <Col id="Column01">가나다라마바사</Col>
+            <Col id="Column04">expand</Col>
+            <Col id="Column07">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="순번">8</Col>
+            <Col id="Column05">가나다라마바사아</Col>
+            <Col id="Column06">1234567890</Col>
+            <Col id="Column01">가나다라마바사아</Col>
+            <Col id="Column04">expand</Col>
+            <Col id="Column07">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="순번">9</Col>
+            <Col id="Column05">가나다라마바사아자</Col>
+            <Col id="Column06">1234567890</Col>
+            <Col id="Column01">가나다라마바사아자</Col>
+            <Col id="Column04">expand</Col>
+            <Col id="Column07">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="순번">10</Col>
+            <Col id="Column05">가나다라마바사아자차</Col>
+            <Col id="Column06">1234567890</Col>
+            <Col id="Column01">가나다라마바사아자차</Col>
+            <Col id="Column04">expand</Col>
+            <Col id="Column07">버튼</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="Tree">
+        <ColumnInfo>
+          <Column id="txt" type="STRING" size="256"/>
+          <Column id="lev" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="txt">1 Depth Menu</Col>
+            <Col id="lev">0</Col>
+          </Row>
+          <Row>
+            <Col id="txt">2 Depth Menu</Col>
+            <Col id="lev">1</Col>
+          </Row>
+          <Row>
+            <Col id="txt">1 Depth Menu</Col>
+            <Col id="lev">0</Col>
+          </Row>
+          <Row>
+            <Col id="txt">2 Depth Menu</Col>
+            <Col id="lev">1</Col>
+          </Row>
+          <Row>
+            <Col id="txt">1 Depth Menu</Col>
+            <Col id="lev">0</Col>
+          </Row>
+          <Row>
+            <Col id="txt">2 Depth Menu</Col>
+            <Col id="lev">1</Col>
+          </Row>
+          <Row>
+            <Col id="txt">2 Depth Menu</Col>
+            <Col id="lev">1</Col>
+          </Row>
+          <Row>
+            <Col id="txt">2 Depth Menu</Col>
+            <Col id="lev">1</Col>
+          </Row>
+          <Row>
+            <Col id="txt">2 Depth Menu</Col>
+            <Col id="lev">1</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="Menu">
+        <ColumnInfo>
+          <Column id="Caption" type="STRING" size="256"/>
+          <Column id="Id" type="STRING" size="256"/>
+          <Column id="Level" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Caption">2depth Menu01</Col>
+            <Col id="Id">00001</Col>
+            <Col id="Level">0</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu01</Col>
+            <Col id="Id">00002</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu02</Col>
+            <Col id="Id">00003</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu03</Col>
+            <Col id="Id">00004</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu04</Col>
+            <Col id="Id">00005</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu05</Col>
+            <Col id="Id">00006</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu06</Col>
+            <Col id="Id">00007</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">2depth Menu02</Col>
+            <Col id="Id">00008</Col>
+            <Col id="Level">0</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu01</Col>
+            <Col id="Id">00009</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu02</Col>
+            <Col id="Id">00010</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu03</Col>
+            <Col id="Id">00011</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu04</Col>
+            <Col id="Id">00012</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu05</Col>
+            <Col id="Id">00013</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu06</Col>
+            <Col id="Id">00014</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">2depth Menu03</Col>
+            <Col id="Id">00015</Col>
+            <Col id="Level">0</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu01</Col>
+            <Col id="Id">00016</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu02</Col>
+            <Col id="Id">00017</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu03</Col>
+            <Col id="Id">00018</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu04</Col>
+            <Col id="Id">00019</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu05</Col>
+            <Col id="Id">00020</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu06</Col>
+            <Col id="Id">00021</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">2depth Menu04</Col>
+            <Col id="Id">00022</Col>
+            <Col id="Level">0</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu01</Col>
+            <Col id="Id">00023</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu02</Col>
+            <Col id="Id">00024</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu03</Col>
+            <Col id="Id">00025</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu04</Col>
+            <Col id="Id">00026</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu05</Col>
+            <Col id="Id">00027</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu06</Col>
+            <Col id="Id">00028</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">2depth Menu05</Col>
+            <Col id="Id">00029</Col>
+            <Col id="Level">0</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu01</Col>
+            <Col id="Id">00030</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu02</Col>
+            <Col id="Id">00031</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu03</Col>
+            <Col id="Id">00032</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu04</Col>
+            <Col id="Id">00033</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu05</Col>
+            <Col id="Id">00034</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu06</Col>
+            <Col id="Id">00035</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="PopupMenu">
+        <ColumnInfo>
+          <Column id="idx" type="STRING" size="256"/>
+          <Column id="lev" type="STRING" size="256"/>
+          <Column id="UserData" type="STRING" size="256"/>
+          <Column id="Caption" type="STRING" size="256"/>
+          <Column id="enable" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="idx">1000</Col>
+            <Col id="lev">0</Col>
+            <Col id="UserData">PopupMenu01</Col>
+            <Col id="Caption">PopupMenu01</Col>
+            <Col id="enable">1</Col>
+          </Row>
+          <Row>
+            <Col id="idx">1001</Col>
+            <Col id="lev">0</Col>
+            <Col id="UserData">PopupMenu02</Col>
+            <Col id="Caption">PopupMenu02</Col>
+            <Col id="enable">1</Col>
+          </Row>
+          <Row>
+            <Col id="idx">1002</Col>
+            <Col id="lev">1</Col>
+            <Col id="UserData">PopupMenu01</Col>
+            <Col id="Caption">PopupMenu01</Col>
+            <Col id="enable">1</Col>
+          </Row>
+          <Row>
+            <Col id="idx">1003</Col>
+            <Col id="lev">1</Col>
+            <Col id="UserData">PopupMenu02</Col>
+            <Col id="Caption">PopupMenu02</Col>
+            <Col id="enable">0</Col>
+          </Row>
+          <Row>
+            <Col id="idx">1004</Col>
+            <Col id="lev">1</Col>
+            <Col id="UserData">PopupMenu03</Col>
+            <Col id="Caption">PopupMenu03</Col>
+            <Col id="enable">1</Col>
+          </Row>
+          <Row>
+            <Col id="idx">1005</Col>
+            <Col id="lev">1</Col>
+            <Col id="UserData">PopupMenu04</Col>
+            <Col id="Caption">PopupMenu04</Col>
+            <Col id="enable">0</Col>
+          </Row>
+          <Row>
+            <Col id="idx">1006</Col>
+            <Col id="lev">1</Col>
+            <Col id="UserData">PopupMenu05</Col>
+            <Col id="Caption">PopupMenu05</Col>
+            <Col id="enable">1</Col>
+          </Row>
+          <Row>
+            <Col id="idx">1007</Col>
+            <Col id="lev">0</Col>
+            <Col id="UserData">PopupMenu03</Col>
+            <Col id="Caption">PopupMenu03</Col>
+            <Col id="enable">1</Col>
+          </Row>
+          <Row>
+            <Col id="idx">1008</Col>
+            <Col id="lev">0</Col>
+            <Col id="UserData">PopupMenu04</Col>
+            <Col id="Caption">PopupMenu04</Col>
+            <Col id="enable">1</Col>
+          </Row>
+          <Row>
+            <Col id="idx">1009</Col>
+            <Col id="lev">1</Col>
+            <Col id="UserData">PopupMenu01</Col>
+            <Col id="Caption">PopupMenu01</Col>
+            <Col id="enable">1</Col>
+          </Row>
+          <Row>
+            <Col id="idx">1010</Col>
+            <Col id="lev">1</Col>
+            <Col id="UserData">PopupMenu02</Col>
+            <Col id="Caption">PopupMenu02</Col>
+            <Col id="enable">1</Col>
+          </Row>
+          <Row>
+            <Col id="idx">1011</Col>
+            <Col id="lev">1</Col>
+            <Col id="UserData">PopupMenu03</Col>
+            <Col id="Caption">PopupMenu03</Col>
+            <Col id="enable">1</Col>
+          </Row>
+          <Row>
+            <Col id="idx">1012</Col>
+            <Col id="lev">1</Col>
+            <Col id="UserData">PopupMenu04</Col>
+            <Col id="Caption">PopupMenu04</Col>
+            <Col id="enable">1</Col>
+          </Row>
+          <Row>
+            <Col id="idx">1013</Col>
+            <Col id="lev">0</Col>
+            <Col id="UserData">PopupMenu05</Col>
+            <Col id="Caption">PopupMenu05</Col>
+            <Col id="enable">1</Col>
+          </Row>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">가나</Col>
+            <Col id="Column1">12</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">가나다</Col>
+            <Col id="Column1">123</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">가나다라</Col>
+            <Col id="Column1">1234</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="Dataset01">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="Grid04_00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">가나다</Col>
+            <Col id="Column1">가나다</Col>
+            <Col id="Column2">가나다</Col>
+            <Col id="Column3">가나다</Col>
+            <Col id="Column4">가나다</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">가나다라</Col>
+            <Col id="Column3">가나다라</Col>
+            <Col id="Column2">가나다라</Col>
+            <Col id="Column1">가나다라</Col>
+            <Col id="Column0">가나다라</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">가나다라마</Col>
+            <Col id="Column1">가나다라마</Col>
+            <Col id="Column2">가나다라마</Col>
+            <Col id="Column3">가나다라마</Col>
+            <Col id="Column4">가나다라마</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="Grid05">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+          <Column id="Column5" type="STRING" size="256"/>
+          <Column id="Column6" type="STRING" size="256"/>
+          <Column id="Column7" type="STRING" size="256"/>
+          <Column id="Column8" type="STRING" size="256"/>
+          <Column id="Column9" type="STRING" size="256"/>
+          <Column id="Column10" type="STRING" size="256"/>
+          <Column id="Column11" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+          <Row/>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="Grid06">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">35</Col>
+            <Col id="Column1">15</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">55</Col>
+            <Col id="Column1">40</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">78</Col>
+            <Col id="Column1">85</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">90</Col>
+            <Col id="Column1">100</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

@@ -1,0 +1,912 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="PatternGuide" width="1210" height="3400" titletext="PatternGuide">
+    <Layouts>
+      <Layout height="3400" mobileorientation="landscape" width="1210">
+        <Static id="Static88" taborder="103" left="110" top="1150" height="920" textAlign="center" background="#ffffff" border="1px solid #767676" font="bold 9pt &quot;Gulim&quot;" text="" cssclass="div_WF_Search" right="0"/>
+        <Static id="Static80" taborder="0" text="Detail" left="0" top="1150" width="111" height="920" textAlign="center" background="#f8f8f8" border="1px solid #767676" font="bold 9pt &quot;Gulim&quot;" onclick="Static01_onclick"/>
+        <Static id="Static01" taborder="1" text="Search" left="0" top="51" width="111" height="1100" textAlign="center" background="#f8f8f8" border="1px solid #767676" font="bold 9pt &quot;Gulim&quot;" onclick="Static01_onclick"/>
+        <Static id="Static02" taborder="2" left="110" top="51" height="1100" textAlign="center" background="#ffffff" border="1px solid #767676" font="bold 9pt &quot;Gulim&quot;" right="0" text="" cssclass="div_WF_Search"/>
+        <Static id="Static00" taborder="3" text="Pattern KIT" left="0" top="0" height="53" textAlign="center" background="#2a3b97" color="#ffffff" font="bold 11pt &quot;Gulim&quot;" right="0"/>
+        <Static id="Static03" taborder="4" text="Data Pattern" left="0" top="2069" width="111" height="320" textAlign="center" background="#f8f8f8" border="1px solid #767676" font="bold 9pt &quot;Gulim&quot;" onclick="Static03_onclick"/>
+        <Static id="Static04" taborder="5" left="110" top="2069" height="320" textAlign="center" background="#ffffff" border="1px solid #767676" font="bold 9pt &quot;Gulim&quot;" right="0" text=""/>
+        <Static id="Static82" taborder="6" text="최소 width : 30px (2자)&#13;&#10;한 글자 늘어날 때 마다 +10px" left="272" top="925" width="140" height="42" cssclass="sta_Guide_Size" textAlign="left"/>
+        <Static id="Static15" taborder="7" text="(전화번호)" left="150" top="2109" width="86" height="15" font="bold 9pt/normal &quot;Guliml&quot;"/>
+        <Static id="Static26" taborder="8" text="normal" left="-181" top="698" width="60" height="21" color="#2c4898"/>
+        <Combo id="Combo00" taborder="9" text="010" left="151" top="2135" width="61" height="21" value="" index="-1"/>
+        <MaskEdit id="MaskEdit00" taborder="10" left="215" top="2135" width="48" height="21" onchanged="MaskEdit00_onchanged"/>
+        <MaskEdit id="MaskEdit01" taborder="11" left="266" top="2135" width="48" height="21"/>
+        <Static id="Static06" taborder="12" left="151" top="2158" width="163" height="25" cssclass="sta_Guide_Width2" text="MIN W 163"/>
+        <Static id="Static07" taborder="13" text="3" left="203" top="2118" width="20" height="15" cssclass="sta_Guide_Size"/>
+        <Static id="Static08" taborder="14" left="212" top="2135" width="3" height="21" cssclass="sta_GD_Square"/>
+        <Static id="Static11" taborder="15" text="3" left="253" top="2118" width="20" height="15" cssclass="sta_Guide_Size"/>
+        <Static id="Static12" taborder="16" left="263" top="2135" width="3" height="21" cssclass="sta_GD_Square"/>
+        <Static id="Static13" taborder="17" text="(달력)" left="368" top="2109" width="86" height="15" font="bold 9pt/normal &quot;Guliml&quot;"/>
+        <Calendar id="Calendar00" taborder="18" left="368" top="2135" width="150" height="21"/>
+        <Calendar id="Calendar01" taborder="19" left="566" top="2133" width="103" height="21"/>
+        <Static id="Static14" taborder="20" text="~" left="Calendar01:0" top="2133" width="15" height="21" cssclass="sta_WF_AlignC" textAlign="center"/>
+        <Calendar id="Calendar02" taborder="21" left="Static14:0" top="2133" width="103" height="21"/>
+        <Static id="Static17" taborder="22" left="567" top="2157" width="219" height="25" cssclass="sta_Guide_Width2" text="MIN W219"/>
+        <Static id="Static18" taborder="23" text="(기간)" left="566" top="2109" width="86" height="15" font="bold 9pt/normal &quot;Guliml&quot;"/>
+        <Static id="Static19" taborder="24" text="(계좌번호)" left="898" top="2109" width="86" height="15" font="bold 9pt/normal &quot;Guliml&quot;"/>
+        <MaskEdit id="MaskEdit02" taborder="25" left="898" top="2133" width="150" height="21" value="1258"/>
+        <Static id="Static20" taborder="26" text="(검색1)" left="150" top="2207" width="86" height="15" font="bold 9pt/normal &quot;Guliml&quot;"/>
+        <Edit id="Edit01" taborder="27" left="148" top="2227" width="128" height="21" value="search" text="search"/>
+        <Button id="Button00" taborder="28" left="Edit01:2" top="2227" height="21" cssclass="btn_WF_search04" width="21"/>
+        <Edit id="Edit02" taborder="29" left="Button00:2" top="2227" width="90" height="21"/>
+        <Static id="Static23" taborder="30" left="299" top="2227" width="3" height="21" cssclass="sta_GD_Square"/>
+        <Static id="Static24" taborder="31" text="3" left="289" top="2210" width="20" height="15" cssclass="sta_Guide_Size"/>
+        <Static id="Static25" taborder="32" text="(검색2)" left="566" top="2205" width="86" height="15" font="bold 9pt/normal &quot;Guliml&quot;"/>
+        <Edit id="Edit03" taborder="33" left="566" top="2225" width="128" height="21"/>
+        <Button id="Button01" taborder="34" left="Edit03:2" top="2225" height="21" cssclass="btn_WF_search04" width="21"/>
+        <Static id="Static42" taborder="35" text="(시간)" left="898" top="2205" width="86" height="15" font="bold 9pt/normal &quot;Guliml&quot;"/>
+        <MaskEdit id="MaskEdit03" taborder="36" left="898" top="2225" width="150" height="21" value="22"/>
+        <Static id="Static43" taborder="37" text="(우편번호1)" left="150" top="2292" width="86" height="15" font="bold 9pt/normal &quot;Guliml&quot;"/>
+        <Edit id="Edit04" taborder="38" left="149" top="2315" width="58" height="21" value="123" text="123"/>
+        <Edit id="Edit06" taborder="44" left="222" top="2315" width="58" height="21" value="123" text="123"/>
+        <Button id="Button14" taborder="39" left="Edit06:3" top="2315" height="21" cssclass="btn_WF_search04" width="21"/>
+        <Static id="Static44" taborder="40" text="(우편번호2)" left="368" top="2293" width="86" height="15" font="bold 9pt/normal &quot;Guliml&quot;"/>
+        <Edit id="Edit05" taborder="41" left="368" top="2316" width="128" height="21" value="123" text="123"/>
+        <Button id="Button15" taborder="42" left="Edit05:3" top="2316" height="21" cssclass="btn_WF_search04" width="21"/>
+        <Static id="Static45" taborder="43" text="-" left="207" top="2315" width="15" height="21" cssclass="sta_WF_AlignC" textAlign="center"/>
+        <Static id="Static46" taborder="45" text="(Dash정의)" left="566" top="2293" width="86" height="15" font="bold 9pt/normal &quot;Guliml&quot;"/>
+        <Static id="Static47" taborder="46" text="-" left="569" top="2316" width="15" height="21" cssclass="sta_WF_AlignC" textAlign="center"/>
+        <Static id="Static49" taborder="47" left="569" top="2340" width="15" height="25" cssclass="sta_Guide_Width2" text="15"/>
+        <Static id="Static50" taborder="48" text="~" left="597" top="2316" width="15" height="21" cssclass="sta_WF_AlignC" textAlign="center"/>
+        <Static id="Static54" taborder="49" left="597" top="2340" width="15" height="25" cssclass="sta_Guide_Width2" text="15"/>
+        <Static id="Static56" taborder="50" text="@" left="626" top="2316" width="17" height="21" cssclass="sta_WF_AlignC" textAlign="center"/>
+        <Static id="Static57" taborder="51" left="626" top="2340" width="17" height="25" cssclass="sta_Guide_Width2" text="17"/>
+        <Static id="Static59" taborder="52" text="(주민등록번호1)" left="704" top="2292" width="109" height="16" font="bold 9pt/normal &quot;Guliml&quot;"/>
+        <Edit id="Edit07" taborder="53" left="703" top="2316" width="75" height="21" value="885620" text="885620"/>
+        <Edit id="Edit08" taborder="54" left="781" top="2316" width="75" height="21" value="******" text="******"/>
+        <Static id="Static60" taborder="55" text="(주민등록번호2)" left="898" top="2292" width="109" height="16" font="bold 9pt/normal &quot;Guliml&quot;"/>
+        <MaskEdit id="MaskEdit04" taborder="56" left="898" top="2316" width="150" height="21" value="22"/>
+        <Static id="Static09" taborder="57" text="가나" left="164" top="920" width="30" height="21" cssclass="sta_WF_textR" minwidth="100" maxwidth=""/>
+        <Static id="Static10" taborder="58" text="가나다" left="164" top="946" width="40" height="21" cssclass="sta_WF_textR" minwidth="100" maxwidth=""/>
+        <Static id="Static27" taborder="59" text="가나다라" left="164" top="972" width="50" height="21" cssclass="sta_WF_textR" minwidth="100" maxwidth=""/>
+        <Static id="Static28" taborder="60" text="가나다라마" left="164" top="998" width="60" height="21" cssclass="sta_WF_textR" minwidth="100" maxwidth=""/>
+        <Static id="Static29" taborder="61" text="가나다라마바" left="164" top="1024" width="70" height="21" cssclass="sta_WF_textR" minwidth="100" maxwidth=""/>
+        <Static id="Static30" taborder="62" text="가나다라마바사" left="164" top="1050" width="80" height="21" cssclass="sta_WF_textR" minwidth="110" maxwidth=""/>
+        <Div id="Div00" taborder="63" left="151" top="140" height="43" cssclass="div_WF_searchBox02" width="1020" text="">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="Label" left="20" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="Combo00" taborder="1" text="Combo00" left="Static00:-35" width="231" height="21" top="10"/>
+              <Static id="Static05" taborder="2" text="Label" left="Combo00:50" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="Edit11" taborder="3" left="Static05:-35" top="10" width="231" height="21"/>
+              <Static id="Static30" taborder="9" text="Label" left="Edit11:50" top="10" width="80" height="21" cssclass="sta_WF_textR" minwidth="80" maxwidth=""/>
+              <Edit id="Edit00" taborder="4" left="Static30:30" top="10" height="21" width="218"/>
+              <Static id="Static33" taborder="5" left="296" width="50" cssclass="sta_Guide_Width2" text="50" height="25" bottom="0"/>
+              <Static id="Static02" taborder="6" left="622" width="50" cssclass="sta_Guide_Width2" text="50" height="25" bottom="0"/>
+              <Static id="Static03" taborder="7" text="여백" left="296" top="0" width="50" height="21" cssclass="sta_GD_Square" visible="false"/>
+              <Static id="Static04" taborder="8" text="여백" left="622" top="0" width="50" height="21" cssclass="sta_GD_Square" visible="false"/>
+              <Static id="Static01" taborder="10" text="여백" left="1" top="0" width="20" height="21" cssclass="sta_GD_Square" visible="false"/>
+              <Static id="Static06" taborder="11" left="1000" width="20" cssclass="sta_Guide_Width2" text="20" height="25" bottom="0"/>
+              <Static id="Static07" taborder="12" text="여백" left="1000" top="0" width="20" height="21" cssclass="sta_GD_Square" visible="false"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static31" taborder="64" text="- 1줄일때" left="151" top="117" width="86" height="15" font="bold 9pt/normal &quot;Guliml&quot;"/>
+        <Static id="Static33" taborder="65" left="152" top="158" width="20" height="25" cssclass="sta_Guide_Width2" text="20"/>
+        <Static id="Static34" taborder="66" left="206" top="156" width="10" height="25" cssclass="sta_Guide_Width2"/>
+        <Static id="Static35" taborder="67" text="10" left="196" top="189" width="30" height="15" cssclass="sta_Guide_Size"/>
+        <Static id="Static36" taborder="68" text="10" left="360" top="135" width="20" height="21" cssclass="sta_Guide_Size"/>
+        <Static id="Static37" taborder="69" left="339" top="141" width="25" height="10" cssclass="sta_Guide_Height2"/>
+        <Static id="Static66" taborder="70" text="- 2줄일때" left="149" top="225" width="86" height="15" font="bold 9pt/normal &quot;Guliml&quot;"/>
+        <Static id="Static67" taborder="71" text="- 3줄일때" left="149" top="340" width="86" height="15" font="bold 9pt/normal &quot;Guliml&quot;"/>
+        <Static id="Static68" taborder="72" left="125" top="140" width="25" height="43" cssclass="sta_Guide_Height3" text="43"/>
+        <Static id="Static71" taborder="73" left="151" top="184" width="1020" height="25" cssclass="sta_Guide_Width3" text="1020"/>
+        <Static id="Static73" taborder="74" left="125" top="247" width="25" height="72" cssclass="sta_Guide_Height3" text="72"/>
+        <Static id="Static74" taborder="75" left="125" top="363" width="25" height="101" cssclass="sta_Guide_Height3" text="101"/>
+        <Static id="Static76" taborder="76" text="- 4줄일때" left="150" top="480" width="86" height="15" font="bold 9pt/normal &quot;Guliml&quot;"/>
+        <Static id="Static77" taborder="77" left="126" top="503" width="25" height="130" cssclass="sta_Guide_Height3" text="130"/>
+        <Static id="Static83" taborder="78" text="- 1단일때" left="150" top="1185" width="86" height="15" font="bold 9pt/normal &quot;Guliml&quot;"/>
+        <Static id="Static117" taborder="85" text="- 2단일때" left="150" top="1343" width="86" height="15" font="bold 9pt/normal &quot;Guliml&quot;"/>
+        <Static id="Static148" taborder="86" text="- 3단일때" left="150" top="1474" width="86" height="15" font="bold 9pt/normal &quot;Guliml&quot;"/>
+        <Static id="Static222" taborder="87" text="가나" left="150" top="1729" width="120" cssclass="sta_WF_th01L" height="29"/>
+        <Static id="Static223" taborder="88" text="7 글자 기준 최소Size (w120)" left="255" top="1734" width="200" height="15" cssclass="sta_Guide_Size" font="normal 11px/normal &quot;Gulim&quot;"/>
+        <Static id="Static224" taborder="89" text="(Label Width Size 정의)" left="150" top="1636" width="338" height="28" font="bold 9pt/normal &quot;Guliml&quot;"/>
+        <Static id="Static225" taborder="90" text="- 최소 8글자기준(w120)으로 한 글자씩 늘어날 때마다 12px가 늘어나며 예시 이외 글자 수가 많아질 경우 글자가 가려지지 않게 가변적으로 width값을 결정&#13;&#10;- 각 Label Width값은 다른줄의 Label Width값에 영향을 주지 않음 &#13;&#13;&#10;" left="158" top="1667" width="871" height="50" font="12px/18px normal &quot;Guliml&quot;"/>
+        <Static id="Static226" taborder="91" text="가나다" left="150" top="1768" width="120" cssclass="sta_WF_th01L" height="29"/>
+        <Static id="Static227" taborder="92" text="가나다라" left="150" top="1807" width="120" cssclass="sta_WF_th01L" height="29"/>
+        <Static id="Static228" taborder="93" text="가나다라마" left="150" top="1846" width="120" cssclass="sta_WF_th01L" height="29"/>
+        <Static id="Static229" taborder="94" text="가나다라마바" left="488" top="1729" width="120" cssclass="sta_WF_th01L" height="29"/>
+        <Static id="Static230" taborder="95" text="가나다라마바사" left="488" top="1768" width="120" cssclass="sta_WF_th01L" height="29"/>
+        <Static id="Static231" taborder="96" text="가나다라마바사아" left="488" top="1807" width="120" cssclass="sta_WF_th01L" height="29"/>
+        <Static id="Static232" taborder="97" text="가나다라마바사아자" left="488" top="1846" width="132" cssclass="sta_WF_th01L" height="29"/>
+        <Static id="Static81" taborder="98" text="width : 144" left="665" top="1887" width="70" height="12" cssclass="sta_Guide_Size"/>
+        <Static id="Static39" taborder="100" left="339" top="171" width="25" height="11" cssclass="sta_Guide_Height2"/>
+        <Static id="Static191" taborder="101" text="11" left="360" top="167" width="20" height="21" cssclass="sta_Guide_Size"/>
+        <Static id="Static87" taborder="102" text="- 조회영역 텍스트(6자 이하)" left="151" top="889" width="166" height="15" font="bold 9pt/normal &quot;Guliml&quot;"/>
+        <Div id="Div01" taborder="104" left="151" top="247" height="72" cssclass="div_WF_searchBox02" width="1020">
+          <Layouts>
+            <Layout>
+              <Edit id="Edit01" taborder="7" left="391" top="39" width="230" height="21"/>
+              <Static id="Static01" taborder="0" text="가나다라마바사아자" left="Edit01:51" top="39" width="110" height="21" cssclass="sta_WF_textR" minwidth="100" maxwidth=""/>
+              <Edit id="Edit02" taborder="1" left="Static01:0" top="39" height="21" right="20"/>
+              <Static id="Static04" taborder="2" left="296" width="50" cssclass="sta_Guide_Width2" text="50" height="25" bottom="0"/>
+              <Static id="Static09" taborder="3" left="622" width="50" cssclass="sta_Guide_Width2" text="50" height="25" bottom="0"/>
+              <Combo id="Combo01" taborder="4" text="Combo00" left="65" width="231" height="21" top="39"/>
+              <Static id="Static02" taborder="5" text="Label" left="20" top="39" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Static id="Static06" taborder="6" text="Label" left="Combo01:50" top="39" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Static id="Static00" taborder="8" text="Label" left="20" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="Combo00" taborder="9" text="Combo00" left="65" top="10" width="231" height="21"/>
+              <Static id="Static03" taborder="10" text="여백" left="296" top="0" width="50" height="21" cssclass="sta_GD_Square" visible="false"/>
+              <Static id="Static05" taborder="11" text="Label" left="346" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="Edit11" taborder="12" left="391" top="10" width="231" height="21"/>
+              <Static id="Static07" taborder="13" text="여백" left="622" top="0" width="50" height="21" cssclass="sta_GD_Square" visible="false"/>
+              <Static id="Static30" taborder="14" text="Label" left="672" top="10" width="80" height="21" cssclass="sta_WF_textR" minwidth="80" maxwidth=""/>
+              <Edit id="Edit00" taborder="15" left="782" top="10" height="21" width="218"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="Div02" taborder="105" left="151" top="363" height="101" cssclass="div_WF_searchBox02" width="1020">
+          <Layouts>
+            <Layout>
+              <Edit id="Edit11" taborder="0" left="391" top="10" width="231" height="21"/>
+              <Edit id="Edit01" taborder="1" left="391" top="39" width="231" height="21"/>
+              <Static id="Static00" taborder="2" text="Label" left="20" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="Combo00" taborder="3" text="Combo00" left="65" top="10" width="231" height="21"/>
+              <Static id="Static05" taborder="6" text="Label" left="346" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="Combo01" taborder="9" text="Combo00" left="65" top="39" width="231" height="21"/>
+              <Static id="Static02" taborder="10" text="Label" left="20" top="39" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Static id="Static06" taborder="11" text="Label" left="346" top="39" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Static id="Static07" taborder="12" text="Label" left="20" top="68" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="Combo02" taborder="13" text="Combo00" left="65" width="231" height="21" top="68"/>
+              <Static id="Static10" taborder="14" text="Label" left="346" top="68" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="Edit03" taborder="15" left="391" width="231" height="21" top="68"/>
+              <Static id="Static11" taborder="16" text="가나다라마바사아자" left="672" top="68" width="110" height="21" cssclass="sta_WF_textR" minwidth="100" maxwidth=""/>
+              <Edit id="Edit04" taborder="17" left="782" top="68" height="21" right="20"/>
+              <Static id="Static30" taborder="18" text="Label" left="672" top="10" width="80" height="21" cssclass="sta_WF_textR" minwidth="80" maxwidth=""/>
+              <Edit id="Edit00" taborder="19" left="782" top="10" height="21" width="218"/>
+              <Static id="Static01" taborder="20" text="Label" left="672" top="39" width="80" height="21" cssclass="sta_WF_textR" minwidth="80" maxwidth=""/>
+              <Edit id="Edit02" taborder="21" left="782" top="39" height="21" width="218"/>
+              <Static id="Static03" taborder="4" text="여백" left="296" top="0" width="50" height="21" cssclass="sta_GD_Square" visible="false"/>
+              <Static id="Static04" taborder="5" left="296" width="50" cssclass="sta_Guide_Width2" text="50" height="25" bottom="0"/>
+              <Static id="Static08" taborder="7" text="여백" left="622" top="0" width="50" height="21" cssclass="sta_GD_Square" visible="false"/>
+              <Static id="Static09" taborder="8" left="622" width="50" cssclass="sta_Guide_Width2" text="50" height="25" bottom="0"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="Div03" taborder="106" left="151" top="503" height="130" cssclass="div_WF_searchBox02" width="1020">
+          <Layouts>
+            <Layout>
+              <Combo id="Combo00" taborder="3" text="Combo00" left="65" top="10" width="231" height="21"/>
+              <Static id="Static05" taborder="6" text="Label" left="Combo00:50" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="Edit11" taborder="0" left="Static05:-35" top="10" width="231" height="21"/>
+              <Edit id="Edit01" taborder="1" left="391" top="39" width="231" height="21"/>
+              <Static id="Static00" taborder="2" text="Label" left="20" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="Combo01" taborder="9" text="Combo00" left="65" top="39" width="231" height="21"/>
+              <Static id="Static02" taborder="10" text="Label" left="20" top="39" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Static id="Static06" taborder="11" text="Label" left="346" top="39" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Static id="Static07" taborder="12" text="Label" left="20" top="68" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="Combo02" taborder="13" text="Combo00" left="65" top="68" width="231" height="21"/>
+              <Static id="Static10" taborder="14" text="Label" left="346" top="68" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="Edit03" taborder="15" left="391" top="68" width="231" height="21"/>
+              <Static id="Static11" taborder="16" text="가나다라마바사아자" left="672" top="68" width="110" height="21" cssclass="sta_WF_textR" minwidth="100" maxwidth=""/>
+              <Edit id="Edit04" taborder="17" left="782" top="68" height="21" right="20"/>
+              <Static id="Static30" taborder="18" text="Label" left="Edit11:50" top="10" width="80" height="21" cssclass="sta_WF_textR" minwidth="80" maxwidth=""/>
+              <Edit id="Edit00" taborder="19" left="Static30:30" top="11" height="21" right="20"/>
+              <Static id="Static01" taborder="20" text="Label" left="672" top="39" width="80" height="21" cssclass="sta_WF_textR" minwidth="80" maxwidth=""/>
+              <Edit id="Edit02" taborder="21" left="782" top="39" height="21" right="20"/>
+              <Static id="Static12" taborder="22" text="Label" left="20" top="97" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="Combo03" taborder="23" text="Combo00" left="65" width="231" height="21" top="97"/>
+              <Static id="Static13" taborder="24" text="Label" left="346" top="97" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Static id="Static14" taborder="25" text="가나다라마바사아자" left="672" top="97" width="110" height="21" cssclass="sta_WF_textR" minwidth="100" maxwidth=""/>
+              <Edit id="Edit05" taborder="26" left="782" top="97" height="21" right="20"/>
+              <Edit id="Edit06" taborder="27" left="391" top="97" width="231" height="21"/>
+              <Static id="Static03" taborder="4" text="여백" left="296" top="0" width="50" height="21" cssclass="sta_GD_Square" visible="false"/>
+              <Static id="Static04" taborder="5" left="296" width="50" cssclass="sta_Guide_Width2" text="50" height="25" bottom="0"/>
+              <Static id="Static08" taborder="7" text="여백" left="622" top="0" width="50" height="21" cssclass="sta_GD_Square" visible="false"/>
+              <Static id="Static09" taborder="8" left="622" width="50" cssclass="sta_Guide_Width2" text="50" height="25" bottom="0"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static79" taborder="107" text="1줄 추가 될때 28PX 씩 높이 증가" left="156" top="77" width="369" height="25"/>
+        <Static id="Static91" taborder="108" text="- 2단일때" left="148" top="660" width="86" height="15" font="bold 9pt/normal &quot;Guliml&quot;"/>
+        <Static id="Static92" taborder="109" left="124" top="682" width="26" height="72" cssclass="sta_Guide_Height3" text="72"/>
+        <Div id="Div07" taborder="110" left="150" top="682" height="72" cssclass="div_WF_searchBox02" width="1020">
+          <Layouts>
+            <Layout>
+              <Edit id="Edit11" taborder="9" left="391" top="10" width="231" height="21"/>
+              <Static id="Static30" taborder="0" text="가나다라마바사아자" left="Edit11:50" top="10" width="110" height="21" cssclass="sta_WF_textR" minwidth="100" maxwidth=""/>
+              <Edit id="Edit00" taborder="1" left="Static30:0" top="10" height="21" right="20"/>
+              <Edit id="Edit01" taborder="15" left="391" top="39" width="231" height="21"/>
+              <Static id="Static01" taborder="2" text="가나다라마바사아자" left="Edit01:50" top="39" width="110" height="21" cssclass="sta_WF_textR" minwidth="100" maxwidth=""/>
+              <Edit id="Edit02" taborder="3" left="Static01:0" top="39" height="21" right="20"/>
+              <Static id="Static00" taborder="4" text="Label" left="20" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="Combo00" taborder="5" text="Combo00" left="65" top="10" width="231" height="21"/>
+              <Static id="Static03" taborder="6" text="여백" left="296" top="0" width="50" height="21" cssclass="sta_GD_Square" visible="false"/>
+              <Static id="Static04" taborder="7" left="296" width="50" cssclass="sta_Guide_Width2" text="50" height="25" bottom="0"/>
+              <Static id="Static05" taborder="8" text="Label" left="346" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="Combo01" taborder="12" text="Combo00" left="65" top="39" width="231" height="21"/>
+              <Static id="Static02" taborder="13" text="Label" left="20" top="39" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Static id="Static06" taborder="14" text="Label" left="346" top="39" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Static id="Static08" taborder="10" text="여백" left="622" top="0" width="50" height="21" cssclass="sta_GD_Square" visible="false"/>
+              <Static id="Static09" taborder="11" left="622" width="50" cssclass="sta_Guide_Width2" text="50" height="25" bottom="0"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static93" taborder="111" left="124" top="751" width="26" height="101" cssclass="sta_Guide_Height3" text="101"/>
+        <Div id="Div08" taborder="112" left="150" top="751" height="101" cssclass="div_WF_searchBox03" width="1020">
+          <Layouts>
+            <Layout>
+              <Edit id="Edit11" taborder="0" left="391" top="10" width="231" height="21"/>
+              <Edit id="Edit01" taborder="1" left="391" top="39" width="231" height="21"/>
+              <Static id="Static00" taborder="2" text="Label" left="20" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="Combo00" taborder="3" text="Combo00" left="65" top="10" width="231" height="21"/>
+              <Static id="Static03" taborder="4" text="여백" left="296" top="0" width="50" height="21" cssclass="sta_GD_Square" visible="false"/>
+              <Static id="Static04" taborder="5" left="296" width="50" cssclass="sta_Guide_Width2" text="50" height="25" bottom="0"/>
+              <Static id="Static05" taborder="6" text="Label" left="346" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="Combo01" taborder="9" text="Combo00" left="65" top="39" width="231" height="21"/>
+              <Static id="Static02" taborder="10" text="Label" left="20" top="39" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Static id="Static06" taborder="11" text="Label" left="346" top="39" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Static id="Static07" taborder="12" text="Label" left="20" top="68" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="Combo02" taborder="13" text="Combo00" left="65" width="231" height="21" top="68"/>
+              <Static id="Static10" taborder="14" text="Label" left="346" top="68" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="Edit03" taborder="15" left="391" top="68" width="231" height="21"/>
+              <Static id="Static11" taborder="16" text="가나다라마바사아자" left="672" top="68" width="110" height="21" cssclass="sta_WF_textR" minwidth="100" maxwidth=""/>
+              <Edit id="Edit04" taborder="17" left="782" top="68" height="21" right="20"/>
+              <Static id="Static30" taborder="18" text="Label" left="672" top="10" width="80" height="21" cssclass="sta_WF_textR" minwidth="80" maxwidth=""/>
+              <Edit id="Edit00" taborder="19" left="782" top="10" height="21" width="218"/>
+              <Static id="Static01" taborder="20" text="Label" left="672" top="39" width="80" height="21" cssclass="sta_WF_textR" minwidth="80" maxwidth=""/>
+              <Edit id="Edit02" taborder="21" left="782" top="39" height="21" width="218"/>
+              <Static id="Static08" taborder="7" text="여백" left="622" top="0" width="50" height="21" cssclass="sta_GD_Square" visible="false"/>
+              <Static id="Static09" taborder="8" left="622" width="50" cssclass="sta_Guide_Width2" text="50" height="25" bottom="0"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static84" taborder="113" text="Label" left="145" top="1210" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="Static85" taborder="115" left="263" top="1210" height="31" cssclass="sta_WF_td01L" width="900"/>
+        <Edit id="Edit00" taborder="114" left="271" top="1215" height="21" width="885"/>
+        <Static id="Static105" taborder="81" left="125" top="1210" width="25" height="31" cssclass="sta_Guide_Height3" text="31"/>
+        <Static id="Static108" taborder="82" text="1px 겹칩" left="87" top="1230" width="50" height="23" color="#2c4898"/>
+        <Static id="Static109" taborder="83" left="144" top="1268" width="120" height="25" cssclass="sta_Guide_Width3" text="120"/>
+        <Static id="Static113" taborder="84" left="144" top="1288" width="1020" height="25" cssclass="sta_Guide_Width3" text="1020"/>
+        <Static id="Static55" taborder="99" left="125" top="1240" width="25" height="31" cssclass="sta_Guide_Height3" text="31"/>
+        <Static id="Static86" taborder="116" left="264" width="7" cssclass="sta_Guide_Width2" text="7" height="25" bottom="2161"/>
+        <Static id="Static90" taborder="117" left="1155" width="7" cssclass="sta_Guide_Width2" text="7" height="25" bottom="2161"/>
+        <Static id="Static69" taborder="118" text="Label" left="145" top="1240" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="Static94" taborder="119" left="263" top="1240" height="31" cssclass="sta_WF_td01L" width="900"/>
+        <Edit id="Edit09" taborder="120" left="271" top="1245" height="21" width="885"/>
+        <Static id="Static100" taborder="79" left="335" top="1236" width="25" height="4" cssclass="sta_Guide_Height"/>
+        <Static id="Static101" taborder="80" text="4" left="342" top="1227" width="15" height="21" cssclass="sta_Guide_Size"/>
+        <Static id="Static95" taborder="121" left="335" top="1265" width="25" height="4" cssclass="sta_Guide_Height"/>
+        <Static id="Static96" taborder="122" text="4" left="342" top="1256" width="15" height="21" cssclass="sta_Guide_Size"/>
+        <Static id="Static58" taborder="123" left="263" top="1368" height="31" cssclass="sta_WF_td01L" width="900"/>
+        <Edit id="Edit10" taborder="124" left="271" top="1373" height="21" width="375"/>
+        <Static id="Static70" taborder="125" left="125" top="1368" width="25" height="31" cssclass="sta_Guide_Height3" text="31"/>
+        <Static id="Static72" taborder="126" left="125" top="1398" width="25" height="31" cssclass="sta_Guide_Height3" text="31"/>
+        <Static id="Static75" taborder="127" left="264" width="7" cssclass="sta_Guide_Width2" text="7" height="25" bottom="2003"/>
+        <Static id="Static98" taborder="129" left="263" top="1398" height="31" cssclass="sta_WF_td01L" width="900"/>
+        <Edit id="Edit11" taborder="130" left="271" top="1403" height="21" width="885"/>
+        <Static id="Static112" taborder="131" text="Label" left="145" top="1368" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="Static78" taborder="132" text="Label" left="Edit10:7" top="1368" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="Static99" taborder="133" left="645" width="7" cssclass="sta_Guide_Width2" text="7" height="25" bottom="2002"/>
+        <Edit id="Edit12" taborder="134" left="Static78:6" top="1373" height="21" width="377"/>
+        <Static id="Static102" taborder="135" left="773" width="7" cssclass="sta_Guide_Width2" text="7" height="25" bottom="2002"/>
+        <Static id="Static103" taborder="136" left="1156" width="7" cssclass="sta_Guide_Width2" text="7" height="25" bottom="2002"/>
+        <Static id="Static111" taborder="137" left="144" top="1428" width="120" height="25" cssclass="sta_Guide_Width3" text="120"/>
+        <Static id="Static114" taborder="138" left="653" top="1428" width="120" height="25" cssclass="sta_Guide_Width3" text="120"/>
+        <Static id="Static104" taborder="139" left="263" top="1500" height="31" cssclass="sta_WF_td01L" width="900"/>
+        <Edit id="Edit13" taborder="140" left="271" top="1505" height="21" width="208"/>
+        <Static id="Static106" taborder="141" left="125" top="1500" width="25" height="31" cssclass="sta_Guide_Height3" text="31"/>
+        <Static id="Static107" taborder="142" left="125" top="1530" width="25" height="31" cssclass="sta_Guide_Height3" text="31"/>
+        <Static id="Static115" taborder="143" left="264" width="7" cssclass="sta_Guide_Width2" text="7" height="25" bottom="1871"/>
+        <Static id="Static119" taborder="145" left="263" top="1530" height="31" cssclass="sta_WF_td01L" width="900"/>
+        <Edit id="Edit14" taborder="146" left="271" top="1535" height="21" width="885"/>
+        <Static id="Static120" taborder="147" text="Label" left="Edit13:6" top="1500" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="Static121" taborder="148" left="478" width="7" cssclass="sta_Guide_Width2" text="7" height="25" bottom="1870"/>
+        <Edit id="Edit15" taborder="149" left="Static120:6" top="1505" height="21" width="208"/>
+        <Static id="Static122" taborder="150" left="605" width="7" cssclass="sta_Guide_Width2" text="7" height="25" bottom="1870"/>
+        <Static id="Static123" taborder="151" left="1156" width="7" cssclass="sta_Guide_Width2" text="7" height="25" bottom="1870"/>
+        <Static id="Static124" taborder="152" left="144" top="1560" width="120" height="25" cssclass="sta_Guide_Width3" text="120"/>
+        <Static id="Static125" taborder="153" left="484" top="1560" width="120" height="25" cssclass="sta_Guide_Width3" text="120"/>
+        <Static id="Static126" taborder="154" text="Label" left="145" top="1500" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="Static129" taborder="157" text="Label" left="Edit15:6" top="1500" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="Static128" taborder="156" left="818" width="7" cssclass="sta_Guide_Width2" text="7" height="25" bottom="1870"/>
+        <Edit id="Edit16" taborder="158" left="Static129:6" top="1505" height="21" width="205"/>
+        <Static id="Static127" taborder="155" left="944" width="7" cssclass="sta_Guide_Width2" text="7" height="25" bottom="1870"/>
+        <Static id="Static130" taborder="159" left="826" top="1560" width="120" height="25" cssclass="sta_Guide_Width3" text="120"/>
+        <Static id="Static48" taborder="160" text="가나다라마바사아자차" left="488" top="1885" width="144" cssclass="sta_WF_th01L" height="29"/>
+        <Static id="Static110" taborder="161" text="width : 132" left="665" top="1851" width="70" height="12" cssclass="sta_Guide_Size"/>
+        <Static id="Static116" taborder="162" left="326" top="278" width="25" height="8" cssclass="sta_Guide_Height2"/>
+        <Static id="Static131" taborder="163" text="8" left="347" top="271" width="20" height="21" cssclass="sta_Guide_Size"/>
+        <Static id="Static21" taborder="164" left="275" top="2227" width="3" height="21" cssclass="sta_GD_Square"/>
+        <Static id="Static22" taborder="165" text="3" left="265" top="2210" width="20" height="15" cssclass="sta_Guide_Size"/>
+        <Static id="Static97" taborder="128" text="Label" left="145" top="1398" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="Static118" taborder="144" text="Label" left="145" top="1530" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="Static30_00" taborder="166" text="가나다라마바사아" left="164" top="1076" width="90" height="21" cssclass="sta_WF_textR" minwidth="110" maxwidth=""/>
+        <Static id="Static30_01" taborder="167" text="가나다라마바사아자" left="164" top="1102" width="100" height="21" cssclass="sta_WF_textR" minwidth="110" maxwidth=""/>
+        <Static id="Static09_00_00_00_00" taborder="168" text="aaaaa" left="589" top="998" width="39" height="21" cssclass="sta_WF_textR" minwidth="100" maxwidth=""/>
+        <Static id="Static09_00_00_00" taborder="169" text="aaaa" left="589" top="972" width="33" height="21" cssclass="sta_WF_textR" minwidth="100" maxwidth=""/>
+        <Static id="Static09_00_00" taborder="170" text="aaa" left="589" top="946" width="27" height="21" cssclass="sta_WF_textR" minwidth="100" maxwidth=""/>
+        <Static id="Static09_00" taborder="171" text="aa" left="589" top="920" width="21" height="21" cssclass="sta_WF_textR" minwidth="100" maxwidth=""/>
+        <Static id="Static09_00_00_00_00_00" taborder="172" text="aaaaaa" left="589" top="1024" width="45" height="21" cssclass="sta_WF_textR" minwidth="100" maxwidth=""/>
+        <Static id="Static09_00_00_00_00_00_00" taborder="173" text="aaaaaaa" left="589" top="1050" width="51" height="21" cssclass="sta_WF_textR" minwidth="100" maxwidth=""/>
+        <Static id="Static09_00_00_00_00_00_00_00" taborder="174" text="aaaaaaaa" left="589" top="1076" width="57" height="21" cssclass="sta_WF_textR" minwidth="100" maxwidth=""/>
+        <Static id="Static09_00_00_00_00_00_00_00_00" taborder="175" text="aaaaaaaaa" left="589" top="1102" width="63" height="21" cssclass="sta_WF_textR" minwidth="100" maxwidth=""/>
+        <Static id="Static09_00_00_00_00_00_00_00_00_00" taborder="176" text="aaaaaaaaaa" left="722" top="920" width="69" height="21" cssclass="sta_WF_textR" minwidth="100" maxwidth=""/>
+        <Static id="Static09_00_00_00_00_00_00_00_00_00_00" taborder="177" text="aaaaaaaaaaa" left="722" top="946" width="75" height="21" cssclass="sta_WF_textR" minwidth="100" maxwidth=""/>
+        <Static id="Static09_00_00_00_00_00_00_00_00_00_00_00" taborder="178" text="aaaaaaaaaaaa" left="722" top="972" width="81" height="21" cssclass="sta_WF_textR" minwidth="100" maxwidth=""/>
+        <Static id="Static09_00_00_00_00_00_00_00_00_00_00_00_00" taborder="179" text="aaaaaaaaaaaaa" left="722" top="998" width="87" height="21" cssclass="sta_WF_textR" minwidth="100" maxwidth=""/>
+        <Static id="Static09_00_00_00_00_00_00_00_00_00_00_00_00_00" taborder="180" text="aaaaaaaaaaaaaa" left="722" top="1024" width="93" height="21" cssclass="sta_WF_textR" minwidth="100" maxwidth=""/>
+        <Static id="Static09_00_00_00_00_00_00_00_00_00_00_00_00_00_00" taborder="181" text="aaaaaaaaaaaaaaa" left="722" top="1050" width="99" height="21" cssclass="sta_WF_textR" minwidth="100" maxwidth=""/>
+        <Static id="Static09_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00" taborder="182" text="aaaaaaaaaaaaaaaa" left="722" top="1076" width="105" height="21" cssclass="sta_WF_textR" minwidth="100" maxwidth=""/>
+        <Static id="Static09_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00" taborder="183" text="aaaaaaaaaaaaaaaaa" left="722" top="1102" width="111" height="21" cssclass="sta_WF_textR" minwidth="100" maxwidth=""/>
+        <Static id="Static09_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00" taborder="184" text="aaaaaaaaaaaaaaaaaa" left="903" top="920" width="117" height="21" cssclass="sta_WF_textR" minwidth="100" maxwidth=""/>
+        <Static id="Static09_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00" taborder="185" text="aaaaaaaaaaaaaaaaaaa" left="903" top="946" width="123" height="21" cssclass="sta_WF_textR" minwidth="100" maxwidth=""/>
+        <Static id="Static09_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00" taborder="186" text="aaaaaaaaaaaaaaaaaaaa" left="903" top="972" width="129" height="21" cssclass="sta_WF_textR" minwidth="100" maxwidth=""/>
+        <Static id="Static82_00" taborder="187" text="최소 width : 21px (2자)&#13;&#10;한 글자 늘어날 때 마다 +6px" left="903" top="1039" width="140" height="42" cssclass="sta_Guide_Size" textAlign="left"/>
+        <Static id="Static231_00" taborder="188" text="aaaaaaaaaaaaaa" left="150" top="1935" width="120" cssclass="sta_WF_th01L" height="29"/>
+        <Static id="Static232_00" taborder="189" text="aaaaaaaaaaaaaaa" left="150" top="1974" width="126" cssclass="sta_WF_th01L" height="29"/>
+        <Static id="Static232_00_00" taborder="190" text="aaaaaaaaaaaaaaaa" left="150" top="2013" width="132" cssclass="sta_WF_th01L" height="29"/>
+        <Static id="Static232_00_00_00" taborder="191" text="aaaaaaaaaaaaaaaaaaa" left="352" top="2013" width="150" cssclass="sta_WF_th01L" height="29"/>
+        <Static id="Static232_00_01" taborder="192" text="aaaaaaaaaaaaaaaaaa" left="352" top="1974" width="144" cssclass="sta_WF_th01L" height="29"/>
+        <Static id="Static231_00_00" taborder="193" text="aaaaaaaaaaaaaaaaa" left="352" top="1935" width="138" cssclass="sta_WF_th01L" height="29"/>
+        <Static id="Static232_00_00_00_00" taborder="194" text="aaaaaaaaaaaaaaaaaaaa" left="572" top="1935" width="156" cssclass="sta_WF_th01L" height="29"/>
+        <Static id="Static232_00_00_00_00_00" taborder="195" text="Aaaaaaaaaaaaaaaaaaaa" left="572" top="1974" width="158" cssclass="sta_WF_th01L" height="29"/>
+        <Static id="Static09_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00" taborder="196" text="Aaaaaaaaaaaaaaaaaaaa" left="903" top="998" width="131" height="21" cssclass="sta_WF_textR" minwidth="100" maxwidth=""/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Combo">
+        <ColumnInfo>
+          <Column id="txt" type="STRING" size="256"/>
+          <Column id="lev" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="txt">전체</Col>
+            <Col id="lev">0</Col>
+          </Row>
+          <Row>
+            <Col id="txt">가</Col>
+            <Col id="lev">1</Col>
+          </Row>
+          <Row>
+            <Col id="txt">가나</Col>
+            <Col id="lev">2</Col>
+          </Row>
+          <Row>
+            <Col id="txt">가나다</Col>
+            <Col id="lev">3</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="Grid" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="순번" type="STRING" size="256"/>
+          <Column id="Column01" type="STRING" size="256"/>
+          <Column id="Column02" type="STRING" size="256"/>
+          <Column id="Column03" type="STRING" size="256"/>
+          <Column id="Column04" type="STRING" size="256"/>
+          <Column id="Column05" type="STRING" size="256"/>
+          <Column id="Column06" type="STRING" size="256"/>
+          <Column id="Column07" type="STRING" size="256"/>
+          <Column id="lev" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="순번">1</Col>
+            <Col id="Column05">가</Col>
+            <Col id="Column06">1234567890</Col>
+            <Col id="Column01">가</Col>
+            <Col id="Column04">expand</Col>
+            <Col id="Column02">전체</Col>
+            <Col id="lev">0</Col>
+            <Col id="Column07">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="순번">2</Col>
+            <Col id="Column05">가나</Col>
+            <Col id="Column06">1234567890</Col>
+            <Col id="Column01">가나</Col>
+            <Col id="Column04">expand</Col>
+            <Col id="Column02">가</Col>
+            <Col id="lev">0</Col>
+            <Col id="Column07">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="순번">3</Col>
+            <Col id="Column05">가나다</Col>
+            <Col id="Column06">1234567890</Col>
+            <Col id="Column01">가나다</Col>
+            <Col id="Column04">expand</Col>
+            <Col id="Column02">가나</Col>
+            <Col id="lev">0</Col>
+            <Col id="Column07">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="순번">4</Col>
+            <Col id="Column05">가나다라</Col>
+            <Col id="Column06">1234567890</Col>
+            <Col id="Column01">가나다라</Col>
+            <Col id="Column04">expand</Col>
+            <Col id="Column02">가나다</Col>
+            <Col id="lev">0</Col>
+            <Col id="Column07">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="순번">5</Col>
+            <Col id="Column05">가나다라마</Col>
+            <Col id="Column06">1234567890</Col>
+            <Col id="Column01">가나다라마</Col>
+            <Col id="Column04">expand</Col>
+            <Col id="Column07">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="순번">6</Col>
+            <Col id="Column05">가나다라마바</Col>
+            <Col id="Column06">1234567890</Col>
+            <Col id="Column01">가나다라마바</Col>
+            <Col id="Column04">expand</Col>
+            <Col id="Column07">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="순번">7</Col>
+            <Col id="Column05">가나다라마바사</Col>
+            <Col id="Column06">1234567890</Col>
+            <Col id="Column01">가나다라마바사</Col>
+            <Col id="Column04">expand</Col>
+            <Col id="Column07">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="순번">8</Col>
+            <Col id="Column05">가나다라마바사아</Col>
+            <Col id="Column06">1234567890</Col>
+            <Col id="Column01">가나다라마바사아</Col>
+            <Col id="Column04">expand</Col>
+            <Col id="Column07">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="순번">9</Col>
+            <Col id="Column05">가나다라마바사아자</Col>
+            <Col id="Column06">1234567890</Col>
+            <Col id="Column01">가나다라마바사아자</Col>
+            <Col id="Column04">expand</Col>
+            <Col id="Column07">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="순번">10</Col>
+            <Col id="Column05">가나다라마바사아자차</Col>
+            <Col id="Column06">1234567890</Col>
+            <Col id="Column01">가나다라마바사아자차</Col>
+            <Col id="Column04">expand</Col>
+            <Col id="Column07">버튼</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="Tree">
+        <ColumnInfo>
+          <Column id="txt" type="STRING" size="256"/>
+          <Column id="lev" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="txt">1 Depth Menu</Col>
+            <Col id="lev">0</Col>
+          </Row>
+          <Row>
+            <Col id="txt">2 Depth Menu</Col>
+            <Col id="lev">1</Col>
+          </Row>
+          <Row>
+            <Col id="txt">1 Depth Menu</Col>
+            <Col id="lev">0</Col>
+          </Row>
+          <Row>
+            <Col id="txt">2 Depth Menu</Col>
+            <Col id="lev">1</Col>
+          </Row>
+          <Row>
+            <Col id="txt">1 Depth Menu</Col>
+            <Col id="lev">0</Col>
+          </Row>
+          <Row>
+            <Col id="txt">2 Depth Menu</Col>
+            <Col id="lev">1</Col>
+          </Row>
+          <Row>
+            <Col id="txt">2 Depth Menu</Col>
+            <Col id="lev">1</Col>
+          </Row>
+          <Row>
+            <Col id="txt">2 Depth Menu</Col>
+            <Col id="lev">1</Col>
+          </Row>
+          <Row>
+            <Col id="txt">2 Depth Menu</Col>
+            <Col id="lev">1</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="Menu">
+        <ColumnInfo>
+          <Column id="Caption" type="STRING" size="256"/>
+          <Column id="Id" type="STRING" size="256"/>
+          <Column id="Level" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Caption">2depth Menu01</Col>
+            <Col id="Id">00001</Col>
+            <Col id="Level">0</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu01</Col>
+            <Col id="Id">00002</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu02</Col>
+            <Col id="Id">00003</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu03</Col>
+            <Col id="Id">00004</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu04</Col>
+            <Col id="Id">00005</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu05</Col>
+            <Col id="Id">00006</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu06</Col>
+            <Col id="Id">00007</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">2depth Menu02</Col>
+            <Col id="Id">00008</Col>
+            <Col id="Level">0</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu01</Col>
+            <Col id="Id">00009</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu02</Col>
+            <Col id="Id">00010</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu03</Col>
+            <Col id="Id">00011</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu04</Col>
+            <Col id="Id">00012</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu05</Col>
+            <Col id="Id">00013</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu06</Col>
+            <Col id="Id">00014</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">2depth Menu03</Col>
+            <Col id="Id">00015</Col>
+            <Col id="Level">0</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu01</Col>
+            <Col id="Id">00016</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu02</Col>
+            <Col id="Id">00017</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu03</Col>
+            <Col id="Id">00018</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu04</Col>
+            <Col id="Id">00019</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu05</Col>
+            <Col id="Id">00020</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu06</Col>
+            <Col id="Id">00021</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">2depth Menu04</Col>
+            <Col id="Id">00022</Col>
+            <Col id="Level">0</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu01</Col>
+            <Col id="Id">00023</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu02</Col>
+            <Col id="Id">00024</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu03</Col>
+            <Col id="Id">00025</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu04</Col>
+            <Col id="Id">00026</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu05</Col>
+            <Col id="Id">00027</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu06</Col>
+            <Col id="Id">00028</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">2depth Menu05</Col>
+            <Col id="Id">00029</Col>
+            <Col id="Level">0</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu01</Col>
+            <Col id="Id">00030</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu02</Col>
+            <Col id="Id">00031</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu03</Col>
+            <Col id="Id">00032</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu04</Col>
+            <Col id="Id">00033</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu05</Col>
+            <Col id="Id">00034</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row>
+            <Col id="Caption">3depth Menu06</Col>
+            <Col id="Id">00035</Col>
+            <Col id="Level">1</Col>
+          </Row>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="PopupMenu">
+        <ColumnInfo>
+          <Column id="idx" type="STRING" size="256"/>
+          <Column id="lev" type="STRING" size="256"/>
+          <Column id="UserData" type="STRING" size="256"/>
+          <Column id="Caption" type="STRING" size="256"/>
+          <Column id="enable" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="idx">1000</Col>
+            <Col id="lev">0</Col>
+            <Col id="UserData">PopupMenu01</Col>
+            <Col id="Caption">PopupMenu01</Col>
+            <Col id="enable">1</Col>
+          </Row>
+          <Row>
+            <Col id="idx">1001</Col>
+            <Col id="lev">0</Col>
+            <Col id="UserData">PopupMenu02</Col>
+            <Col id="Caption">PopupMenu02</Col>
+            <Col id="enable">1</Col>
+          </Row>
+          <Row>
+            <Col id="idx">1002</Col>
+            <Col id="lev">1</Col>
+            <Col id="UserData">PopupMenu01</Col>
+            <Col id="Caption">PopupMenu01</Col>
+            <Col id="enable">1</Col>
+          </Row>
+          <Row>
+            <Col id="idx">1003</Col>
+            <Col id="lev">1</Col>
+            <Col id="UserData">PopupMenu02</Col>
+            <Col id="Caption">PopupMenu02</Col>
+            <Col id="enable">0</Col>
+          </Row>
+          <Row>
+            <Col id="idx">1004</Col>
+            <Col id="lev">1</Col>
+            <Col id="UserData">PopupMenu03</Col>
+            <Col id="Caption">PopupMenu03</Col>
+            <Col id="enable">1</Col>
+          </Row>
+          <Row>
+            <Col id="idx">1005</Col>
+            <Col id="lev">1</Col>
+            <Col id="UserData">PopupMenu04</Col>
+            <Col id="Caption">PopupMenu04</Col>
+            <Col id="enable">0</Col>
+          </Row>
+          <Row>
+            <Col id="idx">1006</Col>
+            <Col id="lev">1</Col>
+            <Col id="UserData">PopupMenu05</Col>
+            <Col id="Caption">PopupMenu05</Col>
+            <Col id="enable">1</Col>
+          </Row>
+          <Row>
+            <Col id="idx">1007</Col>
+            <Col id="lev">0</Col>
+            <Col id="UserData">PopupMenu03</Col>
+            <Col id="Caption">PopupMenu03</Col>
+            <Col id="enable">1</Col>
+          </Row>
+          <Row>
+            <Col id="idx">1008</Col>
+            <Col id="lev">0</Col>
+            <Col id="UserData">PopupMenu04</Col>
+            <Col id="Caption">PopupMenu04</Col>
+            <Col id="enable">1</Col>
+          </Row>
+          <Row>
+            <Col id="idx">1009</Col>
+            <Col id="lev">1</Col>
+            <Col id="UserData">PopupMenu01</Col>
+            <Col id="Caption">PopupMenu01</Col>
+            <Col id="enable">1</Col>
+          </Row>
+          <Row>
+            <Col id="idx">1010</Col>
+            <Col id="lev">1</Col>
+            <Col id="UserData">PopupMenu02</Col>
+            <Col id="Caption">PopupMenu02</Col>
+            <Col id="enable">1</Col>
+          </Row>
+          <Row>
+            <Col id="idx">1011</Col>
+            <Col id="lev">1</Col>
+            <Col id="UserData">PopupMenu03</Col>
+            <Col id="Caption">PopupMenu03</Col>
+            <Col id="enable">1</Col>
+          </Row>
+          <Row>
+            <Col id="idx">1012</Col>
+            <Col id="lev">1</Col>
+            <Col id="UserData">PopupMenu04</Col>
+            <Col id="Caption">PopupMenu04</Col>
+            <Col id="enable">1</Col>
+          </Row>
+          <Row>
+            <Col id="idx">1013</Col>
+            <Col id="lev">0</Col>
+            <Col id="UserData">PopupMenu05</Col>
+            <Col id="Caption">PopupMenu05</Col>
+            <Col id="enable">1</Col>
+          </Row>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">가나</Col>
+            <Col id="Column1">12</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">가나다</Col>
+            <Col id="Column1">123</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">가나다라</Col>
+            <Col id="Column1">1234</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="Dataset01">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="Grid04_00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">가나다</Col>
+            <Col id="Column1">가나다</Col>
+            <Col id="Column2">가나다</Col>
+            <Col id="Column3">가나다</Col>
+            <Col id="Column4">가나다</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">가나다라</Col>
+            <Col id="Column3">가나다라</Col>
+            <Col id="Column2">가나다라</Col>
+            <Col id="Column1">가나다라</Col>
+            <Col id="Column0">가나다라</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">가나다라마</Col>
+            <Col id="Column1">가나다라마</Col>
+            <Col id="Column2">가나다라마</Col>
+            <Col id="Column3">가나다라마</Col>
+            <Col id="Column4">가나다라마</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="Grid05">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+          <Column id="Column5" type="STRING" size="256"/>
+          <Column id="Column6" type="STRING" size="256"/>
+          <Column id="Column7" type="STRING" size="256"/>
+          <Column id="Column8" type="STRING" size="256"/>
+          <Column id="Column9" type="STRING" size="256"/>
+          <Column id="Column10" type="STRING" size="256"/>
+          <Column id="Column11" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+          <Row/>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

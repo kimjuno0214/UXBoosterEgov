@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="sampleGrid" width="1280" height="790" titletext="Take 그리드 기능" onload="sampleGrid_onload" oninit="sampleGrid_oninit">
+    <Layouts>
+      <Layout height="790" mobileorientation="landscape" width="1280">
+        <Static id="Static01" taborder="4" text="- 그룹 옵션&#13;&#10;&#13;&#10;  paggingall        : checkbox,no,status,move,hide,excel,fix,reset&#13;&#10;&#13;&#10;   paggingselect  : no,move,hide,excel,fix,reset&#13;&#10;&#13;&#10;   paggingcrud    : checkbox,no,status,move,hide,excel,fix,reset&#13;&#10;&#13;&#10;- 개별 옵션&#13;&#10;&#13;&#10;   checkbox    : 공통 체크 박스 기능 사용 [주의 : 그리드의 첫번째 셀에 자동 생성]&#13;&#10;&#13;&#10;   no                : 순번 기능 사용 [주의 : 그리드의 두번째 셀에 자동 생성]&#13;&#10;&#13;&#10;   status          : Row 상태값 I(추가), U(수정), D(삭제) 보기 기능 사용&#13;&#10;&#13;&#10;   move          : 컬럼(cell) 이동 기능 사용  [주의 : 드래그하여 셀 이동]&#13;&#10;&#13;&#10;   hide             : 컬럼 숨기기 기능 사용&#13;&#10;&#13;&#10;   excel           : 엑셀 다운로드 기능 사용&#13;&#10;&#13;&#10;   fix                : 행/열 틀고정 기능 사용&#13;&#10;&#13;&#10;   reset            : 그리드를 기능이 적용되기 전으로 초기화하는 기능 사용&#13;&#10;&#13;&#10;   find              : 그리드에서 데이터 찾기 기능 사용&#13;&#10;&#13;&#10;   filter             : 그리드 데이터 필터 기능 사용 &#13;&#10;                         [주의 : 페이징시 사용자 오해 소지가 있어 되도록 사용하지 않음]&#13;&#10;&#13;&#10;   sort              : 정렬 기능 사용 (헤더 클릭시 정렬, 헤더 시프트 클릭시 멀티정렬, 팝업으 정렬)&#13;&#10;                          [주의:페이징시 사용자 오해 소지가 있어 되도록 사용하지 않음]&#13;&#10;&#13;&#10;   pagging     : 그리드 페이징 기능 사용&#13;&#10;                         페이지 번호 클릭시 데이터를 조회 " left="760" top="100" verticalAlign="top" bottom="10" right="5"/>
+        <Grid id="gridList" taborder="1" left="5" top="110" selecttype="area" right="Static01:20" binddataset="dsList" height="41.77%" searchfunction="fnGetData" takegrid="paggingall">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="70"/>
+                <Column size="150"/>
+                <Column size="500"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="Rownum"/>
+                <Cell col="1" text="코드"/>
+                <Cell col="2" text="코드명"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:rnum"/>
+                <Cell col="1" text="bind:code"/>
+                <Cell col="2" text="bind:name"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="btnPSel" taborder="6" text="paggingselect" left="115" top="43" width="105" cssclass="btn_WF_Custom" height="25" onclick="btnCom_onclick"/>
+        <Button id="btnPCrud" taborder="7" text="paggingcrud" left="225" top="43" width="105" cssclass="btn_WF_Custom" height="25" onclick="btnCom_onclick"/>
+        <Button id="btnExport" taborder="0" text="script로 엑셀받기 샘플" left="335" top="43" width="200" cssclass="btn_WF_excel01" height="25" onclick="btnExport_onclick"/>
+        <Static id="staSearchPopUp" taborder="2" text="그리드 공통 기능  : 페이징" left="5" top="5" width="410" height="35" font="bold 11pt/normal &quot;Noto Sans CJK KR DemiLight&quot;,&quot;맑은 고딕&quot;" cssclass="sta_WF_title02"/>
+        <Static id="staInfo" taborder="3" text="'takegrid' User Property 추가 후 사용할 그리드 기능 세팅&#13;&#10;&#13;&#10;페이징 기능 사용시 'pagefunction' User Property 추가 후 페이징 조회 함수 세팅 " left="gridList:20" top="40" height="50" font="11pt/normal &quot;Noto Sans CJK KR DemiLight&quot;,&quot;맑은 고딕&quot;" color="crimson" right="5"/>
+        <Button id="btnPAll" taborder="5" text="paggingall" left="5" top="43" width="105" cssclass="btn_WF_Custom" height="25" onclick="btnCom_onclick"/>
+        <Button id="btnTakeGrid" taborder="8" text="동적으로 그리드기능 부여 (그리드 포멧이 동적으로 변경되는 경우 필수)" left="5" top="73" width="530" height="25" onclick="btnTakeGrid_onclick"/>
+        <Button id="btnSearch" taborder="9" text="조회" left="550" top="43" width="190" height="50" onclick="btnSearch_onclick"/>
+        <Grid id="gridList00" taborder="10" left="5" top="gridList:50" selecttype="area" right="Static01:20" binddataset="dsList" searchfunction="fnGetData" takegrid="paggingall" bottom="10">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="70"/>
+                <Column size="150"/>
+                <Column size="500"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="Rownum"/>
+                <Cell col="1" text="코드"/>
+                <Cell col="2" text="코드명"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:rnum"/>
+                <Cell col="1" text="bind:code"/>
+                <Cell col="2" text="bind:name"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsList">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="name" type="STRING" size="256"/>
+          <Column id="rnum" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[this.fv_sGridFormat = "";
+
+this.sampleGrid_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	take.formOnLoad(this, false);
+    
+     nexacro._OnceCallbackTimer.callonce
+    (
+        this,
+        function () 
+        {
+            this.fv_sGridFormat = this.gridList.getFormatString();
+        },
+        1
+    ); 
+};
+
+//그리드 기능 적용 버튼 클릭 이벤트
+this.btnCom_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var objGrid = this.gridList;
+    var sTakeGrid = obj.text;
+    
+    if (objGrid.takegrid!=sTakeGrid)
+    {
+        objGrid.searchfunction = "fnGetData";
+        objGrid.set_formats(this.fv_sGridFormat);
+        objGrid.setTakeGrid(sTakeGrid);
+    }
+    
+    take.alert(this, "Info", sTakeGrid + " 적용 완료");
+};
+
+//동적 기능 부여 버튼 클릭 이벤트
+this.btnTakeGrid_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    var objGrid = this.gridList;
+    
+    objGrid.set_formats(this.fv_sGridFormat);
+	objGrid.setTakeGrid("paggingall");
+};
+
+//Excel export 버튼 클릭 이벤트
+this.btnExport_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{    
+    //스크립트로 엑셀 Export --> (파일명, 시트명, 타이틀명)
+    this.gridList.ExportExcelGrid("testexcelfile", "sheet01", "테스트 엑셀"); 
+};
+
+this.btnSearch_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fnGetData(true);
+};
+
+//조회 함수
+this.fnGetData = function(bInit)
+{
+    //신규 조회시 페이징 초기화를 위해 
+    if(take.nvl(bInit,false)==true)
+    {
+        this.gridList.initPage();
+    }
+    
+    var sParam = "clCd='DTY_CL_CD'";
+    
+    var sUrl = "SVC_LOC::com/syst/selectMultiCodeList.do";
+    
+    take.transaction(
+        this,
+        "selectpopcode",
+        sUrl,
+        "",
+        "dsList=dsList",
+        sParam + " sDataset='dsList'",
+        function(sId, nErrCd, sErrMsg){
+            //
+        },
+        false);
+}]]></Script>
+  </Form>
+</FDL>

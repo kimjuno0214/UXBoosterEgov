@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="frmMainP01" width="270" height="174" titletext="메인 개인설정팝업">
+    <Layouts>
+      <Layout height="174" mobileorientation="landscape" width="270">
+        <Static id="Static45" taborder="0" text="Static00" left="0" top="0" width="10" background="red" visible="false" bottom="0"/>
+        <Static id="Static22" taborder="1" text="10" left="10" top="0" width="220" height="10" background="rgba(255,0,0,0.4)" visible="false" color="red" textAlign="center"/>
+        <Static id="Static58" taborder="2" left="99" top="40" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="Static59" taborder="3" left="99" top="70" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="Static63" taborder="4" text="사용자명" left="10" top="40" width="90" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="Static65" taborder="5" text="로그인 일시" left="10" top="70" width="90" height="31" cssclass="sta_WF_th01L"/>
+        <Button id="Button00" taborder="6" text="내정보수정" top="141" width="100" height="23" cssclass="btn_WF_basic01" left="85"/>
+        <Static id="Static01" taborder="7" text="10" left="0" top="0" height="10" background="rgba(255,0,0,0.3)" visible="false" textAlign="center" color="#ff0000" right="0"/>
+        <Static id="Static00" taborder="8" text="프로젝트명" left="10" top="10" width="90" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="Static03" taborder="9" left="99" top="10" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="Static04" taborder="10" text="10" left="0" top="131" height="10" background="rgba(255,0,0,0.4)" visible="false" color="red" textAlign="center" right="2"/>
+        <Static id="Static02" taborder="11" text="로그인 IP" left="10" top="100" width="90" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="Static05" taborder="12" left="99" top="100" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="Static06" taborder="13" text="10" left="0" top="164" height="10" background="rgba(255,0,0,0.4)" visible="false" color="red" textAlign="center" right="2"/>
+      </Layout>
+    </Layouts>
+    <Objects/>
+  </Form>
+</FDL>

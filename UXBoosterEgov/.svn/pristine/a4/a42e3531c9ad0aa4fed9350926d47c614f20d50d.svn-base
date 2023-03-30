@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="dbcMainImage" width="1850" height="392" titletext="메인이미지" onload="dbcMainImage_onload">
+    <Layouts>
+      <Layout height="392" mobileorientation="landscape" width="1850">
+        <Static id="staBg" taborder="1" left="0" top="0" cssclass="sta_WF_mainBg01" text="" width="1920" fittocontents="none" height="711"/>
+        <Div id="divInfo" taborder="1" top="0" formscrollbartype="none none" right="0" bottom="0" width="295" opacity="0.8">
+          <Layouts>
+            <Layout>
+              <Static id="staInfoBg" taborder="3" top="0" background="#2d2f3b" left="0" right="0" bottom="0"/>
+              <Static id="staUniv" taborder="4" text="소속&#13;&#10;&lt;fs v='11'&gt;OOOO 대학교&lt;/fs&gt;" left="20" top="10%" width="270" height="50" usedecorate="true" cssclass="sta_WF_mainInfo"/>
+              <Static id="staUser" taborder="0" text="사용자&#13;&#10;&lt;fs v='11'&gt;hongkil (홍길동)&lt;/fs&gt;" left="20" top="staUniv:35" width="270" height="51" usedecorate="true" cssclass="sta_WF_mainInfo"/>
+              <Static id="staLoginDt" taborder="1" text="마지막 로그인 날짜&#13;&#10;&lt;fs v='11'&gt;2019-08-31 14:30&lt;/fs&gt;" left="20" top="staUser:34" width="270" height="50" usedecorate="true" cssclass="sta_WF_mainInfo"/>
+              <Static id="staIP" taborder="2" text="마지막 로그인 IP&#13;&#10;&lt;fs v='11'&gt;000.000.000.000&lt;/fs&gt;" left="20" top="staLoginDt:35" width="270" height="50" usedecorate="true" cssclass="sta_WF_mainInfo"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[this.fv_objGdsUserInfo = nexacro.getApplication().gdsUserInfo;
+
+this.dbcMainImage_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.fnTopBgCenter(this.staBg);
+	this.fnUserInfoSet(this.fv_objGdsUserInfo);
+};
+
+//divTopImg_onsize : Main Img Div 사이즈 변경 이벤트
+this.divTopImg_onsize = function(obj:nexacro.Div,e:nexacro.SizeEventInfo)
+{
+	this.fnTopBgCenter(obj);
+};
+
+/**
+ * fnTopBgCenter : 리사이즈에 따라 탑 이미지 Left 좌표 변경
+ * @param  {Object} objDiv Div
+ * @return {N/A}    N/A
+ * @example this.fnTopBgCenter(this.div00);
+ */
+this.fnTopBgCenter = function(objComp)
+{
+    var objStaBg;
+    var nLeft, nTop;
+        
+    nLeft = (this.getOffsetWidth()-nexacro.toNumber(objComp.width))/2;
+    nTop  = (this.getOffsetHeight()-nexacro.toNumber(objComp.height))/2;
+    
+	objComp.set_left(nLeft);
+    objComp.set_top(nTop);
+}
+
+/**
+ * fnUserInfoSet : 사용자 정보 세팅
+ * @param  {Object} objDs UserInfo Dataset
+ * @return {N/A}    N/A
+ * @example this.fnUserInfoSet(nexacro.getApplication().gdsUserInfo);
+ */
+this.fnUserInfoSet = function(objDs)
+{
+    var sUniv, sUserId, sUserNm, sLastLoginDt, sLastLoginIp;
+    var objDiv;
+    
+    objDiv = this.divInfo.form;
+    
+    sDeptNm   	 = take.nvl(objDs.getColumn(0,"DEPT_NM")   ,"");
+    sUserId      = take.nvl(objDs.getColumn(0,"USER_ID")    ,"");
+    sUserNm      = take.nvl(objDs.getColumn(0,"USER_NM")    ,"");
+    sLastLoginDt = take.nvl(objDs.getColumn(0,"LAST_LOGIN_DT") ,"");
+    sLastLoginIp = take.nvl(objDs.getColumn(0,"LOGIN_IP")    ,"");
+    
+    objDiv.staUniv.set_text("소속\n<fs v='11'>" + (sDeptNm==""?"없음":sDeptNm+"") + "</fs>");
+    objDiv.staUser.set_text("사용자\n<fs v='11'>" + sUserId + " (" + sUserNm + ")</fs>");
+    objDiv.staLoginDt.set_text("마지막 로그인 날짜\n<fs v='11'>" + sLastLoginDt +"</fs>");
+    objDiv.staIP.set_text("마지막 로그인 IP\n<fs v='11'>" + sLastLoginIp + "</fs>");
+}
+
+]]></Script>
+  </Form>
+</FDL>

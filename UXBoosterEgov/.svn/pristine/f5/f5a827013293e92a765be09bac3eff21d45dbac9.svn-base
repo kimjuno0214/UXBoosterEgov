@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="sample01" width="800" height="800" titletext="New Form">
+    <Layouts>
+      <Layout height="800" mobileorientation="landscape" width="800">
+        <Static id="Static01" taborder="0" text="타임라인 목록" left="10" top="0" height="30" width="450" cssclass="sta_WF_title02"/>
+        <Div id="Div00" taborder="1" left="10" top="30" height="478" right="10" cssclass="div_WF_timeLineBox">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="2019-12-16" left="10" top="10" width="120" height="30" cssclass="sta_WF_timeDate"/>
+              <Static id="Static01" taborder="1" left="20" top="50" width="18" height="22" cssclass="sta_WF_timeIcon"/>
+              <Static id="Static02" taborder="2" text="&lt;fc v='#888888'&gt;16:41&lt;/fc&gt; 홍길동" left="45" top="50" width="120" height="20" usedecorate="true"/>
+              <Static id="Static03" taborder="3" text="타이틀타이틀타이틀타이틀타이틀" left="45" top="73" width="620" height="30" usedecorate="true" cssclass="sta_WF_timeLineTitle01"/>
+              <Static id="Static04" taborder="4" text="서브서브서브서브서브서브서브서브서브서브서브서브서브서브서브서브서브서브서브서브" left="45" top="103" width="620" height="30" usedecorate="true" cssclass="sta_WF_timeLineSub01"/>
+              <ImageViewer id="ImageViewer00" taborder="5" left="45" top="143" width="100" height="100" cssclass="imv_WF_thumbnail01"/>
+              <ImageViewer id="ImageViewer01" taborder="6" left="164" top="143" width="100" height="100" cssclass="imv_WF_thumbnail01"/>
+              <ImageViewer id="ImageViewer02" taborder="7" left="284" top="143" width="100" height="100" cssclass="imv_WF_thumbnail01"/>
+              <Static id="Static06" taborder="8" left="20" top="263" width="18" height="22" cssclass="sta_WF_timeIcon"/>
+              <Static id="Static07" taborder="9" text="&lt;fc v='#888888'&gt;16:41&lt;/fc&gt; 홍길동" left="45" top="263" width="120" height="20" usedecorate="true"/>
+              <Static id="Static08" taborder="10" text="타이틀타이틀타이틀타이틀타이틀" left="45" top="286" width="620" height="30" usedecorate="true" cssclass="sta_WF_timeLineTitle01"/>
+              <Static id="Static09" taborder="11" text="서브서브서브서브서브서브서브서브서브서브서브서브서브서브서브서브서브서브서브서브" left="45" top="316" width="620" height="30" usedecorate="true" cssclass="sta_WF_timeLineSub01"/>
+              <ImageViewer id="ImageViewer03" taborder="12" left="45" top="356" width="100" height="100" cssclass="imv_WF_thumbnail01"/>
+              <ImageViewer id="ImageViewer04" taborder="13" left="164" top="356" width="100" height="100" cssclass="imv_WF_thumbnail01"/>
+              <ImageViewer id="ImageViewer05" taborder="14" left="284" top="356" width="100" height="100" cssclass="imv_WF_thumbnail01"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="Div01" taborder="2" left="10" top="508" height="265" right="10" cssclass="div_WF_timeLineBox">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="2019-12-17" left="10" top="10" width="120" height="30" cssclass="sta_WF_timeDate"/>
+              <Static id="Static01" taborder="1" left="20" top="50" width="18" height="22" cssclass="sta_WF_timeIcon"/>
+              <Static id="Static02" taborder="2" text="&lt;fc v='#888888'&gt;16:41&lt;/fc&gt; 홍길동" left="45" top="50" width="120" height="20" usedecorate="true"/>
+              <Static id="Static03" taborder="3" text="타이틀타이틀타이틀타이틀타이틀" left="45" top="73" width="620" height="30" usedecorate="true" cssclass="sta_WF_timeLineTitle01"/>
+              <Static id="Static04" taborder="4" text="서브서브서브서브서브서브서브서브서브서브서브서브서브서브서브서브서브서브서브서브" left="45" top="103" width="620" height="30" usedecorate="true" cssclass="sta_WF_timeLineSub01"/>
+              <ImageViewer id="ImageViewer00" taborder="5" left="45" top="143" width="100" height="100" cssclass="imv_WF_thumbnail01"/>
+              <ImageViewer id="ImageViewer01" taborder="6" left="164" top="143" width="100" height="100" cssclass="imv_WF_thumbnail01"/>
+              <ImageViewer id="ImageViewer02" taborder="7" left="284" top="143" width="100" height="100" cssclass="imv_WF_thumbnail01"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">사용자명</Col>
+            <Col id="Column1">2019-08-15 16:27:38</Col>
+            <Col id="Column2">제목제목제목제목제목제목제목제목제목</Col>
+            <Col id="Column3">내용</Col>
+            <Col id="Column4">이미지</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">사용자명</Col>
+            <Col id="Column1">2019-08-15 16:27:38</Col>
+            <Col id="Column2">제목제목제목제목제목제목제목제목제목</Col>
+            <Col id="Column3">내용</Col>
+            <Col id="Column4">이미지</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">사용자명</Col>
+            <Col id="Column1">2019-08-15 16:27:38</Col>
+            <Col id="Column2">제목제목제목제목제목제목제목제목제목</Col>
+            <Col id="Column3">내용</Col>
+            <Col id="Column4">이미지</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

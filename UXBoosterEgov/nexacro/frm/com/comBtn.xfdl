@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="comBtnDiv" width="260" height="43" titletext="공통버튼 DIV" onload="comBtnDiv_onload">
+    <Layouts>
+      <Layout height="43" mobileorientation="landscape" width="260">
+        <Button id="btnSearch" taborder="0" text="조회" top="10" height="23" cssclass="btn_WF_search00" width="58" onclick="commonbtn_onclick" visible="false" right="192"/>
+        <Button id="btnAdd" taborder="1" text="신규" top="10" height="23" cssclass="btn_WF_new00" width="58" right="131" onclick="commonbtn_onclick" visible="false"/>
+        <Button id="btnDel" taborder="2" text="삭제" top="10" height="23" cssclass="btn_WF_delete00" width="58" right="70" onclick="commonbtn_onclick" visible="false"/>
+        <Button id="btnSave" taborder="3" text="저장" top="10" height="23" cssclass="btn_WF_save00" width="58" right="9" onclick="commonbtn_onclick" visible="false"/>
+        <Static id="Static24_00" taborder="4" text="10" left="10" height="10" background="rgba(255,0,0,0.4)" visible="false" textAlign="center" top="0" width="100"/>
+        <Static id="Static01" taborder="5" text="10" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="4" visible="false" textAlign="center"/>
+        <Static id="Static00" taborder="6" text="10" top="0" width="10" background="rgba(255,0,0,0.4)" visible="false" textAlign="center" right="0" height="100"/>
+        <Static id="Static24_00_00" taborder="7" text="10" left="20" height="10" background="rgba(255,0,0,0.4)" visible="false" textAlign="center" width="100" bottom="0"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[this.comBtnDiv_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+	{
+		this.fnBtnRole();
+	}
+};
+
+/**
+ * commonbtn_onclick : ~ 공통 버튼 클릭
+ */
+this.commonbtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var sBtnGbn;
+    var objDivWork;
+    
+    sBtnGbn = obj.name.substr(3);
+    objDivWork = take.getActiveForm(this).divForm.form;
+    
+    switch(sBtnGbn)
+    {
+        case "Add" :      //등록
+            objDivWork.fnAddRow();
+            break;
+            
+        case "Search" :   //조회
+            objDivWork.fnSearch();
+            break;
+            
+        case "Save" :     //수정
+            objDivWork.fnSave();
+            break;
+        
+        case "Del" :      //삭제
+            objDivWork.fnDelRow();
+            break;
+            
+        default :
+            break;
+    }   
+};
+
+this.getOwnerFormObject = function(objComp)
+{
+    var sType = objComp.parent._type_name;
+    if (sType!="ChildFrame")
+    {
+		if(objComp.name.substring(0,8) =="divWork_") {
+			return objComp;
+		}else{
+			return arguments.callee(objComp.parent);
+		}
+    } else {
+        //현재 프레임 구조에 맞게 설정
+        if (objComp.name.substring(0,8) =="divWork_") {
+            return objComp.form;
+        } else {
+            return objComp;
+        }
+    }
+}
+
+/**
+ * fnBtnRole : 공통버튼 권한 처리
+ * @param  {N/A} N/A 
+ * @example this.fnBtnRole();
+ */
+this.fnBtnRole = function()
+{	
+	var sMenuCd = "";
+	var pForm = take.getActiveForm(this);
+	if(take.getActiveForm(this)){
+		sMenuCd = pForm.parent.ProgId;
+	}else{
+		sMenuCd = this.getOwnerFormObject(this).ProgId;
+	}
+	
+	var sProjectCd = UXBooster.av_sProjectCd;
+
+    if (sMenuCd=="")
+    {
+        trace("메뉴 아이디가 없습니다.");
+        return;
+    }
+    
+     take.tranSelect
+         (
+             this,  //Form 객체
+             "menuBtnRoleCom",
+             "Main.userButtonRoleSelect",
+             "",
+             "dsBtnRole",
+             "sMenuCd='" + sMenuCd +"' sProjectCd='" + sProjectCd + "'",
+             function (sId, nErr, sMsg) //sCallBack
+             {
+                 if (sId=="menuBtnRoleCom")
+                 {
+                     var sBtnRole;
+                     
+                     sBtnRole = take.nvl(this.dsBtnRole.getColumn(0,"BTN_ROLE"),"");
+                     
+                     if (sBtnRole=="")
+                     {
+                         take.debug(this, "버튼 권한이 데이터를 불러오지 못하였습니다.");
+                         return;
+                     }
+                     
+                     this.fnBtnRoleSetting();
+                 }
+             }
+         );
+};
+
+/**
+ * fnBtnRoleSetting : 공통버튼 권한 처리
+ * @param   {N/A} N/A 권한여부문자열
+ * @example this.fnBtnRoleSetting();
+ */
+this.fnBtnRoleSetting = function()
+{
+    var arrBtn = {"INPUT":this.btnAdd, "READ":this.btnSearch, "SAVE":this.btnSave, "DELETE":this.btnDel};
+	var nRight = 10, nInterval = 3;
+	var arrBtnRole = ["SAVE", "DELETE", "INPUT", "READ"]; //조회, 신규, 삭제, 저장, 인쇄
+
+	for( var i=0; i<arrBtnRole.length; i++ )
+	{
+		var sId = arrBtnRole[i];
+		var sRole = take.nvl(this.dsBtnRole.getColumn(0,"R_"+sId),"");
+
+    	sId = sId.toUpperCase();
+		var objBtn = arrBtn[sId];
+
+		if (sRole == "N")
+		{
+			objBtn.set_visible(false);
+			objBtn.set_width(0);
+		} else {
+			objBtn.set_right(nRight);
+			nRight = parseInt(objBtn.right) + parseInt(objBtn.width) + nInterval;
+			
+			objBtn.set_visible(true);
+		}
+	}
+};]]></Script>
+    <Objects>
+      <Dataset id="dsBtnRole">
+        <ColumnInfo>
+          <Column id="BTN_ROLE" type="STRING" size="256"/>
+          <Column id="R_READ" type="STRING" size="256"/>
+          <Column id="R_INPUT" type="STRING" size="256"/>
+          <Column id="R_DELETE" type="STRING" size="256"/>
+          <Column id="R_SAVE" type="STRING" size="256"/>
+          <Column id="R_PRINT" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

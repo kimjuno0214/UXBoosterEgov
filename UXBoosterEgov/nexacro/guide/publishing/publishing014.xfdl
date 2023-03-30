@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="publishing014" width="1040" height="685" titletext="사용자관리">
+    <Layouts>
+      <Layout height="685" mobileorientation="landscape" width="1040">
+        <Static id="Static18" taborder="0" text="Test" left="10" top="97" height="30" width="450" cssclass="sta_WF_title02"/>
+        <Static id="Static20" taborder="1" text="Test" left="318" top="97" height="30" cssclass="sta_WF_title02" right="162"/>
+        <Grid id="Grid00" taborder="2" left="10" top="127" width="300" binddataset="Dataset00" autofittype="col" bottom="10">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="100"/>
+                <Column size="160"/>
+              </Columns>
+              <Rows>
+                <Row size="30" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="순번"/>
+                <Cell col="1" text="코드"/>
+                <Cell col="2" text="프로젝트 명"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0" displaytype="checkboxcontrol" edittype="checkbox"/>
+                <Cell col="1" text="bind:Column1"/>
+                <Cell col="2" text="bind:Column2"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static45" taborder="3" text="Static00" left="308" top="119" width="10" background="red" visible="false" height="200"/>
+        <Button id="Button01" taborder="4" left="485" top="72" width="70" height="15" cssclass="btn_WF_fold01"/>
+        <Static id="Static02" taborder="6" left="792" top="644" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="Static04" taborder="8" left="437" top="644" cssclass="sta_WF_td01L" right="365" height="31"/>
+        <Static id="Static03" taborder="7" text="등록자" left="318" top="644" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="Static09" taborder="9" text="Static03" left="0" top="87" height="10" background="red" visible="false" right="0"/>
+        <Static id="Static23" taborder="10" text="Static23" left="1" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static24" taborder="11" text="Static23" left="340" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static25" taborder="12" text="Static23" left="679" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static26" taborder="13" text="Static23" left="1018" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Div id="Div00" taborder="14" left="10" height="72" cssclass="div_WF_searchBox03" right="22" top="0">
+          <Layouts>
+            <Layout>
+              <Static id="Static04" taborder="0" text="ID" left="20" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Static id="Static00" taborder="1" text="기간" left="20" top="38" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Static id="Static01" taborder="2" text="이름" left="363" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Static id="Static03" taborder="3" text="%" left="665" top="38" width="20" height="20"/>
+              <Static id="Static05" taborder="4" text="사용유무" left="722" top="10" width="90" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="Edit01" taborder="5" left="104" top="10" width="216" height="21"/>
+              <Edit id="Edit02" taborder="6" left="446" top="10" width="216" height="21"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Calendar id="Calendar00" taborder="15" left="115" top="40" width="110" height="21"/>
+        <Static id="Static10" taborder="16" text="~" left="225" top="40" width="20" height="21" cssclass="sta_WF_textC"/>
+        <Calendar id="Calendar01" taborder="17" left="245" top="40" width="110" height="21"/>
+        <Radio id="Radio00" taborder="18" left="826" top="5" width="114" height="31" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" direction="vertical">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">1</Col>
+                <Col id="datacolumn">사용</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">2</Col>
+                <Col id="datacolumn">미사용</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Radio>
+        <Button id="Button04" taborder="19" text="비밀번호초기화" top="101" width="100" height="23" cssclass="btn_WF_basic01" right="10"/>
+        <Static id="Static01" taborder="5" text="등록일" left="674" top="644" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="Static58" taborder="20" left="757" top="157" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="Static59" taborder="21" left="757" top="187" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="Static60" taborder="22" left="757" top="247" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="Static61" taborder="23" left="757" top="217" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="Static62" taborder="24" left="757" top="277" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="Static63" taborder="25" text="ID" left="674" top="157" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="Static64" taborder="26" text="이름(영문)" left="674" top="217" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+        <Edit id="Edit08" taborder="27" left="800" top="282" height="21" right="20"/>
+        <Edit id="Edit11" taborder="28" left="801" top="192" height="21" right="20"/>
+        <Static id="Static65" taborder="29" text="이름(한글)" left="674" top="187" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+        <Static id="Static66" taborder="30" text="사용여부" left="674" top="247" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+        <Static id="Static67" taborder="31" text="담당자" left="674" top="277" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+        <Static id="Static68" taborder="32" left="318" top="157" height="211" cssclass="sta_WF_td01L" width="357"/>
+        <ImageViewer id="ImageViewer01" taborder="33" text="ImageViewer00" left="385" top="169" width="235" height="163"/>
+        <Button id="Button03" taborder="34" text="업로드" top="339" width="69" height="23" cssclass="btn_WF_basic01" right="507"/>
+        <Static id="Static69" taborder="35" left="757" top="307" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Edit id="Edit12" taborder="36" left="800" top="312" height="21" right="20"/>
+        <Static id="Static70" taborder="37" text="담당자" left="674" top="307" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+        <Static id="Static71" taborder="38" left="757" top="337" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Edit id="Edit13" taborder="39" left="800" top="342" height="21" right="20"/>
+        <Static id="Static72" taborder="40" text="담당자" left="674" top="337" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+        <Static id="Static73" taborder="41" left="757" top="367" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Combo id="Combo05" taborder="42" text="Combo00" left="801" top="372" width="110" height="21"/>
+        <Static id="Static74" taborder="43" text="유형" left="674" top="367" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+        <Edit id="edtID" taborder="44" left="801" top="162" height="21" right="20"/>
+        <Edit id="Edit15" taborder="45" left="801" top="252" height="21" right="20"/>
+        <Edit id="Edit16" taborder="46" left="801" top="222" height="21" right="20"/>
+        <Static id="Static75" taborder="47" left="402" top="397" height="56" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="Static76" taborder="48" left="402" top="367" height="31" cssclass="sta_WF_td01L" right="365"/>
+        <Combo id="Combo10" taborder="49" text="Combo00" left="445" top="372" width="110" height="21"/>
+        <Static id="Static77" taborder="50" text="유형" left="318" top="367" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+        <Button id="Button05" taborder="51" text="주소찾기" top="425" width="70" height="23" cssclass="btn_WF_basic01" right="20"/>
+        <Edit id="Edit17" taborder="52" left="445" top="402" height="21" right="110"/>
+        <Static id="Static79" taborder="53" text="주소" left="318" top="397" width="120" height="56" cssclass="sta_WF_th01Limport"/>
+        <Edit id="Edit18" taborder="54" left="445" top="427" height="21" right="110"/>
+        <Static id="Static80" taborder="55" text="회사정보" left="318" top="494" height="31" cssclass="sta_WF_th01L" right="10"/>
+        <Static id="Static81" taborder="56" left="402" top="524" height="31" cssclass="sta_WF_td01L" right="365"/>
+        <Static id="Static82" taborder="57" left="757" top="524" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Combo id="Combo11" taborder="58" text="Combo00" left="801" top="529" width="110" height="21"/>
+        <Static id="Static83" taborder="59" text="직위" left="674" top="524" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+        <Static id="Static84" taborder="60" text="소속" left="318" top="524" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+        <Static id="Static85" taborder="61" left="402" top="554" height="31" cssclass="sta_WF_td01L" right="365"/>
+        <Static id="Static86" taborder="62" left="757" top="554" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Combo id="Combo12" taborder="63" text="Combo00" left="801" top="559" width="110" height="21"/>
+        <Static id="Static87" taborder="64" text="재직구분" left="674" top="554" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+        <Static id="Static88" taborder="65" text="사번" left="318" top="554" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+        <Static id="Static89" taborder="66" left="402" top="584" height="31" cssclass="sta_WF_td01L" right="365"/>
+        <Static id="Static90" taborder="67" left="757" top="584" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Combo id="Combo13" taborder="68" text="Combo00" left="801" top="589" width="110" height="21"/>
+        <Static id="Static91" taborder="69" text="부서(영문)" left="674" top="584" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+        <Combo id="Combo14" taborder="70" text="Combo00" left="445" top="589" width="110" height="21"/>
+        <Static id="Static92" taborder="71" text="부서(한글)" left="318" top="584" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+        <Static id="Static93" taborder="72" left="402" top="614" height="31" cssclass="sta_WF_td01L" right="365"/>
+        <Combo id="Combo15" taborder="73" text="Combo00" left="445" top="619" width="110" height="21"/>
+        <Static id="Static94" taborder="74" text="등급" left="318" width="120" height="31" cssclass="sta_WF_th01Limport" top="614"/>
+        <Static id="Static95" taborder="75" left="757" top="614" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Combo id="Combo16" taborder="76" text="Combo00" left="801" top="619" width="110" height="21"/>
+        <Static id="Static96" taborder="77" text="국가" left="674" top="614" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+        <Static id="Static97" taborder="78" left="402" top="452" height="43" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="Static98" taborder="79" text="기타사항" left="318" top="452" width="120" height="43" cssclass="sta_WF_th01Limport"/>
+        <TextArea id="TextArea01" taborder="80" left="445" top="456" right="20" height="33"/>
+        <Edit id="Edit19" taborder="81" left="445" top="559" height="21" right="375"/>
+        <Edit id="Edit20" taborder="82" left="445" top="530" height="21" width="160"/>
+        <Button id="Button06" taborder="83" text="조직도" top="529" width="55" height="23" cssclass="btn_WF_basic01" left="609"/>
+        <Static id="Static99" taborder="84" text="개인정보" left="318" top="127" height="31" cssclass="sta_WF_th01L" right="10"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+          <Column id="Column5" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

@@ -1,0 +1,377 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="frmHome" width="1220" height="660" titletext="메인_메인_메인화면" onload="Form_onload" background="#ffffff">
+    <Layouts>
+      <Layout height="660" width="1220">
+        <Div id="divTopImg" taborder="0" left="0" top="0" height="380" formscrollbartype="none none" onsize="divTopImg_onsize" background="#2d2f3b" right="391">
+          <Layouts>
+            <Layout>
+              <Static id="staBg" taborder="0" left="0" top="0" height="380" cssclass="sta_WF_mainBg01" text="" width="1351" fittocontents="none"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divInfo" taborder="1" left="divTopImg:0" top="0" height="380" formscrollbartype="none none" right="8">
+          <Layouts>
+            <Layout>
+              <Static id="staInfoBg" taborder="3" top="0" height="380" background="#2d2f3b" left="0" right="0"/>
+              <Static id="staUser" taborder="0" text="사용자&#13;&#10;&lt;fs v='11'&gt;{0}&lt;/fs&gt;" left="50" top="123" width="270" height="51" usedecorate="true" cssclass="sta_WF_mainInfo"/>
+              <Static id="staIP" taborder="2" text="마지막 로그인 IP&#13;&#10;&lt;fs v='11'&gt;{0}&lt;/fs&gt;" left="50" top="293" width="270" height="50" usedecorate="true" cssclass="sta_WF_mainInfo"/>
+              <Static id="staLoginDt" taborder="1" text="마지막 로그인 날짜&#13;&#10;&lt;fs v='11'&gt;{0}&lt;/fs&gt;" left="50" top="208" width="270" height="50" usedecorate="true" cssclass="sta_WF_mainInfo"/>
+              <Static id="staUniv" taborder="4" text="소속&#13;&#10;&lt;fs v='11'&gt;{0}&lt;/fs&gt;" left="50" top="38" width="270" height="50" usedecorate="true" cssclass="sta_WF_mainInfo"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divNotice" taborder="2" left="0" top="392" right="0" text="" bottom="1">
+          <Layouts>
+            <Layout>
+              <Static id="Static08" taborder="0" text="공지사항" left="30" top="7" width="150" height="33" cssclass="sta_MF_Title"/>
+              <Grid id="grdNotice01" taborder="1" left="27" top="53" cssclass="grd_WF_trans" autofittype="col" width="44%" bottom="35" binddataset="dsNotice" oncellclick="divNotice_grdNotice01_oncellclick">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="25" band="left"/>
+                      <Column size="80"/>
+                      <Column size="80" band="right"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="40"/>
+                    </Rows>
+                    <Band id="body">
+                      <Cell displaytype="imagecontrol" text="expr:comp.parent.parent.parent.fnSetTitle( currow, dataset.getColumn(currow, 'BOARD_TITLE') )" padding="0px"/>
+                      <Cell col="1" text="bind:BOARD_TITLE" cssclass="expr:IMPORT_YN == 'Y' ? 'import' : ''"/>
+                      <Cell col="2" text="bind:REG_DT" color="#555555" displaytype="mask" calendardateformat="yyyy-MM-dd" maskeditformat="####-##-##" maskedittype="string"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Button id="btnNoticeMore" taborder="2" left="grdNotice01:-27" top="6" width="28" height="28" cssclass="btn_WF_more" onclick="divNotice_btnNoticeMore_onclick"/>
+              <Static id="Static08_00" taborder="3" text="자유게시판" left="grdNotice01:61" top="7" width="150" height="33" cssclass="sta_MF_Title"/>
+              <Grid id="grdNotice00" taborder="4" left="grdNotice01:61" top="53" cssclass="grd_WF_trans" autofittype="col" bottom="35" width="44%" binddataset="dsPds" oncellclick="divNotice_grdNotice00_oncellclick">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="25" band="left"/>
+                      <Column size="80"/>
+                      <Column size="80" band="right"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="40"/>
+                    </Rows>
+                    <Band id="body">
+                      <Cell displaytype="imagecontrol" text="expr:comp.parent.parent.parent.fnSetTitle( currow, dataset.getColumn(currow, 'BOARD_TITLE') )" padding="0px"/>
+                      <Cell col="1" text="bind:BOARD_TITLE" cssclass="expr:IMPORT_YN == 'Y' ? 'import' : ''"/>
+                      <Cell col="2" text="bind:REG_DT" color="#555555" displaytype="mask" calendardateformat="yyyy-MM-dd" maskeditformat="####-##-##" maskedittype="string"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Button id="btnNoticeMore00" taborder="5" left="grdNotice00:-27" top="6" width="28" height="28" cssclass="btn_WF_more" onclick="divNotice_btnNoticeMore00_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsNotice">
+        <ColumnInfo>
+          <Column id="NO" type="STRING" size="256"/>
+          <Column id="BOARD_TITLE" type="STRING" size="256"/>
+          <Column id="USER_NM" type="STRING" size="256"/>
+          <Column id="REG_DT" type="STRING" size="256"/>
+          <Column id="READ_CNT" type="STRING" size="256"/>
+          <Column id="REPLY_CNT" type="STRING" size="256"/>
+          <Column id="ATTACH_CNT" type="STRING" size="256"/>
+          <Column id="BOARD_TXT" type="STRING" size="256"/>
+          <Column id="DEPT_NM" type="STRING" size="256"/>
+          <Column id="BOARD_ATTACH" type="STRING" size="256"/>
+          <Column id="IMPORT_YN" type="STRING" size="256"/>
+          <Column id="POPUP_YN" type="STRING" size="256"/>
+          <Column id="POPUP_START_DT" type="STRING" size="256"/>
+          <Column id="POPUP_END_DT" type="STRING" size="256"/>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="MENU_CD" type="STRING" size="256"/>
+          <Column id="BOARD_SEQ" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="MENU_CD" type="STRING" size="256"/>
+          <Column id="BOARD_SEQ" type="STRING" size="256"/>
+          <Column id="POPUP_YN" type="STRING" size="256"/>
+          <Column id="ATTACH_CD" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsNoticePop">
+        <ColumnInfo>
+          <Column id="NO" type="STRING" size="256"/>
+          <Column id="BOARD_TITLE" type="STRING" size="256"/>
+          <Column id="USER_NM" type="STRING" size="256"/>
+          <Column id="REG_DT" type="STRING" size="256"/>
+          <Column id="READ_CNT" type="STRING" size="256"/>
+          <Column id="REPLY_CNT" type="STRING" size="256"/>
+          <Column id="ATTACH_CNT" type="STRING" size="256"/>
+          <Column id="BOARD_TXT" type="STRING" size="256"/>
+          <Column id="DEPT_NM" type="STRING" size="256"/>
+          <Column id="BOARD_ATTACH" type="STRING" size="256"/>
+          <Column id="IMPORT_YN" type="STRING" size="256"/>
+          <Column id="POPUP_YN" type="STRING" size="256"/>
+          <Column id="POPUP_START_DT" type="STRING" size="256"/>
+          <Column id="POPUP_END_DT" type="STRING" size="256"/>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="MENU_CD" type="STRING" size="256"/>
+          <Column id="BOARD_SEQ" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsPds">
+        <ColumnInfo>
+          <Column id="NO" type="STRING" size="256"/>
+          <Column id="BOARD_TITLE" type="STRING" size="256"/>
+          <Column id="USER_NM" type="STRING" size="256"/>
+          <Column id="REG_DT" type="STRING" size="256"/>
+          <Column id="READ_CNT" type="STRING" size="256"/>
+          <Column id="REPLY_CNT" type="STRING" size="256"/>
+          <Column id="ATTACH_CNT" type="STRING" size="256"/>
+          <Column id="BOARD_TXT" type="STRING" size="256"/>
+          <Column id="DEPT_NM" type="STRING" size="256"/>
+          <Column id="BOARD_ATTACH" type="STRING" size="256"/>
+          <Column id="IMPORT_YN" type="STRING" size="256"/>
+          <Column id="POPUP_YN" type="STRING" size="256"/>
+          <Column id="POPUP_START_DT" type="STRING" size="256"/>
+          <Column id="POPUP_END_DT" type="STRING" size="256"/>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="MENU_CD" type="STRING" size="256"/>
+          <Column id="BOARD_SEQ" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    1Depth > 2Depth
+*  @FileName    *.xfdl 
+*  @Creator     홍길동
+*  @CreateDate  yyyy.MM.DD 
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    Date          Modifier            Description
+*******************************************************************************
+*  YYYY.MM.DD      홍길동             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+//this.fv_nFormVal = null;     //용도
+this.fv_objGdsUserInfo = nexacro.getApplication().gdsUserInfo;
+this.fv_sProjectCd = nexacro.getApplication().av_sProjectCd;
+this.fv_sMenuCd = "M0028";
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload등)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.Form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this, true)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {    
+        //Script  
+		this.fnTopBgCenter(this.divTopImg);
+		this.fnUserInfoSet(this.fv_objGdsUserInfo);
+		this.fnSearch();
+   }
+};
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnInit, fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnInit : 초기화 함수 검색조건 초기화 및 온로드 세팅
+ * @return {N/A}    N/A
+ * @example this.fnInit();
+ */
+this.fnInit = function(){
+	//검색조건
+	var objDivSearch = this.divSearch.form;
+}
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "SearchNotice";
+    
+	this.dsNotice.clearData();
+    take.tranSelect(this,"SearchNotice1","BoardManagement.boardInfoList","dsSearch", "dsNotice", "PROJECT_CD="+this.fv_sProjectCd + " MENU_CD='M0028'", "fnCallback");
+
+	this.dsPds.clearData();
+	take.tranSelect(this,"SearchNotice2","BoardManagement.boardInfoList","dsSearch", "dsPds", "PROJECT_CD="+this.fv_sProjectCd + " MENU_CD='M0037'", "fnCallback");
+};
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+//divTopImg_onsize : Main Img Div 사이즈 변경 이벤트
+this.divTopImg_onsize = function(obj:nexacro.Div,e:nexacro.SizeEventInfo)
+{
+	this.fnTopBgCenter(obj);
+};
+
+//공지사항 more버튼 클릭 이벤트
+this.divNotice_btnNoticeMore_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	take.mdiOpenMenu(this, "M0028", "", "", true);
+};
+
+//자료실 more버튼 클릭 이벤트
+this.divNotice_btnNoticeMore00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	take.mdiOpenMenu(this, "M0037", "", "", true);
+};
+
+this.fnCallPopup = function(sBoardSeq, sBoardAttach, sUrl)
+{
+	var arrParam = {
+			sBoardSeq 	 : sBoardSeq
+		  , sBoardAttach : sBoardAttach
+		  , sProjectCd	 : this.fv_sProjectCd
+		  , sMenuCd		 : this.fv_sMenuCd
+	};
+		
+	take.openPopup(this, sUrl, "frm::mod/"+sUrl+".xfdl", arrParam, "resizable=true", 
+		function(){
+		}
+	);
+};
+
+//공지사항 글 클릭 이벤트
+this.divNotice_grdNotice01_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	this.fv_sMenuCd 	= "M0028";
+	var objDs 			= obj.getBindDataset();
+	var sBoardSeq 		= objDs.getColumn( objDs.rowposition, "BOARD_SEQ" );
+	var sBoardAttach 	= objDs.getColumn( objDs.rowposition, "BOARD_ATTACH" );
+	
+	this.fnCallPopup(sBoardSeq, sBoardAttach, "CM010P02");
+};
+
+//자료실 글 클릭 이벤트
+this.divNotice_grdNotice00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	this.fv_sMenuCd 	= "M0037";
+	var objDs 			= obj.getBindDataset();
+	var sBoardSeq 		= objDs.getColumn( objDs.rowposition, "BOARD_SEQ" );
+	var sBoardAttach 	= objDs.getColumn( objDs.rowposition, "BOARD_ATTACH" );
+	
+	this.fnCallPopup(sBoardSeq, sBoardAttach, "BM010P02");
+};
+
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnUserInfoSet : 사용자 정보 세팅
+ * @param  {Object} objDs UserInfo Dataset
+ * @return {N/A}    N/A
+ * @example this.fnUserInfoSet(nexacro.getApplication().gdsUserInfo);
+ */
+this.fnUserInfoSet = function(objDs)
+{
+    var sUniv, sUserId, sUserNm, sLastLoginDt, sLastLoginIp;
+    var objDiv;
+    
+    objDiv = this.divInfo.form;
+    
+    sDeptNm   	 = take.nvl(objDs.getColumn(0,"DEPT_NM")   ,"-");
+    sUserId      = take.nvl(objDs.getColumn(0,"USER_ID")    ,"-");
+    sUserNm      = take.nvl(objDs.getColumn(0,"USER_NM")    ,"-");
+    sLastLoginDt = take.nvl(objDs.getColumn(0,"LAST_LOGIN_DT") ,"-");
+    sLastLoginIp = take.nvl(objDs.getColumn(0,"LOGIN_IP")    ,"-");
+    
+	objDiv.staUniv.set_text(take.replaceFormat(objDiv.staUniv.text, sDeptNm));
+	objDiv.staUser.set_text(take.replaceFormat(objDiv.staUser.text, sUserId + " (" + sUserNm + ")"));
+	objDiv.staLoginDt.set_text(take.replaceFormat(objDiv.staLoginDt.text, sLastLoginDt));
+	objDiv.staIP.set_text(take.replaceFormat(objDiv.staIP.text, sLastLoginIp));
+};
+
+/**
+ * fnTopBgCenter : 리사이즈에 따라 탑 이미지 Left 좌표 변경
+ * @param  {Object} objDiv Div
+ * @return {N/A}    N/A
+ * @example this.fnTopBgCenter(this.div00);
+ */
+this.fnTopBgCenter = function(objDiv)
+{
+    var objStaBg = objDiv.form.staBg;
+    var nLeft = (objDiv.getOffsetWidth()-nexacro.toNumber(objStaBg.width))/2;
+	objStaBg.set_left(nLeft);
+};
+
+this.fnSetTitle = function( nRow, sTitle )
+{
+	var sImgUrl = "";
+	var sRegDt = take.nvl(this.dsNotice.getColumn(nRow, "REG_DT"), "");
+	
+	if( "" != sRegDt )
+	{
+		sRegDt = sRegDt.replace(/-/gi, "");
+		sRegDt = sRegDt.substr(0, 8);		
+		sRegDt = take.parseDate(sRegDt, "yyyyMMdd");
+		var sToday = take.parseDate(take.getTodayTime().date, "yyyyMMdd");
+		var sTerm = parseInt(take.getDateTerm(sRegDt, sToday));
+		
+		if( 5 >= sTerm )
+		{
+			sImgUrl = "theme://images/img_icon_new.png";
+		}			
+	}
+	return sImgUrl;
+};
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : sId      - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : nErrCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : sErrMsg  - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "SearchNotice1" :  //조회 콜백
+            //Script
+            break;
+		case "SearchNotice2" :  //조회 콜백
+            //Script
+            break;
+        default :
+            break;
+    }        
+};]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+    	<!-- https://mybatis.github.io/mybatis-3/ko/configuration.html -->
+	<settings>
+		<setting name="cacheEnabled" value="false" />
+		<setting name="useGeneratedKeys" value="false" />
+		<setting name="defaultExecutorType" value="REUSE" />
+		<setting name="jdbcTypeForNull" value="NULL"/>
+		<setting name="callSettersOnNulls" value="true"/>
+	</settings>
+
+	<typeAliases>
+		<typeAlias alias="takeResultMap" type="kr.co.takeit.spring.dto.TakeCaseUpperMap"/>
+	</typeAliases>
+
+	<databaseIdProvider type="DB_VENDOR">
+		<property name="Oracle" value="Oracle" />
+		<property name="SQL Server" value="SQL Server" />
+		<property name="MySQL" value="MySQL" />
+		<property name="PostgreSQL" value="PostgreSQL" />
+		<property name="Tibero" value="Oracle" />
+		<property name="MariaDB" value="MySQL" />
+	</databaseIdProvider>
+</configuration>

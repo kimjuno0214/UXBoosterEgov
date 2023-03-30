@@ -1,0 +1,494 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="PM040" width="1040" height="659" titletext="화면설계서" onload="PM040_onload" ontimer="PM040_ontimer">
+    <Layouts>
+      <Layout height="659" mobileorientation="landscape" width="1040">
+        <Div id="divSearch" taborder="0" left="10" top="0" height="43" right="10" cssclass="div_WF_searchBox01" text="" minwidth="1020" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Static id="staTempT" taborder="1" text="템플릿" left="20" top="10" width="80" height="21" cssclass="sta_WF_textRImport"/>
+              <Combo id="cboTemplete" taborder="0" text="" left="104" top="10" width="231" height="21" innerdataset="dsCboTemp" codecolumn="CODE" datacolumn="NAME" onitemchanged="divSearch_cboTemplete_onitemchanged" value="선택" index="0"/>
+            </Layout>
+            <Layout name="default0">
+              <Static id="staTempT" taborder="1" text="프로젝트" left="20" top="10" width="80" height="21" cssclass="sta_WF_textRImport"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnShowHide" taborder="2" left="46.63%" top="42" width="70" height="10" cssclass="btn_WF_fold01"/>
+        <Static id="Static09" taborder="3" text="Static03" left="0" top="52" height="10" background="red" visible="false" right="0"/>
+        <Static id="Static23" taborder="4" text="Static23" left="1" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static24" taborder="5" text="Static23" left="340" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static25" taborder="6" text="Static23" left="679" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static26" taborder="7" text="Static23" left="1018" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Div id="divDetail" taborder="1" left="10" top="62" right="10" bottom="10" text="" minwidth="1020" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Static id="staListT" taborder="0" text="템플릿 Viewer" left="0" top="0" height="30" width="540" cssclass="sta_WF_title02"/>
+              <Div id="divForm" taborder="4" left="0" top="30" bottom="0" right="610" border="5px solid" text="화면 템플릿">
+                <Layouts>
+                  <Layout/>
+                  <Layout name="default0"/>
+                </Layouts>
+              </Div>
+              <Static id="staRoleMapT" taborder="1" text="검색조건 설정 정보" top="0" height="30" cssclass="sta_WF_title02" right="130" width="470"/>
+              <Button id="btnFormDesign" taborder="2" text="화면설계서 다운로드" top="3" width="130" height="23" cssclass="btn_WF_basic01" right="0"/>
+              <Static id="Static45" taborder="3" text="Static00" left="410" top="30" width="10" background="red" visible="false" height="200"/>
+              <Button id="btnData" taborder="5" text="설계 정보 취합" top="3" width="120" height="23" cssclass="btn_WF_basic01" right="135"/>
+              <Grid id="grdInfo" taborder="6" top="26" width="600" right="5" height="42.59%" binddataset="dsSetSearch" scrollbarbaroutsize="5">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="50"/>
+                      <Column size="130"/>
+                      <Column size="100"/>
+                      <Column size="100"/>
+                      <Column size="100"/>
+                      <Column size="100"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="위치"/>
+                      <Cell col="1" text="타이틀"/>
+                      <Cell col="2" text="바인드 데이터셋"/>
+                      <Cell col="3" text="바인드 컬럼"/>
+                      <Cell col="4" text="컴포넌트"/>
+                      <Cell col="5" text="참조데이터셋"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:GUBUN" textAlign="center"/>
+                      <Cell col="1" text="bind:NAME"/>
+                      <Cell col="2" text="bind:DATASET"/>
+                      <Cell col="3" text="bind:COLUMN"/>
+                      <Cell col="4" text="bind:TYPE"/>
+                      <Cell col="5" text="bind:BINDDATASET"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="staRoleMapT00" taborder="7" text="검색조건 설정 정보" top="grdInfo:10" height="30" cssclass="sta_WF_title02" right="130" width="470"/>
+              <Grid id="grdSearch" taborder="8" top="staRoleMapT00:0" width="600" right="0" binddataset="dsSetSearch" scrollbarbaroutsize="5" bottom="0">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="50"/>
+                      <Column size="130"/>
+                      <Column size="100"/>
+                      <Column size="100"/>
+                      <Column size="100"/>
+                      <Column size="100"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="위치"/>
+                      <Cell col="1" text="타이틀"/>
+                      <Cell col="2" text="바인드 데이터셋"/>
+                      <Cell col="3" text="바인드 컬럼"/>
+                      <Cell col="4" text="컴포넌트"/>
+                      <Cell col="5" text="참조데이터셋"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:GUBUN" textAlign="center"/>
+                      <Cell col="1" text="bind:NAME"/>
+                      <Cell col="2" text="bind:DATASET"/>
+                      <Cell col="3" text="bind:COLUMN"/>
+                      <Cell col="4" text="bind:TYPE"/>
+                      <Cell col="5" text="bind:BINDDATASET"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+            <Layout name="default0">
+              <Static id="staListT" taborder="0" text="권한 목록" left="0" top="0" height="30" width="450" cssclass="sta_WF_title02"/>
+              <Static id="staRoleMapT" taborder="1" text="권한 매핑" left="318" top="0" height="30" cssclass="sta_WF_title02" right="162"/>
+              <Button id="btnFormDesign" taborder="2" text="저장" top="3" width="46" height="23" cssclass="btn_WF_basic01" right="8" onclick="btnRoleSave_onclick"/>
+              <Static id="Static45" taborder="3" text="Static00" left="310" top="30" width="10" background="red" visible="false" height="200"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+      <Layout height="659" mobileorientation="landscape" width="1040" name="default0">
+        <Div id="divSearch" taborder="0" left="10" top="0" height="43" right="10" cssclass="div_WF_searchBox01" text=""/>
+        <Button id="btnShowHide" taborder="1" left="485" top="42" width="70" height="10" cssclass="btn_WF_fold01"/>
+        <Static id="Static09" taborder="2" text="Static03" left="0" top="52" height="10" background="red" visible="false" right="0"/>
+        <Static id="Static23" taborder="3" text="Static23" left="1" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static24" taborder="4" text="Static23" left="340" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static25" taborder="5" text="Static23" left="679" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static26" taborder="6" text="Static23" left="1018" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Div id="divDetail" taborder="7" left="0" top="62" right="0" bottom="0" text=""/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsSetSearch">
+        <ColumnInfo>
+          <Column id="TEMPLETE" type="STRING" size="256"/>
+          <Column id="GUBUN" type="STRING" size="255" description="프로그램유형"/>
+          <Column id="NAME" type="STRING" size="255" description="PREFIX"/>
+          <Column id="DATASET" type="STRING" size="256"/>
+          <Column id="COLUMN" type="STRING" size="256"/>
+          <Column id="TYPE" type="STRING" size="256"/>
+          <Column id="BINDDATASET" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="TEMPLETE">smpFrom01</Col>
+            <Col id="GUBUN">11</Col>
+            <Col id="NAME">사용자부서</Col>
+            <Col id="DATASET">dsSearch</Col>
+            <Col id="COLUMN">DEPT_CD</Col>
+            <Col id="TYPE">combo</Col>
+          </Row>
+          <Row>
+            <Col id="TEMPLETE">smpFrom01</Col>
+            <Col id="GUBUN">12</Col>
+            <Col id="NAME">아이디</Col>
+            <Col id="DATASET">dsSearch</Col>
+            <Col id="COLUMN">USER_ID</Col>
+            <Col id="TYPE">edit</Col>
+          </Row>
+          <Row>
+            <Col id="TEMPLETE">smpFrom01</Col>
+            <Col id="GUBUN">13</Col>
+            <Col id="NAME">성명</Col>
+            <Col id="DATASET">dsSearch</Col>
+            <Col id="COLUMN">USER_NM</Col>
+            <Col id="TYPE">edit</Col>
+          </Row>
+          <Row>
+            <Col id="TEMPLETE">smpFrom01</Col>
+            <Col id="GUBUN">21_1</Col>
+            <Col id="NAME">로그인일시</Col>
+            <Col id="DATASET">dsSearch</Col>
+            <Col id="COLUMN">FROM_DATE</Col>
+            <Col id="TYPE">calendar</Col>
+          </Row>
+          <Row>
+            <Col id="TEMPLETE">smpFrom01</Col>
+            <Col id="GUBUN">21_2</Col>
+            <Col id="NAME">~</Col>
+            <Col id="DATASET">dsSearch</Col>
+            <Col id="COLUMN">TO_DATE</Col>
+            <Col id="TYPE">calendar</Col>
+          </Row>
+          <Row>
+            <Col id="TEMPLETE">smpFrom01</Col>
+            <Col id="GUBUN">22</Col>
+            <Col id="NAME">상태</Col>
+            <Col id="DATASET">dsSearch</Col>
+            <Col id="COLUMN">STATUS</Col>
+            <Col id="TYPE">combo</Col>
+          </Row>
+          <Row>
+            <Col id="TEMPLETE">smpFrom01</Col>
+            <Col id="GUBUN">23</Col>
+            <Col id="NAME">사용여부</Col>
+            <Col id="DATASET">dsSearch</Col>
+            <Col id="COLUMN">USE_YN</Col>
+            <Col id="TYPE">combo</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsCboTemp">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE"/>
+            <Col id="NAME">선택</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">smpForm01</Col>
+            <Col id="NAME">리스트 조회</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">smpForm01_01</Col>
+            <Col id="NAME">리스트 CRUD</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">sample01</Col>
+            <Col id="NAME">리스트 상세 CRUD</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">sample02</Col>
+            <Col id="NAME">리스트 상세 서브리스트 CRUD</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">sample03</Col>
+            <Col id="NAME">리스트 상세리스트 </Col>
+          </Row>
+          <Row>
+            <Col id="CODE">sample04</Col>
+            <Col id="NAME">리스트 CRUD 2</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">sample05</Col>
+            <Col id="NAME">리스트 상세리스트 CRUD</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsSetTran">
+        <ColumnInfo>
+          <Column id="KEY" type="STRING" size="256"/>
+          <Column id="VALUE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    
+*  @FileNAME    FormCreate.xfdl 
+*  @Creator     고영민
+*  @CreateDate  2020.08.25 
+*  @Version     1.0
+*  @Desction    화면 설계서
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2019.08.25      고영민             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/ 
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.PM040_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+    if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+    { 
+		// 초기화
+        this.fnInit();  
+    }
+}
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnInit : 초기화 함수
+ * @param  {N/A}    N/A
+ * @return {N/A}    N/A
+ * @example this.fnInit();
+ */
+this.fnInit = function()
+{    
+	// 공통 코드조회 함수 호출
+    //this.fnCommonCode()
+    this.divSearch.form.cboTemplete.set_index(0);
+}
+
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "formList";	
+	
+    this.dsFormList.clearData();
+    
+    var sPrefix = this.divSearch.form.cboPrefix.value;
+    
+    take.tranSelect
+    (
+        this, 
+        "formList", 
+        "Main.prefixFormList", 
+        "", 
+        "dsFormList", 
+        "PREFIX='" + sPrefix + "'",
+        "fnCallback"
+    )
+}
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+this.fnSave = function(sTranId)
+{    
+    
+}
+/**
+ * fnAddRow : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+ * @example this.fnAddRow(sGrdId, nRow);
+ */
+this.fnAddRow = function(sGrdId, nRow)
+{
+    
+};
+
+/**
+ * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number, Array} arrnRow    deleteRow 리턴값
+ * @return {N/A} N/A
+ * @example this.fnDelRow(sGrdId, nRow); 
+ */
+this.fnDelRow = function(sGrdId, arrnRow)
+{    
+    
+};
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+ ********************************************************/
+ this.divSearch_cboTemplete_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	var sFileUrl;
+    var objCbo;
+    
+    objCbo = this.divSearch.form.cboTemplete;
+    
+    sFileUrl = "guide::form/" + objCbo.value + ".xfdl";
+    
+    this.divDetail.form.divForm.set_url("");
+    
+    this.divDetail.form.divForm.set_url(sFileUrl);
+};
+
+//화면설계서 다운로드 버튼 클릭 이벤트
+this.divDetail_btnFormDesign_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    
+};
+
+//설계 정보 취합 버튼 클릭 이벤트
+this.divDetail_btnData_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	
+};
+
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+
+/**
+ * fnCommonCode : 공통 코드조회
+ * @example this.fnCommonCode();
+ */
+// this.fnCommonCode = function ()
+// {
+// 	take.tranCode(
+//         this, 
+//         ["00009","00006"], 
+//         ["dsCboUseYn","dsCboPrefix"], 
+//         ["ALL","SEL"],
+//         function(sId, nErrCd, sErrMsg)
+//         {
+//             if (this.dsCboUseYn.rowcount > 0){
+//                 this.divSearch.form.cboUseYn.set_index(0);
+//             }
+//             
+//             if (this.dsCboUseYn.rowcount > 0){
+//                 this.divSearch.form.cboPrefix.set_index(0);
+//             }
+//         }, 
+//         false);
+//     
+//     return true
+// };
+
+//파일 다운로드
+this.fnFileDown = function()
+{
+    var sPrefix, sDownloadUrl;
+	var objFileDown, objCapDs;
+    var nCnt;
+    
+    objDs = this.dsPrefixList;
+    objFileDown = this.fdtDoc;
+    objCapDs = this.dsCapture;
+    
+    sPrefix = this.divSearch.form.cboPrefix.text;
+    
+    sDownloadUrl = take.getSvcUrl() + "formDesignDownload.do";
+	sDownloadUrl += "?sPrefix="+sPrefix;
+	
+    objFileDown.set_url(sDownloadUrl);
+    
+    nCnt = objCapDs.rowcount;
+    
+    if (nCnt<=0) return
+        
+    take.transaction(
+        this, 
+        "uploaddata", 
+        "SVC::formCapture.do", 
+        "dsCapture=dsCapture", 
+        "", 
+        "", 
+        function (sId, sErrCd, sMsg)
+        {
+        	objFileDown.download();
+        }, 
+        false);
+}
+
+//화면 불러오기
+this.fnFormViewer = function(objDs, nRow)
+{
+    var objDiv, objCaptureDs, objTxt;
+    var sUrl, sProgId, sProgNm;
+    var nNRow, sTxt;
+    
+    objDiv = this.divDetail.form.divForm.form.divForm;
+    sProgId = objDs.getColumn(nRow, "PROGRAM_ID");
+    sProgNm = objDs.getColumn(nRow ,"PROGRAM_NM");
+    sUrl = objDs.getColumn(nRow, "PROGRAM_PREFIX") + "::" + sProgId + ".xfdl";
+    
+    objCaptureDs = this.dsCapture;
+    nNRow = objCaptureDs.addRow();
+    objCaptureDs.setColumn(nNRow, "PROGRAM_ID", sProgId)
+
+    objTxt = this.divDetail.form.txtInfo;
+    sTxt = objTxt.value + "\n######" + sProgNm + "(" + sProgId + ") 화면을 로드합니다.";
+    objTxt.set_value(sTxt);
+            
+    objDiv.set_url("");
+    objDiv.set_url(sUrl);
+    
+    this.fv_objForm = this.divDetail.form.divForm.form.divForm.form;
+    
+    sTxt = objTxt.value + "\n######" + sProgNm + "(" + sProgId + ") 화면이 로드 되었습니다.";
+    objTxt.set_value(sTxt);
+}
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+//
+]]></Script>
+  </Form>
+</FDL>

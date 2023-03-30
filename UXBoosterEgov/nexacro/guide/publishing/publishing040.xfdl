@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="publishing040" width="1040" height="659" titletext="공지사항등록/수정">
+    <Layouts>
+      <Layout height="659" mobileorientation="landscape" width="1040">
+        <Button id="Button01" taborder="0" text="파일첨부" top="483" width="60" height="23" cssclass="btn_WF_basic01" right="10"/>
+        <Static id="Static01" taborder="1" left="10" top="10" height="31" cssclass="sta_WF_th01L" right="10"/>
+        <Edit id="Edit11" taborder="2" left="17" top="15" width="823" height="21"/>
+        <CheckBox id="CheckBox02" taborder="3" text="중요공지여부" left="865" top="15" width="150" height="20"/>
+        <Static id="Static02" taborder="4" left="10" top="40" height="388" cssclass="sta_WF_th01L" right="10"/>
+        <TextArea id="TextArea00" taborder="5" left="17" top="50" height="368" right="20"/>
+        <Div id="Div00" taborder="6" left="10" top="427" height="47" cssclass="div_WF_replyBox01" right="10" formscrollbartype="none none">
+          <Layouts>
+            <Layout>
+              <CheckBox id="CheckBox00" taborder="0" text="팝업공지여부" left="18" top="13" width="114" height="20"/>
+              <Static id="staMlGroupSearch00" taborder="1" text="공지기간" left="339" top="13" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Calendar id="calLoginDateFromSearch" taborder="2" left="421" top="13" width="100" height="21"/>
+              <Static id="staMlGroupSearch01" taborder="4" text="~" left="calLoginDateFromSearch:3" top="13" width="22" height="20" cssclass="sta_WF_textR"/>
+              <Calendar id="calLoginDateToSearch" taborder="3" left="staMlGroupSearch01:3" top="13" width="100" height="21"/>
+              <Static id="staProgramInfoSearch" taborder="5" text="팝업공지대상" left="678" top="13" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="edtProgramInfoSearch" taborder="6" left="762" top="13" width="200" height="21"/>
+              <Button id="Button00" taborder="7" top="13" width="21" height="21" cssclass="btn_WF_search02" left="edtProgramInfoSearch:4"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Grid id="Grid00" taborder="7" left="10" top="510" binddataset="Dataset00" autofittype="col" right="10" bottom="10">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="38"/>
+                <Column size="353"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="순번"/>
+                <Cell col="1" text="파일명"/>
+                <Cell col="2" text="파일경로"/>
+                <Cell col="3" text="파일사이즈"/>
+                <Cell col="4" text="삭제"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0"/>
+                <Cell col="1" text="bind:Column1"/>
+                <Cell col="2" text="bind:Column2"/>
+                <Cell col="3" text="bind:Column3"/>
+                <Cell col="4" text="bind:Column4" displaytype="buttoncontrol" edittype="button"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static23" taborder="8" text="10" left="10" top="427" width="20" height="47" background="rgba(0,0,255,0.4)" visible="false" color="blue"/>
+        <Static id="Static24" taborder="9" text="10" left="339" top="427" width="10" height="47" background="rgba(0,0,255,0.4)" visible="false" color="blue"/>
+        <Static id="Static25" taborder="10" text="10" left="679" top="427" width="10" height="47" background="rgba(0,0,255,0.4)" visible="false" color="blue"/>
+        <Static id="Static26" taborder="11" text="20" top="427" width="20" height="47" background="rgba(0,0,255,0.4)" visible="false" color="blue" right="10"/>
+        <Static id="Static22" taborder="12" text="10" left="0" height="10" background="rgba(255,0,0,0.4)" visible="false" right="0" bottom="649" textAlign="center"/>
+        <Static id="Static16" taborder="13" text="10" left="1030" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" textAlign="center"/>
+        <Static id="Static00" taborder="14" text="10" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" textAlign="center"/>
+        <Static id="Static03" taborder="15" text="10" left="0" height="10" background="rgba(255,0,0,0.4)" visible="false" right="0" bottom="176" textAlign="center"/>
+        <Div id="Div01" taborder="16" text="Div00" left="1050" top="40" width="400" height="300">
+          <Layouts>
+            <Layout>
+              <Grid id="Grid00" taborder="0" left="10" top="10" right="10" bottom="10" binddataset="Dataset01" autofittype="col" fillareatype="linerow">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="45"/>
+                      <Column size="150"/>
+                      <Column size="150"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="순번"/>
+                      <Cell col="1" text="권한명"/>
+                      <Cell col="2" text="권한코드"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:Column0"/>
+                      <Cell col="1" text="bind:Column1"/>
+                      <Cell col="2" text="bind:Column2"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static04" taborder="17" text="10" left="0" height="10" background="rgba(255,0,0,0.4)" visible="false" right="0" bottom="0" textAlign="center"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column4">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="Dataset01">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">작성자</Col>
+            <Col id="Column1">작성일</Col>
+            <Col id="Column2">댓글내용</Col>
+            <Col id="Column3">수정버튼</Col>
+            <Col id="Column4">삭제버튼</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">작성자</Col>
+            <Col id="Column1">작성일</Col>
+            <Col id="Column2">댓글내용</Col>
+            <Col id="Column3">수정버튼</Col>
+            <Col id="Column4">삭제버튼</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

@@ -1,0 +1,509 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="DashboardGuide" width="1245" height="737" titletext="New Form" onload="Form_onload">
+    <Layouts>
+      <Layout height="737" width="1245">
+        <Div id="divSearch" taborder="0" left="10" top="0" height="43" right="10" cssclass="div_WF_searchBox01" text="" minwidth="1020" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Static id="staPrefixT" taborder="1" text="대시보드 가이드" left="20" top="10" width="90" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="cboGuide" taborder="0" text="선택" left="114" top="10" width="221" height="21" innerdataset="dsGuide" codecolumn="CODE" datacolumn="DATA" onitemchanged="divSearch_cboGuide_onitemchanged" index="0" value=""/>
+              <Static id="Static00" taborder="2" text="화면 사이즈(W*H)" left="cboGuide:19" top="10" width="100" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="edtW" taborder="3" left="Static00:4" top="10" width="60" height="21" value="434" text="434" textAlign="center" onkillfocus="edt_onkillfocus" onkeydown="edt_onkeydown"/>
+              <Static id="Static00_00" taborder="4" text="X" left="edtW:0" top="10" width="20" height="21" textAlign="center" font="bold 12px/normal &quot;Arial&quot;,&quot;Noto Sans CJK KR&quot;,&quot;Malgun Gothic&quot;"/>
+              <Edit id="edtH" taborder="5" left="Static00_00:0" top="10" width="60" height="21" value="197" text="197" textAlign="center" onkeydown="edt_onkeydown" onkillfocus="edt_onkillfocus"/>
+              <Static id="Static00_01" taborder="6" text="Drag 또는 사이즈를 입력해서 리사이즈 해보세요." left="609" top="10" height="21" right="299"/>
+            </Layout>
+            <Layout name="default0">
+              <Static id="staPrefixT" taborder="2" text="프로젝트" left="20" top="10" width="80" height="21" cssclass="sta_WF_textRImport"/>
+              <Static id="staRoleT" taborder="3" text="권한" left="354" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="edtRole" taborder="0" left="438" top="10" width="231" height="21"/>
+              <Static id="staUseYnT" taborder="4" text="사용여부" left="688" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="cboUseYn" taborder="1" text="Combo00" left="772" top="10" width="227" height="21" innerdataset="dsCboUseYn" codecolumn="CODE" datacolumn="NAME"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnShowHide" taborder="1" left="47.15%" top="42" width="70" height="10" cssclass="btn_WF_fold01"/>
+        <Static id="Static09" taborder="2" text="Static03" left="0" top="52" height="10" background="red" visible="false" right="10"/>
+        <Static id="Static23" taborder="3" text="Static23" left="0" top="-10" width="10" background="blue" visible="false" bottom="-10"/>
+        <Static id="Static24" taborder="4" text="Static23" left="340" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static09_00" taborder="5" text="Static03" left="0" height="10" background="red" visible="false" right="10" bottom="0"/>
+        <Div id="divDetail" taborder="6" left="10" top="62" right="10" text="" maxwidth="" bottom="10" ondragmove="divDetail_ondragmove" formscrollbarsize="5" formscrollbartype="indicator indicator" border="1px solid">
+          <Layouts>
+            <Layout>
+              <Button id="btnW" taborder="0" left="295" top="0" width="5" height="320" cursor="w-resize" ondrag="divDetail_btn_ondrag" background="#ffffff"/>
+              <Button id="btnH" taborder="1" left="0" top="320" height="5" cursor="n-resize" ondrag="divDetail_btn_ondrag" right="btnW:0" background="#ffffff"/>
+              <Div id="divDashView" taborder="2" text="대시보드 가이드 보기" left="0" top="0" border="1px solid" background="#ffffff" right="btnW:0" bottom="btnH:0"/>
+              <Button id="btnWH" taborder="3" left="btnH:0" top="btnW:0" width="5" height="5" cursor="move" ondrag="divDetail_btn_ondrag" background="#ffffff"/>
+            </Layout>
+            <Layout name="default0">
+              <Grid id="grdForm" taborder="0" left="320" top="30" right="8" bottom="10" binddataset="dsProjectRoleMenuList" autofittype="col" treeusecheckbox="false" autosizingtype="col" oncellclick="grdRoleMenu_oncellclick"/>
+              <Static id="staListT" taborder="1" text="권한 목록" left="0" top="0" height="30" width="450" cssclass="sta_WF_title02"/>
+              <Static id="staRoleMapT" taborder="2" text="권한 매핑" left="318" top="0" height="30" cssclass="sta_WF_title02" right="162"/>
+              <Button id="btnFormDesign" taborder="3" text="저장" top="3" width="46" height="23" cssclass="btn_WF_basic01" right="8" onclick="btnRoleSave_onclick"/>
+              <Static id="Static45" taborder="4" text="Static00" left="310" top="30" width="10" background="red" visible="false" height="200"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static24_00" taborder="7" text="Static23" top="-10" width="10" background="blue" visible="false" right="0" bottom="-10"/>
+        <Static id="Static25" taborder="8" text="Static23" left="679" top="-10" width="10" height="106" background="blue" visible="false"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsGuide">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="DATA" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE"/>
+            <Col id="DATA">선택</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">DashboardGuide_11_295_155</Col>
+            <Col id="DATA">1X1 컨텐츠 (W295 X H155)</Col>
+          </Row>
+          <Row>
+            <Col id="DATA">1X2 컨텐츠 (W295 X H320)</Col>
+            <Col id="CODE">DashboardGuide_12_295_320</Col>
+          </Row>
+          <Row>
+            <Col id="DATA">1X2 차트 (W295 X H320)</Col>
+            <Col id="CODE">DashboardGuide_12_295_320_chart_01</Col>
+          </Row>
+          <Row>
+            <Col id="DATA">1X2 차트&amp;컨텐츠 (W295 X H320)</Col>
+            <Col id="CODE">DashboardGuide_12_295_320_chart_02</Col>
+          </Row>
+          <Row>
+            <Col id="DATA">1X3 컨텐츠 (W295 X H485)</Col>
+            <Col id="CODE">DashboardGuide_13_295_485</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">DashboardGuide_13_295_485_chart_01</Col>
+            <Col id="DATA">1X3 차트 (W295 X H485)</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">DashboardGuide_13_295_485_chart_02</Col>
+            <Col id="DATA">1X3 차트&amp;컨텐츠 (W295 X H485)</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">DashboardGuide_14_295_650</Col>
+            <Col id="DATA">1X4 컨텐츠 (W295 X H650)</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">DashboardGuide_14_295_650_chart_01</Col>
+            <Col id="DATA">1X4 차트 (W295 X H650)</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">DashboardGuide_14_295_650_chart_02</Col>
+            <Col id="DATA">1X4 차트&amp;컨텐츠 (W295 X H650)</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">DashboardGuide_21_600_155</Col>
+            <Col id="DATA">2X1 컨텐츠 (W600 X H155)</Col>
+          </Row>
+          <Row>
+            <Col id="DATA">2X2 컨텐츠 (W600 X H320)</Col>
+            <Col id="CODE">DashboardGuide_22_600_320</Col>
+          </Row>
+          <Row>
+            <Col id="DATA">2X2 차트 (W600 X H320)</Col>
+            <Col id="CODE">DashboardGuide_22_600_320_chart_01</Col>
+          </Row>
+          <Row>
+            <Col id="DATA">2X2 차트&amp;컨텐츠 (W600 X H320)</Col>
+            <Col id="CODE">DashboardGuide_22_600_320_chart_02</Col>
+          </Row>
+          <Row>
+            <Col id="DATA">2X3 컨텐츠 (W600 X H485)</Col>
+            <Col id="CODE">DashboardGuide_23_600_485</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">DashboardGuide_23_600_485_chart_01</Col>
+            <Col id="DATA">2X3 차트 (W600 X H485)</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">DashboardGuide_23_600_485_chart_02</Col>
+            <Col id="DATA">2X3 차트&amp;컨텐츠(W600 X H485)</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">DashboardGuide_24_600_650</Col>
+            <Col id="DATA">2X4 컨텐츠 (W600 X H650)</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">DashboardGuide_24_600_650_chart_01</Col>
+            <Col id="DATA">2X4 차트(W600 X H650)</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">DashboardGuide_24_600_650_chart_02</Col>
+            <Col id="DATA">2X4 차트&amp;컨텐츠(W600 X H650)</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">DashboardGuide_31_905_155</Col>
+            <Col id="DATA">3X1 컨텐츠 (W905 X H155)</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">DashboardGuide_32_905_320</Col>
+            <Col id="DATA">3X2 컨텐츠 (W905 X H320)</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">DashboardGuide_32_905_320_chart_01</Col>
+            <Col id="DATA">3X2 차트 (W905 X H320)</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">DashboardGuide_32_905_320_chart_02</Col>
+            <Col id="DATA">3X2 차트&amp;컨텐츠 (W905 X H320)</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">DashboardGuide_33_905_485</Col>
+            <Col id="DATA">3X3 컨텐츠 (W905 X H485)</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">DashboardGuide_33_905_485_chart_01</Col>
+            <Col id="DATA">3X3 차트 (W905 X H485)</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">DashboardGuide_33_905_485_chart_02</Col>
+            <Col id="DATA">3X3 차트&amp;컨텐츠 (W905 X H485)</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">DashboardGuide_13_295_650</Col>
+            <Col id="DATA">3X4 컨텐츠 (W905 X H650)</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">DashboardGuide_34_905_650_chart_01</Col>
+            <Col id="DATA">3X4 차트 (W905 X H650)</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">DashboardGuide_34_905_650_chart_02</Col>
+            <Col id="DATA">3X4 차트&amp;컨텐츠 (W905 X H650)</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">DashboardGuide_41_1210_155</Col>
+            <Col id="DATA">4X1 컨텐츠 (W1210 X H155)</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">DashboardGuide_42_1210_320</Col>
+            <Col id="DATA">4X2 컨텐츠 (W1210 X H320)</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">DashboardGuide_42_1210_320_chart_01</Col>
+            <Col id="DATA">4X2 차트 (W1210 X H320)</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">DashboardGuide_42_1210_320_chart_02</Col>
+            <Col id="DATA">4X2 차트&amp;컨텐츠 (W1210 X H320)</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">DashboardGuide_43_600_485</Col>
+            <Col id="DATA">4X3 컨텐츠 (W1210 X H485)</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">DashboardGuide_43_1210_485_chart_01</Col>
+            <Col id="DATA">4X3 차트 (W1210 X H485)</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">DashboardGuide_43_1210_485_chart_02</Col>
+            <Col id="DATA">4X3 차트&amp;컨텐츠(W1210 X H485)</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">DashboardGuide_44_1210_650</Col>
+            <Col id="DATA">4X4 컨텐츠 (W1210 X H650)</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">DashboardGuide_44_1210_650_chart_01</Col>
+            <Col id="DATA">4X4 차트(W1210 X H650)</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">DashboardGuide_44_1210_650_chart_02</Col>
+            <Col id="DATA">4X4 차트&amp;컨텐츠(W1210 X H650)</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  DashboardGuide
+*
+*  @MenuPath    Guide > DashboardGuide
+*  @FileName    DashboardGuide.xfdl 
+*  @Creator     고영민
+*  @CreateDate  2020.09.01 
+*  @Version     1.0
+*  @Desction    대시보드 가이드
+* 
+************** 소스 수정 이력 *************************************************
+*    Date          Modifier            Description
+*******************************************************************************
+*  2020.09.01      고영민             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+//this.fv_nFormVal = null;     //용도
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload등)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.Form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+    if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+    {    
+        //Script  
+    }
+}
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnInit, fnSearch, fnSave, fnAddRow, fnDelRow, fnExcel, fnPrint)
+********************************************************/
+/**
+ * fnInit : 초기화 함수 검색조건 초기화 및 온로드 세팅
+ * @return {N/A}    N/A
+ * @example this.fnInit();
+ */
+this.fnInit = function()
+{
+	return true;
+}
+
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    return true;
+}
+
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+this.fnSave = function(sTranId)
+{    
+    return true;
+}
+
+/**
+ * fnAddRow : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+ * @example this.fnAddRow(sGrdId, nRow);
+ */
+this.fnAddRow = function(sGrdId, nRow)
+{
+    return true;
+}
+
+/**
+ * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number, Array} arrnRow    deleteRow 리턴값
+ * @return {N/A} N/A
+ * @example this.fnDelRow(sGrdId, nRow); 
+ */
+this.fnDelRow = function(sGrdId, arrnRow)
+{    
+    return true;
+}
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+ ********************************************************/
+//버튼 드래그
+this.divDetail_btn_ondrag = function(obj:nexacro.Button,e:nexacro.DragEventInfo)
+{
+    //컴포넌트 아이디
+	var sGbn = obj.name.substr(3);
+    
+    //userdata 세팅
+    e.set_userdata(sGbn);
+    
+    //드래그 시작을 위한 리턴
+    return true;
+};
+
+//폼 드래그 무브
+this.divDetail_ondragmove = function(obj:nexacro.Div,e:nexacro.DragEventInfo)
+{
+    //변수 선언
+	var sGbn;
+    var objBase;
+    
+    //drag시 세팅됀 userdata
+    sGbn = e.userdata;
+    
+    //베이스가 되는 div Form
+    objBase = this.divDetail.form;
+    
+    //Width 변경 버튼이 drag되었을 경우
+    if (sGbn=="W")
+    {
+        objBase.btnW.set_left(e.clientx);
+        
+    } else if (sGbn=="H") { //Height 변경 버튼이 drag되었을 경우
+    
+        objBase.btnH.set_top(e.clienty);
+        objBase.btnW.set_height(e.clienty);
+        
+    } else { //Width, Height 동시 변경 버튼이 drag되었을 경우
+    
+        objBase.btnW.set_left(e.clientx);
+        objBase.btnH.set_top(e.clienty);
+        objBase.btnW.set_height(e.clienty);
+        
+    }
+    
+    //reset scroll
+    objBase.resetScroll();
+    
+    //대시보드 view div
+    objDashView = this.divDetail.form.divDashView;
+    
+    //상단 검색 조건 height, width값 변경 적용
+    this.divSearch.form.edtW.set_value(objDashView.getOffsetWidth());
+    this.divSearch.form.edtH.set_value(objDashView.getOffsetHeight());
+};
+
+//상단 검색 조건 height, width edit 포커스가 나갔을 때 이벤트
+this.edt_onkillfocus = function(obj:nexacro.Edit,e:nexacro.KillFocusEventInfo)
+{
+    //대시보드 view div 사이즈 변경 함수 호출
+	this.fnDashViewResize();
+};
+
+//상단 검색 조건 height, width edit 키 다운 이벤트
+this.edt_onkeydown = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+    //엔터일 경우 대시보드 view div 사이즈 변경 함수 호출
+    if (e.keycode==13) this.fnDashViewResize();
+};
+
+//검색조건 가이드 콤보 변경 이벤트
+this.divSearch_cboGuide_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+    //변수 선언
+	var sUrl, sVal;
+    var arrInfo;
+    var nW, nH;
+    
+    //변경된 값
+    sVal = e.postvalue;
+    
+    //Guide Form URL 구하기
+    sUrl = "guide::design/";    
+    sUrl+=sVal + ".xfdl";
+    
+    //DashboardGuide_12_295_320_chart_01
+    arrInfo = sVal.split("_");
+    
+    //trace("arrInfo --> " + arrInfo);
+    
+    //변경된 width, height값
+    nW = arrInfo[2];
+    nH = arrInfo[3];
+    
+    //변경된 값 적용하기
+    this.divSearch.form.edtW.set_value(nW);
+    this.divSearch.form.edtH.set_value(nH);
+    
+    //URL 초기화
+    this.divDetail.form.divDashView.dashurl="";
+    this.divDetail.form.divDashView.set_url("");
+    
+    //URL 세팅
+    this.divDetail.form.divDashView.dashurl=sUrl;
+    this.divDetail.form.divDashView.set_url("frm::dbc/dbcComDash.xfdl");
+    
+    //변경된 값에 맞게 대시보드 뷰 사이즈 변경
+    this.fnDashViewResize();
+    
+};
+
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnDashViewResize : view div 사이즈 변경 함수 호출
+ * @param  {N/A} N/A
+ * @example this.fnDashViewResize();
+ */
+this.fnDashViewResize = function()
+{
+    //변수 선언
+    var objDiv, objBase;
+    var nW, nH, nMaxW, nMaxH;
+    
+    //변수값 세팅
+    objDiv = this.divDetail; //Detail Div
+    objBase = objDiv.form;   //Detail Div Form
+    
+    nW = nexacro.toNumber(this.divSearch.form.edtW.value); //width 값
+    nH = nexacro.toNumber(this.divSearch.form.edtH.value); //height 값
+    //nMaxW = objDiv.getOffsetWidth()-nexacro.toNumber(objBase.btnW.width); //최대 width 값
+    //nMaxH = objDiv.getOffsetHeight()-nexacro.toNumber(objBase.btnH.height); //최대 height 값
+    nMaxW = 1220; //최대 width 값
+    nMaxH = 660; //최대 height 값
+    
+    //width 사이즈가 너무 작거나 최대값을 넘어선 경우
+    if (nW>nMaxW)
+    {
+        //alert("현재 가능한 Width는 1 ~ "+ nMaxW+" 입니다.");
+        take.alert(this, "Info", "현재 가능한 Width는 1 ~ {text} 입니다.", {text:nMaxW});
+        
+        nW = nMaxW;
+        this.divSearch.form.edtW.set_value(nW);
+    } else if (nW<1) {
+    
+        take.alert(this, "Info", "현재 가능한 Width는 1 ~ {text} 입니다.", {text:nMaxW});
+        
+        nW = 1;
+        this.divSearch.form.edtW.set_value(nW);
+    }
+    
+    //변경된 width 적용
+    objBase.btnW.set_left(nW);
+    
+    //height 사이즈가 너무 작거나 최대값을 넘어선 경우
+    if (nH>nMaxH)
+    {
+        //alert("현재 가능한 Height는 1 ~ "+ nMaxH+" 입니다.");
+        take.alert(this, "Info", "현재 가능한 Height는 1 ~ {text} 입니다.", {text:nMaxH});
+        
+        nH = nMaxH;
+        this.divSearch.form.edtH.set_value(nH);
+    } else if (nH<1) {
+    
+        take.alert(this, "Info", "현재 가능한 Height는 1 ~ {text} 입니다.", {text:nMaxH});
+        
+        nH = 1;
+        this.divSearch.form.edtH.set_value(1);
+    }
+    
+    //변경된 height 적용
+    objBase.btnH.set_top(nH);
+    objBase.btnW.set_height(nH);
+    
+    //resetScroll
+    objBase.resetScroll();
+}
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+//N/A
+]]></Script>
+  </Form>
+</FDL>

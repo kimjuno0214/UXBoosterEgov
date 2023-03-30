@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="genForm" width="1280" height="400" titletext="MP-NP XML 변환 샘플" onload="form_onload">
+    <Layouts>
+      <Layout height="400" width="1280">
+        <TextArea id="taMyDsInfo" taborder="0" left="20" top="27" width="620" height="161" autoselect="true"/>
+        <TextArea id="taToboDsInfo" taborder="1" left="20" top="230" height="161" autoselect="true" width="620"/>
+        <Static id="Static10" taborder="2" text="Miplatform" left="20" width="170" height="25" cssclass="sta_WF_detailL" top="-2"/>
+        <Static id="Static12" taborder="3" text="nexacro" left="20" width="100" height="25" cssclass="sta_WF_detailL" top="201"/>
+        <Button id="Button03" taborder="4" text="변환" top="27" height="50" right="517" width="103" onclick="Button03_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[this.Button03_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    var arrVal = this.taMyDsInfo.value;
+    var vDsNm, vColNm, vType, vSize, arrSize = "" , arrColNm = "", arrCol="", arrType="";
+    
+    arrVal = arrVal.split("\n");    
+           
+    for(var i =0; i < arrVal.length; i++ ){
+        
+        if( arrVal[i].indexOf("<Dataset") > -1  ){
+            vDsNm = arrVal[i].substr(arrVal[i].indexOf("Id=") + 4, arrVal[i].length );            
+            vDsNm = vDsNm.substr( 0 , vDsNm.indexOf('"') );
+        } 
+        
+        if( arrVal[i].indexOf("<colinfo id=") > -1  ){
+            vColNm = arrVal[i].substr(arrVal[i].indexOf("<colinfo id=") + 13, arrVal[i].length );            
+            arrColNm += vColNm.substr( 0 , vColNm.indexOf('"') ) +",";
+        }            
+        if( arrVal[i].indexOf(" type=") > -1  ){
+            vType = arrVal[i].substr(arrVal[i].indexOf(" type=") + 7, arrVal[i].length );            
+            arrType += vType.substr( 0 , vType.indexOf('"') ) +",";
+        } 
+        
+        if( arrVal[i].indexOf(" size=") > -1  ){
+            vSize = arrVal[i].substr(arrVal[i].indexOf(" size=") + 7, arrVal[i].length );            
+            arrSize += vSize.substr( 0 , vSize.indexOf('"') ) +",";
+        } 
+        
+    }
+    this.removeChild( vDsNm );
+    
+    var objDs = new Dataset; 
+    var vDsScript = "", arrCols = "";
+    arrCols = arrColNm.split(",");
+    arrType = arrType.split(",");
+    arrSize = arrSize.split(",");
+    for(var i =0; i < arrCols.length-1; i++ ){  
+        arrCol = arrCols[i];
+        trace(" arrCol  : " + arrCol);
+        trace(" arrType : " + arrType[i]);
+        trace(" arrSize : " + arrSize[i]);
+        objDs.addColumn(arrCol.toUpperCase()==="DATA" ? "NAME" : arrCol.toUpperCase(), arrType[i] == "DECIMAL" ? "BIGDECIMAL" : arrType[i], arrType[i] == "STRING" ? "255" : arrSize[i]);
+        
+    } 
+    
+    
+    //arrCols = arrColNm.split(",");
+    var nLength =0, nRow=0; 
+    for(var i =0; i < arrVal.length-1; i++ ){     
+        if( arrVal[i].indexOf("<record>") > -1  ){
+            nRow = objDs.addRow();
+        }
+        for(var j =0; j < arrCols.length-1; j++ ){ 
+            arrCol = arrCols[j];
+            //trace(" arrCol  : " + arrCol);
+            if( arrVal[i].indexOf(arrCol+">") > -1  ){
+                nLength = arrVal[i].indexOf(">") + 1 ;
+                nLength = nexacro.toNumber(arrVal[i].indexOf("</") ) - nLength;
+                trace(arrCol + " :: " + arrVal[i].substr(arrVal[i].indexOf(">") + 1, nLength ));
+                objDs.setColumn(nRow, arrCol.toUpperCase()==="DATA" ? "NAME" : arrCol.toUpperCase(), arrVal[i].substr(arrVal[i].indexOf(">") + 1, nLength ));                
+            }
+        }
+           
+    }
+    
+    this.addChild(vDsNm, objDs);
+    
+    vDsScript = objDs.saveXML();
+    
+    vDsScript = nexacro.replaceAll( vDsScript, "<Rows>", "" );
+    vDsScript = nexacro.replaceAll( vDsScript, "</Rows>", "" );
+    
+    this.taToboDsInfo.set_value(vDsScript);
+    
+};
+]]></Script>
+    <Objects/>
+  </Form>
+</FDL>

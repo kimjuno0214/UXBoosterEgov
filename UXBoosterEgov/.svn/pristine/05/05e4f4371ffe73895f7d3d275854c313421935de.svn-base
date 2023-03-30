@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="frmLoginP02" width="600" height="580" titletext="로그인 개인정보처리약관 팝업" onload="Form_onload" background="white">
+    <Layouts>
+      <Layout height="580" width="600">
+        <Static id="staSystem" taborder="0" left="10" top="40" cssclass="sta_WF_td01L" right="10" height="200"/>
+        <Static id="Static45" taborder="1" text="Static00" left="0" top="0" width="10" background="red" visible="false" height="200"/>
+        <Static id="Static22" taborder="2" text="10" left="10" top="0" width="220" height="10" background="rgba(255,0,0,0.4)" visible="false" color="red" textAlign="center"/>
+        <TextArea id="txtSystem" taborder="3" top="46" right="16" left="16" height="188" readonly="true"/>
+        <Static id="Static99" taborder="4" text="시스템 이용약관" left="10" top="10" height="31" cssclass="sta_WF_th01L" right="10"/>
+        <Static id="staAgree1" taborder="5" left="10" height="31" cssclass="sta_WF_td01L" right="10" top="239"/>
+        <CheckBox id="chkAgree1" taborder="6" text="동의합니다" left="16" top="244" width="150" height="20" falsevalue="X" truevalue="Y"/>
+        <Static id="staPersonalInfo" taborder="7" left="10" top="299" cssclass="sta_WF_td01L" right="10" height="200"/>
+        <TextArea id="txtPersonalInfo" taborder="8" top="305" right="16" left="16" height="188" readonly="true"/>
+        <Static id="staAgree2" taborder="9" left="10" top="498" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <CheckBox id="chkAgree2" taborder="10" text="동의합니다" left="16" top="503" width="150" height="20" falsevalue="X" truevalue="Y"/>
+        <Static id="Static02" taborder="11" text="개인정보이용동의" left="10" top="269" height="31" cssclass="sta_WF_th01L" right="10"/>
+        <Button id="btnAgree" taborder="12" text="동의" top="538" width="100" height="23" cssclass="btn_WF_basic01" left="196" onclick="btnAgree_onclick"/>
+        <Button id="btnCancel" taborder="13" text="취소" width="100" height="23" cssclass="btn_WF_basic01" left="303" top="538" onclick="btnCancel_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/**
+*  개인정보처리인증
+*
+*  @MenuPath    메인로그인 > 개인정보처리인증
+*  @FileName    MN020PT01.xfdl 
+*  @Creator     전영찬
+*  @CreateDate  2019.10.21
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2019.10.21      전영찬             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.Form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {    
+        this.fnInit();
+   }
+};
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+ ********************************************************/
+this.btnAgree_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	if(this.chkAgree1.value == "X") {
+        alert("시스템이용약관에 대해 동의해주세요.");
+        return;
+    }
+    
+    if(this.chkAgree2.value == "X") {
+        alert("개인정보이용동의 대해 동의해주세요.");
+        return;
+    }
+    
+//     if (take.confirm(this, "question", "동의확인, 회원가입을 진행하시겠습니까?"))
+//     {
+//     	//
+//         this.close();
+//     }
+    var sRtn = this.chkAgree1.value +','+ this.chkAgree1.value;
+    this.close(sRtn);
+};
+
+this.btnCancel_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.close();
+};
+
+/*********************************************************
+ * 4 사용자 FUNCTION 영역
+ ********************************************************/
+/**
+ * fnInit : 초기화 함수
+ * @param  {String} N/A 
+ * @example this.fnInit();
+ */
+this.fnInit = function()
+{
+    if(this.parent.sFlag == "Info") {
+        this.chkAgree1.set_visible(false);
+        this.staAgree1.set_visible(false);
+        this.txtSystem.set_height(219);
+        this.staSystem.set_height(231);
+        
+        this.chkAgree2.set_visible(false);
+        this.staAgree2.set_visible(false);
+        this.txtPersonalInfo.set_height(259);
+        this.staPersonalInfo.set_height(271);
+        
+        this.btnAgree.set_visible(false);
+        this.btnCancel.set_visible(false);
+    } else {
+        this.chkAgree1.set_value(this.parent.sChk1);
+        this.chkAgree2.set_value(this.parent.sChk2);
+    }
+	
+	take.transaction(this, "Search", "SVC_LOC::/mn/policy.do", "", "dsPolicy=dsPolicy", "SYSTEM_ID=S000000001", "fnCallback");
+};
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "Search" : //조회 콜백
+            //Script
+            break;
+        default :
+            break;
+    }
+};]]></Script>
+    <Objects>
+      <Dataset id="dsPolicy">
+        <ColumnInfo>
+          <Column id="POLICY_INFO" type="STRING" size="256"/>
+          <Column id="PRIVACY_INFO" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="txtSystem" propid="value" datasetid="dsPolicy" columnid="POLICY_INFO"/>
+      <BindItem id="item1" compid="txtPersonalInfo" propid="value" datasetid="dsPolicy" columnid="PRIVACY_INFO"/>
+    </Bind>
+  </Form>
+</FDL>

@@ -1,0 +1,337 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="PL020S01" width="1249" height="625" titletext="계획_품목관리" background="#ffffff" onload="Form_onload">
+    <Layouts>
+      <Layout>
+        <Static id="staProgDetailT00_00" taborder="0" text="품목" left="10" top="10" height="21" cssclass="sta_WF_title02" width="500" onclick="btnExcelUpload_onclick"/>
+        <Grid id="gridGds" taborder="1" left="10" top="staProgDetailT00_00:5" autofittype="col" onselectchanged="grdProgList_onselectchanged" bottom="10" right="10" selecttype="area" selectscrollmode="select" oncellclick="grdProgList00_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="200"/>
+                <Column size="48"/>
+                <Column size="200"/>
+                <Column size="30"/>
+                <Column size="35"/>
+                <Column size="35"/>
+                <Column size="35"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="24" band="head"/>
+                <Row size="24" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell rowspan="3" text="인증종류"/>
+                <Cell col="1" rowspan="3" text="폼목명"/>
+                <Cell col="2" rowspan="3" text="품목&#13;&#10;계획&#13;&#10;수량"/>
+                <Cell col="3" rowspan="3" text="세부품목명"/>
+                <Cell col="4" rowspan="3" text="기관&#13;&#10;검토" autosizecol="none"/>
+                <Cell col="5" rowspan="2" colspan="3" text="수량"/>
+                <Cell col="8" colspan="24" text="시험기관"/>
+                <Cell row="1" col="8" colspan="2" text="KCL"/>
+                <Cell row="1" col="10" colspan="2" text="KTR"/>
+                <Cell row="1" col="12" colspan="2" text="KTC"/>
+                <Cell row="1" col="14" colspan="2" text="KATRI"/>
+                <Cell row="1" col="16" colspan="2" text="FITI"/>
+                <Cell row="1" col="18" colspan="2" text="KOTITI"/>
+                <Cell row="1" col="20" colspan="2" text="KTL"/>
+                <Cell row="1" col="22" colspan="2" text="INST_1"/>
+                <Cell row="1" col="24" colspan="2" text="기관2"/>
+                <Cell row="1" col="26" colspan="2" text="기관3"/>
+                <Cell row="1" col="28" colspan="2" text="기관4"/>
+                <Cell row="1" col="30" colspan="2" text="기관5"/>
+                <Cell row="2" col="5" text="목표"/>
+                <Cell row="2" col="6" text="가능"/>
+                <Cell row="2" col="7" text="계획"/>
+                <Cell row="2" col="8" text="가능"/>
+                <Cell row="2" col="9" text="계획"/>
+                <Cell row="2" col="10" text="가능"/>
+                <Cell row="2" col="11" text="계획"/>
+                <Cell row="2" col="12" text="가능"/>
+                <Cell row="2" col="13" text="계획"/>
+                <Cell row="2" col="14" text="가능"/>
+                <Cell row="2" col="15" text="계획"/>
+                <Cell row="2" col="16" text="가능"/>
+                <Cell row="2" col="17" text="계획"/>
+                <Cell row="2" col="18" text="가능"/>
+                <Cell row="2" col="19" text="계획"/>
+                <Cell row="2" col="20" text="가능"/>
+                <Cell row="2" col="21" text="계획"/>
+                <Cell row="2" col="22" text="가능"/>
+                <Cell row="2" col="23" text="계획"/>
+                <Cell row="2" col="24" text="가능"/>
+                <Cell row="2" col="25" text="계획"/>
+                <Cell row="2" col="26" text="가능"/>
+                <Cell row="2" col="27" text="계획"/>
+                <Cell row="2" col="28" text="가능"/>
+                <Cell row="2" col="29" text="계획"/>
+                <Cell row="2" col="30" text="가능"/>
+                <Cell row="2" col="31" text="계획"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:CERT_KND_CD" textAlign="left" suppress="1" background="#ffffff"/>
+                <Cell col="1" text="bind:GDS_CD" textAlign="left" suppress="2" background="#ffffff"/>
+                <Cell col="2" text="bind:GDS_PLAN_QY" suppress="3" textAlign="center" edittype="normal"/>
+                <Cell col="3" text="bind:DETAIL_GDS_ID" textAlign="left" background="#ffffff"/>
+                <Cell col="4" textAlign="center" background="#ffffff" displaytype="expr:Column3 == '6'?'buttoncontrol':'none'" edittype="button" cssclass="expr:Column3 == '6'?'grd_WF_note':''" autosizecol="none"/>
+                <Cell col="5" text="bind:GOAL_QY" textAlign="center" background="#ffffff" edittype="normal"/>
+                <Cell col="6" text="bind:POSBL_QY" textAlign="center" displaytype="number" edittype="none" background="#ffffff"/>
+                <Cell col="7" text="bind:PLAN_QY" textAlign="center" background="#ffffff"/>
+                <Cell col="8" text="bind:KCL_POSBL_QY" textAlign="center" displaytype="number" edittype="none" background="#ffffff"/>
+                <Cell col="9" text="bind:KCL_PLAN_QY" textAlign="center" displaytype="normal" edittype="normal" background="#ffffff"/>
+                <Cell col="10" text="bind:KTR_POSBL_QY" textAlign="center" displaytype="number" edittype="none" background="#ffffff"/>
+                <Cell col="11" text="bind:KTR_PLAN_QY" textAlign="center" displaytype="normal" edittype="normal" background="#ffffff"/>
+                <Cell col="12" text="bind:KTC_POSBL_QY" textAlign="center" displaytype="number" edittype="none" background="#ffffff"/>
+                <Cell col="13" text="bind:KTC_PLAN_QY" textAlign="center" displaytype="normal" edittype="normal" background="#ffffff"/>
+                <Cell col="14" text="bind:KATRI_POSBL_QY" textAlign="center" displaytype="number" edittype="none" background="#ffffff"/>
+                <Cell col="15" text="bind:KATRI_PLAN_QY" textAlign="center" displaytype="normal" edittype="normal" background="#ffffff"/>
+                <Cell col="16" text="bind:FITI_POSBL_QY" textAlign="center" displaytype="number" edittype="none" background="#ffffff"/>
+                <Cell col="17" text="bind:FITI_PLAN_QY" textAlign="center" displaytype="normal" edittype="normal" background="#ffffff"/>
+                <Cell col="18" text="bind:KOTITI_POSBL_QY" textAlign="center" displaytype="number" edittype="none" background="#ffffff"/>
+                <Cell col="19" text="bind:KOTITI_PLAN_QY" textAlign="center" displaytype="normal" edittype="normal" background="#ffffff"/>
+                <Cell col="20" text="bind:KTL_POSBL_QY" textAlign="center" displaytype="number" edittype="none" background="#ffffff"/>
+                <Cell col="21" text="bind:KTL_PLAN_QY" textAlign="center" displaytype="normal" edittype="normal" background="#ffffff"/>
+                <Cell col="22" text="bind:INST_1_POSBL_QY" textAlign="center" displaytype="number" edittype="none" background="#ffffff"/>
+                <Cell col="23" text="bind:INST_1_PLAN_QY" textAlign="center" displaytype="normal" edittype="normal" background="#ffffff"/>
+                <Cell col="24" text="bind:INST_2_POSBL_QY" textAlign="center" displaytype="number" edittype="none" background="#ffffff"/>
+                <Cell col="25" text="bind:INST_2_PLAN_QY" textAlign="center" displaytype="normal" edittype="normal" background="#ffffff"/>
+                <Cell col="26" text="bind:INST_3_POSBL_QY" textAlign="center" displaytype="number" edittype="none" background="#ffffff"/>
+                <Cell col="27" text="bind:INST_3_PLAN_QY" textAlign="center" displaytype="normal" edittype="normal" background="#ffffff"/>
+                <Cell col="28" text="bind:INST_4_POSBL_QY" textAlign="center" displaytype="number" edittype="none" background="#ffffff"/>
+                <Cell col="29" text="bind:INST_4_PLAN_QY" textAlign="center" displaytype="normal" edittype="normal" background="#ffffff"/>
+                <Cell col="30" text="bind:INST_5_POSBL_QY" textAlign="center" displaytype="number" edittype="none" background="#ffffff"/>
+                <Cell col="31" text="bind:INST_5_PLAN_QY" textAlign="center" displaytype="normal" edittype="normal" background="#ffffff"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static01" taborder="2" text="10" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" textAlign="center"/>
+        <Static id="Static24" taborder="3" text="20" left="0" height="10" background="rgba(255,0,0,0.4)" visible="false" right="0" textAlign="center" top="0"/>
+        <Static id="Static01_00" taborder="4" text="10" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" textAlign="center" right="0"/>
+        <Static id="Static24_00" taborder="5" text="20" left="0" height="10" background="rgba(255,0,0,0.4)" visible="false" right="0" textAlign="center" bottom="0"/>
+        <Button id="btnDeployAdd00" taborder="6" text="품목추가" top="9" height="23" cssclass="btn_WF_basic01" width="90" right="10" onclick="btnDeployAdd00_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsInstCd">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">KTL</Col>
+            <Col id="NAME">KTL</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">INST_1</Col>
+            <Col id="NAME">두레소프트</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">KOTITI</Col>
+            <Col id="NAME">KOTITI</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  안전성조사 계획 품목 관리
+*
+*  @MenuPath    안전성조사 > 안전성조사계획 > 품목
+*  @FileName    PLN010S02.xfdl 
+*  @Creator     doore
+*  @CreateDate  2023.02.07 
+*  @Version     1.0
+*  @Desction    설명 : 안전성조사 계획 품목 관리 화면
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2023.02.07      doore               최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+//this.fv_nFormVal = null;     //용도
+this.fv_objGdsUserInfo = nexacro.getApplication().gdsUserInfo;
+this.fv_sProjectCd = nexacro.getApplication().av_sProjectCd;
+this.fv_sMenuCd = "";
+this.fv_objProgInfo;
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* formid_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.Form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this)) 
+   {    
+		this.fnSetGrid();
+   }
+};
+
+/*********************************************************
+ * 2.1 CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+		case "Search" :
+			break;
+        case "Delete" : //삭제 콜백
+            //Script
+			take.alert(this, "", "삭제가 완료되었습니다.");
+			this.fnSearch();
+            break;
+        default :
+            break;
+    }        
+};
+
+/*********************************************************
+* 3 필수 FUNCTION 영역 (fnSearch, fnSave, fnAdd, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Search";
+	
+    take.tranSelect(this, "Search", "BoardManagement.boardInfoList", "dsSearch", "dsNotice", "", "fnCallback");
+};
+
+/**
+ * fnAdd : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+ * @example this.fnAddRow(sGrdId, nRow);
+ */
+this.fnAddRow = function(sGrdId, nRow)
+{
+    
+};
+
+/**
+ * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number, Array} arrnRow    deleteRow 리턴값
+ * @return {N/A} N/A
+ * @example this.fnDelRow(sGrdId, nRow); 
+ */
+this.fnDelRow = function(sGrdId, arrnRow)
+{   
+    
+};
+
+/*********************************************************
+ * 4 각 COMPONENT 별 EVENT 영역
+ ********************************************************/
+
+this.divSearch_edtTitle_onkeyup = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+	if( e.keycode == 13 )
+	{
+		this.fnSearch();
+	}
+};
+
+
+/*********************************************************
+* 5 사용자 FUNCTION 영역
+********************************************************/
+
+/* 폼목 그리드 숨김 처리  */
+this.fnSetGrid = function()
+{
+	var colCnt = this.gridGds.getCellCount("head");
+	var instCnt = this.dsInstCd.rowcount;
+	var colSize = 35;
+	
+	// column size 설정
+	if(instCnt < 6) colSize = colSize + ((6 - instCnt) * 10);
+	
+	for(var i = 0; i < this.dsInstCd.rowcount; i++)
+	{
+		for(var j = 0; j < colCnt; j++)
+		{
+			var strBindCol = this.gridGds.getCellProperty("body", j, "text");
+			
+			if(strBindCol != null)
+			{
+				strBindCol = strBindCol.substr(5);
+				
+				var strPosblQy = strBindCol.split("_POSBL_QY");
+				var strPlanQy = strBindCol.split("_PLAN_QY");
+				
+				if(strPosblQy[0] == this.dsInstCd.getColumn(i, "CODE")) this.gridGds.setFormatColProperty(j, "size", colSize);
+				if(strPlanQy[0] == this.dsInstCd.getColumn(i, "CODE")) this.gridGds.setFormatColProperty(j, "size", colSize);
+				
+				if(this.dsInstCd.getColumn(i, "CODE") == "INST_1" && this.gridGds.getCellProperty( "head", j, "text") == "INST_1") this.gridGds.setCellProperty( "head", j, "text", this.dsInstCd.getColumn(i, "NAME"));
+				if(this.dsInstCd.getColumn(i, "CODE") == "INST_2" && this.gridGds.getCellProperty( "head", j, "text") == "INST_2") this.gridGds.setCellProperty( "head", j, "text", this.dsInstCd.getColumn(i, "NAME"));
+				if(this.dsInstCd.getColumn(i, "CODE") == "INST_3" && this.gridGds.getCellProperty( "head", j, "text") == "INST_3") this.gridGds.setCellProperty( "head", j, "text", this.dsInstCd.getColumn(i, "NAME"));
+				if(this.dsInstCd.getColumn(i, "CODE") == "INST_4" && this.gridGds.getCellProperty( "head", j, "text") == "INST_4") this.gridGds.setCellProperty( "head", j, "text", this.dsInstCd.getColumn(i, "NAME"));
+				if(this.dsInstCd.getColumn(i, "CODE") == "INST_5" && this.gridGds.getCellProperty( "head", j, "text") == "INST_5") this.gridGds.setCellProperty( "head", j, "text", this.dsInstCd.getColumn(i, "NAME"));
+				
+			}
+		}
+	}
+}]]></Script>
+  </Form>
+</FDL>

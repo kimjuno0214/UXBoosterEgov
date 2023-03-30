@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="sample01" width="1040" height="685" titletext="팝업샘플">
+    <Layouts>
+      <Layout height="685" mobileorientation="landscape" width="1040">
+        <Div id="Div02" taborder="4" left="10" top="10" width="800" height="361" cssclass="dvi_WF_tabBox01">
+          <Layouts>
+            <Layout>
+              <Static id="Static03" taborder="0" text="일시" left="10" top="10" width="100" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static10" taborder="1" left="108" top="10" height="31" cssclass="sta_WF_td01L" width="340"/>
+              <Button id="Button02" taborder="2" text="엑셀 Download " top="51" width="100" height="23" cssclass="btn_WF_basic01" right="10"/>
+              <Static id="Static00" taborder="5" left="545" top="10" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Static id="Static01" taborder="6" text="구분" left="447" top="10" width="100" height="31" cssclass="sta_WF_th01L"/>
+              <Calendar id="Calendar00" taborder="7" left="115" top="15" width="110" height="21"/>
+              <Calendar id="Calendar01" taborder="8" left="235" top="15" width="110" height="21"/>
+              <Combo id="Combo00" taborder="3" text="Combo00" left="554" top="15" width="80" height="21"/>
+              <Combo id="Combo01" taborder="4" text="Combo00" left="639" top="15" width="80" height="21"/>
+              <Grid id="Grid00" taborder="9" left="10" top="79" height="270" right="10" binddataset="Dataset00" autofittype="col" cssclass="grd_WF_calendar">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="일자"/>
+                      <Cell col="1" text="시간"/>
+                      <Cell col="2" text="범주"/>
+                      <Cell col="3" text="구분"/>
+                      <Cell col="4" text="일정"/>
+                      <Cell col="5" text="내용"/>
+                      <Cell col="6" text="참여자"/>
+                      <Cell col="7" text="장소"/>
+                      <Cell col="8" text="작성자"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:Column0"/>
+                      <Cell col="1" text="bind:Column1"/>
+                      <Cell col="2" text="bind:Column2" cssclass="cellTeam"/>
+                      <Cell col="3" text="bind:Column3" cssclass="cellCompany"/>
+                      <Cell col="4" text="bind:Column4"/>
+                      <Cell col="5" text="bind:Column5"/>
+                      <Cell col="6" text="bind:Column6" cssclass="celPrivate"/>
+                      <Cell col="7" text="bind:Column7"/>
+                      <Cell col="8" text="bind:Column8"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+          <Column id="Column5" type="STRING" size="256"/>
+          <Column id="Column6" type="STRING" size="256"/>
+          <Column id="Column7" type="STRING" size="256"/>
+          <Column id="Column8" type="STRING" size="256"/>
+          <Column id="Column9" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column2">tttttt</Col>
+          </Row>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

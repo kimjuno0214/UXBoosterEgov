@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="comCalCustom" width="199" height="223" titletext="커스텀 달력 Pop" scrollbartype="none none" onload="comCalCustom_onload">
+    <Layouts>
+      <Layout height="223" mobileorientation="landscape" width="199">
+        <Calendar id="calDay" taborder="0" left="0" top="0" type="monthonly" right="0" bottom="23" onchanged="calDay_onchanged"/>
+        <Button id="btnToday" taborder="1" text="오늘" width="24.62%" height="23" bottom="0" onclick="btnDay_onclick" left="0"/>
+        <Button id="btnYesterday" taborder="2" text="어제" width="24.62%" height="23" bottom="0" onclick="btnDay_onclick" left="btnToday:1"/>
+        <Button id="btnWeek" taborder="3" text="1주일" width="24.62%" height="23" bottom="0" onclick="btnDay_onclick" left="btnYesterday:1"/>
+        <Button id="btnMonth" taborder="4" text="1개월" height="23" bottom="0" onclick="btnDay_onclick" left="btnWeek:1" right="0"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[this.fv_objComp = null;
+
+//폼 onload 이벤트
+this.comCalCustom_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.btnToday.set_text(take.getWord(this.parent, "MS00000107"));
+	this.btnYesterday.set_text(take.getWord(this.parent, "MS00000108"));
+	this.btnWeek.set_text(take.getWord(this.parent, "MS00000109"));
+	this.btnMonth.set_text(take.getWord(this.parent, "MS00000110"));
+
+    this.fv_objComp = nexacro._nvl(this.parent.objComp, "");
+    this.calDay.set_value(this.parent.data);
+};
+
+//오늘/어제/1주일/1개월 클릭 이벤트
+this.btnDay_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var sBtnId; 
+    var objDay = new Date();
+    var nDay;
+    
+    sBtnId = obj.name.substr(3);
+    
+    switch(sBtnId) {
+        case "Today":
+            break;
+        case "Yesterday":
+            objDay.getAddDays(-1);
+            break;
+        case "Week":
+            objDay.getAddDays(-7);
+            break;
+        case "Month":
+            objDay.getAddMonths(-1);        
+            break;
+        default:
+    }
+    
+    this.calDay.set_value( take.toDateString(objDay,"yyyyMMdd"));
+    
+    this.fnSetValue();
+};
+
+//날짜 변경 이벤트
+this.calDay_onchanged = function(obj:nexacro.Calendar,e:nexacro.ChangeEventInfo)
+{
+	this.fnSetValue();
+};
+
+//값 세팅
+this.fnSetValue = function(bClose)
+{
+    var sDate;
+    
+    bClose = nexacro._nvl(bClose, true);
+ 
+    sDate = this.calDay.value;
+    
+    this.fv_objComp.set_value(sDate);
+    
+    trace("CustomCalendar("+this.fv_objComp.name+") return value --> " + sDate);
+
+    if (bClose) 
+    {
+//       //별도 조건이 필요할 경우
+//       if(this.parent.parent.parent.parent.name == "SSCW3Q30" || this.parent.parent.parent.parent.name =="SSCW3Q20")
+//       {
+// 		 this.parent.parent.parent.parent.fnGetIrnCode();
+//       }
+        this.parent.closePopup();
+    }
+};
+
+
+/**
+ * @class 현재일자를 구한다. <br>
+ * @param {String} [sFormat] - yyyymmdd/null : 일자, yyyymm : 년월, mmdd : 월일, yyyy : 년, mm : 월, dd : 일
+ * @return {String} 8자리 날짜(YYYYMMMDD)문자열
+ */
+this.fnGetDate = function(objDay, sFormat) 
+{
+    var sYyyy, sMm, sDd;
+    
+    if (nexacro._nvl(sFormat, "")=="") sFormat = "yyyymmdd";	
+	
+	sYyyy = objDay.getFullYear();
+    
+    if (sFormat=="yyyy") return sYyyy;
+    
+    sMm = ((objDay.getMonth() + 1) + "").padLeft(2, '0');
+    
+    if (sFormat=="mm") return sMm;
+    if (sFormat=="yyyymm") return sYyyy + sMm;
+        
+    sDd = (objDay.getDate() + "").padLeft(2, '0');
+	
+    if (sFormat=="dd") return sDd;
+    if (sFormat=="mmdd") return sMm + sDd;
+    
+	return sYyyy + sMm + sDd;
+};]]></Script>
+  </Form>
+</FDL>

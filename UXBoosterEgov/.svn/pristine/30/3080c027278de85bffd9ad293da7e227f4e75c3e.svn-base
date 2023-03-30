@@ -1,0 +1,210 @@
+package kr.co.company.framework.common.controller;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import kr.co.company.framework.common.service.CommonService;
+import kr.co.company.framework.common.service.LoginService;
+import kr.co.takeit.nexacro.NexacroServiceInfo;
+import kr.co.takeit.nexacro.NexacroServiceManager;
+import kr.co.takeit.spring.service.TakeService;
+import kr.co.takeit.util.SessionManager;
+import kr.co.takeit.util.TakeCodeUtil;
+import kr.co.takeit.util.TakeStringUtil;
+
+@Controller
+public class LoginController {
+
+	private static final Marker USERLOG_MARKER = MarkerFactory.getMarker("USERLOG");
+	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+
+	@Autowired
+	private SessionManager sessionMgr;
+
+	@Autowired
+	private TakeService service;
+
+	@Autowired
+	private CommonService cmmService;
+
+	@Autowired
+	private LoginService loginService;
+
+	@RequestMapping(value="langCd.do")
+	public void langCd(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		logger.info("Welcome langCd !");
+
+		NexacroServiceManager manager = new NexacroServiceManager();
+		manager.setRequest(request);
+
+		Map paramMap = manager.getParamMap();
+		paramMap.put("sGroupId", "00001");
+
+		manager.response(response, new NexacroServiceInfo("dsDomain", service.selectList("Main.codeSimpleSelect", paramMap)));
+	}
+
+	@RequestMapping(value="loginOnLoad.do")
+	public void onload(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		logger.info("Welcome onload !");
+
+		NexacroServiceManager manager = new NexacroServiceManager();
+		manager.setRequest(request);
+
+		ArrayList<NexacroServiceInfo> list = new ArrayList<NexacroServiceInfo>();
+
+		List<LinkedHashMap<String, Object>> rtnLang = new ArrayList<LinkedHashMap<String, Object>>();
+		LinkedHashMap<String, Object> rtnMap = new LinkedHashMap<String, Object>();
+
+		List<LinkedHashMap<String, Object>> listLang = service.selectList("kr.co.takeit.mapper.TakeCommonMapper.progDomainSelect", manager.getParamMap());
+		if (listLang != null) {
+			for (int i = 0; i < listLang.size(); i++) {
+				LinkedHashMap<String, Object> map = listLang.get(i);
+
+				String labelId = (String) map.get("LABLE_ID");
+				String labelNm = (String) map.get("LABLE_NM");
+
+				rtnMap.put(labelId, labelNm);
+			}
+			rtnLang.add(rtnMap);
+		}
+
+		List listMsg = service.selectList("kr.co.takeit.mapper.TakeCommonMapper.progDomainLangSelect", manager.getParamMap());
+
+		list.add(new NexacroServiceInfo("tgdsLang", rtnLang));
+		list.add(new NexacroServiceInfo("tgdsMsg", listMsg));
+
+		// Response
+		manager.response(response, list);
+	}
+
+	@RequestMapping(value="login.do")
+	public void login(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		logger.info("Welcome login !");
+
+		logger.info("###################################################################");
+		logger.info("## IP Address : " + request.getRemoteAddr());
+		logger.info("###################################################################");
+
+		NexacroServiceInfo info = null;
+
+		Map userInfo = null;
+
+		String sLoginIp	= null;
+
+		NexacroServiceManager manager = new NexacroServiceManager();
+		try{
+			manager.setRequest(request);
+
+			sLoginIp = request.getRemoteAddr();
+
+			Map paramMap = manager.getParamMap();
+			paramMap.put("sLoginIp", sLoginIp);
+
+
+			info = loginService.login(paramMap);
+
+			if( info.getErrorCode() == 0 ){
+				List<Map> list = info.getData();
+				// 세션 생성
+				userInfo = (Map)list.get(0);
+				String userCd = TakeStringUtil.nvl(userInfo.get("USER_CD"), "");
+				String encUserCd = cmmService.getSHA512(userCd);
+
+				userInfo.put("ENC_USER_CD", encUserCd);
+
+				sessionMgr.createSession(request, userInfo);
+
+				// paramSearchLog
+//				paramSearchLog.append("[Param]USER_ID=" + sUserId + "\r\n");
+//				paramSearchLog.append("[Param]sSystemType=" + sSystemType + "\r\n");
+//				paramSearchLog.append("[Param]__tcsFormId=" + sProgId + "\r\n");
+
+				// Response
+				manager.response(response, info);
+				
+				if(userInfo != null) {
+					logger.info(USERLOG_MARKER
+								, TakeCodeUtil.LOGTYPE_LOGOUT
+								, new String[] {
+										  (String)userInfo.get("LOGIN_DEVICE")
+										, (String)userInfo.get("LOGIN_BROWSER")
+										, (String)paramMap.get("__tcsProjectCd")
+										, ""
+										, ""
+										, TakeCodeUtil.LOGTYPE_LOGIN
+										, (String)userInfo.get("USER_CD")
+										, (String)userInfo.get("LAST_LOGIN_DT")
+										, ""
+										, (String)userInfo.get("LOGIN_IP")
+								}
+					);
+				}
+			}else{
+				manager.error(response, String.valueOf(info.getErrorCode()), info.getErrorMsg());
+			}
+		}catch(Exception ex){
+			logger.error("로그인 실패", ex);
+			manager.error(response, "-1", "에러가 발생하였습니다");
+		}
+	}
+
+	@RequestMapping(value="logout.do", method = RequestMethod.POST)
+	public void logout(HttpServletRequest request, HttpServletResponse response) throws Exception{
+
+		Map userInfo	= null;
+		Map paramMap 	= null;
+		StringBuffer sbLog = new StringBuffer();
+		
+		NexacroServiceManager manager = new NexacroServiceManager();
+		try{
+			manager.setRequest(request);
+
+			paramMap = manager.getParamMap();
+			sbLog.append("parameter: USER_ID=" + sessionMgr.getUserId(request) + "\r\n");
+
+			userInfo = sessionMgr.getUserInfo(request);
+			if( userInfo != null ){
+				sessionMgr.deleteSession(request);
+			}
+
+			manager.success(response);
+		}catch(Exception ex){
+			logger.error(ex.getMessage());
+			manager.error(response, "-1", "에러가 발생하였습니다");
+		}
+
+		//service.insertLog(TakeCodeUtil.LOGTYPE_LOGOUT, sbLog.toString(), userInfo, manager.getParamMap());
+		if(userInfo != null) {
+			logger.info(USERLOG_MARKER
+						, TakeCodeUtil.LOGTYPE_LOGOUT
+						, new String[] {
+								  (String)userInfo.get("LOGIN_DEVICE")
+								, (String)userInfo.get("LOGIN_BROWSER")
+								, (String)paramMap.get("__tcsProjectCd")
+								, (String)paramMap.get("sMenuCd")
+								, (String)paramMap.get("__tcsFormId")
+								, TakeCodeUtil.LOGTYPE_LOGOUT
+								, (String)userInfo.get("USER_CD")
+								, (String)userInfo.get("LAST_LOGIN_DT")
+								, sbLog.toString()
+								, (String)userInfo.get("LOGIN_IP")
+						}
+			);
+		}
+	}
+}

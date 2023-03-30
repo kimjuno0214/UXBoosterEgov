@@ -1,0 +1,125 @@
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<html style="border:0">
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js"></script>
+  <script type="text/javascript">
+	function fnSend(sUrl)
+	{
+      try 
+      {
+        var objXHR, objWinNx;
+	    
+        if (sUrl == null) sUrl = "";
+        if (new String(sUrl).valueOf() == "undefined" || new String(sUrl).valueOf() == "null") sUrl = "";
+		
+        sUrl = new String(sUrl).replace(/^\s+|\s+$/g, '');
+		
+        //기본 파라메터 세팅
+        if (sUrl=="") return false;
+	  
+        //Ajax 통신을 위해 http request 세팅
+        if (window.XMLHttpRequest) // 모질라, 사파리, IE7+ ...
+        {
+            objXHR = new XMLHttpRequest();	    
+        } else {  // IE 6 이하
+            objXHR = new ActiveXObject("Microsoft.XMLHTTP");
+        }    
+
+        //오픈 및 전송
+        objXHR.open("GET", sUrl, false);
+        objXHR.send(null);
+	    
+        //objWinNx = window.NEXACROWEBBROWSER;
+	        
+        //if (objWinNx) {
+        //    objWinNx.on_fire_onusernotify(objWinNx, "CallBack:"+objXHR.responseText);
+        //} else {
+	        window.document.title = "CallBack:"+objXHR.responseText;
+	    //}
+      } catch(e) {
+    	  window.document.title = "CallBack:(-1)"+ e;
+      }
+	};
+
+  function fnJsonpHttpRequest(sUrl, sReq) 
+  {
+    $.ajax({
+			url:sUrl, 
+			dataType : "jsonp",
+			jsonp : "callback",
+			data : { "REQ": stringformat(encodeURI(sReq))},
+			async : false,
+			success: function(data){
+				document.getElementById("recv").innerText= JSONtoString(data);
+        //alert("success --> " + JSONtoString(data));
+        //window.document.title = JSONtoString(data);
+        //window.document.title = "CallBack:"+data;
+        window.document.title = "CallBack:Success";
+        return JSONtoString(data);
+			}
+		});
+  }
+
+  function JSONtoString(object) 
+  {
+	  var results = [];
+	  for (var property in object) 
+    {
+	    var value = object[property];
+	    if (value)
+	      results.push(property.toString() + ': ' + value);
+	  }
+	                 
+	  return '{' + results.join(', ') + '}';
+	}
+	
+				
+	stringformat = function (text) 
+  {
+		if (arguments.length <= 1) return text;
+	
+		for (var i = 0; i <= arguments.length - 2; i++) 
+    {
+			text = text.replace(new RegExp("\\{" + i + "\\}", "gi"), arguments[i + 1]);
+		}
+	
+		return text;
+	}
+
+  function fnJsonpHttpRequestprint(sUrl) 
+  {
+    try
+    {
+      var objScript;
+
+      objScript = document.createElement('script');
+      objScript.async = false; //비동기
+      objScript.src = sUrl + (sUrl.indexOf('?') >= 0 ? '&' : '?') + 'callback=fnCallback';
+      
+      document.body.appendChild(script); // fyi remove this element later /assign temp class ..then .remove it later
+      //insetead of this you may also create function with  callback value and  use it instead
+      window['fnCallback'] = function(data) {
+        delete window['fnCallback'];
+        document.body.removeChild(script);
+        console.log(data);
+        window.document.title = "CallBack:"+data;
+      };
+      
+      //window[callback] = (data) => {
+      //  window.document.title = "CallBack:"+data;
+      //  console.log(data);  // heres you data
+      //}
+
+    } catch (e) {
+      window.document.title = "CallBack:(-1)"+ e;
+    }
+    
+  }
+	</script>
+    <title>HTTPObject</title>
+</head>
+<body topMargin="5"  leftMargin="5">
+  <center>HTTPObejct</center>
+  <textarea id="recv" name="recv" style="display:none"></textarea>
+</body>
+</html>

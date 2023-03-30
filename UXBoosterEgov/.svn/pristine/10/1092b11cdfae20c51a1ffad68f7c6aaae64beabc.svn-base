@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="Guide005" width="1659" height="832" titletext="Guide999">
+    <Layouts>
+      <Layout height="832" mobileorientation="landscape" width="1659">
+        <Static id="Static00" taborder="0" text="10" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" color="red" textAlign="center"/>
+        <Static id="Static08" taborder="1" text="10" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" color="red" textAlign="center" right="0"/>
+        <Button id="btnShowHide" taborder="2" left="48.16%" top="43" width="60" height="10" cssclass="btn_WF_fold01"/>
+        <Static id="Static24" taborder="3" text="20" left="0" height="20" background="rgba(255,0,0,0.4)" visible="false" right="0" textAlign="center" top="53"/>
+        <Div id="divDetail" taborder="4" left="10" top="73" bottom="10" right="10" minwidth="1340" maxwidth="" minheight="700" maxheight="">
+          <Layouts>
+            <Layout>
+              <Static id="Static01" taborder="0" text="Test" left="0" top="0" height="21" cssclass="sta_WF_title02" width="740"/>
+              <Static id="Static24" taborder="1" text="5" left="0" height="5" background="rgba(255,0,0,0.4)" visible="false" right="0" textAlign="center" top="Static01:0"/>
+              <Static id="Static24_00" taborder="2" text="컨텐츠 영역" left="0" background="#ffffff" right="0" textAlign="center" top="Static24:0" bottom="0"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static22" taborder="5" text="10" left="0" height="10" background="rgba(255,0,0,0.4)" visible="false" right="0" bottom="0" textAlign="center"/>
+        <Static id="Static79" taborder="6" text="모든 화면기준&#13;&#10;divSearch = 검색조건영역&#13;&#10;btnShowHide = 검색조건 접기버튼&#13;&#10;divDetail   = 상세영역" left="1666" top="18" width="134" height="72" background="red" visible="false" enable="false"/>
+        <Div id="divSearch" taborder="7" left="10" top="0" height="43" right="10" cssclass="div_WF_searchBox01" text="" formscrolltype="none" minwidth="1340" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="Label" left="20" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="Combo00" taborder="3" text="Combo00" left="Static00:10" top="10" width="195" height="21" cssclass="cmb_WF_essential"/>
+              <Static id="Static07_01" taborder="8" text="50" left="305" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static05" taborder="1" text="Label" left="355" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="Edit11" taborder="2" left="Static05:10" top="10" width="195" height="21"/>
+              <Static id="Static08_00" taborder="10" text="50" left="640" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static01" taborder="4" text="Label" left="690" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="Edit00" taborder="5" left="Static01:10" top="10" width="195" height="21"/>
+              <Static id="Static07_00_00" taborder="6" text="285" left="20" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00" taborder="7" text="20" left="0" top="0" width="20" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static07_00_00_00" taborder="9" text="285" left="355" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00_00_00_00" taborder="11" text="285" left="690" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static08_00_00" taborder="12" text="50" left="975" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static07_00_00_00_00_00" taborder="13" text="285" left="1025" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static08_00_00_00" taborder="14" text="20" left="1310" top="0" width="20" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static01_00" taborder="15" text="Label" left="1025" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="Edit00_00" taborder="16" left="Static01_00:10" width="195" height="21" top="10"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+          <Column id="Column5" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column4">버튼</Col>
+            <Col id="Column5">Text</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+            <Col id="Column5">Text</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+            <Col id="Column5">Text</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+            <Col id="Column5">Text</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+            <Col id="Column5">Text</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+            <Col id="Column5">Text</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+            <Col id="Column5">Text</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+            <Col id="Column5">Text</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+            <Col id="Column5">Text</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+            <Col id="Column5">Text</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

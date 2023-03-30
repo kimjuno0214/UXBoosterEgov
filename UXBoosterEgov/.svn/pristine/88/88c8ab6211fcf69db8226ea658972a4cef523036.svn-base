@@ -1,0 +1,1871 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="BAS010M01" width="1659" height="832" titletext="품목관리" onload="GM030_onload">
+    <Layouts>
+      <Layout height="832" width="1659">
+        <Div id="divSearch" taborder="0" left="10" top="0" height="43" right="10" cssclass="div_WF_searchBox01" text="" minwidth="1300" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Static id="Static07_00" taborder="0" text="20" left="0" top="0" width="20" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static07_00_00" taborder="1" text="285" left="20" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00_00_01" taborder="2" text="285" left="20" top="31" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07" taborder="3" text="50" left="305" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static07_00_00_00" taborder="4" text="285" left="355" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00_00_00_00" taborder="5" text="285" left="355" top="31" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="staUseYnT" taborder="6" text="인증분야" left="20" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="cboUseYn" taborder="7" left="110" top="10" height="21" innerdataset="dsIn" codecolumn="CODE" datacolumn="NAME" width="195" value="어린이" text="어린이" index="0"/>
+              <Static id="staUseYnT00" taborder="8" text="인증종류" left="355" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="cboUseYn00" taborder="9" left="445" top="10" height="21" innerdataset="dsIn00_00" codecolumn="CODE" datacolumn="NAME" width="195" value="정기" text="정기" index="0"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnShowHide" taborder="1" left="48.16%" top="divSearch:0" width="60" height="10" cssclass="btn_WF_fold01"/>
+        <Div id="divDetail" taborder="2" left="10" top="73" right="10" bottom="10" text="" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Static id="staProgListTitle" taborder="0" text="품목정보" left="0" top="0" height="21" cssclass="sta_WF_title02" right="1329"/>
+              <Button id="btnSpliter00" taborder="8" left="525" top="26" width="10" ondrag="btnSpliter_ondrag" bottom="0" cssclass="btn_WF_splitter"/>
+              <Grid id="grdProgList" taborder="1" left="0" top="26" autofittype="col" onselectchanged="grdProgList_onselectchanged" bottom="0" binddataset="dsList" right="btnSpliter00:5">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="90"/>
+                      <Column size="100"/>
+                      <Column size="150"/>
+                      <Column size="150"/>
+                      <Column size="50"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="인증분야"/>
+                      <Cell col="1" text="인증종류"/>
+                      <Cell col="2" text="품목명"/>
+                      <Cell col="3" text="세부품목명"/>
+                      <Cell col="4" text="사용여부"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:Column0" textAlign="left" suppress="1"/>
+                      <Cell col="1" text="bind:Column1" textAlign="left" suppress="2"/>
+                      <Cell col="2" text="bind:Column2" textAlign="left" suppress="3"/>
+                      <Cell col="3" text="bind:Column3" textAlign="left"/>
+                      <Cell col="4" textAlign="center" text="bind:Column4"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Grid id="grdProgList01" taborder="5" left="btnSpliter00:5" top="26" autofittype="col" onselectchanged="grdProgList_onselectchanged" binddataset="dsList3" right="200" bottom="0" selecttype="cell">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="150"/>
+                      <Column size="120"/>
+                      <Column size="120"/>
+                      <Column size="120"/>
+                      <Column size="120"/>
+                      <Column size="100"/>
+                      <Column size="60"/>
+                      <Column size="60"/>
+                      <Column size="60"/>
+                      <Column size="60"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="분류1"/>
+                      <Cell col="1" text="분류2"/>
+                      <Cell col="2" text="분류3"/>
+                      <Cell col="3" text="분류4"/>
+                      <Cell col="4" text="분류5"/>
+                      <Cell col="5" text="항목 표현명"/>
+                      <Cell col="6" text="결함구분"/>
+                      <Cell col="7" text="검출한계"/>
+                      <Cell col="8" text="단위"/>
+                      <Cell col="9" text="사용여부"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:Column0" textAlign="left"/>
+                      <Cell col="1" text="bind:Column1" textAlign="left"/>
+                      <Cell col="2" text="bind:Column2" textAlign="left"/>
+                      <Cell col="3" text="bind:Column3" textAlign="left"/>
+                      <Cell col="4" text="bind:Column4" textAlign="left"/>
+                      <Cell col="5" text="bind:Column5" textAlign="left"/>
+                      <Cell col="6" text="bind:Column6" textAlign="center"/>
+                      <Cell col="7" text="bind:Column7" textAlign="center"/>
+                      <Cell col="8" text="bind:Column8" textAlign="center"/>
+                      <Cell col="9" text="bind:Column9" textAlign="center"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Grid id="grdProgList00_00" taborder="7" left="grdProgList01:10" top="30" autofittype="col" onselectchanged="grdProgList_onselectchanged" binddataset="dsList00_00" width="190" height="450">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="90"/>
+                      <Column size="120"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="적용일자"/>
+                      <Cell col="1" text="기준치"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:Column0" textAlign="center"/>
+                      <Cell col="1" text="bind:Column1" textAlign="center"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="staProgListTitle00" taborder="2" text="시험가능 기관" left="grdProgList01:10" top="grdProgList00_00:10" cssclass="sta_WF_title02" width="150" height="21"/>
+              <Grid id="grdProgList00" taborder="3" left="grdProgList01:10" top="staProgListTitle00:5" takegrid="checkbox" autofittype="col" onselectchanged="grdProgList_onselectchanged" bottom="0" binddataset="dsIn00" width="190">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="120"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="시험기관"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:CODE" textAlign="left"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="staProgListTitle00_00" taborder="4" text="가능시험항목" left="grdProgList:20" top="0" cssclass="sta_WF_title02" width="150" bottom="btnSpliter00:10"/>
+              <Static id="staProgListTitle00_01" taborder="6" text="기준치" left="grdProgList01:10" top="5" cssclass="sta_WF_title02" width="150" height="21"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static01" taborder="3" text="10" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" textAlign="center"/>
+        <Static id="Static24" taborder="4" text="20" left="0" height="20" background="rgba(255,0,0,0.4)" visible="false" right="0" textAlign="center" top="53"/>
+        <Static id="Static01_00" taborder="5" text="10" left="0" top="0" background="rgba(255,0,0,0.4)" bottom="0" visible="false" textAlign="center" width="10"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsList3">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+          <Column id="Column5" type="STRING" size="256"/>
+          <Column id="Column6" type="STRING" size="256"/>
+          <Column id="Column7" type="STRING" size="256"/>
+          <Column id="Column8" type="STRING" size="256"/>
+          <Column id="Column9" type="STRING" size="256"/>
+          <Column id="Column10" type="STRING" size="256"/>
+          <Column id="Column11" type="STRING" size="256"/>
+          <Column id="Column12" type="STRING" size="256"/>
+          <Column id="Column13" type="STRING" size="256"/>
+          <Column id="Column14" type="STRING" size="256"/>
+          <Column id="Column15" type="STRING" size="256"/>
+          <Column id="Column16" type="STRING" size="256"/>
+          <Column id="Column17" type="STRING" size="256"/>
+          <Column id="Column18" type="STRING" size="256"/>
+          <Column id="Column19" type="STRING" size="256"/>
+          <Column id="Column20" type="STRING" size="256"/>
+          <Column id="Column21" type="STRING" size="256"/>
+          <Column id="Column22" type="STRING" size="256"/>
+          <Column id="Column23" type="STRING" size="256"/>
+          <Column id="Column24" type="STRING" size="256"/>
+          <Column id="Column25" type="STRING" size="256"/>
+          <Column id="Column26" type="STRING" size="256"/>
+          <Column id="Column27" type="STRING" size="256"/>
+          <Column id="Column28" type="STRING" size="256"/>
+          <Column id="Column29" type="STRING" size="256"/>
+          <Column id="Column30" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">5.1 총론</Col>
+            <Col id="Column5">5.1 총론</Col>
+            <Col id="Column6">경결함</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.2 부양</Col>
+            <Col id="Column1">5.2.1 기구의 부양특성</Col>
+            <Col id="Column5">5.2.1 기구의 부양특성</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.2 부양</Col>
+            <Col id="Column1">5.2.2 잔존부력</Col>
+            <Col id="Column5">5.2.2 잔존부력</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.2 부양</Col>
+            <Col id="Column1">5.2.3 앉는 부분의 안전성</Col>
+            <Col id="Column5">5.2.3 앉는 부분의 안전성</Col>
+            <Col id="Column6">중결함</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.3 착용 및 몸에 맞는 정도</Col>
+            <Col id="Column1">5.3.1 착용감 - 타입 B의 기구</Col>
+            <Col id="Column5">5.3 착용 및 몸에 맞는 정도</Col>
+            <Col id="Column6">중결함</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.3 착용 및 몸에 맞는 정도</Col>
+            <Col id="Column1">5.3.2 버클 및 기타 부착물의 안전성</Col>
+            <Col id="Column5">5.3 착용 및 몸에 맞는 정도</Col>
+            <Col id="Column6">중결함</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.3 착용 및 몸에 맞는 정도</Col>
+            <Col id="Column1">5.3.3 기능의 유지</Col>
+            <Col id="Column5">5.3 착용 및 몸에 맞는 정도</Col>
+            <Col id="Column6">중결함</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.4 안전설계</Col>
+            <Col id="Column1">5.4.1 가장자리, 모서리부분 및 끝부분</Col>
+            <Col id="Column5">5.4.1 가장자리, 모서리부분 및 끝부분</Col>
+            <Col id="Column6">중결함</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.4 안전설계</Col>
+            <Col id="Column1">5.4.2 작은 부품</Col>
+            <Col id="Column5">5.4.2 작은 부품</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.4 안전설계</Col>
+            <Col id="Column1">5.4.3 유해물질</Col>
+            <Col id="Column2">유해원소 용출</Col>
+            <Col id="Column3">안티모니 (Sb)</Col>
+            <Col id="Column5">유해원소 용출</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">mg/kg</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.4 안전설계</Col>
+            <Col id="Column1">5.4.3 유해물질</Col>
+            <Col id="Column2">유해원소 용출</Col>
+            <Col id="Column3">비소 (As)</Col>
+            <Col id="Column5">유해원소 용출</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">mg/kg</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.4 안전설계</Col>
+            <Col id="Column1">5.4.3 유해물질</Col>
+            <Col id="Column2">유해원소 용출</Col>
+            <Col id="Column3">바륨 (Ba)</Col>
+            <Col id="Column5">유해원소 용출</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">mg/kg</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.4 안전설계</Col>
+            <Col id="Column1">5.4.3 유해물질</Col>
+            <Col id="Column2">유해원소 용출</Col>
+            <Col id="Column3">카드뮴 (Cd)</Col>
+            <Col id="Column5">유해원소 용출</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">mg/kg</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.4 안전설계</Col>
+            <Col id="Column1">5.4.3 유해물질</Col>
+            <Col id="Column2">유해원소 용출</Col>
+            <Col id="Column3">크로뮴 (Cr)</Col>
+            <Col id="Column5">유해원소 용출</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">mg/kg</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.4 안전설계</Col>
+            <Col id="Column1">5.4.3 유해물질</Col>
+            <Col id="Column2">유해원소 용출</Col>
+            <Col id="Column3">납 (Pb)</Col>
+            <Col id="Column5">유해원소 용출</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">mg/kg</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.4 안전설계</Col>
+            <Col id="Column1">5.4.3 유해물질</Col>
+            <Col id="Column2">유해원소 용출</Col>
+            <Col id="Column3">수은 (Hg)</Col>
+            <Col id="Column5">유해원소 용출</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">mg/kg</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.4 안전설계</Col>
+            <Col id="Column1">5.4.3 유해물질</Col>
+            <Col id="Column2">유해원소 용출</Col>
+            <Col id="Column3">셀레늄 (Se)</Col>
+            <Col id="Column5">유해원소 용출</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">mg/kg</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.4 안전설계</Col>
+            <Col id="Column1">5.4.3 유해물질</Col>
+            <Col id="Column2">유해원소 함유량</Col>
+            <Col id="Column3">총 납 함유량</Col>
+            <Col id="Column4">금속 기질 재료</Col>
+            <Col id="Column5">총 납 함유량</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">mg/kg</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.4 안전설계</Col>
+            <Col id="Column1">5.4.3 유해물질</Col>
+            <Col id="Column2">유해원소 함유량</Col>
+            <Col id="Column3">총 납 함유량</Col>
+            <Col id="Column4">고분자 기질 재료</Col>
+            <Col id="Column5">총 납 함유량</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">mg/kg</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.4 안전설계</Col>
+            <Col id="Column1">5.4.3 유해물질</Col>
+            <Col id="Column2">유해원소 함유량</Col>
+            <Col id="Column3">총 납 함유량</Col>
+            <Col id="Column4">페인트나 유사 코팅</Col>
+            <Col id="Column5">총 납 함유량</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">mg/kg</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.4 안전설계</Col>
+            <Col id="Column1">5.4.3 유해물질</Col>
+            <Col id="Column2">유해원소 함유량</Col>
+            <Col id="Column3">총 납 함유량</Col>
+            <Col id="Column4">기타 재료</Col>
+            <Col id="Column5">총 납 함유량</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">mg/kg</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.4 안전설계</Col>
+            <Col id="Column1">5.4.3 유해물질</Col>
+            <Col id="Column2">유해원소 함유량</Col>
+            <Col id="Column3">총 카드뮴 함유량</Col>
+            <Col id="Column4">금속 기질 재료</Col>
+            <Col id="Column5">총 카드뮴 함유량</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">mg/kg</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.4 안전설계</Col>
+            <Col id="Column1">5.4.3 유해물질</Col>
+            <Col id="Column2">유해원소 함유량</Col>
+            <Col id="Column3">총 카드뮴 함유량</Col>
+            <Col id="Column4">고분자 기질 재료</Col>
+            <Col id="Column5">총 카드뮴 함유량</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">mg/kg</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.4 안전설계</Col>
+            <Col id="Column1">5.4.3 유해물질</Col>
+            <Col id="Column2">유해원소 함유량</Col>
+            <Col id="Column3">총 카드뮴 함유량</Col>
+            <Col id="Column4">페인트나 유사 코팅</Col>
+            <Col id="Column5">총 카드뮴 함유량</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">mg/kg</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.4 안전설계</Col>
+            <Col id="Column1">5.4.3 유해물질</Col>
+            <Col id="Column2">유해원소 함유량</Col>
+            <Col id="Column3">총 카드뮴 함유량</Col>
+            <Col id="Column4">기타 재료</Col>
+            <Col id="Column5">총 카드뮴 함유량</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">mg/kg</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.4 안전설계</Col>
+            <Col id="Column1">5.4.3 유해물질</Col>
+            <Col id="Column2">프탈레이트계 가소제</Col>
+            <Col id="Column3">DEHP</Col>
+            <Col id="Column5">프탈레이트계 가소제</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">%</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.4 안전설계</Col>
+            <Col id="Column1">5.4.3 유해물질</Col>
+            <Col id="Column2">프탈레이트계 가소제</Col>
+            <Col id="Column3">DBP</Col>
+            <Col id="Column5">프탈레이트계 가소제</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">%</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.4 안전설계</Col>
+            <Col id="Column1">5.4.3 유해물질</Col>
+            <Col id="Column2">프탈레이트계 가소제</Col>
+            <Col id="Column3">BBP</Col>
+            <Col id="Column5">프탈레이트계 가소제</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">%</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.4 안전설계</Col>
+            <Col id="Column1">5.4.3 유해물질</Col>
+            <Col id="Column2">프탈레이트계 가소제</Col>
+            <Col id="Column3">DINP</Col>
+            <Col id="Column5">프탈레이트계 가소제</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">%</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.4 안전설계</Col>
+            <Col id="Column1">5.4.3 유해물질</Col>
+            <Col id="Column2">프탈레이트계 가소제</Col>
+            <Col id="Column3">DIDP</Col>
+            <Col id="Column5">프탈레이트계 가소제</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">%</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.4 안전설계</Col>
+            <Col id="Column1">5.4.3 유해물질</Col>
+            <Col id="Column2">프탈레이트계 가소제</Col>
+            <Col id="Column3">DnOP</Col>
+            <Col id="Column5">프탈레이트계 가소제</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">%</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.4 안전설계</Col>
+            <Col id="Column1">5.4.3 유해물질</Col>
+            <Col id="Column2">프탈레이트계 가소제</Col>
+            <Col id="Column3">DIBP</Col>
+            <Col id="Column5">프탈레이트계 가소제</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">%</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.5 조립 및 부품</Col>
+            <Col id="Column1">5.5.1 착용하는 기구의 완제품 하중시험</Col>
+            <Col id="Column5">5.5 조립 및 부품</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">5.5.2 봉사</Col>
+            <Col id="Column5">5.5 조립 및 부품</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">5.5.3 밸브와 잠금장치</Col>
+            <Col id="Column5">5.5 조립 및 부품</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.6 자재 - 기계적인 부품</Col>
+            <Col id="Column1">5.6.1 접합부분강도 및 공기를 넣는 보조용품의 내구성</Col>
+            <Col id="Column5">5.6 자재 - 기계적인 부품</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">5.6.2 펑크의 방지</Col>
+            <Col id="Column5">5.6 자재 - 기계적인 부품</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">5.6.3 폼 및 부력이 있는 물질이 물을 흡수하지 않는 정도</Col>
+            <Col id="Column5">5.6 자재 - 기계적인 부품</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">5.6.4 부력이 있는 물질이 압력을 견디는 정도</Col>
+            <Col id="Column5">5.6 자재 - 기계적인 부품</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.7 자재 및 표시방법 - 화학적인부품</Col>
+            <Col id="Column1">5.7.1 표시가 염소로 소독된 소금물에 견디는 정도</Col>
+            <Col id="Column5">5.7 자재 및 표시방법 - 화학적인부품</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">5.7.2 표시가 침의 영향에 견디는 정도</Col>
+            <Col id="Column5">5.7 자재 및 표시방법 - 화학적인부품</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">5.7.3 표시가 땀의 영향에 견디는 정도</Col>
+            <Col id="Column5">5.7 자재 및 표시방법 - 화학적인부품</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5.8 표시의 접착강도</Col>
+            <Col id="Column5">5.8 표시의 접착강도</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">표시사항</Col>
+            <Col id="Column1">모델명</Col>
+            <Col id="Column5">표시사항</Col>
+            <Col id="Column6">경결함</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">표시사항</Col>
+            <Col id="Column1">제조연월</Col>
+            <Col id="Column5">표시사항</Col>
+            <Col id="Column6">경결함</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">표시사항</Col>
+            <Col id="Column1">제조자명</Col>
+            <Col id="Column5">표시사항</Col>
+            <Col id="Column6">경결함</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">표시사항</Col>
+            <Col id="Column1">수입자명 </Col>
+            <Col id="Column5">표시사항</Col>
+            <Col id="Column6">경결함</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">표시사항</Col>
+            <Col id="Column1">주소 및 전화번호</Col>
+            <Col id="Column5">표시사항</Col>
+            <Col id="Column6">경결함</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">표시사항</Col>
+            <Col id="Column1">제조국명</Col>
+            <Col id="Column5">표시사항</Col>
+            <Col id="Column6">경결함</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">표시사항</Col>
+            <Col id="Column1">사용연령 및 체중범위</Col>
+            <Col id="Column5">표시사항</Col>
+            <Col id="Column6">경결함</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">표시사항</Col>
+            <Col id="Column1">경고사항</Col>
+            <Col id="Column5">표시사항</Col>
+            <Col id="Column6">경결함</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">표시사항</Col>
+            <Col id="Column1">사용상 주의사항</Col>
+            <Col id="Column5">표시사항</Col>
+            <Col id="Column6">경결함</Col>
+            <Col id="Column9">Y</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsList">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+          <Column id="Column5" type="STRING" size="256"/>
+          <Column id="Column6" type="STRING" size="256"/>
+          <Column id="Column7" type="STRING" size="256"/>
+          <Column id="Column8" type="STRING" size="256"/>
+          <Column id="Column9" type="STRING" size="256"/>
+          <Column id="Column10" type="STRING" size="256"/>
+          <Column id="Column11" type="STRING" size="256"/>
+          <Column id="Column12" type="STRING" size="256"/>
+          <Column id="Column13" type="STRING" size="256"/>
+          <Column id="Column14" type="STRING" size="256"/>
+          <Column id="Column15" type="STRING" size="256"/>
+          <Column id="Column16" type="STRING" size="256"/>
+          <Column id="Column17" type="STRING" size="256"/>
+          <Column id="Column18" type="STRING" size="256"/>
+          <Column id="Column19" type="STRING" size="256"/>
+          <Column id="Column20" type="STRING" size="256"/>
+          <Column id="Column21" type="STRING" size="256"/>
+          <Column id="Column22" type="STRING" size="256"/>
+          <Column id="Column23" type="STRING" size="256"/>
+          <Column id="Column24" type="STRING" size="256"/>
+          <Column id="Column25" type="STRING" size="256"/>
+          <Column id="Column26" type="STRING" size="256"/>
+          <Column id="Column27" type="STRING" size="256"/>
+          <Column id="Column28" type="STRING" size="256"/>
+          <Column id="Column29" type="STRING" size="256"/>
+          <Column id="Column30" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전인증</Col>
+            <Col id="Column2">어린이용 물놀이기구</Col>
+            <Col id="Column3">수영보조용품(착용형)</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전인증</Col>
+            <Col id="Column2">어린이용 물놀이기구</Col>
+            <Col id="Column3">수영보조용품(비착용형)</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전인증</Col>
+            <Col id="Column2">자동차용 어린이 보호장치</Col>
+            <Col id="Column3">휴대용 유아침대</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전인증</Col>
+            <Col id="Column2">자동차용 어린이 보호장치</Col>
+            <Col id="Column3">유아용좌석</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전인증</Col>
+            <Col id="Column2">자동차용 어린이 보호장치</Col>
+            <Col id="Column3">부스터 좌석</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">유아용 섬유제품</Col>
+            <Col id="Column3">하네스/조끼형 보호장치</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">유아용 섬유제품</Col>
+            <Col id="Column3">외의류(유섬)</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">유아용 섬유제품</Col>
+            <Col id="Column3">중의류(유섬)</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">유아용 섬유제품</Col>
+            <Col id="Column3">내의류(유섬)</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">유아용 섬유제품</Col>
+            <Col id="Column3">침구류(유섬)</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">유아용 섬유제품</Col>
+            <Col id="Column3">신발류(유섬)</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">유아용 섬유제품</Col>
+            <Col id="Column3">양말류(유섬)</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">유아용 섬유제품</Col>
+            <Col id="Column3">장갑류(유섬)</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">유아용 섬유제품</Col>
+            <Col id="Column3">모자류(유섬)</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">유아용 섬유제품</Col>
+            <Col id="Column3">가방류(유섬)</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">유아용 섬유제품</Col>
+            <Col id="Column3">신생아용품(유섬)</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">합성수지제 어린이용품</Col>
+            <Col id="Column3">어린이용 침대가드</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">합성수지제 어린이용품</Col>
+            <Col id="Column3">유아용 노리개젖꼭지</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">합성수지제 어린이용품</Col>
+            <Col id="Column3">유아용 노리개젖꼭지 걸이</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">합성수지제 어린이용품</Col>
+            <Col id="Column3">바닥매트</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">어린이용 스포츠 보호 용품(보호 장구 및 안전모)</Col>
+            <Col id="Column3">보호장구</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">어린이용 스케이트보드</Col>
+            <Col id="Column3">A등급</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">어린이용 스케이트보드</Col>
+            <Col id="Column3">B등급</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">아동용 이단침대</Col>
+            <Col id="Column3">어린이용 이단침대</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">완구</Col>
+            <Col id="Column3">활동완구</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">완구</Col>
+            <Col id="Column3">미술공예 완구</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">완구</Col>
+            <Col id="Column3">퍼즐 완구</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">완구</Col>
+            <Col id="Column3">파티완구</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">완구</Col>
+            <Col id="Column3">봉제인형</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">완구</Col>
+            <Col id="Column3">기능성 완구</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">완구</Col>
+            <Col id="Column3">게임 완구</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">완구</Col>
+            <Col id="Column3">승용 완구</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">완구</Col>
+            <Col id="Column3">발사체 완구</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">완구</Col>
+            <Col id="Column3">역할놀이 완구</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">완구</Col>
+            <Col id="Column3">악기완구</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">완구</Col>
+            <Col id="Column3">운동완구</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">완구</Col>
+            <Col id="Column3">유아완구</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">완구</Col>
+            <Col id="Column3">블록완구</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">완구</Col>
+            <Col id="Column3">모형완구</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">완구</Col>
+            <Col id="Column3">자석완구</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">완구</Col>
+            <Col id="Column3">조종완구</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">완구</Col>
+            <Col id="Column3">가구완구</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">완구</Col>
+            <Col id="Column3">교육용 완구(교구)</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">완구</Col>
+            <Col id="Column3">조립완구</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">완구</Col>
+            <Col id="Column3">기타완구(작동완구)</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">유아용 삼륜차</Col>
+            <Col id="Column3">유아용 삼륜차</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">어린이용 자전거</Col>
+            <Col id="Column3">어린이용 자전거</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">학용품</Col>
+            <Col id="Column3">크레용·크레파스</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">학용품</Col>
+            <Col id="Column3">연필류·연필심</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">학용품</Col>
+            <Col id="Column3">샤프연필·샤프연필심</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">학용품</Col>
+            <Col id="Column3">지우개</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">학용품</Col>
+            <Col id="Column3">파스텔</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">학용품</Col>
+            <Col id="Column3">그림물감</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">학용품</Col>
+            <Col id="Column3">분필</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">학용품</Col>
+            <Col id="Column3">마킹펜류</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">학용품</Col>
+            <Col id="Column3">연필깎이</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">학용품</Col>
+            <Col id="Column3">필통</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">학용품</Col>
+            <Col id="Column3">색종이</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">학용품</Col>
+            <Col id="Column3">공책</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">학용품</Col>
+            <Col id="Column3">스케치북</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">학용품</Col>
+            <Col id="Column3">점토류</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">학용품</Col>
+            <Col id="Column3">문구용 풀</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">학용품</Col>
+            <Col id="Column3">악기류</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">유아용 캐리어</Col>
+            <Col id="Column3">프레임 없는 캐리어</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">안전확인</Col>
+            <Col id="Column2">유아용 캐리어</Col>
+            <Col id="Column3">프레임 있는 캐리어</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">공급자적합성</Col>
+            <Col id="Column2">어린이용 안경테 및 선글라스</Col>
+            <Col id="Column3">안경테</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">공급자적합성</Col>
+            <Col id="Column2">어린이용 안경테 및 선글라스</Col>
+            <Col id="Column3">선글라스</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">공급자적합성</Col>
+            <Col id="Column2">어린이용 우산 및 양산</Col>
+            <Col id="Column3">우산</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">공급자적합성</Col>
+            <Col id="Column2">어린이용 우산 및 양산</Col>
+            <Col id="Column3">양산</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">공급자적합성</Col>
+            <Col id="Column2">어린이용 우산 및 양산</Col>
+            <Col id="Column3">우산 겸용 양산</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">공급자적합성</Col>
+            <Col id="Column2">어린이용 바퀴달린 운동화</Col>
+            <Col id="Column3">어린이용 바퀴달린 운동화</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">공급자적합성</Col>
+            <Col id="Column2">어린이용 장신구</Col>
+            <Col id="Column3">어린이용 장신구</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">공급자적합성</Col>
+            <Col id="Column2">어린이용 킥보드</Col>
+            <Col id="Column3">수동식</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">공급자적합성</Col>
+            <Col id="Column2">어린이용 킥보드</Col>
+            <Col id="Column3">전동식</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">공급자적합성</Col>
+            <Col id="Column2">아동용 섬유제품</Col>
+            <Col id="Column3">내의류(아섬)</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">공급자적합성</Col>
+            <Col id="Column2">아동용 섬유제품</Col>
+            <Col id="Column3">중의류(아섬)</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">공급자적합성</Col>
+            <Col id="Column2">아동용 섬유제품</Col>
+            <Col id="Column3">외의류(아섬)</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">공급자적합성</Col>
+            <Col id="Column2">아동용 섬유제품</Col>
+            <Col id="Column3">침구류(아섬)</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">공급자적합성</Col>
+            <Col id="Column2">아동용 섬유제품</Col>
+            <Col id="Column3">기타 제품류(아섬)</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">공급자적합성</Col>
+            <Col id="Column2">아동용 섬유제품</Col>
+            <Col id="Column3">양말류(아섬)</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">공급자적합성</Col>
+            <Col id="Column2">아동용 섬유제품</Col>
+            <Col id="Column3">장갑류(아섭)</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">공급자적합성</Col>
+            <Col id="Column2">아동용 섬유제품</Col>
+            <Col id="Column3">모자류(아섬)</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">어린이</Col>
+            <Col id="Column1">공급자적합성</Col>
+            <Col id="Column2">기타어린이제품</Col>
+            <Col id="Column3">기타어린이제품</Col>
+            <Col id="Column4">Y</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsList2">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+          <Column id="Column5" type="STRING" size="256"/>
+          <Column id="Column6" type="STRING" size="256"/>
+          <Column id="Column7" type="STRING" size="256"/>
+          <Column id="Column8" type="STRING" size="256"/>
+          <Column id="Column9" type="STRING" size="256"/>
+          <Column id="Column10" type="STRING" size="256"/>
+          <Column id="Column11" type="STRING" size="256"/>
+          <Column id="Column12" type="STRING" size="256"/>
+          <Column id="Column13" type="STRING" size="256"/>
+          <Column id="Column14" type="STRING" size="256"/>
+          <Column id="Column15" type="STRING" size="256"/>
+          <Column id="Column16" type="STRING" size="256"/>
+          <Column id="Column17" type="STRING" size="256"/>
+          <Column id="Column18" type="STRING" size="256"/>
+          <Column id="Column19" type="STRING" size="256"/>
+          <Column id="Column20" type="STRING" size="256"/>
+          <Column id="Column21" type="STRING" size="256"/>
+          <Column id="Column22" type="STRING" size="256"/>
+          <Column id="Column23" type="STRING" size="256"/>
+          <Column id="Column24" type="STRING" size="256"/>
+          <Column id="Column25" type="STRING" size="256"/>
+          <Column id="Column26" type="STRING" size="256"/>
+          <Column id="Column27" type="STRING" size="256"/>
+          <Column id="Column28" type="STRING" size="256"/>
+          <Column id="Column29" type="STRING" size="256"/>
+          <Column id="Column30" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">총 납 함유량</Col>
+            <Col id="Column1">고분자 기질 재료</Col>
+            <Col id="Column5">어린이제품 공통안전기준</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">mg/kg</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">총 납 함유량</Col>
+            <Col id="Column1">페인트나 유사 코팅</Col>
+            <Col id="Column5">어린이제품 공통안전기준</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">mg/kg</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">총 납 함유량</Col>
+            <Col id="Column1">기타 재료</Col>
+            <Col id="Column5">어린이제품 공통안전기준</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">mg/kg</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">총 카드뮴 함유량</Col>
+            <Col id="Column1">금속 기질 재료</Col>
+            <Col id="Column5">어린이제품 공통안전기준</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">mg/kg</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">총 카드뮴 함유량</Col>
+            <Col id="Column1">고분자 기질 재료</Col>
+            <Col id="Column5">어린이제품 공통안전기준</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">mg/kg</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">총 카드뮴 함유량</Col>
+            <Col id="Column1">페인트나 유사 코팅</Col>
+            <Col id="Column5">어린이제품 공통안전기준</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">mg/kg</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">총 카드뮴 함유량</Col>
+            <Col id="Column1">기타 재료</Col>
+            <Col id="Column5">어린이제품 공통안전기준</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">mg/kg</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">프탈레이트계 가소제 총 함유량</Col>
+            <Col id="Column1">DEHP</Col>
+            <Col id="Column5">어린이제품 공통안전기준</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">%</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">프탈레이트계 가소제 총 함유량</Col>
+            <Col id="Column1">DBP</Col>
+            <Col id="Column5">어린이제품 공통안전기준</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">%</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">프탈레이트계 가소제 총 함유량</Col>
+            <Col id="Column1">BBP</Col>
+            <Col id="Column5">어린이제품 공통안전기준</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">%</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">프탈레이트계 가소제 총 함유량</Col>
+            <Col id="Column1">DINP</Col>
+            <Col id="Column5">어린이제품 공통안전기준</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">%</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">프탈레이트계 가소제 총 함유량</Col>
+            <Col id="Column1">DIDP</Col>
+            <Col id="Column5">어린이제품 공통안전기준</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">%</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">프탈레이트계 가소제 총 함유량</Col>
+            <Col id="Column1">DnOP</Col>
+            <Col id="Column5">어린이제품 공통안전기준</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">%</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">프탈레이트계 가소제 총 함유량</Col>
+            <Col id="Column1">DIBP</Col>
+            <Col id="Column5">어린이제품 공통안전기준</Col>
+            <Col id="Column6">최중결함</Col>
+            <Col id="Column8">%</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsIn">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">어린이</Col>
+            <Col id="NAME">어린이</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">생활</Col>
+            <Col id="NAME">생활</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">전기</Col>
+            <Col id="NAME">전기</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsIn00_00">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">안전인증</Col>
+            <Col id="NAME">안전인증</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">안전확인</Col>
+            <Col id="NAME">안전확인</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">공급자적합성</Col>
+            <Col id="NAME">공급자적합성</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256" description="프로젝트 코드"/>
+          <Column id="MENU_CD" type="STRING" size="256" description="메뉴 코드"/>
+          <Column id="GROUP_CD" type="STRING" size="256" description="그룹코드(조회)"/>
+          <Column id="USER_NM" type="STRING" size="256" description="이름(조회)"/>
+          <Column id="YYYY" type="STRING" size="256"/>
+          <Column id="VACATION_TYPE" type="STRING" size="256"/>
+          <Column id="APP_TYPE" type="STRING" size="256"/>
+          <Column id="VACATION_SEQ" type="STRING" size="256"/>
+          <Column id="USER_CD" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsIn00">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="CHK" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">KCL</Col>
+            <Col id="CHK">1</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">KTR</Col>
+            <Col id="CHK">1</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">KTC</Col>
+            <Col id="CHK">1</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">KATRI</Col>
+            <Col id="CHK">1</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">FITI</Col>
+            <Col id="CHK">1</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">KOTITI</Col>
+            <Col id="CHK">1</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">KTL</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">기타</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsList00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+          <Column id="Column5" type="STRING" size="256"/>
+          <Column id="Column6" type="STRING" size="256"/>
+          <Column id="Column7" type="STRING" size="256"/>
+          <Column id="Column8" type="STRING" size="256"/>
+          <Column id="Column9" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">공기실의 용적</Col>
+            <Col id="Column2">어린이용물놀이기구</Col>
+            <Col id="Column1">4.2 구조</Col>
+            <Col id="Column3"/>
+            <Col id="Column4"/>
+            <Col id="Column6">안전기준 부속서 1</Col>
+            <Col id="Column7">최중결함</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">두께(mm)</Col>
+            <Col id="Column2">50 cm 이상 76 cm 미만</Col>
+            <Col id="Column1">4.3 치수 및 재료</Col>
+            <Col id="Column3"/>
+            <Col id="Column4"/>
+            <Col id="Column6">안전기준 부속서 1</Col>
+            <Col id="Column7">최중결함</Col>
+            <Col id="Column9">mm</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">두께(mm)</Col>
+            <Col id="Column2">76 cm 이상</Col>
+            <Col id="Column1">4.3 치수 및 재료</Col>
+            <Col id="Column3"/>
+            <Col id="Column4"/>
+            <Col id="Column6">안전기준 부속서 1</Col>
+            <Col id="Column7">최중결함</Col>
+            <Col id="Column9">mm</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">두께(mm)</Col>
+            <Col id="Column1">4.3 치수 및 재료</Col>
+            <Col id="Column2">50 cm 이상의 비치볼</Col>
+            <Col id="Column3"/>
+            <Col id="Column4"/>
+            <Col id="Column6">안전기준 부속서 1</Col>
+            <Col id="Column7">최중결함</Col>
+            <Col id="Column9">mm</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">두께(mm)</Col>
+            <Col id="Column1">4.3 치수 및 재료</Col>
+            <Col id="Column2">76 cm 이상의 동물형상</Col>
+            <Col id="Column3"/>
+            <Col id="Column6">안전기준 부속서 1</Col>
+            <Col id="Column7">최중결함</Col>
+            <Col id="Column9">mm</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">로프부착부분의인장강도</Col>
+            <Col id="Column1"/>
+            <Col id="Column2">자동차용 어린이 보호장치</Col>
+            <Col id="Column3"/>
+            <Col id="Column6">안전기준 부속서 1</Col>
+            <Col id="Column7">최중결함</Col>
+            <Col id="Column9">mm</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsList00_00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">2022.02.01</Col>
+            <Col id="Column1">이상없음</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">2022.01.01</Col>
+            <Col id="Column1">이상없음</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">2021.07.01</Col>
+            <Col id="Column1">이상없음</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">2020.12.04</Col>
+            <Col id="Column1">이상없음</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">2020.06.04</Col>
+            <Col id="Column1">이상없음</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">2019.01.01</Col>
+            <Col id="Column1">이상없음</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">2018.02.01</Col>
+            <Col id="Column1">이상없음</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">2018.01.22</Col>
+            <Col id="Column1">이상없음</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">2017.08.01</Col>
+            <Col id="Column1">이상없음</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">2015.06.04</Col>
+            <Col id="Column1">이상없음</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    1DEPTH > 2DEPTH
+*  @FileName    GM030.xfdl
+*  @Creator     이동건
+*  @CreateDate  2019.08.16
+*  @Version     1.0
+*  @Desction    설명
+*
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2019.08.16      이동건             최초 생성
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+//this.fv_nFormVal = null;     //용도
+this.fv_sMlCd="";
+this.fv_sMlNm="";
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* GM030_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.GM030_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {
+		UXBooster.afnUseSpliter(this, this.divDetail.form.btnSpliter);
+		UXBooster.afnUseSpliter(this, this.divDetail.form.btnSpliter00);
+       // this.fnInit();
+		this.divSearch.form.cboUseYn00.set_index(0);
+   }
+}
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnInit, fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnInit : 초기화 함수 검색조건 초기화 및 온로드 세팅
+ * @return {N/A}    N/A
+ * @example this.fnInit();
+ */
+this.fnInit = function(){
+	//검색조건
+	var objDivSearch = this.divSearch.form;
+	//조회 시 prefix를 가져와서 프로그램 선택 시 비교해야 함
+	take.tranCode(this, ["00006"], ["dsProgPrefix"], "ALL", "fnCallback");
+
+};
+
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "progOnload";
+
+	if(sTranId == "progOnload"){
+		var objDivSearch = this.divSearch.form;
+		take.tranSelect(this, "progOnload", "ProgramManagement.programInfoList", "dsSearch", "dsProgList"
+		,"PROGRAM_PREFIX='"+take.nvl(objDivSearch.cboPrefix.value, "")
+		  +"' PROGRAM_CD='"+take.nvl(objDivSearch.edtProgNm.value, "")+"'"
+		  +"' USE_YN='Y'", "fnCallback");
+
+	} else if(sTranId == "Language"){
+		this.dsProgMultiLangDetail.clearData();
+		var nRow  = this.dsMsgList.rowposition;
+		var sMlCd = take.nvl(this.dsMsgList.getColumn(nRow, "ML_CD"), "");
+		take.tranSelect(this, "Language", "SystemCommon.multilanguageDetailList", "", "dsProgMultiLangDetail", "sMlCd='" + sMlCd + "'", "fnCallback");
+
+	} else if(sTranId == "msgSelect"){
+		this.dsMsgList.clearData();
+		var nRow = this.dsProgList.rowposition;
+		var nProgCd = this.dsProgList.getColumn(nRow, "PROGRAM_CD");
+		take.tranSelect(this, "msgSelect", "ProgramManagement.programMessageList", "", "dsMsgList", "PROGRAM_CD='"+nProgCd+"'", "fnCallback");
+	}
+};
+
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+this.fnSave = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "programMessageSave";
+
+	var nRow 		= this.dsProgList.rowposition;
+	var sProgType 	= this.dsProgList.getColumn(nRow, "PROGRAM_TYPE");	//프로그램 타입
+	var sProgCd 	= take.nvl(this.dsProgList.getColumn(nRow, "PROGRAM_CD"), "");	//프로그램 코드
+	var bolConfirm 	= take.confirm(this, "question", "{text} 하시겠습니까?", {text : "저장"});
+	if(bolConfirm) {
+		//take.tranSave(this, "programMessageSave", "ProgramManagement.programMessage", "dsMsgList", "", "PROGRAM_CD='"+sProgCd+"'", "fnCallback");
+        take.transaction(this, "programMessageSave", "SVC_LOC::gm/programMessageSave.do", "dsMsgList=dsMsgList:U", "", "PROGRAM_CD='"+sProgCd+"'", "fnCallback");
+	}
+};
+
+/**
+ * fnAddRow : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+ * @example this.fnAddRow(sGrdId, nRow);
+ */
+this.fnAddRow = function(sGrdId, nRow)
+{
+    //공통 행추가에서 호출할 디폴트값 세팅
+    if (take.nvl(sGrdId, "")=="") sGrdId = "Grid00";
+
+	take.openPopup(this, "addMultiLanguage", "biz::sys/OM010P06.xfdl", "", "", "fnPopCallback");
+};
+
+/**
+ * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number, Array} arrnRow    deleteRow 리턴값
+ * @return {N/A} N/A
+ * @example this.fnDelRow(sGrdId, nRow);
+ */
+this.fnDelRow = function(sGrdId, arrnRow)
+{
+    //공통 행추가에서 호출할 디폴트값 세팅
+    if (take.nvl(sGrdId, "")=="") sGrdId = "Grid00";
+    var nSelRow= this.dsMsgList.rowposition;
+	this.dsMsgList.deleteRow(nSelRow);
+};
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+/**
+* component_onclick : ~ 버튼 클릭
+*/
+this.divDetail_grdProgList_onselectchanged = function(obj:nexacro.Grid,e:nexacro.GridSelectEventInfo)
+{
+	if(e.row != -1){
+		this.fnSearch("msgSelect");
+	}
+};
+
+this.dsMsgList_onrowposchanged = function(obj:nexacro.NormalDataset,e:nexacro.DSRowPosChangeEventInfo)
+{
+	if(e.row != -1){
+		this.fnSearch("Language");
+	}
+};
+
+this.divSearch_edtProgNm_onkeyup = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+	if(e.keycode == 13){
+		this.fnSearch("progOnload");
+	}
+};
+
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : sId      - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : nErrCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : sErrMsg  - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script
+    } else {
+        //Etc Script
+    }
+
+    switch(sId)
+    {
+        case "progOnload" : //조회 콜백
+            //Script
+            break;
+        case "msgSelect" :  //조회 콜백
+
+            break;
+        case "codetran.multi" : //조회 콜백
+			this.divSearch.form.cboPrefix.set_index(0);
+			this.fnSearch();
+            break;
+        case "programMessageSave" :  //저장 콜백
+            this.fnSearch("msgSelect");
+            break;
+        case "Save transation id 01" :  //저장 콜백
+            //Script
+            break;
+        default :
+            break;
+    }
+};
+
+/**
+ * fnPopCallback : 다국어팝업 콜백
+ * @example this.fnPopCallback();
+ */
+this.fnPopCallback = function (sId, nReturnVal)
+{
+	var objDs = this.dsMsgList;
+	var nRow;
+	
+	if(!take.isEmpty(nReturnVal)){
+		sCd 	 = nReturnVal.split(",")[0];
+		sMsgNm   = nReturnVal.split(",")[1];
+		sDescTxt = nReturnVal.split(",")[2];
+		sTypeId  = nReturnVal.split(",")[3];
+		sTypeNm  = nReturnVal.split(",")[4];
+		
+		objDs.set_enableevent(false);
+		nRow = objDs.addRow();
+		objDs.setColumn(nRow, "ML_CD"	  	, sCd);
+		objDs.setColumn(nRow, "MESSAGE_NM"	, sMsgNm);
+		objDs.setColumn(nRow, "DESC_TXT"	, sDescTxt);
+		objDs.setColumn(nRow, "ML_TYPE"	  	, sTypeId);
+		objDs.setColumn(nRow, "ML_TYPE_NM"	, sTypeNm);
+		objDs.setColumn(nRow, "MESSAGE_SEQ"	, "-자동생성-");
+		objDs.set_enableevent(true);
+	} else return;
+	this.fnSearch("Language");
+};
+
+this.divDetail_DivRight_Button27_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	take.openPopup(this, "addMultiLanguage", "biz::pln/PL010P01.xfdl", "", "", "fnPopCallback");
+};
+
+this.divTab00_btnDeployAdd_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.dsList00_00.addRow();
+};
+
+this.divDetail_DivRight_btnDeployAdd00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	take.openPopup(this, "addMultiLanguage", "biz::pln/PL010P02.xfdl", "", "", "fnPopCallback");
+};
+
+this.divDetail_DivRight_btnDeployAdd00_00_onclick = function(obj:nexacro.Button,e:nexacro.ClidivDetail_DivRight_btnDeployAdd00_00_onclickckEventInfo)
+{
+	take.openPopup(this, "addMultiLanguage", "biz::pln/PL010P03.xfdl", "", "", "fnPopCallback");
+};
+
+this.divDetail_DivRight_btnDeployAdd00_01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	take.openPopup(this, "addMultiLanguage", "biz::pln/PL010P01.xfdl", "", "", "fnPopCallback");
+};
+]]></Script>
+    <Bind>
+      <BindItem id="item2" compid="divSearch.form.cboUseYn" propid="value" datasetid="dsSearch" columnid="USE_YN"/>
+      <BindItem id="item3" compid="divSearch.form.cboUseYn00" propid="value" datasetid="dsSearch" columnid="PROJECT_CD"/>
+    </Bind>
+  </Form>
+</FDL>

@@ -1,0 +1,436 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="dashWeather" width="354" height="113" titletext="날씨" onload="dashWeather_onload" onsize="dashWeather_onsize" ontimer="dashWeather_ontimer">
+    <Layouts>
+      <Layout height="113" width="354">
+        <Div id="divToday" taborder="1" left="0" top="20" cssclass="div_MF_DashboardBot" text="" width="50%" bottom="0">
+          <Layouts>
+            <Layout>
+              <Static id="staTitle" taborder="3" text="오&#13;&#10;늘" left="0" width="15" cssclass="sta_MF_WeatherText01" textAlign="center" verticalAlign="middle" bottom="15" top="0"/>
+              <Static id="staTemperature" taborder="1" text="&lt;fs v='12'&gt;&lt;fc v='#333333'&gt;℃ &lt;/fc&gt;&lt;/fs&gt;" width="80" cssclass="sta_MF_WeatherText02" textAlign="center" bottom="15" top="0" verticalAlign="middle" right="0" usedecorate="true"/>
+              <Static id="staWeatherIcon" taborder="0" left="20" bottom="15" top="0" background="url(&quot;theme://images/img_MF_Weather01.png&quot;) no-repeat center center" text="" right="80"/>
+              <Static id="staMaxTemp" taborder="4" height="15" cssclass="sta_MF_WeatherText03" usedecorate="true" bottom="0" text="&lt;fc v='blue'&gt;℃&lt;/fc&gt; / &lt;fc v='red'&gt;℃&lt;/fc&gt;" width="80" right="0"/>
+              <Static id="staWeatherText" taborder="2" text="맑음" left="20" height="15" cssclass="sta_MF_WeatherText03" bottom="0" right="80"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="stInfo" taborder="1" text="" left="0" top="0" height="20" right="70"/>
+        <Static id="stUnit" taborder="2" top="0" height="20" cssclass="sta_MF_Unit" right="0" width="70" text="출처 : 기상청"/>
+        <Static id="Static09" taborder="3" left="divToday:1" width="1" background="darkgray" bottom="0" top="20"/>
+        <Div id="divTomorrow" taborder="4" left="divToday:0" top="20" cssclass="div_MF_DashboardBot" bottom="0" text="" right="0">
+          <Layouts>
+            <Layout>
+              <Static id="staTitle" taborder="0" text="내&#13;&#10;일" left="10" width="15" cssclass="sta_MF_WeatherText01" textAlign="center" verticalAlign="middle" bottom="15" top="0"/>
+              <Static id="staTemperature" taborder="2" text="&lt;fs v='12'&gt;&lt;fc v='#333333'&gt;℃ &lt;/fc&gt;&lt;/fs&gt;" cssclass="sta_MF_WeatherText02" usedecorate="true" textAlign="center" bottom="15" top="0" verticalAlign="middle" right="0" width="70"/>
+              <Static id="staWeatherIcon" taborder="1" left="20" bottom="15" top="0" background="url(&quot;theme://images/img_MF_Weather01.png&quot;) no-repeat center center" right="70"/>
+              <Static id="staMaxTemp" taborder="4" text="&lt;fc v='blue'&gt;℃&lt;/fc&gt; / &lt;fc v='red'&gt;℃&lt;/fc&gt;" width="80" height="15" cssclass="sta_MF_WeatherText03" usedecorate="true" bottom="0" right="0"/>
+              <Static id="staWeatherText" taborder="3" text="맑음" left="20" height="15" cssclass="sta_MF_WeatherText03" bottom="0" right="70"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="staTemperatureTemplate" taborder="5" text="&lt;fs v='12'&gt;&lt;fc v='#333333'&gt;℃ &lt;/fc&gt;&lt;/fs&gt;" width="30" textAlign="center" bottom="-46" top="120" verticalAlign="middle" right="299" usedecorate="true" visible="false"/>
+        <Static id="staMinTempTemplate" taborder="6" height="15" cssclass="sta_MF_WeatherText03" usedecorate="true" bottom="-25" text="&lt;fc v='blue'&gt;℃&lt;/fc&gt;" width="40" right="254" visible="false"/>
+        <Static id="staMaxTemplate" taborder="7" height="15" cssclass="sta_MF_WeatherText03" usedecorate="true" bottom="-42" text="&lt;fc v='red'&gt;℃&lt;/fc&gt;" width="40" right="254" visible="false"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    dash > dashWeather
+*  @FileName    dashWeather.xfdl 
+*  @Creator     
+*  @CreateDate  2018.05.18 
+*  @Version     1.0
+*  @Desction    
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2018.05.18      이동건             최초 생성 
+*  2020.09.22      김대승             날씨 api 스펙 변경으로 서비스 변경 및 로직 수정
+*  2021.01.29      정해원             최적화
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+this.fv_nReload = 0;       //재 조회 주기
+this.fvTodayYmd = "";
+this.fvTomorrowYmd = "";
+this.fvTodayHH = "";
+
+/*********************************************************
+ * 1.2 FORM EVENT 영역(onload)
+ ********************************************************/
+/**
+* dashWeather_onload : 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.dashWeather_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+    var bTran;
+	
+    bTran = this.parent.btran;
+	
+    if (bTran) this.fnInit();
+};
+
+this.dashWeather_ontimer = function(obj:nexacro.Form,e:nexacro.TimerEventInfo)
+{
+	if (e.timerid == 9999) { 
+        this.killTimer(9999);
+        this.fnSearch();
+    }
+};
+
+//리사이즈 처리
+this.dashWeather_onsize = function(obj:nexacro.Form,e:nexacro.SizeEventInfo)
+{
+	this.resetScroll();
+};
+
+/*********************************************************
+ * 2 각 COMPONENT 별 EVENT 영역
+ ********************************************************/
+
+
+/*********************************************************
+ * 3 Dashboard 필수 FUNCTION 영역 (fnSearch)
+ ********************************************************/
+
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+this.fnSetCoordinates = function(sLatitude, sLongitude){
+	this.dsSearch.clearData();
+	var nRow = this.dsSearch.addRow();
+	this.dsSearch.setColumn(nRow, "LATITUDE" , sLatitude);
+	this.dsSearch.setColumn(nRow, "LONGITUDE", sLongitude);
+};
+
+this.fnSetStaInfo = function(){
+	if(this.dsLocation.rowcount == 0){
+		return;
+	}
+	
+	var sAddr = take.nvl(this.dsLocation.getColumn(0, "ARDD"), "");
+	var sFirstTime = take.nvl(this.dsToday.getColumn(0, "baseTime"), "");
+	if(!take.isEmpty(sFirstTime)){
+		sFirstTime = sFirstTime.substring(0,2) + "시 기준";
+	}
+	
+	if(!take.isEmpty(sAddr)){
+		var sStep1 = take.nvl(this.dsLocation.getColumn(0, "STEP_1"), "");
+		var sStep2 = take.nvl(this.dsLocation.getColumn(0, "STEP_2"), "");
+		var sStep3 = take.nvl(this.dsLocation.getColumn(0, "STEP_3"), "");
+		sAddr = sStep1 + " " + sStep2 + " " + sStep3;
+	}
+	
+	this.stInfo.set_text(sAddr + " (금일 " + sFirstTime + ")");
+};
+
+// 초기화
+this.fnInit = function() {
+    var sLocation 	= take.nvl(_application.av_sLocation, "");
+	var pThis		= this;
+	
+	// 로케이션 정보를 이미 가지고 있다면 새로 받지 않음.
+	if(!take.isEmpty(sLocation)){
+		this.fnSetCoordinates(sLocation.split(",")[0], sLocation.split(",")[1]);
+		this.fnSearch();
+	} else {
+		//navigator를 지원하지 않음
+		if (typeof(navigator) != "object" || typeof(navigator.geolocation) != "object") {
+			this.fnSetCoordinates("", "");
+			this.fnSearch();
+		}else{
+			if(take.isFunction(navigator.geolocation.getCurrentPosition)){
+				navigator.geolocation.getCurrentPosition(
+					function(position) {
+						_application.av_sLocation = position.coords.latitude+","+position.coords.longitude;
+						pThis.fnSetCoordinates(position.coords.latitude, position.coords.longitude);
+						pThis.fnSearch();
+					}, 
+					function(error) {
+						take.debug(_application, "현재 위치 값을 가져오지 못했습니다. \n브라우저 설정을 확인 해주세요. (error.code ->   "+error.code+")");
+						this.fnSetCoordinates("", "");
+						pThis.fnSearch();
+					}
+				);
+			}
+		}
+	}
+	
+	//오늘/내일 날짜 계산
+	var today = take.getDbTime();
+	this.fvTodayYmd = today.date;
+	this.fvTodayHH = ((parseInt(parseInt(today.hh)/3) * 3) + "00").lpad(4, "0");
+	var tomorrow = take.getConvertDate(today.date);
+	tomorrow.addDate(1);
+	this.fvTomorrowYmd = take.toDateString(tomorrow, "yyyyMMdd");
+};
+
+// 로케이션 정보, 날씨api 조회
+this.fnSearch = function()
+{
+	this.dsLocation.clearData();
+	this.dsToday.clearData();
+	this.dsTomorrow.clearData();
+	this.dsTodayMax.clearData();
+	
+	take.setUseWaitCursor(false);
+	
+	// 로케이션, 초단기실황(내일예보), 오늘동네예보, 초단기실황(오늘예보)
+	take.transaction
+	(
+		this, 
+		"locationInfo", 
+		"SVC_LOC::dash/getWeather.do", 
+		"dsSearch=dsSearch", 
+		"dsLocation=dsLocation dsToday=dsToday dsTomorrow=dsTomorrow dsTodayMax=dsTodayMax", 
+		"", 
+		function (sId, nErr, sMsg) {
+			//기준시간 표시
+			this.fnSetStaInfo();
+			
+			//오늘날씨 표시
+			this.fnSetToday();
+			
+			//내일날씨 표시
+			this.fnSetTomorrow();
+			
+			var nReloadn = parseInt(take.nvl(this.parent.reloadtime,"0"));
+			if (nReloadn > 0) {
+                nReloadn = nReloadn * 1000;
+                this.setTimer(9999, nReloadn);
+            }
+			
+			take.setUseWaitCursor(true);
+		}
+	);
+};
+
+//내일날씨 표시
+this.fnSetTomorrow = function(){
+	if(this.dsTomorrow.getRowCount() > 0){
+		this.fnSetTomorrowTemperature();
+		this.fnSetTomorrowMinMax();
+		this.fnSetTomorrowWeatherIcon();
+	}
+};
+
+//현재기온 표시 "category" : "T3H"
+this.fnSetTomorrowTemperature = function(){
+	var fcstDate = this.fvTomorrowYmd;
+	var fcstTime = this.fvTodayHH;
+	var nRow = this.dsTomorrow.findRowExpr("fcstDate=='" + fcstDate + "' && fcstTime=='" + fcstTime + "' && category=='T3H'");
+	var T3H = this.dsTomorrow.getColumn(nRow, "fcstValue");
+	this.divTomorrow.form.staTemperature.set_text(T3H + this.staTemperatureTemplate.text);
+};
+
+//최저/최대기온 표시
+this.fnSetTomorrowMinMax = function(){
+	var fcstDate = this.fvTomorrowYmd;
+	var fcstTime = this.fvTodayHH;
+	var nRow = this.dsTomorrow.findRowExpr("fcstDate=='" + fcstDate + "' && category=='TMN'");
+	var TMN = this.dsTomorrow.getColumn(nRow, "fcstValue");	//최저
+	
+		nRow = this.dsTomorrow.findRowExpr("fcstDate=='" + fcstDate + "' && category=='TMX'");
+	var TMX = this.dsTomorrow.getColumn(nRow, "fcstValue");	//최고
+	
+	this.divTomorrow.form.staMaxTemp.set_text(TMN + this.staMinTempTemplate.text + " / " + TMX + this.staMaxTemplate.text);
+};
+
+//내일 날씨아이콘 세팅
+this.fnSetTomorrowWeatherIcon = function(){
+	var fcstDate = this.fvTomorrowYmd;
+	var fcstTime = this.fvTodayHH;
+	var nRow = this.dsTomorrow.findRowExpr("fcstDate=='" + fcstDate + "' && fcstTime=='" + fcstTime + "' && category=='PTY'");
+	var pty = this.dsTomorrow.getColumn(nRow, "fcstValue");
+	var sSky = "";
+	
+	if(pty == "0"){
+		//비가 오지 않을경우 하늘 상태를 내일 예보 데이터중 금일 데이터를 가져온다.
+		//예보에서 오늘 하늘 상태 가져오기
+		
+		nRow = this.dsTomorrow.findRowExpr( "category=='SKY' && fcstDate=='" + fcstDate + "' && fcstTime=='" + fcstTime + "'");
+		sSky = this.dsTomorrow.getColumn(nRow, 'fcstValue');
+		
+		this.divTomorrow.form.staWeatherIcon.set_background('url("theme://images/img_MF_Weather0' + sSky +'.png") no-repeat center center');
+			
+		if (sSky=="1") 		sSky = "맑음";
+		else if (sSky=="2") sSky = "구름조금";
+		else if (sSky=="3") sSky = "구름많음";
+		else if (sSky=="4") sSky = "흐림";
+		
+		this.divTomorrow.form.staWeatherText.set_text(sSky);
+		
+	}else{
+		//비,눈 올 경우 강수량 가져오기
+		var r06s06 = 0;
+		if (pty == "1") {
+			//비
+			sSky = "비";
+			this.divTomorrow.form.staCloudNextDay.set_background('url("theme://images/img_MF_Weather05.png") no-repeat center center');
+			
+			//강수량 가져오기
+			nRow = this.dsTomorrow.findRowExpr("category=='R06' && fcstDate=='" + sTomorrow + "' && fcstTime=='" + fcstTime + "'");
+			r06s06 = this.dsTomorrow.getColumn(nFRow, "fcstValue");
+			
+			//강수량이 100일 경우 70mm이상으로 세팅
+			if (r06s06 == "100") r06s06 = "70mm 이상";
+			else r06s06 += "mm 미만";
+			
+		} else if (pty == "2") {
+			//비,눈
+			sSky = "비/눈";
+			this.divTomorrow.form.staCloudNextDay.set_background('url("theme://images/img_MF_Weather09.png") no-repeat center center');
+			
+			//적설량 가져오기
+			nRow = this.dsTomorrow.findRowExpr("category=='S06' && fcstDate=='" + sTomorrow + "' && fcstTime=='" + fcstTime + "'");
+			r06s06 = this.dsTomorrow.getColumn(nFRow, "fcstValue");
+			
+			//적설량이 100일 경우 20cm이상으로 세팅
+			if (r06s06 == "100") r06s06 = "20cm 이상";
+			else r06s06 += "cm 미만";
+			
+		} else if (pty == "3") {
+			//눈
+			sSky = "비/눈";
+			this.divTomorrow.form.staCloudNextDay.set_background('url("theme://images/img_MF_Weather06.png") no-repeat center center');
+			
+			//적설량 가져오기
+			nRow = this.dsTomorrow.findRowExpr("category=='S06' && fcstDate=='" + sTomorrow + "' && fcstTime=='" + fcstTime + "'");
+			r06s06 = this.dsTomorrow.getColumn(nFRow, "fcstValue");
+			
+			//적설량이 100일 경우 20cm이상으로 세팅
+			if (r06s06 == "100") r06s06 = "20cm 이상";
+			else r06s06 += "cm 미만";
+		}
+		
+		this.divTomorrow.form.staWeatherText.set_text(sSky + "(" + r06s06 + ")");
+	}
+};
+
+//오늘날씨 표시
+this.fnSetToday = function(){
+	if(this.dsToday.getRowCount() > 0){
+		this.fnSetTodayTemperature();
+		this.fnSetTodayWeatherIcon();
+		this.fnSetTodayMinMax();
+	}	
+};
+
+//현재기온 표시 "category" : "T1H"
+this.fnSetTodayTemperature = function(objDiv, objWeather){
+	var t1h = this.dsToday.lookup("category", "T1H", "obsrValue");
+	this.divToday.form.staTemperature.set_text(t1h + this.staTemperatureTemplate.text);
+};
+
+//최저/최대기온 표시
+this.fnSetTodayMinMax = function(){
+	var nRow  = this.dsTodayMax.findRowExpr("fcstDate=='" + this.fvTodayYmd + "' && category=='TMN'");
+	var TMN = this.dsTodayMax.getColumn(nRow, "fcstValue"); //최저
+		nRow  = this.dsTodayMax.findRowExpr("fcstDate=='" + this.fvTodayYmd + "' && category=='TMX'");
+	var TMX = this.dsTodayMax.getColumn(nRow, "fcstValue"); //최고
+	
+	this.divToday.form.staMaxTemp.set_text(TMN + this.staMinTempTemplate.text + " / " + TMX + this.staMaxTemplate.text);
+};
+
+//오늘 날씨아이콘 세팅
+this.fnSetTodayWeatherIcon = function(){
+	//강수형태(PTY) 코드 : 없음(0), 비(1), 비/눈(2), 눈(3), 소나기(4), 빗방울(5), 빗방울/눈날림(6), 눈날림(7)
+	var pty = this.dsToday.lookup("category", "PTY", "obsrValue");
+	var sSky = "";
+	
+	if(pty == "0"){
+		//비가 오지 않을경우 하늘 상태를 내일 예보 데이터중 금일 데이터를 가져온다.
+		//예보에서 오늘 하늘 상태 가져오기
+		var nRow = this.dsTomorrow.findRowExpr("fcstDate=='" + this.fvTodayYmd + "' && category=='SKY'");
+		if (nRow != -1) {
+			sSky = this.dsTomorrow.getColumn(nRow, "fcstValue");
+			this.divToday.form.staWeatherIcon.set_background('url("theme://images/img_MF_Weather0' + sSky +'.png") no-repeat center center');
+			
+			if (sSky=="1") 		sSky = "맑음";
+            else if (sSky=="2") sSky = "구름조금";
+            else if (sSky=="3") sSky = "구름많음";
+            else if (sSky=="4") sSky = "흐림";
+			
+			this.divToday.form.staWeatherText.set_text(sSky);
+		}
+	}else{
+		//비,눈 올 경우 강수량 가져오기
+		if (pty == "1") {
+			sSky = "비";
+			this.divToday.form.staWeatherIcon.set_background('url("theme://images/img_MF_Weather05.png") no-repeat center center');
+		} else if (pty == "2") {
+			sSky = "비/눈";
+			this.divToday.form.staWeatherIcon.set_background('url("theme://images/img_MF_Weather09.png") no-repeat center center');
+		} else if (pty == "3") {
+			sSky = "눈";
+			this.divToday.form.staWeatherIcon.set_background('url("theme://images/img_MF_Weather06.png") no-repeat center center');
+		}
+		
+		var rn1 = this.dsToday.lookup("category", "RN1", "obsrValue");
+		this.divToday.form.staWeatherText.set_text(sSky + "(" + rn1 + "mm)");
+	}
+};
+
+]]></Script>
+    <Objects>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="LATITUDE" type="STRING" size="256"/>
+          <Column id="LONGITUDE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsLocation">
+        <ColumnInfo>
+          <Column id="LOCATION_CODE" type="STRING" size="255"/>
+          <Column id="STEP_1" type="STRING" size="255"/>
+          <Column id="STEP_2" type="STRING" size="255"/>
+          <Column id="STEP_3" type="STRING" size="255"/>
+          <Column id="N_X" type="STRING" size="255"/>
+          <Column id="N_Y" type="STRING" size="255"/>
+          <Column id="ARDD" type="STRING" size="255"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsToday">
+        <ColumnInfo>
+          <Column id="baseDate" type="STRING" size="255"/>
+          <Column id="baseTime" type="STRING" size="255"/>
+          <Column id="category" type="STRING" size="255"/>
+          <Column id="nx" type="STRING" size="255"/>
+          <Column id="ny" type="STRING" size="255"/>
+          <Column id="obsrValue" type="STRING" size="255"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsTodayMax">
+        <ColumnInfo>
+          <Column id="baseDate" type="STRING" size="255"/>
+          <Column id="baseTime" type="STRING" size="255"/>
+          <Column id="category" type="STRING" size="255"/>
+          <Column id="fcstDate" type="STRING" size="255"/>
+          <Column id="fcstTime" type="STRING" size="255"/>
+          <Column id="fcstValue" type="STRING" size="255"/>
+          <Column id="nx" type="STRING" size="255"/>
+          <Column id="ny" type="STRING" size="255"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsTomorrow">
+        <ColumnInfo>
+          <Column id="baseDate" type="STRING" size="255"/>
+          <Column id="baseTime" type="STRING" size="255"/>
+          <Column id="category" type="STRING" size="255"/>
+          <Column id="fcstDate" type="STRING" size="255"/>
+          <Column id="fcstTime" type="STRING" size="255"/>
+          <Column id="fcstValue" type="STRING" size="255"/>
+          <Column id="nx" type="STRING" size="255"/>
+          <Column id="ny" type="STRING" size="255"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

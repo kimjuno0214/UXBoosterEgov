@@ -1,0 +1,287 @@
+(function()
+{
+    return function()
+    {
+        if (!this._is_form)
+            return;
+        
+        var obj = null;
+        
+        this.on_create = function()
+        {
+            this.set_name("comDeptPop");
+            this.set_titletext("부서찾기팝업");
+            this.set_background("#ffffff");
+            if (Form == this.constructor)
+            {
+                this._setFormPosition(330,455);
+            }
+            
+            // Object(Dataset, ExcelExportObject) Initialize
+            obj = new Dataset("dsDeptList", this);
+            obj.set_updatecontrol("true");
+            obj.set_useclientlayout("true");
+            obj._setContents("<ColumnInfo><Column id=\"DEPT_CD\" type=\"STRING\" size=\"256\"/><Column id=\"DEPT_NM\" type=\"STRING\" size=\"256\"/><Column id=\"DEPT_LEVEL\" type=\"STRING\" size=\"256\"/><Column id=\"PARENT_DEPT\" type=\"STRING\" size=\"256\"/><Column id=\"DESC_TXT\" type=\"STRING\" size=\"256\"/><Column id=\"USE_YN\" type=\"STRING\" size=\"256\"/><Column id=\"DEPT_ENG_NM\" type=\"STRING\" size=\"256\"/><Column id=\"REG_NM\" type=\"STRING\" size=\"256\"/><Column id=\"REG_DT\" type=\"STRING\" size=\"256\"/><Column id=\"MOD_NM\" type=\"STRING\" size=\"256\"/><Column id=\"MOD_DT\" type=\"STRING\" size=\"256\"/><Column id=\"EXCEL_YN\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+
+            obj = new Dataset("dsSearch", this);
+            obj._setContents("<ColumnInfo><Column id=\"DEPT_CD\" type=\"STRING\" size=\"256\"/><Column id=\"DEPT_NM\" type=\"STRING\" size=\"256\"/><Column id=\"USE_YN\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+            
+            // UI Components Initialize
+            obj = new Grid("grdMain","0","0",null,null,"0","0",null,null,null,null,this);
+            obj.set_taborder("0");
+            obj.set_autofittype("col");
+            obj.set_treeinitstatus("expand,all");
+            obj.set_treeusecheckbox("false");
+            obj.set_treeuseline("false");
+            obj.set_binddataset("dsDeptList");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"328\"/></Columns><Rows><Row size=\"30\"/></Rows><Band id=\"body\"><Cell text=\"bind:DEPT_NM\" displaytype=\"treeitemcontrol\" edittype=\"tree\" treelevel=\"bind:DEPT_LEVEL\"/></Band></Format></Formats>");
+            this.addChild(obj.name, obj);
+            // Layout Functions
+            //-- Default Layout : this
+            obj = new Layout("default","",this._adjust_width,this._adjust_height,this,function(p){});
+            this.addLayout(obj.name, obj);
+            
+            // BindItem Information
+
+            
+            // TriggerItem Information
+
+        };
+        
+        this.loadPreloadList = function()
+        {
+
+        };
+        
+        // User Script
+        this.registerScript("comDeptPop.xfdl", function() {
+        /**
+        *  SYSTEM FORM NAME
+        *
+        *  @MenuPath    1Depth > 2Depth
+        *  @FileName    *.xfdl
+        *  @Creator     홍길동
+        *  @CreateDate  yyyy.MM.DD
+        *  @Version     1.0
+        *  @Desction    설명
+        *
+        ************** 소스 수정 이력 *************************************************
+        *    Date          Modifier            Description
+        *******************************************************************************
+        *  YYYY.MM.DD      홍길동             최초 생성
+        *******************************************************************************
+        */
+
+        //공통 라이브러리 호출
+
+        /*********************************************************
+         * 1.1 FORM 변수 선언 영역
+         ********************************************************/
+        //this.fv_nFormVal = null;     //용도
+        this.fv_sSearch = null;
+        this.fv_arrColInfo = null;
+
+        /*********************************************************
+        * 1.2 FORM EVENT 영역(onload등)
+        ********************************************************/
+        /**
+        * Form_onload 최초 로드시 발생되는 이벤트 (필수)
+        */
+        this.OM010P05_onload = function(obj, e)
+        {
+            this.fnInit();
+        }
+
+        /*********************************************************
+        * 2 필수 FUNCTION 영역 (fnInit, fnSearch, fnSave, fnAddRow, fnDelRow)
+        ********************************************************/
+        /**
+         * fnInit : 초기화 함수 검색조건 초기화 및 온로드 세팅
+         * @return {N/A}    N/A
+         * @example this.fnInit();
+         */
+        this.fnInit = function(){
+        	//변수 선언
+            var objDs, objDsIn;
+            var sTitle, sSearch, sNameSpace, sInDs;
+
+            //팝업 타이틀 세팅
+            sTitle = "부서찾기";
+            this.set_titletext(sTitle);
+
+            //this.staPopupTitle.set_text(sTitle);
+
+            //부모폼에서 넘어온 검색어 세팅
+            this.fv_sSearch = take.nvl(this.parent.Text, "");
+
+            if (this.fv_sSearch!="")
+            {
+                this.fv_sSearch = nexacro.replaceAll(this.fv_sSearch, ",", "\n")     //.replace(",", "\n");
+            }
+
+        	this.dsSearch.clearData();
+        	this.dsSearch.addRow();
+        // 	this.dsSearch.setColumn(0, "DEPT_CD", this.divSearch.form.edtDeptId.value);
+        // 	this.dsSearch.setColumn(0, "DEPT_NM", this.divSearch.form.edtDeptNm.value);
+        	this.dsSearch.setColumn(0, "USE_YN", "Y");
+
+        	trace("!@!@>> dsSearch:   " + this.dsSearch.saveXML());
+
+            take.tranSelect(this, "Search", "UserManagement.deptInfoList", "dsSearch", "dsDeptList", "", "fnCallback");
+        };
+
+        /**
+         * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+         * @param  {String} sTranId 트랜젝션 아이디
+         * @return {N/A}    N/A
+         * @example this.fnSearch("ID");
+         */
+        this.fnSearch = function(sTranId)
+        {
+            //공통 조회에서 호출할 디폴트값 세팅 필요
+            if (take.nvl(sTranId, "")=="") sTranId = "Transation id";
+            take.tranSelect(this,sTranId,"Namespace","sInDataset", "sOutDataset", "sParam", "fnCallback");
+        };
+
+        /**
+         * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+         * @param  {String} sTranId 트랜젝션 아이디
+         * @return {N/A}    N/A
+         * @example this.fnSave("ID");
+         */
+        this.fnSave = function(sTranId)
+        {
+            //공통 조회에서 호출할 디폴트값 세팅 필요
+            if (take.nvl(sTranId, "")=="") sTranId = "Save transation id";
+            take.tranSave(this, sTranId, "NAMESPACE", "sInDs", "sOutDs", "sParam", "fnCallback");
+        };
+
+        /**
+         * fnAddRow : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+         * @param  {String} sGridId 그리드 아이디
+         * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+         * @example this.fnAddRow(sGrdId, nRow);
+         */
+        this.fnAddRow = function(sGrdId, nRow)
+        {
+            //공통 행추가에서 호출할 디폴트값 세팅
+            if (take.nvl(sGrdId, "")=="") sGrdId = "Grid00";
+
+            //Script
+        };
+
+        /**
+         * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+         * @param  {String} sGridId 그리드 아이디
+         * @param  {Number, Array} arrnRow    deleteRow 리턴값
+         * @return {N/A} N/A
+         * @example this.fnDelRow(sGrdId, nRow);
+         */
+        this.fnDelRow = function(sGrdId, arrnRow)
+        {
+            //공통 행추가에서 호출할 디폴트값 세팅
+            if (take.nvl(sGrdId, "")=="") sGrdId = "Grid00";
+
+            //Script
+        };
+
+        /*********************************************************
+         * 3 각 COMPONENT 별 EVENT 영역
+          ********************************************************/
+        /**
+        * component_onclick : ~ 버튼 클릭
+        */
+        this.component_onclick = function(obj,e)
+        {
+            //Script
+        };
+
+        /*********************************************************
+        * 4 사용자 FUNCTION 영역
+        ********************************************************/
+        /**
+         * fnUserFunction : 사용자 함수
+         * @param  {String} sParam 문자형 인자
+         * @param  {Number} nParam 숫자형 인자
+         * @example this.fnUserFunction(sParam, nParam);
+         */
+        this.fnUserFunction = function(sParam, nParam)
+        {
+            //Script
+        };
+
+        /*********************************************************
+         * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+         ********************************************************/
+        /**
+        * fnCallback : transaction callback
+        * @param  : sId      - 서비스 아이디 (공통 콜백에서 넘어옴)
+        * @param  : nErrCd   - 에러코드 (공통 콜백에서 넘어옴)
+        * @param  : sErrMsg  - 에러메세지 (공통 콜백에서 넘어옴)
+        * @return : N/A
+        * @example :
+        */
+        this.fnCallback = function(sId, nErrCd, sErrMsg)
+        {
+            //Transaction 에러는 공통에서 처리
+
+            //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+            if( sErrMsg == "SUCC" )
+            {
+                //Success Script
+            } else {
+                //Etc Script
+            }
+
+            switch(sId)
+            {
+                case "Search" : //조회 콜백
+                    //Script
+                    break;
+                case "Transation id 02" :  //조회 콜백
+                    //Script
+                    break;
+                case "Transation id 03" : //조회 콜백
+                    //Script
+                    break;
+                case "Save transation id 01" :  //저장 콜백
+                    //Script
+                    break;
+                case "Save transation id 01" :  //저장 콜백
+                    //Script
+                    break;
+                default :
+                    break;
+            }
+        }
+
+        this.grdMain_oncelldblclick = function(obj,e)
+        {
+        	var arrRowidx = parseInt(obj.getSelectedRows());
+        	var sDeptCd = take.nvl(this.dsDeptList.getColumn(arrRowidx, "DEPT_CD"), "");
+        	var sDeptNm = take.nvl(this.dsDeptList.getColumn(arrRowidx, "DEPT_NM"), "");
+
+        	this.opener.dsUserDetail.setColumn(0, "DEPT_CD", sDeptCd);
+        	this.opener.dsUserDetail.setColumn(0, "DEPT_NM", sDeptNm);
+
+        	this.close();
+        };
+        });
+        
+        // Regist UI Components Event
+        this.on_initEvent = function()
+        {
+            this.addEventHandler("onload",this.OM010P05_onload,this);
+            this.grdMain.addEventHandler("oncelldblclick",this.grdMain_oncelldblclick,this);
+        };
+        this.loadIncludeScript("comDeptPop.xfdl");
+        this.loadPreloadList();
+        
+        // Remove Reference
+        obj = null;
+    };
+}
+)();

@@ -1,0 +1,448 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="BAS010P02" width="1000" height="800" titletext="품목코드 등록" onload="Form_onload" background="#ffffff">
+    <Layouts>
+      <Layout height="800" mobileorientation="landscape" width="1000">
+        <Static id="Static01_00" taborder="0" text="H20" left="0" height="20" right="0" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" top="0"/>
+        <Static id="Static02_00_00" taborder="1" text="W&#13;&#10;20" background="#fd9da0" opacity="0.5" textAlign="center" top="0" bottom="0" visible="false" right="0" width="20"/>
+        <Static id="Static02_00" taborder="2" text="W&#13;&#10;20" background="#fd9da0" opacity="0.5" textAlign="center" width="20" top="0" bottom="0" visible="false" left="0"/>
+        <Static id="Static01" taborder="3" text="H20" left="0" height="20" bottom="0" right="0" background="#fd9da0" opacity="0.5" textAlign="center" visible="false"/>
+        <Static id="Static01_00_01" taborder="4" text="H5" left="0" height="5" right="0" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" top="41"/>
+        <Button id="btnProgramSearch" taborder="5" top="20" height="21" cssclass="btn_WF_search03" text="조회" width="50" right="20" onclick="fnSearch"/>
+        <Div id="divSearch" taborder="6" left="20" top="46" height="43" cssclass="div_WF_searchBox01" right="20">
+          <Layouts>
+            <Layout>
+              <Static id="staProgramNm" taborder="0" text="인증분야" left="10" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="cboCertFldCd" taborder="1" left="staProgramNm:10" top="10" height="21" innerdataset="dsCertFldCd" codecolumn="CODE" datacolumn="NAME" width="195" value="어린이" text="" index="0" onitemchanged="fnSearch"/>
+              <Static id="Static07_00_01" taborder="2" text="50" left="295" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static07_00_01_00" taborder="7" text="50" left="619" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="staUseYnSearch" taborder="3" text="사용여부" left="Static07_00_01_00:5" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="cboUseYn" taborder="4" text="" left="staUseYnSearch:0" top="10" width="201" height="21" innerdataset="dsUseYn" codecolumn="CODE" datacolumn="NAME" index="-1" onitemchanged="fnSearch"/>
+              <Static id="staProgramNm00" taborder="5" text="품목명" left="Static07_00_01:0" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="edtGdsNm" taborder="6" left="staProgramNm00:0" top="9" width="195" height="20" onkeyup="divSearch_onkeyup"/>
+            </Layout>
+            <Layout name="default0"/>
+          </Layouts>
+        </Div>
+        <Button id="btnShowHide" taborder="7" left="43.75%" top="89" width="60" height="10" cssclass="btn_WF_fold01" onclick="btnShowHide_onclick"/>
+        <Div id="divDetail" taborder="8" left="20" top="btnShowHide:20" right="20" bottom="63" text="">
+          <Layouts>
+            <Layout>
+              <Static id="Static24" taborder="1" text="품목코드 목록" left="0" top="0" height="21" cssclass="sta_WF_title02" right="0"/>
+              <Grid id="grdList" taborder="1" left="0" top="26" binddataset="dsList" autofittype="col" right="0" bottom="0" oncellclick="divDetail_grdList_oncellclick">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="0"/>
+                      <Column size="80"/>
+                      <Column size="120"/>
+                      <Column size="250"/>
+                      <Column size="80"/>
+                      <Column size="50"/>
+                      <Column size="50"/>
+                      <Column size="50"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="DOC_KEY"/>
+                      <Cell col="1" text="인증분야" cssclass="cellImport" displaytype="normal" edittype="none" textAlign="center"/>
+                      <Cell col="2" text="인증종류" cssclass="cellImport" displaytype="normal" edittype="none" textAlign="center"/>
+                      <Cell col="3" text="품목명" cssclass="cellImport"/>
+                      <Cell col="4" text="간사기관" displaytype="normal" edittype="none" textAlign="center"/>
+                      <Cell col="5" text="우선인계여부"/>
+                      <Cell col="6" text="정렬순번" cssclass="cellImport"/>
+                      <Cell col="7" text="사용여부" cssclass="cellImport"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:CODE_KEY" textAlign="left" edittype="none"/>
+                      <Cell col="1" text="bind:REF1" textAlign="left" edittype="expr:dataset.getRowType(currow) == '2'?'combo':'none'" displaytype="combotext" combodataset="dsCertFldCd" combocodecol="CODE" combodatacol="NAME" combodisplaynulltype="nulltext" combodisplaynulltext="bind:REF1_NM"/>
+                      <Cell col="2" text="bind:REF2" textAlign="left" edittype="expr:dataset.getRowType(currow) == '2'?'combo':'none'" displaytype="combotext" combodataset="dsCertKndCd" combocodecol="CODE" combodatacol="NAME" combodisplaynulltype="nulltext" combodisplaynulltext="bind:REF2_NM"/>
+                      <Cell col="3" text="bind:CODE_NM" textAlign="left" edittype="normal"/>
+                      <Cell col="4" text="bind:REF3" textAlign="left" edittype="combo" displaytype="combotext" combodataset="dsTestInstCd" combocodecol="CODE" combodatacol="NAME" combodisplaynulltype="nulltext" combodisplaynulltext="bind:REF3_NM"/>
+                      <Cell col="5" edittype="combo" text="bind:REF4" displaytype="combotext" combodataset="dsUseYnGrid" combocodecol="CODE" combodatacol="NAME"/>
+                      <Cell col="6" text="bind:CODE_ORDER" textAlign="right" edittype="normal" editinputtype="number"/>
+                      <Cell col="7" text="bind:USE_YN" textAlign="center" wordWrap="char" displaytype="combotext" edittype="combo" combodataset="dsUseYnGrid" combocodecol="CODE" combodatacol="NAME"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Button id="btnDelHarmInfo" taborder="2" text="  행삭제  " top="0" width="110" height="21" cssclass="btn_WF_Custom" right="0" fittocontents="width" visible="true" onclick="fnDelRow"/>
+              <Button id="btnAddHarmInfo" taborder="3" text="  행추가  " top="0" width="110" height="21" cssclass="btn_WF_Custom" right="btnDelHarmInfo:3" fittocontents="width" visible="true" onclick="fnAddRow"/>
+              <Button id="btnDownExcel" taborder="4" text="  엑셀다운로드  " top="0" width="110" height="21" cssclass="btn_WF_Custom" right="btnAddHarmInfo:3" fittocontents="width" visible="true" onclick="btnExcelDownload_onclick"/>
+              <Button id="btnUploadExcel" taborder="5" text="  엑셀업로드  " top="0" width="110" height="21" cssclass="btn_WF_Custom" right="btnDownExcel:3" fittocontents="width" visible="true" onclick="btnExcelUpload_onclick"/>
+            </Layout>
+            <Layout name="default0">
+              <Grid id="grdList" taborder="0" left="10" top="79" autofittype="col" right="10" height="350" oncelldblclick="divSearch_grdList_oncelldblclick" binddataset="dsProgramCd"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static01_00_00" taborder="9" text="H20" left="0" height="20" right="0" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" top="99"/>
+        <Static id="Static01_01" taborder="10" text="H20" left="0" right="0" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" bottom="43" height="20"/>
+        <Button id="btnCancel" taborder="11" height="23" cssclass="btn_WF_cancel01" text="닫기" right="20" onclick="fnClose" bottom="20" width="57"/>
+        <Button id="btnEnter" taborder="12" height="23" cssclass="btn_WF_check01" text="저장" width="57" onclick="fnSave" right="btnCancel:3" bottom="20"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsCertFldCd">
+        <ColumnInfo>
+          <ConstColumn id="CODE" type="STRING" size="30"/>
+          <ConstColumn id="NAME" type="STRING" size="30"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="REF1" type="STRING" size="256" description="프로젝트 코드"/>
+          <Column id="USE_YN" type="STRING" size="256"/>
+          <Column id="GROUP_ID" type="STRING" size="256"/>
+          <Column id="CODE_NM" type="STRING" size="256"/>
+          <Column id="GROUP_REF1" type="STRING" size="256"/>
+          <Column id="GROUP_REF2" type="STRING" size="256"/>
+          <Column id="GROUP_REF3" type="STRING" size="256"/>
+          <Column id="GROUP_REF4" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsList">
+        <ColumnInfo>
+          <Column id="CODE_KEY" type="STRING" size="255"/>
+          <Column id="GROUP_ID" type="STRING" size="255"/>
+          <Column id="CODE_ID" type="STRING" size="255"/>
+          <Column id="PARENT_KEY" type="STRING" size="255"/>
+          <Column id="CODE_NM" type="STRING" size="255"/>
+          <Column id="ML_CD" type="STRING" size="255"/>
+          <Column id="REF1" type="STRING" size="255"/>
+          <Column id="REF2" type="STRING" size="255"/>
+          <Column id="REF3" type="STRING" size="255"/>
+          <Column id="REF4" type="STRING" size="255"/>
+          <Column id="REF5" type="STRING" size="255"/>
+          <Column id="DESC_TXT" type="STRING" size="255"/>
+          <Column id="CODE_ORDER" type="STRING" size="255"/>
+          <Column id="USE_YN" type="STRING" size="255"/>
+          <Column id="REG_DT" type="STRING" size="255"/>
+          <Column id="REG_CD" type="STRING" size="255"/>
+          <Column id="MOD_DT" type="STRING" size="255"/>
+          <Column id="MOD_CD" type="STRING" size="255"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsUseYn">
+        <ColumnInfo>
+          <ConstColumn id="CODE" type="STRING" size="30"/>
+          <ConstColumn id="NAME" type="STRING" size="30"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsUseYnGrid">
+        <ColumnInfo>
+          <ConstColumn id="CODE" type="STRING" size="30"/>
+          <ConstColumn id="NAME" type="STRING" size="30"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsExcelUpload"/>
+      <Dataset id="dsCertKndCd">
+        <ColumnInfo>
+          <ConstColumn id="CODE" type="STRING" size="30"/>
+          <ConstColumn id="NAME" type="STRING" size="30"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsTestInstCd">
+        <ColumnInfo>
+          <ConstColumn id="CODE" type="STRING" size="30"/>
+          <ConstColumn id="NAME" type="STRING" size="30"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  품목코드등록
+*
+*  @MenuPath    기초정보관리 > 품목관리 > 품목코드등록
+*  @FileName    BAS010P02.xfdl 
+*  @Creator     doore
+*  @CreateDate  2023.02.06 
+*  @Version     1.0
+*  @Desction    공통코드 품목코드(GDS_CD) 등록
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2023.02.06      doore              최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+this.fv_sProjectCd = nexacro.getApplication().av_sProjectCd;
+this.fv_objGdsUserInfo  = nexacro.getApplication().gdsUserInfo;
+this.fv_sCertFldCd = take.nvl(this.parent.sCertFldCd, "");
+
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.Form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {    
+        // 공통코드 조회
+		take.tranCode(this, ["CERT_FLD_CD", "CERT_KND_CD", "TEST_INST_CD", "YN", "YN"]
+		                  , ["dsCertFldCd", "dsCertKndCd", "dsTestInstCd", "dsUseYn", "dsUseYnGrid"]
+						  , ["","","", "ALL",""],
+		function(sId, nErrCd, sErrMsg)
+		{
+			if(!take.isEmpty(this.fv_sCertFldCd)) this.divSearch.form.cboCertFldCd.set_value(this.fv_sCertFldCd);
+			else this.divSearch.form.cboCertFldCd.set_index(0);
+			
+			this.divSearch.form.cboUseYn.set_index(1);
+
+			this.fnSearch();
+		});
+   }
+}
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Search";
+	
+	this.dsList.clearData();
+	this.dsSearch.setColumn(0, "GROUP_ID", "GDS_CD");
+	this.dsSearch.setColumn(0, "GROUP_REF1", "CERT_FLD_CD");
+	this.dsSearch.setColumn(0, "GROUP_REF2", "CERT_KND_CD");
+	this.dsSearch.setColumn(0, "GROUP_REF3", "TEST_INST_CD");
+
+    take.tranSelect(this, "Search", "Doore.codeInfoList", "dsSearch", "dsList", "", "fnCallback");
+}
+
+/**
+ * fnAdd : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+ * @example this.fnAddRow(sGrdId, nRow);
+ */
+this.fnAddRow = function(sGrdId, nRow)
+{
+	var strCertFldCd = this.divSearch.form.cboCertFldCd.value;
+	
+	var objDs;
+
+    //변수에 값 세팅
+	nRow = this.dsList.addRow();
+    
+	// 기본정보 세팅
+	this.dsList.setColumn(nRow, "REF1", strCertFldCd);
+	this.dsList.setColumn(nRow, "GROUP_ID",   "GDS_CD");
+	this.dsList.setColumn(nRow, "PARENT_KEY", "0004400172");
+	this.dsList.setColumn(nRow, "USE_YN", "Y");
+	
+};
+
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+this.fnSave = function()
+{    
+	var sTranId = "Save";
+	
+	//데이터셋 수정 여부 확인
+	if (!take.isDsModified(this.dsList))
+    {
+        take.alert(this, "Info", "변경된 데이터가 없습니다.");
+        return false;
+    }
+	
+	//저장 전 벨리데이션 체크
+    var bRtn = 
+        takeval.checkComp(
+            this,                           //현재 Form Object
+            this.divDetail.form.grdList,  	//벨리데이션 대상 컴포넌트 (Grid 및 Form류[this,div,tabpase])
+            "cellImport",                   //필수 입력 css값
+            "",                				//성공 Call Back 함수
+            true);                          //동기 여부
+			
+	if(bRtn) 
+	{
+		var sParam = "sNameSpace=basicInfo.codeInfoInsert|SystemCommon.codeInfoUpdate|SystemCommon.codeInfoDelete"
+				   + " sDataset=dsList";
+		
+		take.transaction(this, sTranId, "SVC_LOC::doore/saveList.do", "dsList=dsList:U", "", sParam, "fnCallback");
+	}
+};
+
+/**
+ * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+ * @param  {N/A} N/A
+ * @return {N/A} N/A
+ */
+this.fnDelRow = function()
+{    
+	//공통 행추가에서 호출할 디폴트값 세팅
+    var delRow = this.dsList.rowposition;
+   
+    if(delRow < 0)
+	{
+        alert("선택된 항목이 없습니다.");
+        return;
+    }
+	
+	// row 상태가 insert 인경우만 삭제 가능
+	if(this.dsList.getRowType(delRow) == 2) this.dsList.deleteRow(delRow);
+	else 
+	{
+		alert("저장된 행은 삭제 할 수 없습니다. 사용여부를 'N'으로 변경하여 주십시오.");
+		return false;
+	}
+};
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+
+/* 닫기 버튼 클릭 이벤트 */
+this.fnClose = function()
+{
+	this.close();
+}
+
+/* 엑셀 다운로드 클릭 이벤트 */
+this.btnExcelDownload_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	gFnExcelDown (this, this.divDetail.form.grdList, "품목코드_" + this.divSearch.form.cboCertFldCd.text);
+};
+
+/* 엑셀 업로드 클릭 이벤트 */
+this.btnExcelUpload_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	gFnExcelUpload(this, this.dsExcelUpload, 2, this.fnExcelImport_onsuccess, this.fnExcelImport_onerror);
+
+};
+
+/* 인증종류 클릭시 필터 처리 */
+this.divDetail_grdList_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	var strColNm = this.divDetail.form.grdList.getCellProperty( "head", e.col, "text" );
+	var strCertFldCd = this.dsList.getColumn(e.row,"REF1");
+	if(strColNm == "인증종류") 
+	{
+		this.dsCertKndCd.filter("");
+		// 01 : 전기용품, 02 : 생활용품, 03 : 어린이제품
+		if(strCertFldCd == "03") this.dsCertKndCd.filter("REF1 == '" + this.dsList.getColumn(e.row, "REF1") + "'" );	
+		else if(strCertFldCd == "02") this.dsCertKndCd.filter("REF2 == '" + this.dsList.getColumn(e.row, "REF1") + "'" ); 
+		else if(strCertFldCd == "01") this.dsCertKndCd.filter("REF3 == '" + this.dsList.getColumn(e.row, "REF1") + "'" ); 
+	}
+};
+
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+
+/*
+	excel 업로드 성공
+*/
+this.fnExcelImport_onsuccess = function(obj:ExcelImportObject,  e:nexacro.ExcelImportEventInfo)
+{
+	var nCnt = this.dsExcelUpload.rowcount;
+    this.dsList.clearData();
+	var strMapp = gFnGetMappingString(this.divDetail.form.grdList);
+
+	for(var i = 0; i < nCnt; i++) {
+		var nRow = this.dsList.addRow();
+		this.dsList.copyRow(nRow,this.dsExcelUpload, i, strMapp);
+		this.dsList.setColumn(nRow, "GROUP_ID", "GDS_CD");
+		this.dsList.setColumn(nRow, "PARENT_KEY", "0004400172");
+		
+		// 인증분야코드 처리
+		var sCertFldCd = gFnReplace(this.dsList.getColumn(nRow, "REF1"), /\s/g, "");
+		sCertFldCd = gFnGetCodeId(this.dsCertFldCd, sCertFldCd);
+		this.dsList.setColumn(nRow, "REF1", sCertFldCd);
+		// 인증종류코드 처리
+		var sCertKndCd = gFnReplace(this.dsList.getColumn(nRow, "REF2"), /\s/g, "");
+		sCertKndCd = gFnGetCodeId(this.dsCertKndCd, sCertKndCd);
+		this.dsList.setColumn(nRow, "REF2", sCertKndCd);
+	}
+	
+	// 데이터셋 처리 : CODE_KEY가 있는 경우 update, 없는 경우 insert
+	this.dsList.set_updatecontrol(false);
+	for(var i = 0; i < this.dsList.rowcount; i++)
+	{
+		if(take.isEmpty(this.dsList.getColumn(i, "CODE_KEY"))) this.dsList.setRowType(i, "I");
+		else  this.dsList.setRowType(i, "U");
+	}
+	this.dsList.set_updatecontrol(true);
+	
+	this.divDetail.form.grdList.selectRow(0);
+} 
+
+// 검색조건 엔터 값 조회
+this.divSearch_onkeyup = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+	if(e.keycode == 13){
+		this.fnSearch();
+	}
+};
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script       
+    } else {
+        //Etc Script
+    }  
+
+	switch(sId)
+    {
+        case "Save" : //저장 콜백
+			alert("저장되었습니다.");
+			this.fnSearch();
+			break;
+        case "Search" :  //조회 콜백
+            break;        
+        default :
+            break;
+    }           
+};
+
+
+]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="divSearch.form.cboCertFldCd" propid="value" datasetid="dsSearch" columnid="REF1"/>
+      <BindItem id="item1" compid="divSearch.form.cboUseYn" propid="value" datasetid="dsSearch" columnid="USE_YN"/>
+      <BindItem id="item2" compid="divSearch.form.edtGdsNm" propid="value" datasetid="dsSearch" columnid="CODE_NM"/>
+    </Bind>
+  </Form>
+</FDL>

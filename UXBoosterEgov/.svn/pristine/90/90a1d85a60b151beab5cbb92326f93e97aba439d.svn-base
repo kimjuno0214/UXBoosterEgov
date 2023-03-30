@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="DRE020M01" width="1659" height="832" titletext="자주쓰는문구" onload="Form_onload">
+    <Layouts>
+      <Layout height="832" mobileorientation="landscape" width="1659">
+        <Div id="divSearch" taborder="0" left="10" top="0" height="43" right="10" cssclass="div_WF_searchBox01" text="" minwidth="1300" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Static id="staTitleT" taborder="0" text="제목" left="20" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="edtTitle" taborder="1" left="staTitleT:10" top="10" width="195" height="21" onkeyup="divSearch_edtTitle_onkeyup"/>
+              <Static id="Static07" taborder="2" text="10" left="332" top="0" width="2" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static08" taborder="3" text="10" left="665" top="0" width="2" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnShowHide" taborder="2" left="48.16%" top="divSearch:0" width="60" height="10" cssclass="btn_WF_fold01"/>
+        <Div id="divDetail" taborder="1" left="10" top="btnShowHide:20" right="10" bottom="10" minwidth="1300" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Static id="staListT" taborder="0" text="자주쓰는 문구 목록조회" left="0" top="0" height="30" width="450" cssclass="sta_WF_title02"/>
+              <Grid id="gridMain" taborder="1" left="0" top="30" bottom="0" autofittype="col" binddataset="dsMain" initvalueid="iv_Grid1" right="0" oncellclick="gridMain_oncellclick" oncelldblclick="divDetail_gridMain_oncelldblclick" takegrid="sort,no" nodataimage="url('theme://images/Alert_nodataimage.png')" autosizingtype="row">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="200"/>
+                      <Column size="500"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="제목"/>
+                      <Cell col="1" text="내용"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:SJ" textAlign="left" displaytype="normal" cssclass="expr:IMPORT_YN == 'Y' ? 'import' : ''" padding="0px 0px 0px 0px" edittype="normal"/>
+                      <Cell col="1" text="bind:CN" textAlign="left" edittype="normal"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static01" taborder="3" text="10" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" textAlign="center"/>
+        <Static id="Static24" taborder="4" text="10" left="0" height="20" background="rgba(255,0,0,0.4)" visible="false" right="0" textAlign="center" top="53"/>
+        <Static id="Static22" taborder="5" text="10" left="0" height="10" background="rgba(255,0,0,0.4)" visible="false" right="0" bottom="0" textAlign="center"/>
+        <Static id="Static01_00" taborder="6" text="10" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" textAlign="center" right="0"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="MENU_CD" type="STRING" size="256"/>
+          <Column id="BOARD_TITLE" type="STRING" size="256"/>
+          <Column id="REG_CD" type="STRING" size="256"/>
+          <Column id="REG_DT_FROM" type="STRING" size="256"/>
+          <Column id="REG_DT_TO" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsMain"/>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  기본조회화면
+*
+*  @MenuPath    시스템 > 두레소프트 > 자주쓰는 문구
+*  @FileName    TMP010M01.xfdl 
+*  @Creator     doore
+*  @CreateDate  2023.01.04 
+*  @Version     1.0
+*  @Desction    설명 : 조회화면 템플릿
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2023.01.04      doore               최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+//this.fv_nFormVal = null;     //용도
+this.fv_objGdsUserInfo = nexacro.getApplication().gdsUserInfo;
+this.fv_sProjectCd = nexacro.getApplication().av_sProjectCd;
+this.fv_sMenuCd = "";
+this.fv_objProgInfo;
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* formid_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.Form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this)) 
+   {    
+		this.fnSearch();
+   }
+};
+
+/*********************************************************
+ * 2.1 CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+		case "Search" :
+			break;
+        case "Delete" : //삭제 콜백
+            //Script
+			take.alert(this, "", "삭제가 완료되었습니다.");
+			this.fnSearch();
+            break;
+        default :
+            break;
+    }        
+};
+
+/*********************************************************
+* 3 필수 FUNCTION 영역 (fnSearch, fnSave, fnAdd, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Search";
+	
+    take.tranSelect(this, "Search", "Doore.docmSelect", "dsSearch", "dsMain", "", "fnCallback");
+   //this.transaction( "MyService01","SVC_LOC::samplexml.jsp","input1=Dataset02","Dataset03=output1","a=b","callbackFunction");
+
+};
+
+/**
+ * fnAdd : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+ * @example this.fnAddRow(sGrdId, nRow);
+ */
+this.fnAddRow = function(sGrdId, nRow)
+{
+    
+};
+
+/**
+ * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number, Array} arrnRow    deleteRow 리턴값
+ * @return {N/A} N/A
+ * @example this.fnDelRow(sGrdId, nRow); 
+ */
+this.fnDelRow = function(sGrdId, arrnRow)
+{   
+    
+};
+
+/*********************************************************
+ * 4 각 COMPONENT 별 EVENT 영역
+ ********************************************************/
+
+this.divSearch_edtTitle_onkeyup = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+	if( e.keycode == 13 )
+	{
+		this.fnSearch();
+	}
+};
+
+
+/*********************************************************
+* 5 사용자 FUNCTION 영역
+********************************************************/
+]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="divSearch.form.edtTitle" propid="value" datasetid="dsSearch" columnid="BOARD_TITLE"/>
+    </Bind>
+  </Form>
+</FDL>

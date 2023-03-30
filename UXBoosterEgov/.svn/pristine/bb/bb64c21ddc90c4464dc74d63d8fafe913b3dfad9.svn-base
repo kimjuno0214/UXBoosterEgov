@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AppVariables version="2.0">
+  <Datasets>
+    <Dataset id="gdsUserInfo">
+      <ColumnInfo>
+        <Column id="USER_CD" type="STRING" size="255"/>
+        <Column id="USER_ID" type="STRING" size="255"/>
+        <Column id="USER_NM" type="STRING" size="255"/>
+        <Column id="USER_ENG_NM" type="STRING" size="255"/>
+        <Column id="USER_BIRTHDAY" type="STRING" size="255"/>
+        <Column id="LUNAR_CD" type="STRING" size="255"/>
+        <Column id="USER_EMAIL" type="STRING" size="255"/>
+        <Column id="USER_MOBILE" type="STRING" size="255"/>
+        <Column id="USER_TEL" type="STRING" size="255"/>
+        <Column id="USER_FAX" type="STRING" size="255"/>
+        <Column id="DEPT_CD" type="STRING" size="256"/>
+        <Column id="USER_POSITION" type="STRING" size="256"/>
+        <Column id="USER_GRADE" type="STRING" size="256"/>
+        <Column id="USER_STATUS" type="STRING" size="256"/>
+        <Column id="DESC_TXT" type="STRING" size="256"/>
+        <Column id="USE_YN" type="STRING" size="256"/>
+        <Column id="AGREE_YN" type="STRING" size="256"/>
+        <Column id="AGREE_DT" type="STRING" size="256"/>
+        <Column id="LOGIN_FAIL_CNT" type="STRING" size="256"/>
+        <Column id="PW_CHANGE_DT" type="STRING" size="256"/>
+        <Column id="PW_CHANGE_CNT" type="STRING" size="256"/>
+        <Column id="INIT_YN" type="STRING" size="256"/>
+        <Column id="PROJECT_CNT" type="STRING" size="256"/>
+        <Column id="PROJECT_CD" type="STRING" size="256"/>
+        <Column id="DEPT_NM" type="STRING" size="256"/>
+        <Column id="LOGIN_IP" type="STRING" size="256"/>
+        <Column id="REG_DT" type="STRING" size="256"/>
+        <Column id="LAST_LOGIN_DT" type="STRING" size="256"/>
+        <Column id="ADMIN_YN" type="STRING" size="256"/>
+        <Column id="ROLE_CD" type="STRING" size="256"/>
+        <Column id="MAIN_URL" type="STRING" size="256"/>
+        <Column id="DASH_COUNT" type="STRING" size="256"/>
+        <Column id="ENC_USER_CD" type="STRING" size="256"/>
+      </ColumnInfo>
+    </Dataset>
+    <Dataset id="tgdsMsg"/>
+  </Datasets>
+  <Variables>
+    <Variable id="av_sProjectCd" initval="PM00000001"/>
+    <Variable id="av_sProjectNm" initval="관리자"/>
+    <Variable id="av_nMdiCnt" initval="8"/>
+    <Variable id="av_sLangCd"/>
+    <Variable id="av_sLocation"/>
+    <Variable id="av_objDateTime"/>
+  </Variables>
+  <DataObjects/>
+</AppVariables>

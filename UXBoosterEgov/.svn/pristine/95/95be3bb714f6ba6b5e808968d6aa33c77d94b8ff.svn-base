@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="publishing031" width="600" height="650" titletext="약관팝업">
+    <Layouts>
+      <Layout height="650" mobileorientation="landscape" width="600">
+        <Static id="Static16" taborder="1" left="10" top="80" cssclass="sta_WF_td01L" right="10" height="200"/>
+        <Static id="Static45" taborder="2" text="Static00" left="0" top="0" width="10" background="red" visible="false" height="200"/>
+        <Static id="Static22" taborder="3" text="10" left="10" top="0" width="220" height="10" background="rgba(255,0,0,0.4)" visible="false" color="red" textAlign="center"/>
+        <TextArea id="TextArea00" taborder="0" top="86" right="16" left="16" height="188"/>
+        <Static id="Static99" taborder="4" text="시스템 이용약관" left="10" top="50" height="31" cssclass="sta_WF_th01L" right="10"/>
+        <Static id="Static13" taborder="5" left="10" top="279" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <CheckBox id="CheckBox00" taborder="6" text="동의합니다" left="16" top="284" width="150" height="20"/>
+        <Static id="Static00" taborder="7" left="10" top="339" cssclass="sta_WF_td01L" right="10" height="200"/>
+        <TextArea id="TextArea01" taborder="8" top="345" right="16" left="16" height="188"/>
+        <Static id="Static01" taborder="9" left="10" top="538" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <CheckBox id="CheckBox01" taborder="10" text="동의합니다" left="16" top="543" width="150" height="20"/>
+        <Static id="Static02" taborder="11" text="개인정보이용동의" left="10" top="309" height="31" cssclass="sta_WF_th01L" right="10"/>
+        <Button id="Button02" taborder="12" text="동의" top="578" width="100" height="23" cssclass="btn_WF_basic01" left="196"/>
+        <Button id="Button03" taborder="13" text="취소" width="100" height="23" cssclass="btn_WF_basic01" left="303" top="578"/>
+        <Static id="Static03" taborder="14" text="팝업타이틀" left="10" top="10" height="40" width="580" cssclass="sta_WF_popTitle01"/>
+        <Button id="Button00" taborder="15" left="550" top="10" width="40" height="40" cssclass="btn_WF_popClose01"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+          <Column id="Column5" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

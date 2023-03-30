@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="frmMdi" width="1040" height="45" titletext="New Form">
+    <Layouts>
+      <Layout height="45" mobileorientation="landscape" width="1040">
+        <Static id="Static00" taborder="0" text="코드관리" left="0" top="13" height="19" cssclass="sta_WF_title01" width="610"/>
+        <Button id="Button00" taborder="1" text="조회" top="10" height="25" cssclass="btn_WF_search01" width="58" right="289"/>
+        <Button id="Button01" taborder="2" text="신규" top="10" height="25" cssclass="btn_WF_new01" width="58" right="226"/>
+        <Button id="Button02" taborder="3" text="삭제" top="10" height="25" cssclass="btn_WF_delete01" width="58" right="163"/>
+        <Button id="Button03" taborder="4" text="저장" top="10" height="25" cssclass="btn_WF_save01" width="58" right="100"/>
+        <Button id="Button04" taborder="5" text="인쇄" top="10" height="25" cssclass="btn_WF_print01" width="58" right="37"/>
+        <Button id="Button05" taborder="6" top="10" height="24" cssclass="btn_WF_advice01" left="1008" width="22"/>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>

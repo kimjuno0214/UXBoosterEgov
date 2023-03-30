@@ -1,0 +1,294 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="srcMaker_Popup" width="980" height="700" titletext="EasyBAM Source Maker_PopUp" onload="srcMaker_Popup_onload">
+    <Layouts>
+      <Layout height="700" mobileorientation="landscape" width="980">
+        <Tab id="Tab" taborder="1" tabindex="0" left="0" top="40" right="0" bottom="10">
+          <Tabpages>
+            <Tabpage id="tabPage1" text="퀴리내용">
+              <Layouts>
+                <Layout>
+                  <TextArea id="teaQuery" taborder="0" left="10" top="10" right="10" bottom="10"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="tabPage2" text="Dataset XML">
+              <Layouts>
+                <Layout>
+                  <TextArea id="teaDataset" taborder="0" left="10" top="10" right="10" bottom="10"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+        <Button id="btnOk" taborder="1" text="확인" left="910" top="10" height="22" right="10" onclick="btnOk_onclick"/>
+        <Static id="staLable02" taborder="2" text="미리보기" top="1" cssclass="sta_WF_title02" usedecorate="true" width="154" height="40" left="1"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsInfo">
+        <ColumnInfo>
+          <Column id="CHK" type="STRING" size="256"/>
+          <Column id="ID" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CHK"/>
+            <Col id="ID">codeSelect</Col>
+          </Row>
+          <Row>
+            <Col id="ID">codeInsert</Col>
+          </Row>
+          <Row>
+            <Col id="ID">codeUpdate</Col>
+          </Row>
+          <Row>
+            <Col id="ID">codeDelete</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsTree">
+        <ColumnInfo>
+          <Column id="GRID_TYPE" type="STRING" size="256"/>
+          <Column id="LEV" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="GRID_TYPE">TakeSystemMapper</Col>
+            <Col id="LEV">0</Col>
+          </Row>
+          <Row>
+            <Col id="LEV">1</Col>
+            <Col id="GRID_TYPE">sysComCode</Col>
+          </Row>
+          <Row>
+            <Col id="LEV">1</Col>
+            <Col id="GRID_TYPE">sysLogHistory</Col>
+          </Row>
+          <Row>
+            <Col id="LEV">1</Col>
+            <Col id="GRID_TYPE">sysProgMgr</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    1DEPTH > 2DEPTH
+*  @FileName    *.xfdl 
+*  @Creator     홍길동
+*  @CreateDate  yyyy.MM.DD 
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  YYYY.MM.DD      홍길동             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* formid_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.srcMaker_Popup_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (takeit.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {    
+		//this.Tab.tabPage2.form.teaDataset.set_value(this.parent.oDatasetNm.saveXML());
+   }
+}
+
+/*********************************************************
+* 2.1 TRANSACTION 서비스 호출 처리
+ ********************************************************/
+/**
+ * fnTran : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnTran("ID");
+ */
+this.fnTran = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (takeit.nvl(sTranId, "")=="") sTranId = "Transation id";
+    
+    //변수선언
+    var sUrl   = "",      //서비스 URL
+        sInDs  = "",      //데이터셋을 검색조건으로 보낼경우 사용 -->선택
+        sOutDs = "",      //데이터를 받아올 데이터셋 지정
+        sParam = "",      //파라메터 사용 안 할 경우       
+        sCallBack = "";        //콜백 처리 함수
+
+    sCallBack  = "fnCallback" ; 
+    
+    switch(sTranId)
+    {
+        case "Transaction id 01" :  
+            Dataset.clearData();
+            //Script
+            break;
+        case "Transaction id 02" :  //코드 조회
+            Dataset.clearData();//Script
+            //Script
+            break;
+        case "Transaction id 03" : //다국어 조회
+            Dataset.clearData();//Script
+            //Script
+            break;
+        case "Save transation id 01" :  
+            //Script            
+            break;
+        case "Save transation id 01" :  //코드저장
+            //Script            
+            break; 
+        default :
+            break;
+    }
+    
+    //트랜젝션 공통함수 호출 -->필수(모든 트랜젝션을 공통으로 처리)
+    takeit.transaction(this,sTranId, sUrl, sInDs, sOutDs, sParam, sCallBack);
+}
+
+/*********************************************************
+ * 2.2 CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "Transation id 01" : //조회 콜백
+            //Script
+            break;
+        case "Transation id 02" :  //조회 콜백
+            //Script
+            break;
+        case "Transation id 03" : //조회 콜백
+            //Script
+            break;
+        case "Save transation id 01" :  //저장 콜백
+            //Script
+            break;
+        case "Save transation id 01" :  //저장 콜백
+            //Script
+            break;
+        default :
+            break;
+    }        
+} 
+
+/*********************************************************
+* 3 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (takeit.nvl(sTranId, "")=="") sTranId = "Transation id";
+    
+    this.fnTran(sTranId);
+}
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+this.fnSave = function(sTranId)
+{    
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (takeit.nvl(sTranId, "")=="") sTranId = "Save transation id";
+    
+    this.fnTran(sTranId);
+}
+/**
+ * fnAddRow : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+ * @example this.fnAddRow(sGrdId, nRow);
+ */
+this.fnAddRow = function(sGrdId, nRow)
+{
+    //공통 행추가에서 호출할 디폴트값 세팅
+    if (takeit.nvl(sGrdId, "")=="") sGrdId = "Grid00";
+    
+    //Script
+}
+
+/**
+ * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number, Array} arrnRow    deleteRow 리턴값
+ * @return {N/A} N/A
+ * @example this.fnDelRow(sGrdId, nRow); 
+ */
+this.fnDelRow = function(sGrdId, arrnRow)
+{    
+    //공통 행추가에서 호출할 디폴트값 세팅
+    if (takeit.nvl(sGrdId, "")=="") sGrdId = "Grid00";
+    
+    //Script
+}
+
+/*********************************************************
+ * 4 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+/**
+* btnOk_onclick : 확인 버튼 클릭
+*/
+this.btnOk_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.close();
+};
+
+/*********************************************************
+* 5 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnUserFunction : 사용자 함수
+ * @param  {String} sParam 문자형 인자
+ * @param  {Number} nParam 숫자형 인자
+ * @example this.fnUserFunction(sParam, nParam);
+ */
+this.fnUserFunction = function(sParam, nParam)
+{    
+    //Script
+}
+
+]]></Script>
+  </Form>
+</FDL>

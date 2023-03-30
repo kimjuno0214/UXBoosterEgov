@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="sample01" width="1040" height="685" titletext="팝업샘플">
+    <Layouts>
+      <Layout height="685" mobileorientation="landscape" width="1040">
+        <Div id="Div02" taborder="4" left="10" top="10" width="460" height="600" cssclass="dvi_WF_tabBox01">
+          <Layouts>
+            <Layout>
+              <Static id="Static03" taborder="0" text="프로젝트명" left="10" top="10" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static10" taborder="1" left="128" top="10" height="31" cssclass="sta_WF_td01L" width="320"/>
+              <Static id="Static00" taborder="3" text="사용자명" left="10" top="40" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static01" taborder="4" left="128" top="40" height="31" cssclass="sta_WF_td01L" width="320"/>
+              <Static id="Static02" taborder="5" text="로그인일시" left="10" top="70" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static04" taborder="6" left="128" top="70" height="31" cssclass="sta_WF_td01L" width="320"/>
+              <Static id="Static05" taborder="7" left="10" top="100" height="31" cssclass="sta_WF_td01L" width="438"/>
+              <Button id="Button00" taborder="8" text="내정보수정" left="94" top="104" width="86" height="23" cssclass="btn_WF_basic01"/>
+              <Button id="Button01" taborder="9" text="비밀번호변경" left="185" top="104" width="86" height="23" cssclass="btn_WF_basic01"/>
+              <Button id="Button02" taborder="10" text="마이메뉴설정" left="276" top="104" width="86" height="23" cssclass="btn_WF_basic01"/>
+              <Static id="Static06" taborder="11" text="대시보드설정" left="10" top="130" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static07" taborder="12" left="128" top="130" height="31" cssclass="sta_WF_td01L" width="320"/>
+              <Static id="Static08" taborder="13" text="대시보드검색" left="10" top="160" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static09" taborder="14" left="128" top="160" height="31" cssclass="sta_WF_td01L" width="320"/>
+              <Edit id="Edit11" taborder="2" left="135" top="165" width="190" height="21"/>
+              <Static id="Static11" taborder="15" text="카테고리 예시" left="10" top="201" height="30" width="290" cssclass="sta_WF_title02"/>
+              <Grid id="Grid00" taborder="16" left="10" top="231" width="438" height="270" binddataset="Dataset00" autofittype="col">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="31"/>
+                      <Column size="202"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="body">
+                      <Cell text="bind:Column0" displaytype="checkboxcontrol" edittype="checkbox"/>
+                      <Cell col="1" text="bind:Column1"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="Static12" taborder="17" left="255" top="205" width="25" height="22" cssclass="sta_WF_icoCategory01"/>
+              <Static id="Static13" taborder="18" left="283" top="205" width="25" height="22" cssclass="sta_WF_icoCategory02"/>
+              <Static id="Static14" taborder="19" left="311" top="205" width="25" height="22" cssclass="sta_WF_icoCategory03"/>
+              <Static id="Static15" taborder="20" left="339" top="205" width="25" height="22" cssclass="sta_WF_icoCategory04"/>
+              <Static id="Static16" taborder="21" left="367" top="205" width="25" height="22" cssclass="sta_WF_icoCategory05"/>
+              <Static id="Static17" taborder="22" left="395" top="205" width="25" height="22" cssclass="sta_WF_icoCategory06"/>
+              <Static id="Static18" taborder="23" left="423" top="205" width="25" height="22" cssclass="sta_WF_icoCategory07"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column1">static</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">static</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">static</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">static</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">static</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">static</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">static</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">static</Col>
+          </Row>
+          <Row/>
+          <Row/>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

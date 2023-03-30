@@ -1,0 +1,391 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="smpComComponent" width="1659" height="1350" titletext="공통 컴포넌트" background="white" onload="smpComComponent_onload">
+    <Layouts>
+      <Layout height="1350" mobileorientation="landscape" width="1659">
+        <Static id="Static01" taborder="0" text="10" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" textAlign="center"/>
+        <Static id="Static00_00" taborder="1" text="10" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" textAlign="center" right="0"/>
+        <Static id="Static24_00" taborder="2" text="10" left="10" height="10" background="rgba(255,0,0,0.4)" visible="false" right="0" textAlign="center" top="0"/>
+        <Div id="divComPop" taborder="3" text="Div00" left="10" top="10" right="10" bottom="0">
+          <Layouts>
+            <Layout>
+              <Button id="Button02" taborder="0" text="점포검색(SCC::SCC00044P.xfdl)" left="760" top="49" width="240" height="21" onclick="Button00_onclick"/>
+              <Button id="Button03" taborder="1" text="팀 검색(SCC::SCC00045P.xfdl)" left="760" top="80" width="240" height="21" onclick="Button00_onclick"/>
+              <Button id="Button04" taborder="2" text="사용자 검색(SCC::SCC00100P.xfdl)" left="760" top="111" width="240" height="21" onclick="Button00_onclick"/>
+              <Button id="Button05" taborder="3" text="점포 검색 2(SCC::SCC00101P.xfdl)" left="760" top="142" width="240" height="21" onclick="Button00_onclick"/>
+              <Button id="Button06" taborder="4" text="인사정보 검색(SCC::SCC00200P.xfdl)" left="760" top="173" width="240" height="21" onclick="Button00_onclick"/>
+              <Button id="Button07" taborder="5" text="발령대상 인사정보 검색(SCC::SCC00300P.xfdl)" left="760" top="204" width="240" height="21" onclick="Button00_onclick"/>
+              <Button id="Button08" taborder="6" text="e-HR 파일업로드 팝업(SCC::SCC00400P.xfdl)" left="760" top="235" width="240" height="21" onclick="Button00_onclick"/>
+              <Button id="Button09" taborder="7" text="코드조회(SCC::SCC90000P.xfdl)" left="760" top="266" width="240" height="21" onclick="Button00_onclick"/>
+              <Button id="Button10" taborder="8" text="이미지뷰어(SCC::SCC91000P.xfdl)" left="760" top="297" width="240" height="21" onclick="Button00_onclick"/>
+              <Button id="Button11" taborder="9" text="이미지뷰어_1(SCC::SCC91000P_1.xfdl)" left="760" top="328" width="240" height="21" onclick="Button00_onclick"/>
+              <Button id="Button12" taborder="10" text="공지1(SCC::SCC91001P.xfdl)" left="760" top="359" width="240" height="21" onclick="Button00_onclick"/>
+              <Button id="Button13" taborder="11" text="공지2(SCC::SCC91002P.xfdl)" left="760" top="390" width="240" height="21" onclick="Button00_onclick"/>
+              <Button id="Button14" taborder="12" text="공지3(SCC::SCC91003P.xfdl)" left="760" top="421" width="240" height="21" onclick="Button00_onclick"/>
+              <Button id="Button15" taborder="13" text="공지5(SCC::SCC91005P.xfdl)" left="1010" top="19" width="240" height="21" onclick="Button00_onclick"/>
+              <Button id="Button16" taborder="14" text="공지6(SCC::SCC91006P.xfdl)" left="1010" top="50" width="240" height="21" onclick="Button00_onclick"/>
+              <Button id="Button17" taborder="15" text="공지7(SCC::SCC91007P.xfdl)" left="1010" top="81" width="240" height="21" onclick="Button00_onclick"/>
+              <Button id="Button18" taborder="16" text="위생관리(SCC::SCC91008P.xfdl)" left="1010" top="112" width="240" height="21" onclick="Button00_onclick"/>
+              <Button id="Button19" taborder="17" text="데이터찾기(SCC::SCC92000P.xfdl)" left="1010" top="143" width="240" height="21" onclick="Button00_onclick"/>
+              <Button id="Button21" taborder="18" text="공통코드(SCC::SCCPOPUP1.xfdl)" left="1010" top="204" width="240" height="21" onclick="Button00_onclick"/>
+              <Button id="Button22" taborder="19" text="공통sql POPUP(SCC::SCCPOPUP2.xfdl)" left="1010" top="235" width="240" height="21" onclick="Button00_onclick"/>
+              <Button id="Button23" taborder="20" text="리포트 출력공통(SCC::SCCREPORT1.xfdl)" left="1010" top="266" width="240" height="21" onclick="Button00_onclick"/>
+              <Button id="Button19_00" taborder="21" text="다중소트(SCC::SCC93000P.xfdl)" left="1010" top="174" width="240" height="21" onclick="Button00_onclick"/>
+              <Static id="Static61" taborder="22" text="공통팝업" left="0" top="0" width="100" height="21" cssclass="sta_WF_title02"/>
+              <Static id="staSawonT" taborder="23" text="사원검색" left="10" top="41" width="100" height="21" cssclass="sta_WF_title03"/>
+              <Edit id="edtSawon" taborder="24" left="123" top="41" height="21" width="120" poptype="sawon" onchanged="edt_onchanged"/>
+              <Static id="staJumpoT" taborder="25" text="점포검색" left="10" top="72" width="100" height="21" cssclass="sta_WF_title03"/>
+              <Edit id="edtJumpo" taborder="26" left="123" top="72" height="21" width="120" poptype="jumpo" onchanged="edt_onchanged" userparam="{&quot;P_USER_GROUP&quot;:&quot;홈푸드&quot;}"/>
+              <Static id="staTeamT" taborder="27" text="팀검색" left="10" top="103" width="100" height="21" cssclass="sta_WF_title03"/>
+              <Edit id="edtTeam" taborder="28" left="123" top="103" height="21" width="120" poptype="team" onchanged="edt_onchanged" userparam="{&quot;P_USER_GROUP&quot;:&quot;홈푸드&quot;}"/>
+              <Static id="staJumpoT02" taborder="29" text="점포검색2" left="10" top="165" width="100" height="21" cssclass="sta_WF_title03"/>
+              <Edit id="edtJumpo02" taborder="30" left="123" top="165" height="21" width="120" poptype="jumpo2" onchanged="edt_onchanged"/>
+              <Static id="staInsaT" taborder="31" text="인사정보검색" left="10" top="196" width="100" height="21" cssclass="sta_WF_title03"/>
+              <Edit id="edtInsa" taborder="32" left="123" top="196" height="21" width="120" poptype="insa" onchanged="edt_onchanged" userparam="{&quot;P_USER_GROUP&quot;:&quot;3102&quot;}"/>
+              <Static id="staTginsaT" taborder="33" text="발령대상인사정보" left="10" top="227" width="100" height="21" cssclass="sta_WF_title03"/>
+              <Edit id="edtTginsa" taborder="34" left="123" top="227" height="21" width="120" poptype="tginsa" onchanged="edt_onchanged" userparam="{&quot;P_USER_GROUP&quot;:&quot;3102&quot;, &quot;P_APPOINT_CODE&quot;:&quot;0090&quot;}"/>
+              <Static id="staEhrT" taborder="35" text="e-HR 파일업로드" left="10" top="258" width="100" height="21" cssclass="sta_WF_title03"/>
+              <Edit id="edtEhr" taborder="36" left="123" top="258" height="21" width="120" poptype="ehr" onchanged="edt_onchanged" displaynulltext="작업중"/>
+              <Static id="staCodeT" taborder="37" text="코드조회" left="10" top="289" width="100" height="21" cssclass="sta_WF_title03"/>
+              <Edit id="edtCode" taborder="38" left="123" top="289" height="21" width="120" poptype="code" onchanged="edt_onchanged" userparam="{ &quot;SQL&quot; : &quot;scc.strQuery_Team&quot;, &quot;CODE&quot; : &quot;&quot;, &quot;CODENAME&quot; : &quot;&quot;, &quot;CODE_DSP&quot; : &quot;팀 코드&quot;, &quot;CODENAME_DSP&quot; : &quot;팀명&quot;, &quot;CODE_VAL&quot; : &quot;&quot;, &quot;CODENAME_VAL&quot; : &quot;&quot;, &quot;ADDWHERE&quot; : &quot;&quot;, &quot;CAPTION&quot; : &quot;&quot;, &quot;ALLFIELD&quot; : &quot;&quot;, &quot;ORDERBY&quot; : &quot;&quot; }"/>
+              <Static id="staImageT01" taborder="39" text="이미지뷰어" left="10" top="320" width="100" height="21" cssclass="sta_WF_title03"/>
+              <Edit id="edtImage01" taborder="40" left="123" top="320" height="21" width="120" poptype="image1" onchanged="edt_onchanged" displaynulltext="작업중"/>
+              <Static id="staImageT02" taborder="41" text="이미지뷰어_1" left="10" top="351" width="100" height="21" cssclass="sta_WF_title03"/>
+              <Edit id="edtImage02" taborder="42" left="123" top="351" height="21" width="120" poptype="image2" onchanged="edt_onchanged" displaynulltext="작업중"/>
+              <Static id="Static00" taborder="43" text=" - 공통팝업 사용법&#13;&#10;&#13;&#10;1. edit 컴포넌트에 userproperty 'poptype' 등록&#13;&#10;2. 파라메터가 있는경우 &#13;&#10;    userproperty 'userparam' 등록(key, value 형식)&#13;&#10;    ex) {&quot;Text&quot;:&quot;SMILE&quot;}" left="300" top="21" width="450" height="175" font="normal 14pt/normal &quot;Arial&quot;" fittocontents="both"/>
+              <Static id="staUserT" taborder="44" text="사용자검색" left="10" top="134" width="100" height="21" cssclass="sta_WF_title03"/>
+              <Edit id="edtUser" taborder="45" left="123" top="134" height="21" width="120" poptype="user" onchanged="edt_onchanged" userparam="{&quot;P_USER_GROUP&quot;:&quot;3102&quot;}"/>
+              <Static id="staSawonT00" taborder="46" left="250" top="41" width="100" height="21" text="sawon"/>
+              <Static id="staJumpoT00" taborder="47" text="jumpo" left="250" top="72" width="100" height="21"/>
+              <Static id="staTeamT00" taborder="48" text="team" left="250" top="103" width="100" height="21"/>
+              <Static id="staUserT00" taborder="49" text="user" left="250" top="134" width="100" height="21"/>
+              <Static id="staJumpoT02_00" taborder="50" text="jumpo2" left="250" top="165" width="100" height="21"/>
+              <Static id="staInsaT00" taborder="51" text="insa" left="250" top="196" width="100" height="21"/>
+              <Static id="staTginsaT00" taborder="52" text="tginsa" left="250" top="227" width="100" height="21"/>
+              <Static id="staEhrT00" taborder="53" text="ehr" left="250" top="258" width="100" height="21"/>
+              <Static id="staCodeT00" taborder="54" text="code" left="250" top="289" width="100" height="21"/>
+              <Static id="staImageT01_00" taborder="55" text="image1" left="250" top="320" width="100" height="21"/>
+              <Static id="staImageT02_00" taborder="56" text="image2" left="250" top="351" width="100" height="21"/>
+              <Button id="Button01" taborder="57" text="사원검색(SCC::SCC00043P.xfdl)" left="760" top="19" width="240" height="21" onclick="Button00_onclick"/>
+              <Static id="staHygieneT" taborder="58" text="위생관리" left="323" top="196" width="100" height="21" cssclass="sta_WF_title03"/>
+              <Edit id="edtHygiene" taborder="59" left="426" top="196" height="21" width="120" poptype="hygiene" onchanged="edt_onchanged" displaynulltext="작업중"/>
+              <Static id="staDataT" taborder="60" text="데이터찾기" left="323" top="227" width="100" height="21" cssclass="sta_WF_title03"/>
+              <Edit id="edtData" taborder="61" left="426" top="227" height="21" width="120" poptype="data" onchanged="edt_onchanged" displaynulltext="작업중"/>
+              <Static id="staMultisortT" taborder="62" text="다중소트" left="323" top="258" width="100" height="21" cssclass="sta_WF_title03"/>
+              <Edit id="edtMultisort" taborder="63" left="426" top="258" height="21" width="120" poptype="multisort" onchanged="edt_onchanged" displaynulltext="작업중"/>
+              <Static id="staComcodeT" taborder="64" text="공통코드" left="323" top="289" width="100" height="21" cssclass="sta_WF_title03"/>
+              <Edit id="edtComcode" taborder="65" left="426" top="289" height="21" width="120" poptype="comcode" onchanged="edt_onchanged" displaynulltext="작업중"/>
+              <Static id="staComsqlT" taborder="66" text="공통 SQL" left="323" top="320" width="100" height="21" cssclass="sta_WF_title03"/>
+              <Edit id="edtComsql" taborder="67" left="426" top="320" height="21" width="120" poptype="comsql" onchanged="edt_onchanged" displaynulltext="작업중"/>
+              <Static id="staReportT" taborder="68" text="리포트 출력" left="323" top="351" width="100" height="21" cssclass="sta_WF_title03"/>
+              <Edit id="edtReport" taborder="69" left="426" top="351" height="21" width="120" poptype="report" onchanged="edt_onchanged" displaynulltext="작업중"/>
+              <Static id="staHygieneT00" taborder="70" text="hygiene" left="553" top="196" width="100" height="21"/>
+              <Static id="staDataT00" taborder="71" text="data" left="553" top="227" width="100" height="21"/>
+              <Static id="staMultisortT00" taborder="72" text="multisort" left="553" top="258" width="100" height="21"/>
+              <Static id="staComcodeT00" taborder="73" text="comcode" left="553" top="289" width="100" height="21"/>
+              <Static id="staComsqlT00" taborder="74" text="comsql" left="553" top="320" width="100" height="21"/>
+              <Static id="staReportT00" taborder="75" text="report" left="553" top="351" width="100" height="21"/>
+              <Static id="Static00_00" taborder="76" text=" - 점포 검색 팝업 예시&#13;&#10;&#13;&#10;take.openPopup(&#13;&#10;    this,&#13;&#10;    &quot;TestPopJumpo&quot;,&#13;&#10;    &quot;SCC::SCC00044P.xfdl&quot;,&#13;&#10;    {P_USER_GROUP : nexacro.getApplication().g_Upjang},&#13;&#10;    &quot;&quot;,&#13;&#10;    function(sId, sRtn){&#13;&#10;        trace(&quot;sRtn : &quot; + sRtn);&#13;&#10;    }, &#13;&#10;    false);" left="1265" top="19" width="374" height="392" font="normal 14pt/normal &quot;Arial&quot;" fittocontents="both"/>
+              <Static id="staSelPopT" taborder="77" text="데이터 선택 팝업" left="10" top="382" width="100" height="21" cssclass="sta_WF_title03"/>
+              <Edit id="edtSelPop" taborder="78" left="123" top="382" height="21" width="120" onchanged="edt_onchanged"/>
+              <Button id="btnDataSelPop" taborder="79" left="222" top="382" width="21" height="21" cssclass="btn_WF_search04" onclick="divComPop_btnDataSelPop_onclick"/>
+              <Static id="staCustT" taborder="80" text="거래처검색" left="323" top="382" width="100" height="21" cssclass="sta_WF_title03"/>
+              <Edit id="edtCust" taborder="81" left="426" top="382" height="21" width="120" poptype="cust" onchanged="edt_onchanged"/>
+              <Static id="staCustT00" taborder="82" left="553" top="382" width="100" height="21" text="cust"/>
+              <Button id="Button23_00" taborder="83" text="거래처 검색(FSZ::CUST_SEARCH.xfdl)" left="1010" top="297" width="240" height="21" onclick="Button00_onclick"/>
+              <Static id="Static61_00" taborder="84" text="코드 조회 팝업 " left="0" top="470" width="150" height="21" cssclass="sta_WF_title02"/>
+              <Static id="staCodeT01" taborder="85" text="코드조회" left="10" top="499" width="100" height="21" cssclass="sta_WF_title03"/>
+              <Edit id="edtCode00" taborder="86" left="123" top="499" height="21" width="120" poptype="code" onchanged="edt_onchanged" userparam="{ &quot;SQL&quot; : &quot;strQuery_Team&quot;, &quot;CODE&quot; : &quot;&quot;, &quot;CODENAME&quot; : &quot;TM_NM&quot;, &quot;CODE_DSP&quot; : &quot;팀 코드&quot;, &quot;CODENAME_DSP&quot; : &quot;팀명&quot;, &quot;CODE_VAL&quot; : &quot;100&quot;, &quot;CODENAME_VAL&quot; : &quot;&quot;, &quot;ADDWHERE&quot; : &quot;USE_YN='Y'&quot;, &quot;CAPTION&quot; : &quot;&quot;, &quot;ALLFIELD&quot; : &quot;TM_CD;TM_NM&quot;, &quot;ORDERBY&quot; : &quot;&quot; }"/>
+              <Static id="staCodeT00_00" taborder="87" text="code" left="250" top="499" width="100" height="21"/>
+              <Button id="btnCodeSelect" taborder="88" text="코드조회(take.sqlPopUp)" left="300" top="499" width="160" height="21" onclick="divComPop_btnCodeSelect_onclick"/>
+              <Static id="Static00_01" taborder="89" text="- 기존 AS-IS 소스에서 fn_sql_common_setup 함수 호출시 오픈되는 팝업&#13;&#10;&#13;&#10; 1. 변경 방법&#13;&#10;&#13;&#10; fn_sql_common_setup 함수안의 파라메터를 사용하여 Edit 컴포넌트의 userproperty 'userparam'에 추가&#13;&#10; 또는 take.sqlPopUp 함수 사용&#13;&#10;&#13;&#10; 2. 파라메터 설명(AS-IS 파라메터 : TOBE 파라메터(설명))&#13;&#10;&#13;&#10; _sql : SQL (SQL ID)&#13;&#10; _code : CODE (WHERE 절의 추가 조건(KEY))&#13;&#10; _name : CODENAME (WHERE 절의 추가 조건(KEY))&#13;&#10; _val_code : CODE_VAL (CODE 값(VALUE))&#13;&#10; _val_name : CODENAME_VAL (CODENAME 값(VALUE))&#13;&#10; _code_dsp : CODE_DSP (그리드 헤드 CODE 값)&#13;&#10; _name_dsp : CODENAME_DSP (그리드 헤드 CODENAME 값)&#13;&#10; _add_where : ADDWHERE (추가할 WHERE 절)&#13;&#10; _caption : CAPTION (팝업의 titletext)&#13;&#10; _allfield : ALLFIELD (바인딩 되는 컬럼 정보)&#13;&#10; _orderby : ORDERBY (ORDER BY문)&#13;&#10; _chkIRIS &#13;&#10; _flag : FLAG(자동조회 여부)&#13;&#10;&#13;&#10; 예시 &#13;&#10;&#13;&#10; * Edit 컴포넌트 사용시 &#13;&#10; : 해당 컴포넌트의 user Property에 'userparam' 등록&#13;&#10; { &quot;SQL&quot; : &quot;scc.strQuery_Team&quot;, &quot;CODE&quot;: &quot;TM_CD&quot;, &quot;CODENAME&quot; : &quot;TM_NM&quot;, &quot;CODE_DSP&quot; : &quot;팀 코드&quot;, &quot;CODENAME_DSP&quot; : &quot;팀명&quot;, &quot;CODE_VAL&quot; : &quot;&quot;, &quot;CODENAME_VAL&quot; : &quot;&quot;, &quot;ADDWHERE&quot; : &quot;&quot;, &quot;CAPTION&quot; : &quot;&quot;, &quot;ALLFIELD&quot; : &quot;&quot;, &quot;ORDERBY&quot; : &quot;&quot; }&#13;&#10;&#13;&#10; * Button 컴포넌트 사용시&#13;&#10; : take.sqlPopUp의 파라메터 입력 칸에 추가&#13;&#10;   take.sqlPopUp&#13;&#10;   ( &#13;&#10;       this,&#13;&#10;       &quot;codeSelect&quot;,&#13;&#10;       { SQL : &quot;strQuery_Team&quot;, CODE: &quot;TM_CD&quot;, CODENAME : &quot;TM_NM&quot;, CODE_DSP : &quot;팀 코드&quot;, CODENAME_DSP : &quot;팀명&quot;, CODE_VAL : &quot;&quot;, CODENAME_VAL : &quot;&quot;, ADDWHERE : &quot;&quot;, CAPTION : &quot;&quot;, ALLFIELD : &quot;&quot;, ORDERBY : &quot;&quot; },&#13;&#10;       &quot;fnPopUpCallBack&quot;&#13;&#10;    );&#13;&#10; " left="10" top="530" width="1629" height="740" font="normal 12pt/normal &quot;Arial&quot;" fittocontents="both"/>
+              <Button id="Button00" taborder="90" text="커스터마이징 필요" left="239" top="77" width="586" height="242"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[this.smpComComponent_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{   
+
+};
+
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    var arrName;
+    var sName = obj.text;
+    
+    var objArgList;
+    var sFormUrl;
+    
+    arrName = sName.split("(");
+    
+    switch(arrName[0]) {
+    case "사원검색":
+        objArgList = {};
+        sFormUrl = "SCC::SCC00043P.xfdl";
+    	break;
+    case "점포검색":
+        objArgList = {P_USER_GROUP : nexacro.getApplication().g_Upjang};
+        sFormUrl = "SCC::SCC00044P.xfdl";
+    	break;
+    case "팀 검색":
+        objArgList = {};
+        sFormUrl = "SCC::SCC00045P.xfdl";
+    	break;
+    case "사용자 검색":
+        objArgList = {P_USER_GROUP : nexacro.getApplication().g_Upjang};
+        sFormUrl = "SCC::SCC00100P.xfdl";
+    	break;    
+    case "점포 검색 2":
+        objArgList = {};
+        sFormUrl = "SCC::SCC00101P.xfdl";
+    	break;
+    case "인사정보 검색":
+        objArgList = {P_USER_GROUP : nexacro.getApplication().g_Upjang, ed_sUpjang : ""};
+        sFormUrl = "SCC::SCC00200P.xfdl";
+    	break;
+    case "발령대상 인사정보 검색":
+        objArgList = {P_USER_GROUP : nexacro.getApplication().g_Upjang, P_APPOINT_CODE : "0090"};
+        sFormUrl = "SCC::SCC00300P.xfdl";
+    	break;
+    case "e-HR 파일업로드 팝업":
+        objArgList = {P_USER_GROUP : nexacro.getApplication().g_Upjang, P_APPOINT_CODE : "0090"};
+        sFormUrl = "SCC::SCC00400P.xfdl";
+    	break;    
+    case "코드조회":
+        objArgList = { SQL : "strQuery_Team", CODE: "TM_CD", CODENAME : "TM_NM", CODE_DSP : "팀 코드", CODENAME_DSP : "팀명", CODE_VAL : "", CODENAME_VAL : "", ADDWHERE : "", CAPTION : "", ALLFIELD : "", ORDERBY : "" };
+        sFormUrl = "SCC::SCC90000P.xfdl";   
+    	break;
+    case "이미지뷰어":
+        objArgList = {};
+        sFormUrl = "SCC::SCC91000P.xfdl";
+    	break;
+    case "이미지뷰어_1":
+        objArgList = {};
+        sFormUrl = "SCC::SCC91000P_1.xfdl";
+    	break;
+    case "공지1":
+        objArgList = {};
+        sFormUrl = "SCC::SCC91001P.xfdl";
+    	break;    
+    case "공지2":
+        objArgList = {};
+        sFormUrl = "SCC::SCC91002P.xfdl";
+    	break;
+    case "공지3":
+        objArgList = {};
+        sFormUrl = "SCC::SCC91003P.xfdl";
+    	break;
+    case "공지5":
+        objArgList = {};
+        sFormUrl = "SCC::SCC91005P.xfdl";
+    	break;
+    case "공지6":
+        objArgList = {};
+        sFormUrl = "SCC::SCC91006P.xfdl";
+    	break;
+    case "공지7":
+        objArgList = {};
+        sFormUrl = "SCC::SCC91007P.xfdl";
+    	break;
+    case "위생관리":
+        objArgList = {};
+        sFormUrl = "SCC::SCC91008P.xfdl";
+    	break;
+    case "데이터찾기":
+        objArgList = {};
+        sFormUrl = "SCC::SCC92000P.xfdl";
+    	break;
+    case "다중소트":
+        objArgList = {};
+        sFormUrl = "SCC::SCC93000P.xfdl";
+    	break;    
+    case "출력화면":
+        objArgList = {};
+        sFormUrl = "SCC::SCC95000P.xfdl";
+    	break;    
+    case "공통코드":
+        objArgList = {};
+        sFormUrl = "SCC::SCCPOPUP1.xfdl";
+    	break;
+    case "공통sql POPUP":
+        objArgList = {};
+        sFormUrl = "SCC::SCCPOPUP2.xfdl";
+    	break;
+    case "리포트 출력공통":
+        objArgList = {};
+        sFormUrl = "SCC::SCCREPORT1.xfdl";
+    	break;
+    case "거래처 검색":
+        objArgList = {};
+        sFormUrl = "FSZ::CUST_SEARCH.xfdl";
+    	break;
+    default:
+    }
+    
+    take.openPopup(
+        this,
+        "TestPop"+obj.id,
+        sFormUrl,   // sFormUrl
+        objArgList, // objArgList
+        "",         // sOptions
+        "fnPopupCallBack",         // sPopupCallback
+        false);
+};
+
+// divComPop_btnCodeSelect_onclick : 코드조회 팝업 버튼 클릭 이벤트
+this.divComPop_btnCodeSelect_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    var sAddWhere, sUseYn;
+    
+    // CODE, CODENAME 외에 추가할 파라메터
+    sUseYn = "Y";
+    sAddWhere = "USE_YN="+ sUseYn +"";
+    
+    take.sqlPopUp(
+        this,
+        "codeSelect",
+        { SQL : "strQuery_Team",
+        CODE: "TM_CD", CODENAME : "TM_NM",
+        CODE_DSP : "팀 코드", CODENAME_DSP : "팀명",
+        CODE_VAL : "", CODENAME_VAL : "",
+        ADDWHERE : "", CAPTION : "",
+        ALLFIELD : "", ORDERBY : "" },
+        "fnPopupCallBack");
+};
+
+/**
+* fnPopupCallBack : 팝업 콜백
+* @param  {string} sId  서비스 아이디
+* @param  {string} sRtn 리턴값
+*/
+this.fnPopupCallBack = function(sId, sRtn) 
+{
+    trace("sId ---------> " + sId);
+    
+    if(take.nvl(sRtn, "") != ""){
+        console.dir(sRtn);
+        trace(sRtn.CODE);
+        trace(sRtn.CODENAME);
+    }
+}
+
+this.fn_AlertMsg = function(cd)
+{
+	var v_Msg="";
+	switch(cd)
+	{
+		case "000":
+			v_Msg= "이(가) 저장되었습니다.";
+			break;
+		case "001":
+			v_Msg= "버튼이 정의 되어 있지않습니다.";
+			break;
+		case "002":
+			v_Msg="서비스 오류:시스템 관리자에게 문의하십시오";
+			break;
+		case "003":
+			v_Msg="필수항목은 반드시 선택하시기 바랍니다.";
+			break;	
+		case "004":
+			v_Msg="작업대상 본사를 선택하세요.";
+			break;
+		case "005":
+			v_Msg="을(를) 입력하세요";
+			break;
+		case "006":
+			v_Msg="삭제할 데이터가 없습니다.";
+			break;
+		case "007":
+			v_Msg="변경된 데이터가 없습니다.";
+			break;
+		case "008":
+			v_Msg="시스템ID가 없습니다.";
+			break;			
+/*			
+		case "":
+			v_Msg="";
+			break;
+*/			
+		default:
+			break;			
+	}
+	return v_Msg;
+}
+
+// edt_onchanged 이벤트
+this.edt_onchanged = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
+{
+	var sData;
+    var sName = obj.name.substr(3);
+
+    if(obj.hasOwnProperty("resultdata")){
+        trace(sName + "의 리턴값");
+        console.dir(obj.resultdata);
+        console.dir(obj.codevalue);
+        console.dir(obj.value);
+        console.dir(obj.userdata);
+    }
+};
+
+this.divComPop_btnDataSelPop_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var objForm    = this;                 
+    var sPopId     = "PopUp";              
+	var sTitle     = "일반 업무 팝업";   
+    var sSearchTxt = "";
+    var objDs      = "";                
+    var sSvcUrl    = "scc.strQuery_ScRole"; 
+    var objInDs    = "";                   
+    var sParam     = "sUseYn='Y' sSysType='식재영업'";   
+    var bMulti     = true;                
+    var arrColInfo = [["ROLE",        "권한", "50"],  
+                     ["ROLE_NAME", "권한명", "50"]]; 
+   
+    //팝업 오픈
+    take.dataSelPopUp(
+        this,       //팝업을 오픈할 현재 폼
+        sPopId,     //팝업 아이디
+        sTitle,     //팝업 타이틀
+        sSearchTxt, //검색어
+        objDs,      //폼에 넘길 데이터셋 (데이터셋이 있을경우 해당 데이터셋 데이터를 보여준다)
+        sSvcUrl,    //transation URL (데이터셋이 없을경우만 transaction 발생)
+        objInDs,    //검색조건이 되는 데이터셋 (검색조건을 데이터 셋으로 넘길 경우)
+        sParam,     //transaction으로 넘길 파라메터
+        arrColInfo, //컬럼 정보를 배열로 설정([[컬럼1, 컬럼1헤더표기명, 컬럼1사이즈], [컬럼2, 컬럼2헤더표기명, 컬럼2사이즈],...]) 
+        bMulti,     //멀티 여부
+        function(sId, sRtn) {  //팝업 콜백
+        
+            var objRtn;
+            var aCode, aName;
+            
+            if (take.nvl(sRtn, "")!="" && take.nvl(sRtn, "")!="cancel" )
+            {
+                //String으로 넘어온 팝업 Return값을 Object로 변환
+                objRtn = take.StringToObject(sRtn);
+
+                //필요한 컬럼 가져오기
+                aCode = take.nvl(objRtn.ROLE,""); //코드컬럼
+                aName = take.nvl(objRtn.ROLE_NAME,""); //명칭컬럼
+                
+                if (aCode!="") aCode.toString(); //코드 값
+                if (aName!="") aName.toString(); //명칭 값
+                
+                this.divComPop.form.edtSelPop.set_value(aName);
+                
+            } else { }
+        }
+    );
+};
+]]></Script>
+    <Objects>
+      <Dataset id="dsSelPop">
+        <ColumnInfo>
+          <Column id="UPJANG" type="STRING" size="256"/>
+          <Column id="UPJANGNM" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

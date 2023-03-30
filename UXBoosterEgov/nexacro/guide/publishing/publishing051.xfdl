@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="publishing051" width="500" height="430" titletext="타임라인팝업조회">
+    <Layouts>
+      <Layout height="430" mobileorientation="landscape" width="500">
+        <Div id="Div02" taborder="0" left="0" top="0" width="500" height="430" cssclass="dvi_WF_tabBox01">
+          <Layouts>
+            <Layout>
+              <ImageViewer id="ImageViewer00" taborder="0" text="ImageViewer00" left="10" top="10" height="280" right="10"/>
+              <Div id="Div00" taborder="1" left="10" top="300" width="478" height="118" cssclass="div_WF_replyBox02">
+                <Layouts>
+                  <Layout>
+                    <Static id="Static00" taborder="0" text="이미지" left="9" top="9" width="100" height="100" cssclass="sta_WF_imgBox01"/>
+                    <Static id="Static01" taborder="1" text="이미지" left="119" top="9" width="100" height="100" cssclass="sta_WF_imgBox01"/>
+                    <Static id="Static02" taborder="2" text="이미지" left="229" top="9" width="100" height="100" cssclass="sta_WF_imgBox01"/>
+                    <Static id="Static03" taborder="3" text="이미지" left="339" top="9" width="100" height="100" cssclass="sta_WF_imgBox01"/>
+                    <Static id="Static04" taborder="4" text="이미지" left="449" top="9" width="100" height="100" cssclass="sta_WF_imgBox01"/>
+                  </Layout>
+                </Layouts>
+              </Div>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">사용자명</Col>
+            <Col id="Column1">2019-08-15 16:27:38</Col>
+            <Col id="Column2">제목제목제목제목제목제목제목제목제목</Col>
+            <Col id="Column3">내용</Col>
+            <Col id="Column4">이미지</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">사용자명</Col>
+            <Col id="Column1">2019-08-15 16:27:38</Col>
+            <Col id="Column2">제목제목제목제목제목제목제목제목제목</Col>
+            <Col id="Column3">내용</Col>
+            <Col id="Column4">이미지</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">사용자명</Col>
+            <Col id="Column1">2019-08-15 16:27:38</Col>
+            <Col id="Column2">제목제목제목제목제목제목제목제목제목</Col>
+            <Col id="Column3">내용</Col>
+            <Col id="Column4">이미지</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

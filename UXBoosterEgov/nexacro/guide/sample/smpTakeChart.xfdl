@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="smpTakeChart" width="1040" height="659" titletext="New Form" ontimer="smpStepChart_ontimer">
+    <Layouts>
+      <Layout height="659" width="1040">
+        <Button id="btnStepStart" taborder="0" text="Start" left="52" top="74" width="93" height="40" onclick="btnStepStart_onclick"/>
+        <Static id="staStepBase" taborder="2" left="141" top="188" width="133" height="1" background="#000000"/>
+        <Div id="divStepChart" taborder="1" text="Div00" left="182" width="50" bottom="staStepBase:0" height="119">
+          <Layouts>
+            <Layout>
+              <Static id="sta10" taborder="0" left="0" height="10" right="0" background="indigo" bottom="0"/>
+              <Static id="sta20" taborder="1" left="0" height="10" right="0" background="indigo" bottom="11"/>
+              <Static id="sta40" taborder="2" left="0" height="10" right="0" background="indigo" bottom="33"/>
+              <Static id="sta30" taborder="3" left="0" height="10" right="0" background="indigo" bottom="22"/>
+              <Static id="sta50" taborder="4" left="0" height="10" right="0" background="indigo" bottom="44"/>
+              <Static id="sta100" taborder="5" left="0" height="10" right="0" background="indigo" bottom="99"/>
+              <Static id="sta90" taborder="6" left="0" height="10" right="0" background="indigo" bottom="88"/>
+              <Static id="sta80" taborder="7" left="0" height="10" right="0" background="indigo" bottom="77"/>
+              <Static id="sta70" taborder="8" left="0" height="10" right="0" background="indigo" bottom="66"/>
+              <Static id="sta60" taborder="9" left="0" height="10" right="0" background="indigo" bottom="55"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnStepEnd" taborder="3" text="Stop" left="52" top="117" width="93" height="40" onclick="btnStepEnd_onclick"/>
+        <Static id="staStepValue" taborder="4" left="182" width="50" bottom="divStepChart:0" height="20" textAlign="center"/>
+        <Static id="stStepTitle" taborder="5" text="- Step Chart" left="18" top="3" width="120" height="60"/>
+        <Static id="staCol3DTitle" taborder="6" text="- Column 3D Chart" left="390" top="4" width="120" height="60"/>
+        <Button id="btnCol3DEnd" taborder="7" text="Stop" left="420" top="117" width="93" height="40" onclick="btnCol3DEnd_onclick"/>
+        <Button id="btnCol3DStart" taborder="8" text="Start" left="420" top="74" width="93" height="40" onclick="btnCol3DStart_onclick"/>
+        <Static id="staCol3DBase" taborder="9" left="532" top="208" width="90" height="1" background="#000000"/>
+        <Static id="staCol3DChart" taborder="11" left="562" width="40" bottom="staCol3DBase:0" height="150" background="url('theme::UXBooster/images/img_Col3DFull.png') no-repeat"/>
+        <Static id="staCol3DValue" taborder="10" left="552" width="50" bottom="staCol3DChart:0" height="20" textAlign="center"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.smpStepChart_ontimer = function(obj:nexacro.Form,e:nexacro.TimerEventInfo)
+{
+    var nRandom, nSpace, nWid;
+    
+    nRandom = Math.round(Math.random()*100);  
+    
+    if (e.timerid==1111) //Step Chart
+    {
+        nSpace = Math.round(nRandom/10);
+        
+        nWid = nRandom+nSpace;
+        
+        this.staStepValue.set_text("");
+        this.staStepValue.set_text(nRandom);
+        
+        this.divStepChart.set_height(nWid);
+        
+    } else if (e.timerid==2222) {
+    
+        nSpace = 10;
+        nWid = Math.round(nRandom/100*(150-nSpace))+nSpace;
+        
+        this.staCol3DValue.set_text("");
+        this.staCol3DValue.set_text(nRandom);
+        
+        this.staCol3DChart.set_height(nWid);
+    }
+	
+    this.resetScroll();
+};
+
+this.btnStepStart_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.setTimer(1111,500);
+};
+
+this.btnStepEnd_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.killTimer(1111);
+};
+
+this.btnCol3DStart_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.setTimer(2222,500);
+};
+
+this.btnCol3DEnd_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.killTimer(2222);
+};
+]]></Script>
+    <Objects>
+      <Dataset id="dsList">
+        <ColumnInfo>
+          <Column id="NAME" type="STRING" size="256"/>
+          <Column id="AMT" type="STRING" size="256"/>
+          <Column id="SELECT" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="NAME">목표</Col>
+            <Col id="AMT">49919</Col>
+            <Col id="SELECT">false</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">실적</Col>
+            <Col id="AMT">49213</Col>
+            <Col id="SELECT">true</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">전년</Col>
+            <Col id="AMT">43535</Col>
+            <Col id="SELECT">false</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsList00">
+        <ColumnInfo>
+          <Column id="일" type="STRING" size="256"/>
+          <Column id="이" type="STRING" size="256"/>
+          <Column id="삼" type="STRING" size="256"/>
+          <Column id="사" type="STRING" size="256"/>
+          <Column id="오" type="STRING" size="256"/>
+          <Column id="육" type="STRING" size="256"/>
+          <Column id="칠" type="STRING" size="256"/>
+          <Column id="팔" type="STRING" size="256"/>
+          <Column id="구" type="STRING" size="256"/>
+          <Column id="십" type="STRING" size="256"/>
+          <Column id="SELECT" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="일">2</Col>
+            <Col id="이">4</Col>
+            <Col id="삼">6</Col>
+            <Col id="SELECT">false</Col>
+            <Col id="사">8</Col>
+            <Col id="오">10</Col>
+            <Col id="육">12</Col>
+            <Col id="칠">14</Col>
+            <Col id="팔">16</Col>
+            <Col id="구">18</Col>
+            <Col id="십">20</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+* DB함수 관련
+*
+* @filename mappers/inc/CommonIncMapper.xml
+* @author takeit
+* @since 2021.02.16
+* @version 1.0
+* @see
+*
+* << 변경 이력(Modification Information) >>
+*
+* 변경번호 : #1
+* 변경일자 : 2021.02.16
+* 변경사람 : takeit
+* 변경내용 : 신규 생성
+ -->
+<mapper namespace="CommonInc">
+	<!-- DB Vendor
+	Oracle
+	SQL Server
+	MySQL
+	PostgreSQL
+
+	Tibero
+	DB2
+	Sybase
+	H2
+	HSQL
+
+	<include refid="CommonInc.deptNameByEmpNo">
+       <property name="compCd" value="A.COMP_CD"/>
+       <property name="busiPlace" value="A.BUSI_PLACE"/>
+       <property name="empNo" value="A.CON_EMP"/>
+   </include> AS CONTRCT_DEPT_NAME
+
+   <include refid="CommonInc.codeName">
+           <property name="compCd" value="A.COMP_CD"/>
+           <property name="codeType" value="'MM11'"/>
+           <property name="code" value="A.QTY_UNIT"/>
+       </include>
+
+	 -->
+
+
+
+
+
+	<!--
+		TO_CHAR, CONVERT
+		datatype, date/number, format
+	-->
+	<sql id="toChar" databaseId="Oracle">
+        <choose>
+        <when test="@kr.co.takeit.util.MybatisUtil@notEmpty(fmt)">
+        (TO_CHAR(${arg1}, ${fmt1}))
+        </when>
+        <otherwise>
+        (TO_CHAR(${arg1}))
+        </otherwise>
+        </choose>
+    </sql>
+	<sql id="toChar" databaseId="SQL Server">
+        (CONVERT(${dataType}, ${arg1}, ${fmt2}))
+    </sql>
+    <sql id="toChar" databaseId="MySQL">
+        (DATE_FORMAT(${arg1}, ${fmt3}))
+    </sql>
+    <sql id="toChar" databaseId="PostgreSQL">
+        (TO_CHAR(${arg1}, ${fmt4}))
+    </sql>
+
+
+
+
+	<!-- NVL, ISNULL -->
+	<sql id="nvl">
+        (CASE WHEN ${arg1} IS NULL THEN ${arg2} ELSE ${arg1} END)
+    </sql>
+
+
+    <!-- TRUNC, DATEDIFF -->
+	<sql id="datediff" databaseId="Oracle">
+        ( TRUNC(${arg1} - ${arg2}) )
+    </sql>
+	<sql id="datediff" databaseId="SQL Server">
+        ( DATEDIFF ( day , ${arg1}, ${arg2} ) )
+    </sql>
+    <sql id="datediff" databaseId="MySQL">
+        ( DATEDIFF ( ${arg1}, ${arg2} ) )
+    </sql>
+    <sql id="datediff" databaseId="PostgreSQL">
+        ( DATE_PART('day', ${arg1}::timestamp - ${arg2}::timestamp) )
+    </sql>
+
+
+    <!-- TO_DATE, CONVERT -->
+	<sql id="toDate" databaseId="Oracle">
+        ( TO_DATE(${arg1}, ${fmt}) )
+    </sql>
+	<sql id="toDate" databaseId="SQL Server">
+        <!-- (CONVERT(VARCHAR, ${arg1}, ${fmt})) -->
+        <!-- FORMAT(GETDATE(), 'yyyy-MM-dd HH:mm:ss.fff') -->
+        ( FORMAT(${arg1}, ${fmt}) )
+    </sql>
+    <sql id="toDate" databaseId="MySQL">
+        ( STR_TO_DATE(${arg1}, ${fmt} ) )
+    </sql>
+    <sql id="toDate" databaseId="PostgreSQL">
+        ( TO_TIMESTAMP(${arg1}, ${fmt}) )
+    </sql>
+
+
+
+
+    <!-- SYSDATE, GETDATE -->
+	<sql id="sysdate" databaseId="Oracle">
+        ( SYSDATE )
+    </sql>
+	<sql id="sysdate" databaseId="SQL Server">
+        ( GETDATE() )
+    </sql>
+    <sql id="sysdate" databaseId="MySQL">
+        ( NOW() )
+    </sql>
+    <sql id="sysdate" databaseId="PostgreSQL">
+        ( NOW() )
+    </sql>
+
+
+
+    <!-- TO_NUMBER -->
+	<sql id="toNumber" databaseId="Oracle">
+        ( TO_NUMBER(${arg1}) )
+    </sql>
+	<sql id="toNumber" databaseId="SQL Server">
+        ( CONVERT(NUMERIC, ${arg1}) )
+    </sql>
+    <sql id="toNumber" databaseId="MySQL">
+        ( CAST(${arg1} AS UNSIGNED) )
+    </sql>
+    <sql id="toNumber" databaseId="PostgreSQL">
+        ( CAST(${arg1} AS INT) )
+    </sql>
+
+	
+	<!-- TO_NUMBER PARAM -->
+	<sql id="toNumber_param" databaseId="Oracle">
+        ( TO_NUMBER(#{arg1}) )
+    </sql>
+	<sql id="toNumber_param" databaseId="SQL Server">
+        ( CONVERT(NUMERIC, #{arg1}) )
+    </sql>
+    <sql id="toNumber_param" databaseId="MySQL">
+        ( CAST(#{arg1} AS UNSIGNED) )
+    </sql>
+    <sql id="toNumber_param" databaseId="PostgreSQL">
+        ( CAST(#{arg1} AS INT) )
+    </sql>
+
+
+    <!-- SUBSTR -->
+	<sql id="substr" databaseId="Oracle">
+        ( SUBSTR(${arg1}, ${st}, ${len}) )
+    </sql>
+	<sql id="substr" databaseId="SQL Server">
+        ( SUBSTRING(${arg1}, ${st}, ${len}) )
+    </sql>
+    <sql id="substr" databaseId="MySQL">
+        ( SUBSTRING(${arg1}, ${st}, ${len}) )
+    </sql>
+    <sql id="substr" databaseId="PostgreSQL">
+        ( SUBSTRING(${arg1}, ${st}, ${len}) )
+    </sql>
+
+
+
+
+    <!-- LPAD -->
+	<sql id="lpad" databaseId="Oracle">
+        ( LPAD(${arg1}, ${cnt}, ${prefix}) )
+    </sql>
+	<sql id="lpad" databaseId="SQL Server">
+        ( REPLICATE(${prefix}, ${cnt} - LEN(${arg1})) + ${arg1} )
+    </sql>
+    <sql id="lpad" databaseId="MySQL">
+        ( LPAD(${arg1}, ${cnt}, ${prefix}) )
+    </sql>
+    <sql id="lpad" databaseId="PostgreSQL">
+        ( LPAD(${arg1}::VARCHAR, ${cnt}, ${prefix}) )
+    </sql>
+
+    <!-- FROM DUAL -->
+	<sql id="dual" databaseId="Oracle">
+        FROM DUAL
+    </sql>
+	<sql id="dual" databaseId="SQL Server">
+    </sql>
+    <sql id="dual" databaseId="MySQL">
+    </sql>
+    <sql id="dual" databaseId="PostgreSQL">
+    </sql>
+
+    <!-- rownum -->
+	<sql id="rownum" databaseId="Oracle">
+        (ROWNUM)
+    </sql>
+	<sql id="rownum" databaseId="SQL Server">
+    </sql>
+    <sql id="rownum" databaseId="MySQL">
+    	(ROW_NUMBER() OVER())
+    </sql>
+    <sql id="rownum" databaseId="PostgreSQL">
+        (ROW_NUMBER() OVER())
+    </sql>
+    
+    <!-- || CONCAT -->
+	<sql id="concat" databaseId="Oracle">		
+		(${arg1} || #{arg2} || ${arg1})
+    </sql>
+	<sql id="concat" databaseId="SQL Server">
+        (${arg1} || #{arg2} || ${arg1})
+    </sql>
+    <sql id="concat" databaseId="MySQL">
+        ( CONCAT ( ${arg1}, #{arg2}, ${arg1} ) )
+    </sql>
+    <sql id="concat" databaseId="PostgreSQL">
+        (${arg1} || #{arg2} || ${arg1})
+    </sql>
+</mapper>

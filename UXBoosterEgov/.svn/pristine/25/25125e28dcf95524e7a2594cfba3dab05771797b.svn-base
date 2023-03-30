@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="sample3" width="1040" height="659" titletext="Layout3" onload="Form_onload">
+    <Layouts>
+      <Layout height="659" mobileorientation="landscape" width="1040">
+        <Div id="divSearch" taborder="0" left="10" top="0" height="43" cssclass="div_WF_searchBox01" right="10">
+          <Layouts>
+            <Layout>
+              <Static id="staLable01" taborder="0" text="키값" left="19" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="edtKey" taborder="7" left="staLable01:3" top="10" width="231" height="21" text="TEXT"/>
+              <Static id="staLable02" taborder="1" text="데이터1" left="edtKey:19" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="edtText01" taborder="4" left="staLable02:3" top="10" width="231" height="21" text="TEXT"/>
+              <Static id="staUseYn" taborder="2" text="사용여부" left="edtText01:19" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="cboUseYn" taborder="3" left="staUseYn:3" top="10" width="231" height="21" index="0" innerdataset="dsCboUseYn" codecolumn="CODE" datacolumn="NAME" text="사용" value="Y"/>
+              <Static id="Static07" taborder="5" text="10" left="332" top="0" width="2" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static08" taborder="6" text="10" left="665" top="0" width="2" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnShowHide" taborder="2" left="48.08%" top="divSearch:0" width="40" height="10" cssclass="btn_WF_fold01"/>
+        <Div id="divDetail" taborder="1" left="10" top="btnShowHide:10" bottom="10" right="10">
+          <Layouts>
+            <Layout>
+              <Static id="staTitle" taborder="0" text="리스트타이틀" left="0" top="0" height="30" right="866" cssclass="sta_WF_title02" usedecorate="true"/>
+              <Grid id="grdMain" taborder="3" left="0" top="staTitle:0" width="250" bottom="0" binddataset="dsList00" autofittype="col" initvalueid="iv_Grid1" treeinitstatus="expand,all" cssclass="gid_WF_Noborder" treeusebutton="noclick" treeusecheckbox="false" treeuseline="false" cellsizebandtype="allband" cellsizingtype="both">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="80"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="body">
+                      <Cell text="bind:Column1" treelevel="bind:Column0" displaytype="treeitemcontrol" edittype="tree"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="Static27" taborder="2" text="10" left="grdMain:0" top="0" width="10" background="rgba(255,0,0,0.4)" visible="false" color="red" textAlign="center" bottom="0"/>
+              <Static id="staLable06" taborder="1" text="디테일타이틀" top="0" cssclass="sta_WF_title02" usedecorate="true" height="30" left="Static27:0" right="90"/>
+              <Grid id="grdDetail" taborder="4" left="260" top="staLable06:0" binddataset="dsDetail00" autofittype="col" right="0" bottom="0" extendgridoption="checkbox,readonly" cellsizebandtype="allband">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="130"/>
+                      <Column size="270"/>
+                      <Column size="100"/>
+                      <Column size="69"/>
+                      <Column size="100"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="키값" cssclass="CellEssential"/>
+                      <Cell col="1" text="데이터1"/>
+                      <Cell col="2" text="데이터2"/>
+                      <Cell col="3" text="데이터3"/>
+                      <Cell col="4" text="데이터4" cssclass="CellEssential"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:Column1" edittype="text" textAlign="left"/>
+                      <Cell col="1" edittype="text" text="bind:Column2" textAlign="left"/>
+                      <Cell col="2" edittype="text" text="bind:Column3" textAlign="left"/>
+                      <Cell col="3" edittype="text" text="bind:Column4" textAlign="center"/>
+                      <Cell col="4" text="bind:Column5" displaytype="combotext" edittype="combo" combodataset="dsCboUseYn" combocodecol="CODE" combodatacol="NAME"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static24" taborder="3" text="10" left="0" height="10" background="rgba(255,0,0,0.4)" visible="false" right="0" textAlign="center" top="53"/>
+        <Static id="Static01" taborder="4" text="10" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" textAlign="center"/>
+        <Static id="Static22" taborder="5" text="10" left="0" height="10" background="rgba(255,0,0,0.4)" visible="false" right="0" bottom="0" textAlign="center"/>
+        <Static id="Static00" taborder="6" text="10" left="1030" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" textAlign="center"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsList">
+        <ColumnInfo>
+          <Column id="key" type="STRING" size="256"/>
+          <Column id="col1" type="STRING" size="256"/>
+          <Column id="col2" type="STRING" size="256"/>
+          <Column id="col3" type="STRING" size="256"/>
+          <Column id="col4" type="STRING" size="256"/>
+          <Column id="col5" type="STRING" size="256"/>
+          <Column id="col6" type="STRING" size="256"/>
+          <Column id="col7" type="STRING" size="256"/>
+          <Column id="col8" type="STRING" size="256"/>
+          <Column id="col9" type="STRING" size="256"/>
+          <Column id="col10" type="STRING" size="256"/>
+          <Column id="use_yn" type="STRING" size="256"/>
+          <Column id="reg_cd" type="STRING" size="256"/>
+          <Column id="reg_dt" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsCboUseYn">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">Y</Col>
+            <Col id="NAME">사용</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">미사용</Col>
+            <Col id="CODE">N</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="col1" type="STRING" size="256"/>
+          <Column id="col2" type="STRING" size="256"/>
+          <Column id="use_yn" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsDetail">
+        <ColumnInfo>
+          <Column id="key" type="STRING" size="256"/>
+          <Column id="col1" type="STRING" size="256"/>
+          <Column id="col2" type="STRING" size="256"/>
+          <Column id="col3" type="STRING" size="256"/>
+          <Column id="col4" type="STRING" size="256"/>
+          <Column id="col5" type="STRING" size="256"/>
+          <Column id="col6" type="STRING" size="256"/>
+          <Column id="col7" type="STRING" size="256"/>
+          <Column id="col8" type="STRING" size="256"/>
+          <Column id="col9" type="STRING" size="256"/>
+          <Column id="col10" type="STRING" size="256"/>
+          <Column id="use_yn" type="STRING" size="256"/>
+          <Column id="reg_cd" type="STRING" size="256"/>
+          <Column id="reg_dt" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsList00" onrowposchanged="dsList_onrowposchanged">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">0</Col>
+            <Col id="Column1">Data01</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">1</Col>
+            <Col id="Column1">Data02</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">1</Col>
+            <Col id="Column1">Data03</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">1</Col>
+            <Col id="Column1">Data04</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">1</Col>
+            <Col id="Column1">Data05</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">1</Col>
+            <Col id="Column1">Data06</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">1</Col>
+            <Col id="Column1">Data07</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">1</Col>
+            <Col id="Column1">Data08</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">1</Col>
+            <Col id="Column1">Data09</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">1</Col>
+            <Col id="Column1">Data10</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsDetail00">
+        <ColumnInfo>
+          <Column id="CHK" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+          <Column id="Column5" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CHK">0</Col>
+            <Col id="Column1">Data01</Col>
+            <Col id="Column2">Data01</Col>
+            <Col id="Column3">Data01</Col>
+            <Col id="Column4">Data01</Col>
+            <Col id="Column5">Data01</Col>
+          </Row>
+          <Row>
+            <Col id="CHK">0</Col>
+            <Col id="Column1">Data02</Col>
+            <Col id="Column2">Data02</Col>
+            <Col id="Column3">Data02</Col>
+            <Col id="Column4">Data02</Col>
+            <Col id="Column5">Data02</Col>
+          </Row>
+          <Row>
+            <Col id="CHK">0</Col>
+            <Col id="Column1">Data03</Col>
+            <Col id="Column2">Data03</Col>
+            <Col id="Column3">Data03</Col>
+            <Col id="Column4">Data03</Col>
+            <Col id="Column5">Data03</Col>
+          </Row>
+          <Row>
+            <Col id="CHK">0</Col>
+            <Col id="Column1">Data04</Col>
+            <Col id="Column2">Data04</Col>
+            <Col id="Column3">Data04</Col>
+            <Col id="Column4">Data04</Col>
+            <Col id="Column5">Data04</Col>
+          </Row>
+          <Row>
+            <Col id="CHK">0</Col>
+            <Col id="Column1">Data05</Col>
+            <Col id="Column2">Data05</Col>
+            <Col id="Column3">Data05</Col>
+            <Col id="Column4">Data05</Col>
+            <Col id="Column5">Data05</Col>
+          </Row>
+          <Row>
+            <Col id="CHK">0</Col>
+            <Col id="Column1">Data06</Col>
+            <Col id="Column2">Data06</Col>
+            <Col id="Column3">Data06</Col>
+            <Col id="Column4">Data06</Col>
+            <Col id="Column5">Data06</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[]]></Script>
+    <Bind>
+      <BindItem id="item1" compid="divSearch.form.edtText01" propid="value" datasetid="dsSearch" columnid="col2"/>
+      <BindItem id="item2" compid="divSearch.form.cboUseYn" propid="value" datasetid="dsSearch" columnid="use_yn"/>
+      <BindItem id="item0" compid="divSearch.form.edtKey" propid="value" datasetid="dsSearch" columnid="col2"/>
+    </Bind>
+  </Form>
+</FDL>

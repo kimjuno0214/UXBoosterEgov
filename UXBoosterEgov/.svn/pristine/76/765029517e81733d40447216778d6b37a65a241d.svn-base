@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="smpGoogleChart" width="800" height="600" titletext="New Form" onload="smpGoogleChart_onload" ontimer="smpGoogleChart_ontimer">
+    <Layouts>
+      <Layout height="600" mobileorientation="landscape" width="800">
+        <Button id="btnChart" taborder="0" text="데이터변경" left="11" top="10" width="119" height="50" onclick="btnChart_onclick"/>
+        <WebBrowser id="wbChart" taborder="1" left="10" top="76" onloadcompleted="wbChart_onloadcompleted" onusernotify="wbChart_onusernotify" right="10" bottom="10"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[this.fv_bWebOnload = false;
+
+this.smpGoogleChart_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+    var sBaseUrl = take.getSvcUrl();
+
+    this.wbChart.set_url(sBaseUrl + "_webkit/google/googleChart.html");
+    this.setTimer(1,100);
+};
+
+this.btnChart_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    this.fnChart(this.dsData);
+};
+
+this.wbChart_onloadcompleted = function(obj:nexacro.WebBrowser,e:nexacro.WebLoadCompEventInfo)
+{
+	if (e.url.indexOf("googleChart.html") != -1)
+	{
+		this.fv_bWebOnload = true;
+	}
+};
+
+this.wbChart_onusernotify = function(obj:nexacro.WebBrowser,e:nexacro.WebUserNotifyEventInfo)
+{
+	var sUserData = e.userdata;
+    
+    //넘어온 데이터가 detail인 경우
+	if (sUserData.indexOf("CallBack")>=0)
+    { 
+        var sRtn = sUserData.substr(9);
+        trace("Return --> " + sRtn);
+        if(sRtn.substr(0,4)=="(-1)")
+        {            
+            trace("Google chart loading fail : " + sRtn);
+            return;		
+        } else if (sRtn.substr(0,4)=="(00)"){
+            trace("Google chart loading success");
+        }
+    }	
+};
+
+this.smpGoogleChart_ontimer = function(obj:nexacro.Form,e:nexacro.TimerEventInfo)
+{
+	if (e.timerid==1)
+	{
+        if (this.fv_bWebOnload == true)
+		{
+            this.killTimer(1);     
+            
+            this.fnChart(this.dsData);
+		}
+	}
+};
+
+this.fnChart = function(objDs)
+{
+    var arrCol, arrData;
+    var objOption;
+    var nSelIdx;
+    
+    arrCol = [["string","NAME"], ["number","VALUE"]]; //값은 필히 number여야함
+	//arrData = [["Work", 10], ["Eat", 20], ["Commute", 30], ["Watch TV", 40]];
+    //nSelIdx = 3; 
+    
+    arrData = this.fnGetArrayDs(objDs, "NAME", "VALUE");
+    objOption = {title:"Title Change", pieHole: 0.4}; // title, ect option
+
+    nSelIdx = objDs.findRow("VALUE", objDs.getMax("VALUE"));
+    
+//     trace("arrData --> " + arrData);
+//     trace("nSelIdx --> " + nSelIdx);
+	this.wbChart.getProperty("window").callMethod("fnCreateChart", arrCol, arrData, objOption, nSelIdx);    
+}
+
+this.fnGetArrayDs = function(objDs, sKeyId, sValId)
+{
+    var arrRtn = new Array();
+    var nCnt, nVal;
+    var sKey;
+    
+    nCnt = objDs.rowcount;
+    
+    for (var i=0;i<nCnt;i++)
+    {
+        sKey = objDs.getColumn(i, sKeyId);
+        nVal = nexacro.toNumber(objDs.getColumn(i, sValId));        
+        arrRtn.push([sKey, nVal]);
+    }
+    
+    return arrRtn;
+}]]></Script>
+    <Objects>
+      <Dataset id="dsData">
+        <ColumnInfo>
+          <Column id="NAME" type="STRING" size="256"/>
+          <Column id="VALUE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="NAME">Work</Col>
+            <Col id="VALUE">10</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">Eat</Col>
+            <Col id="VALUE">20</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">Commute</Col>
+            <Col id="VALUE">30</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">Watch TV</Col>
+            <Col id="VALUE">40</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

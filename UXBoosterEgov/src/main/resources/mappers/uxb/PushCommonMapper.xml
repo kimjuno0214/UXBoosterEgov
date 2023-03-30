@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+* 관리자 > 시스템관리 관련
+*
+* @filename mappers/adm/SystemCommonMapper.xml
+* @author takeit
+* @since 2019.08.02
+* @version 1.0
+* @see
+*
+* << 변경 이력(Modification Information) >>
+*
+* 변경번호 : #1
+* 변경일자 : 2019.08.02
+* 변경사람 : takeit
+* 변경내용 : 신규 생성
+ -->
+<mapper namespace="PushCommon">
+
+    <select id="tokenValueSelect" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		 * PushCommon.tokenValueSelect
+		 * 토큰 정보 조회
+		 * @author takeit
+		 * @since 2020.07.17
+		 */
+		]]>
+		SELECT #{PROJECT_CD} AS PROJECT_CD
+				, TO_CHAR(U.TOKEN_VAL) AS TOKEN_VAL
+				, U.USER_NM
+		from PROJECT_USER P
+		LEFT OUTER JOIN USER_INFO U ON P.USER_CD= U.USER_CD
+		WHERE P.PROJECT_CD = #{PROJECT_CD}
+		AND U.TOKEN_VAL IS NOT NULL
+	</select>
+
+</mapper>

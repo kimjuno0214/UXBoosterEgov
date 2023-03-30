@@ -1,0 +1,402 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="test" width="1040" height="659" titletext="팝업 샘플" onload="Form_onload">
+    <Layouts>
+      <Layout height="659" mobileorientation="landscape" width="1040">
+        <Div id="divSearch" taborder="0" left="10" top="0" height="43" right="10" cssclass="div_WF_searchBox01" text="">
+          <Layouts>
+            <Layout>
+              <Static id="staTypeT" taborder="0" text="사용자선택" left="20" top="10" width="80" height="21" cssclass="sta_WF_textRImport"/>
+              <Static id="staOrdNoT" taborder="1" text="프로젝트명" left="359" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="edtOrdNo" taborder="2" left="442" top="10" width="110" height="21"/>
+              <Static id="Static01" taborder="3" text="사용여부" left="698" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="Combo01" taborder="4" text="Combo00" left="780" top="10" width="110" height="21" innerdataset="dsCode" codecolumn="CODE" datacolumn="DATA"/>
+              <Edit id="edtTypeCd" taborder="5" left="103" top="10" width="100" height="21" autoselect="true" onkeydown="divSearch_edtTypeCd_onkeydown" onkeyup="divSearch_edtTypeCd_onkeyup"/>
+              <Edit id="edtTypeNm" taborder="6" left="206" top="10" width="120" height="21" readonly="true" onchanged="divSearch_edtTypeNm_onchanged"/>
+              <Button id="btnCodeFind" taborder="7" text="ㅇ" left="178" top="11" width="24" height="19" onclick="divSearch_btnCodeFind_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnShowHide" taborder="1" left="485" top="divSearch:0" width="70" height="15" cssclass="btn_WF_fold01"/>
+        <Static id="Static09" taborder="2" text="Static03" left="0" top="57" height="10" background="red" visible="false" right="0"/>
+        <Static id="Static23" taborder="3" text="Static23" left="1" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static24" taborder="4" text="Static23" left="340" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static25" taborder="5" text="Static23" left="679" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static26" taborder="6" text="Static23" left="1018" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Div id="divDetail" taborder="7" text="Div00" left="10" top="btnShowHide:9" right="10" bottom="10">
+          <Layouts>
+            <Layout>
+              <Static id="Static18" taborder="0" text="프로젝트목록" left="0" top="0" height="30" cssclass="sta_WF_title02" right="0"/>
+              <Grid id="Grid00" taborder="1" left="0" top="30" binddataset="dsList" autofittype="col" bottom="0" right="0" takegrid="all">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="CHK"/>
+                      <Cell col="1" text="키코드"/>
+                      <Cell col="2" text="GROUP_ID"/>
+                      <Cell col="3" text="CODE_ID"/>
+                      <Cell col="4" text="PARENT_KEY"/>
+                      <Cell col="5" text="CODE_NM"/>
+                      <Cell col="6" text="ML_CD"/>
+                      <Cell col="7" text="REF1"/>
+                      <Cell col="8" text="REF2"/>
+                      <Cell col="9" text="REF3"/>
+                      <Cell col="10" text="DESC_TXT"/>
+                      <Cell col="11" text="CODE_ORDER"/>
+                      <Cell col="12" text="USE_YN"/>
+                      <Cell col="13" text="REG_DT"/>
+                      <Cell col="14" text="REG_CD"/>
+                      <Cell col="15" text="REG_NM"/>
+                      <Cell col="16" text="MOD_DT"/>
+                      <Cell col="17" text="MOD_CD"/>
+                      <Cell col="18" text="MOD_NM"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:CHK"/>
+                      <Cell col="1" text="bind:CODE_KEY"/>
+                      <Cell col="2" text="bind:GROUP_ID"/>
+                      <Cell col="3" text="bind:CODE_ID"/>
+                      <Cell col="4" text="bind:PARENT_KEY"/>
+                      <Cell col="5" text="bind:CODE_NM"/>
+                      <Cell col="6" text="bind:ML_CD"/>
+                      <Cell col="7" text="bind:REF1"/>
+                      <Cell col="8" text="bind:REF2"/>
+                      <Cell col="9" text="bind:REF3"/>
+                      <Cell col="10" text="bind:DESC_TXT"/>
+                      <Cell col="11" text="bind:CODE_ORDER"/>
+                      <Cell col="12" text="bind:USE_YN"/>
+                      <Cell col="13" text="bind:REG_DT"/>
+                      <Cell col="14" text="bind:REG_CD"/>
+                      <Cell col="15" text="bind:REG_NM"/>
+                      <Cell col="16" text="bind:MOD_DT"/>
+                      <Cell col="17" text="bind:MOD_CD"/>
+                      <Cell col="18" text="bind:MOD_NM"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsList">
+        <ColumnInfo>
+          <Column id="CHK" type="STRING" size="255"/>
+          <Column id="CODE_KEY" type="STRING" size="255"/>
+          <Column id="GROUP_ID" type="STRING" size="255"/>
+          <Column id="CODE_ID" type="STRING" size="255"/>
+          <Column id="PARENT_KEY" type="STRING" size="255"/>
+          <Column id="CODE_NM" type="STRING" size="255"/>
+          <Column id="ML_CD" type="STRING" size="255"/>
+          <Column id="REF1" type="STRING" size="255"/>
+          <Column id="REF2" type="STRING" size="255"/>
+          <Column id="REF3" type="STRING" size="255"/>
+          <Column id="DESC_TXT" type="STRING" size="255"/>
+          <Column id="CODE_ORDER" type="STRING" size="255"/>
+          <Column id="USE_YN" type="STRING" size="255"/>
+          <Column id="REG_DT" type="STRING" size="255"/>
+          <Column id="REG_CD" type="STRING" size="255"/>
+          <Column id="REG_NM" type="STRING" size="255"/>
+          <Column id="MOD_DT" type="STRING" size="255"/>
+          <Column id="MOD_CD" type="STRING" size="255"/>
+          <Column id="MOD_NM" type="STRING" size="255"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="sParentKey" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsCode">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="DATA" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">01</Col>
+            <Col id="DATA">일번</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">01</Col>
+            <Col id="DATA">이번</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    1Depth > 2Depth
+*  @FileName    *.xfdl 
+*  @Creator     홍길동
+*  @CreateDate  yyyy.MM.DD 
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    Date          Modifier            Description
+*******************************************************************************
+*  YYYY.MM.DD      홍길동             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+//this.fv_nFormVal = null;     //용도
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload등)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.Form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this, true)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {    
+        //Script  
+   }
+}
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnInit, fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnInit : 초기화 함수 검색조건 초기화 및 온로드 세팅
+ * @return {N/A}    N/A
+ * @example this.fnInit();
+ */
+this.fnInit = function(){
+	//검색조건
+	var objDivSearch = this.divSearch.form;
+}
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "codeSearch";
+	var sParam = "sParentKey='" + take.nvl(this.divSearch.form.edtOrdNo.value,"") + "'";
+	this.dsList.clearData();
+	this.divSearch.form.edtOrdNo.updateToDataset();
+    take.tranSelect(this,sTranId,"SystemCommon.codeInfoList","dsSearch", "dsList", "", "fnCallback");
+}
+
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+this.fnSave = function(sTranId)
+{    
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Save transation id";
+    take.tranSave(this, sTranId, "NAMESPACE", "sInDs", "sOutDs", "sParam", "fnCallback");
+}
+
+/**
+ * fnAddRow : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+ * @example this.fnAddRow(sGrdId, nRow);
+ */
+this.fnAddRow = function(sGrdId, nRow)
+{
+    //공통 행추가에서 호출할 디폴트값 세팅
+    if (take.nvl(sGrdId, "")=="") sGrdId = "Grid00";
+    
+    //Script
+}
+
+/**
+ * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number, Array} arrnRow    deleteRow 리턴값
+ * @return {N/A} N/A
+ * @example this.fnDelRow(sGrdId, nRow); 
+ */
+this.fnDelRow = function(sGrdId, arrnRow)
+{    
+    //공통 행추가에서 호출할 디폴트값 세팅
+    if (take.nvl(sGrdId, "")=="") sGrdId = "Grid00";
+    
+    //Script
+}
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+//유형 돋보기 찾기 버튼 클릭 이벤트
+this.divSearch_btnCodeFind_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    this.fnPopUpOpen();	
+};
+
+//유형 코드 에디터 키 다운 버튼
+this.divSearch_edtTypeCd_onkeydown = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+	if( e.keycode == 13)
+    {   
+        this.fnPopUpOpen();
+        
+    } else if (e.keycode==8) {
+        if (take.nvl(this.divSearch.form.edtTypeNm.value, "")!="")
+        {
+            this.divSearch.form.edtTypeCd.set_value("");
+            this.divSearch.form.edtTypeNm.set_value("");
+        }
+    }
+};
+
+//유형 코드명 변경 이벤트
+this.divSearch_edtTypeNm_onchanged = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
+{
+	if (take.nvl(obj.vale, "")!="")
+    {
+        this.parent.parent.getNextComponent(this.parent).setFocus();
+    }
+};
+
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnUserFunction : 사용자 함수
+ * @param  {String} sParam 문자형 인자
+ * @param  {Number} nParam 숫자형 인자
+ * @example this.fnUserFunction(sParam, nParam);
+ */
+this.fnUserFunction = function(sParam, nParam)
+{    
+    //Script
+}
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : sId      - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : nErrCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : sErrMsg  - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "codeSearch" : //조회 콜백
+            trace(this.dsList.saveXML());
+            break;
+        case "Transation id 02" :  //조회 콜백
+            //Script
+            break;
+        case "Transation id 03" : //조회 콜백
+            //Script
+            break;
+        case "Save transation id 01" :  //저장 콜백
+            //Script
+            break;
+        case "Save transation id 01" :  //저장 콜백
+            //Script
+            break;
+        default :
+            break;
+    }        
+} 
+
+this.fnPopUpOpen = function()
+{
+    var sTitle  = "사용자 선택";
+    var sSearchTxt = "";
+
+    take.dataSelPopUp(
+        this, 
+        "PopUp", 
+        sTitle, 
+        sSearchTxt, 
+        "",
+        //"Main.codeSimpleSelect", 
+        "HumanResourceManagement.userList",
+        "", 
+        "PROJECT_CD=" + nexacro.getApplication().av_sProjectCd,
+        [["USER_CD", "ID", "40"],["USER_NM", "사용자명", "40"],["USER_POSITION_NM", "직책", "20"]], 
+        false, 
+        function(sId, sRtn) {   
+            if (take.nvl(sRtn, "")!="")
+            {
+                var nIdx = sRtn.indexOf(",");                            
+                this.divSearch.form.edtTypeCd.set_value(sRtn.substr(0, nIdx));
+                this.divSearch.form.edtTypeNm.set_value(sRtn.substr(nIdx+1));
+                
+            } else {
+                this.divSearch.form.edtTypeCd.set_value("");
+                this.divSearch.form.edtTypeNm.set_value("");
+            }
+        }
+    );
+}
+
+
+this.divSearch_edtTypeCd_onkeyup = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+	//var sCode = take.nvl(obj.value, "");
+    
+    this.divSearch.form.edtTypeNm.set_value("");
+};
+]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="divSearch.form.edtOrdNo" propid="value" datasetid="dsSearch" columnid="sParentKey"/>
+    </Bind>
+  </Form>
+</FDL>

@@ -1,0 +1,316 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="sampleComCodePop" width="620" height="490" onload="form_onload" background="#ffffff" titletext="부서검색">
+    <Layouts>
+      <Layout height="490" mobileorientation="landscape" width="620">
+        <Static id="Static09_00_00" taborder="0" text="w&#13;&#10;1&#13;&#10;0" top="0" height="420" background="rgba(224,159,30,0.40)" visible="false" textAlign="center" verticalAlign="middle" font="normal 7pt/normal &quot;Arial&quot;" width="10" right="0"/>
+        <Static id="Static09_00_01_00" taborder="1" text="h10" left="0" background="rgba(224,159,30,0.40)" visible="false" textAlign="center" verticalAlign="middle" font="normal 7pt/normal &quot;Arial&quot;" height="10" width="610" bottom="0"/>
+        <Static id="Static09_00_00_00" taborder="2" text="w&#13;&#10;1&#13;&#10;0" left="0" top="0" height="420" background="RGBA(224,159,30,0.40)" visible="false" textAlign="center" verticalAlign="middle" font="normal 7pt/normal &quot;Arial&quot;" width="10"/>
+        <Static id="Static09_00_01" taborder="3" text="h10" left="0" background="rgba(224,159,30,0.40)" visible="false" textAlign="center" verticalAlign="middle" font="normal 7pt/normal &quot;Arial&quot;" height="10" top="0" width="610"/>
+        <Div id="divSearch" taborder="5" text="Div00" left="10" top="10" height="31" right="10">
+          <Layouts>
+            <Layout>
+              <Static id="staCode" taborder="0" text="부서" left="0" top="0" width="100" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static10" taborder="1" left="98" top="0" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Edit id="edtCode" taborder="2" left="104" top="4" height="23" onkeydown="divSearch_edtCode_onkeydown" right="6"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static09_00" taborder="6" text="Static03" left="0" top="divSearch:0" height="5" background="red" visible="false" right="0"/>
+        <Button id="btnSearch" taborder="8" text="조회" top="Static09_00:0" height="23" cssclass="btn_WF_basic01" left="10" right="10" onclick="btnSearch_onclick"/>
+        <Static id="Static09_00_02" taborder="7" text="Static03" left="0" top="btnSearch:0" height="5" background="red" visible="false" right="0"/>
+        <Button id="btnConfirm" taborder="10" text="확인" cssclass="btn_WF_basic01" onclick="btnConfirm_onclick" left="10" right="10" bottom="10" height="23"/>
+        <Static id="Static09_00_02_00" taborder="9" text="Static03" left="0" background="red" visible="false" right="0" bottom="btnConfirm:0" height="5"/>
+        <Div id="divMain" taborder="4" text="그리드" left="10" top="Static09_00_02:0" right="10" bottom="Static09_00_02_00:0">
+          <Layouts>
+            <Layout>
+              <Grid id="grdList" taborder="1" left="0" top="0" binddataset="dsList" autofittype="col" bottom="0" right="0" oncelldblclick="divMain_grdList_oncelldblclick" cellclickbound="cell" cellsizingtype="col">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="24" band="head"/>
+                      <Row size="24"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="CODE"/>
+                      <Cell col="1" text="NAME"/>
+                      <Cell col="2" text="USE_YN"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:CODE"/>
+                      <Cell col="1" text="bind:NAME"/>
+                      <Cell col="2" text="bind:USE_YN"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsList">
+        <ColumnInfo>
+          <Column id="CHK" type="STRING" size="256"/>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+          <Column id="USE_YN" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+ *  SYSTEM FORM NAME
+ *
+ *  @MenuPath    com
+ *  @FileName    sampleComCodePop.xfdl
+ *  @Creator     정해원
+ *  @CreateDate  2019.12.19
+ *  @Version     1.0
+ *  @Desction    코드검색팝업(샘플)
+ *               
+ * 
+ ************** 소스 수정 이력 *************************************************
+ *    date          Modifier            Description
+ *******************************************************************************
+ *  2019.12.19      정해원             최초 생성 
+ *******************************************************************************
+ */
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+this.fvIsMultiSel = false;
+
+/*********************************************************
+ * 1.2 FORM EVENT 영역(onload)
+ ********************************************************/
+this.form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{	
+	if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+	{
+		this.fnInit();
+	}
+};
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "search";
+
+	this.dsList.clearData();
+	
+    take.tranSelect
+	(
+		  this
+		, sTranId
+		, "Sample.deptSelect"
+		, "dsSearch"
+		, "dsList"
+		, ""
+		, "fnCallback"
+	);
+};
+
+/**
+ * fnInit : 초기화
+ * @example this.fnInit();
+ */
+this.fnInit = function(){
+	if(!take.isEmpty(this.getOwnerFrame().argInSearchText)){
+		this.dsSearch.setColumn(0, 'CODE', this.getOwnerFrame().argInSearchText);
+	}
+	
+	this.fnSearch();
+};
+
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+ ********************************************************/
+/**
+ * btnSearch_onclick : 조회
+ */
+this.btnSearch_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fnSearch();
+};
+/**
+ * btnConfirm_onclick : 확인
+ */
+this.btnConfirm_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fnConfirm();
+};
+/**
+ * btnClose_onclick : 닫기
+ */
+this.btnClose_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fnClose(this);
+};
+/**
+ * divMain_grdList_oncelldblclick : 그리드 더블클릭
+ */
+this.divMain_grdList_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	if(!this.fvIsMultiSel){
+		this.fnConfirm();
+	}
+};
+
+/**
+ * divSearch_edtCode_onkeydown : 키입력
+ */
+this.divSearch_edtCode_onkeydown = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+	if(e.keycode == 13){
+		this.divMain.form.grdList.setFocus();
+		obj.setFocus();
+		this.fnSearch();
+	}
+};
+
+this.divSearch_mskCorpNo_onkeydown = function(obj:nexacro.MaskEdit,e:nexacro.KeyEventInfo)
+{
+	if(e.keycode == 13){
+		this.divMain.form.grdList.setFocus();
+		obj.setFocus();
+		this.fnSearch();
+	}
+};
+
+this.divSearch_edtPresiName_onkeydown = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+	if(e.keycode == 13){
+		this.divMain.form.grdList.setFocus();
+		obj.setFocus();
+		this.fnSearch();
+	}
+};
+
+
+/*********************************************************
+ * 4 사용자 FUNCTION 영역
+ ********************************************************/
+this.fnConfirm = function()
+{
+	var dsObj = this.dsList;
+	var returnObj;
+
+	if(dsObj.rowposition == -1 || dsObj.getRowCount() == 0){
+		return;
+	}
+	
+	if(!this.fvIsMultiSel){
+		//싱글
+		if(dsObj.rowposition > -1){
+			returnObj = this.fnDataset2Object(dsObj, dsObj.rowposition);
+		}
+	}else{
+		//멀티
+		returnObj	= new Array();
+		
+		var arrChkRow = take.getChkRow(dsObj, "CHK");
+		for (var i=0; i<arrChkRow.length; i++){
+			// Dataset의 특정 Row 값을 JSON Object로 변환한다.
+			var objRtn = this.fnDataset2Object(dsObj, arrChkRow[i]);
+			returnObj.push(objRtn);
+		}
+	}
+
+	this.fnClose(this, returnObj);
+};
+
+/**
+ * fnDataset2Object : dataset 특정행을 object로 변환
+ */
+this.fnDataset2Object = function(obj, nRow)
+{
+	var objRtn	= {};
+	
+	for (var i=0; i<obj.getColCount(); i++)
+	{
+		var strColId	 = obj.getColID(i);
+		objRtn[strColId] = obj.getColumn(nRow, strColId);
+	}
+	return objRtn;
+};
+
+/**
+ * fnClose : 부모창으로 변수 전달
+ */
+this.fnClose = function(o, variant)
+{
+	var pThis  = o;
+	
+	if (pThis.opener && typeof variant != "string") {
+		variant = take.nvl(variant, "");
+		pThis.opener.oCodeInfo = variant;
+		pThis.close();
+	}else{
+		pThis.close(variant);
+	}
+};
+
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+ * fnCallback : transaction callback
+ * @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+ * @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+ * @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+ * @return : N/A
+ * @example :  
+ */
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg != "SUCC" )
+	{
+        //Etc Script
+    }
+    
+    switch(sId)
+    {
+        case "search" :
+			// 조회 콜백
+            break;
+			
+        default :
+            break;
+    }
+};]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="divSearch.form.edtCode" propid="value" datasetid="dsSearch" columnid="CODE"/>
+    </Bind>
+  </Form>
+</FDL>

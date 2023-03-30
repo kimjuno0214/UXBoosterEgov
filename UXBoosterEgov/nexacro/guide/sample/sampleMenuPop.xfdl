@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="sampleMenuPop" width="1040" height="659" titletext="(샘플)메뉴팝업">
+    <Layouts>
+      <Layout height="659" width="1040">
+        <Div id="divMenuPop" taborder="0" text="Div00" left="10" top="15" height="95" right="10">
+          <Layouts>
+            <Layout>
+              <Static id="Static18" taborder="2" text="메뉴팝업" left="0" top="-10" height="30" cssclass="sta_WF_title02" right="0"/>
+              <Static id="staTypeT" taborder="3" text="메뉴코드" left="20" top="34" width="80" height="21" cssclass="sta_WF_textRImport"/>
+              <Edit id="edtMenuCd" taborder="0" left="103" top="34" width="100" height="21" autoselect="true" onkeyup="divCodePopup_edtMenuCd_onkeyup" value="M0015" text="M0015"/>
+              <Button id="btnMenuOpen" taborder="1" text="OPEN" left="208" top="34" width="100" height="21" onclick="divCodePopup_Button00_onclick" cssclass="btn_WF_basic01"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.divCodePopup_Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var sMenuId = this.divMenuPop.form.edtMenuCd.value;
+	var sUserParam="";
+    var sCallBack="";
+    var sOption="";
+    
+    take.openMenuPop(sMenuId, sUserParam, sOption, sCallBack);
+};]]></Script>
+  </Form>
+</FDL>

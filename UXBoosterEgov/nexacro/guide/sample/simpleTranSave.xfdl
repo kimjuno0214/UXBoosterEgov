@@ -1,0 +1,351 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="sample1" width="380" height="380" titletext="Layout1" onload="Form_onload" background="white">
+    <Layouts>
+      <Layout height="380" mobileorientation="landscape" width="380">
+        <Div id="divDetail" taborder="0" left="10" top="0" width="370" text="" height="360">
+          <Layouts>
+            <Layout>
+              <Grid id="grdMain" taborder="0" left="0" top="30" binddataset="dsList" autofittype="col" width="361" extendgridoption="checkbox,readonly" cellsizebandtype="allband" cellsizingtype="col" onselectchanged="divDetail_grdMain_onselectchanged" height="165">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="키값"/>
+                      <Cell col="1" text="데이터1"/>
+                      <Cell col="2" text="데이터2"/>
+                      <Cell col="3" text="데이터3"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:key" textAlign="center"/>
+                      <Cell col="1" text="bind:col1" textAlign="center"/>
+                      <Cell col="2" text="bind:col2"/>
+                      <Cell col="3" text="bind:col3"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="staTitle" taborder="1" text="리스트" left="0" top="0" height="30" right="866" usedecorate="true"/>
+              <Static id="staLable06" taborder="2" text="디테일" top="195" usedecorate="true" height="30" left="1" width="299"/>
+              <Static id="staBg01" taborder="3" left="70" top="225" height="31" cssclass="sta_WF_td01L" width="291"/>
+              <Static id="staLable01" taborder="4" text="키" left="1" top="225" width="70" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="staBg02" taborder="5" left="70" top="staBg01:-1" height="31" cssclass="sta_WF_td01L" width="291"/>
+              <Static id="staBg03" taborder="6" left="70" top="staBg02:-1" height="31" cssclass="sta_WF_td01L" width="291"/>
+              <Static id="staBg04" taborder="14" left="70" top="staBg03:-1" height="31" cssclass="sta_WF_td01L" width="291"/>
+              <Static id="staLable02" taborder="7" text="데이터1" left="1" top="staLable01:-1" width="70" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="staLable03" taborder="8" text="데이터2" left="1" top="staLable02:-1" width="70" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="staLable04" taborder="15" text="데이터3" left="1" top="staLable03:-1" width="70" height="31" cssclass="sta_WF_th01L"/>
+              <Edit id="edtData1" taborder="10" left="staLable02:6" top="260" height="21" text="TEXT" width="278"/>
+              <Edit id="edtKey" taborder="9" left="staLable01:6" top="230" height="21" text="주식회사 티플럭스" onchanged="divDetail_edtProgId_onchanged" width="278" readonly="true"/>
+              <Static id="staBgLine" taborder="13" left="4" top="225" height="1" cssclass="sta_WF_tableLine" right="509"/>
+              <Edit id="edtData2" taborder="11" left="staLable03:6" top="290" height="21" text="주식회사 티플럭스" onchanged="divDetail_edtProgId_onchanged" width="278"/>
+              <Edit id="edtData3" taborder="12" left="staLable04:6" top="320" height="21" text="주식회사 티플럭스" textAlign="left" onkeyup="divDetail_edtPProgNm_onkeyup" width="278"/>
+              <Button id="btnSearch" taborder="16" text="조회" left="208" top="5" width="149" height="23" onclick="divDetail_btnSearch_onclick"/>
+              <Button id="btnNew" taborder="17" text="신규" left="123" top="200" width="70" height="22" onclick="divDetail_btnNew_onclick"/>
+              <Button id="btnSave" taborder="18" text="저장" left="283" top="200" width="70" height="22" onclick="divDetail_btnSave_onclick"/>
+              <Button id="btnDelete" taborder="19" text="삭제" left="203" top="200" width="70" height="22" onclick="divDetail_btnDelete_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsList">
+        <ColumnInfo>
+          <Column id="key" type="STRING" size="256"/>
+          <Column id="col1" type="STRING" size="256"/>
+          <Column id="col2" type="STRING" size="256"/>
+          <Column id="col3" type="STRING" size="256"/>
+          <Column id="col4" type="STRING" size="256"/>
+          <Column id="col5" type="STRING" size="256"/>
+          <Column id="col6" type="STRING" size="256"/>
+          <Column id="col7" type="STRING" size="256"/>
+          <Column id="col8" type="STRING" size="256"/>
+          <Column id="col9" type="STRING" size="256"/>
+          <Column id="col10" type="STRING" size="256"/>
+          <Column id="use_yn" type="STRING" size="256"/>
+          <Column id="reg_cd" type="STRING" size="256"/>
+          <Column id="reg_dt" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsDetail">
+        <ColumnInfo>
+          <Column id="key" type="STRING" size="256"/>
+          <Column id="col1" type="STRING" size="256"/>
+          <Column id="col2" type="STRING" size="256"/>
+          <Column id="col3" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  sample1 템플릿
+*
+*  @MenuPath    guide > sample1
+*  @FileName    sample1.xfdl 
+*  @Creator     전영찬
+*  @CreateDate  2019.10.31 
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2019.10.31      전영찬             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+this.fv_sNew = "N";     //신규작성 확인값
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.Form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {    
+        this.fnInit();
+   }
+}
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "List";
+    
+    switch(sTranId) {
+        case "List":
+            this.dsList.clearData();
+            
+            take.tranSelect(this, sTranId, "Sample.sample01Select", "", "dsList", "", "fnCallback");
+            break;
+        
+        case "Detail":
+            var sSampleKey = this.dsList.getColumn(this.dsList.rowposition, "key");
+            var sParam = "sKey='" + sSampleKey + "'";
+            
+            this.dsDetail.clearData();
+            
+            take.tranSelect(this, sTranId, "Sample.sample01DetailSelect", "", "dsDetail", sParam, "fnCallback");
+            break;
+        default:
+            break;
+    }
+}
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+this.fnSave = function(sTranId)
+{    
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Save";
+    
+    var nRowType = this.dsDetail.getRowType(0);
+    
+    switch(nRowType) {
+    case 1: //초기행의 상태
+        alert("선택한 신청건의 수정사항이 없습니다.");
+    	break;
+    case 2: //추가된 행의 상태
+        var bRowChange = take.confirm(this, "question", "신규 저장 하시겠습니까?");
+        if (bRowChange){
+            take.tranSave(this, "Save", "Sample.sampleTran", "dsDetail", "", "", "fnCallback");
+        }
+    	break;
+    case 4: //수정된 행의 상태
+        if (take.confirm(this, "question", "선택건을 수정 하시겠습니까?")){
+            take.tranSave(this, "Modify", "Sample.sampleTran", "dsDetail", "", "", "fnCallback");
+        }
+        break;
+    default:
+    }
+}
+/**
+ * fnAddRow : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+ * @example this.fnAddRow(sGrdId, nRow);
+ */
+this.fnAddRow = function(sGrdId, nRow)
+{
+    if(this.dsDetail.getRowType(this.dsDetail.rowposition) == 2) {
+        alert("이미 신청 작성중입니다.");
+        return false;
+    }else{
+        var objDsDetail = this.dsDetail;
+        
+        objDsDetail.clearData();
+        objDsDetail.addRow();
+    }
+}
+
+/**
+ * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number, Array} arrnRow    deleteRow 리턴값
+ * @return {N/A} N/A
+ * @example this.fnDelRow(sGrdId, nRow); 
+ */
+this.fnDelRow = function(sGrdId, arrnRow)
+{    
+    var nRowType = this.dsDetail.getRowType(0);
+    trace(nRowType);
+    
+    switch(nRowType) {
+    case 0: //존재하지 않는 행의 상태
+        alert("선택한 데이터가 없습니다.");
+    	break;
+    case 2: //추가된 행의 상태
+        if (take.confirm(this, "question", "작성중인 자료가 삭제됩니다.\n진행하시겠습니까?")){
+            this.dsDetail.clearData();
+            this.fnSearch("List");
+        }
+    	break;
+    default:
+        if (take.confirm(this, "question", "선택한 신청건을 삭제하시겠습니까?")){
+            this.dsList.deleteRow(this.dsList.rowposition);
+            take.tranSave(this, "Delete", "Sample.sampleTran", "dsDetail", "", "", "fnCallback");
+        }
+        break;
+    }
+}
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+//리스트 클릭 이벤트
+this.divDetail_grdMain_onselectchanged = function(obj:nexacro.Grid,e:nexacro.GridSelectEventInfo)
+{
+    this.fnSearch("Detail");
+};
+
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnInit : 초기화 함수
+ * @param  {String} N/A 
+ * @example this.fnInit();
+ */
+this.fnInit = function()
+{
+    
+}
+
+/**
+ * fnModifySet : 신규저장 / 수정
+ * @param  {String} sParam N/A
+ * @example this.fnModifySet();
+ */
+this.fnModifySet = function()
+{
+    //팝업으로 '템플릿 진행할 때' 포커스가 안빠져서 바인드된값이 업데이트가 안됨. -> 강제 data셋팅필요.
+    var objDsDetail = this.dsDetail;
+    var objDivDetail = this.divDetail.form;
+    var sEdtText01  = take.nvl(objDivDetail.edtData1.value, "");
+    var sEdtText02  = take.nvl(objDivDetail.edtData2.value, "");
+    var sEdtText03  = take.nvl(objDivDetail.edtData3.value, "");
+    
+    objDsDetail.setColumn(0, "col1", sEdtText01);
+    objDsDetail.setColumn(0, "col2", sEdtText02);
+    objDsDetail.setColumn(0, "col2", sEdtText03);
+}
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "List" : //조회 콜백
+            this.divDetail.form.staTitle.set_text("Title (총 " + this.dsList.rowcount + "건)");
+            break;
+        case "Detail" : //조회 콜백
+            //Script
+            break;
+        case "Save" :  //저장 콜백
+            this.fnSearch("List");
+            break;
+        case "Delete" :  //삭제 콜백
+            this.fnSearch("List");
+            break;
+        default :       // 수정 콜백
+            this.fnSearch("List");
+            break;
+    }        
+}
+
+this.divDetail_btnSearch_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fnSearch('List');
+};
+
+//신규버튼
+this.divDetail_btnNew_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fnAddRow();
+};
+//삭제버튼
+this.divDetail_btnDelete_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fnDelRow();
+};
+//저장버튼
+this.divDetail_btnSave_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fnSave('Save');
+};]]></Script>
+    <Bind>
+      <BindItem id="item15" compid="divDetail.form.edtKey" propid="value" datasetid="dsDetail" columnid="key"/>
+      <BindItem id="item1" compid="divDetail.form.edtData1" propid="value" datasetid="dsDetail" columnid="col1"/>
+      <BindItem id="item2" compid="divDetail.form.edtData2" propid="value" datasetid="dsDetail" columnid="col2"/>
+      <BindItem id="item4" compid="divDetail.form.edtData3" propid="value" datasetid="dsDetail" columnid="col3"/>
+    </Bind>
+  </Form>
+</FDL>

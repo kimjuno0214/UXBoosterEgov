@@ -1,0 +1,497 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="PM040P01" width="760" height="630" onload="form_onload" background="#ffffff" titletext="프로젝트관리_권한관리_권한관리_기능버튼">
+    <Layouts>
+      <Layout height="630" mobileorientation="landscape" width="760">
+        <Static id="Static09_00_00" taborder="0" text="w&#13;&#10;1&#13;&#10;0" top="20" background="#fd9da0" visible="false" textAlign="center" verticalAlign="middle" font="normal 7pt/normal &quot;Arial&quot;" width="20" right="0" bottom="0" opacity="0.5"/>
+        <Static id="Static09_00_00_00" taborder="1" text="w&#13;&#10;1&#13;&#10;0" left="0" top="20" background="#fd9da0" visible="false" textAlign="center" verticalAlign="middle" font="normal 7pt/normal &quot;Arial&quot;" width="20" bottom="0" opacity="0.5"/>
+        <Static id="Static09_00_01" taborder="2" text="h10" left="0" background="#fd9da0" visible="false" textAlign="center" verticalAlign="middle" font="normal 7pt/normal &quot;Arial&quot;" height="20" top="0" right="0" opacity="0.5"/>
+        <Div id="divMenu" taborder="3" text="Div00" left="20" top="20" height="91" right="20">
+          <Layouts>
+            <Layout>
+              <Static id="staCode" taborder="0" text="메뉴" left="0" top="26" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static10" taborder="1" left="119" top="26" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Edit id="edtMenuCd" taborder="2" left="127" top="30" height="23" onkeyup="divSearch_edtCode_onkeyup" readonly="true" width="84"/>
+              <Static id="staCode00" taborder="3" text="프로그램" left="0" top="56" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static10_00" taborder="4" left="119" top="56" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Edit id="edtMenuNm" taborder="5" left="214" top="30" height="23" right="6" onkeyup="divSearch_edtCode_onkeyup" readonly="true"/>
+              <Edit id="edtProgramCd" taborder="6" left="127" top="60" height="23" onkeyup="divSearch_edtCode_onkeyup" readonly="true" width="84"/>
+              <Edit id="edtProgramNm" taborder="7" left="214" top="60" height="23" right="6" onkeyup="divSearch_edtCode_onkeyup" readonly="true"/>
+              <Static id="staProgDetailT" taborder="8" text="화면정보" left="0" top="0" height="21" cssclass="sta_WF_title02" right="320"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divButton" taborder="4" text="Div00" left="20" top="divMenu:5" height="236" right="20">
+          <Layouts>
+            <Layout>
+              <Static id="staProgDetailT" taborder="1" text="기능버튼목록" left="0" top="0" height="21" cssclass="sta_WF_title02" right="320"/>
+              <Grid id="grdButton" taborder="0" left="0" top="26" right="0" bottom="0" binddataset="dsButton" autofittype="col" cellclickbound="cell">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="120"/>
+                      <Column size="200"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="버튼ID"/>
+                      <Cell col="1" text="버튼명"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:COMPONENT_ID"/>
+                      <Cell col="1" text="bind:COMPONENT_NM"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divProgram" taborder="5" left="126" top="230" width="49" height="36" text="가상폼" async="false" visible="false" border="1px solid"/>
+        <Div id="divUser" taborder="6" text="Div00" left="20" top="divButton:5" right="20" bottom="63">
+          <Layouts>
+            <Layout>
+              <Static id="staProgDetailT" taborder="0" text="접근 가능 사용자" left="0" top="0" height="21" cssclass="sta_WF_title02" right="520"/>
+              <Button id="btnRight" taborder="5" left="47.50%" top="70" width="10" height="50" cssclass="btn_WF_next" onclick="divUser_btnRight_onclick"/>
+              <Static id="Static03_00" taborder="7" text="5" top="30" height="206" background="#fd9da0" visible="false" textAlign="center" width="5" left="btnRight:0" opacity="0.5"/>
+              <Static id="staProgDetailT00" taborder="1" text="접근 불가 사용자" left="Static03_00:0" top="0" height="21" cssclass="sta_WF_title02" right="149"/>
+              <Static id="Static03" taborder="4" text="5" top="30" height="206" background="#fd9da0" visible="false" textAlign="center" right="btnRight:0" width="5" opacity="0.5"/>
+              <Grid id="grdUserY" taborder="2" left="0" top="26" bottom="0" binddataset="dsUserY" autofittype="col" right="Static03:0" oncelldblclick="divUser_grdUser_oncelldblclick">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="100"/>
+                      <Column size="100"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="사용자코드"/>
+                      <Cell col="1" text="사용자명"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:USER_CD" cssclass="cellC" cursor="pointer"/>
+                      <Cell col="1" text="bind:USER_NM" cssclass="cellC" cursor="pointer"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Grid id="grdUserN" taborder="3" top="26" bottom="0" right="0" binddataset="dsUserN" autofittype="col" left="Static03_00:0" oncelldblclick="divUser_grdUser_oncelldblclick">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="100"/>
+                      <Column size="100"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="사용자코드"/>
+                      <Cell col="1" text="사용자명"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:USER_CD" cssclass="cellC" cursor="pointer"/>
+                      <Cell col="1" text="bind:USER_NM" cssclass="cellC" cursor="pointer"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Button id="btnLeft" taborder="6" left="47.50%" top="146" width="10" height="50" cssclass="btn_WF_prev" onclick="divUser_btnLeft_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static01" taborder="7" text="H20" left="20" height="20" bottom="0" right="20" background="#fd9da0" opacity="0.5" textAlign="center" visible="false"/>
+        <Static id="Static01_01" taborder="8" text="H20" left="20" height="20" right="20" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" top="divUser:0"/>
+        <Button id="btnCancle" taborder="10" height="23" cssclass="btn_WF_cancel01" text="닫기" right="20" width="57" onclick="btnCancle_onclick" top="Static01_01:0"/>
+        <Button id="btnSave" taborder="9" height="23" cssclass="btn_WF_save01" text="저장" right="btnCancle:3" width="57" onclick="btnSave_onclick" top="Static01_01:0"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="ROLE_CD" type="STRING" size="256"/>
+          <Column id="MENU_CD" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsProjectMenu">
+        <ColumnInfo>
+          <Column id="MENU_CD" type="STRING" size="255"/>
+          <Column id="MENU_TYPE" type="STRING" size="255"/>
+          <Column id="PROGRAM_NM" type="STRING" size="255"/>
+          <Column id="PROGRAM_CD" type="STRING" size="255"/>
+          <Column id="PROJECT_CD" type="STRING" size="255"/>
+          <Column id="PROGRAM_URL" type="STRING" size="255"/>
+          <Column id="MENU_NM" type="STRING" size="255"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsButton" onrowposchanged="dsButton_onrowposchanged" canrowposchange="dsButton_canrowposchange">
+        <ColumnInfo>
+          <Column id="COMPONENT_ID" type="STRING" size="256"/>
+          <Column id="COMPONENT_NM" type="STRING" size="256"/>
+          <Column id="COMPONENT_PATH" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsUserY">
+        <ColumnInfo>
+          <Column id="USER_CD" type="STRING" size="255"/>
+          <Column id="USER_ID" type="STRING" size="255"/>
+          <Column id="USER_NM" type="STRING" size="255"/>
+          <Column id="PROJECT_CD" type="STRING" size="255"/>
+          <Column id="ROLE_CD" type="STRING" size="255"/>
+          <Column id="MENU_CD" type="STRING" size="255"/>
+          <Column id="BTN_ID" type="STRING" size="255"/>
+          <Column id="USE_YN" type="STRING" size="255"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsUserN">
+        <ColumnInfo>
+          <Column id="USER_CD" type="STRING" size="255"/>
+          <Column id="USER_ID" type="STRING" size="255"/>
+          <Column id="USER_NM" type="STRING" size="255"/>
+          <Column id="PROJECT_CD" type="STRING" size="255"/>
+          <Column id="ROLE_CD" type="STRING" size="255"/>
+          <Column id="MENU_CD" type="STRING" size="255"/>
+          <Column id="BTN_ID" type="STRING" size="255"/>
+          <Column id="USE_YN" type="STRING" size="255"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+ *  SYSTEM FORM NAME
+ *
+ *  @MenuPath    pm > PM040
+ *  @FileName    PM040P01.xfdl 
+ *  @Creator     정해원
+ *  @CreateDate  2020.04.27
+ *  @Version     1.0
+ *  @Desction    프로젝트 권한관리 기능버튼 추가
+ * 
+ ************** 소스 수정 이력 *************************************************
+ *    date          Modifier            Description
+ *******************************************************************************
+ *  2020.04.27      정해원             최초 생성(사용자에 화면 매핑)
+ *******************************************************************************
+ */
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+
+/*********************************************************
+ * 1.2 FORM EVENT 영역(onload)
+ ********************************************************/
+this.form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{	
+	if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+	{
+		this.fnInit();
+	}
+};
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "search";
+	
+	var sNameSpaces;
+	var sOutDs;
+	var sInDs 		= "";
+	var sParams		= "";
+	
+	if(sTranId == "search"){
+		this.dsProjectMenu.clearData();	
+		this.dsButton.clearData();
+		
+		sNameSpaces = "ProjectManagement.projectMenuProgramDetail";
+		sInDs		= "dsSearch";
+		sOutDs 		= "dsProjectMenu";
+		
+	}else if(sTranId == "searchUser"){
+		this.dsUserY.clearData();
+		this.dsUserN.clearData();
+
+		sNameSpaces = ["ProjectManagement.projectMenuButtonSelectY", "ProjectManagement.projectMenuButtonSelectN"];
+		sOutDs 		= ["dsUserY", "dsUserN"];
+		sParams		+= "PROJECT_CD='" + this.dsSearch.getColumn(0, 'PROJECT_CD') + "'";
+		sParams		+= " MENU_CD='" + this.dsSearch.getColumn(0, 'MENU_CD') + "'";
+		sParams		+= " ROLE_CD='" + this.dsSearch.getColumn(0, 'ROLE_CD') + "'";
+		sParams		+= " BTN_ID='" + this.dsButton.getColumn(this.dsButton.rowposition, 'COMPONENT_PATH') + "'";
+	}
+	
+	take.tranSelect(this, sTranId, sNameSpaces, sInDs, sOutDs, sParams, "fnCallback");
+};
+
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+this.fnSave = function(){
+	//this.dsUserN 만 저장
+	if ( !take.isDsModified(this.dsUserY) && !take.isDsModified(this.dsUserN) )
+	{
+		//take.alert(this, "info", "변경된 내역이 없습니다.");
+		take.alert(this, "Info", "MS00000001");
+		return;
+	}
+	
+	take.tranSave
+	(
+		this, 
+		"save", 
+		"ProjectManagement.projectMenuButton", 
+		"dsUserN", 
+		"",
+		"",
+		"fnCallback"
+	)
+};
+
+/**
+ * fnInit : 초기화
+ * @example this.fnInit();
+ */
+this.fnInit = function(){
+	if(!take.isEmpty(this.getOwnerFrame().argInProjectCd)){
+		this.dsSearch.setColumn(0, 'PROJECT_CD', this.getOwnerFrame().argInProjectCd);
+	}
+	
+	if(!take.isEmpty(this.getOwnerFrame().argInRoleCd)){
+		this.dsSearch.setColumn(0, 'ROLE_CD', this.getOwnerFrame().argInRoleCd);
+	}
+	
+	if(!take.isEmpty(this.getOwnerFrame().argInMenuCd)){
+		this.dsSearch.setColumn(0, 'MENU_CD', this.getOwnerFrame().argInMenuCd);
+	}
+	
+	this.fnSearch();
+};
+
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+ ********************************************************/
+/**
+ * btnSave_onclick : 저장
+ */
+this.btnSave_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fnSave();
+};
+
+/**
+ * divUser_btnRight_onclick : 접근불가 사용자 추가 버튼
+ */
+this.divUser_btnRight_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fnSwitchingUser("grdUserY");
+};
+
+/**
+ * divUser_btnLeft_onclick : 접근가능 사용자 추가 버튼
+ */
+this.divUser_btnLeft_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fnSwitchingUser("grdUserN");
+};
+
+/**
+ * dsButton_canrowposchange : 기능버튼 선택 전
+ */
+this.dsButton_canrowposchange = function(obj:nexacro.NormalDataset,e:nexacro.DSRowPosChangeEventInfo)
+{
+	if ( take.isDsModified(this.dsUserN) ){
+		var ret = take.confirm(this, "question", "MS00000074");
+		//take.confirm(this, "question", "작성중인 데이터는 유지되지 않습니다.\r\n계속 진행하시겠습니까?");
+		if(!ret){
+			return false;
+		}
+	}
+	
+	return true;
+};
+
+/**
+ * dsButton_onrowposchanged : 기능버튼 선택 후
+ */
+this.dsButton_onrowposchanged = function(obj:nexacro.NormalDataset,e:nexacro.DSRowPosChangeEventInfo)
+{
+	if(e.newrow == -1){
+		return;
+	}
+	
+	this.fnSearch("searchUser");
+};
+
+/**
+ * divUser_grdUser_oncelldblclick : 그리드 더블클릭
+ */
+this.divUser_grdUser_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	this.fnSwitchingUser(obj.name);
+};
+
+/**
+ * btnCancle_onclick : 닫기 버튼
+ */
+this.btnCancle_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.close();
+};
+/*********************************************************
+ * 4 사용자 FUNCTION 영역
+ ********************************************************/
+/**
+ * fnSetForm : 화면페이지 로드
+ */
+this.fnSetForm = function(){
+	this.divProgram.set_url("");
+	
+	var sProgramUrl = this.dsProjectMenu.getColumn(0, "PROGRAM_URL");
+	try{
+		this.divProgram.set_url(sProgramUrl);
+	}catch(e){
+		this.divProgram.set_url("");
+		return;
+	}
+	
+	this.fnGetButton();
+	
+	if(this.dsButton.getRowCount() > 0){
+		this.dsButton.set_rowposition(-1);
+		this.dsButton.set_rowposition(0);
+	}
+};
+
+/**
+ * fnGetButton : 버튼 컴퍼넌트 로드
+ */
+this.fnGetButton = function(){
+	var objForm = this.divProgram.form;
+	var arrComp = take.getCompObjects(objForm, "button");
+	
+	//컴포넌트 갯수 만큼 반복
+	this.dsButton.set_enableevent(false);
+    for (var i = 0 ; i < arrComp.length ; i++){		
+		var objFullPath 	= take.ObjectPath(arrComp[i]);
+		var objParentPath 	= objForm._unique_id;
+		var objPath 		= objFullPath.substr(objFullPath.indexOf(objParentPath) + objParentPath.length + 1);
+		
+		//trace('objParentPath===>' + objParentPath);	===>mainframe.WorkFrame.PM040P01.form.divProgram.form
+		//trace('objFullPath===>' + objFullPath);		===>_application.mainframe.WorkFrame.PM040P01.form.divProgram.form.divDetail.form.btnAddRow
+		//trace('objPath===>' + objPath);				===>divDetail.form.btnAddRow
+		
+		if(	!arrComp[i] 
+			|| arrComp[i].id == 'btnShowHide' 
+			|| arrComp[i].cssclass == 'btn_WF_tab02' || arrComp[i].cssclass == 'btn_WF_tab01'
+			|| arrComp[i].cssclass == 'btn_WF_search02' || arrComp[i].cssclass == 'btn_WF_search01'
+		){
+			continue;
+		}
+		
+		var nRow = this.dsButton.addRow();
+		this.dsButton.setColumn(nRow, "PROJECT_CD"		, this.dsProjectMenu.getColumn(0, "PROJECT_CD"));
+		this.dsButton.setColumn(nRow, "ROLE_CD"			, this.dsProjectMenu.getColumn(0, "ROLE_CD"));
+		this.dsButton.setColumn(nRow, "MENU_CD"			, this.dsProjectMenu.getColumn(0, "MENU_CD"));
+		
+		this.dsButton.setColumn(nRow, "COMPONENT_ID"	, arrComp[i].id);
+		this.dsButton.setColumn(nRow, "COMPONENT_NM"	, arrComp[i].text);
+		this.dsButton.setColumn(nRow, "COMPONENT_PATH"	, objPath);
+    }
+	this.dsButton.set_enableevent(true);
+};
+
+/**
+ * fnSwitchingUser : 사용자전환
+ */
+this.fnSwitchingUser = function(sGridName){
+	var insertDs = this.dsUserY;
+	var removeDs = this.dsUserN;
+	var useYn	 = "Y";
+	
+	if (sGridName == "grdUserY" ){
+		insertDs = this.dsUserN;
+		removeDs = this.dsUserY;
+		useYn	 = "N";
+	}
+	
+	var nRow = removeDs.rowposition;
+	if (nRow < 0) return;
+	
+	var newRow 	= insertDs.addRow();
+	insertDs.copyRow(newRow, removeDs, nRow);
+	insertDs.setColumn(newRow, "USE_YN", "N");
+	removeDs.deleteRow(nRow);
+};
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+ * fnCallback : transaction callback
+ * @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+ * @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+ * @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+ * @return : N/A
+ * @example :  
+ */
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg != "SUCC" )
+	{
+        //Etc Script
+    }
+    
+    switch(sId)
+    {
+        case "search" :
+			// 조회 콜백
+			this.fnSetForm();
+            break;
+        case "save" :
+			// 저장 콜백
+			this.fnSearch("searchUser");
+            break;
+        default :
+            break;
+    }
+};
+
+
+
+
+]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="divMenu.form.edtMenuCd" propid="value" datasetid="dsProjectMenu" columnid="MENU_CD"/>
+      <BindItem id="item1" compid="divMenu.form.edtMenuNm" propid="value" datasetid="dsProjectMenu" columnid="MENU_NM"/>
+      <BindItem id="item2" compid="divMenu.form.edtProgramCd" propid="value" datasetid="dsProjectMenu" columnid="PROGRAM_CD"/>
+      <BindItem id="item3" compid="divMenu.form.edtProgramNm" propid="value" datasetid="dsProjectMenu" columnid="PROGRAM_URL"/>
+    </Bind>
+  </Form>
+</FDL>

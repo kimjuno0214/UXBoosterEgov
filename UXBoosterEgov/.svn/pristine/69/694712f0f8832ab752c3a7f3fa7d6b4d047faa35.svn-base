@@ -1,0 +1,11 @@
+{
+	"name": "Extend",
+	"nexacroversion": "17.1.3.200",
+	"description": "Extend Library for Nexacro17",
+	"license": "",
+	"scripts": [
+			"Extend/html2canvas.min.js",
+			"Extend/takeEcma6.js",
+			"Extend/crypto-js.min.js"
+	]
+}

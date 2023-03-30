@@ -1,0 +1,534 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="frmLoginS02" width="420" height="556" titletext="로그인 회원등록 서브화면" onclick="MN010PT02_onclick" onload="Form_onload">
+    <Layouts>
+      <Layout height="556" width="420">
+        <Static id="staLogin" taborder="0" text="로그인" top="25" width="84" height="25" cssclass="sta_WF_chgLoginBox" right="25" onclick="staLogin_onclick"/>
+        <Static id="Static01" taborder="1" left="95" top="79" width="231" height="40" cssclass="sta_WF_loginLogo"/>
+        <Edit id="edtUserNm" taborder="2" left="95" top="129" width="231" height="30" displaynulltext="이름" onkeyup="Edit_onkeyup"/>
+        <Edit id="edtUserId" taborder="3" left="95" top="169" width="168" height="30" displaynulltext="아이디" onkeyup="Edit_onkeyup" inputfilter="comma,dot,sign,space,symbol" inputtype="alpha,english,digit"/>
+        <CheckBox id="chkSystem" taborder="8" text="UXBooster 시스템 이용약관에 동의함." left="95" top="365" width="220" height="20" truevalue="Y" falsevalue="X" onchanged="CheckBox_onchanged"/>
+        <Button id="btnJoin" taborder="10" text="회원가입" left="95" top="421" width="231" height="40" cssclass="btn_WF_login" onclick="btnJoin_onclick"/>
+        <Button id="btnCancel" taborder="11" text="취소" left="95" top="466" width="231" height="40" cssclass="btn_WF_findInfo" onclick="btnCancel_onclick"/>
+        <Edit id="edtUserPw1" taborder="4" left="95" top="209" width="231" height="30" displaynulltext="비밀번호" password="true" onkeyup="Edit_onkeyup"/>
+        <Edit id="edtUserPw2" taborder="5" left="95" top="249" width="231" height="30" displaynulltext="비밀번호확인" password="true" onkeyup="Edit_onkeyup"/>
+        <Edit id="edtEmail" taborder="6" left="95" top="289" width="168" height="30" displaynulltext="이메일" onkeyup="Edit_onkeyup"/>
+        <Edit id="edtMobile" taborder="7" left="95" top="329" width="231" height="30" displaynulltext="핸드폰" inputfilter="sign,space,symbol,dot,comma,alpha" oninput="edtMobile_oninput" onkeyup="Edit_onkeyup" maxlength="13"/>
+        <CheckBox id="chkPersonalInfo" taborder="9" text="개인정보처리 동의" left="95" top="385" width="220" height="20" truevalue="Y" falsevalue="X" onchanged="CheckBox_onchanged"/>
+        <Button id="btnChkId" taborder="12" text="중복체크" top="169" width="60" height="30" cssclass="btn_WF_basic01" left="edtUserId:3" onclick="btnChk_onclick"/>
+        <Button id="btnChkMail" taborder="13" text="중복체크" top="289" width="60" height="30" cssclass="btn_WF_basic01" left="edtEmail:3" onclick="btnChk_onclick"/>
+        <Static id="staChkId" taborder="14" left="95" top="509" width="231" height="10" color="red" font="8px/normal &quot;Arial&quot;,&quot;Noto Sans CJK KR&quot;,&quot;맑은 고딕&quot;"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/**
+*  로그인
+*
+*  @MenuPath    메인 > 로그인 > 회원가입
+*  @FileName    MN080.xfdl 
+*  @Creator     전영찬
+*  @CreateDate  2019.10.22 
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2019.10.22      전영찬             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+this.fv_sChkId = "N";     //ID 중복 확인
+this.fv_sChkMail = "N";   //Mail 중복 확인
+this.fv_nSystemId = 'S000000001';     //시스템ID
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.Form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	this.ProgId="GM00000003";
+    this.ProgNm="GM00000003";
+	
+	//로그인 이후 로그아웃했을경우 기존에 사용한 다국어 코드 세팅
+    if (take.nvl(nexacro.getApplication().av_sLangCd,"")=="")
+    {
+        nexacro.getApplication().av_sLangCd = take.nvl(nexacro.getEnvironment().locale, "ko_KR");
+    }
+	
+    if (take.bDomain)
+    {
+        //다국어 코드 가져오기
+        this.fnGetLang();
+    }
+	
+   //if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   //{    
+        //Script
+		//take.tranSelect(this,"PolicySearch","Main.policySelect","dsSearch", "dsPolicy", "", "fnCallback");
+		take.transaction(this, "PolicySearch", "SVC_LOC::mn/policy.do", "dsSearch=dsSearch", "dsPolicy", "", "fnCallback");
+   //}
+}
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Transation id";
+    take.tranSelect(this,sTranId,"Namespace","sInDataset", "sOutDataset", "sParam", "fnCallback");
+}
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+this.fnSave = function(sTranId)
+{    
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Save";
+    
+    //take.tranSave(this, sTranId, "UserManagement.userInfo", "dsUserJoin", "", "", "fnCallback");
+}
+
+/**
+ * fnTran : 트랜잭션
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @example this.fnTran("ID");
+ */
+this.fnTran = function(sTranId)
+{   
+    if (take.nvl(sTranId, "")=="") sTranId = "ChkId";
+    
+    var sParam;
+    
+    switch(sTranId)
+    {
+        case "ChkId" :        //아이디확인
+            sParam = "sUserId='" + this.edtUserId.value + "'";
+            take.transaction(this, sTranId, "SVC_LOC::mn/dupCheck.do", "", "", sParam, "fnCallback");
+            break;
+        case "ChkMail" :    //메일중복확인
+            sParam = "sUserEmail='" + this.edtEmail.value + "'";
+            take.transaction(this, sTranId, "SVC_LOC::mn/dupCheck.do", "", "", sParam, "fnCallback");
+            break;
+        case "Join" :    // 회원가입
+            take.transaction(this, sTranId, "SVC_LOC::mn/userJoin.do", "dsUserJoin=dsUserJoin:U", "", "", "fnCallback");
+            break;
+        default :
+            //ID 동적 구현
+//             sParam = "sUserId='" + this.edtUserId.value + "'";
+//             take.tranSelect(this, sTranId, "Main.dupCheck2", "", "dsResult", sParam, "fnCallback");
+            break;
+    }
+}
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+//상단 로그인 클릭
+this.staLogin_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	this.getOwnerFrame().parent.frame.form.divCenter.form.divLogIn.set_url("frm::frmLoginS01.xfdl");
+};
+
+//동의 체크박스 선택
+this.CheckBox_onchanged = function(obj:nexacro.CheckBox,e:nexacro.CheckBoxChangedEventInfo)
+{
+	if(obj.value != "X") {
+        obj.set_value("X");
+        var aAgrKey = {sTitle:"개인정보처리동의/시스템약관", sFlag:"Agree", sChk1:this.chkSystem.value, sChk2:this.chkPersonalInfo.value};
+        take.openPopup(this, "MN020PT01", "frm::frmLoginP02.xfdl", aAgrKey, "", "fnPopCallback", false);
+    }
+};
+
+// 회원가입버튼
+this.btnJoin_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	if(this.fnCheckForm()) {
+        if(take.confirm(this, "question", "회원가입을 진행하시겠습니까?")) {
+            this.fnTran("Join");
+        }
+    }
+};
+
+// 취소버튼
+this.btnCancel_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.getOwnerFrame().parent.frame.form.divCenter.form.divLogIn.set_url("frm::frmLoginS01.xfdl");
+};
+
+//폼 클릭 이벤트 포커스아웃
+this.MN010PT02_onclick = function(obj:nexacro.Form,e:nexacro.ClickEventInfo)
+{
+	this.btnJoin.setFocus();
+};
+
+//중복체크 버튼 클릭 이벤트
+this.btnChk_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var sBtnGbn = obj.name.substr(3);
+    
+    if (sBtnGbn == "ChkId") {
+        if(take.nvl(this.edtUserId.value, "") == ""){
+            take.alert(this, "", "ID를 작성해주세요.");
+            this.edtUserId.setFocus();
+            return;
+        }
+        
+    	this.fnTran("ChkId");
+    } else {
+        if(take.nvl(this.edtEmail.value, "") == ""){
+            take.alert(this, "", "이메일을 작성해주세요.");
+            this.edtEmail.setFocus();
+            return;
+        }
+		else if( !take.isEmail(this.edtEmail.value) ){
+			take.alert(this, "", "이메일 형식이 잘못되었습니다.");
+            this.edtEmail.setFocus();
+            return;
+		}
+        
+        this.fnTran("ChkMail");
+    }
+};
+
+// 모바일 번호 형식 체크
+this.edtMobile_oninput = function(obj:nexacro.Edit,e:nexacro.InputEventInfo)
+{
+	var sVal = obj.value;
+    var sMobile = '';
+    sVal = sVal.replace(/[^0-9]/g, '');
+    
+    if( sVal.length < 4){
+        return sVal;
+    }else if(sVal.length < 7){
+        sMobile += sVal.substr(0, 3);
+        sMobile += '-';
+        sMobile += sVal.substr(3);
+    }else if(sVal.length < 11){
+        sMobile += sVal.substr(0, 3);
+        sMobile += '-';
+        sMobile += sVal.substr(3, 3);
+        sMobile += '-';
+        sMobile += sVal.substr(6);
+    }else{
+        sMobile += sVal.substr(0, 3);
+        sMobile += '-';
+        sMobile += sVal.substr(3, 4);
+        sMobile += '-';
+        sMobile += sVal.substr(7);
+    }
+    
+    this.edtMobile.set_value(sMobile);
+};
+
+//ID,Email 중복체크 동적
+// this.edtUserId_onkillfocus = function(obj:nexacro.Edit,e:nexacro.KillFocusEventInfo)
+// {
+//     if (take.nvl(this.edtUserId.value, "") != "") {
+//     	if ((this.edtUserId.value).length < 2)
+//     	{
+//     		alert("ID를 두자 이상 작성해주세요.");
+//             return;
+//     	}
+//         this.fnTran("IdTest");
+//     }
+// };
+
+// Edit_onkeyup : 엔터로 강제 포커스아웃
+this.Edit_onkeyup = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+	if(e.keycode == 13){
+        var sBtnId = obj.name.substr(3);
+        
+        switch(sBtnId) {
+        case "UserNm":
+            this.edtUserId.setFocus();
+        	break;
+        case "UserId":
+            this.edtUserPw1.setFocus();
+        	break;
+        case "UserPw1":
+            this.edtUserPw2.setFocus();
+        	break;
+        case "UserPw2":
+            this.edtEmail.setFocus();
+        	break;
+        case "Email":
+            this.edtMobile.setFocus();
+        	break;
+        default:
+            this.btnJoin.setFocus();
+            break;
+        }
+    }
+};
+
+// dsUserJoin_oncolumnchanged : 회원가입정보 변경
+this.dsUserJoin_oncolumnchanged = function(obj:nexacro.NormalDataset,e:nexacro.DSColChangeEventInfo)
+{
+	if(e.columnid == 'USER_ID'){
+		this.fv_sChkId = "N";
+	}else if(e.columnid == 'USER_EMAIL'){
+		this.fv_sChkMail = "N";
+	}
+};
+
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnCheckForm : 저장전 유효성 체크
+ * @param  {String} sParam N/A
+ * @example this.fnCheckForm();
+ */
+this.fnCheckForm = function()
+{   
+    var sUserId     = take.nvl(this.edtUserId.value, "");
+    var sUserNm     = take.nvl(this.edtUserNm.value, "");
+    var sUserPw1    = take.nvl(this.edtUserPw1.value, "");
+    var sUserPw2    = take.nvl(this.edtUserPw2.value, "");
+    var sEmail      = take.nvl(this.edtEmail.value, "");
+    var sMobile     = take.nvl(this.edtMobile.value, "");
+    
+    if(sUserNm == ""){
+        take.alert(this, "Info", "이름을 작성해주세요.");
+        this.edtUserNm.setFocus();
+        return false;
+    }
+    
+    if(sUserId == ""){
+        take.alert(this, "Info", "ID를 작성해주세요.");
+        this.edtUserId.setFocus();
+        return false;
+    }
+    
+    if(sUserPw1 == ""){
+        take.alert(this, "Info", "비밀번호를 작성해주세요.");
+        this.edtUserPw1.setFocus();
+        return false;
+    }
+    
+    if(sUserPw2 == ""){
+        take.alert(this, "Info", "비밀번호확인란을 작성해주세요.");
+        this.edtUserPw2.setFocus();
+        return false;
+    }
+    
+    if (sUserPw1 != sUserPw2)
+    {
+    	take.alert(this, "Info", "비밀번호를 확인해주세요.\n비밀번호가 같지않습니다.");
+        this.edtUserPw2.setFocus();
+        return false;
+    }
+    
+    if(sEmail == ""){
+        take.alert(this, "Info", "이메일을 작성해주세요.");
+        this.edtEmail.setFocus();
+        return false;
+    }
+    
+    if(!take.isEmail(sEmail)){
+        take.alert(this, "Info", "이메일을 형식에 맞춰 주세요.");
+        this.edtEmail.setFocus();
+        return false;
+    }
+    
+//     if(sMobile == ""){
+//         alert("핸드폰번호를 작성해주세요.");
+//         this.edtMobile.setFocus();
+//         return false;
+//     }
+    
+    if( sMobile != "" && !this.fnMobileChk(sMobile) ){
+        take.alert(this, "Info", "핸드폰번호를 확인해주세요.");
+        this.edtMobile.setFocus();
+        return false;
+    }
+    
+    if(this.fv_sChkId == "N"){
+        take.alert(this, "Info", "ID 중복체크를 완료해주세요.");
+        return false;
+    }
+    
+    if(this.fv_sChkMail == "N"){
+        take.alert(this, "Info", "이메일 중복체크를 완료해주세요.");
+        return false;
+    }
+    
+    if(this.chkSystem.value == "X"){
+        take.alert(this, "Info", "서비스약관에 대해 동의해주세요.");
+        this.chkSystem.setFocus();
+        return false;
+    }
+    
+    if(this.chkPersonalInfo.value == "X"){
+        take.alert(this, "Info", "개인정보처리방침에 대해 동의해주세요.");
+        this.chkPersonalInfo.setFocus();
+        return false;
+    }
+    
+    return true;
+};
+
+/**
+ * fnMobileChk : 폰번호 체크
+ * @param  {String} sParam N/A
+ * @example this.fnCheckForm();
+ */
+this.fnMobileChk = function(sMobile)
+{
+    var regExp = /^\d{3}-\d{3,4}-\d{4}$/;
+    if (!regExp.test(sMobile))
+    {
+        return false;
+    }
+    
+    return true;
+};
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "ChkId" : //조회 콜백
+            take.alert(this, "Info", "사용할수 있는 ID 입니다.");
+            this.fv_sChkId = "Y";
+            this.edtUserPw1.setFocus();
+            break;
+        case "ChkMail" : //조회 콜백
+            take.alert(this, "Info", "사용할수 있는 이메일 입니다.");
+            this.fv_sChkMail = "Y";
+            this.edtMobile.setFocus();
+            break;
+        case "Join" :  //저장 콜백
+            take.alert(this, "Info", "회원가입이 정상적으로 완료되었습니다.");
+            
+            this.getOwnerFrame().parent.frame.form.divCenter.form.divLogIn.set_url("frm::frmLoginS01.xfdl");
+            break;
+        default :
+//             if(this.dsResult.getColumn(0,"CNT") != "0") {
+//                 this.edtUserId.set_cssclass("ed_LF_idchk");
+//                 this.staChkId.set_text("사용중인 ID입니다.");
+//             } else {
+//                 this.edtUserId.set_cssclass("ed_LF_idchk");
+//                 this.staChkId.set_text("");
+//             }
+            break;
+    }        
+}
+
+/**
+* fnPopCallback : popup callback
+* @param  : N/A
+* @return : N/A
+* @example :  
+*/
+this.fnPopCallback = function(sPopId, sRtn)
+{
+    switch(sPopId)
+    {
+        case "MN020PT01" : // 동의팝업 콜백
+            var arrRtn = sRtn.split(',');
+            this.chkSystem.set_value(arrRtn[0]);
+            this.chkPersonalInfo.set_value(arrRtn[1]);
+            break;
+        default :
+            break;
+    }
+}
+
+/**
+* fnGetLang : 도메인코드 가져오기
+* @param  : N/A
+* @return : true/false
+* @example : this.fnGetLang()
+*/
+this.fnGetLang = function()
+{
+    take.transaction(
+        this, 
+        "domainLangSvc", 
+        "SVC_LOC::loginOnLoad.do", 
+        "", 
+        "tgdsLang=tgdsLang tgdsMsg=tgdsMsg", 
+        "", 
+        function (sId, nErr, sMsg)
+        {
+            //다국어 동적 바인딩
+            takedomain.SetLang(this, this.tgdsLang);
+        },
+        false);
+        
+    return true;
+}]]></Script>
+    <Objects>
+      <Dataset id="dsUserJoin" useclientlayout="true" oncolumnchanged="dsUserJoin_oncolumnchanged">
+        <ColumnInfo>
+          <Column id="USER_ID" SIZE="256" type="STRING"/>
+          <Column id="USER_NM" SIZE="256" type="STRING"/>
+          <Column id="USER_PW" SIZE="256" type="STRING"/>
+          <Column id="USER_EMAIL" SIZe="256" type="STRING"/>
+          <Column id="USER_MOBILE" TYpe="STRING" size="256"/>
+          <Column id="AGREE_SYS" TYPE="STRING" size="256"/>
+          <Column id="AGREE_PERSON" Type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsResult">
+        <ColumnInfo>
+          <Column id="CNT" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="tgdsLang"/>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="edtUserNm" propid="value" datasetid="dsUserJoin" columnid="USER_NM"/>
+      <BindItem id="item1" compid="edtUserId" propid="value" datasetid="dsUserJoin" columnid="USER_ID"/>
+      <BindItem id="item2" compid="edtUserPw1" propid="value" datasetid="dsUserJoin" columnid="USER_PW"/>
+      <BindItem id="item3" compid="edtEmail" propid="value" datasetid="dsUserJoin" columnid="USER_EMAIL"/>
+      <BindItem id="item4" compid="edtMobile" propid="value" datasetid="dsUserJoin" columnid="USER_MOBILE"/>
+      <BindItem id="item5" compid="chkSystem" propid="value" datasetid="dsUserJoin" columnid="AGREE_SYS"/>
+      <BindItem id="item6" compid="chkPersonalInfo" propid="value" datasetid="dsUserJoin" columnid="AGREE_PERSON"/>
+    </Bind>
+  </Form>
+</FDL>

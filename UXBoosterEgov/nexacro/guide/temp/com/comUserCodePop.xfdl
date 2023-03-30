@@ -1,0 +1,397 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="comUserCodePop" width="600" height="400" onload="form_onload" background="#ffffff">
+    <Layouts>
+      <Layout height="400" mobileorientation="landscape" width="600">
+        <Div id="divSearch" taborder="1" text="Div00" left="20" top="46" height="43" right="20" cssclass="div_WF_searchBox01">
+          <Layouts>
+            <Layout>
+              <Static id="staCode" taborder="0" text="검색어" left="10" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="edtCode" taborder="1" left="staCode:10" top="10" height="21" onkeydown="divSearch_edtCode_onkeydown" right="7"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnShowHide" taborder="3" left="45.00%" top="89" width="60" height="10" cssclass="btn_WF_fold01" tabstop="false" text=""/>
+        <Div id="divDetail" taborder="0" text="그리드" left="20" top="btnShowHide:20" right="20" bottom="63">
+          <Layouts>
+            <Layout>
+              <Grid id="grdList" taborder="1" left="0" top="26" binddataset="dsList" autofittype="col" bottom="0" right="0" oncelldblclick="divMain_grdList_oncelldblclick" cellclickbound="cell" cellsizingtype="col">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="50"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="4"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="Static24" taborder="1" text="목록" left="0" top="0" height="21" cssclass="sta_WF_title02" right="0"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnSearch" taborder="2" text="조회" top="20" height="21" onclick="btnSearch_onclick" width="46" cssclass="btn_WF_search03" right="20"/>
+        <Static id="Static01_01" taborder="4" text="H20" left="20" height="20" right="20" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" top="337"/>
+        <Static id="Static01" taborder="5" text="H20" left="20" right="20" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" top="380" height="20"/>
+        <Button id="btnCancle" taborder="6" height="23" cssclass="btn_WF_cancel01" text="닫기" right="20" width="57" onclick="btnCancle_onclick" top="divDetail:20"/>
+        <Button id="btnConfirm" taborder="7" height="23" cssclass="btn_WF_check01" text="확인" right="btnCancle:3" width="57" onclick="btnConfirm_onclick" top="divDetail:20"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsList"/>
+      <Dataset id="dsTemplate">
+        <ColumnInfo>
+          <Column id="type" type="STRING" size="256"/>
+          <Column id="content" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="type">grid</Col>
+            <Col id="content">&lt;Formats&gt;
+    &lt;Format id="default"&gt;
+      &lt;Columns&gt;
+      $columns_
+      &lt;/Columns&gt;
+      &lt;Rows&gt;
+ &lt;Row size="32" band="head"/&gt;
+ &lt;Row size="30"/&gt;
+      &lt;/Rows&gt;
+      &lt;Band id="head"&gt;
+      $cells_
+      &lt;/Band&gt;
+      &lt;Band id="body"&gt;
+      $bodies_
+      &lt;/Band&gt;
+    &lt;/Format&gt;
+  &lt;/Formats&gt;</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+ *  SYSTEM FORM NAME
+ *
+ *  @MenuPath    com
+ *  @FileName    comUserCodePop.xfdl 
+ *  @Creator     정해원
+ *  @CreateDate  2019.12.19
+ *  @Version     1.0
+ *  @Desction    코드검색팝업
+ *               
+ * 
+ ************** 소스 수정 이력 *************************************************
+ *    date          Modifier            Description
+ *******************************************************************************
+ *  2019.12.19      정해원             최초 생성 
+ *******************************************************************************
+ */
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+this.fvIsMultiSel = false;
+
+this.fvNamespace;
+this.fvGridOption;
+this.fvSearchTitle;
+
+/*********************************************************
+ * 1.2 FORM EVENT 영역(onload)
+ ********************************************************/
+this.form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{	
+	this.ProgId="GM00000107";
+    this.ProgNm="GM00000107";
+	
+	if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+	{
+		this.fnInit();
+	}
+};
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "search";
+
+	this.dsList.clearData();
+	
+    take.tranSelect
+	(
+		  this
+		, sTranId
+		, this.fvNamespace
+		, "dsSearch"
+		, "dsList"
+		, ""
+		, "fnCallback"
+	);
+};
+
+/**
+ * fnInit : 초기화
+ * @example this.fnInit();
+ */
+this.fnInit = function(){
+	if(!take.isEmpty(this.getOwnerFrame().argInNamespace)){
+		this.fvNamespace = this.getOwnerFrame().argInNamespace;
+	}
+	
+	if(!take.isEmpty(this.getOwnerFrame().argInGridOption)){
+		this.fvGridOption = this.getOwnerFrame().argInGridOption;
+	}
+	
+	if(!take.isEmpty(this.getOwnerFrame().argInSearchTitle)){
+		this.divSearch.form.staCode.set_text(this.getOwnerFrame().argInSearchTitle);
+	}
+	
+	if(!take.isEmpty(this.getOwnerFrame().argInMultiSel)){
+		this.fvIsMultiSel = this.getOwnerFrame().argInMultiSel;
+	}
+	
+	if(!take.isEmpty(this.getOwnerFrame().argInSearchText)){
+		this.dsSearch.setColumn(0, 'CODE', this.getOwnerFrame().argInSearchText);
+	}
+	
+	if(!take.isEmpty(this.getOwnerFrame().argInSearchParam)){
+		//파라미터가 존재할 경우
+		var searchParam = this.getOwnerFrame().argInSearchParam;
+		for(var paramKey in searchParam){
+			takeEtc.arguAdd(this.dsSearch, paramKey, take.nvl(searchParam[paramKey], ""));
+		}
+	}
+	
+	this.fnInitGrid();
+	this.fnSearch();
+};
+
+this.fnInitGrid = function(){
+	var content = this.dsTemplate.lookup('type', 'grid', 'content');
+	
+	var columnCnt 	 = 0;
+	var headFormat 	 = "";
+	var bodyFormat 	 = "";
+	var columnFormat = "";
+	
+	if(this.fvIsMultiSel){
+		columnFormat+= "<Column size=\"10\"/>\r\n";
+		headFormat 	+= "<Cell/>\r\n";
+		bodyFormat 	+= "<Cell edittype=\"checkbox\" displaytype=\"checkboxcontrol\" text=\"bind:CHK\"/>\r\n";
+		columnCnt++;
+	}
+	
+	for(var i = 0 ; i < this.fvGridOption.length ; i++){
+		var gridOption = this.fvGridOption[i];
+		
+		columnFormat+= "<Column size=\"" + gridOption.cellWidth + "\"/>\r\n";
+		headFormat 	+= "<Cell col=\"" + columnCnt + "\" text=\"" + gridOption.gridHeader + "\"/>\r\n";
+		bodyFormat 	+= "<Cell col=\"" + columnCnt + "\" text=\"bind:" + gridOption.gridColumn + "\" textAlign=\"" + take.nvl(gridOption.cellAlign, "left") + "\"/>\r\n";
+		
+		columnCnt++;
+	}
+	
+	content = content.replace('$columns_'	, columnFormat);
+	content = content.replace('$cells_'		, headFormat);
+	content = content.replace('$bodies_'	, bodyFormat);
+
+	this.divDetail.form.grdList.set_formats(content);
+};
+
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+ ********************************************************/
+/**
+ * btnSearch_onclick : 조회
+ */
+this.btnSearch_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fnSearch();
+};
+/**
+ * btnConfirm_onclick : 확인
+ */
+this.btnConfirm_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fnConfirm();
+};
+/**
+ * btnClose_onclick : 닫기
+ */
+this.btnClose_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fnClose(this);
+};
+/**
+ * divDetail_grdList_oncelldblclick : 그리드 더블클릭
+ */
+this.divMain_grdList_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	if(!this.fvIsMultiSel){
+		this.fnConfirm();
+	}
+};
+
+/**
+ * divSearch_edtCode_onkeydown : 키입력
+ */
+this.divSearch_edtCode_onkeydown = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+	if(e.keycode == 13){
+		this.divDetail.form.grdList.setFocus();
+		obj.setFocus();
+		this.fnSearch();
+	}
+};
+
+this.divSearch_mskCorpNo_onkeydown = function(obj:nexacro.MaskEdit,e:nexacro.KeyEventInfo)
+{
+	if(e.keycode == 13){
+		this.divDetail.form.grdList.setFocus();
+		obj.setFocus();
+		this.fnSearch();
+	}
+};
+
+this.divSearch_edtPresiName_onkeydown = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+	if(e.keycode == 13){
+		this.divDetail.form.grdList.setFocus();
+		obj.setFocus();
+		this.fnSearch();
+	}
+};
+
+
+/*********************************************************
+ * 4 사용자 FUNCTION 영역
+ ********************************************************/
+this.fnConfirm = function()
+{
+	var dsObj = this.dsList;
+	var returnObj;
+
+	if(dsObj.rowposition == -1 || dsObj.getRowCount() == 0){
+		return;
+	}
+	
+	if(!this.fvIsMultiSel){
+		//싱글
+		if(dsObj.rowposition > -1){
+			returnObj = this.fnDataset2Object(dsObj, dsObj.rowposition);
+		}
+	}else{
+		//멀티
+		returnObj	= new Array();
+		
+		var arrChkRow = take.getChkRow(dsObj, "CHK");
+		for (var i=0; i<arrChkRow.length; i++){
+			// Dataset의 특정 Row 값을 JSON Object로 변환한다.
+			var objRtn = this.fnDataset2Object(dsObj, arrChkRow[i]);
+			returnObj.push(objRtn);
+		}
+	}
+
+	this.fnClose(this, returnObj);
+};
+
+/**
+ * fnDataset2Object : dataset 특정행을 object로 변환
+ */
+this.fnDataset2Object = function(obj, nRow)
+{
+	var objRtn	= {};
+	
+	for (var i=0; i<obj.getColCount(); i++)
+	{
+		var strColId	 = obj.getColID(i);
+		objRtn[strColId] = obj.getColumn(nRow, strColId);
+	}
+	return objRtn;
+};
+
+/**
+ * fnClose : 부모창으로 변수 전달
+ */
+this.fnClose = function(o, variant)
+{
+	var pThis  = o;
+	
+	if (pThis.opener && typeof variant != "string") {
+		variant = take.nvl(variant, "");
+		pThis.opener.oCodeInfo = variant;
+		pThis.close();
+	}else{
+		pThis.close(variant);
+	}
+};
+
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+ * fnCallback : transaction callback
+ * @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+ * @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+ * @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+ * @return : N/A
+ * @example :  
+ */
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg != "SUCC" )
+	{
+        //Etc Script
+    }
+    
+    switch(sId)
+    {
+        case "search" :
+			// 조회 콜백
+            break;
+			
+        default :
+            break;
+    }
+};
+this.btnCancle_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.close();
+};
+]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="divSearch.form.edtCode" propid="value" datasetid="dsSearch" columnid="CODE"/>
+    </Bind>
+  </Form>
+</FDL>

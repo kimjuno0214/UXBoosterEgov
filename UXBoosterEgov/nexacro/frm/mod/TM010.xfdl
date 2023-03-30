@@ -1,0 +1,461 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="TM010" width="1659" height="832" titletext="타임라인목록" onload="TM010_onload">
+    <Layouts>
+      <Layout height="832" mobileorientation="landscape" width="1659">
+        <Static id="Static00" taborder="0" text="10" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" color="red" textAlign="center"/>
+        <Static id="Static08" taborder="1" text="10" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" color="red" textAlign="center" right="0"/>
+        <Div id="divSearch" taborder="2" left="10" top="0" height="43" right="10" cssclass="div_WF_searchBox01" text="" minwidth="1300" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Static id="staTitleT" taborder="5" text="제목" left="20" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="edtTitle" taborder="11" left="staTitleT:10" top="10" width="195" height="21" onkeyup="divSearch_Edit00_onkeyup"/>
+              <Static id="staStatusT" taborder="3" text="진행상태" left="edtTitle:50" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="cboStatus" taborder="6" text="Combo00" left="staStatusT:10" top="10" width="195" height="21" innerdataset="dsCboStatus" codecolumn="CODE" datacolumn="NAME"/>
+              <Static id="staClassT" taborder="2" text="등급" left="cboStatus:50" top="10" width="80" height="21" cssclass="sta_WF_textR" minwidth="80" maxwidth=""/>
+              <Combo id="cboClass" taborder="7" text="Combo00" left="staClassT:10" top="10" width="195" height="21" innerdataset="dsCboGrade" codecolumn="CODE" datacolumn="NAME"/>
+              <Static id="staRegDtT" taborder="4" text="작성일시" left="cboClass:50" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Static id="Static07" taborder="0" text="10" left="332" top="0" width="2" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static08" taborder="1" text="10" left="665" top="0" width="2" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Calendar id="calRegForm" taborder="9" left="staRegDtT:10" top="10" width="90" height="21" dateformat="yyyy-MM-dd" cssclass="cal_WF_essential"/>
+              <Static id="Static14" taborder="8" text="~" left="calRegForm:0" top="10" width="15" height="21" cssclass="sta_WF_textC"/>
+              <Calendar id="calRegTo" taborder="10" left="Static14:0" top="10" width="90" height="21" dateformat="yyyy-MM-dd" cssclass="cal_WF_essential"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnShowHide" taborder="3" left="48.16%" top="divSearch:0" width="60" height="10" cssclass="btn_WF_fold01"/>
+        <Static id="Static24" taborder="4" text="10" left="0" height="20" background="rgba(255,0,0,0.4)" visible="false" right="0" textAlign="center" top="53"/>
+        <Div id="divDetail" taborder="5" left="10" top="btnShowHide:20" bottom="10" right="10" minwidth="1300" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Static id="staTimeLineListT" taborder="0" text="타임라인 목록" left="0" top="0" height="30" cssclass="sta_WF_title02" width="740"/>
+              <Grid id="grdTimeLine" taborder="1" left="0" top="staTimeLineListT:0" binddataset="dsTimelineList" autofittype="col" right="0" bottom="0" maxwidth="" oncelldblclick="divDetail_grdTimeLine_oncelldblclick" cssclass="grd_WF_timeLine" nodataimage="url('theme://images/Alert_nodataimage.png')">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="48"/>
+                      <Column size="22"/>
+                      <Column size="447"/>
+                      <Column size="100"/>
+                      <Column size="80"/>
+                      <Column size="75"/>
+                      <Column size="50"/>
+                      <Column size="50"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="순번"/>
+                      <Cell col="1" colspan="2" text="제목"/>
+                      <Cell col="3" text="작성일"/>
+                      <Cell col="4" text="작성자"/>
+                      <Cell col="5" text="타임라인"/>
+                      <Cell col="6" text="등급"/>
+                      <Cell col="7" text="상태"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="expr:currow+1" textAlign="center"/>
+                      <Cell col="1" colspan="2">
+                        <Cell text="expr:comp.parent.parent.parent.fnSetTitle( currow, dataset.getColumn(currow, 'BOARD_TITLE') )" displaytype="imagecontrol"/>
+                        <Cell col="1" text="bind:TIMELINE_TITLE"/>
+                      </Cell>
+                      <Cell col="3" text="bind:REG_DT" textAlign="center"/>
+                      <Cell col="4" text="bind:REG_NM" textAlign="center"/>
+                      <Cell col="5" text="bind:TIMELINE_CNT" textAlign="center"/>
+                      <Cell col="6" text="bind:GRADE_NM" textAlign="center" cssclass="expr:(dataset.getColumn( currow, 'TIMELINE_GRADE' ) == &quot;A&quot;) ? &quot;cellGrad01&quot; : (dataset.getColumn( currow, 'TIMELINE_GRADE' ) == &quot;B&quot;) ? &quot;cellGrad02&quot; : &quot;cellGrad03&quot;" border="0px solid" padding="5px"/>
+                      <Cell col="7" text="bind:STATUS_NM" textAlign="center" cssclass="expr:(dataset.getColumn( currow, 'TIMELINE_STATUS' ) == '01') ? 'cellGrad04' : 'cellGrad05' " border="0px solid" padding="5px"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static22" taborder="6" text="10" left="0" height="10" background="rgba(255,0,0,0.4)" visible="false" right="0" bottom="0" textAlign="center"/>
+        <ListView id="lstTimeLine" taborder="7" left="0" right="20" binddataset="dsTimelineList" cssclass="lst_WF_timeLine" oncellclick="divDetail_lstTimeLine_oncellclick" visible="false" height="50" bottom="-61">
+          <Formats>
+            <Format id="default">
+              <Band id="body" width="100%" height="100">
+                <Cell id="cellImg" left="10" top="10" width="100" height="80"/>
+                <Cell id="cellTitle" left="120" top="13" width="870" height="40" text="bind:TIMELINE_TITLE" cssclass="cellTitle01"/>
+                <Cell id="cellUserNm" left="120" top="55" width="200" height="30" text="bind:REG_NM"/>
+                <Cell id="cellDate" left="320" top="55" width="170" height="30" text="bind:REG_DT"/>
+                <Cell id="Cell04" left="495" top="58" width="50" height="24" text="조회수" cssclass="cellBox01"/>
+                <Cell id="Cell05" left="550" top="55" width="60" height="30" text="bind:COLUMN3" displaytype="number"/>
+                <Cell id="cellAttach" left="615" top="58" width="50" height="24" text="첨부" cssclass="cellBox01"/>
+                <Cell id="cellAttachNum" left="670" top="55" width="60" height="30" text="bind:COLUMN4" displaytype="number"/>
+                <Cell id="cellComment" left="735" top="58" width="60" height="24" text="타임라인" cssclass="cellBox01"/>
+                <Cell id="cellCommentNum" left="800" top="55" width="60" height="30" text="bind:TIMELINE_CNT" displaytype="number"/>
+                <Cell id="cellClass" left="875" top="58" width="60" height="24" text="bind:GRADE_NM" cssclass="cellGrade01"/>
+                <Cell id="cellStatus" left="940" top="58" width="60" height="24" text="bind:STATUS_NM" cssclass="cellStatus01"/>
+              </Band>
+              <Band id="detail" width="100%" height="5"/>
+            </Format>
+          </Formats>
+        </ListView>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsTimelineList">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="MENU_CD" type="STRING" size="256"/>
+          <Column id="TIMELINE_SEQ" type="STRING" size="256"/>
+          <Column id="TIMELINE_TITLE" type="STRING" size="256"/>
+          <Column id="TIMELINE_GRADE" type="STRING" size="256"/>
+          <Column id="GRADE_NM" type="STRING" size="256"/>
+          <Column id="TIMELINE_STATUS" type="STRING" size="256"/>
+          <Column id="STATUS_NM" type="STRING" size="256"/>
+          <Column id="TIMELINE_ATTACH" type="STRING" size="256"/>
+          <Column id="REG_DT" type="STRING" size="256"/>
+          <Column id="REG_CD" type="STRING" size="256"/>
+          <Column id="REG_NM" type="STRING" size="256"/>
+          <Column id="MOD_DT" type="STRING" size="256"/>
+          <Column id="MOD_CD" type="STRING" size="256"/>
+          <Column id="MOD_NM" type="STRING" size="256"/>
+          <Column id="TIMELINE_CNT" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsCboStatus">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsCboGrade">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsMarster">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="MENU_CD" type="STRING" size="256"/>
+          <Column id="TIMELINE_SEQ" type="STRING" size="256"/>
+          <Column id="TIMELINE_TITLE" type="STRING" size="256"/>
+          <Column id="TIMELINE_GRADE" type="STRING" size="256"/>
+          <Column id="GRADE_NM" type="STRING" size="256"/>
+          <Column id="TIMELINE_STATUS" type="STRING" size="256"/>
+          <Column id="STATUS_NM" type="STRING" size="256"/>
+          <Column id="TIMELINE_ATTACH" type="STRING" size="256"/>
+          <Column id="REG_DT" type="STRING" size="256"/>
+          <Column id="REG_CD" type="STRING" size="256"/>
+          <Column id="REG_NM" type="STRING" size="256"/>
+          <Column id="MOD_DT" type="STRING" size="256"/>
+          <Column id="MOD_CD" type="STRING" size="256"/>
+          <Column id="MOD_NM" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="GRADE_CD" type="STRING" size="256" description="등급"/>
+          <Column id="STATUS_CD" type="STRING" size="256" description="상태"/>
+          <Column id="TIMELINE_TITLE" type="STRING" size="256" description="제목"/>
+          <Column id="REG_DT_TO" type="STRING" size="256" description="to일시"/>
+          <Column id="REG_DT_FROM" type="STRING" size="256" description="from일시"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="COLUMN0" type="STRING" size="256"/>
+          <Column id="COLUMN1" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    tm > TM010
+*  @FileName    TM010.xfdl 
+*  @Creator     김대승
+*  @CreateDate  2019.09.18 
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2019.09.18      김대승             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+//this.fv_nFormVal = null;     //용도
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.TM010_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {
+        this.fnInit();
+   }
+}
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "TimeLineSearch";
+	
+	var sCalFrom = this.divSearch.form.calRegForm.value;
+	var sCalTo	 = this.divSearch.form.calRegTo.value;
+	if( !take.isEmpty(sCalFrom) && !take.isEmpty(sCalTo) ){
+		var bFromTo = take.isFromTo(sCalFrom, sCalTo);		
+		if( !bFromTo ){
+			take.alert(this, "", "작성일시 기간이 잘못되었습니다.");
+			return;
+		}
+	}
+	
+	this.dsTimelineList.clearData();
+	
+    // 벨리데이션 
+// 	takeval.add(this, "Search", this.divSearch.form.cboType, "유형", "value", true, "string", "", "");
+// 	if(!takeval.check(this, "Search")) return;
+	
+	//var sProjectCd = take.nvl(this.divSearch.form.edtProjectNm.value, "");	
+	//var sMenuCd	   = take.nvl(this.divSearch.form.cboUseYn.value, "");		
+	
+	// 임시사용 코드
+	var sProjectCd = "PM00000002";
+	var sMenuCd	   = "M0018";
+	
+	this.dsSearch.setColumn(0, "REG_DT_FROM", take.nvl(sCalFrom, ""));
+	this.dsSearch.setColumn(0, "REG_DT_TO"  , take.nvl(sCalTo, ""));
+	take.tranSelect
+	(
+		this, 
+		"TimeLineSearch", 
+		"TimelineManagement.timelineInfoList", 
+		"dsSearch", 
+		"dsTimelineList", 
+		"sProjectCd='" + sProjectCd + "' sMenuCd='" + sMenuCd + "'", 
+		"fnCallback"
+	)
+}
+
+/**
+
+ * fnAddRow : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+ * @example this.fnAddRow(sGrdId, nRow);
+ */
+this.fnAddRow = function(sGrdId, nRow)
+{
+	//공통 행추가에서 호출할 디폴트값 세팅
+    if (take.nvl(sGrdId, "")=="") sGrdId = "grdTimeLine";
+	
+	// 타입라인등록 팝업 오픈 TM020P02
+	AgrKey = {sProjectCd:"PM00000002", sMenuCd:"M0018", sTimelineSeq:"0000000001"};
+	take.openPopup(this, "TM020P02", "frm::mod/TM020P02.xfdl", AgrKey, "", 
+		function(){
+			this.fnSearch("TimeLineSearch");
+		},
+	false);
+}
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+// divDetail_grdTimeLine_oncelldblclick : 데이터라인 더블클릭 상세 팝업 오픈
+this.divDetail_grdTimeLine_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	var objDsTimeLineList = this.dsTimelineList;
+	var objDsMarster	  = this.dsMarster;
+	
+	var nSelectProj = objDsTimeLineList.getColumn(e.row, "PROJECT_CD");
+	var nSelectMenu = objDsTimeLineList.getColumn(e.row, "MENU_CD");
+	var nSelectSeq  = objDsTimeLineList.getColumn(e.row, "TIMELINE_SEQ");
+	objDsMarster.clearData();
+	objDsMarster.copyRow(objDsMarster.addRow(), objDsTimeLineList, objDsTimeLineList.rowposition);
+	
+	// 타입라인상세 팝업 오픈 TM020
+	AgrKey = {sProjectCd:nSelectProj, sMenuCd:nSelectMenu, sTimelineSeq:nSelectSeq, objDs:objDsMarster};
+	take.openPopup(this, "TM020", "frm::mod/TM020.xfdl", AgrKey, "",
+		function(){
+			this.fnSearch("TimeLineSearch");
+		},
+	false);
+};
+ 
+// divSearch_Edit00_onkeyup : Edit 컴포넌트 Enter 값 처리
+this.divSearch_Edit00_onkeyup = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+	if(e.keycode == 13){
+		this.fnSearch();
+	}
+};
+
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnInit : 초기화 함수
+ * @example this.fnInit();
+ */
+this.fnInit = function()
+{    
+	// 공통 코드조회 함수 호출
+    this.fnCommonCode();
+	
+	// 검색조건 작성일시 셋팅 [오늘 날짜 기본 셋팅]
+	var objDate = take.getTodayTime();
+	var nToday  = objDate.date;
+	
+  	this.divSearch.form.calRegForm.set_value(nToday);
+  	this.divSearch.form.calRegTo.set_value(nToday);
+}
+
+/**
+ * fnCommonCode : 공통 코드조회
+ * @example this.fnCommonCode();
+ */
+this.fnCommonCode = function ()
+{
+	var arrGroupCodes = ["00022", "00016"];
+	var arrOutDs      = ["dsCboStatus", "dsCboGrade"];
+	var arrHeaderType = ["ALL", "ALL"];
+	
+	take.tranCode(this, arrGroupCodes, arrOutDs, arrHeaderType,
+	function(sId, nErrCd, sErrMsg)
+	{
+		if (this.dsCboStatus.rowcount > 0){
+			this.divSearch.form.cboStatus.set_index(0);
+		}
+		if (this.dsCboGrade.rowcount > 0){
+			this.divSearch.form.cboClass.set_index(0);
+		}
+		this.fnSearch("TimeLineSearch");
+	});
+};
+
+/**
+ * fnSetTitle : 신규작성 타임라인 new 표시
+ * @example this.fnSetTitle(nRow, sTitle);
+ */
+this.fnSetTitle = function(nRow, sTitle)
+{
+	var sImgUrl = "";
+	var sRegDt = take.nvl(this.dsTimelineList.getColumn(nRow, "REG_DT"), "");
+	
+	if( "" != sRegDt )
+	{
+		sRegDt = sRegDt.replace(/-/gi, "");
+		sRegDt = sRegDt.substr(0, 8);		
+		sRegDt = take.parseDate(sRegDt, "yyyymmdd");
+		var sToday = take.parseDate(take.getTodayTime().date, "yyyymmdd");
+		var sTerm = parseInt(take.getDateTerm(sRegDt, sToday));
+		
+		if( 5 >= sTerm )
+		{
+			//trace("sTerm->"+sTerm)
+			sImgUrl = "theme://images/img_icon_new.png";
+		}			
+	}
+	return sImgUrl;
+}
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "TimeLineSearch" : 	// 타임라인 조회 콜백
+            //trace(this.dsTimelineList.saveXML());
+            break;
+        case "Transation id 03" : //조회 콜백
+            //Script
+            break;
+        case "Save transation id 01" :  //저장 콜백
+            //Script
+            break;
+        case "Save transation id 01" :  //저장 콜백
+            //Script
+            break;
+        default :
+            break;
+    }        
+} 
+
+// 임시 조회
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fnSearch("TimeLineSearch");
+};
+
+// 임시 저장
+this.Button02_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fnSave();
+};
+
+// 임시 추가
+this.Button03_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fnAddRow("grdTimeLine");
+};]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="divSearch.form.edtTitle" propid="value" datasetid="dsSearch" columnid="TIMELINE_TITLE"/>
+      <BindItem id="item1" compid="divSearch.form.cboStatus" propid="value" datasetid="dsSearch" columnid="STATUS_CD"/>
+      <BindItem id="item2" compid="divSearch.form.cboClass" propid="value" datasetid="dsSearch" columnid="GRADE_CD"/>
+    </Bind>
+  </Form>
+</FDL>

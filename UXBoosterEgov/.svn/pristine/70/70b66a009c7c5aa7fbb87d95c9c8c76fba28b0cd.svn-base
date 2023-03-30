@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="smpDashCreate" width="1040" height="685" titletext="대시보드 동적 생성기" background="">
+    <Layouts>
+      <Layout height="685" mobileorientation="landscape" width="1040">
+        <ListView id="ListView00" taborder="0" left="10" top="10" width="400" bottom="10" binddataset="dsDash" autoenter="select">
+          <Formats>
+            <Format id="default">
+              <Band id="body" width="100%" height="450">
+                <Cell id="Cell00" left="10" top="5" width="120" height="24" text="대시보드아이디" border="0px solid #dbdee2" font="bold 10pt/normal &quot;Malgun Gothic&quot;"/>
+                <Cell id="Cell01" left="135" top="5" width="243" height="24" text="bind:dashid" padding="0px"/>
+                <Cell id="Cell02" left="10" top="34" width="120" height="24" text="대시보드명" border="0px solid #dbdee2" font="bold 10pt/normal &quot;Malgun Gothic&quot;"/>
+                <Cell id="Cell03" left="135" top="34" width="243" height="24" text="bind:dashnm" edittype="text" padding="0px"/>
+                <Cell id="Cell04" left="10" top="63" width="120" height="24" text="대시보드타입" border="0px solid #dbdee2" font="bold 10pt/normal &quot;Malgun Gothic&quot;"/>
+                <Cell id="Cell05" left="135" top="63" width="243" height="24" text="bind:dashtype" edittype="combo" combodataset="dsDashType" combocodecol="code" combodatacol="data" padding="0px"/>
+                <Cell id="Cell06" left="10" top="92" width="120" height="24" text="대시보드URL" border="0px solid #dbdee2" font="bold 10pt/normal &quot;Malgun Gothic&quot;"/>
+                <Cell id="Cell07" left="135" top="92" width="243" height="24" text="bind:dashurl" edittype="expr:dashtype==&quot;00&quot; || dashtype==&quot;01&quot;?&quot;text&quot;:&quot;none&quot;" padding="0px"/>
+                <Cell id="Cell08" left="10" top="121" width="120" height="24" text="상세프로그램" border="0px solid #dbdee2" font="bold 10pt/normal &quot;Malgun Gothic&quot;"/>
+                <Cell id="Cell09" left="135" top="121" width="243" height="24" text="bind:progid" edittype="text" padding="0px"/>
+                <Cell id="Cell10" left="10" top="150" width="120" height="24" text="도움말URL" border="0px solid #dbdee2" font="bold 10pt/normal &quot;Malgun Gothic&quot;"/>
+                <Cell id="Cell11" left="135" top="150" width="243" height="24" text="bind:helpurl" edittype="text" padding="0px"/>
+                <Cell id="Cell12" left="10" top="179" width="120" height="24" text="재조회주기" border="0px solid #dbdee2" font="bold 10pt/normal &quot;Malgun Gothic&quot;"/>
+                <Cell id="Cell13" left="135" top="179" width="200" height="24" text="bind:reload" edittype="text" padding="0px"/>
+                <Cell id="Cell14" left="10" top="208" width="120" height="24" text="참조/단위" border="0px solid #dbdee2" font="bold 10pt/normal &quot;Malgun Gothic&quot;"/>
+                <Cell id="Cell15" left="135" top="208" width="243" height="24" text="bind:refer" edittype="text" padding="0px"/>
+                <Cell id="Cell16" left="10" top="237" width="120" height="24" text="조회일시" border="0px solid #dbdee2" font="bold 10pt/normal &quot;Malgun Gothic&quot;"/>
+                <Cell id="Cell17" left="135" top="237" width="243" height="24" text="bind:basedt" edittype="text" padding="0px"/>
+                <Cell id="Cell18" left="10" top="266" width="120" height="84" text="컨텐츠" border="0px solid #dbdee2" font="bold 10pt/normal &quot;Malgun Gothic&quot;"/>
+                <Cell id="Cell19" left="135" top="266" width="243" height="84" text="bind:contents" edittype="textarea" verticalAlign="top" padding="0px" wordWrap="char"/>
+                <Cell id="Cell20" left="10" top="355" width="120" height="84" text="옵션" border="0px solid #dbdee2" font="bold 10pt/normal &quot;Malgun Gothic&quot;"/>
+                <Cell id="Cell21" left="135" top="355" width="243" height="84" text="bind:options" edittype="textarea" verticalAlign="top" padding="0px" wordWrap="char"/>
+                <Cell id="Cell22" left="338" top="179" width="40" height="24" text="m/s" border="0px solid #dbdee2"/>
+              </Band>
+            </Format>
+          </Formats>
+        </ListView>
+        <Edit id="edtW" taborder="1" left="530" top="10" width="80" height="30" value="295" text="295" textAlign="center" onkillfocus="edt_onkillfocus" onkeydown="edt_onkeydown"/>
+        <Edit id="edtH" taborder="2" left="630" top="10" width="80" height="30" value="320" text="320" textAlign="center" onkeydown="edt_onkeydown" onkillfocus="edt_onkillfocus"/>
+        <Static id="Static00" taborder="3" text="화면 사이즈(W*H)" left="420" top="10" width="110" height="30"/>
+        <Static id="Static00_00" taborder="4" text="X" left="610" top="10" width="20" height="30" textAlign="center" font="bold 12px/normal &quot;Arial&quot;,&quot;Noto Sans CJK KR&quot;,&quot;Malgun Gothic&quot;"/>
+        <Div id="divBase" taborder="5" left="420" top="45" right="10" bottom="10" background="whitesmoke" ondragmove="divBase_ondragmove">
+          <Layouts>
+            <Layout>
+              <Button id="btnW" taborder="1" left="295" top="0" width="5" height="320" cursor="w-resize" ondrag="divBase_btn_ondrag" background="black"/>
+              <Button id="btnH" taborder="2" left="0" top="320" height="5" cursor="n-resize" ondrag="divBase_btn_ondrag" right="btnW:0" background="black"/>
+              <Div id="divDashView" taborder="0" text="대시보드 미리보기" left="0" top="0" border="1px solid" right="btnW:0" bottom="btnH:0"/>
+              <Button id="btnWH" taborder="3" left="btnH:0" top="btnW:0" width="5" height="5" cursor="move" ondrag="divBase_btn_ondrag" background="green"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static00_01" taborder="6" text="Drag 또는 사이즈를 입력해서 리사이즈 해보세요." left="720" top="10" height="30" right="10"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsDash" onrowposchanged="dsDash_onrowposchanged">
+        <ColumnInfo>
+          <Column id="dashid" type="STRING" size="256"/>
+          <Column id="dashnm" type="STRING" size="256"/>
+          <Column id="dashtype" type="STRING" size="256"/>
+          <Column id="dashurl" type="STRING" size="256"/>
+          <Column id="progid" type="STRING" size="256"/>
+          <Column id="helpurl" type="STRING" size="256"/>
+          <Column id="reload" type="STRING" size="256"/>
+          <Column id="refer" type="STRING" size="256"/>
+          <Column id="basedt" type="STRING" size="256"/>
+          <Column id="contents" type="STRING" size="256"/>
+          <Column id="options" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="dashid">D0000000001</Col>
+            <Col id="dashnm">매출현황-1</Col>
+            <Col id="dashtype">02</Col>
+            <Col id="dashurl">frm::com/comChartBasic.xfdl</Col>
+            <Col id="progid">P0000000001</Col>
+            <Col id="helpurl">http://www.daum.net/</Col>
+            <Col id="reload">1000</Col>
+            <Col id="refer">단위 : 백만원</Col>
+            <Col id="basedt">2020.01.30 10:27</Col>
+            <Col id="contents">{contents:[{text:"달성률(목표)",value:"98%"},{text:"신장률(전년)",value:"113%"}]}</Col>
+            <Col id="options">{options:{chart:"",contents:{board:"",categoryaxis:"",valueaxes:"",seriesset:"",tooltip:""}}}</Col>
+          </Row>
+          <Row>
+            <Col id="dashid">D0000000002</Col>
+            <Col id="dashnm">매출현황-2</Col>
+            <Col id="dashtype">02</Col>
+            <Col id="dashurl">frm::com/comChartBasic.xfdl</Col>
+            <Col id="progid">P0000000001</Col>
+            <Col id="helpurl">http://52.79.243.187/redmine/</Col>
+            <Col id="reload">1000</Col>
+            <Col id="refer">단위 : 원</Col>
+            <Col id="basedt">2020.01.29 00:00</Col>
+            <Col id="contents">{contents:[{text:"실적",value:"49,213"}]}</Col>
+            <Col id="options">{options:{chart:"",contents:{board:"",categoryaxis:"",valueaxes:"",seriesset:"",tooltip:""}}}</Col>
+          </Row>
+          <Row>
+            <Col id="dashid">D0000000003</Col>
+            <Col id="dashnm">매출현황-3</Col>
+            <Col id="dashtype">02</Col>
+            <Col id="dashurl">frm::com/comChartBasic.xfdl</Col>
+            <Col id="progid">P0000000001</Col>
+            <Col id="helpurl">http://52.79.243.187:8280/NexaBooster/</Col>
+            <Col id="reload">1000</Col>
+            <Col id="refer">참조 : 한국은행 고시</Col>
+            <Col id="basedt">2020.01.01 12:01</Col>
+            <Col id="contents"/>
+            <Col id="options">{options:{chart:"",contents:{board:"",categoryaxis:"",valueaxes:"",seriesset:"",tooltip:""}}}</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsDashType">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="data" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">00</Col>
+            <Col id="data">Form</Col>
+          </Row>
+          <Row>
+            <Col id="code">01</Col>
+            <Col id="data">Web</Col>
+          </Row>
+          <Row>
+            <Col id="code">02</Col>
+            <Col id="data">Bar chart</Col>
+          </Row>
+          <Row>
+            <Col id="code">03</Col>
+            <Col id="data">Static chart</Col>
+          </Row>
+          <Row>
+            <Col id="code">04</Col>
+            <Col id="data">Line chart</Col>
+          </Row>
+          <Row>
+            <Col id="code">05</Col>
+            <Col id="data">Bar/Line multi chart</Col>
+          </Row>
+          <Row>
+            <Col id="code">06</Col>
+            <Col id="data">Static/Line multi chart</Col>
+          </Row>
+          <Row>
+            <Col id="code">07</Col>
+            <Col id="data">Pie chart</Col>
+          </Row>
+          <Row>
+            <Col id="data">Donut chart</Col>
+            <Col id="code">08</Col>
+          </Row>
+          <Row>
+            <Col id="data">Radar chart</Col>
+            <Col id="code">09</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[
+this.divBase_btn_ondrag = function(obj:nexacro.Button,e:nexacro.DragEventInfo)
+{
+	var sGbn = obj.name.substr(3);
+    e.set_userdata(sGbn);
+    return true;
+};
+
+this.divBase_ondragmove = function(obj:nexacro.Div,e:nexacro.DragEventInfo)
+{
+	var sGbn;
+    var objBase;
+    
+    sGbn = e.userdata;
+    
+    objBase = this.divBase.form;
+    
+    if (sGbn=="W")
+    {
+        objBase.btnW.set_left(e.clientx);
+    } else if (sGbn=="H") {
+        objBase.btnH.set_top(e.clienty);
+        objBase.btnW.set_height(e.clienty);
+    } else {
+        objBase.btnW.set_left(e.clientx);
+        objBase.btnH.set_top(e.clienty);
+        objBase.btnW.set_height(e.clienty);
+    }
+    
+    objBase.resetScroll();
+    
+    objDashView = this.divBase.form.divDashView;
+    this.edtW.set_value(objDashView.getOffsetWidth());
+    this.edtH.set_value(objDashView.getOffsetHeight());
+};
+
+this.edt_onkillfocus = function(obj:nexacro.Edit,e:nexacro.KillFocusEventInfo)
+{
+	this.fnDashViewResize();
+};
+
+this.edt_onkeydown = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+    if (e.keycode==13) this.fnDashViewResize();
+};
+
+this.fnDashViewResize = function()
+{
+    var objDiv, objBase;
+    var nW, nH, nMaxW, nMaxH;
+    
+    objDiv = this.divBase;
+    objBase = objDiv.form;
+    
+    nW = nexacro.toNumber(this.edtW.value);
+    nH = nexacro.toNumber(this.edtH.value);
+    nMaxW = objDiv.getOffsetWidth()-nexacro.toNumber(objBase.btnW.width);
+    nMaxH =objDiv.getOffsetHeight()-nexacro.toNumber(objBase.btnH.height);
+    
+    if (nW>nMaxW || nW<1)
+    {
+        alert("현재 가능한 Width는 1 ~ "+ nMaxW+" 입니다.");
+        nW = nMaxW;
+        this.edtW.set_value(nW);
+    }
+    
+    objBase.btnW.set_left(nW);
+    
+    if (nH>nMaxH || nH<1)
+    {
+        alert("현재 가능한 Height는 1 ~ "+ nMaxH+" 입니다.");
+        nH = nMaxH;
+        this.edtH.set_value(nH);
+    }
+    
+     objBase.btnH.set_top(nH);
+     objBase.btnW.set_height(nH);
+        
+    objBase.resetScroll();
+}
+
+this.dsDash_onrowposchanged = function(obj:nexacro.NormalDataset,e:nexacro.DSRowPosChangeEventInfo)
+{
+    var objDiv = this.divBase.form.divDashView;
+    var sUrl = obj.getColumn(e.newrow, "dashurl");
+    
+	objDiv.set_url("");
+    objDiv.set_url(sUrl);
+};
+]]></Script>
+  </Form>
+</FDL>

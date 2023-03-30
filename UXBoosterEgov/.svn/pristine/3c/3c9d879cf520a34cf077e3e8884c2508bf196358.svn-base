@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="smpSpliter" width="1830" height="849" titletext="New Form">
+    <Layouts>
+      <Layout height="849" width="1830">
+        <Div id="divDetail" taborder="1" text="Div00" left="10" top="10" width="600" height="400" ondragmove="divDetail_ondragmove">
+          <Layouts>
+            <Layout>
+              <Button id="btnSpliter" taborder="0" left="255" top="0" width="10" ondrag="btnSpliter_ondrag" bottom="0" cssclass="btn_WF_splitter"/>
+              <Div id="divLeft" taborder="1" text="Left" left="0" top="0" background="yellow" right="btnSpliter:5" bottom="0"/>
+              <Button id="btnSpliter00" taborder="4" left="btnSpliter:5" top="205" ondrag="btnSpliter_ondrag" height="10" right="0" cssclass="btn_WF_splitter2"/>
+              <Div id="divRight01" taborder="2" text="Right01" left="btnSpliter:5" top="0" background="chartreuse" right="0" bottom="btnSpliter00:5">
+                <Layouts>
+                  <Layout/>
+                </Layouts>
+              </Div>
+              <Div id="divRight02" taborder="3" text="Right02" left="btnSpliter:5" top="btnSpliter00:5" background="chartreuse" bottom="0" right="0"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnDone" taborder="0" text="스프리터 적용" left="630" top="10" width="241" height="102" onclick="btnDone_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[this.btnDone_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	trace("세로 --> " + UXBooster.afnUseSpliter(this, this.divDetail.form.btnSpliter));
+    trace("가로 --> " + UXBooster.afnUseSpliter(this, this.divDetail.form.btnSpliter00));
+};
+]]></Script>
+  </Form>
+</FDL>

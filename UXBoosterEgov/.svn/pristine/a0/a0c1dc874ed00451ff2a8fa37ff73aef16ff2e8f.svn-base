@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="frmMdi" width="1040" height="35" titletext="Main Mdi" onload="frmMdi_onload">
+    <Layouts>
+      <Layout height="35" width="1040">
+        <Static id="staBg" taborder="6" left="0" top="0" cssclass="sta_nav_bg" right="0" bottom="0"/>
+        <Static id="staHome" taborder="0" left="5" top="7" width="24" height="24" cssclass="sta_nav_home" onclick="staHome_onclick"/>
+        <Button id="btnAllClose" taborder="1" top="5" width="24" height="24" right="13" cssclass="btn_nav_mdiClose" onclick="btnAllClose_onclick"/>
+        <Button id="btnMenuList" taborder="2" top="5" width="24" height="24" right="37" cssclass="btn_nav_mdiMenu" onclick="btnMenuList_onclick"/>
+        <Button id="btnRight" taborder="3" top="5" width="24" height="24" right="61" cssclass="btn_nav_tabNext" onclick="btnLR_onclick"/>
+        <Button id="btnLeft" taborder="4" top="5" width="24" height="24" right="85" cssclass="btn_nav_tabPrev" onclick="btnLR_onclick"/>
+        <Div id="divTab" taborder="5" left="34" top="0" right="123" bottom="0" formscrolltype="horizontal" onsize="divTab_onsize">
+          <Layouts>
+            <Layout>
+              <Static id="staLineMdi" taborder="0" left="0" height="1" background="#c6c9d4" bottom="0" right="0"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <PopupDiv id="pdivOpenMenu" visible="false" top="35" width="180" height="284" right="0" oncloseup="pdivOpenMenu_oncloseup" border="1px solid #005f96" background="white">
+          <Layouts>
+            <Layout>
+              <Grid id="grdOpenMenu" taborder="1" left="0" top="0" binddataset="dsOpenMenu" scrollbartype="none autoindicator" nodatatext="No data." oncellclick="pdivOpenMenu_grdOpenMenu_oncellclick" right="0" bottom="0" autofittype="col" border="0px none">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="130"/>
+                      <Column size="50"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="35"/>
+                    </Rows>
+                    <Band id="body">
+                      <Cell text="bind:MENU_NM" border="0px none" padding="0px 0px 2px 10px"/>
+                      <Cell col="1" text="닫기" displaytype="buttoncontrol" border="0px none"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </PopupDiv>
+        <Static id="staLineLeft" taborder="7" left="0" height="1" bottom="0" background="#c6c9d4" width="34"/>
+        <Static id="staLineRight" taborder="8" height="1" bottom="0" background="#c6c9d4" width="123" right="0"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsOpenMenu" useclientlayout="true">
+        <ColumnInfo>
+          <Column id="MENU_CD" type="STRING" size="255"/>
+          <Column id="MENU_NM" type="STRING" size="255"/>
+          <Column id="MENU_URL" type="STRING" size="255"/>
+          <Column id="MENU_TYPE" type="STRING" size="256"/>
+          <Column id="PROGRAM_PREFIX" type="STRING" size="256"/>
+          <Column id="OPEN_GBN" type="STRING" size="256"/>
+          <Column id="MENU_PARAM" type="STRING" size="256"/>
+          <Column id="OPEN_TYPE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  Mdi Tab
+*
+*  @MenuPath    MainFrame > Mdi Tab
+*  @FileName    frmMdi.xfdl 
+*  @Creator     고영민
+*  @CreateDate  2019.09.10
+*  @Version     1.0
+*  @Desction    MDI Tab
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2019.09.10      고영민             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+//this.fv_nFormVal = null;     //용도
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.frmMdi_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	trace("frmMdi.onload.success");
+};
+
+/*********************************************************
+ * 2 필수 FUNCTION 영역
+ ********************************************************/
+//N/A
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+ ********************************************************/
+//MDI 스크롤 이동 버튼 클릭 이벤트
+this.btnLR_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{   
+    var nTabWidth = UXBooster.mainframe.WorkFrame.form.fv_nTabWidth;
+    if (obj.name.substr(3)=="Left")
+    {
+        //trace("<");
+        this.divTab.form.scrollBy((nTabWidth*-1),0);
+    } else {
+        //trace(">");
+        this.divTab.form.scrollBy(nTabWidth,0);
+    }
+};
+
+//MDI전체 닫기 버튼 클릭 이벤트
+this.btnAllClose_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.getOwnerFrame().form.fnResetMdi();
+};
+
+//오픈 메뉴 리스트 버튼 클릭 이벤트
+this.btnMenuList_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fnOpenMenuPop();
+};
+
+//메뉴 오픈 팝업 그리드 클릭 이벤트
+this.pdivOpenMenu_grdOpenMenu_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	var objDs, objWorkDiv, objWorkForm;
+    var sDivId;
+    var nFRow;
+    
+    objDs = obj.getBindDataset();
+    objWorkForm = this.getOwnerFrame().form;
+    
+	if (e.cell==0)
+    {        
+        objWorkForm.fnActiveMenu(objDs, e.row);        
+        
+    } else if (e.cell==1) {
+        
+        sDivId = "divWork_" + objDs.getColumn(e.row, "PROGRAM_PREFIX") + "_" + objDs.getColumn(e.row, "MENU_CD");
+        objWorkDiv = objWorkForm.components[sDivId];
+        //trace("objWorkDiv.name--->" + objWorkDiv.name);
+        if (objWorkDiv)
+        {
+            if (!objWorkForm.fnMdiDestroy(objWorkDiv))
+            {
+                take.trace("System", "ERROR", "MDI 제거 실패");
+            }
+        }
+    }
+    
+    this.pdivOpenMenu.closePopup();
+};
+
+//홈 클릭 이벤트
+this.staHome_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	//20210202 정해원 이미 열어놓은 페이지가 있을 경우
+	this.divTab.objActiveWork = null;
+	
+	UXBooster.WorkFrame.set_visible(true);
+    UXBooster.WorkFrame.set_enable(true);
+
+	//20210202 정해원 메인화면이 대시보드로 변경되면서 주석처리	
+	//objFrameForm.fnSearch("SearchNotice");
+	//objFrameForm.divMain.set_url("");
+	//objFrameForm.divMain.set_url("frm::frmHome.xfdl");
+	this.getOwnerFrame().form.fnDisableMenu();
+	
+	UXBooster.WorkFrame.bringToFront();
+
+};
+
+//20210205 정해원 
+//화면리사이즈 시 staLineMdi의 너비가 스크롤할 수 있는 너비까지 확장되도록 처리
+this.divTab_onsize = function(obj:nexacro.Div,e:nexacro.SizeEventInfo)
+{
+	this.divTab.form.staLineMdi.set_right("0px");
+	this.divTab.form.resetScroll();
+	if(this.divTab.form.hscrollbar.max > 0)
+	{
+		var nPos = this.divTab.form.hscrollbar.max;
+		this.divTab.form.staLineMdi.set_right("-" + nPos + "px");
+	}
+};
+
+/*********************************************************
+ * 4 사용자 FUNCTION 영역
+ ********************************************************/
+/**
+ * fnOpenMenuPop : 열려 잇는 메뉴 리스트 팝업
+ * @param  {N/A} N/A
+ * @example this.fnMenuFind();
+ */
+this.fnOpenMenuPop = function()
+{    
+    var objPdiv = this.pdivOpenMenu;
+    var nLeft = objPdiv.getOffsetLeft();
+    var objTabList = this.btnMenuList;
+    
+    if (!objPdiv.isPopup())
+    {
+        //objTabList.set_cssclass("btn_MDI_PopClose");
+        objPdiv.trackPopupByComponent(objTabList, -100, 30 );
+    } else {
+        //objTabList.set_cssclass("btn_MDI_Menu");
+    }
+};]]></Script>
+  </Form>
+</FDL>

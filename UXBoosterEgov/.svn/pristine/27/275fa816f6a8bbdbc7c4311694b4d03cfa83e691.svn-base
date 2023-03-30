@@ -1,0 +1,601 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="smpForm01_01" width="1659" height="832" titletext="Sample02_01 - CRUD" onload="Form_onload" background="#ffffff">
+    <Layouts>
+      <Layout height="832" mobileorientation="landscape" width="1659">
+        <Div id="divSearch" taborder="0" left="10" top="0" height="43" cssclass="div_WF_searchBox01" right="10">
+          <Layouts>
+            <Layout>
+              <Static id="staDeptT" taborder="0" text="부서명" left="20" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="edtDept" taborder="1" left="staDeptT:10" top="10" width="195" height="21" text="TEXT" onkeydown="divSearch_edtDept_onkeydown"/>
+              <Static id="staUseYnT" taborder="2" text="사용여부" left="355" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="cboUseYn" taborder="3" left="staUseYnT:10" top="10" width="195" height="21" index="0" innerdataset="dsCboUseYn" codecolumn="CODE" datacolumn="NAME" text="사용" value="Y" onitemchanged="divSearch_cboUseYn_onitemchanged" cssclass="cmb_WF_essential"/>
+              <Static id="Static07_00" taborder="4" text="20" left="0" top="0" width="20" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static07_00_00" taborder="5" text="285" left="20" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00_00_00" taborder="6" text="285" left="20" top="31" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07" taborder="7" text="50" left="305" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static07_00_00_01" taborder="8" text="285" left="355" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00_00_01_01" taborder="9" text="285" left="355" top="31" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnShowHide" taborder="2" left="47.12%" top="43" width="60" height="10" cssclass="btn_WF_fold01"/>
+        <Div id="divDetail" taborder="1" left="10" top="73" bottom="10" right="10" text="">
+          <Layouts>
+            <Layout>
+              <Static id="staTitleL" taborder="0" text="부서 목록" top="0" cssclass="sta_WF_title02" usedecorate="true" height="21" left="0" right="770"/>
+              <Static id="staTitleR" taborder="3" text="사용자 목록" top="0" cssclass="sta_WF_title02" usedecorate="true" height="21" left="261" right="0"/>
+              <Grid id="grdList" taborder="2" left="0" top="staTitleL:5" binddataset="dsDept" autosizingtype="row" bottom="0" onselectchanged="divDetail_grdList_onselectchanged" width="250" nodataimage="url('theme://images/Alert_nodataimage.png')" scrollbarsize="10" extendsizetype="row" cellsizingtype="col">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="100"/>
+                      <Column size="138"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="부서코드"/>
+                      <Cell col="1" text="부서명"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:DEPT_CD" textAlign="center" autosizerow="limitmin"/>
+                      <Cell col="1" text="bind:DEPT_NM" autosizerow="limitmin"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Grid id="grdDetail" taborder="1" left="grdList:20" top="staTitleR:5" right="0" bottom="0" binddataset="dsList" autosizingtype="row" autoenter="select" autoupdatetype="comboselect" nodataimage="url('theme://images/Alert_nodataimage.png')" cellsizingtype="col" extendsizetype="row" takegrid="crud">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="80"/>
+                      <Column size="110"/>
+                      <Column size="120"/>
+                      <Column size="160"/>
+                      <Column size="110"/>
+                      <Column size="110"/>
+                      <Column size="110"/>
+                      <Column size="80"/>
+                      <Column size="200"/>
+                      <Column size="100"/>
+                      <Column size="100"/>
+                      <Column size="100"/>
+                      <Column size="80"/>
+                      <Column size="140"/>
+                      <Column size="140"/>
+                      <Column size="120"/>
+                      <Column size="110"/>
+                      <Column size="120"/>
+                      <Column size="120"/>
+                      <Column size="120"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="ID" cssclass="cellImport"/>
+                      <Cell col="1" text="성명" cssclass="cellImport"/>
+                      <Cell col="2" text="생년월일"/>
+                      <Cell col="3" text="이메일"/>
+                      <Cell col="4" text="모바일"/>
+                      <Cell col="5" text="유선전화"/>
+                      <Cell col="6" text="팩스"/>
+                      <Cell col="7" text="우편번호"/>
+                      <Cell col="8" text="주소"/>
+                      <Cell col="9" text="부서코드" cssclass="cellImport"/>
+                      <Cell col="10" text="상태"/>
+                      <Cell col="11" text="사용유무"/>
+                      <Cell col="12" text="동의유무"/>
+                      <Cell col="13" text="로그인일자"/>
+                      <Cell col="14" text="비밀번호 변경일자"/>
+                      <Cell col="15" text="로그인 브라우저"/>
+                      <Cell col="16" text="로그인 IP"/>
+                      <Cell col="17" text="가입 일자"/>
+                      <Cell col="18" text="유효시작일자"/>
+                      <Cell col="19" text="유효종료일자"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:USER_ID" edittype="text" autosizerow="limitmin" textAlign="center"/>
+                      <Cell col="1" text="bind:USER_NM" wordWrap="char" edittype="text" autosizerow="limitmin" textAlign="center"/>
+                      <Cell col="2" text="bind:USER_BIRTHDAY" displaytype="expr:USER_BIRTHDAY == '' || USER_BIRTHDAY == null ? '' : 'calendarcontrol'" edittype="date" autosizerow="limitmin"/>
+                      <Cell col="3" text="bind:USER_EMAIL" wordWrap="char" edittype="text" autosizerow="limitmin"/>
+                      <Cell col="4" text="bind:USER_MOBILE" edittype="text" autosizerow="limitmin" textAlign="center"/>
+                      <Cell col="5" text="bind:USER_TEL" edittype="text" autosizerow="limitmin" textAlign="center"/>
+                      <Cell col="6" text="bind:USER_FAX" edittype="text" autosizerow="limitmin" textAlign="center"/>
+                      <Cell col="7" text="bind:POST_CD" edittype="text" autosizerow="limitmin" textAlign="center"/>
+                      <Cell col="8" text="bind:USER_ADDR" wordWrap="char" edittype="text" autosizerow="limitmin"/>
+                      <Cell col="9" text="bind:DEPT_CD" autosizerow="limitmin" edittype="combo" displaytype="combotext" combodataset="dsCboDept" combodatacol="NAME" combocodecol="CODE" comboautoselect="true"/>
+                      <Cell col="10" text="bind:USER_STATUS" edittype="combo" displaytype="combotext" combodataset="dsCboUseYn2" combocodecol="CODE" combodatacol="NAME" autosizerow="limitmin" comboautoselect="true"/>
+                      <Cell col="11" text="bind:USE_YN" edittype="combo" displaytype="combotext" combodataset="dsCboUseYn" combocodecol="CODE" combodatacol="NAME" autosizerow="limitmin" comboautoselect="true"/>
+                      <Cell col="12" text="bind:AGREE_YN" edittype="text" autosizerow="limitmin" textAlign="center"/>
+                      <Cell col="13" text="bind:LAST_LOGIN_DT" wordWrap="char" autosizerow="limitmin"/>
+                      <Cell col="14" text="bind:PW_CHANGE_DT" wordWrap="char" autosizerow="limitmin"/>
+                      <Cell col="15" text="bind:LOGIN_BROWSER" wordWrap="char" autosizerow="limitmin" textAlign="center"/>
+                      <Cell col="16" text="bind:LOGIN_IP" autosizerow="limitmin"/>
+                      <Cell col="17" text="bind:JOIN_DATE" displaytype="expr:JOIN_DATE == '' || JOIN_DATE == null ? '' : 'date'" autosizerow="limitmin" textAlign="center"/>
+                      <Cell col="18" text="bind:VALID_START_DATE" displaytype="expr:VALID_START_DATE == '' || VALID_START_DATE == null ? '' : 'date'" autosizerow="limitmin" textAlign="center"/>
+                      <Cell col="19" text="bind:VALID_END_DATE" displaytype="expr:VALID_END_DATE == '' || VALID_END_DATE == null ? '' : 'date'" autosizerow="limitmin" textAlign="center"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static24" taborder="3" text="20" left="0" height="20" background="rgba(255,0,0,0.4)" visible="false" right="0" textAlign="center" top="53"/>
+        <Static id="Static01" taborder="4" text="10" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" textAlign="center"/>
+        <Static id="Static00_00" taborder="5" text="10" left="10" top="822" background="rgba(255,0,0,0.4)" visible="false" color="red" textAlign="center" right="0" bottom="0"/>
+        <Static id="Static00_01" taborder="6" text="10" left="1649" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" color="red" textAlign="center"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsList">
+        <ColumnInfo>
+          <Column id="USER_CD" type="STRING" size="256"/>
+          <Column id="USER_ID" type="STRING" size="255"/>
+          <Column id="USER_NM" type="STRING" size="255"/>
+          <Column id="USER_BIRTHDAY" type="STRING" size="255"/>
+          <Column id="USER_EMAIL" type="STRING" size="255"/>
+          <Column id="USER_MOBILE" type="STRING" size="255"/>
+          <Column id="USER_TEL" type="STRING" size="255"/>
+          <Column id="USER_FAX" type="STRING" size="255"/>
+          <Column id="POST_CD" type="STRING" size="255"/>
+          <Column id="USER_ADDR" type="STRING" size="255"/>
+          <Column id="DEPT_CD" type="STRING" size="255"/>
+          <Column id="USER_STATUS" type="STRING" size="255"/>
+          <Column id="USE_YN" type="STRING" size="255"/>
+          <Column id="AGREE_YN" type="STRING" size="255"/>
+          <Column id="LAST_LOGIN_DT" type="STRING" size="255"/>
+          <Column id="PW_CHANGE_DT" type="STRING" size="255"/>
+          <Column id="LOGIN_BROWSER" type="STRING" size="255"/>
+          <Column id="LOGIN_IP" type="STRING" size="255"/>
+          <Column id="JOIN_DATE" type="STRING" size="255"/>
+          <Column id="VALID_START_DATE" type="STRING" size="255"/>
+          <Column id="VALID_END_DATE" type="STRING" size="255"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsCboUseYn">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="NAME">- 전체 -</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">Y</Col>
+            <Col id="NAME">사용</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">미사용</Col>
+            <Col id="CODE">N</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsCboStatus">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="NAME">- 전체 -</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">Y</Col>
+            <Col id="NAME">사용</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">미사용</Col>
+            <Col id="CODE">N</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsDept" canrowposchange="dsDept_canrowposchange">
+        <ColumnInfo>
+          <Column id="DEPT_CD" type="STRING" size="256"/>
+          <Column id="DEPT_NM" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsCboDept">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="USER_ID" type="STRING" size="256"/>
+          <Column id="USE_YN" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsCboUseYn2">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="NAME">- 전체 -</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">Y</Col>
+            <Col id="NAME">사용</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">미사용</Col>
+            <Col id="CODE">N</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    1Depth > 2Depth
+*  @FileName    smpForm01_01.xfdl 
+*  @Creator     고영민
+*  @CreateDate  2020.08.25
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    Date          Modifier            Description
+*******************************************************************************
+*  2020.08.25      고영민             최초 생성 
+*  2021.05.18      신준민             tranSave -> transaction 변경
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+//this.fv_nFormVal = null;     //용도
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload등)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.Form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this, true)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {    
+        //초기화
+        this.fnInit();
+   }
+}
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnInit, fnSearch, fnSave, fnAddRow, fnDelRow, fnExcel, fnPrint)
+********************************************************/
+/**
+ * fnInit : 초기화 함수 검색조건 초기화 및 온로드 세팅
+ * @return {N/A}    N/A
+ * @example this.fnInit();
+ */
+this.fnInit = function()
+{
+	var objDivSearch;
+	
+	objDivSearch = this.divSearch.form;
+	
+	//공통코드
+	this.fnCommonCode();
+
+	//벨리데이션 등록
+	takeval.add(this, "Search", objDivSearch.cboUseYn, objDivSearch.staUseYnT.text, "value", true, "string", "", "");
+}
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "deptSelect";
+	
+	switch(sTranId) {
+        case "deptSelect":
+            // 벨리데이션 체크
+			if(!takeval.check(this, "Search")) return;
+			
+			var objDivSearch;
+            var sDeptNm, sUseYn;
+            
+			objDivSearch = this.divSearch.form;
+            sDeptNm 	 = take.nvl(objDivSearch.edtDept.value, "");
+            sUseYn 		 = objDivSearch.cboUseYn.value;
+            
+			this.dsDept.clearData();			   
+            
+            take.tranSelect
+			(
+                this, 
+                sTranId, 
+                "Sample.smpForm02DeptSelect", 
+                "", 
+                "dsDept", 
+                "sDeptNm="+sDeptNm+" sUseYn=" + sUseYn, 
+                "fnCallBack",
+                false
+            );
+            
+            break;
+        case "userSelect":
+            
+            var sDeptCd;
+            var objDept;
+			
+            objDept = this.dsDept;
+            
+            sDeptCd = objDept.getColumn(objDept.rowposition, "DEPT_CD");
+            
+			this.dsList.clearData();
+		
+			take.tranSelect
+			(
+                this, 
+                sTranId, 
+                "Sample.smpForm02Select", 
+                "", 
+                "dsList", 
+                "sDeptCd="+sDeptCd, 
+                "fnCallBack"
+			);
+            break;
+        default:
+    }
+}
+
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+this.fnSave = function(sTranId)
+{    
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "userSave";
+	
+    //데이터셋 수정 여부 확인
+    if (!take.isDsModified(this.dsList))
+    {
+        take.alert(this, "Info", "변경된 데이터가 없습니다.");
+        return false;
+    }
+	
+	//저장 전 벨리데이션 체크
+	var bRtn = 
+		takeval.checkComp
+		(
+			this,                           	 //현재 Form Object
+			this.divDetail.form.grdDetail,       //벨리데이션 대상 컴포넌트 (Grid 및 Form류[this,div,tabpase])
+			"cellImport",                    	 //필수 입력 css값
+			"fnValCallBack",                 	 //성공 Call Back 함수
+			true								 //동기 여부
+		);    
+	
+	//벨리데이션 체크 완료 후
+	if (bRtn) 
+	{
+		//take.tranSave(this, sTranId, "Sample.smpForm02", "dsList", "", "", "fnCallBack");
+        take.transaction(this, sTranId, "SVC_LOC::sample/smpForm02Save.do", "dsList=dsList:U", "", "", "fnCallBack");
+	}
+}
+
+/**
+ * fnAddRow : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+ * @example this.fnAddRow(sGrdId, nRow);
+ */
+this.fnAddRow = function(sGrdId, nRow)
+{
+    //공통 행추가에서 호출할 디폴트값 세팅
+    if (take.nvl(sGrdId, "")=="") sGrdId = "grdDetail";
+    
+	var objDs, objDsDept;
+	
+	objDs 	  = this.dsList;
+	objDsDept = this.dsDept;
+	
+	var nAddRow = objDs.addRow();
+	var sDeptCd = objDsDept.getColumn(objDsDept.rowposition, "DEPT_CD");
+	
+	objDs.setColumn(nAddRow, "DEPT_CD", sDeptCd);
+	
+}
+
+/**
+ * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number, Array} arrnRow    deleteRow 리턴값
+ * @return {N/A} N/A
+ * @example this.fnDelRow(sGrdId, nRow); 
+ */
+this.fnDelRow = function(sGrdId, arrnRow)
+{    
+    //공통 행추가에서 호출할 디폴트값 세팅
+    if (take.nvl(sGrdId, "")=="") sGrdId = "grdDetail";
+    
+	var objDsList;
+	var nRow;
+	var arrChk;
+	
+	objDsList = this.dsList;
+	nRow      = objDsList.rowposition;
+	arrChk 	  = take.getChkRow(objDsList);
+	
+	if(arrChk.length > 0) {
+		if (take.confirm(this, "Info", "삭제 하시겠습니까?."))
+        {
+            objDsList.deleteMultiRows(arrChk);
+        }
+	} else {
+		take.alert(this, "Info", "선택된 행이 없습니다.");
+        return;
+	}
+}
+
+/**
+ * fnExcel : 엑셀 다운로드 함수 (필수) --> 공통 엑셀 다운로드에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @return {N/A} N/A
+ * @example this.fnExcel(sGrdId, nRow); 
+ */
+this.fnExcel = function(sGrdId)
+{    
+    return false;
+}
+
+/**
+ * fnPrint : 출력 함수 (필수)
+ * @param  {N/A} N/A
+ * @return {N/A} N/A
+ * @example this.fnPrint(); 
+ */
+this.fnPrint = function()
+{    
+    return false;
+}
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+ ********************************************************/
+//부서 목록 선택 변경이벤트
+this.divDetail_grdList_onselectchanged = function(obj:nexacro.Grid,e:nexacro.GridSelectEventInfo)
+{
+    this.fnSearch("userSelect");
+};
+
+//데이터셋 row 변경 이벤트 발생 전
+this.dsDept_canrowposchange = function(obj:nexacro.NormalDataset,e:nexacro.DSRowPosChangeEventInfo)
+{
+	//데이터셋 수정 여부 확인
+    if (take.isDsModified(this.dsList))
+    {
+        //행 변경 수행 여부 확인
+        if (!take.confirm(this, "Info", "작업중인 데이터는 저장되지 않습니다.\n그래도 이동하시겠습니까?"))
+        {
+            return false;
+        }
+    }	
+};
+
+//사용유무 콤보 변경 이벤트
+this.divSearch_cboUseYn_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	this.fnSearch("deptSelect");
+};
+
+//부서명 입력창 키 다운 이벤트
+this.divSearch_edtDept_onkeydown = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+    if (e.keycode==13)
+    {
+        this.fnSearch("deptSelect");
+    }
+};
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnCommonCode : 코드호출 함수
+ * @param  {String} N/A 
+ * @example this.fnCommonCode();
+ */
+this.fnCommonCode = function ()
+{
+    var sOutDs      = ["dsCboStatus", "dsCboUseYn",	"dsCboUseYn2"];
+    var sGroupCodes = ["00017"		, "00009"	  ,	"00009"		 ];
+    var sHeaderType = ["ALL"		, "SEL"		  ,	""			 ];
+
+    take.tranCode(
+        this, 
+        sGroupCodes, 
+        sOutDs, 
+        sHeaderType,
+        function(sId, nErrCd, sErrMsg)
+        {
+            if (this.dsCboUseYn.rowcount > 0){
+                this.divSearch.form.cboUseYn.set_index(0);
+            }
+        },
+        false);
+        
+    take.tranSelect(
+        this, 
+        "deptCdSelect", 
+        "Sample.smpForm01DeptSelect", 
+        "", 
+        "dsCboDept", 
+        "", 
+        function (sId, sCd, sMsg) {
+            
+        },
+        false)
+    
+};
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : sId      - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : nErrCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : sErrMsg  - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallBack = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "deptSelect" :  //조회 콜백
+            this.divDetail.form.staTitleL.set_text("부서목록 (총 " + this.dsDept.rowcount + "건)");
+			this.fnSearch("userSelect");
+            break;
+			
+        case "userSelect" : //조회 콜백
+            this.divDetail.form.staTitleR.set_text("사용자 목록 (총 " + this.dsList.rowcount + "건)");
+            break;
+			
+        case "userSave" :  //저장 콜백
+            this.fnSearch("userSelect");
+            break;
+			
+        default :
+            break;
+    }        
+} ]]></Script>
+    <Bind>
+      <BindItem id="item4" compid="divSearch.form.edtDept" propid="value" datasetid="dsSearch" columnid="USER_ID"/>
+      <BindItem id="item6" compid="divSearch.form.cboUseYn" propid="value" datasetid="dsSearch" columnid="USE_YN"/>
+    </Bind>
+  </Form>
+</FDL>

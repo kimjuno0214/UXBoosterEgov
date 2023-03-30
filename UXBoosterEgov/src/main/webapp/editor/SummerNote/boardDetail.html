@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv='X-UA-Compatible' content='IE=edge' />
+	<meta http-equiv="Cache-control" content="no-cache">
+	<meta http-equiv="Pragma" content="no-cache">
+<script>
+	if (! window.NEXACROHTML){
+		window.NEXACROHTML = {};
+	}
+
+	var oParent = window.NEXACROWEBBROWSER;
+	function callNexacro(userdata){
+		var wb = window.NEXACROWEBBROWSER;
+		if ( wb ){
+			//HTML
+			wb.on_fire_onusernotify(wb, userdata);
+		} else {
+			//Runtime
+			window.document.title = userdata;
+		}
+	}
+
+	var nHeight;
+
+	function fn_setHtml() {
+		var sDiv = document.getElementById("editorData");
+		var iDiv = document.getElementById("inputData");
+
+		sDiv.innerHTML = iDiv.value;
+		nHeight = Math.max(Math.max(document.body.scrollHeight,
+				document.documentElement.scrollHeight), Math.max(
+				document.body.offsetHeight,
+				document.documentElement.offsetHeight), Math.max(
+				document.body.clientHeight,
+				document.documentElement.clientHeight))
+		callNexacro(nHeight);
+	}
+</script>
+<title></title>
+</head>
+<body topMargin="0" leftMargin="10">
+	<form id="frmBoard">
+		<input id="inputData" name="inputData" value="" type="hidden" />
+		<div id="editorData"></div>
+	</form>
+</body>
+</html>

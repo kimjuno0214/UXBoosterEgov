@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+* 관리자 > 프로그램관리 관련
+*
+* @filename mappers/adm/ProgramManagementMapper.xml
+* @author takeit
+* @since 2019.08.02
+* @version 1.0
+* @see
+*
+* << 변경 이력(Modification Information) >>
+*
+* 변경번호 : #1
+* 변경일자 : 2019.08.02
+* 변경사람 : takeit
+* 변경내용 : 신규 생성
+ -->
+<mapper namespace="ProgramManagement">
+	<!-- program_info(프로그램정보) START -->
+	<select id="programInfoList" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* ProgramManagement.programInfoList
+		* 프로그램정보 목록
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		SELECT
+			PROGRAM_CD			-- 프로그램코드
+			, PROGRAM_TYPE		-- 프로그램유형
+			, PROGRAM_PREFIX	-- 프로그램PREFIX
+			, PROGRAM_ID		-- 프로그램ID
+			, PROGRAM_NM		-- 프로그램명
+		FROM PROGRAM_INFO
+		WHERE 1 = 1
+		<if test=" PROGRAM_PREFIX != null and PROGRAM_PREFIX != '' ">
+			AND PROGRAM_PREFIX = #{PROGRAM_PREFIX}
+		</if>
+		<if test=" PROGRAM_CD != null and PROGRAM_CD != '' ">
+			AND (
+				<if test="_databaseId == 'Oracle'">
+			    PROGRAM_NM LIKE ('%' || #{PROGRAM_CD} || '%')
+			    </if>
+				<if test="_databaseId == 'SQL Server'">
+			    </if>
+				<if test="_databaseId == 'MySQL'">
+				PROGRAM_NM LIKE CONCAT('%' , #{PROGRAM_CD} , '%')
+			    </if>
+				<if test="_databaseId == 'PostgreSQL'">
+			    </if>
+			)
+		</if>
+		<if test=" USE_YN != null and USE_YN != '' ">
+			AND USE_YN = #{USE_YN}
+		</if>
+		ORDER BY PROGRAM_CD
+	</select>
+
+	<select id="programInfoDetail" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* ProgramManagement.programInfoDetail
+		* 프로그램정보 상세
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		SELECT
+			P.PROGRAM_CD			-- 프로그램코드
+			, P.PROGRAM_TYPE		-- 프로그램유형
+			, P.PROGRAM_PREFIX		-- 프로그램PREFIX
+			, C.CODE_NM AS PROGRAM_PREFIX_NM	-- 프로그램PREFIX명
+			, P.PROGRAM_ID			-- 프로그램ID
+			, P.PROGRAM_NM			-- 프로그램명
+			, P.ML_CD				-- 다국어코드
+			, P.DESC_TXT			-- 상세설명
+			, P.USE_YN				-- 사용여부
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="P.REG_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			  </include>  AS REG_DT	-- 등록일시
+			, P.REG_CD				-- 등록자코드
+			, U1.USER_NM AS REG_NM	-- 등록자명
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="P.MOD_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			  </include>  AS MOD_DT	-- 수정일시
+			, P.MOD_CD				-- 수정자코드
+			, U2.USER_NM AS MOD_NM	-- 수정자명
+		FROM PROGRAM_INFO P
+			LEFT OUTER JOIN USER_INFO U1 ON P.REG_CD = U1.USER_CD
+			LEFT OUTER JOIN USER_INFO U2 ON P.MOD_CD = U2.USER_CD
+			LEFT OUTER JOIN CODE_INFO C ON C.GROUP_ID = '00006' AND P.PROGRAM_PREFIX = C.CODE_ID
+		WHERE 1 = 1
+		<if test=" PROGRAM_CD != null and PROGRAM_CD != '' ">
+			AND P.PROGRAM_CD = #{PROGRAM_CD}
+		</if>
+		<if test=" FORM_PROGRAM_ID != null ">
+			AND P.PROGRAM_ID IN
+			<foreach collection="FORM_PROGRAM_ID" item="item" open="(" close=")" separator=",">
+			#{item.PROGRAM_ID}
+			</foreach>
+		</if>
+
+		ORDER BY C.CODE_ORDER
+	</select>
+
+	<insert id="programInfoInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* ProgramManagement.programInfoInsert
+		* 프로그램정보 입력
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		<selectKey keyProperty="maxCd" resultType="String" order="BEFORE">
+			<if test="_databaseId == 'Oracle'">
+		    SELECT ('GM' || LPAD(TO_NUMBER((NVL(MAX(SUBSTR(PROGRAM_CD, 3, 8)), '0') + 1) ), 8, '00000000')) AS maxCd
+			FROM PROGRAM_INFO
+		    </if>
+			<if test="_databaseId == 'SQL Server'">
+		    </if>
+			<if test="_databaseId == 'MySQL'">
+			SELECT CONCAT('GM' , LPAD((COALESCE(MAX(SUBSTR(PROGRAM_CD, 3, 8)), '0') + 1), 8, '00000000')) AS maxCd
+			FROM PROGRAM_INFO
+		    </if>
+			<if test="_databaseId == 'PostgreSQL'">
+			SELECT ('GM' || LPAD(CAST((COALESCE(MAX(SUBSTR(PROGRAM_CD, 3, 8)), '0')::INT + 1) AS TEXT), 8, '00000000')) AS maxCd
+			FROM PROGRAM_INFO
+		    </if>
+		</selectKey>
+		INSERT INTO PROGRAM_INFO (
+			PROGRAM_CD
+			, PROGRAM_TYPE
+			, PROGRAM_PREFIX
+			, PROGRAM_ID
+			, PROGRAM_NM
+			, ML_CD
+			, DESC_TXT
+			, USE_YN
+			, REG_DT
+			, REG_CD
+		)
+		VALUES (
+			#{maxCd}				-- 프로그램코드
+			, #{PROGRAM_TYPE}		-- 프로그램유형
+			, #{PROGRAM_PREFIX}		-- 프로그램PREFIX
+			, #{PROGRAM_ID}			-- 프로그램ID
+			, #{PROGRAM_NM}			-- 프로그램명
+			, #{ML_CD}				-- 다국어코드
+			, #{DESC_TXT}			-- 상세설명
+			, #{USE_YN}				-- 사용여부
+			, <include refid="CommonInc.sysdate" />					-- 등록일시
+			, #{_sessionUserCd}		-- 등록자코드
+		)
+	</insert>
+
+	<update id="programInfoUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* ProgramManagement.programInfoUpdate
+		* 프로그램정보 수정
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		UPDATE PROGRAM_INFO
+		SET
+			PROGRAM_TYPE 		= #{PROGRAM_TYPE}		-- 프로그램유형
+			, PROGRAM_PREFIX 	= #{PROGRAM_PREFIX}		-- 프로그램PREFIX
+			, PROGRAM_ID 		= #{PROGRAM_ID}			-- 프로그램ID
+			, PROGRAM_NM 		= #{PROGRAM_NM}			-- 프로그램명
+			, ML_CD 			= #{ML_CD}				-- 다국어코드
+			, DESC_TXT 			= #{DESC_TXT}			-- 상세설명
+			, USE_YN 			= #{USE_YN}				-- 사용여부
+			, MOD_DT 			= <include refid="CommonInc.sysdate" />	-- 수정일시
+			, MOD_CD 			= #{_sessionUserCd}		-- 수정자코드
+		WHERE PROGRAM_CD 		= #{PROGRAM_CD}			-- 프로그램코드
+	</update>
+
+	<delete id="programInfoDelete" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* ProgramManagement.programInfoDelete
+		* 프로그램정보 삭제
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		DELETE FROM PROGRAM_INFO
+		WHERE PROGRAM_CD = #{PROGRAM_CD}			-- 프로그램코드
+	</delete>
+	<!-- program_info(프로그램정보) END -->
+
+	<!-- program_component(프로그램컴포넌트정보) START -->
+	<select id="programComponentList" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* ProgramManagement.programComponentList
+		* 프로그램컴포넌트정보 상세 목록
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		SELECT
+			'0' AS CHK
+			, PC.PROGRAM_CD			-- 프로그램코드
+			, PC.COMPONENT_SEQ		-- 컴포넌트일련번호
+			, PC.COMPONENT_ID		-- 컴포넌트ID
+			, PC.COMPONENT_NM		-- 컴포넌트명
+			, PC.ML_CD				-- 다국어코드
+			, PC.DESC_TXT			-- 상세설명
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="PC.REG_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			  </include>  AS REG_DT	-- 등록일시
+			, PC.REG_CD				-- 등록자코드
+			, U1.USER_NM AS REG_NM	-- 등록자명
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="PC.MOD_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			  </include>  AS MOD_DT	-- 수정일시
+			, PC.MOD_CD				-- 수정자코드
+			, U2.USER_NM AS MOD_NM	-- 수정자명
+		FROM PROGRAM_COMPONENT PC
+			LEFT OUTER JOIN USER_INFO U1 ON PC.REG_CD = U1.USER_CD
+			LEFT OUTER JOIN USER_INFO U2 ON PC.MOD_CD = U2.USER_CD
+		WHERE PC.PROGRAM_CD = #{PROGRAM_CD}
+	<!-- 	<if test=" component_id != null and component_id != '' ">
+			AND (
+				component_id LIKE ('%' || #{component_id} || '%')
+				OR component_nm LIKE ('%' || #{component_nm} || '%')
+			)
+		</if>
+		 -->
+
+
+	</select>
+
+	<select id="programComponentLanguageList" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* ProgramManagement.programComponentLanguageList
+		* 프로그램컴포넌트 다국어 목록
+		* @author takeit
+		* @since 2019.11.04
+		*/
+		]]>
+		SELECT PC.ML_CD
+			, MD.LANG_CD
+			, C.CODE_NM AS LANG_NM
+			, MD.ML_LANG_TXT
+		FROM PROGRAM_COMPONENT PC
+			INNER JOIN MULTILANGUAGE_DETAIL MD ON PC.ML_CD = MD.ML_CD
+			INNER JOIN CODE_INFO C ON C.GROUP_ID = '00001' AND C.CODE_ID = MD.LANG_CD
+		WHERE PC.PROGRAM_CD 		= #{sProgramCd}
+			AND PC.ML_CD 			= #{sMlCd}
+			AND PC.COMPONENT_SEQ 	= #{sComponentSeq}
+		ORDER BY C.CODE_ORDER
+	</select>
+
+	<insert id="programComponentInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* ProgramManagement.programComponentInsert
+		* 프로그램컴포넌트정보 입력
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		<selectKey keyProperty="maxSeq" resultType="String" order="BEFORE">
+			<if test="_databaseId == 'Oracle'">
+		    SELECT LPAD(TO_NUMBER((NVL(MAX(COMPONENT_SEQ), '0') + 1) ), 5, '00000') AS maxSeq
+			FROM PROGRAM_COMPONENT
+			WHERE PROGRAM_CD = #{PROGRAM_CD}
+		    </if>
+			<if test="_databaseId == 'SQL Server'">
+		    </if>
+			<if test="_databaseId == 'MySQL'">
+			SELECT LPAD((COALESCE(MAX(COMPONENT_SEQ), '0') + 1), 5, '00000') AS maxSeq
+			FROM PROGRAM_COMPONENT
+			WHERE PROGRAM_CD = #{PROGRAM_CD}
+		    </if>
+			<if test="_databaseId == 'PostgreSQL'">
+		    </if>
+		</selectKey>
+		INSERT INTO PROGRAM_COMPONENT (
+			PROGRAM_CD
+			, COMPONENT_SEQ
+			, COMPONENT_ID
+			, COMPONENT_NM
+			, ML_CD
+			, DESC_TXT
+			, REG_DT
+			, REG_CD
+		)
+		VALUES (
+			#{PROGRAM_CD}			-- 프로그램코드
+			, #{maxSeq}				-- 컴포넌트일련번호
+			, #{COMPONENT_ID}		-- 컴포넌트ID
+			, #{COMPONENT_NM}		-- 컴포넌트명
+			, #{ML_CD}				-- 다국어코드
+			, #{DESC_TXT}			-- 상세설명
+			, <include refid="CommonInc.sysdate" />	-- 등록일시
+			, #{REG_CD}				-- 등록자코드
+		)
+	</insert>
+
+	<update id="programComponentUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* ProgramManagement.programComponentUpdate
+		* 프로그램컴포넌트정보 수정
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		UPDATE PROGRAM_COMPONENT
+		SET
+			COMPONENT_ID = #{COMPONENT_ID}			-- 컴포넌트ID
+			, COMPONENT_NM = #{COMPONENT_NM}		-- 컴포넌트명
+			, ML_CD = #{ML_CD}						-- 다국어코드
+			, DESC_TXT = #{DESC_TXT}				-- 상세설명
+			, MOD_DT = <include refid="CommonInc.sysdate" />	-- 수정일시
+			, MOD_CD = #{MOD_CD}					-- 수정자코드
+		WHERE PROGRAM_CD = #{PROGRAM_CD}			-- 프로그램코드
+			AND COMPONENT_SEQ = #{COMPONENT_SEQ}	-- 컴포넌트일련번호
+	</update>
+
+	<delete id="programComponentDelete" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* ProgramManagement.programComponentDelete
+		* 프로그램컴포넌트정보 삭제
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		DELETE FROM PROGRAM_COMPONENT
+		WHERE PROGRAM_CD 		= #{PROGRAM_CD}		-- 프로그램코드
+			AND COMPONENT_SEQ 	= #{COMPONENT_SEQ}	-- 컴포넌트일련번호
+	</delete>
+	<!-- program_component(프로그램컴포넌트정보) END -->
+
+	<!-- program_message(프로그램메세지정보) START -->
+	<select id="programMessageList" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* ProgramManagement.programMessageList
+		* 프로그램메세지정보 상세 목록
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		SELECT
+			PM.PROGRAM_CD				-- 프로그램코드
+			, PM.MESSAGE_SEQ			-- 메세지일련번호
+			, <include refid="CommonInc.nvl">
+		     	<property name="arg1" value="PM.MESSAGE_NM"/>
+		     	<property name="arg2" value="MI.ML_NM"/>
+		     </include> AS MESSAGE_NM	-- 메세지명
+			, PM.ML_CD					-- 다국어코드
+			, PM.DESC_TXT				-- 상세설명
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="PM.REG_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			  </include>  AS REG_DT		-- 등록일시
+			, PM.REG_CD					-- 등록자코드
+			, U1.USER_NM AS REG_NM		-- 등록자명
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="PM.MOD_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			  </include>  AS MOD_DT		-- 수정일시
+			, PM.MOD_CD					-- 수정자코드
+			, U2.USER_NM AS MOD_NM		-- 수정자명
+			, C.CODE_ID AS ML_TYPE
+			, C.CODE_NM	AS ML_TYPE_NM
+		FROM PROGRAM_MESSAGE PM
+			LEFT OUTER JOIN USER_INFO U1 ON PM.REG_CD = U1.USER_CD
+			LEFT OUTER JOIN USER_INFO U2 ON PM.MOD_CD = U2.USER_CD
+            JOIN MULTILANGUAGE_INFO MI
+            ON MI.ML_CD = PM.ML_CD
+            LEFT OUTER JOIN CODE_INFO C  ON C.GROUP_ID = '00011' AND C.CODE_ID = MI.ML_GROUP
+		WHERE PM.PROGRAM_CD = #{PROGRAM_CD}
+	</select>
+
+	<insert id="programMessageInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* ProgramManagement.programMessageInsert
+		* 프로그램메세지정보 입력
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		<selectKey keyProperty="maxSeq" resultType="String" order="BEFORE">
+			<if test="_databaseId == 'Oracle'">
+		    SELECT LPAD(TO_NUMBER((NVL(MAX(MESSAGE_SEQ), '0') + 1)), 5, '00000') AS maxSeq
+			FROM PROGRAM_MESSAGE
+			WHERE PROGRAM_CD = #{PROGRAM_CD}
+		    </if>
+			<if test="_databaseId == 'SQL Server'">
+		    </if>
+			<if test="_databaseId == 'MySQL'">
+			SELECT LPAD((COALESCE(MAX(MESSAGE_SEQ), '0') + 1), 5, '00000') AS maxSeq
+			FROM PROGRAM_MESSAGE
+			WHERE PROGRAM_CD = #{PROGRAM_CD}
+		    </if>
+			<if test="_databaseId == 'PostgreSQL'">
+		    </if>
+		</selectKey>
+		INSERT INTO PROGRAM_MESSAGE (
+			PROGRAM_CD
+			, MESSAGE_SEQ
+			, MESSAGE_NM
+			, ML_CD
+			, DESC_TXT
+			, REG_DT
+			, REG_CD
+		)
+		VALUES (
+			#{PROGRAM_CD}		-- 프로그램코드
+			, #{maxSeq}			-- 메세지일련번호
+			, #{MESSAGE_NM}		-- 메세지명
+			, #{ML_CD}			-- 다국어코드
+			, #{DESC_TXT}		-- 상세설명
+			, <include refid="CommonInc.sysdate" />	-- 등록일시
+			, #{_sessionUserCd}		-- 등록자코드
+		)
+	</insert>
+
+	<update id="programMessageUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* ProgramManagement.programMessageUpdate
+		* 프로그램메세지정보 수정
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		UPDATE PROGRAM_MESSAGE
+		SET
+			MESSAGE_NM 		= #{MESSAGE_NM}			-- 메세지명
+			, ML_CD 		= #{ML_CD}				-- 다국어코드
+			, DESC_TXT 		= #{DESC_TXT}			-- 상세설명
+			, MOD_DT 		= <include refid="CommonInc.sysdate" />	-- 수정일시
+			, MOD_CD 		= #{_sessionUserCd}		-- 수정자코드
+		WHERE PROGRAM_CD 	= #{PROGRAM_CD}			-- 프로그램코드
+			AND MESSAGE_SEQ = #{MESSAGE_SEQ}		-- 메세지일련번호
+	</update>
+
+	<delete id="programMessageDelete" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* ProgramManagement.programMessageDelete
+		* 프로그램메세지정보 삭제
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		DELETE FROM PROGRAM_MESSAGE
+		WHERE PROGRAM_CD 	= #{PROGRAM_CD}		-- 프로그램코드
+			AND MESSAGE_SEQ = #{MESSAGE_SEQ}	-- 메세지일련번호
+	</delete>
+	<!-- program_message(프로그램메세지정보) END -->
+
+</mapper>

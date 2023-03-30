@@ -1,0 +1,399 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="MT010" width="1659" height="832" titletext="회의록목록" onload="Form_onload">
+    <Layouts>
+      <Layout height="832" mobileorientation="landscape" width="1659">
+        <Div id="divSearch" taborder="0" left="10" top="0" height="43" right="10" cssclass="div_WF_searchBox01" text="" minwidth="1300" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Static id="staTitleT" taborder="0" text="제목" left="20" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="edtTitle" taborder="3" left="staTitleT:10" top="10" width="195" height="21"/>
+              <Static id="staRegNmT" taborder="1" text="작성자" left="edtTitle:50" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="edtRegNm" taborder="2" left="staRegNmT:10" top="10" width="195" height="21"/>
+              <Static id="staTermT" taborder="4" text="회의일" left="edtRegNm:50" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Calendar id="calFrom" taborder="5" left="staTermT:10" top="10" width="90" height="21" dateformat="yyyy-MM-dd" onchanged="Calendar_onchanged"/>
+              <Static id="Static10" taborder="6" text="~" left="calFrom:0" top="10" width="15" height="21" cssclass="sta_WF_textC"/>
+              <Calendar id="calTo" taborder="7" top="10" width="90" height="21" dateformat="yyyy-MM-dd" left="Static10:0" onchanged="Calendar_onchanged"/>
+              <Static id="staApproval" taborder="8" text="사용여부" left="calTo:50" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="cboUseYn" taborder="9" left="staApproval:10" top="10" width="195" height="21" innerdataset="dsUseYnCode" datacolumn="NAME" codecolumn="CODE" index="0" text="사용" value="Y"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnShowHide" taborder="2" left="48.16%" top="divSearch:0" width="60" height="10" cssclass="btn_WF_fold01"/>
+        <Div id="divDetail" taborder="1" left="10" top="btnShowHide:20" right="10" bottom="10" minwidth="1300" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Static id="staList" taborder="0" text="회의록 목록" left="0" top="0" height="30" width="450" cssclass="sta_WF_title02"/>
+              <Grid id="gridMain" taborder="1" left="0" top="30" bottom="0" autofittype="col" binddataset="dsMeeting" right="0" oncelldblclick="divDetail_gridMain_oncelldblclick" takegrid="checkbox,readonly" nodataimage="url('theme://images/Alert_nodataimage.png')">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="50"/>
+                      <Column size="360"/>
+                      <Column size="120"/>
+                      <Column size="110"/>
+                      <Column size="110"/>
+                      <Column size="90"/>
+                      <Column size="120"/>
+                      <Column size="60"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="순번"/>
+                      <Cell col="1" text="제목"/>
+                      <Cell col="2" text="회의시간"/>
+                      <Cell col="3" text="회의장소"/>
+                      <Cell col="4" text="작성부서"/>
+                      <Cell col="5" text="작성자"/>
+                      <Cell col="6" text="작성일자"/>
+                      <Cell col="7" text="참석인원"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="expr:currow + 1" textAlign="center"/>
+                      <Cell col="1" text="bind:MEETING_TITLE" textAlign="left" displaytype="normal" textDecoration="underline"/>
+                      <Cell col="2" text="bind:MEETING_TIME" textAlign="center"/>
+                      <Cell col="3" text="bind:MEETING_PLACE" textAlign="center"/>
+                      <Cell col="4" text="bind:REG_DEPT_NM" textAlign="center"/>
+                      <Cell col="5" text="bind:REG_NM" textAlign="center"/>
+                      <Cell col="6" text="bind:REG_DT" maskedittype="string" maskeditformat="####-##-##" textAlign="center"/>
+                      <Cell col="7" textAlign="center" text="bind:ATTENDEE_CNT"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static01" taborder="3" text="10" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" textAlign="center"/>
+        <Static id="Static24" taborder="4" text="10" left="0" height="20" background="rgba(255,0,0,0.4)" visible="false" right="0" textAlign="center" top="divSearch:10"/>
+        <Static id="Static00" taborder="5" text="10" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" textAlign="center" right="0"/>
+        <Static id="Static22" taborder="6" text="10" left="0" height="10" background="rgba(255,0,0,0.4)" visible="false" right="0" bottom="0" textAlign="center"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="MENU_CD" type="STRING" size="256"/>
+          <Column id="MEETING_TITLE" type="STRING" size="256"/>
+          <Column id="USER_NM" type="STRING" size="256"/>
+          <Column id="FROM_DATE" type="STRING" size="256"/>
+          <Column id="TO_DATE" type="STRING" size="256"/>
+          <Column id="USE_YN" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsMeeting">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256" description="프로젝트코드"/>
+          <Column id="MENU_CD" type="STRING" size="256" description="메뉴코드"/>
+          <Column id="MEETING_SEQ" type="STRING" size="256"/>
+          <Column id="MEETING_TIME" type="STRING" size="256" description="회의시간"/>
+          <Column id="REG_DT" type="STRING" size="256" description="작성일자"/>
+          <Column id="MEETING_PLACE" type="STRING" size="256" description="회의장소"/>
+          <Column id="MEETING_TITLE" type="STRING" size="256" description="회의록제목"/>
+          <Column id="MEETING_TXT" type="STRING" size="256" description="회의록내용"/>
+          <Column id="REG_CD" type="STRING" size="256" description="작성자"/>
+          <Column id="REG_NM" type="STRING" size="256" description="작성자"/>
+          <Column id="REG_DEPT" type="STRING" size="256" description="작성자부서"/>
+          <Column id="REG_DEPT_NM" type="STRING" size="256" description="작성자부서명"/>
+          <Column id="ATTENDEE_CNT" type="STRING" size="256" description="참석자수"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsMeeting_bak">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256" description="프로젝트코드"/>
+          <Column id="MENU_CD" type="STRING" size="256" description="메뉴코드"/>
+          <Column id="MEETING_SEQ" type="STRING" size="256"/>
+          <Column id="MEETING_START_DT" type="STRING" size="256" description="회의시작일자"/>
+          <Column id="MEETING_START_TIME" type="STRING" size="256" description="회의시작시간"/>
+          <Column id="MEETING_REQUIRED_TIME" type="STRING" size="256" description="회의소요시간"/>
+          <Column id="MEETING_PLACE" type="STRING" size="256" description="회의장소"/>
+          <Column id="MEETING_TITLE" type="STRING" size="256" description="회의록제목"/>
+          <Column id="MEETING_TXT" type="STRING" size="256" description="회의록내용"/>
+          <Column id="REG_CD" type="STRING" size="256" description="작성자"/>
+          <Column id="REG_NM" type="STRING" size="256" description="작성자"/>
+          <Column id="REG_DEPT" type="STRING" size="256" description="작성자부서"/>
+          <Column id="ATTENDEE_CNT" type="STRING" size="256" description="참석자수"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsUseYnCode">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="NAME">- 선택 -</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">Y</Col>
+            <Col id="NAME">사용</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">N</Col>
+            <Col id="NAME">사용안함</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  회의록 목록
+*
+*  @MenuPath    회의록 목록
+*  @FileName    MT010.xfdl 
+*  @Creator     전영찬
+*  @CreateDate  2019.11.18 
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    Date          Modifier            Description
+*******************************************************************************
+*  2019.11.18      전영찬             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+this.fv_sProjectCd = nexacro.getApplication().av_sProjectCd;    // ProjectCd
+this.fv_objGdsUserInfo  = nexacro.getApplication().gdsUserInfo;
+this.fv_sUserCd         = "";
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.Form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {    
+        this.fnInit();
+   }
+}
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Search";
+    
+    var sParam = "PROJECT_CD='" + this.fv_sProjectCd + "' MENU_CD='" + this.ProgId + "'";
+    
+    take.tranSelect(this, sTranId, "MeetingMinutesManagement.meetingInfoList", "dsSearch", "dsMeeting", sParam, "fnCallback");
+}
+
+/**
+ * fnAddRow : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+ * @example this.fnAddRow(sGrdId, nRow);
+ */
+this.fnAddRow = function(sGrdId, nRow)
+{
+    //공통 행추가에서 호출할 디폴트값 세팅
+    //if (take.nvl(sGrdId, "")=="") sGrdId = "Grid00";
+    
+    take.openPopup(this, "MT010P01", "biz::thr/MT010P01.xfdl", "", "resizable=false", "fnPopCallback", false);
+    //take.openPopup(this, "MT010P01", "biz::thr/MT010P01.xfdl", "", "", "fnPopCallback", false);
+}
+
+/**
+ * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number, Array} arrnRow    deleteRow 리턴값
+ * @return {N/A} N/A
+ * @example this.fnDelRow(sGrdId, nRow); 
+ */
+this.fnDelRow = function(sGrdId, arrnRow)
+{    
+    //공통 행추가에서 호출할 디폴트값 세팅
+    //if (take.nvl(sGrdId, "")=="") sGrdId = "Grid00";
+    var objDsMeeting = this.dsMeeting;
+    var arrChkRow = take.getChkRow(objDsMeeting,"chk");
+    if(arrChkRow.length == 0){
+        alert("선택된 항목이 없습니다.");
+        return;
+    }
+    
+    var sRegCd = "";
+    for(var i=0; i<arrChkRow.length; i++) {
+        sRegCd = objDsMeeting.getColumn(arrChkRow[i], "REG_CD");
+        if(sRegCd != this.fv_sUserCd) {
+            alert("삭제 권한이 없는 항목이 포함되어 있습니다.\n(작성자 본인만 삭제 가능.)");
+            return;
+        }
+    }
+    
+    var bRowDel = take.confirm(this, "question", "선택된 회의록을 삭제 하시겠습니까?");
+    if (bRowDel){
+        objDsMeeting.set_enableevent(false);
+        objDsMeeting.set_updatecontrol(false);
+        for(var i=0; i<arrChkRow.length; i++) {
+            //this.dsMeeting.deleteRow(arrChkRow[i]);
+            // 삭제 되어야 하는 항목 RowType 'DELETE' <- 바꿔줌 ---------> 삭제X 사용여부 N
+            objDsMeeting.setRowType(arrChkRow[i], "U");
+        }
+        objDsMeeting.set_updatecontrol(true);
+        objDsMeeting.set_enableevent(true);
+        
+        take.tranSave(this, "Delete", "MeetingMinutesManagement.meetingDel", "dsMeeting", "", "", "fnCallback");
+    }
+}
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+// 그리드(목록) 더블클릭
+this.divDetail_gridMain_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	var sRegCd = this.dsMeeting.getColumn(this.dsMeeting.rowposition, "REG_CD");
+    if(sRegCd == this.fv_sUserCd) {
+        var sRegYn = "Y";
+    } else {
+        var sRegYn = "N";
+    }
+    var argParam = {sMtSeq:this.dsMeeting.getColumn(this.dsMeeting.rowposition, "MEETING_SEQ"), sRegYn:sRegYn}
+    
+    //take.openPopup(this, "MT010P02", "biz::thr/MT010P02.xfdl", argParam, "", "fnPopCallback", false);
+    take.openPopup(this, "MT010P02", "biz::thr/MT010P02.xfdl", argParam, "resizable=false", "fnPopCallback", false);
+};
+
+// 캘린더 조정
+this.Calendar_onchanged = function(obj:nexacro.Calendar,e:nexacro.ChangeEventInfo)
+{
+	var objDivSearch = this.divSearch.form;
+    var sDateFrom   = take.nvl(objDivSearch.calFrom.value, "");
+    var sDateTo     = take.nvl(objDivSearch.calTo.value, "");
+    
+	if(sDateFrom > sDateTo){
+        objDivSearch.calTo.set_value(sDateFrom);
+    }
+};
+
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnInit : 초기화 함수
+ * @return {N/A}    N/A
+ * @example this.fnInit();
+ */
+this.fnInit = function(){
+    this.fv_sUserCd = this.fv_objGdsUserInfo.getColumn(0, "USER_CD");
+    
+    this.divSearch.form.cboUseYn.set_index(1);
+    
+	// 최초 조회 일자 셋팅
+	var objDate   = take.getTodayTime();
+	var sToday    = objDate.date;
+	var sPreMonth = this.fnChangeDate(-1);
+	
+	this.dsSearch.setColumn(0, "FROM_DATE", sPreMonth);
+	this.dsSearch.setColumn(0, "TO_DATE"  , sToday);
+	
+    this.fnSearch();
+}
+
+/**
+ * fnChangeDate : 원하는 날짜로 캘린더 셋팅
+ * @param  : nNum  - 양수,음수
+ * @return : sRtn  - 전달된 인수로 계산된 일자
+ * @example this.fnChangeDate(nNum, sGnb);
+ */
+this.fnChangeDate = function (nNum)
+{
+	var objDate    = new Date();
+	var objNewDate = new Date(objDate.getFullYear(),objDate.getMonth(),objDate.getDate());
+	var nMs 	   = objNewDate.addMonth(nNum);
+	
+	var sRtn 	= ( new Date(nMs) ).getFullYear()
+				+ ((new Date(nMs) ).getMonth()+1).toString().padLeft(2, "0")
+				+ ((new Date(nMs) ).getDate()).toString().padLeft(2, "0");
+				
+	return sRtn;
+};
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "Search" : //조회 콜백
+            this.divDetail.form.staList.set_text("회의록 목록 (" + this.dsMeeting.rowcount + "건)");
+            break;
+        case "Delete" :  //삭제 콜백
+            this.fnSearch();
+            break;
+        default :
+            break;
+    }        
+}
+
+/**
+* fnPopCallback : popup callback
+* @param  : N/A
+* @return : N/A
+* @example :  
+*/
+this.fnPopCallback = function(sPopId, sRtn)
+{
+    switch(sPopId)
+    {
+        case "MT010P01" : // 작성 콜백
+            //this.fnSearch();
+            break;
+        case "MT010P02" : // 수정 콜백
+            //this.fnSearch();
+            break;
+        default :
+            break;
+    }
+}
+]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="divSearch.form.edtTitle" propid="value" datasetid="dsSearch" columnid="MEETING_TITLE"/>
+      <BindItem id="item1" compid="divSearch.form.edtRegNm" propid="value" datasetid="dsSearch" columnid="USER_NM"/>
+      <BindItem id="item2" compid="divSearch.form.calFrom" propid="value" datasetid="dsSearch" columnid="FROM_DATE"/>
+      <BindItem id="item3" compid="divSearch.form.calTo" propid="value" datasetid="dsSearch" columnid="TO_DATE"/>
+      <BindItem id="item4" compid="divSearch.form.cboUseYn" propid="value" datasetid="dsSearch" columnid="USE_YN"/>
+    </Bind>
+  </Form>
+</FDL>

@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+* 관리자 > 통계 관련
+*
+* @filename mappers/adm/StatisticsMapper.xml
+* @author takeit
+* @since 2019.08.02
+* @version 1.0
+* @see
+*
+* << 변경 이력(Modification Information) >>
+*
+* 변경번호 : #1
+* 변경일자 : 2019.08.02
+* 변경사람 : takeit
+* 변경내용 : 신규 생성
+ -->
+<mapper namespace="Statistics">
+	<!-- history_log(시스템사용이력) START -->
+	<select id="historyLogList" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* Statistics.historyLogList
+		* 시스템사용이력 목록
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		SELECT
+			<include refid="CommonInc.rownum" />
+			, H.HISTORY_SEQ											-- 시스템사용이력일련번호
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="H.HISTORY_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD'"/>
+				<property name="fmt3" value="'%Y-%m-%d'"/>
+			  </include>  AS HISTORY_DATE							-- 배포일자
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="H.HISTORY_DT"/>
+				<property name="fmt1" value="'HH24:MI'"/>
+				<property name="fmt3" value="'%H:%i'"/>
+			  </include>  AS HISTORY_TIME							-- 배포일시
+			, H.LOGIN_DEVICE										-- 접속기기
+			, H.LOGIN_BROWSER										-- 접속환경
+			, H.PROJECT_CD											-- 프로젝트코드
+			, P.PROJECT_NM											-- 프로젝트명
+			, PM.MENU_CD											-- 메뉴코드
+			, <include refid="CommonInc.nvl" >
+				<property name="arg1" value="PM.MENU_NM"/>
+				<property name="arg2" value="H.MENU_CD"/>
+			  </include> AS MENU_NM					-- 메뉴명
+			, <include refid="CommonInc.nvl" >
+				<property name="arg1" value="PROG.PROGRAM_ID"/>
+				<property name="arg2" value="H.MENU_CD"/>
+			  </include> AS FORM_ID			-- 화면ID
+			, H.HISTORY_TYPE										-- 이력유형
+			, C.CODE_NM AS HISTORY_TYPE_NM							-- 이력유형 명
+			, H.USER_CD												-- 사용자코드
+			, U.USER_ID												-- 사용자ID
+			, U.USER_NM												-- 사용자명
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="H.LOGIN_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			  </include>  AS LOGIN_DT								-- 로그인일시
+			, H.HISTORY_DESC										-- 이력내용
+			, H.LOGIN_IP											-- 로그인IP
+		FROM HISTORY_LOG H
+			INNER JOIN PROJECT_INFO P ON H.PROJECT_CD = P.PROJECT_CD
+			INNER JOIN PROJECT_MENU PM ON H.PROJECT_CD = PM.PROJECT_CD AND H.FORM_ID = PM.MENU_CD
+			LEFT OUTER JOIN PROGRAM_INFO PROG ON PM.PROGRAM_CD = PROG.PROGRAM_CD
+			INNER JOIN CODE_INFO C ON C.GROUP_ID = '00019' AND C.CODE_ID = H.HISTORY_TYPE
+			INNER JOIN USER_INFO U ON H.USER_CD = U.USER_CD
+		WHERE 1 = 1
+		<if test=" PROJECT_CD != null and PROJECT_CD != '' ">
+			AND (
+				H.PROJECT_CD LIKE 
+				<if test="_databaseId == 'Oracle'">
+				('%' || #{PROJECT_CD} || '%')
+				</if>
+				<if test="_databaseId == 'SQL Server'">
+				('%' || #{PROJECT_CD} || '%')
+				</if>
+				<if test="_databaseId == 'MySQL'">
+				CONCAT('%' , #{PROJECT_CD} , '%')
+				</if>
+				<if test="_databaseId == 'PostgreSQL'">
+				('%' || #{PROJECT_CD} || '%')
+				</if>
+				
+				OR P.PROJECT_NM LIKE 
+				<if test="_databaseId == 'Oracle'">
+				('%' || #{PROJECT_CD} || '%')
+				</if>
+				<if test="_databaseId == 'SQL Server'">
+				('%' || #{PROJECT_CD} || '%')
+				</if>
+				<if test="_databaseId == 'MySQL'">
+				CONCAT('%' , #{PROJECT_CD} , '%')
+				</if>
+				<if test="_databaseId == 'PostgreSQL'">
+				('%' || #{PROJECT_CD} || '%')
+				</if>
+			)
+		</if>
+		<if test=" LOGIN_DEVICE != null and LOGIN_DEVICE != '' ">
+			AND H.LOGIN_DEVICE LIKE 
+			<if test="_databaseId == 'Oracle'">
+			('%' || #{LOGIN_DEVICE} || '%')
+			</if>
+			<if test="_databaseId == 'SQL Server'">
+			('%' || #{LOGIN_DEVICE} || '%')
+			</if>
+			<if test="_databaseId == 'MySQL'">
+			CONCAT('%' , #{LOGIN_DEVICE} , '%')
+			</if>
+			<if test="_databaseId == 'PostgreSQL'">
+			('%' || #{LOGIN_DEVICE} || '%')
+			</if>
+		</if>
+		<if test=" LOGIN_BROWSER != null and LOGIN_BROWSER != '' ">
+			AND H.LOGIN_BROWSER LIKE 
+			<if test="_databaseId == 'Oracle'">
+			('%' || #{LOGIN_BROWSER} || '%')
+			</if>
+			<if test="_databaseId == 'SQL Server'">
+			('%' || #{LOGIN_BROWSER} || '%')
+			</if>
+			<if test="_databaseId == 'MySQL'">
+			CONCAT('%' , #{LOGIN_BROWSER} , '%')
+			</if>
+			<if test="_databaseId == 'PostgreSQL'">
+			('%' || #{LOGIN_BROWSER} || '%')
+			</if>
+		</if>
+		<if test=" USER_CD != null and USER_CD != '' ">
+			AND (
+				H.USER_CD LIKE 
+				<if test="_databaseId == 'Oracle'">
+				('%' || #{USER_CD} || '%')
+				</if>
+				<if test="_databaseId == 'SQL Server'">
+				('%' || #{USER_CD} || '%')
+				</if>
+				<if test="_databaseId == 'MySQL'">
+				CONCAT('%' , #{USER_CD} , '%')
+				</if>
+				<if test="_databaseId == 'PostgreSQL'">
+				('%' || #{USER_CD} || '%')
+				</if>
+				
+				OR U.USER_NM LIKE 
+				<if test="_databaseId == 'Oracle'">
+				('%' || #{USER_CD} || '%')
+				</if>
+				<if test="_databaseId == 'SQL Server'">
+				('%' || #{USER_CD} || '%')
+				</if>
+				<if test="_databaseId == 'MySQL'">
+				CONCAT('%' , #{USER_CD} , '%')
+				</if>
+				<if test="_databaseId == 'PostgreSQL'">
+				('%' || #{USER_CD} || '%')
+				</if>
+			)
+		</if>
+		<if test="START_DATE != null and START_DATE != '' ">
+			AND <include refid="CommonInc.toChar" >
+				<property name="arg1" value="H.HISTORY_DT"/>
+				<property name="fmt1" value="'YYYYMMDD'"/>
+				<property name="fmt3" value="'%Y%m%d'"/>
+			  </include>
+			  <![CDATA[>=]]>  #{START_DATE}
+		</if>
+		<if test="END_DATE != null and END_DATE != '' ">
+			AND <include refid="CommonInc.toChar" >
+				<property name="arg1" value="H.HISTORY_DT"/>
+				<property name="fmt1" value="'YYYYMMDD'"/>
+				<property name="fmt3" value="'%Y%m%d'"/>
+			  </include>
+			  <![CDATA[<=]]>  #{END_DATE}
+		</if>
+		<if test="START_TIME != null and START_TIME != '' ">
+			AND <include refid="CommonInc.toChar" >
+				<property name="arg1" value="H.HISTORY_DT"/>
+				<property name="fmt1" value="'HH24MISS'"/>
+				<property name="fmt3" value="'%H:%i%s'"/>
+			  </include>
+			  <![CDATA[>=]]>  #{START_TIME}
+		</if>
+		<if test="END_TIME != null and END_TIME != '' ">
+			AND <include refid="CommonInc.toChar" >
+				<property name="arg1" value="H.HISTORY_DT"/>
+				<property name="fmt1" value="'HH24MISS'"/>
+				<property name="fmt3" value="'%H:%i%s'"/>
+			  </include>
+			  <![CDATA[<=]]>  #{END_TIME}
+		</if>
+		<if test=" MENU_CD != null and MENU_CD != '' ">
+			AND (
+				H.FORM_ID LIKE 
+				<if test="_databaseId == 'Oracle'">
+				('%' || #{MENU_CD} || '%')
+				</if>
+				<if test="_databaseId == 'SQL Server'">
+				('%' || #{MENU_CD} || '%')
+				</if>
+				<if test="_databaseId == 'MySQL'">
+				CONCAT('%' , #{MENU_CD} , '%')
+				</if>
+				<if test="_databaseId == 'PostgreSQL'">
+				('%' || #{MENU_CD} || '%')
+				</if>
+				
+				OR PM.MENU_NM LIKE 
+				<if test="_databaseId == 'Oracle'">
+				('%' || #{MENU_CD} || '%')
+				</if>
+				<if test="_databaseId == 'SQL Server'">
+				('%' || #{MENU_CD} || '%')
+				</if>
+				<if test="_databaseId == 'MySQL'">
+				CONCAT('%' , #{MENU_CD} , '%')
+				</if>
+				<if test="_databaseId == 'PostgreSQL'">
+				('%' || #{MENU_CD} || '%')
+				</if>
+			)
+		</if>
+		<if test=" HISTORY_TYPE != null and HISTORY_TYPE != '' ">
+			AND H.HISTORY_TYPE = #{HISTORY_TYPE}
+		</if>
+		<if test=" USER_NAME != null and USER_NAME != '' ">
+			AND (
+				U.USER_NM LIKE 
+				<if test="_databaseId == 'Oracle'">
+				('%' || #{USER_NAME} || '%')
+				</if>
+				<if test="_databaseId == 'SQL Server'">
+				('%' || #{USER_NAME} || '%')
+				</if>
+				<if test="_databaseId == 'MySQL'">
+				CONCAT('%' , #{USER_NAME} , '%')
+				</if>
+				<if test="_databaseId == 'PostgreSQL'">
+				('%' || #{USER_NAME} || '%')
+				</if>
+				
+				OR U.USER_ID LIKE 
+				<if test="_databaseId == 'Oracle'">
+				('%' || #{USER_NAME} || '%')
+				</if>
+				<if test="_databaseId == 'SQL Server'">
+				('%' || #{USER_NAME} || '%')
+				</if>
+				<if test="_databaseId == 'MySQL'">
+				CONCAT('%' , #{USER_NAME} , '%')
+				</if>
+				<if test="_databaseId == 'PostgreSQL'">
+				('%' || #{USER_NAME} || '%')
+				</if>
+			)
+		</if>
+		<if test=" LOGIN_INFO != null and LOGIN_INFO != '' ">
+			AND (
+				H.LOGIN_DEVICE LIKE 
+				<if test="_databaseId == 'Oracle'">
+				('%' || #{LOGIN_INFO} || '%')
+				</if>
+				<if test="_databaseId == 'SQL Server'">
+				('%' || #{LOGIN_INFO} || '%')
+				</if>
+				<if test="_databaseId == 'MySQL'">
+				CONCAT('%' , #{LOGIN_INFO} , '%')
+				</if>
+				<if test="_databaseId == 'PostgreSQL'">
+				('%' || #{LOGIN_INFO} || '%')
+				</if>
+				
+				OR H.LOGIN_BROWSER LIKE 
+				<if test="_databaseId == 'Oracle'">
+				('%' || #{LOGIN_INFO} || '%')
+				</if>
+				<if test="_databaseId == 'SQL Server'">
+				('%' || #{LOGIN_INFO} || '%')
+				</if>
+				<if test="_databaseId == 'MySQL'">
+				CONCAT('%' , #{LOGIN_INFO} , '%')
+				</if>
+				<if test="_databaseId == 'PostgreSQL'">
+				('%' || #{LOGIN_INFO} || '%')
+				</if>
+			)
+		</if>
+		<if test=" DATE_FROM != null and DATE_FROM != '' ">
+			AND <include refid="CommonInc.toChar" >
+				<property name="arg1" value="H.HISTORY_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			  </include>
+			  <![CDATA[>=]]> #{DATE_FROM}
+		</if>
+		<if test=" DATE_TO != null and DATE_TO != '' ">
+			AND <include refid="CommonInc.toChar" >
+				<property name="arg1" value="H.HISTORY_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			  </include>
+			  <![CDATA[<=]]> #{DATE_TO}
+		</if>
+		<if test=" MENU_NM != null and MENU_NM != '' ">
+			AND (
+				<if test="_databaseId == 'Oracle'">
+				H.MENU_CD LIKE ('%' || #{MENU_NM} || '%')
+				OR PM.MENU_NM LIKE ('%' || #{MENU_NM} || '%')
+				OR PROG.PROGRAM_ID LIKE ('%' || #{MENU_NM} || '%')
+				</if>
+				<if test="_databaseId == 'SQL Server'">
+				H.MENU_CD LIKE ('%' || #{MENU_NM} || '%')
+				OR PM.MENU_NM LIKE ('%' || #{MENU_NM} || '%')
+				OR PROG.PROGRAM_ID LIKE ('%' || #{MENU_NM} || '%')
+				</if>
+				<if test="_databaseId == 'MySQL'">
+				H.MENU_CD LIKE CONCAT('%' , #{MENU_NM} , '%')
+				OR PM.MENU_NM LIKE CONCAT('%' , #{MENU_NM} , '%')
+				OR PROG.PROGRAM_ID LIKE CONCAT('%' , #{MENU_NM} , '%')
+				</if>
+				<if test="_databaseId == 'PostgreSQL'">
+				H.MENU_CD LIKE ('%' || #{MENU_NM} || '%')
+				OR PM.MENU_NM LIKE ('%' || #{MENU_NM} || '%')
+				OR PROG.PROGRAM_ID LIKE ('%' || #{MENU_NM} || '%')
+				</if> 
+				
+			)
+		</if>
+		ORDER BY H.HISTORY_SEQ
+	</select>
+
+	<insert id="historyLogInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		 * loback DBAppender 사용으로 인해 deprecated
+		 * 
+		 * Statistics.historyLogInsert
+		 * 시스템사용이력 입력
+		 * @author takeit
+		 * @since 2019.08.02
+		 */
+		]]>
+		<selectKey keyProperty="maxSeq" resultType="String" order="BEFORE">
+			<if test="_databaseId == 'Oracle'">
+		    SELECT (TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS') || LPAD(TO_NUMBER(HIST_SEQ.NEXTVAL), 3, '0')) AS MAX_SEQ FROM DUAL
+		    </if>
+			<if test="_databaseId == 'SQL Server'">
+			SELECT (FORMAT(GETDATE(), 'yyyyMMddHHmmssfff')) AS MAX_SEQ
+		    </if>
+			<if test="_databaseId == 'MySQL'">
+			SELECT SUBSTRING((DATE_FORMAT(NOW(3), '%Y%m%d%H%i%S%f')), 1, 17) AS MAX_SEQ
+		    </if>
+			<if test="_databaseId == 'PostgreSQL'">
+			SELECT (TO_CHAR(NOW(), 'YYYYMMDDHH24MISS') || LPAD(NEXTVAL('HIST_SEQ')::VARCHAR, 3, '0')) AS MAX_SEQ
+		    </if>
+		</selectKey>
+		INSERT INTO HISTORY_LOG (
+			HISTORY_SEQ
+			, HISTORY_DT
+			, LOGIN_DEVICE
+			, LOGIN_BROWSER
+			, PROJECT_CD
+			, MENU_CD
+			, FORM_ID
+			, HISTORY_TYPE
+			, USER_CD
+			, LOGIN_DT
+			, HISTORY_DESC
+			, LOGIN_IP
+		)
+		VALUES (
+			#{maxSeq}				-- 시스템사용이력일련번호
+			, <include refid="CommonInc.sysdate" />				-- 이력일시
+			, #{LOGIN_DEVICE}		-- 접속기기
+			, #{LOGIN_BROWSER}		-- 접속환경
+			, #{PROJECT_CD}			-- 프로젝트코드
+			, #{MENU_CD}			-- 메뉴코드
+			, #{FORM_ID}			-- 화면ID
+			, #{HISTORY_TYPE}		-- 이력유형
+			, #{USER_CD}			-- 사용자코드
+			, <include refid="CommonInc.toDate" >
+				<property name="arg1" value="#{LOGIN_DT}"/>
+				<property name="fmt" value="'YYYY-MM-DD HH24:MI'"/>
+			  </include>
+			, #{HISTORY_DESC}		-- 이력내용
+			, #{LOGIN_IP}			-- 로그인IP
+		)
+	</insert>
+	<!-- history_log(시스템사용이력) END -->
+
+</mapper>

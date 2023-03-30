@@ -1,0 +1,298 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="TMP010M01" width="1659" height="832" titletext="기본조회화면" onload="Form_onload">
+    <Layouts>
+      <Layout height="832" mobileorientation="landscape" width="1659">
+        <Div id="divSearch" taborder="0" left="10" top="0" height="43" right="10" cssclass="div_WF_searchBox01" text="" minwidth="1300" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Static id="staTitleT" taborder="0" text="제목" left="20" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="edtTitle" taborder="1" left="staTitleT:10" top="10" width="195" height="21" onkeyup="divSearch_edtTitle_onkeyup" enable="true"/>
+              <Static id="Static07" taborder="2" text="10" left="332" top="0" width="2" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static08" taborder="3" text="10" left="665" top="0" width="2" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnShowHide" taborder="2" left="48.16%" top="divSearch:0" width="60" height="10" cssclass="btn_WF_fold01"/>
+        <Div id="divDetail" taborder="1" left="10" top="btnShowHide:20" right="10" bottom="10" minwidth="1300" maxwidth="" text="">
+          <Layouts>
+            <Layout>
+              <Static id="staListT" taborder="0" text="자주쓰는 문구 목록조회" left="0" top="0" height="30" width="450" cssclass="sta_WF_title02"/>
+              <Grid id="gridMain" taborder="1" left="0" top="30" bottom="321" autofittype="col" binddataset="dsMain" initvalueid="iv_Grid1" right="-1" oncelldblclick="divDetail_gridMain_oncelldblclick" takegrid="sort" nodataimage="url('theme://images/Alert_nodataimage.png')" autosizingtype="row" extendsizetype="row" autosizebandtype="body" scrollbarsize="15">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="30"/>
+                      <Column size="500"/>
+                      <Column size="760"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="순번"/>
+                      <Cell col="1" text="제목" cssclass="cellImport"/>
+                      <Cell col="2" text="내용" edittype="none"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="expr:currow + 1" textAlign="center"/>
+                      <Cell col="1" text="bind:SJ" textAlign="left" displaytype="normal" cssclass="expr:IMPORT_YN == 'Y' ? 'import' : ''" padding="0px 0px 0px 0px" edittype="text"/>
+                      <Cell col="2" text="bind:CN" textAlign="left" edittype="textarea" autosizerow="limitmin" textareaautoselect="false" autosizecol="default" displaytype="normal" controlautosizingtype="both" textareaacceptsenter="true"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Div id="divSearch" taborder="2" left="-5" top="gridMain:10" height="43" cssclass="div_WF_searchBox01" text="" right="5" minwidth="1300" maxwidth="">
+                <Layouts>
+                  <Layout>
+                    <Static id="staDeptIdT" taborder="3" text="문서ID" left="0" top="10" width="80" height="21" cssclass="sta_WF_textR" onclick="divDetail_divSearch_staDeptIdT_onclick"/>
+                    <Edit id="edtNo" taborder="1" left="staDeptIdT:10" top="10" width="175" height="21" onkeyup="divSearch_edtTitle_onkeyup"/>
+                    <Static id="Static07_00_01" taborder="9" text="50" left="305" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+                    <Static id="staDeptNmT" taborder="4" text="제목" left="355" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+                    <Edit id="edtTitle2" taborder="2" left="staDeptNmT:10" top="10" width="195" height="21" onkeyup="divSearch_edtTitle_onkeyup"/>
+                    <Static id="Static07_00_01_00" taborder="12" text="50" left="640" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+                    <Static id="staUseYnT" taborder="0" text="내용" left="690" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+                    <Static id="Static07_00" taborder="5" text="20" left="0" top="0" width="20" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+                    <Static id="Static07_00_00" taborder="6" text="285" left="20" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+                    <Static id="Static07_00_00_01_00" taborder="7" text="285" left="20" top="31" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="11"/>
+                    <Static id="Static07_00_00_00" taborder="8" text="285" left="355" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+                    <Static id="Static07_00_00_01_00_00" taborder="10" text="285" left="355" top="31" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="11"/>
+                    <Static id="Static07_00_00_00_00" taborder="11" text="285" left="690" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+                    <Static id="Static07_00_00_01_00_00_00" taborder="13" text="285" left="690" top="31" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="11"/>
+                    <Edit id="edtCn" taborder="14" left="780" top="10" width="195" height="21" onkeyup="divSearch_edtTitle_onkeyup"/>
+                  </Layout>
+                </Layouts>
+              </Div>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static01" taborder="3" text="10" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" textAlign="center"/>
+        <Static id="Static24" taborder="4" text="10" left="0" height="20" background="rgba(255,0,0,0.4)" visible="false" right="0" textAlign="center" top="53"/>
+        <Static id="Static22" taborder="5" text="10" left="0" height="10" background="rgba(255,0,0,0.4)" visible="false" right="0" bottom="0" textAlign="center"/>
+        <Static id="Static01_00" taborder="6" text="10" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" textAlign="center" right="0"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="test" type="STRING" size="256"/>
+          <Column id="content" type="STRING" size="256"/>
+          <Column id="doc_id" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsMain"/>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  기본조회화면
+*
+*  @MenuPath    시스템 > 두레소프트 > 자주쓰는 문구
+*  @FileName    TMP010M01.xfdl 
+*  @Creator     doore
+*  @CreateDate  2023.01.04 
+*  @Version     1.0
+*  @Desction    설명 : 조회화면 템플릿
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2023.01.04      doore               최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+
+
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+//this.fv_nFormVal = null;     //용도
+this.fv_objGdsUserInfo = nexacro.getApplication().gdsUserInfo;
+this.fv_sProjectCd = nexacro.getApplication().av_sProjectCd;
+this.fv_sMenuCd = "";
+this.fv_objProgInfo;
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* formid_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.Form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this)) 
+   {    
+		this.fnSearch();
+   }
+   
+};
+
+/*********************************************************
+ * 2.1 CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+		case "Search" :
+			trace(this.dsMain.saveXML());
+			break;
+		case "Save":
+			take.alert(this,"","저장되었습니다.");
+			this.fnSearch();
+			break;
+        case "Delete" : //삭제 콜백
+            //Script
+			take.alert(this, "", "삭제가 완료되었습니다.");
+			this.fnSearch();
+            break;
+        default : 
+            break;
+    }        
+};
+
+
+/*********************************************************
+* 3 필수 FUNCTION 영역 (fnSearch, fnSave, fnAdd, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+	trace(this.dsMain.saveXML());	
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Search";
+ 	//var sSj = ''; 만약 이 방법으로 하면 "" 빈공백의 파라미터 안에 sSj를 넘겨주면 됨...
+ 	//if(!take.isEmpty(this.divSearch.form.edtTitle.value)) sSj = "test=" + this.divSearch.form.edtTitle.value;
+	this.dsMain.clearData();
+	trace(this.dsMain.saveXML());
+	
+	take.tranSelect(this, sTranId, "Doore.docmSelect", "dsSearch", "dsMain","","fnCallback");//dsSearch의 데이터셋에 id가 test인 값을 찾아서 mapper의 sql문장에 test의 값을 넣어줘서 select
+	//take.transaction(this, sTranId, "SVC_LOC::test/saveList.do", "dsMain=dsMain:U dsMain1=dsMain1:U", "", sParam, "fnCallback", false);
+	//this.transaction("aaaa", "http://localhost:8080/UXBooster?test/saveList.do", "dsSearch", "dsMain", '');
+};
+
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+this.fnSave = function(sTranId)
+{    
+   if (take.nvl(sTranId, "")=="") sTranId = "Save";
+   
+   //데이터셋 수정 여부 확인
+   if (!take.isDsModified(this.dsMain))
+    {
+        take.alert(this, "Info", "변경된 데이터가 없습니다.");
+        return false;
+    }
+
+// 	var srtrCheck = this.dsMain.getColumn(this.dsMain.rowposition, "SJ");
+// 	if(take.isEmpty(srtrCheck)) {
+// 		alert("제[목입력해 주세요.");
+// 		return false;
+// 	}
+	//저장 전 벨리데이션 체크
+    var bRtn = takeval.checkComp(
+            this,                           //현재 Form Object
+            this.divDetail.form.gridMain,	//벨리데이션 대상 컴포넌트 (Grid 및 Form류[this,div,tabpase])
+            "cellImport",                   //필수 입력 css값
+            "fnValCallBack",                //성공 Call Back 함수
+            true);                          //동기 여부
+  
+    //벨리데이션 체크 완료 후
+    if (bRtn) 
+	{
+	   var sParam = "sNameSpace=Doore.docmInsert|Doore.docmUpdate|Doore.docmDelete" + " sDataset=dsMain";
+	   take.transaction(this, sTranId, "SVC_LOC::doore/saveList.do", "dsMain=dsMain:U", "", sParam, "fnCallback", false);
+    }
+};
+/**
+ * fnAdd : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+ * @example this.fnAddRow(sGrdId, nRow);
+ */
+this.fnAddRow = function(sGrdId, nRow)
+{
+    this.dsMain.addRow();
+};
+
+/**
+ * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number, Array} arrnRow    deleteRow 리턴값
+ * @return {N/A} N/A
+ * @example this.fnDelRow(sGrdId, nRow); 
+ */
+this.fnDelRow = function(sGrdId, arrnRow)
+{   
+	this.dsMain.deleteRow(this.dsMain.rowposition);
+};
+
+/*********************************************************
+ * 4 각 COMPONENT 별 EVENT 영역
+ ********************************************************/
+this.divSearch_edtTitle_onkeyup = function(obj:nexacro.Edit, e:nexacro.KeyEventInfo)
+{
+	if( e.keycode == 13 )//enter를 눌렀을 때 keycode값이 13. 
+	{
+		this.fnSearch();
+	}
+};
+
+
+/*********************************************************
+* 5 사용자 FUNCTION 영역
+********************************************************/
+/**
+* fnValCallBack : validation callback
+* @param  : objComp      - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnValCallBack = function(objComp)
+{
+    //벨리데이션 성공 후 스크립트
+    return;
+}
+
+]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="divDetail.form.divSearch.form.edtTitle2" propid="value" datasetid="dsSearch" columnid="test"/>
+      <BindItem id="item1" compid="divSearch.form.edtTitle" propid="value" datasetid="dsSearch" columnid="test"/>
+      <BindItem id="item2" compid="divDetail.form.divSearch.form.edtCn" propid="value" datasetid="dsSearch" columnid="content"/>
+      <BindItem id="item3" compid="divDetail.form.divSearch.form.cboUseYn" propid="value" datasetid="dsMain" columnid="CN"/>
+      <BindItem id="item4" compid="divDetail.form.divSearch.form.edtNo" propid="value" datasetid="dsSearch" columnid="doc_id"/>
+    </Bind>
+  </Form>
+</FDL>

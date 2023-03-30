@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="publishing041" width="1040" height="659" titletext="공지사항상세조회">
+    <Layouts>
+      <Layout height="659" mobileorientation="landscape" width="1040">
+        <Static id="Static01" taborder="0" left="10" top="10" height="31" cssclass="sta_WF_th01L" right="10"/>
+        <Edit id="Edit11" taborder="1" left="17" top="15" height="21" right="20"/>
+        <Static id="Static02" taborder="2" left="10" top="40" height="388" cssclass="sta_WF_th01L" right="10"/>
+        <TextArea id="TextArea00" taborder="3" left="17" top="50" height="368" right="20"/>
+        <Static id="Static23" taborder="4" text="10" left="1" top="427" width="10" height="41" background="rgba(0,0,255,0.4)" visible="false" color="blue"/>
+        <Static id="Static22" taborder="5" text="10" left="0" height="10" background="red" visible="false" right="0" bottom="649" textAlign="center"/>
+        <Static id="Static16" taborder="6" text="10" left="1030" top="0" width="10" background="red" bottom="0" visible="false" textAlign="center"/>
+        <Static id="Static00" taborder="7" text="10" left="0" top="0" width="10" background="red" bottom="0" visible="false" textAlign="center"/>
+        <Static id="Static03" taborder="8" text="10" left="0" height="10" background="red" visible="false" right="0" bottom="222" textAlign="center"/>
+        <Div id="Div01" taborder="9" text="Div00" left="1050" top="40" width="400" height="300">
+          <Layouts>
+            <Layout/>
+          </Layouts>
+        </Div>
+        <Div id="Div02" taborder="10" left="10" top="436" height="47" cssclass="div_WF_replyBox01" right="10" formscrollbartype="none none">
+          <Layouts>
+            <Layout>
+              <Button id="Button00" taborder="1" text="일괄다운" top="10" height="25" cssclass="btn_WF_basic01" right="10" width="80"/>
+              <Static id="Static00" taborder="1" text="첨부파일" left="10" top="10" width="133" height="25" cssclass="sta_WF_fileData01"/>
+              <Static id="Static01" taborder="2" text="첨부파일" left="153" top="10" width="133" height="25" cssclass="sta_WF_fileData01"/>
+              <Static id="Static02" taborder="3" text="첨부파일" left="296" top="10" width="133" height="25" cssclass="sta_WF_fileData01"/>
+              <Static id="Static03" taborder="4" text="첨부파일" left="439" top="10" width="133" height="25" cssclass="sta_WF_fileData01"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column4">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="Dataset01">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">작성자</Col>
+            <Col id="Column1">작성일</Col>
+            <Col id="Column2">댓글내용</Col>
+            <Col id="Column3">수정버튼</Col>
+            <Col id="Column4">삭제버튼</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">작성자</Col>
+            <Col id="Column1">작성일</Col>
+            <Col id="Column2">댓글내용</Col>
+            <Col id="Column3">수정버튼</Col>
+            <Col id="Column4">삭제버튼</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

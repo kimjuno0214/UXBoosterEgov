@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="comOZViewer" width="1024" height="768" titletext="OZReport" onload="comOZViewer_onload" ontimer="comOZViewer_ontimer" cssclass="frm_Popup">
+    <Layouts>
+      <Layout height="768" mobileorientation="landscape" width="1024">
+        <WebBrowser id="wbOZ" taborder="0" left="0" top="0" right="0" bottom="0" onloadcompleted="wbOZ_onloadcompleted" onusernotify="wbOZ_onusernotify"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[this.fv_bWebOnload = false;
+this.fv_objArg;
+
+this.comOZViewer_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{   
+    var sBaseUrl = take.getSvcUrl();  
+    trace(sBaseUrl);
+    this.wbOZ.set_url(sBaseUrl + "_webkit/OZReport/ozreport.html"); 
+    //this.wbOZ.set_url(sBaseUrl + "jsp/OZReport/ozreport_test.html");
+        
+    try {
+        this.fv_objArg = this.parent.arguments;                
+    } catch(e) {
+        this.close("error : " + e);
+    }
+            
+    this.setTimer(1,100);
+    
+//     var objArg = this.parent.arguments;
+//     console.dir(objArg);
+};
+
+this.comOZViewer_ontimer = function(obj:nexacro.Form,e:nexacro.TimerEventInfo)
+{
+    var objArg;
+    
+	if (e.timerid==1)
+	{
+        if (this.fv_bWebOnload == true)
+		{
+            this.killTimer(1);     
+            trace("objArg --> " + this.fv_objArg);
+            console.dir(this.fv_objArg);
+            
+            this.wbOZ.getProperty("window").callMethod("SetOZParamters_OZViewer1", this.fv_objArg);
+		}
+	}
+};
+
+this.wbOZ_onloadcompleted = function(obj:nexacro.WebBrowser,e:nexacro.WebLoadCompEventInfo)
+{
+	if (e.url.indexOf("ozreport.html") != -1)
+    //if (e.url.indexOf("ozreport_test.html") != -1)
+	{
+		this.fv_bWebOnload = true;
+	}
+};
+
+this.wbOZ_onusernotify = function(obj:nexacro.WebBrowser,e:nexacro.WebUserNotifyEventInfo)
+{
+    var sUserData = e.userdata;
+    
+    //넘어온 데이터가 detail인 경우
+	if (sUserData.indexOf("CallBack")>=0)
+    { 
+        var sRtn = sUserData.substr(9);
+        trace("Return --> " + sRtn);
+        if(sRtn.substr(0,4)=="(-1)")
+        {            
+            trace("OZReport loading fail : " + sRtn);
+        } else if (sRtn.substr(0,4)=="(00)"){
+            trace("OZReport loading success");
+        }
+    }	
+};
+]]></Script>
+  </Form>
+</FDL>

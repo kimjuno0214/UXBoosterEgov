@@ -1,0 +1,890 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="TM020" width="1060" height="890" titletext="타임라인상세" onload="TM020_onload" background="#ffffff">
+    <Layouts>
+      <Layout height="890" mobileorientation="landscape" width="1060">
+        <Static id="Static00" taborder="0" text="10" left="0" top="0" width="20" background="rgba(255,0,0,0.4)" bottom="0" visible="false" color="red" textAlign="center"/>
+        <Static id="Static08" taborder="1" text="10" top="0" width="20" background="rgba(255,0,0,0.4)" bottom="0" visible="false" color="red" textAlign="center" right="0"/>
+        <Div id="divDetail" taborder="2" left="20" top="20" bottom="20" right="20" maxwidth="">
+          <Layouts>
+            <Layout/>
+          </Layouts>
+        </Div>
+        <Static id="Static22" taborder="3" text="10" left="0" height="20" background="rgba(255,0,0,0.4)" visible="false" right="0" bottom="0" textAlign="center"/>
+        <Div id="divTitle" taborder="4" left="20" top="20" height="27" maxwidth="" right="20" background="#ffffff">
+          <Layouts>
+            <Layout>
+              <Button id="btnDelTimeLine" taborder="0" text="삭제" top="0" height="21" cssclass="btn_WF_cancel02" onclick="divDetail_btnDelTimeLine_onclick" right="0" width="46"/>
+              <Button id="btnAddTimeLine" taborder="1" text="타임라인추가" top="0" height="21" onclick="divDetail_btnAddTimeLine_onclick" right="btnDelTimeLine:3" width="94"/>
+              <Button id="btnSend" taborder="2" text="완료" top="0" height="21" onclick="divDetail_btnSend_onclick" right="btnAddTimeLine:3" width="46"/>
+              <Static id="Static01" taborder="3" text="타임라인 목록" left="0" top="0" height="21" width="430" cssclass="sta_WF_title02"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsTimeLineDetailList">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="MENU_CD" type="STRING" size="256"/>
+          <Column id="TIMELINE_SEQ" type="STRING" size="256"/>
+          <Column id="DETAIL_SEQ" type="STRING" size="256"/>
+          <Column id="DETAIL_DATE" type="STRING" size="256"/>
+          <Column id="DETAIL_TIME" type="STRING" size="256"/>
+          <Column id="DETAIL_TITLE" type="STRING" size="256"/>
+          <Column id="DETAIL_TXT" type="STRING" size="256"/>
+          <Column id="DETAIL_IMG" type="STRING" size="256"/>
+          <Column id="REG_DT" type="STRING" size="256"/>
+          <Column id="REG_CD" type="STRING" size="256"/>
+          <Column id="REG_NM" type="STRING" size="256"/>
+          <Column id="MOD_DT" type="STRING" size="256"/>
+          <Column id="MOD_CD" type="STRING" size="256"/>
+          <Column id="TIMELINE_BLOB" type="STRING" size="256"/>
+          <Column id="COLUMN0" type="STRING" size="256"/>
+          <Column id="FULL_DATE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsFile">
+        <ColumnInfo>
+          <Column id="ATTACH_CD" type="STRING" size="256"/>
+          <Column id="FILE_SEQ" type="STRING" size="256"/>
+          <Column id="FILE_PATH" type="STRING" size="256"/>
+          <Column id="FILE_NM" type="STRING" size="256"/>
+          <Column id="FILE_SAVE_NM" type="STRING" size="256"/>
+          <Column id="IMPORT_YN" type="STRING" size="256"/>
+          <Column id="FILE_TYPE" type="STRING" size="256"/>
+          <Column id="FILE_SIZE" type="STRING" size="256"/>
+          <Column id="FILE_BLOB" type="STRING" size="256"/>
+          <Column id="DESC_TXT" type="STRING" size="256"/>
+          <Column id="DELETE_YN" type="STRING" size="256"/>
+          <Column id="DELETE_DT" type="STRING" size="256"/>
+          <Column id="REG_DT" type="STRING" size="256"/>
+          <Column id="REG_CD" type="STRING" size="256"/>
+          <Column id="MOD_DT" type="STRING" size="256"/>
+          <Column id="MOD_CD" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsDummy">
+        <ColumnInfo>
+          <Column id="DETAIL_IMG" type="STRING" size="256"/>
+          <Column id="FILE_NM" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsMarster">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="MENU_CD" type="STRING" size="256"/>
+          <Column id="TIMELINE_SEQ" type="STRING" size="256"/>
+          <Column id="TIMELINE_TITLE" type="STRING" size="256"/>
+          <Column id="TIMELINE_GRADE" type="STRING" size="256"/>
+          <Column id="GRADE_NM" type="STRING" size="256"/>
+          <Column id="TIMELINE_STATUS" type="STRING" size="256"/>
+          <Column id="STATUS_NM" type="STRING" size="256"/>
+          <Column id="TIMELINE_ATTACH" type="STRING" size="256"/>
+          <Column id="REG_DT" type="STRING" size="256"/>
+          <Column id="REG_CD" type="STRING" size="256"/>
+          <Column id="REG_NM" type="STRING" size="256"/>
+          <Column id="MOD_DT" type="STRING" size="256"/>
+          <Column id="MOD_CD" type="STRING" size="256"/>
+          <Column id="MOD_NM" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[ 
+/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    tm > TM020
+*  @FileName    TM020.xfdl 
+*  @Creator     김대승
+*  @CreateDate  2019.09.18
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2019.09.18      김대승             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+this.fv_sParentProjectCd   = this.parent.sProjectCd;
+this.fv_sParentMenuCd      = this.parent.sMenuCd;
+this.fv_sParentTimelineSeq = this.parent.sTimelineSeq;
+
+this.fv_sDetailImg = "";
+this.fv_sMarster   = "";
+this.fv_nImgCnt    = 0;	// 이미지 뷰어가 들어갈 Div 카운트
+this.fv_nImgDivCnt = 0; // 이미지뷰어 카운트
+
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.TM020_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {    
+        this.fnInit();
+   }
+}
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "TimeLineDetailSearch";
+	this.dsTimeLineDetailList.clearData();
+	
+	//this.fnSetDynamicDivInit(this.dsTimeLineDetailList, this.dsFile, 110);
+	
+    // 벨리데이션 
+// 	takeval.add(this, "Search", this.divSearch.form.cboType, "유형", "value", true, "string", "", "");
+// 	if(!takeval.check(this, "Search")) return;
+	
+	this.fv_sParentProjectCd   = take.nvl(this.parent.sProjectCd, "");	
+	this.fv_sParentMenuCd	   = take.nvl(this.parent.sMenuCd, "");
+	this.fv_sParentTimelineSeq = take.nvl(this.parent.sTimelineSeq, "");
+	
+	this.dsFile.clearData();
+	this.dsTimeLineDetailList.clearData();
+	
+	take.transaction
+	(
+		this,
+		"TimeLineDetailSearch",
+		"SVC_LOC::tm/timeLineDetailSearch.do",
+		"",
+		"dsTimeLineDetailList=dsTimeLineDetailList dsFile=dsFile",
+		"PROJECT_CD='" + this.fv_sParentProjectCd + "' MENU_CD='" + this.fv_sParentMenuCd + "' TIMELINE_SEQ='"+this.fv_sParentTimelineSeq+"'", 
+		"fnCallback"
+	);
+}
+
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+this.fnSave = function(sTranId)
+{    
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "TimeLineDetailDel";
+	
+	switch(sTranId) {
+	case "TimeLineDetailDel":	// 디테일 삭제
+	
+		// 마스터 삭제일 경우에만 분기적용
+		//if(this.fv_sMarster!=""){
+			take.transaction
+			(
+				this,
+				"TimeLineDetailDel",
+				"SVC_LOC::tm/timeLineDetailDelete.do",
+				"dsTimeLineDetailList=dsTimeLineDetailList:U",
+				"",
+				"    sDetailImg='" 	 + this.fv_sDetailImg 
+				+ "' sFilePath='"    + this.fv_sFilePath 
+				+ "' sMarster='" 	 + this.fv_sMarster 
+				+ "' sTimeLineSeq='" + this.fv_sParentTimelineSeq 
+				+ "' sProjectCd='" 	 + this.fv_sParentProjectCd 
+				+ "' sMenuCd='" 	 + this.fv_sParentMenuCd + "'", 
+				"fnCallback"
+			);
+			break;
+// 		} else {
+// 			take.transaction
+// 			(
+// 				this,
+// 				"TimeLineDetailDel",
+// 				"SVC_LOC::tm/timeLineDetailDelete.do",
+// 				"dsTimeLineDetailList=dsTimeLineDetailList:U",
+// 				"",
+// 				"sDetailImg='" + this.fv_sDetailImg + "' sFilePath='" + this.fv_sFilePath + "'", 
+// 				"fnCallback"
+// 			);
+// 			break;
+// 		}
+		
+	case "timelineInfoUpdate":	// 수정, 완료
+		this.dsMarster.clearData();
+		this.dsMarster.copyData(this.parent.objDs);
+		this.dsMarster.setColumn(0, "TIMELINE_STATUS", "03");
+		
+		//tranSave -> transaction 변경 2021.05.17 전영찬
+		//take.tranSave(this, "timelineInfoUpdate", "TimelineManagement.timelineInfo", "dsMarster", "", "", "fnCallback")
+		take.transaction
+		(
+			this,
+			"timelineInfoUpdate",
+			"SVC_LOC::tm/timelineInfoSave.do",
+			"dsTimeLineInfo=dsMarster:U",
+			"",
+			"",
+			"fnCallback"
+		);
+		break;
+	}
+}
+/**
+ * fnAddRow : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+ * @example this.fnAddRow(sGrdId, nRow);
+ */
+this.fnAddRow = function(sGrdId, nRow)
+{
+    //공통 행추가에서 호출할 디폴트값 세팅
+    if (take.nvl(sGrdId, "")=="") sGrdId = "lstTimeLineDetail";   
+}
+
+/**
+ * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number, Array} arrnRow    deleteRow 리턴값
+ * @return {N/A} N/A
+ * @example this.fnDelRow(sGrdId, nRow); 
+ */
+this.fnDelRow = function(sGrdId, arrnRow)
+{    
+    //공통 행추가에서 호출할 디폴트값 세팅
+    if (take.nvl(sGrdId, "")=="") sGrdId = "Grid00";
+    
+    //Script
+}
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+// divDetail_btnAddTimeLine_onclick : 타임라인추가 버튼 클릭
+this.divDetail_btnAddTimeLine_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	// 타입라인 상세 등록 팝업 오픈 TM020P02
+	AgrKey = {sProjectCd:this.fv_sParentProjectCd, sMenuCd:this.fv_sParentMenuCd, sTimelineSeq:this.fv_sParentTimelineSeq};
+	take.openPopup(this, "TM020P02", "frm::mod/TM020P03.xfdl", AgrKey, "",
+		function(){
+			this.fnInit();
+			//this.fnSearch("TimeLineDetailSearch");
+		},
+	false);
+};
+
+// divDetail_ImageViewer_onclick : 이미지 클릭시 상세팝업오픈
+this.divDetail_ImageViewer_onclick = function(obj:nexacro.ImageViewer,e:nexacro.ClickEventInfo)
+{
+	var sImgId = obj.id
+	var nRow   = sImgId.split("Img")[1];	
+	
+	// 선택 이미지 정보
+	var sDetailImg = this.dsDummy.getColumn(nRow, "DETAIL_IMG");
+	var sFileNm	   = this.dsDummy.getColumn(nRow, "FILE_NM");
+	
+	AgrKey = {
+		sProjectCd:this.fv_sParentProjectCd, 		// 최상위 부모폼 프로젝트 코드
+		sMenuCd:this.fv_sParentMenuCd, 				// 최상위 부모폼 메뉴 코드
+		sTimelineSeq:this.fv_sParentTimelineSeq,	// 최상위 부모폼 타임라인 일련번호
+		sDetailImg:sDetailImg,						// 선택 이미지 코드 값
+		sFileNm:sFileNm,							// 선택 이미지 이름
+		objFileDs:this.dsFile						// 파일 데이터셋
+	};
+	
+	take.openPopup(this, "TM020P01", "frm::mod/TM020P01.xfdl", AgrKey, "",
+		function(){
+			// 콜백
+		},
+	false);
+};
+
+// divDetail_btnDel_onclick : 타임라인 상세 건별 삭제 버튼
+this.divDetail_btnDel_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var bConfirm = take.confirm(this, "String", "타임라인 상세가 삭제됩니다.\n삭제 하시겠습니까?");
+	if(bConfirm){
+		var sBtnId = obj.id
+		var nRow   = sBtnId.split("btnDel")[1];	
+		var objDs  = this.dsTimeLineDetailList;
+		
+		// RowType - Update 변경 이유
+		// Delete 변경시 서비스에서 RowCount를 받아오지 못함 U 로 변경후 서비스에서 Delete 실행
+		objDs.set_enableevent(false);
+		objDs.set_updatecontrol(false);
+		objDs.setRowType(nRow, "U");
+		objDs.set_updatecontrol(true);
+		objDs.set_enableevent(true);
+		
+		// 삭제될 이미지 코드 값
+		this.fv_sDetailImg = this.dsTimeLineDetailList.getColumn(nRow, "DETAIL_IMG");
+		this.fv_sFilePath  = "TML";
+		this.fv_sMarster   = ""; // 전부 삭제인 경우에만 값 넘겨서 사용
+		this.fnSave("TimeLineDetailDel");
+	}
+};
+
+// divDetail_btnDel_onclick : 타임라인 디테일 전부 삭제
+this.divDetail_btnDelTimeLine_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var bConfirm = take.confirm(this, "String", "타임라인 상세가 전부 삭제됩니다.\n그래도 삭제 하시겠습니까?");
+	if(bConfirm){
+		// 디테일 전부를 삭제하기 위해서 모든 RowType - update 변경 후 서비스 호출
+		var objDs = this.dsTimeLineDetailList;
+		objDs.set_enableevent(false);
+		objDs.set_updatecontrol(false);
+		for(var i=0; i<objDs.rowcount; i++){
+			objDs.setRowType(i, "U");
+		}
+		objDs.set_updatecontrol(true);
+		objDs.set_enableevent(true);
+		
+		// 파일정보 테이블에 타임라인 관련 파일은 'TML' 으로 저장
+		this.fv_sFilePath  = "TML";
+		this.fv_sMarster   = "MASTER";
+		this.fnSave("TimeLineDetailDel");
+	} else {
+		return false;
+	}
+};
+
+// btnCancel_onclick : X 버튼 클릭 __ 팝업 창 닫기
+this.btnCancel_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.close();
+};
+
+/*********************************************************
+* 4 사용자 FUNCTION 영역 
+********************************************************/
+/**
+ * fnInit : 초기화 함수
+ * @example this.fnInit();
+ */
+this.fnInit = function()
+{    
+	// 조회
+    this.fnSearch("TimeLineDetailSearch");
+}
+
+/**
+ * fnCommonCode : 공통 코드조회
+ * @example this.fnCommonCode();
+ */
+this.fnCommonCode = function ()
+{
+
+};
+
+/**
+ * fnSetDynamicDivInit : 메인 Div 초기값 설정 동적생성 함수 호출
+ * @example this.fnSetDynamicDivInit(objDs, objFileDs, nTop);
+ */
+this.fnSetDynamicDivInit = function (objDs, objFileDs, nTop)
+{
+	// 컴포넌트 동적 생성전에 기존에 생성된 컴포넌트 삭제
+	var arrComp = take.ComponentList(this.divDetail.form);
+	for(var i=0; i<objDs.rowcount; i++) {
+		if (arrComp.indexOf("divTimeLineImg"+i) > -1) {
+			this.divDetail.form.components["divTimeLineImg"+i].destroy();
+		}
+	}
+	var objDivNm  = "divTimeLineImg";	// 메인Div ID
+	var objBaseDs = objDs;				// 베이스 DS (타임라인 디테일)
+	
+	// (Frame이름, 데이터셋 이름, 사이즈)
+	this.fnSetDivComp(objDivNm, objBaseDs, objFileDs, nTop);
+};
+
+/**
+ * fnSetComp : 프레임 div 컴포넌트 동적 생성
+ * @example this.fnSetDivComp(objDivNm, objBaseDs, objFileDs, nTop);
+ */
+this.fnSetDivComp = function (objDivNm, objBaseDs, objFileDs, nTop)
+{
+	var divLeft, divTop, divWidth, divHeight, divRight, divBottom;
+	var bFlag = true;
+	this.fv_nImgDivCnt = 0;
+	
+	// 함수 호출시 인자로 넘어온 최초 생설될 div top 좌표
+	nTop = parseInt(nTop);
+	nTemp = 31;
+	
+	var nIntTop = (nTop+nTemp);
+	nDivLeft    = 0;
+	nDivTop     = 10; // 10
+	nDivWidth   = null;
+	nDivHeight  = 345; // 130 290
+	nDivRight   = 0;
+	nDivBottom  = null;
+	
+	var n140 = 140;
+	
+	var nNullImgCnt = 1;
+	var sPreDetailImg;
+	var nPreDivBottomPx = 0;
+	var nTopInterval = 15;
+	for(var i = 0; i< objBaseDs.rowcount; i++)
+	{	
+		//최초 frame이 되는 Div를 생성 
+		var frmObjDiv = new Div();
+		
+		// 등록된 게시물의 이미지 구분 값 (파일 코드)
+		var sDetailImg = objBaseDs.getColumn(i, "DETAIL_IMG");
+		
+		//trace("===========>>"+nNullImgCnt)
+		// 등록된 이미지가 없으면 div 크기 작게
+		if (take.nvl(sDetailImg, "") == "")
+		{
+			// 0번째 Row 
+			if(i==0) {
+				frmObjDiv.init(objDivNm+i, nDivLeft, 30, nDivWidth, (nDivHeight-150), nDivRight, nDivBottom);
+			} else {
+				frmObjDiv.init(objDivNm+i, nDivLeft, nPreDivBottomPx+nTopInterval,  nDivWidth, (nDivHeight-150), nDivRight, nDivBottom);
+			}
+			bFlag = false;
+		}
+		// 등록된 이미지가 있다면 div 크기 크게
+		else{
+			// 0 번째 Div 이후 Top 간격 변경
+			if(i==0) {
+				frmObjDiv.init(objDivNm+i, nDivLeft, 30, nDivWidth, nDivHeight, nDivRight, nDivBottom);
+			} else {
+				frmObjDiv.init(objDivNm+i, nDivLeft, nPreDivBottomPx+nTopInterval,  nDivWidth, nDivHeight, nDivRight, nDivBottom);
+			}
+			bFlag = true;
+		}
+		
+		this.divDetail.form.addChild(objDivNm+this.fv_nImgDivCnt, frmObjDiv);
+		
+		
+		var sPreFullDate, sNowFullDate, sNowDate;
+		var sPreDate ="";
+		// 0번째 row는 제외 하고 이전 날짜 값 구하기
+		
+		sPreFullDate = take.nvl(objBaseDs.getColumn(i, "FULL_DATE"), "");
+		sPreDate 	 = sPreFullDate.substring(0, 10);
+		if (i<objBaseDs.rowcount) {
+			sNowFullDate = take.nvl(objBaseDs.getColumn((i+1), "FULL_DATE"), "");
+			sNowDate     = sNowFullDate.substring(0, 10);
+		}else {
+			sNowDate = sPreDate;
+		}
+		
+		trace("sPreDate->> "+sPreDate)
+		trace("sNowDate->> "+sNowDate)
+		if (sPreDate != sNowDate) frmObjDiv.set_cssclass("div_WF_timeLineBox");	
+		else frmObjDiv.set_cssclass("");	
+		frmObjDiv.show();
+		
+		// 0번째 Row를 제외한 나머지 Div은 생성될때 바로 이전 생성된 Row의 Bottom값을 찾아서 
+		nPreDivBottomPx = this.divDetail.form.components[objDivNm+i].getOffsetBottom();
+		
+		// 등록된 게시물의 이미지 구분 값 (파일 코드)
+		var sDetailImg = objBaseDs.getColumn(i, "DETAIL_IMG");
+		
+		// 내부 컴포넌트 동적 생성 호출
+		this.fnInnerCompSet(objDivNm+this.fv_nImgDivCnt, objBaseDs, this.fv_nImgDivCnt, bFlag);
+		
+		// 내부 이미지뷰어를 감싸고 있는 div id
+		var sDivImgBgNm = "divImgBg"+this.fv_nImgDivCnt;
+		// 내부 이미지뷰어 컴포넌트 동적 생성 함수 호출
+		this.fnInnerImgViewerSet(objDivNm+this.fv_nImgDivCnt, objFileDs, sDetailImg, sDivImgBgNm);
+		// 이미지 뷰어가 들어있는 div resetScroll (가로 스크롤)
+		this.divDetail.form.components[objDivNm+this.fv_nImgDivCnt].form.components[sDivImgBgNm].form.resetScroll();
+		Number(this.fv_nImgDivCnt++);
+	}
+	this.divDetail.form.resetScroll();
+}
+
+/**
+ * fnInnerImgViewerSet : Div 내부에 이미지,동영상 갯수 만큼 뷰어 컴포넌트 동적 생성
+ * @example this.fnInnerImgViewerSet(objFileDs);
+ */
+this.fnInnerImgViewerSet = function (objDivNm, objFileDs, sDetailImg, sDivImgBgNm)
+{
+	var sImgNm    = "Img";	// 이미지뷰어 ID
+	var nInterval = 10;		// 이미지뷰어 간격
+	var addRow;
+	var objDummy = this.dsDummy;
+	
+	var nFileCnt = 0;
+	for (var j=0; j<objFileDs.rowcount; j++){
+		if (objFileDs.getColumn(j, "ATTACH_CD") == sDetailImg){
+			Number(nFileCnt++);
+		}
+	}
+	this.dsFile.set_filterstr("ATTACH_CD == '"+sDetailImg+"'");
+	// getFindRowsExpr <-- 버그인지 문제가 있어서 반복문 돌려 카운트 구함
+	// 파일 데이터셋의 이미지구분 , 선택된 디테일 데이터셋의 이미지 구분 일치하는 배열 리턴
+	//arrFindRows = take.getFindRowsExpr(objFileDs, "ATTACH_CD=='"+sDetailImg+"'", false);	
+	
+	for(var i=0; i<nFileCnt; i++)
+	{
+		//  이미지뷰어 생성
+		var objImgViewer = new ImageViewer();
+		
+		nImgLeft   = 45;
+		nImgTop    = 30; // 108
+		nImgWidth  = 120;
+		nImgHeight = 150;
+		
+		// 최초 left의 간격이 10 이후 20으로 변경됨
+		if(i==0) objImgViewer.init(sImgNm+i, 45, nImgTop,  nImgWidth, nImgHeight);
+		else objImgViewer.init(sImgNm+i, (nImgLeft*i)+(nImgWidth*i)+nInterval, nImgTop,  nImgWidth, nImgHeight);
+		
+		// 이미지가 바인딩 될 상품별 이미지뷰어 생성
+		this.divDetail.form.components[objDivNm].form.components[sDivImgBgNm].form.addChild(sImgNm+this.fv_nImgCnt, objImgViewer);
+		
+		// Properties 설정
+		objImgViewer.set_image(objFileDs.getColumn(i, "FILE_BLOB"));
+		objImgViewer.set_stretch("fit"); // fixaspectratio
+		objImgViewer.set_border("0px solid")
+		objImgViewer.set_cssclass("imv_WF_thumbnail01");
+		
+		// 이미지뷰터 온클릭 이벤트 추가
+		objImgViewer.addEventHandler("onclick", this.divDetail_ImageViewer_onclick, this);
+		
+		// 선택된 row의 이미지 정보를 상세정보로 넘기기 위해 더미 데이터셋 사용
+		addRow = objDummy.addRow();
+		objDummy.setColumn(addRow, "DETAIL_IMG", objFileDs.getColumn(i, "ATTACH_CD"));
+		objDummy.setColumn(addRow, "FILE_NM"   , objFileDs.getColumn(i, "FILE_NM"));
+		
+		//각 이미지뷰어 표시
+		objImgViewer.show();
+		Number(this.fv_nImgCnt++);
+	}
+	objFileDs.set_filterstr("");
+};
+
+/**
+ * fnInnerCompSet : Div 내부에 들어갈 컴포넌트 생성
+ * @example this.fnInnerCompSet(objDivNm, objBaseDs, nCount, bFlag);
+ */
+this.fnInnerCompSet = function (objDivNm, objBaseDs, nCount, bFlag)
+{
+	// ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+	// Static 배경 생성 코드 
+	// 타이틀 라인 배경 Static 생성
+	var objStaBg1     = new Static();
+	var sStaBg1Id     = "objStaBg1Nm"
+	var nStaBg1Left   = 0;
+	var nStaBg1Top    = 0;
+	var nStaBg1Width  = null;
+	var nStaBg1Height = 40;
+	var nStaBg1Right  = 0;
+	
+	objStaBg1.init(sStaBg1Id+nCount, nStaBg1Left, nStaBg1Top, nStaBg1Width, nStaBg1Height, nStaBg1Right);
+	
+	// 이미지가 바인딩 될 상품별 이미지뷰어 생성
+	this.divDetail.form.components[objDivNm].form.addChild(sStaBg1Id+nCount, objStaBg1);
+	
+	// 컴포넌트 속성,바인딩
+	objStaBg1.set_cssclass("sta_WF_th01L");
+	//objStaBg1.set_background("green")
+	//objStaBg1.show();
+	
+	// ------------------------------------------------------------------------------------------------------
+	
+	// 내용 라인 배경 Static 생성
+	var objStaBg2     = new Static();
+	var sStaBg2Id     = "objStaBg2Nm"
+	var nStaBg2Left   = 0;
+	var nStaBg2Top    = 39;
+	var nStaBg2Width  = null;
+	var nStaBg2Height = 60;
+	var nStaBg2Right  = 0;
+	
+	objStaBg2.init(sStaBg2Id+nCount, nStaBg2Left, nStaBg2Top, nStaBg2Width, nStaBg2Height, nStaBg2Right);
+	
+	// 이미지가 바인딩 될 상품별 이미지뷰어 생성
+	this.divDetail.form.components[objDivNm].form.addChild(sStaBg2Id+nCount, objStaBg2);
+	
+	// 컴포넌트 속성,바인딩
+	objStaBg2.set_cssclass("sta_WF_th01L");
+	//objStaBg2.show();
+	
+	// ------------------------------------------------------------------------------------------------------
+	
+	// 이미지 라인 배경 Static 생성
+	var objStaBg3     = new Static();
+	var sStaBg3Id     = "objStaBg3Nm"
+	var nStaBg3Left   = 0;
+	var nStaBg3Top    = 138; // 98
+	var nStaBg3Width  = null;
+	var nStaBg3Height = 182;
+	var nStaBg3Right  = 0;
+	
+	// 등록된 이미지가 없으면 이미지 뷰어 위치의 Static 배경 사이즈 조절
+	if (!bFlag){
+		objStaBg3.init(sStaBg3Id+nCount, nStaBg3Left, nStaBg3Top, nStaBg3Width, (nStaBg3Height-150), nStaBg3Right);
+	}else {
+		objStaBg3.init(sStaBg3Id+nCount, nStaBg3Left, nStaBg3Top, nStaBg3Width, nStaBg3Height, nStaBg3Right);
+	}
+	
+	// 이미지가 바인딩 될 상품별 이미지뷰어 생성
+	this.divDetail.form.components[objDivNm].form.addChild(sStaBg3Id+nCount, objStaBg3);
+	
+	// 컴포넌트 속성,바인딩
+	//objStaBg3.set_cssclass("sta_WF_td01L");
+	//objStaBg3.set_background("red");
+	//objStaBg3.show();
+	
+	
+	// Static 배경 생성 코드 끝
+	// ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+	
+	// ------------------------------------------------------------------------------------------------------
+	
+	// 이미지 라인  Div 생성
+	var objDivImgBg     = new Div();
+	var sDivImgBgId     = "divImgBg"
+	var nDivImgBgLeft   = 0;
+	var nDivImgBgTop    = 138; //98
+	var nDivImgBgWidth  = null;
+	var nDivImgBgHeight = 205;
+	var nDivImgBgRight  = 0;
+	
+	// 등록된 이미지가 없으면 이미지 뷰어 위치의 Static 배경 사이즈 조절
+	if (!bFlag){
+		objDivImgBg.init(sDivImgBgId+nCount, nDivImgBgLeft, nDivImgBgTop, nDivImgBgWidth, (nDivImgBgHeight-150), nDivImgBgRight);
+	}else {
+		objDivImgBg.init(sDivImgBgId+nCount, nDivImgBgLeft, nDivImgBgTop, nDivImgBgWidth, nDivImgBgHeight, nDivImgBgRight);
+	}
+	
+	// 이미지가 바인딩 될 상품별 이미지뷰어 생성
+	this.divDetail.form.components[objDivNm].form.addChild(sDivImgBgId+nCount, objDivImgBg);
+	
+	// 컴포넌트 속성,바인딩
+	//objDivImgBg.set_background("red");
+	objDivImgBg.show();
+	
+	// ------------------------------------------------------------------------------------------------------
+	
+	
+	// 사용자명 Static 생성
+	var objUser     = new Static();
+	var sUserId     = "staUserNm"
+	var nUserLeft   = 80; //10
+	var nUserTop    = 40; //5 
+	var nUserWidth  = 90;
+	var nUserHeight = 30;
+	
+	objUser.init(sUserId+nCount, nUserLeft, nUserTop, nUserWidth, nUserHeight);
+	
+	// 이미지가 바인딩 될 상품별 이미지뷰어 생성
+	this.divDetail.form.components[objDivNm].form.addChild(sUserId+nCount, objUser);
+	
+	// 컴포넌트 속성,바인딩
+	objUser.set_text(take.nvl(objBaseDs.getColumn(nCount, "REG_NM"), ""));
+	//objUser.set_cssclass("sta_WF_timeLine01");
+	objUser.show();
+	
+	// ------------------------------------------------------------------------------------------------------
+	
+	// 일자 Static 생성
+	var objDate     = new Static();
+	var sDateNm     = "staDate"
+	var nDateLeft   = 10;  // 105
+	var nDateTop    = 5;
+	var nDateWidth  = 120;  // 150
+	var nDateHeight = 30;
+	
+	objDate.init(sDateNm+nCount, nDateLeft, nDateTop, nDateWidth, nDateHeight);
+	
+	// 이미지가 바인딩 될 상품별 이미지뷰어 생성
+	this.divDetail.form.components[objDivNm].form.addChild(sDateNm+nCount, objDate);
+	
+	var sFullDate = take.nvl(objBaseDs.getColumn(nCount, "FULL_DATE"), "");
+	var sDate     = sFullDate.substring(0, 10);
+	var sTime     = sFullDate.substring(11, 16);
+	
+	// 컴포넌트 속성,바인딩
+	objDate.set_text(sDate);
+	objDate.set_cssclass("sta_WF_timeDate");
+	objDate.show();
+	
+	// ------------------------------------------------------------------------------------------------------
+	
+	// 시간 Static 생성
+	var objTime     = new Static();
+	var sTimeNm     = "staTime"
+	var nTimeLeft   = 45;  // 105
+	var nTimeTop    = 45;
+	var nTimeWidth  = 40;  // 150
+	var nTimeHeight = 20;
+	
+	objTime.init(sTimeNm+nCount, nTimeLeft, nTimeTop, nTimeWidth, nTimeHeight);
+	
+	// 이미지가 바인딩 될 상품별 이미지뷰어 생성
+	this.divDetail.form.components[objDivNm].form.addChild(sTimeNm+nCount, objTime);
+	
+	// 컴포넌트 속성,바인딩
+	objTime.set_color("#888888");
+	objTime.set_text(sTime);
+	objTime.show();
+	
+	// ------------------------------------------------------------------------------------------------------
+	
+	
+	// 시계 아이콘 Static 생성
+	var objIcon     = new Static();
+	var sIconId     = "staIconNm"
+	var nIconLeft   = 20; //10
+	var nIconTop    = 45; //5 
+	var nIconWidth  = 18;
+	var nIconHeight = 22;
+	
+	objIcon.init(sIconId+nCount, nIconLeft, nIconTop, nIconWidth, nIconHeight);
+	
+	// 이미지가 바인딩 될 상품별 이미지뷰어 생성
+	this.divDetail.form.components[objDivNm].form.addChild(sIconId+nCount, objIcon);
+	
+	// 컴포넌트 속성,바인딩
+	objIcon.set_cssclass("sta_WF_timeIcon");
+	objIcon.show();
+	
+	// ------------------------------------------------------------------------------------------------------
+	
+	// 타이틀(제목) Static 생성
+	var objTitle     = new Static();
+	var sTitleNm     = "staTitle"
+	var nTitleLeft   = 45; // 260
+	var nTitleTop    = 73; //5 // 45
+	var nTitleWidth  = null;
+	var nTitleHeight = 30;
+	var nTitleRight  = 45;
+	
+	objTitle.init(sTitleNm+nCount, nTitleLeft, nTitleTop, nTitleWidth, nTitleHeight, nTitleRight);
+	this.divDetail.form.components[objDivNm].form.addChild(sTitleNm+nCount, objTitle);
+	
+	// 컴포넌트 속성,바인딩
+	objTitle.set_text(take.nvl(objBaseDs.getColumn(nCount, "DETAIL_TITLE"), ""));
+	objTitle.show();
+	
+	// ------------------------------------------------------------------------------------------------------
+	
+	// 내용 Static 생성
+	var objContents     = new TextArea();
+	var sContentsNm     = "staContents"
+	var nContentsLeft   = 45; //10
+	var nContentsTop    = 103; //45 //85
+	var nContentsWidth  = null;
+	var nContentsHeight = 46;
+	var nContentsRight  = 10;
+	
+	objContents.init(sContentsNm+nCount, nContentsLeft, nContentsTop, nContentsWidth, nContentsHeight, nContentsRight);
+	this.divDetail.form.components[objDivNm].form.addChild(sContentsNm+nCount, objContents);
+	
+	// 컴포넌트 속성,바인딩
+	objContents.set_value(take.nvl(objBaseDs.getColumn(nCount, "DETAIL_TXT"), ""));
+	objContents.set_readonly(true);
+	objContents.set_background("transparent");
+	objContents.set_border("0px solid");
+	objContents.set_padding("0px 0px 0px 0px");
+	objContents.show();
+	
+	// ------------------------------------------------------------------------------------------------------
+	
+	// 삭제 Button 생성
+	var objDel     = new Button();
+	var sDelNm     = "btnDel"
+	var nDelLeft   = null;
+	var nDelTop    = 73;  // 5
+	var nDelWidth  = 30;
+	var nDelHeight = 30;
+	var nDelRight  = 10;
+	
+	objDel.init(sDelNm+nCount, nDelLeft, nDelTop, nDelWidth, nDelHeight, nDelRight);
+	
+	// 이미지가 바인딩 될 상품별 이미지뷰어 생성
+	this.divDetail.form.components[objDivNm].form.addChild(sDelNm+nCount, objDel);
+	
+	// 컴포넌트 속성,바인딩
+	objDel.addEventHandler("onclick", this.divDetail_btnDel_onclick, this);
+	objDel.set_text("X");
+	objDel.show();
+};
+
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    switch(sId)
+    {
+        case "TimeLineDetailSearch" : //조회 콜백
+            if (this.dsTimeLineDetailList.rowcount>0) {
+				//var nTop = this.divDetail.form.lstTimeLineDetail.getCellProperty("body", "cellLine", "top");
+				// (베이스DS, 파일DS, TOPpx)
+				var nTop = 109; // 109 Top px 최상단 시작 div 좌표
+				this.fnSetDynamicDivInit(this.dsTimeLineDetailList, this.dsFile, nTop);
+			}else {
+				// 스태틱 생성해서 '데이터가 없습니다.' <- 메세지 출력??
+			}
+            break;
+        case "TimeLineDetailDel" :  // 디테일 삭제 콜백	02 2039 7647
+			// 마스터 삭제일때는 화면 close, 디테일 단건 삭제일때는 reload
+			if(this.fv_sMarster!=""){
+				this.close();
+			}else {
+				this.reload();
+			}
+            break;
+        case "TimeLineInfoDel" :    // 마스터 삭제 콜백
+            this.close();
+            break;
+        case "timelineInfoUpdate" : // 수정,완료 콜백
+            this.close();
+            break;
+        case "Save transation id 01" :  //저장 콜백
+            //Script
+            break;
+        default :
+            break;
+    }
+} 
+
+
+// 임시 완료 버튼
+this.divDetail_btnSend_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fnSave("timelineInfoUpdate");
+};
+
+
+]]></Script>
+  </Form>
+</FDL>

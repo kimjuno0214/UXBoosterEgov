@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="srcMaker_SearchLayout" width="1280" height="720" titletext="New Form">
+    <Layouts>
+      <Layout height="720" mobileorientation="landscape" width="1280">
+        <Grid id="grdSub00" taborder="0" left="0" top="46" right="0" binddataset="dsSearchLayout" autofittype="col" onheadclick="grid_onheadclick" autoenter="select" bottom="0">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="150"/>
+                <Column size="150"/>
+                <Column size="150"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="Label ID"/>
+                <Cell col="1" text="Label Name"/>
+                <Cell col="2" text="Type"/>
+                <Cell col="3" text="Bind Dataset"/>
+                <Cell col="4" text="ETC1"/>
+                <Cell col="5" text="ETC2"/>
+                <Cell col="6" text="ETC3"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:LABEL_ID" edittype="text" displaytype="text"/>
+                <Cell col="1" text="bind:LABEL_NAME" displaytype="text" edittype="text"/>
+                <Cell col="2" text="bind:SEARCH_TYPE" displaytype="combocontrol" edittype="combo" combodataset="dsComponentType" combocodecol="CODE" combodatacol="NAME"/>
+                <Cell col="3" text="bind:BIND_DATASET" displaytype="combocontrol" edittype="combo" combodataset="dsDataset" combocodecol="DATASET_NAME" combodatacol="DATASET_NAME"/>
+                <Cell col="4" text="bind:ETC1" edittype="text" displaytype="text"/>
+                <Cell col="5" text="bind:ETC2" edittype="text" displaytype="text"/>
+                <Cell col="6" text="bind:ETC3" edittype="text" displaytype="text"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsSearchLayout">
+        <ColumnInfo>
+          <Column id="CHK" type="STRING" size="256"/>
+          <Column id="LABEL_ID" type="STRING" size="256"/>
+          <Column id="LABEL_NAME" type="STRING" size="256"/>
+          <Column id="SEARCH_TYPE" type="STRING" size="256"/>
+          <Column id="BIND_DATASET" type="STRING" size="256"/>
+          <Column id="ETC1" type="STRING" size="256"/>
+          <Column id="ETC2" type="STRING" size="256"/>
+          <Column id="ETC3" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

@@ -1,0 +1,1001 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+* 관리자 > 사용자관리 관련
+*
+* @filename mappers/adm/UserManagementMapper.xml
+* @author takeit
+* @since 2019.08.02
+* @version 1.0
+* @see
+*
+* << 변경 이력(Modification Information) >>
+*
+* 변경번호 : #1
+* 변경일자 : 2019.08.02
+* 변경사람 : takeit
+* 변경내용 : 신규 생성
+ -->
+<mapper namespace="UserManagement">
+	<resultMap type="takeResultMap" id="userMap">
+		<result column="USER_BLOB" property="USER_BLOB" jdbcType="CLOB" javaType="java.lang.String" />
+	</resultMap>
+
+	<resultMap type="takeResultMap" id="manualMap">
+        <result column="MANUAL_TXT" property="MANUAL_TXT" jdbcType="CLOB" javaType="java.lang.String" />
+    </resultMap>
+
+	<!-- user_info(사용자정보) START -->
+	<select id="userInfoList" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		 *
+		 * UserManagement.userInfoList
+		 * 사용자정보 목록
+		 * @author takeit
+		 * @since 2019.08.02
+		 */
+		]]>
+		SELECT
+			USER_CD			-- 사용자코드
+			, USER_ID			-- 사용자ID
+			, USER_NM			-- 사용자명
+		FROM USER_INFO
+		WHERE 1 = 1
+		<if test=" USER_CD != null and USER_CD != '' ">
+			AND (
+				<if test="_databaseId == 'Oracle'">
+				USER_CD LIKE ('%' || #{USER_CD} || '%')
+				OR USER_ID LIKE ('%' || #{USER_CD} || '%')
+				OR USER_NM LIKE ('%' || #{USER_CD} || '%')
+				</if>
+				<if test="_databaseId == 'SQL Server'">
+				USER_CD LIKE ('%' || #{USER_CD} || '%')
+				OR USER_ID LIKE ('%' || #{USER_CD} || '%')
+				OR USER_NM LIKE ('%' || #{USER_CD} || '%')
+				</if>
+				<if test="_databaseId == 'MySQL'">
+				USER_CD LIKE CONCAT('%' , #{USER_CD} , '%')
+				OR USER_ID LIKE CONCAT('%' , #{USER_CD} , '%')
+				OR USER_NM LIKE CONCAT('%' , #{USER_CD} , '%')
+				</if>
+				<if test="_databaseId == 'PostgreSQL'">
+				USER_CD LIKE ('%' || #{USER_CD} || '%')
+				OR USER_ID LIKE ('%' || #{USER_CD} || '%')
+				OR USER_NM LIKE ('%' || #{USER_CD} || '%')
+				</if>
+			)
+		</if>
+		<if test=" USE_YN != null and USE_YN != '' ">
+			AND USE_YN = #{USE_YN}
+		</if>
+		<if test=" USER_ID != null and USER_ID != '' ">
+			AND USER_ID LIKE 
+			<if test="_databaseId == 'Oracle'">
+			('%' || #{USER_ID} || '%')
+			</if>
+			<if test="_databaseId == 'SQL Server'">
+			('%' || #{USER_ID} || '%')
+			</if>
+			<if test="_databaseId == 'MySQL'">
+			CONCAT('%' , #{USER_ID} , '%')
+			</if>
+			<if test="_databaseId == 'PostgreSQL'">
+			('%' || #{USER_ID} || '%')
+			</if>
+		</if>
+		<if test=" USER_NM != null and USER_NM != '' ">
+			AND USER_NM LIKE 
+			<if test="_databaseId == 'Oracle'">
+			('%' || #{USER_NM} || '%')
+			</if>
+			<if test="_databaseId == 'SQL Server'">
+			('%' || #{USER_NM} || '%')
+			</if>
+			<if test="_databaseId == 'MySQL'">
+			CONCAT('%' , #{USER_NM} , '%')
+			</if>
+			<if test="_databaseId == 'PostgreSQL'">
+			('%' || #{USER_NM} || '%')
+			</if>
+		</if>
+		<if test=" (REG_DT_FROM != null and REG_DT_FROM != '') or (REG_DT_TO != null and REG_DT_TO != '')" >
+			<choose>
+				<when test=" REG_DT_FROM == null or REG_DT_FROM == '' ">
+					AND REG_DT <![CDATA[<=]]> 
+					<if test="_databaseId == 'Oracle'">
+					TO_DATE(#{REG_DT_TO}, 'YYYYMMDD')
+					</if>
+					<if test="_databaseId == 'SQL Server'">
+					CONVERT(CHAR, CONVERT(DATE, #{REG_DT_TO}), 'YYYYMMDD')
+					</if>
+					<if test="_databaseId == 'MySQL'">
+					DATE_FORMAT(#{REG_DT_TO}, '%Y%m%d')
+					</if>
+					<if test="_databaseId == 'PostgreSQL'">
+					TO_DATE(#{REG_DT_TO}, 'YYYYMMDD')
+					</if> 
+				</when>
+				<when test=" REG_DT_TO == null or REG_DT_TO == '' ">
+					AND REG_DT <![CDATA[>=]]> 
+					<if test="_databaseId == 'Oracle'">
+					TO_DATE(#{REG_DT_FROM}, 'YYYYMMDD')
+					</if>
+					<if test="_databaseId == 'SQL Server'">
+					CONVERT(CHAR, CONVERT(DATE, #{REG_DT_FROM}), 'YYYYMMDD')
+					</if>
+					<if test="_databaseId == 'MySQL'">
+					DATE_FORMAT(#{REG_DT_FROM}, '%Y%m%d')
+					</if>
+					<if test="_databaseId == 'PostgreSQL'">
+					TO_DATE(#{REG_DT_FROM}, 'YYYYMMDD')
+					</if> 
+				</when>
+				<otherwise>
+					<if test="_databaseId == 'Oracle'">
+					AND (REG_DT <![CDATA[>=]]> TO_DATE(#{REG_DT_FROM}, 'YYYYMMDD') AND REG_DT <![CDATA[<=]]> TO_DATE(#{REG_DT_TO}, 'YYYYMMDD'))
+					</if>
+					<if test="_databaseId == 'SQL Server'">
+					AND (REG_DT <![CDATA[>=]]> CONVERT(CHAR, CONVERT(DATE, #{REG_DT_FROM}), 'YYYYMMDD') AND REG_DT <![CDATA[<=]]> CONVERT(CHAR, CONVERT(DATE, #{REG_DT_TO}), 'YYYYMMDD'))
+					</if>
+					<if test="_databaseId == 'MySQL'">
+					AND (REG_DT <![CDATA[>=]]> DATE_FORMAT(#{REG_DT_FROM}, '%Y%m%d') AND REG_DT <![CDATA[<=]]> DATE_FORMAT(#{REG_DT_TO}, '%Y%m%d'))
+					</if>
+					<if test="_databaseId == 'PostgreSQL'">
+					AND (REG_DT <![CDATA[>=]]> TO_DATE(#{REG_DT_FROM}, 'YYYYMMDD') AND REG_DT <![CDATA[<=]]> TO_DATE(#{REG_DT_TO}, 'YYYYMMDD'))
+					</if> 
+					
+				</otherwise>
+			</choose>
+		</if>
+
+
+		<if test=" sUserId != null and sUserId != '' ">
+			AND USER_ID = #{sUserId}
+		</if>
+		<if test=" sUserNm != null and sUserNm != '' ">
+			AND USER_NM = #{sUserNm}
+		</if>
+		<if test=" sUserEmail != null and sUserEmail != '' ">
+			AND USER_EMAIL = #{sUserEmail}
+		</if>
+
+		ORDER BY USER_CD
+
+	</select>
+
+	<select id="userInfoDetail" parameterType="map" timeout="0" resultMap="userMap" useCache="false">
+		<![CDATA[
+		/*
+		 * UserManagement.userInfoDetail
+		 * 사용자정보 상세
+		 * @author takeit
+		 * @since 2019.08.02
+		 */
+		]]>
+		SELECT
+			U.USER_CD					-- 사용자코드
+			, U.USER_ID					-- 사용자ID
+			, U.USER_NM					-- 사용자명
+			, U.USER_ENG_NM				-- 사용자영문명
+			, U.USER_PW					-- 비밀번호
+			, U.USER_IMG				-- 사용자이미지
+			, F.FILE_BLOB AS USER_BLOB	-- 프로젝트이미지 BLOB
+			, F.FILE_SAVE_NM			-- 프로젝트이미지명
+			, F.FILE_PATH				-- 파일 경로
+			, U.USER_BIRTHDAY			-- 사용자생년월일
+			, U.LUNAR_CD				-- 양력음력구분
+			, U.USER_EMAIL				-- 사용자이메일
+			, U.USER_MOBILE				-- 사용자휴대폰번호
+			, U.USER_TEL				-- 사용자전화번호
+			, U.USER_FAX				-- 사용자FAX
+			, U.MAIN_PROJECT			-- 메인프로젝트코드
+			, P.PROJECT_NM AS MAIN_PROJECT_NM -- 메인프로젝트명
+			, CASE WHEN D.DEPT_CD IS NULL THEN ''
+            	ELSE D.DEPT_CD END DEPT_CD              -- 부서코드
+         	, CASE WHEN D.DEPT_NM IS NULL THEN ''
+              	ELSE D.DEPT_NM END DEPT_NM              -- 부서명
+			, U.USER_POSITION			-- 사용자직위
+			, U.USER_GRADE				-- 사용자등급
+			, U.USER_STATUS				-- 사용자상태
+			, U.DESC_TXT				-- 상세설명
+			, U.USE_YN					-- 사용여부
+			, U.AGREE_YN				-- 동의여부
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="U.AGREE_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			</include> AS AGREE_DT		-- 동의일시
+			, U.LOGIN_FAIL_CNT			-- 로그인실패횟수
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="U.LAST_LOGIN_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			</include> AS LAST_LOGIN_DT	-- 최종로그인일시
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="U.PW_CHANGE_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			</include> AS PW_CHANGE_DT  -- 비밀번호변경일시
+			, U.INIT_YN					-- 초기화여부
+			, U.LOGIN_DEVICE			-- 접속기기
+			, U.LOGIN_BROWSER			-- 접속환경
+			, U.LOGIN_IP				-- 접속IP
+			, U.POST_CD					-- 우편번호
+			, U.USER_ADDR1				-- 주소1
+			, U.USER_ADDR2				-- 주소2
+			, U.JOIN_DATE				-- 입사일
+			, (CASE WHEN U.VALID_YN IS NULL THEN 'N' ELSE U.VALID_YN END) AS VALID_YN -- 데모사용자여부
+			, U.VALID_START_DATE        -- 유효시작일
+			, U.VALID_END_DATE	        -- 유효종료일
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="U.REG_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			</include> AS REG_DT		-- 등록일시
+			, U.REG_CD					-- 등록자코드
+			, U1.USER_NM AS REG_NM		-- 등록자명
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="U.MOD_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			</include> AS MOD_DT		-- 수정일시
+			, U.MOD_CD					-- 수정자코드
+			, U2.USER_NM AS MOD_NM		-- 수정자명
+		FROM USER_INFO U
+			LEFT OUTER JOIN ATTACH_FILE F ON U.USER_IMG = F.ATTACH_CD AND (CASE WHEN F.DELETE_YN IS NULL THEN 'N' ELSE F.DELETE_YN END) = 'N'
+			LEFT OUTER JOIN USER_INFO U1 ON U.REG_CD = U1.USER_CD
+			LEFT OUTER JOIN USER_INFO U2 ON U.MOD_CD = U2.USER_CD
+			LEFT OUTER JOIN PROJECT_INFO P ON U.MAIN_PROJECT = P.PROJECT_CD
+			LEFT OUTER JOIN DEPT_INFO D ON U.DEPT_CD = D.DEPT_CD
+		WHERE U.USER_CD = #{USER_CD}
+		<if test=" USE_YN != null and USE_YN != '' ">
+			AND U.USE_YN = #{USE_YN}
+		</if>
+		<if test=" USER_ID != null and USER_ID != '' ">
+			AND U.USER_ID LIKE 
+			<if test="_databaseId == 'Oracle'">
+			('%' || #{USER_ID} || '%')
+			</if>
+			<if test="_databaseId == 'SQL Server'">
+			('%' || #{USER_ID} || '%')
+			</if>
+			<if test="_databaseId == 'MySQL'">
+			CONCAT('%' , #{USER_ID} , '%')
+			</if>
+			<if test="_databaseId == 'PostgreSQL'">
+			('%' || #{USER_ID} || '%')
+			</if>
+		</if>
+		<if test=" USER_NM != null and USER_NM != '' ">
+			AND U.USER_NM LIKE 
+			<if test="_databaseId == 'Oracle'">
+			('%' || #{USER_NM} || '%')
+			</if>
+			<if test="_databaseId == 'SQL Server'">
+			('%' || #{USER_NM} || '%')
+			</if>
+			<if test="_databaseId == 'MySQL'">
+			CONCAT('%' , #{USER_NM} , '%')
+			</if>
+			<if test="_databaseId == 'PostgreSQL'">
+			('%' || #{USER_NM} || '%')
+			</if>
+		</if>
+		<if test=" (REG_DT_FROM != null and REG_DT_FROM != '') or (REG_DT_TO != null and REG_DT_TO != '')" >
+			<choose>
+				<when test=" REG_DT_FROM == null or REG_DT_FROM == '' ">
+					AND U.REG_DT <![CDATA[<=]]> 
+					<if test="_databaseId == 'Oracle'">
+					TO_DATE(#{REG_DT_TO}, 'YYYYMMDD')
+					</if>
+					<if test="_databaseId == 'SQL Server'">
+					CONVERT(CHAR, CONVERT(DATE, #{REG_DT_TO}), 'YYYYMMDD')
+					</if>
+					<if test="_databaseId == 'MySQL'">
+					DATE_FORMAT(#{REG_DT_TO}, '%Y%m%d')
+					</if>
+					<if test="_databaseId == 'PostgreSQL'">
+					TO_DATE(#{REG_DT_TO}, 'YYYYMMDD')
+					</if>
+				</when>
+				<when test=" REG_DT_TO == null or REG_DT_TO == '' ">
+					AND U.REG_DT <![CDATA[>=]]> 
+					<if test="_databaseId == 'Oracle'">
+					TO_DATE(#{REG_DT_FROM}, 'YYYYMMDD')
+					</if>
+					<if test="_databaseId == 'SQL Server'">
+					CONVERT(CHAR, CONVERT(DATE, #{REG_DT_FROM}), 'YYYYMMDD')
+					</if>
+					<if test="_databaseId == 'MySQL'">
+					DATE_FORMAT(#{REG_DT_FROM}, '%Y%m%d')
+					</if>
+					<if test="_databaseId == 'PostgreSQL'">
+					TO_DATE(#{REG_DT_FROM}, 'YYYYMMDD')
+					</if> 
+				</when>
+				<otherwise>
+					<if test="_databaseId == 'Oracle'">
+					AND (U.REG_DT <![CDATA[>=]]> TO_DATE(#{REG_DT_FROM}, 'YYYYMMDD') AND U.REG_DT <![CDATA[<=]]> TO_DATE(#{REG_DT_TO}, 'YYYYMMDD'))
+					</if>
+					<if test="_databaseId == 'SQL Server'">
+					AND (U.REG_DT <![CDATA[>=]]> CONVERT(CHAR, CONVERT(DATE, #{REG_DT_FROM}), 'YYYYMMDD') AND U.REG_DT <![CDATA[<=]]> CONVERT(CHAR, CONVERT(DATE, #{REG_DT_TO}), 'YYYYMMDD'))
+					</if>
+					<if test="_databaseId == 'MySQL'">
+					AND (U.REG_DT <![CDATA[>=]]> DATE_FORMAT(#{REG_DT_FROM}, '%Y%m%d') AND U.REG_DT <![CDATA[<=]]> DATE_FORMAT(#{REG_DT_TO}, '%Y%m%d'))
+					</if>
+					<if test="_databaseId == 'PostgreSQL'">
+					AND (U.REG_DT <![CDATA[>=]]> TO_DATE(#{REG_DT_FROM}, 'YYYYMMDD') AND U.REG_DT <![CDATA[<=]]> TO_DATE(#{REG_DT_TO}, 'YYYYMMDD'))
+					</if> 
+				</otherwise>
+			</choose>
+		</if>
+		ORDER BY U.USER_CD
+	</select>
+
+	<insert id="userInfoInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		 *
+		 * UserManagement.userInfoInsert
+		 * 사용자정보 입력
+		 * @author takeit
+		 * @since 2019.08.02
+		 */
+		]]>
+		<selectKey keyProperty="USER_CD" resultType="String" order="BEFORE">
+		    <if test="_databaseId == 'Oracle'">
+		    SELECT ('U' || LPAD(TO_NUMBER(NVL(MAX(SUBSTR(USER_CD, 2, 9)), '0') + 1), 9, '0')) AS USER_CD
+			FROM USER_INFO
+		    </if>
+			<if test="_databaseId == 'SQL Server'">
+			SELECT ('U' || LPAD(CONVERT(NUMERIC, ISNULL(MAX(SUBSTR(USER_CD, 2, 9)), '0') + 1), 9, '0')) AS USER_CD
+			FROM USER_INFO
+		    </if>
+			<if test="_databaseId == 'MySQL'">
+			SELECT CONCAT('U' , LPAD((IFNULL(MAX(SUBSTR(USER_CD, 2, 9)), '0') + 1), 9, '0')) AS USER_CD
+			FROM USER_INFO
+		    </if>
+			<if test="_databaseId == 'PostgreSQL'">
+			SELECT ('U' || LPAD(CAST(COALESCE(MAX(SUBSTR(USER_CD, 2, 9)), '0')::INT + 1 AS TEXT), 9, '0')) AS USER_CD
+			FROM USER_INFO
+		    </if>
+		</selectKey>
+		INSERT INTO USER_INFO (
+			USER_CD
+			, USER_ID
+			, USER_NM
+			, USER_ENG_NM
+			, USER_PW
+			, USER_IMG
+			, USER_BIRTHDAY
+			, LUNAR_CD
+			, USER_EMAIL
+			, USER_MOBILE
+			, USER_TEL
+			, USER_FAX
+			, DEPT_CD
+			, USER_POSITION
+			, USER_GRADE
+			, USER_STATUS
+			, DESC_TXT
+			, POST_CD
+			, USER_ADDR1
+			, USER_ADDR2
+			, USE_YN
+			, AGREE_YN
+			, AGREE_DT
+			, LOGIN_FAIL_CNT
+			, PW_CHANGE_DT
+			, REG_DT
+			, REG_CD
+			, JOIN_DATE
+			, MAIN_PROJECT
+			, VALID_YN
+			, VALID_START_DATE
+			, VALID_END_DATE
+			, INIT_YN
+		)
+		VALUES (
+			#{USER_CD}				-- 사용자코드
+			, #{USER_ID}			-- 사용자ID
+			, #{USER_NM}			-- 사용자명
+			, #{USER_ENG_NM}		-- 사용자영문명
+			, #{USER_PW}			-- 비밀번호
+			, #{USER_IMG}			-- 사용자이미지
+			, #{USER_BIRTHDAY}		-- 사용자생년월일
+			, #{LUNAR_CD}			-- 양력음력구분
+			, #{USER_EMAIL}			-- 사용자이메일
+			, #{USER_MOBILE}		-- 사용자휴대폰번호
+			, #{USER_TEL}			-- 사용자전화번호
+			, #{USER_FAX}			-- 사용자FAX
+			, #{DEPT_CD}			-- 부서코드
+			, #{USER_POSITION}		-- 사용자직위
+			, #{USER_GRADE}			-- 사용자등급
+			, #{USER_STATUS}		-- 사용자상태
+			, #{DESC_TXT}			-- 상세설명
+			, #{POST_CD}			-- 우편번호
+			, #{USER_ADDR1}			-- 주소1
+			, #{USER_ADDR2}			-- 주소2
+			, #{USE_YN}				-- 사용여부
+			, #{AGREE_YN}			-- 동의여부
+			, (CASE WHEN #{REG_TYPE} = 'JOIN' THEN <include refid="CommonInc.sysdate" /> ELSE NULL END)				-- 동의일시
+			, '0'                   -- 로그인실패횟수
+			, <include refid="CommonInc.sysdate" />               -- 비밀번호변경일시
+			, <include refid="CommonInc.sysdate" />				-- 등록일시
+			, (CASE WHEN #{REG_TYPE} = 'JOIN' THEN #{maxCd} ELSE #{_sessionUserCd} END)	-- 등록자코드
+			, #{JOIN_DATE}			-- 입사일
+			, #{MAIN_PROJECT}		-- 메인현장
+			, #{VALID_YN}			-- 유효여부
+			, #{VALID_START_DATE}	-- 유효시작일자
+			, #{VALID_END_DATE}		-- 유효종료일자
+			, 'N'                   -- 비밀번호 초기화 여부
+		)
+	</insert>
+
+	<update id="userInfoUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		 *
+		 * UserManagement.userInfoUpdate
+		 * 사용자정보 수정
+		 * @author takeit
+		 * @since 2019.08.02
+		 */
+		]]>
+		UPDATE USER_INFO
+		SET	MOD_DT = <include refid="CommonInc.sysdate" />					-- 수정일시
+			, MOD_CD = #{_sessionUserCd}		-- 수정자코드
+			<if test=" USER_ID != null and USER_ID != '' ">
+				, USER_ID = #{USER_ID}					-- 사용자ID
+			</if>
+			<if test=" USER_NM != null and USER_NM != '' ">
+			, USER_NM = #{USER_NM}					-- 사용자명
+			</if>
+			<if test=" USER_ENG_NM != null and USER_ENG_NM != '' ">
+			, USER_ENG_NM = #{USER_ENG_NM}			-- 사용자영문명
+			</if>
+			<if test=" USER_PW != null and USER_PW != '' ">
+			, USER_PW = #{USER_PW}					-- 비밀번호
+			</if>
+			<if test=" USER_IMG != null and USER_IMG != '' ">
+			, USER_IMG = #{USER_IMG}				-- 사용자이미지
+			</if>
+			<if test=" USER_BIRTHDAY != null and USER_BIRTHDAY != '' ">
+			, USER_BIRTHDAY = #{USER_BIRTHDAY}		-- 사용자생년월일
+			</if>
+			<if test=" LUNAR_CD != null and LUNAR_CD != '' ">
+			, LUNAR_CD = #{LUNAR_CD}				-- 양력음력구분
+			</if>
+			<if test=" USER_EMAIL != null and USER_EMAIL != '' ">
+			, USER_EMAIL = #{USER_EMAIL}			-- 사용자이메일
+			</if>
+			<if test=" USER_MOBILE != null and USER_MOBILE != '' ">
+			, USER_MOBILE = #{USER_MOBILE}			-- 사용자휴대폰번호
+			</if>
+			<if test=" USER_TEL != null and USER_TEL != '' ">
+			, USER_TEL = #{USER_TEL}				-- 사용자전화번호
+			</if>
+			<if test=" USER_FAX != null and USER_FAX != '' ">
+			, USER_FAX = #{USER_FAX}				-- 사용자FAX
+			</if>
+			<if test=" DEPT_CD != null and DEPT_CD != '' ">
+			, DEPT_CD = #{DEPT_CD}					-- 부서코드
+			</if>
+			<if test=" USER_POSITION != null and USER_POSITION != '' ">
+			, USER_POSITION = #{USER_POSITION}		-- 사용자직위
+			</if>
+			<if test=" USER_GRADE != null and USER_GRADE != '' ">
+			, USER_GRADE = #{USER_GRADE}			-- 사용자등급
+			</if>
+			<if test=" USER_STATUS != null and USER_STATUS != '' ">
+			, USER_STATUS = #{USER_STATUS}			-- 사용자상태
+			</if>
+			<if test=" DESC_TXT != null and DESC_TXT != '' ">
+			, DESC_TXT = #{DESC_TXT}				-- 상세설명
+			</if>
+			<if test=" USE_YN != null and USE_YN != '' ">
+			, USE_YN = #{USE_YN}					-- 사용여부
+			</if>
+			<if test=" AGREE_YN != null and AGREE_YN != '' ">
+			, AGREE_YN = #{AGREE_YN}				-- 동의여부
+			</if>
+			<if test=" AGREE_DT != null and AGREE_DT != '' ">
+				<if test="_databaseId == 'Oracle'">
+				, AGREE_DT = TO_DATE(#{AGREE_DT}, 'YYYY-MM-DD HH24:MI:SS')				-- 동의일시
+				</if>
+				<if test="_databaseId == 'SQL Server'">
+				, AGREE_DT = CONVERT(CHAR, CONVERT(DATE, #{AGREE_DT}), 'YYYY-MM-DD HH24:MI:SS')				-- 동의일시
+				</if>
+				<if test="_databaseId == 'MySQL'">
+				, AGREE_DT = DATE_FORMAT(#{AGREE_DT}, '%Y-%m-%d %H:%i:%s')				-- 동의일시
+				</if>
+				<if test="_databaseId == 'PostgreSQL'">
+				, AGREE_DT = TO_DATE(#{AGREE_DT}, 'YYYY-MM-DD HH24:MI:SS')				-- 동의일시
+				</if> 
+			</if>
+			<if test=" LOGIN_FAIL_CNT != null and LOGIN_FAIL_CNT != '' ">
+			, LOGIN_FAIL_CNT = #{LOGIN_FAIL_CNT}	-- 로그인실패횟수
+			</if>
+			<if test=" LAST_LOGIN_DT != null and LAST_LOGIN_DT != '' ">
+				<if test="_databaseId == 'Oracle'">
+				, LAST_LOGIN_DT = TO_DATE(#{LAST_LOGIN_DT}, 'YYYY-MM-DD HH24:MI:SS')				-- 동의일시
+				</if>
+				<if test="_databaseId == 'SQL Server'">
+				, LAST_LOGIN_DT = CONVERT(CHAR, CONVERT(DATE, #{LAST_LOGIN_DT}), 'YYYY-MM-DD HH24:MI:SS')				-- 동의일시
+				</if>
+				<if test="_databaseId == 'MySQL'">
+				, LAST_LOGIN_DT = DATE_FORMAT(#{LAST_LOGIN_DT}, '%Y-%m-%d %H:%i:%s')				-- 동의일시
+				</if>
+				<if test="_databaseId == 'PostgreSQL'">
+				, LAST_LOGIN_DT = TO_DATE(#{LAST_LOGIN_DT}, 'YYYY-MM-DD HH24:MI:SS')				-- 동의일시
+				</if> 
+			</if>
+			<if test=" PW_CHG_YN != null and PW_CHG_YN != '' ">
+			, PW_CHANGE_DT = <include refid="CommonInc.sysdate" />					-- 비밀번호변경일시
+			</if>
+			<if test=" INIT_YN != null and INIT_YN != '' ">
+			, INIT_YN = #{INIT_YN}					-- 초기화여부
+			</if>
+			<if test=" LOGIN_DEVICE != null and LOGIN_DEVICE != '' ">
+			, LOGIN_DEVICE = #{LOGIN_DEVICE}		-- 접속기기
+			</if>
+			<if test=" LOGIN_BROWSER != null and LOGIN_BROWSER != '' ">
+			, LOGIN_BROWSER = #{LOGIN_BROWSER}		-- 접속환경
+			</if>
+			<if test=" LOGIN_IP != null and LOGIN_IP != '' ">
+			, LOGIN_IP = #{LOGIN_IP}				-- 접속IP
+			</if>
+			<if test=" POST_CD != null and POST_CD != '' ">
+			, POST_CD = #{POST_CD}					-- 우편번호
+			</if>
+			<if test=" USER_ADDR1 != null and USER_ADDR1 != '' ">
+			, USER_ADDR1 = #{USER_ADDR1}			-- 주소1
+			</if>
+			<if test=" USER_ADDR2 != null and USER_ADDR2 != '' ">
+			, USER_ADDR2 = #{USER_ADDR2}			-- 주소2
+			</if>
+			<if test=" JOIN_DATE != null and JOIN_DATE != '' ">
+			, JOIN_DATE = #{JOIN_DATE}				-- 입사일
+			</if>
+			<if test=" MAIN_PROJECT != null and MAIN_PROJECT != '' ">
+			, MAIN_PROJECT = #{MAIN_PROJECT}		-- 메인현장
+			</if>
+			<if test=" VALID_YN != null and VALID_YN != '' ">
+			, VALID_YN = #{VALID_YN}				-- 유효여부
+			</if>
+			<if test=" VALID_START_DATE != null and VALID_START_DATE != '' ">
+			, VALID_START_DATE = #{VALID_START_DATE}-- 유효시작일자
+			</if>
+			<if test=" VALID_END_DATE != null and VALID_END_DATE != '' ">
+			, VALID_END_DATE = #{VALID_END_DATE}	-- 유효종료일자
+			</if>
+		WHERE USER_CD = #{USER_CD}					-- 사용자코드
+	</update>
+
+	<delete id="userInfoDelete" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		* UserManagement.userInfoDelete
+		* 사용자정보 삭제
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		DELETE FROM USER_INFO
+		WHERE USER_CD = #{USER_CD}			-- 사용자코드
+	</delete>
+
+    <update id="userInfoImageUpdate" parameterType="map" timeout="0">
+        <![CDATA[
+        /*
+         * UserManagement.userInfoImageUpdate
+         * 사용자정보 이미지 수정
+         * @author glorial
+         * @since 2020.05.06
+         */
+        ]]>
+        UPDATE USER_INFO
+        SET MOD_DT = <include refid="CommonInc.sysdate" />                    -- 수정일시
+            , MOD_CD = #{_sessionUserCd}        -- 수정자코드
+            , USER_IMG = #{USER_IMG}                -- 사용자이미지
+        WHERE USER_CD = #{USER_CD}                  -- 사용자코드
+    </update>
+
+	<!-- user_info(사용자정보) END -->
+
+	<!-- dept_info(부서정보) START -->
+	<select id="deptInfoList2" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* UserManagement.deptInfoList
+		* 부서정보 목록
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+
+		<choose>
+		<when test="_databaseId == 'MySQL'">
+		
+		WITH RECURSIVE TEMP (dept_cd, parent_dept, dept_nm, dept_eng_nm, d_path, lev, dept_order, cycle) AS
+			(
+				SELECT D.dept_cd, D.parent_dept, D.dept_nm, D.dept_eng_nm, array[D.parent_dept] AS d_path, D.dept_level AS lev, D.dept_order, false AS cycle
+				FROM dept_info D
+				WHERE 1=1
+				<if test="dept_cd != null and dept_cd != '' ">
+					AND (
+						D.dept_cd LIKE CONCAT('%' , #{dept_cd} , '%')
+						OR D.dept_nm LIKE CONCAT('%' , #{dept_cd} , '%')
+					)
+				</if>
+				<if test=" use_yn != null and use_yn != '' ">
+					AND D.use_yn = #{use_yn}
+				</if>
+
+				UNION ALL
+
+				SELECT D.dept_cd, D.parent_dept, D.dept_nm, D.dept_eng_nm, array[D.dept_cd] as d_path, D.dept_level AS lev, D.dept_order, false AS cycle
+				FROM dept_info D
+				INNER JOIN TEMP ON D.dept_cd = TEMP.parent_dept
+			)
+
+		SELECT DISTINCT
+			A.dept_cd, A.parent_dept, A.dept_nm, A.dept_eng_nm, A.lev AS dept_level, A.dept_order
+			, B.desc_txt
+			, B.use_yn
+			, TO_CHAR(B.reg_dt, '%Y-%m-%d %H:%i') AS reg_dt	-- 등록일시
+			, U1.user_nm AS reg_nm
+			, TO_CHAR(B.mod_dt, '%Y-%m-%d %H:%i') AS mod_dt	-- 수정일시
+			, U2.user_nm AS mod_nm
+		FROM TEMP A
+		INNER JOIN dept_info B ON A.dept_cd = B.dept_cd
+		LEFT OUTER JOIN user_info U1 ON B.reg_cd = U1.user_cd
+		LEFT OUTER JOIN user_info U2 ON B.mod_cd = U2.user_cd
+
+		where 1=1
+		ORDER BY A.dept_order
+		
+		</when>
+		<otherwise>
+		
+		WITH RECURSIVE TEMP (dept_cd, parent_dept, dept_nm, dept_eng_nm, d_path, lev, dept_order, cycle) AS
+			(
+				SELECT D.dept_cd, D.parent_dept, D.dept_nm, D.dept_eng_nm, array[D.parent_dept] AS d_path, D.dept_level AS lev, D.dept_order, false AS cycle
+				FROM dept_info D
+				WHERE 1=1
+				<if test="dept_cd != null and dept_cd != '' ">
+					AND (
+						D.dept_cd LIKE ('%' || #{dept_cd} || '%')
+						OR D.dept_nm LIKE ('%' || #{dept_cd} || '%')
+					)
+				</if>
+				<if test=" use_yn != null and use_yn != '' ">
+					AND D.use_yn = #{use_yn}
+				</if>
+
+				UNION ALL
+
+				SELECT D.dept_cd, D.parent_dept, D.dept_nm, D.dept_eng_nm, array[D.dept_cd] as d_path, D.dept_level AS lev, D.dept_order, false AS cycle
+				FROM dept_info D
+				INNER JOIN TEMP ON D.dept_cd = TEMP.parent_dept
+			)
+
+		SELECT DISTINCT
+			A.dept_cd, A.parent_dept, A.dept_nm, A.dept_eng_nm, A.lev AS dept_level, A.dept_order
+			, B.desc_txt
+			, B.use_yn
+			, TO_CHAR(B.reg_dt, 'YYYY-MM-DD HH24:MI') AS reg_dt	-- 등록일시
+			, U1.user_nm AS reg_nm
+			, TO_CHAR(B.mod_dt, 'YYYY-MM-DD HH24:MI') AS mod_dt	-- 수정일시
+			, U2.user_nm AS mod_nm
+		FROM TEMP A
+		INNER JOIN dept_info B ON A.dept_cd = B.dept_cd
+		LEFT OUTER JOIN user_info U1 ON B.reg_cd = U1.user_cd
+		LEFT OUTER JOIN user_info U2 ON B.mod_cd = U2.user_cd
+
+		where 1=1
+		ORDER BY A.dept_order
+		
+		</otherwise>
+		</choose>
+	</select>
+
+	<select id="deptInfoList" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* UserManagement.deptInfoList
+		* 부서정보 목록
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+
+		SELECT
+			A.DEPT_CD, A.PARENT_DEPT, A.DEPT_NM, A.DEPT_ENG_NM, A.DEPT_LEVEL, A.DEPT_ORDER
+			, A.DESC_TXT
+			, A.USE_YN
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="A.REG_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			</include> AS REG_DT	-- 등록일시
+			, U1.USER_NM AS REG_NM
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="A.MOD_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			</include> AS MOD_DT	-- 수정일시
+			, U2.USER_NM AS MOD_NM
+		FROM DEPT_INFO A
+		LEFT OUTER JOIN USER_INFO U1 ON A.REG_CD = U1.USER_CD
+		LEFT OUTER JOIN USER_INFO U2 ON A.MOD_CD = U2.USER_CD
+
+		WHERE 1=1
+		<if test="DEPT_CD != null and DEPT_CD != '' ">
+			AND A.DEPT_CD LIKE 
+			<if test="_databaseId == 'Oracle'">
+			('%' || #{DEPT_CD} || '%')
+			</if>
+			<if test="_databaseId == 'SQL Server'">
+			('%' || #{DEPT_CD} || '%')
+			</if>
+			<if test="_databaseId == 'MySQL'">
+			CONCAT('%' , #{DEPT_CD} , '%')
+			</if>
+			<if test="_databaseId == 'PostgreSQL'">
+			('%' || #{DEPT_CD} || '%')
+			</if>
+		</if>
+		<if test="DEPT_NM != null and DEPT_NM != '' ">
+			AND A.DEPT_NM LIKE 
+			<if test="_databaseId == 'Oracle'">
+			('%' || #{DEPT_NM} || '%')
+			</if>
+			<if test="_databaseId == 'SQL Server'">
+			('%' || #{DEPT_NM} || '%')
+			</if>
+			<if test="_databaseId == 'MySQL'">
+			CONCAT('%' , #{DEPT_NM} , '%')
+			</if>
+			<if test="_databaseId == 'PostgreSQL'">
+			('%' || #{DEPT_NM} || '%')
+			</if>
+		</if>
+		<if test=" USE_YN != null and USE_YN != '' ">
+			AND A.USE_YN = #{USE_YN}
+		</if>
+
+		ORDER BY A.DEPT_ORDER
+
+	</select>
+
+	<select id="deptInfoDetail" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* UserManagement.deptInfoDetail
+		* 부서정보 상세
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		SELECT
+			D.DEPT_CD				-- 부서코드
+			, D.DEPT_NM				-- 부서명
+			, D.ML_CD				-- 다국어코드
+			, D.PARENT_DEPT			-- 상위부서
+			, D.DEPT_LEVEL			-- 부서LEVEL
+			, D.DEPT_ORDER			-- 부서정렬순서
+			, D.USE_YN				-- 사용여부
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="D.REG_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			</include> AS REG_DT	-- 등록일시
+			, D.REG_CD				-- 등록자코드
+			, U1.USER_NM AS REG_NM	-- 등록자명
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="D.MOD_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			</include> AS MOD_DT	-- 수정일시
+			, D.MOD_CD				-- 수정자코드
+			, U2.USER_NM AS MOD_NM	-- 수정자명
+		FROM DEPT_INFO D
+			LEFT OUTER JOIN USER_INFO U1 ON D.REG_CD = U1.USER_CD
+			LEFT OUTER JOIN USER_INFO U2 ON D.MOD_CD = U2.USER_CD
+		WHERE D.DEPT_CD = #{DEPT_CD}
+	</select>
+
+	<insert id="deptInfoInsertByCd" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		 *
+		 * UserManagement.deptInfoInsertByCd
+		 * 부서정보 입력
+		 * @author takeit
+		 * @since 2019.08.02
+		 */
+		]]>
+		INSERT INTO DEPT_INFO (
+			DEPT_CD
+			, DEPT_NM
+			, ML_CD
+			, PARENT_DEPT
+			, DEPT_LEVEL
+			, DEPT_ORDER
+			, DESC_TXT
+			, USE_YN
+			, REG_DT
+			, REG_CD
+		)
+		VALUES (
+			#{DEPT_CD}			-- 부서코드
+			, #{DEPT_NM}		-- 부서명
+			, #{ML_CD}			-- 다국어코드
+			, #{PARENT_DEPT}	-- 상위부서
+			, #{DEPT_LEVEL}		-- 부서LEVEL
+			, #{DEPT_ORDER}		-- 부서정렬순서
+			, #{DESC_TXT}		-- 상세설명
+			, #{USE_YN}			-- 사용여부
+			, <include refid="CommonInc.sysdate" />				-- 등록일시
+			, #{_sessionUserCd}		-- 등록자코드
+		)
+	</insert>
+
+	<insert id="deptInfoInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* UserManagement.deptInfoInsert
+		* 부서정보 입력
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		<selectKey keyProperty="maxCd" resultType="String" order="BEFORE">
+			SELECT 
+			
+			<if test="_databaseId == 'Oracle'">
+			('D' || LPAD(TO_NUMBER(NVL(MAX(SUBSTR(DEPT_CD, 2, 4)), '0') + 1), 4, '0')) AS maxCd
+			</if>
+			<if test="_databaseId == 'SQL Server'">
+			('D' || LPAD(CONVERT(NUMERIC, ISNULL(MAX(SUBSTR(DEPT_CD, 2, 4)), '0') + 1), 4, '0')) AS maxCd
+			</if>
+			<if test="_databaseId == 'MySQL'">
+			CONCAT('D' , LPAD((IFNULL(MAX(SUBSTR(DEPT_CD, 2, 4)), '0') + 1), 4, '0')) AS maxCd
+			</if>
+			<if test="_databaseId == 'PostgreSQL'">
+			('D' || LPAD(TO_NUMBER(COALESCE(MAX(SUBSTR(DEPT_CD, 2, 4)), '0') + 1), 4, '0')) AS maxCd
+			</if> 
+			
+			FROM DEPT_INFO
+		</selectKey>
+		INSERT INTO DEPT_INFO (
+			DEPT_CD
+			, DEPT_NM
+			, DEPT_ENG_NM
+			, ML_CD
+			, PARENT_DEPT
+			, DEPT_LEVEL
+			, DEPT_ORDER
+			, DESC_TXT
+			, USE_YN
+			, REG_DT
+			, REG_CD
+		)
+		VALUES (
+			#{maxCd}			-- 부서코드
+			, #{DEPT_NM}		-- 부서명
+			, #{DEPT_ENG_NM}	-- 부서영문명
+			, #{ML_CD}			-- 다국어코드
+			, #{PARENT_DEPT}	-- 상위부서
+			, #{DEPT_LEVEL}		-- 부서LEVEL
+			, #{DEPT_ORDER}		-- 부서정렬순서
+			, #{DESC_TXT}		-- 상세설명
+			, #{USE_YN}			-- 사용여부
+			, <include refid="CommonInc.sysdate" />				-- 등록일시
+			, #{_sessionUserCd}		-- 등록자코드
+		)
+	</insert>
+
+	<update id="deptInfoUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* UserManagement.deptInfoUpdate
+		* 부서정보 수정
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		UPDATE DEPT_INFO
+		SET
+			MOD_DT = <include refid="CommonInc.sysdate" />				-- 수정일시
+			, MOD_CD = #{_sessionUserCd}	-- 수정자코드
+			<if test=" DEPT_NM != null and DEPT_NM != '' " >
+			, DEPT_NM = #{DEPT_NM}			-- 부서명
+			</if>
+			<if test=" DEPT_ENG_NM != null and DEPT_ENG_NM != '' " >
+			, DEPT_ENG_NM = #{DEPT_ENG_NM}  -- 부서영문명
+			</if>
+			<if test=" ML_CD != null and ML_CD != '' " >
+			, ML_CD = #{ML_CD}				-- 다국어코드
+			</if>
+			<if test=" PARENT_DEPT != null and PARENT_DEPT != '' " >
+			, PARENT_DEPT = #{PARENT_DEPT}	-- 상위부서
+			</if>
+			<if test=" DEPT_LEVEL != null and DEPT_LEVEL != '' " >
+			, DEPT_LEVEL = #{DEPT_LEVEL}	-- 부서LEVEL
+			</if>
+			<if test=" DEPT_ORDER != null and DEPT_ORDER != '' " >
+			, DEPT_ORDER = #{DEPT_ORDER}	-- 부서정렬순서
+			</if>
+			<if test=" DESC_TXT != null and DESC_TXT != '' " >
+			, DESC_TXT = #{DESC_TXT}		-- 상세설명
+			</if>
+			<if test=" USE_YN != null and USE_YN != '' " >
+			, USE_YN = #{USE_YN}			-- 사용여부
+			</if>
+
+		WHERE DEPT_CD = #{DEPT_CD}			-- 부서코드
+	</update>
+
+	<delete id="deptInfoDelete" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* UserManagement.deptInfoDelete
+		* 부서정보 삭제
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		DELETE FROM DEPT_INFO
+		WHERE 1=1
+		<if test=" DEPT_CD != null and DEPT_CD != '' " >
+			 AND DEPT_CD = #{DEPT_CD}			-- 부서코드
+		</if>
+	</delete>
+	<!-- dept_info(부서정보) END -->
+
+	<select id="userDashSelect" parameterType="map" timeout="0" resultMap="manualMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* UserManagement.userDashSelect
+		* 사용자 대시보드
+		* @author take
+		* @since 2020.09.21
+		*/
+		]]>
+		SELECT  A.PAGE_NO
+               ,A.GRID_NO
+               ,A.DASH_CD
+               ,B.DASH_NM
+               ,A.DASH_TYPE
+               ,P.PROGRAM_PREFIX AS DASH_PREFIX	-- 프로그램_프리픽스
+               ,P.PROGRAM_ID||'.xfdl' AS DASH_URL	-- 프로그램_ID
+               ,B.DETAIL_PROG
+               ,B.MANUAL_TXT
+               ,B.RELOAD_CNT
+               ,B.TITLEBAR_YN
+               ,B.DASH_PARAM
+          FROM  USER_DASH_CONFIG A
+                INNER JOIN DASH_INFO B
+                   ON B.USE_YN     = 'Y'
+                  AND A.PROJECT_CD = B.PROJECT_CD
+                  AND A.DASH_CD    = B.DASH_CD
+                LEFT OUTER JOIN PROGRAM_INFO P
+                  ON B.PROGRAM_CD = P.PROGRAM_CD
+         WHERE  A.PROJECT_CD = #{sProjectCd}
+           AND  A.USER_CD    = #{_sessionUserCd}
+           AND  A.PAGE_NO    = #{sPageNo}
+         ORDER  BY A.GRID_NO
+	</select>
+</mapper>

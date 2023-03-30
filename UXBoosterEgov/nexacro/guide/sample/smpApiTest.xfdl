@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="sampleTest" width="800" height="600" titletext="New Form">
+    <Layouts>
+      <Layout height="600" mobileorientation="landscape" width="800">
+        <Button id="Button00" taborder="0" text="dsWeather" left="10" top="6" width="228" height="48" onclick="Button00_onclick"/>
+        <Grid id="Grid00" taborder="1" left="10" top="60" right="10" bottom="10" binddataset="dsWeather">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="baseDate"/>
+                <Cell col="1" text="baseTime"/>
+                <Cell col="2" text="category"/>
+                <Cell col="3" text="fcstDate"/>
+                <Cell col="4" text="fcstTime"/>
+                <Cell col="5" text="fcstValue"/>
+                <Cell col="6" text="nx"/>
+                <Cell col="7" text="ny"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:baseDate"/>
+                <Cell col="1" text="bind:baseTime"/>
+                <Cell col="2" text="bind:category"/>
+                <Cell col="3" text="bind:fcstDate"/>
+                <Cell col="4" text="bind:fcstTime"/>
+                <Cell col="5" text="bind:fcstValue"/>
+                <Cell col="6" text="bind:nx"/>
+                <Cell col="7" text="bind:ny"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="Button01" taborder="2" text="dsCurrentWeather" left="246" top="6" width="228" height="48" onclick="Button01_onclick"/>
+        <Button id="Button02" taborder="3" text="Button02" left="552" top="11" width="117" height="43" onclick="Button02_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.dsWeather.clearData();
+    
+    var sUrl   = "SVC_LOC::dash/weatherGetInfo.do",     			//서비스 URL
+        sInDs  = "",      												//데이터셋을 검색조건으로 보낼경우 사용 -->선택
+        sOutDs = "dsWeather=dsWeather",     							//데이터를 받아올 데이터셋 지정
+        sParam = "sX='61' sY='125'";   //파라메터 사용 안 할 경우 
+            
+    takeit.transaction(this, "WEATHERSEARCH", sUrl, sInDs, sOutDs, sParam, "fnCallBack", false);
+};
+
+this.Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.dsCurWeather.clearData();
+    
+    var sUrl   = "SVC_LOC::dash/weatherGetCurInfo.do",     			//서비스 URL
+        sInDs  = "",      												//데이터셋을 검색조건으로 보낼경우 사용 -->선택
+        sOutDs = "dsCurWeather=dsCurWeather",     							//데이터를 받아올 데이터셋 지정
+        sParam = "sX='61' sY='125' sTime='0500'";   //파라메터 사용 안 할 경우       
+    takeit.transaction(this, "CURRENTWEATHERSEARCH", sUrl, sInDs, sOutDs, sParam, "fnCallBack", false);
+};
+
+this.fnCallBack = function(sId, nErr, sMsg)
+{
+    if (sId=="WEATHERSEARCH")
+    {
+        this.Grid00.setBindDataset(this.dsWeather);
+        this.Grid00.createFormat();
+        //trace(this.dsWeather.saveXML());
+    } else if (sId=="CURRENTWEATHERSEARCH") {
+        this.Grid00.setBindDataset(this.dsCurWeather);
+        this.Grid00.createFormat();
+        trace(this.dsCurWeather.saveXML());
+    }
+}
+
+
+
+
+this.Button02_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	//this.dsWeather.filter("fcstDate=='20190306' && (category=='TMN' || category=='TMX')");
+    this.dsWeather.filter("category=='TMN' || category=='TMX'");
+};
+]]></Script>
+    <Objects>
+      <Dataset id="dsWeather">
+        <ColumnInfo>
+          <Column id="baseDate" type="STRING" size="256"/>
+          <Column id="baseTime" type="STRING" size="256"/>
+          <Column id="category" type="STRING" size="256"/>
+          <Column id="fcstDate" type="STRING" size="256"/>
+          <Column id="fcstTime" type="STRING" size="256"/>
+          <Column id="fcstValue" type="STRING" size="256"/>
+          <Column id="nx" type="STRING" size="256"/>
+          <Column id="ny" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsCurWeather">
+        <ColumnInfo>
+          <Column id="baseDate" type="STRING" size="256"/>
+          <Column id="baseTime" type="STRING" size="256"/>
+          <Column id="category" type="STRING" size="256"/>
+          <Column id="nx" type="STRING" size="256"/>
+          <Column id="ny" type="STRING" size="256"/>
+          <Column id="obsrValue" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

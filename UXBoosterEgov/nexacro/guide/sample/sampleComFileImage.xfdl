@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="sampleComFile" width="1040" height="970" titletext="(샘플)파일업로드 공통" onload="comFileSingle_onload">
+    <Layouts>
+      <Layout height="25" width="530">
+        <Button id="btnInit" taborder="0" text=" 초기화" top="47" width="70" height="23" cssclass="btn_WF_basic01" onclick="btnInit_onclick" left="152"/>
+        <Button id="btnNew" taborder="1" text="신규" top="47" width="70" height="23" cssclass="btn_WF_basic01" onclick="btnNew_onclick" left="224"/>
+        <Edit id="edtAtchFileId" taborder="2" left="17" top="47" width="133" height="23"/>
+        <ImageViewer id="imgViewer" taborder="3" left="571" top="80" width="398" height="177" stretch="fixaspectratio"/>
+        <Div id="divComFileSingle" taborder="4" left="570" top="48" width="398" height="25" url="frm::com/comFileSingle.xfdl" formscrolltype="none" formscrollbartype="none none"/>
+        <Button id="btnSave" taborder="5" text="저장" top="47" width="70" height="23" cssclass="btn_WF_basic01" onclick="btnSave_onclick" left="367"/>
+        <Button id="btnSearch" taborder="6" text="조회" left="296" top="47" width="69" height="23" cssclass="btn_WF_basic01" onclick="btnSearch_onclick"/>
+        <Static id="Static18" taborder="7" text="이미지뷰어 연동" left="0" top="0" height="30" width="450" cssclass="sta_WF_title02"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/**
+ *  SYSTEM FORM NAME
+ *
+ *  @MenuPath    -
+ *  @FileName    comFileSingle.xfdl
+ *  @Creator     정해원
+ *  @CreateDate  2020.09.23
+ *  @Version     1.0
+ *  @Desction    첨부파일공통(일반) - ATTACH_INFO와 연동
+ *
+ *
+ ************** 소스 수정 이력 *************************************************
+ *    date          Modifier            Description
+ *******************************************************************************
+ *  2020.09.23      정해원             최초 생성
+ *******************************************************************************
+ */
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+	this.fv_divFile;
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload등)
+********************************************************/
+	/**
+	* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+	*/
+	this.comFileSingle_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+	{
+		if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+		{
+			this.fnInit();
+		}
+	};
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnInit, fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+	this.fnInit = function(){
+	};
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+ ********************************************************/
+
+////////////////////////////////////////테스트용 스크립트
+this.FILETYPE_ETC = "06";
+this.btnInit_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fv_divFile = this.divComFileSingle.form;
+	this.fv_divFile.fn_setAtchFileTypeCd(this.FILETYPE_ETC);
+	
+	//용량제한 1Mbyte
+	this.fv_divFile.fn_setMaxLength(1 * 1024);
+	
+	//이미지URL DataSet연결
+	this.fv_divFile.fn_setImageViewer(this.imgViewer);
+	this.fv_divFile.fnInitComponent(this);
+};
+
+this.btnNew_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	//첨부파일 ID생성
+	this.fv_divFile.fnSearchAtchFileId(this,
+		function(rtnValue){
+			//첨부파일 ID 변경
+			this.fv_divFile.fn_setAtchFileId(rtnValue.resultData);
+			
+			//조회
+			this.edtAtchFileId.set_value(rtnValue.resultData);
+			this.fv_divFile.fnSearchFileList(this);
+		}
+	);
+};
+
+this.btnSave_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	//데이터변경 / 파일 수정 여부
+	if (!this.fv_divFile.fn_isUpdate()){
+		take.alert(this, "info", "변경된 내역이 없습니다.");
+		return;
+	}
+	
+	//파일 업로드 / 저장
+	this.fv_divFile.fnUploadSaveFileList(this,
+		function(rtnValue){
+			if(rtnValue.result){
+				//reload하기
+			}
+		}
+	);
+};
+
+this.btnSearch_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fv_divFile.fn_setAtchFileId(this.edtAtchFileId.value);
+	this.fv_divFile.fnSearchFileList(this);
+};]]></Script>
+    <Objects>
+      <Dataset id="dsInfo">
+        <ColumnInfo>
+          <Column id="atchFileId" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="atchFileId">AF00000600</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="edtAtchFileId" propid="value" datasetid="dsInfo" columnid="atchFileId"/>
+    </Bind>
+  </Form>
+</FDL>

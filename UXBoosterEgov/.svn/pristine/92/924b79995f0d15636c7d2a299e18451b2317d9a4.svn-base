@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="ST020" width="1659" height="832" titletext="통계_접속자현황_접속자현황" onload="Form_onload">
+    <Layouts>
+      <Layout height="832" mobileorientation="landscape" width="1659">
+        <Div id="divSearch" taborder="0" left="10" top="0" height="43" right="10" cssclass="div_WF_searchBox01" text="" minwidth="1300" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Static id="staProjectInfoSearch" taborder="0" text="프로젝트" left="20" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Static id="Static07_00_01" taborder="10" text="50" left="305" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="staLoginInfoSearch" taborder="1" text="접속기기/환경" left="355" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Static id="Static07_00_02" taborder="13" text="50" left="640" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="staUserInfoSearch" taborder="2" text="사용자" left="690" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="edtUserInfoSearch" taborder="3" left="staUserInfoSearch:10" top="10" width="195" height="21"/>
+              <Combo id="cboProject" taborder="4" left="staProjectInfoSearch:10" top="10" width="195" height="21" index="0" innerdataset="dsProject" codecolumn="CODE" datacolumn="NAME" value="Y" cssclass="cmb_WF_essential"/>
+              <Edit id="edtLoginInfoSearch" taborder="5" left="staLoginInfoSearch:10" top="10" width="195" height="21" onkeydown="divSearch_onkeydown"/>
+              <Static id="Static07_00_00" taborder="6" text="285" left="20" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00" taborder="7" text="20" left="0" top="0" width="20" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static07_00_00_01_00" taborder="8" text="285" left="20" top="31" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="11"/>
+              <Static id="Static07_00_00_00" taborder="9" text="285" left="355" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00_00_01_00_00" taborder="11" text="285" left="355" top="31" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="11"/>
+              <Static id="Static07_00_00_01" taborder="12" text="285" left="690" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00_00_01_00_01" taborder="14" text="285" left="690" top="31" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="11"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnShowHide" taborder="5" left="48.16%" top="divSearch:0" width="60" height="10" cssclass="btn_WF_fold01"/>
+        <Static id="Static24_00" taborder="6" text="10" left="0" height="20" background="rgba(255,0,0,0.4)" visible="false" right="0" textAlign="center" top="53"/>
+        <Div id="divDetail" taborder="1" left="10" top="73" right="10" bottom="10" minwidth="1300" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Static id="Static01" taborder="0" text="현재 접속자 현황" left="0" top="0" height="21" width="280" cssclass="sta_WF_title02"/>
+              <Grid id="Grid01" taborder="1" left="0" top="26" binddataset="dsLoginLog" autofittype="col" right="0" bottom="0" fillareatype="none">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="150"/>
+                      <Column size="100"/>
+                      <Column size="100"/>
+                      <Column size="100"/>
+                      <Column size="100"/>
+                      <Column size="120"/>
+                      <Column size="120"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="프로젝트명"/>
+                      <Cell col="1" text="접속기기"/>
+                      <Cell col="2" text="접속환경"/>
+                      <Cell col="3" text="사용자ID"/>
+                      <Cell col="4" text="사용자명"/>
+                      <Cell col="5" text="로그인일시"/>
+                      <Cell col="6" text="접속IP"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:PROJECT_NM" textAlign="center"/>
+                      <Cell col="1" text="bind:LOGIN_DEVICE" textAlign="center"/>
+                      <Cell col="2" text="bind:LOGIN_BROWSER" textAlign="center"/>
+                      <Cell col="3" text="bind:USER_ID" textAlign="center"/>
+                      <Cell col="4" text="bind:USER_NM" textAlign="center"/>
+                      <Cell col="5" text="bind:LAST_LOGIN_DT" textAlign="center"/>
+                      <Cell col="6" text="bind:LOGIN_IP" textAlign="center"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </Div>
+s        <Static id="Static00" taborder="2" text="10" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" textAlign="center" right="0"/>
+        <Static id="Static01" taborder="3" text="10" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" textAlign="center"/>
+        <Static id="Static22" taborder="4" text="10" left="0" height="10" background="rgba(255,0,0,0.4)" visible="false" right="0" bottom="0" textAlign="center"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsLoginLog">
+        <ColumnInfo>
+          <Column id="ROWNUM" type="STRING" size="256"/>
+          <Column id="HISOTRY_TIME" type="STRING" size="256"/>
+          <Column id="LOGIN_DEVICE" type="STRING" size="256"/>
+          <Column id="LOGIN_BROWSER" type="STRING" size="256"/>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="PROJECT_NM" type="STRING" size="256"/>
+          <Column id="USER_ID" type="STRING" size="256"/>
+          <Column id="USER_NM" type="STRING" size="256"/>
+          <Column id="LAST_LOGIN_DT" type="STRING" size="256"/>
+          <Column id="LOGIN_IP" type="STRING" size="256"/>
+          <Column id="DEPT_NM" type="STRING" size="256"/>
+          <Column id="USER_POSITION" type="STRING" size="256"/>
+          <Column id="USER_EMAIL" type="STRING" size="256"/>
+          <Column id="USER_MOBILE" type="STRING" size="256"/>
+          <Column id="USER_TEL" type="STRING" size="256"/>
+          <Column id="USER_FAX" type="STRING" size="256"/>
+          <Column id="USER_TYPE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsProject">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="LOGIN_INFO" type="STRING" size="256"/>
+          <Column id="USER_NM" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    1DEPTH > 2DEPTH
+*  @FileName    *.xfdl 
+*  @Creator     홍길동
+*  @CreateDate  yyyy.MM.DD 
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  YYYY.MM.DD      홍길동             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+this.fv_sProjectCd = nexacro.getApplication().av_sProjectCd;
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.Form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {    
+        var sOutDs 		= ["dsProject"];
+		var sNameSpaces = ["ProjectManagement.projectInfoCode"];
+		var sParam = "";
+
+		take.tranSelect(this, "ProjectSearch", sNameSpaces, "", sOutDs, sParam,
+		function(sId, nErrCd, sErrMsg){
+			//callback
+			this.divSearch.form.cboProject.set_value(this.fv_sProjectCd);
+
+			// PM00000001 관리자 아닐시 콤보 변경 X 처리
+			if(this.fv_sProjectCd != "PM00000001") {
+				this.divSearch.form.cboProject.set_readonly();
+			}
+			this.fnSearch();
+		});
+   }
+}
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Search";
+	
+    //take.tranSelect(this,sTranId,"Namespace","sInDataset", "sOutDataset", "sParam", "fnCallback");
+	this.dsLoginLog.clearData();
+	take.transaction(this, sTranId, "SVC_LOC::/loginUser.do", "dsSearch=dsSearch", "dsLoginLog=dsList", "", "fnCallback");
+}
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+this.fnSave = function(sTranId)
+{    
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Save transation id";
+    take.tranSave(this, sTranId, "NAMESPACE", "sInDs", "sOutDs", "sParam", "fnCallback");
+}
+/**
+ * fnAddRow : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+ * @example this.fnAddRow(sGrdId, nRow);
+ */
+this.fnAddRow = function(sGrdId, nRow)
+{
+    //공통 행추가에서 호출할 디폴트값 세팅
+    if (take.nvl(sGrdId, "")=="") sGrdId = "Grid00";
+    
+    //Script
+}
+
+/**
+ * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number, Array} arrnRow    deleteRow 리턴값
+ * @return {N/A} N/A
+ * @example this.fnDelRow(sGrdId, nRow); 
+ */
+this.fnDelRow = function(sGrdId, arrnRow)
+{    
+    //공통 행추가에서 호출할 디폴트값 세팅
+    if (take.nvl(sGrdId, "")=="") sGrdId = "Grid00";
+    
+    //Script
+}
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+/**
+* component_onclick : ~ 버튼 클릭
+*/
+this.component_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    //Script
+};
+
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnUserFunction : 사용자 함수
+ * @param  {String} sParam 문자형 인자
+ * @param  {Number} nParam 숫자형 인자
+ * @example this.fnUserFunction(sParam, nParam);
+ */
+this.fnUserFunction = function(sParam, nParam)
+{    
+    //Script
+}
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "Transation id 01" : //조회 콜백
+            //Script
+            break;
+        case "Transation id 02" :  //조회 콜백
+            //Script
+            break;
+        case "Transation id 03" : //조회 콜백
+            //Script
+            break;
+        case "Save transation id 01" :  //저장 콜백
+            //Script
+            break;
+        case "Save transation id 01" :  //저장 콜백
+            //Script
+            break;
+        default :
+            break;
+    }        
+} ]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="divSearch.form.cboProject" propid="value" datasetid="dsSearch" columnid="PROJECT_CD"/>
+      <BindItem id="item1" compid="divSearch.form.edtLoginInfoSearch" propid="value" datasetid="dsSearch" columnid="LOGIN_INFO"/>
+      <BindItem id="item2" compid="divSearch.form.edtUserInfoSearch" propid="value" datasetid="dsSearch" columnid="USER_NM"/>
+    </Bind>
+  </Form>
+</FDL>

@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="frmLoginS03" width="580" height="556" titletext="로그인 베너 서브화면" onload="loginBanner_onload" ontimer="loginBanner_ontimer" onclose="loginBanner_onclose">
+    <Layouts>
+      <Layout height="556" stepcount="3" width="580">
+        <Static id="staBanner00" taborder="0" left="0" top="0" width="580" height="556"/>
+        <Static id="staBanner02" taborder="1" left="0" top="0" width="580" height="556" positionstep="2"/>
+        <Static id="staBanner01" taborder="2" left="0" top="0" width="580" height="556" positionstep="1"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    Login > Banner
+*  @FileName    MN090.xfdl 
+*  @Creator     고영민
+*  @CreateDate  2019.10.22 
+*  @Version     1.0
+*  @Desction    로그인 베너
+* 
+************** 소스 수정 이력 *************************************************
+*    Date          Modifier            Description
+*******************************************************************************
+*  2019.10.22      고영민             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+//N/A
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+//N/A
+
+/*********************************************************
+ * 1.2 FORM EVENT 영역(onload등)
+ ********************************************************/
+/**
+* form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.loginBanner_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {    
+		//var sUrl = nexacro.getEnvironment().services[take.nvl(take.SvcId,"SVC_LOC")].url;
+        var sUrl, sDateTime;
+        var objDateTime = take.getTodayTime();
+        
+        sUrl = take.getSvcUrl();
+        sDateTime = objDateTime.date + objDateTime.time;
+        
+		for( var i=0; i<3; i++ ){
+			var sImg = "imgTakeBanner0"+(i+1)+".png";			
+			this.components["staBanner0"+i].set_background('url("'+sUrl+'/images/banner/'+ sImg + '?' + sDateTime + '") no-repeat center center');
+		}
+
+        this.setTimer(999,5000);
+   }
+}
+
+/**
+* loginBanner_ontimer 타이머 이벤트
+*/
+this.loginBanner_ontimer = function(obj:nexacro.Form,e:nexacro.TimerEventInfo)
+{
+    if (e.timerid==999)
+    {
+        var nStep = this.getStepIndex();
+        
+        if (nStep>=this.getStepCount()-1)
+        {
+            this.setStepIndex(0);
+        } else {    
+            this.setStepIndex(nStep+1);
+        }
+    }
+};
+
+/**
+* loginBanner_onclose 폼 닫기 이벤트
+*/
+this.loginBanner_onclose = function(obj:nexacro.Form,e:nexacro.CloseEventInfo)
+{
+	this.killTimer(999);
+};
+/*********************************************************
+ * 2 필수 FUNCTION 영역 (fnSearch, fnAddRow, fnSave, fnDelRow, fnExcel...)
+ ********************************************************/
+//N/A
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+ ********************************************************/
+//N/A
+
+/*********************************************************
+ * 4 사용자 FUNCTION 영역
+ ********************************************************/
+/**
+ * fnUserFunction : 사용자 함수
+ * @param  {String} sParam 문자형 인자
+ * @param  {Number} nParam 숫자형 인자
+ * @example this.fnUserFunction(sParam, nParam);
+ */
+this.fnUserFunction = function(sParam, nParam)
+{    
+    //Script
+}
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+//N/A
+
+
+
+
+]]></Script>
+  </Form>
+</FDL>

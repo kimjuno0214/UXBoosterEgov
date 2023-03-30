@@ -1,0 +1,804 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="smpDashCreateNew" width="1200" height="685" titletext="대시보드 동적 생성기" background="">
+    <Layouts>
+      <Layout height="685" width="1200" stepcount="0">
+        <Static id="Static02" taborder="0" text="W&#13;&#10;20" background="#fd9da0" opacity="0.5" textAlign="center" top="0" bottom="0" visible="false" width="20" right="0"/>
+        <Static id="Static02_00" taborder="1" text="W&#13;&#10;20" background="#fd9da0" opacity="0.5" textAlign="center" width="20" top="0" bottom="7" visible="false" left="0"/>
+        <Static id="Static01_00" taborder="2" text="H20" left="0" height="20" right="0" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" top="0"/>
+        <Static id="Static01_01" taborder="3" text="H20" left="0" height="20" bottom="2" right="0" background="#fd9da0" opacity="0.5" textAlign="center" visible="false"/>
+        <Static id="Static01" taborder="4" text="H20" left="0" height="20" bottom="45" right="0" background="#fd9da0" opacity="0.5" textAlign="center" visible="false"/>
+        <Button id="btnCancle" taborder="6" width="57" height="23" cssclass="btn_WF_cancel01" text="취소" right="20" bottom="22"/>
+        <Button id="btnCheck" taborder="5" height="23" cssclass="btn_WF_check01" text="확인" width="57" right="80" bottom="22"/>
+        <Static id="Static02_00_00" taborder="7" text="W&#13;&#10;20" background="#fd9da0" opacity="0.5" textAlign="center" width="20" top="0" bottom="59" visible="false" left="540"/>
+        <Div id="divLeft" taborder="8" text="Div00" left="20" top="20" width="520" bottom="64">
+          <Layouts>
+            <Layout>
+              <Static id="staInfoUnitBg" taborder="27" top="146" height="31" cssclass="sta_WF_td01L" left="118" width="402" text=""/>
+              <Static id="staInfoDateBg" taborder="26" top="116" height="31" cssclass="sta_WF_td01L" left="118" width="402" text=""/>
+              <Static id="staVewMapIdBg" taborder="17" top="56" height="31" cssclass="sta_WF_td01L" left="118" width="402" text=""/>
+              <Edit id="edtVewMapId" taborder="16" left="126" top="61" width="389" height="21" displaynulltext="Sample.sampleSelect" cssclass="edt_WF_essential"/>
+              <Static id="staVewMapIdT" taborder="19" text="뷰 데이터" top="56" width="120" height="31" cssclass="sta_WF_th01L" left="0"/>
+              <Static id="staTitleL" taborder="0" text="컨텐츠 정보" left="0" top="0" height="21" width="400" cssclass="sta_WF_title02"/>
+              <Static id="Static32_00" taborder="1" left="-1" top="21" width="47" background="rgba(255,0,0,0.4)" visible="false" height="5" color="red" textAlign="center"/>
+              <Static id="staContTypeBg" taborder="2" top="26" height="31" cssclass="sta_WF_td01L" left="118" width="402"/>
+              <Static id="staContTypeT" taborder="3" text="컨텐츠 유형" top="26" width="120" height="31" cssclass="sta_WF_th01L" left="0"/>
+              <Static id="staInfoGbnBg" taborder="5" top="86" height="31" cssclass="sta_WF_td01L" left="118" width="402" text=""/>
+              <Static id="staTextContT" taborder="6" text="텍스트 컨텐츠&#13;&#10;(최대 8개)&#13;&#10;&#13;&#10;가로 1 : 2개 이하&#13;&#10;가로 2 : 4개 이하&#13;&#10;가로 3 : 6개 이하&#13;&#10;가로 4 : 8개 이하" top="176" width="120" height="307" cssclass="sta_WF_th01L" left="0"/>
+              <Static id="staTextContBg" taborder="7" top="176" height="307" cssclass="sta_WF_td01L" left="118" width="402"/>
+              <Static id="staOptionT" taborder="8" text="Option" top="482" width="120" cssclass="sta_WF_th01L" left="0" bottom="0"/>
+              <Static id="staOptionBg" taborder="9" top="482" cssclass="sta_WF_td01L" left="118" width="402" bottom="0"/>
+              <Grid id="grdTextCont" taborder="10" left="126" top="205" height="273" right="5" binddataset="dsTextCont" scrollbarsize="10">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="40"/>
+                      <Column size="130"/>
+                      <Column size="150"/>
+                      <Column size="67"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="No."/>
+                      <Cell col="1" text="텍스트"/>
+                      <Cell col="2" text="값"/>
+                      <Cell col="3" text="단위"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="expr:currow+1" textAlign="center"/>
+                      <Cell col="1" text="bind:TEXT"/>
+                      <Cell col="2" text="bind:VALUE"/>
+                      <Cell col="3" text="bind:UNIT"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <TextArea id="txtOption" taborder="11" left="126" top="487" right="5" bottom="4"/>
+              <Combo id="cmbContType" taborder="12" text="리스트(Grid)" left="126" top="31" width="150" height="21" innerdataset="dsContType" codecolumn="CODE" datacolumn="NAME" index="1" cssclass="cmb_WF_essential" onitemchanged="divLeft_cmbContType_onitemchanged"/>
+              <Edit id="edtInfoMapId" taborder="13" left="279" top="91" width="236" height="21" text="ㅁㄶㄹㄴㅁㅎ" displaynulltext="Sample.sampleSelect" enable="false"/>
+              <Button id="btnTextContUp" taborder="14" top="181" width="21" height="21" cssclass="btn_WF_up" left="469" onclick="divLeft_btnTextCont_onclick"/>
+              <Button id="btnTextContDown" taborder="15" top="181" width="21" height="21" cssclass="btn_WF_down" left="493" onclick="divLeft_btnTextCont_onclick"/>
+              <Static id="staInfoDateT" taborder="18" text="기준일" left="126" top="121" width="60" height="21" enable="false"/>
+              <Static id="staInfoUnitT" taborder="20" text="단위/출처" left="126" top="151" width="60" height="21" enable="false"/>
+              <Edit id="edtInfoDate" taborder="21" left="279" top="121" width="236" height="21" enable="false"/>
+              <Combo id="cmbInfoGbn" taborder="22" text="직접선택" left="196" top="91" width="80" height="21" innerdataset="dsInfoType" codecolumn="CODE" datacolumn="NAME" index="0" value="00" onitemchanged="divLeft_cmbInfoGbn_onitemchanged"/>
+              <Edit id="edtInfoUnit" taborder="23" left="279" top="151" height="21" enable="false" width="236"/>
+              <Combo id="cmbInfoDateType" taborder="24" text="현재일" left="196" top="121" width="80" height="21" innerdataset="dsDateType" codecolumn="CODE" datacolumn="NAME" index="0" value="00" onitemchanged="divLeft_cmbInfoType_onitemchanged"/>
+              <Combo id="cmbInfoUnitType" taborder="25" text="천원" left="196" top="151" width="80" height="21" innerdataset="dsUnitType" codecolumn="CODE" datacolumn="NAME" index="1" value="01" onitemchanged="divLeft_cmbInfoType_onitemchanged"/>
+              <Static id="staInfoGbnT" taborder="28" text="구분" left="126" top="91" width="60" height="21" enable="false"/>
+              <Static id="staInfoT" taborder="4" top="86" width="120" height="91" cssclass="sta_WF_th01L" left="0" text="기준 정보"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divRight" taborder="9" text="Div01" left="560" top="20" bottom="65" right="20">
+          <Layouts>
+            <Layout>
+              <Static id="staSizeBg" taborder="7" top="26" height="31" cssclass="sta_WF_td01L" left="130" right="0"/>
+              <Static id="staTitleR" taborder="0" text="미리보기" left="0" top="0" height="21" width="450" cssclass="sta_WF_title02"/>
+              <Static id="Static32" taborder="1" left="0" top="41" width="47" background="rgba(255,0,0,0.4)" visible="false" height="5" color="red" textAlign="center"/>
+              <Static id="staSizeT" taborder="2" text="화면 사이즈 (W*H)" top="26" width="132" height="31" cssclass="sta_WF_th01L" left="0"/>
+              <Edit id="edtW" taborder="3" left="198" top="31" width="50" height="21" value="396" text="396" textAlign="center" onkeydown="divRight_edt_onkeydown" onkillfocus="divRight_edt_onkillfocus"/>
+              <Static id="staSizeX" taborder="4" text="X" left="248" top="31" width="17" height="21" cssclass="sta_WF_AlignC" textAlign="center"/>
+              <Edit id="edtH" taborder="5" left="265" top="31" width="50" height="21" value="410" text="410" textAlign="center" onkeydown="divRight_edt_onkeydown" onkillfocus="divRight_edt_onkillfocus"/>
+              <Static id="staSizeInfo" taborder="6" text="Drag 또는 사이즈를 입력해서 리사이즈 해보세요." left="390" top="30" height="21" right="0"/>
+              <Static id="Static22_00_01" taborder="9" left="50" top="57" width="57" height="5" background="rgba(255,0,0,0.4)" visible="false" color="red" textAlign="center"/>
+              <Div id="divBase" taborder="8" left="0" top="62" right="0" bottom="0" background="whitesmoke" ondragmove="divRight_divBase_ondragmove">
+                <Layouts>
+                  <Layout>
+                    <Button id="btnW" taborder="1" left="396" top="0" width="5" height="410" cursor="w-resize" background="black" ondrag="divRight_divBase_btn_ondrag"/>
+                    <Button id="btnH" taborder="2" left="0" top="410" height="5" cursor="n-resize" ondrag="divRight_divBase_btn_ondrag" right="btnW:0" background="black"/>
+                    <Div id="divDashView" taborder="0" text="대시보드 미리보기" left="0" top="0" border="1px solid" right="btnW:0" bottom="btnH:0"/>
+                    <Button id="btnWH" taborder="3" left="btnH:0" top="btnW:0" width="5" height="5" cursor="move" ondrag="divRight_divBase_btn_ondrag" background="green"/>
+                  </Layout>
+                </Layouts>
+              </Div>
+              <Combo id="cmbDashType" taborder="10" text="1 X 2" left="staSizeT:6" top="31" width="57" height="21" innerdataset="dsDashType" codecolumn="CODE" datacolumn="NAME" index="1" value="12" onitemchanged="divRight_cmbDashType_onitemchanged"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <PopupDiv id="pDivHelp" visible="false" left="1216" top="133" width="374" height="227" background="#ffffff">
+          <Layouts>
+            <Layout>
+              <TextArea id="txtHelp" taborder="0" left="6" top="4" right="6" bottom="4" readonly="true"/>
+            </Layout>
+          </Layouts>
+        </PopupDiv>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsDashType" onrowposchanged="dsDash_onrowposchanged">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">11</Col>
+            <Col id="NAME">1 X 1</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">12</Col>
+            <Col id="NAME">1 X 2</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">13</Col>
+            <Col id="NAME">1 X 3</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">14</Col>
+            <Col id="NAME">1 X 4</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">21</Col>
+            <Col id="NAME">2 X 1</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">22</Col>
+            <Col id="NAME">2 X 2</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">23</Col>
+            <Col id="NAME">2 X 3</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">24</Col>
+            <Col id="NAME">2 X 4</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">31</Col>
+            <Col id="NAME">3 X 1</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">32</Col>
+            <Col id="NAME">3 X 2</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">33</Col>
+            <Col id="NAME">3 X 3</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">34</Col>
+            <Col id="NAME">3 X 4</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">41</Col>
+            <Col id="NAME">4 X 1</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">42</Col>
+            <Col id="NAME">4 X 2</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">43</Col>
+            <Col id="NAME">4 X 3</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">44</Col>
+            <Col id="NAME">4 X 4</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsContType">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+          <Column id="REF1" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE"/>
+            <Col id="NAME">선택</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">00</Col>
+            <Col id="NAME">리스트(Grid)</Col>
+            <Col id="REF1">grid</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">01</Col>
+            <Col id="NAME">Web link</Col>
+            <Col id="REF1">link</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">02</Col>
+            <Col id="NAME">Bar chart</Col>
+            <Col id="REF1">chart</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">03</Col>
+            <Col id="NAME">Static chart</Col>
+            <Col id="REF1">chart</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">04</Col>
+            <Col id="NAME">Line chart</Col>
+            <Col id="REF1">chart</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">07</Col>
+            <Col id="NAME">Pie chart</Col>
+            <Col id="REF1">chart</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">Donut chart</Col>
+            <Col id="CODE">08</Col>
+            <Col id="REF1">chart</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">Radar chart</Col>
+            <Col id="CODE">09</Col>
+            <Col id="REF1">chart</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsTextCont">
+        <ColumnInfo>
+          <Column id="TEXT" type="STRING" size="256"/>
+          <Column id="VALUE" type="STRING" size="256"/>
+          <Column id="UNIT" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsInfoType">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">01</Col>
+            <Col id="NAME">Mapper Id</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsDateType">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+          <Column id="REF1" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">00</Col>
+            <Col id="NAME">현재일</Col>
+            <Col id="REF1"/>
+          </Row>
+          <Row>
+            <Col id="CODE">01</Col>
+            <Col id="NAME">전일</Col>
+            <Col id="REF1"/>
+          </Row>
+          <Row>
+            <Col id="CODE">02</Col>
+            <Col id="NAME">익일</Col>
+            <Col id="REF1"/>
+          </Row>
+          <Row>
+            <Col id="CODE">03</Col>
+            <Col id="NAME">당월</Col>
+            <Col id="REF1"/>
+          </Row>
+          <Row>
+            <Col id="CODE">04</Col>
+            <Col id="NAME">전월</Col>
+            <Col id="REF1"/>
+          </Row>
+          <Row>
+            <Col id="CODE">05</Col>
+            <Col id="NAME">익월</Col>
+            <Col id="REF1"/>
+          </Row>
+          <Row>
+            <Col id="NAME">당년</Col>
+            <Col id="REF1"/>
+            <Col id="CODE">06</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">전년</Col>
+            <Col id="REF1"/>
+            <Col id="CODE">07</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">익년</Col>
+            <Col id="REF1"/>
+            <Col id="CODE">08</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsUnitType">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+          <Column id="REF1" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">00</Col>
+            <Col id="NAME">원</Col>
+            <Col id="REF1"/>
+          </Row>
+          <Row>
+            <Col id="CODE">01</Col>
+            <Col id="NAME">천원</Col>
+            <Col id="REF1"/>
+          </Row>
+          <Row>
+            <Col id="CODE">02</Col>
+            <Col id="NAME">만원</Col>
+            <Col id="REF1"/>
+          </Row>
+          <Row>
+            <Col id="CODE">03</Col>
+            <Col id="NAME">백만원</Col>
+            <Col id="REF1"/>
+          </Row>
+          <Row>
+            <Col id="CODE">04</Col>
+            <Col id="NAME">천만원</Col>
+            <Col id="REF1"/>
+          </Row>
+          <Row>
+            <Col id="CODE">05</Col>
+            <Col id="NAME">억원</Col>
+            <Col id="REF1"/>
+          </Row>
+          <Row>
+            <Col id="NAME">EA</Col>
+            <Col id="REF1"/>
+            <Col id="CODE">06</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">07</Col>
+            <Col id="NAME">g</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">kg</Col>
+            <Col id="REF1"/>
+            <Col id="CODE">08</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">m</Col>
+            <Col id="CODE">09</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">10</Col>
+            <Col id="NAME">km</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">l</Col>
+            <Col id="REF1"/>
+            <Col id="CODE">11</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsDashCont" oncolumnchanged="dsDashCont_oncolumnchanged">
+        <ColumnInfo>
+          <Column id="CONTTYPE" type="STRING" size="256"/>
+          <Column id="VIEWMAPID" type="STRING" size="256"/>
+          <Column id="INFOMAPID" type="STRING" size="256"/>
+          <Column id="INFODATE" type="STRING" size="256"/>
+          <Column id="INFOUNIT" type="STRING" size="256"/>
+          <Column id="TEXTCONTENTS" type="STRING" size="256"/>
+          <Column id="OPTION" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    1Depth > 2Depth
+*  @FileName    *.xfdl 
+*  @Creator     홍길동
+*  @CreateDate  yyyy.MM.DD 
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    Date          Modifier            Description
+*******************************************************************************
+*  YYYY.MM.DD      홍길동             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+this.fv_objSizeW = { "1":396
+                    ,"2":807
+                    ,"3":1349
+                    ,"4":1619};    
+
+this.fv_objSizeH = { "1":196
+                    ,"2":410
+                    ,"3":608
+                    ,"4":822};
+                    
+// 1 X 1 : 354 * 113 396 * 196
+// 1 X 2 : 354 * 327 396 * 410
+// 1 X 3 : 354 * 525 396 * 608
+// 1 X 4 : 354 * 739 396 * 822
+
+// 2 X 1 : 765 * 113 807 * 196
+// 2 X 2 : 765 * 327 807 * 410
+// 2 X 3 : 765 * 525 807 * 608
+// 2 X 4 : 765 * 739 807 * 822
+
+// 3 X 1 : 1206 * 113 1349 * 196
+// 3 X 2 : 1206 * 327 1349 * 410
+// 3 X 3 : 1206 * 525 1349 * 608
+// 3 X 4 : 1206 * 739 1349 * 822
+
+// 4 X 1 : 1767 * 113 1619 * 196
+// 4 X 2 : 1767 * 327 1619 * 410
+// 4 X 3 : 1767 * 525 1619 * 608
+// 4 X 4 : 1767 * 739 1619 * 822
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload등)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.Form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {    
+        //Script  
+   }
+}
+
+/****************************************************************************************
+* 2 필수 FUNCTION 영역 (fnInit, fnSearch, fnSave, fnAddRow, fnDelRow, fnExcel, fnPrint)
+****************************************************************************************/
+//N/A
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+ ********************************************************/
+//컨텐츠 타입 콤보 변경 이벤트
+this.divLeft_cmbContType_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	var nRow;
+    var objStaOpt, objTxtOpt;
+    var sType, sText, sCss;
+    
+    nRow = take.nvl(e.postindex, 0);
+    
+    if (nRow>0)
+    {
+        sType = take.nvl(obj.getInnerDataset().getColumn(nRow,"REF1"), "");
+        
+        objStaOpt = this.divLeft.form.staOptionT;
+        objTxtOpt = this.divLeft.form.txtOption;
+        
+        if (sType!="")
+        {   
+            if (sType=="grid")
+            {
+                sText = "Grid\ncolumn";
+                sCss = "";
+            } else if (sType=="chart") {
+                sText = "Chart\noption";
+                sCss="";
+            } else if(sType=="link") {
+                sText = "Link url";
+                sCss = "txt_WF_essential";
+            }
+            
+            objStaOpt.set_text(sText);
+            objTxtOpt.set_css(sCss);
+            objTxtOpt.set_displaynulltext(sSample);
+        }
+        
+        
+    }
+};
+
+//기준 정보 구분 콤보 변경 이벤트
+this.divLeft_cmbInfoGbn_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	var sGbn;
+    var objMapId, objDate, objUnit;
+    
+    sGbn = take.nvl(e.postvalue,"");
+    
+    objMapId = this.divLeft.form.edtInfoMapId;
+    objDate = this.divLeft.form.cmbInfoDateType;
+    objUnit = this.divLeft.form.cmbInfoUnitType;
+    
+    if (sGbn!="")
+    {
+        objMapId.set_enable(true);
+        objDate.set_enable(false);
+        objUnit.set_enable(false);
+    } else {
+        objMapId.set_enable(false);
+        objDate.set_enable(true);
+        objUnit.set_enable(true);
+    }
+    
+    
+    this.divLeft.form.edtInfoDate.set_enable(false);
+    this.divLeft.form.edtInfoUnit.set_enable(false);
+};
+
+//기준 정보 기준일,단위/출처 콤보 변경 이벤트
+this.divLeft_cmbInfoType_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+    var sGbn;
+    var objEdt;
+    
+	sGbn = take.nvl(e.postvalue,"");
+    
+    if (obj.name=="cmbInfoDateType")
+    {
+        objEdt = this.divLeft.form.edtInfoDate;
+    } else {
+        objEdt = this.divLeft.form.edtInfoUnit;
+    }
+    
+    if (sGbn=="")
+    {
+        objEdt.set_enable(true);
+    } else {
+        objEdt.set_enable(false);
+    }
+};
+
+//text contents 순서 이동 버튼 클릭 이벤트
+this.divLeft_btnTextCont_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    var sGbn;
+	var nCRow, nNRow, nCnt;
+    var objGrid, objDs;
+    
+    sGbn = obj.name.substr(11);
+    
+    objGrid = this.divLeft.form.grdTextCont;
+    objDs = this.dsTextCont;
+    
+    nCnt = objDs.rowcount;
+    
+    if (nCnt>0)
+    {
+        nCRow = objDs.rowposition;
+        
+        if (sGbn=="Up")
+        {
+            if (nCRow>0) nNRow = nCRow--;        
+        } else {
+            if (nCRow<nCnt) nNRow = nCRow++;
+        }
+        
+        objDs.set_rowpostion(nNRow);
+    }
+};
+
+//리사이즈 버튼 드래그 이벤트
+this.divRight_divBase_btn_ondrag = function(obj:nexacro.Button,e:nexacro.DragEventInfo)
+{
+	var sGbn = obj.name.substr(3);
+    e.set_userdata(sGbn);
+    return true;
+};
+
+//divBase 드래그 무브이벤트
+this.divRight_divBase_ondragmove = function(obj:nexacro.Div,e:nexacro.DragEventInfo)
+{
+	var sGbn;
+    var objBase;
+    
+    sGbn = e.userdata;
+    
+    objBase = this.divRight.form.divBase.form;
+    
+    if (sGbn=="W")
+    {
+        objBase.btnW.set_left(e.clientx);
+    } else if (sGbn=="H") {
+        objBase.btnH.set_top(e.clienty);
+        objBase.btnW.set_height(e.clienty);
+    } else {
+        objBase.btnW.set_left(e.clientx);
+        objBase.btnH.set_top(e.clienty);
+        objBase.btnW.set_height(e.clienty);
+    }
+    
+    objBase.resetScroll();
+    
+    objDashView = this.divRight.form.divBase.form.divDashView;
+    this.divRight.form.edtW.set_value(objDashView.getOffsetWidth());
+    this.divRight.form.edtH.set_value(objDashView.getOffsetHeight());
+};
+
+//사이즈 입력에디터에 포거스 나갈때 이벤트
+this.divRight_edt_onkillfocus = function(obj:nexacro.Edit,e:nexacro.KillFocusEventInfo)
+{
+	this.fnDashViewResize();
+};
+
+//사이즈 입력에디터에 키 다운 이벤트
+this.divRight_edt_onkeydown = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+    if (e.keycode==13) this.fnDashViewResize();
+};
+
+//대시보드 타입 콤보 변경 이벤트
+this.divRight_cmbDashType_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+    var nW, nH;
+    var arrType;
+    
+    arrType = e.postvalue;
+    
+    console.dir(arrType);
+    
+    nW = this.fv_objSizeW[arrType[0]];
+    nH = this.fv_objSizeH[arrType[1]];
+    
+    this.divRight.form.edtW.set_value(nW);
+    this.divRight.form.edtH.set_value(nH);
+    
+	this.fnDashViewResize();
+};
+
+
+
+this.dsDashCont_oncolumnchanged = function(obj:nexacro.NormalDataset,e:nexacro.DSColChangeEventInfo)
+{
+	var objDiv = this.divRight.form.divBase.form.divDashView;
+    
+	objDiv.set_url("");
+    objDiv.set_url("frm::dbc/dbcComDash.xfdl");
+};
+
+/*********************************************************
+ * 4 사용자 FUNCTION 영역
+ ********************************************************/
+/**
+ * fnInit : 컨텐츠 미리보기 리사이즈 
+ * @param  {N/A}
+ * @example this.fnInit();
+ */
+this.fnInit = function()
+{
+    var objInfoTypeDs, objDateTypeDs, objUnitTypeDs;
+    var sText;
+    
+    objInfoTypeDs = this.dsInfoType;
+    objDateTypeDs = this.dsDateType;
+    objUnitTypeDs = this.dsUnitType;
+    
+    sText = takedomain.getFindDomainId(this,"직접선택");
+    
+    //기준 정보 입력 구분
+    nRow = objInfoTypeDs.insertRow(0);
+    objInfoTypeDs.setColumn(nRow, "CODE", "");
+    objInfoTypeDs.setColumn(nRow, "NAME", sText);
+	
+    sText = takedomain.getFindDomainId(this,"직접입력");
+    
+    //기준정보 기준일
+    nRow = objDateTypeDs.addRow();
+    objDateTypeDs.setColumn(nRow, "CODE", "");
+    objDateTypeDs.setColumn(nRow, "NAME", sText);
+    
+    //기준정보 단위
+    nRow = objUnitTypeDs.addRow();
+    objUnitTypeDs.setColumn(nRow, "CODE", "");
+    objUnitTypeDs.setColumn(nRow, "NAME", sText);
+}
+
+/**
+ * fnDashViewResize : 컨텐츠 미리보기 리사이즈 
+ * @param  {N/A}
+ * @example this.fnDashViewResize();
+ */
+this.fnDashViewResize = function()
+{
+    var objDiv, objBase;
+    var nW, nH, nMaxW, nMaxH;
+    
+    objDiv = this.divRight.form.divBase;
+    objBase = objDiv.form;
+    
+    nW = nexacro.toNumber(this.divRight.form.edtW.value);
+    nH = nexacro.toNumber(this.divRight.form.edtH.value);
+    nMaxW = objDiv.getOffsetWidth()-nexacro.toNumber(objBase.btnW.width);
+    nMaxH =objDiv.getOffsetHeight()-nexacro.toNumber(objBase.btnH.height);
+    
+    if (nW>nMaxW || nW<1)
+    {
+        alert("현재 가능한 Width는 1 ~ "+ nMaxW+" 입니다.");
+        nW = nMaxW;
+        this.divRight.form.edtW.set_value(nW);
+    }
+    
+    objBase.btnW.set_left(nW);
+    
+    if (nH>nMaxH || nH<1)
+    {
+        alert("현재 가능한 Height는 1 ~ "+ nMaxH+" 입니다.");
+        nH = nMaxH;
+        this.divRight.form.edtH.set_value(nH);
+    }
+    
+     objBase.btnH.set_top(nH);
+     objBase.btnW.set_height(nH);
+        
+    objBase.resetScroll();
+}
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callBack
+* @param  : sId      - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : nErrCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : sErrMsg  - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallBack = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "Transation id 01" : //조회 콜백
+            //Script
+            break;
+        case "Transation id 02" :  //조회 콜백
+            //Script
+            break;
+        case "Transation id 03" : //조회 콜백
+            //Script
+            break;
+        case "Save transation id 01" :  //저장 콜백
+            //Script
+            break;
+        case "Save transation id 01" :  //저장 콜백
+            //Script
+            break;
+        default :
+            break;
+    }        
+} 
+
+
+
+]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="divLeft.form.cmbContType" propid="value" datasetid="dsDashCont" columnid="CONTTYPE"/>
+      <BindItem id="item1" compid="divLeft.form.edtVewMapId" propid="value" datasetid="dsDashCont" columnid="VIEWMAPID"/>
+      <BindItem id="item2" compid="divLeft.form.edtInfoMapId" propid="value" datasetid="dsDashCont" columnid="INFOMAPID"/>
+      <BindItem id="item3" compid="divLeft.form.txtOption" propid="value" datasetid="dsDashCont" columnid="OPTION"/>
+    </Bind>
+  </Form>
+</FDL>

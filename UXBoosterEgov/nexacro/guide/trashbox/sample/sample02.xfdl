@@ -1,0 +1,604 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="sample2" width="1040" height="659" titletext="Layout2" onload="Form_onload">
+    <Layouts>
+      <Layout height="659" mobileorientation="landscape" width="1040">
+        <Div id="divSearch" taborder="0" left="10" top="0" height="43" cssclass="div_WF_searchBox01" right="10">
+          <Layouts>
+            <Layout>
+              <Static id="staLable01" taborder="0" text="키값" left="19" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="edtKey" taborder="7" left="staLable01:3" top="10" width="231" height="21" text="TEXT"/>
+              <Static id="staLable02" taborder="1" text="데이터1" left="edtKey:19" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="edtText01" taborder="4" left="staLable02:3" top="10" width="231" height="21" text="TEXT"/>
+              <Static id="staUseYn" taborder="2" text="사용여부" left="edtText01:19" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="cboUseYn" taborder="3" left="staUseYn:3" top="10" width="231" height="21" index="0" innerdataset="dsCboUseYn" codecolumn="code" datacolumn="name" text="사용" value="Y"/>
+              <Static id="Static07" taborder="5" text="10" left="332" top="0" width="2" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static08" taborder="6" text="10" left="665" top="0" width="2" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnShowHide" taborder="2" left="48.08%" top="divSearch:0" width="40" height="10" cssclass="btn_WF_fold01"/>
+        <Div id="divDetail" taborder="1" left="10" top="btnShowHide:10" bottom="10" right="10">
+          <Layouts>
+            <Layout>
+              <Grid id="grdMain" taborder="0" left="0" top="30" binddataset="dsList" autofittype="col" bottom="0" width="410" extendgridoption="checkbox,readonly" cellsizebandtype="allband" cellsizingtype="col" onselectchanged="divDetail_grdMain_onselectchanged">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="키값"/>
+                      <Cell col="1" text="데이터1"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:key" textAlign="center"/>
+                      <Cell col="1" text="bind:col1"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="staTitle" taborder="1" text="리스트타이틀" left="0" top="0" height="30" right="866" cssclass="sta_WF_title02" usedecorate="true"/>
+              <Static id="Static27" taborder="3" text="10" left="grdMain:0" top="0" width="10" background="rgba(255,0,0,0.4)" visible="false" color="red" textAlign="center" bottom="0"/>
+              <Static id="staLable06" taborder="2" text="디테일타이틀" top="0" cssclass="sta_WF_title02" usedecorate="true" height="30" left="420" right="90"/>
+              <Static id="staBg01" taborder="4" left="539" top="30" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Static id="staLable01" taborder="5" text="등록자" left="420" top="30" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+              <Static id="staBg02" taborder="6" left="539" top="staBg01:-1" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Static id="staBg03" taborder="7" left="539" top="staBg02:-1" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Static id="staBg04" taborder="19" left="539" top="staBg03:-1" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Static id="staBg05" taborder="22" left="539" top="staBg04:-1" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Static id="staBg06" taborder="8" left="539" top="staBg05:-1" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Static id="staLable02" taborder="9" text="데이터1" left="420" top="staLable01:-1" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="staLable03" taborder="10" text="데이터2" left="420" top="staLable02:-1" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="staLable04" taborder="21" text="데이터3" left="420" top="staLable03:-1" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="staLable11" taborder="23" text="사용여부" left="420" top="staLable04:-1" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="staLable00" taborder="11" text="데이터4" left="420" top="staLable11:-1" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Edit id="edtData1" taborder="13" left="staLable02:6" top="65" height="21" text="TEXT" right="6"/>
+              <Static id="staBgLine" taborder="18" left="423" top="30" height="1" cssclass="sta_WF_tableLine" right="90"/>
+              <Combo id="cboUseYn" taborder="20" text="선택1" left="staLable11:6" top="155" height="21" innerdataset="dsCboUseYn" codecolumn="code" datacolumn="name" index="1" right="6" value="Y"/>
+              <Edit id="edtRegCd" taborder="12" left="staLable01:6" top="35" height="21" text="주식회사 티플럭스" textAlign="left" right="6" onkeyup="divDetail_edtPProgNm_onkeyup"/>
+              <Edit id="edtData2" taborder="14" left="staLable03:6" top="95" height="21" text="TEXT" right="6"/>
+              <Edit id="edtData3" taborder="15" left="staLable04:6" top="125" height="21" text="TEXT" right="6"/>
+              <CheckBox id="chk01" taborder="16" text="체크1" left="staLable00:6" top="staBg05:4" width="114" height="21" falsevalue="N" truevalue="Y" canchange="chkBox_canchange"/>
+              <CheckBox id="chk02" taborder="17" text="체크2" left="chk01:6" top="185" width="114" height="21" falsevalue="N" truevalue="Y" canchange="chkBox_canchange"/>
+              <Static id="Static06" taborder="24" text="10" left="420" top="staLable00:0" background="rgba(255,0,0,0.4)" visible="false" color="red" textAlign="center" right="0" height="10"/>
+              <Static id="staSubTitle" taborder="25" text="서브타이틀" left="420" top="Static06:0" height="30" cssclass="sta_WF_title02" right="0"/>
+              <Grid id="grdSub" taborder="26" left="420" top="staSubTitle:0" right="0" binddataset="dsSubList" autofittype="col" bottom="0" onheadclick="grid_onheadclick" cellsizebandtype="allband" cellsizingtype="both" takegrid="checkbox,readonly">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="275"/>
+                      <Column size="275"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="32"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="데이터1"/>
+                      <Cell col="1" text="데이터2"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:col1" textAlign="center" displaytype="text" edittype="text"/>
+                      <Cell col="1" text="bind:col2" textAlign="left" displaytype="text" edittype="text"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Button id="btnSave" taborder="28" text="저장" top="225" width="46" height="23" cssclass="btn_WF_basic01" right="0" onclick="btn_onclick"/>
+              <Button id="btnDel" taborder="27" text="삭제" top="225" width="46" height="23" cssclass="btn_WF_basic01" right="btnSave:3" onclick="btn_onclick"/>
+              <Button id="btnAdd" taborder="29" text="추가" top="225" width="46" height="23" cssclass="btn_WF_basic01" right="btnDel:3" onclick="btn_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static24" taborder="3" text="10" left="0" height="10" background="rgba(255,0,0,0.4)" visible="false" right="0" textAlign="center" top="53"/>
+        <Static id="Static01" taborder="4" text="10" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" textAlign="center"/>
+        <Static id="Static22" taborder="5" text="10" left="0" height="10" background="rgba(255,0,0,0.4)" visible="false" right="0" bottom="0" textAlign="center"/>
+        <Static id="Static00" taborder="6" text="10" left="1030" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" textAlign="center"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsList">
+        <ColumnInfo>
+          <Column id="key" type="STRING" size="256"/>
+          <Column id="col1" type="STRING" size="256"/>
+          <Column id="col2" type="STRING" size="256"/>
+          <Column id="col3" type="STRING" size="256"/>
+          <Column id="col4" type="STRING" size="256"/>
+          <Column id="chk1" type="STRING" size="256"/>
+          <Column id="use_yn" type="STRING" size="256"/>
+          <Column id="reg_cd" type="STRING" size="256"/>
+          <Column id="reg_dt" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsCboUseYn">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="name" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="name">전체</Col>
+          </Row>
+          <Row>
+            <Col id="code">Y</Col>
+            <Col id="name">사용</Col>
+          </Row>
+          <Row>
+            <Col id="name">미사용</Col>
+            <Col id="code">N</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="key" type="STRING" size="256"/>
+          <Column id="col1" type="STRING" size="256"/>
+          <Column id="use_yn" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsDetail">
+        <ColumnInfo>
+          <Column id="key" type="STRING" size="256"/>
+          <Column id="col1" type="STRING" size="256"/>
+          <Column id="col2" type="STRING" size="256"/>
+          <Column id="col3" type="STRING" size="256"/>
+          <Column id="col4" type="STRING" size="256"/>
+          <Column id="chk1" type="STRING" size="256"/>
+          <Column id="use_yn" type="STRING" size="256"/>
+          <Column id="reg_cd" type="STRING" size="256"/>
+          <Column id="reg_dt" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsChkBox">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="NAME">-선택-</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">1</Col>
+            <Col id="NAME">선택1</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">선택2</Col>
+            <Col id="CODE">2</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">3</Col>
+            <Col id="NAME">선택3</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsSubList">
+        <ColumnInfo>
+          <Column id="chk" type="STRING" size="256"/>
+          <Column id="key" type="STRING" size="256"/>
+          <Column id="seq" type="STRING" size="256"/>
+          <Column id="col1" type="STRING" size="256"/>
+          <Column id="col2" type="STRING" size="256"/>
+          <Column id="reg_cd" type="STRING" size="256"/>
+          <Column id="reg_dt" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  sample1 템플릿
+*
+*  @MenuPath    guide > sample1
+*  @FileName    sample1.xfdl 
+*  @Creator     전영찬
+*  @CreateDate  2019.10.31 
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2019.10.31      전영찬             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+this.fv_sNew = "N";     //신규작성 확인값
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.Form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {    
+        this.fnInit();
+   }
+}
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "List";
+    
+    switch(sTranId) {
+        case "List":
+            this.dsList.clearData();
+            
+            take.tranSelect(this, sTranId, "Sample.sample02Select", "dsSearch", "dsList", "", "fnCallback");
+            break;
+        
+        case "Detail":
+            var sSampleKey = this.dsList.getColumn(this.dsList.rowposition, "key");
+            var sParam = "sKey='" + sSampleKey + "'";
+            
+            this.dsDetail.clearData();
+            
+            take.tranSelect(this, sTranId, "Sample.sample02DetailSelect", "", "dsDetail", sParam, "fnCallback");
+            break;
+        case "SubList":
+            var sSampleKey = this.dsList.getColumn(this.dsList.rowposition, "key");
+            var sParam = "sKey='" + sSampleKey + "'";
+            
+            this.dsSubList.clearData();
+            
+            take.tranSelect(this, sTranId, "Sample.sample02SubSelect", "", "dsSubList", sParam, "fnCallback");
+            break;
+        default:
+            break;
+    }
+}
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+this.fnSave = function(sTranId)
+{    
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Save";
+    
+    if(this.fnCheckForm()) {
+        var nRowType = this.dsDetail.getRowType(0);
+        var sChk;
+        if (this.divDetail.form.chk01.value == "Y") sChk = "01";
+        if (this.divDetail.form.chk02.value == "Y") sChk = "02";
+        
+        if(nRowType == 2) {
+            //신규작성 신청
+            var bRowChange = take.confirm(this, "question", "신규 저장 하시겠습니까?");
+            if (bRowChange){
+                this.dsDetail.setColumn(0,"chk1",sChk);
+                take.tranSave(this, "Save", "Sample.sample02", "dsDetail", "", "", "fnCallback");
+            }
+        } else {
+            if(nRowType == 1) {
+               alert("선택한 신청건의 수정사항이 없습니다.");
+            } else {
+                // 리스트 (수정 -> 저장)
+                if (take.confirm(this, "question", "선택건을 수정 하시겠습니까?")){
+                    take.tranSave(this, "Modify", "Sample.sample02", "dsDetail", "", "", "fnCallback");
+                }
+            }
+        }
+    }
+}
+/**
+ * fnAddRow : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+ * @example this.fnAddRow(sGrdId, nRow);
+ */
+this.fnAddRow = function(sGrdId, nRow)
+{
+    //공통 행추가에서 호출할 디폴트값 세팅
+    //if (take.nvl(sGrdId, "")=="") sGrdId = "grdList";
+    
+    if(this.dsDetail.getRowType(this.dsDetail.rowposition) == 2) {
+        alert("이미 신청 작성중입니다.");
+        return false;
+    }else{
+        //this.fnAddRow("grdLeaveList", this.dsVacaList.addRow());
+        var objDsDetail = this.dsDetail;
+        
+        objDsDetail.clearData();
+        this.dsSubList.clearData();
+        objDsDetail.addRow();
+        
+        this.divDetail.form.chk01.set_value("N");
+        this.divDetail.form.chk02.set_value("N");
+        
+        objDsDetail.setColumn(0, "reg_cd", "U000000008");
+        objDsDetail.setColumn(0, "use_yn", "Y");
+        objDsDetail.setColumn(0, "col1", "신규작성 TEST !!!!!!!");
+        
+        this.fv_sNew = "Y";
+    }
+}
+
+/**
+ * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number, Array} arrnRow    deleteRow 리턴값
+ * @return {N/A} N/A
+ * @example this.fnDelRow(sGrdId, nRow); 
+ */
+this.fnDelRow = function(sGrdId, arrnRow)
+{    
+    //공통 행추가에서 호출할 디폴트값 세팅
+    //if (take.nvl(sGrdId, "")=="") sGrdId = "LeaveList";
+    
+    var nRowType = this.dsDetail.getRowType(0);
+    trace(nRowType);
+    
+    if(nRowType == 2) {
+        if (take.confirm(this, "question", "작성중인 자료가 삭제됩니다.\n진행하시겠습니까?")){
+            this.dsDetail.clearData();
+            this.fv_sNew = "N";
+            this.fnSearch("List");
+        }
+    } else {
+        if (take.confirm(this, "question", "선택한 신청건을 삭제하시겠습니까?")){
+            this.dsList.deleteRow(this.dsList.rowposition);
+            take.tranSave(this, "Delete", "Sample.sample02", "dsList", "", "", "fnCallback");
+        }
+    }
+}
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+//리스트 클릭 이벤트
+this.divDetail_grdMain_onselectchanged = function(obj:nexacro.Grid,e:nexacro.GridSelectEventInfo)
+{
+    if (this.fv_sNew == "Y") { //신규작성 확인값
+        //if (e.oldrow != e.row) {
+            var bRowChange = take.confirm(this, "question", "작성중인 데이터는 유지되지 않습니다.");
+        
+            if (!bRowChange){
+                // 취소
+                //obj.selectRow(e.oldrow);  //신규 로우 유지
+            }else {
+                // 확인
+                this.dsDetail.clearData();
+                this.fv_sNew = "N";
+                this.fnSearch("Detail");
+            }
+        //}
+    } else {
+    	this.fnSearch("Detail");
+    }
+};
+
+// 디테일 체크박스 클릭 이벤트
+this.chkBox_canchange = function(obj:nexacro.CheckBox,e:nexacro.ChangeEventInfo)
+{
+    var sChkId = obj.name.substr(3);
+    
+    if (sChkId == "01") {
+        if (obj.value == "N") {
+            this.divDetail.form.chk02.set_value("N");
+        }
+    } else {
+        if (obj.value == "N") {
+            this.divDetail.form.chk01.set_value("N");
+        }
+    }
+};
+
+//서브 리스트 추가/삭제/저장 버튼 클릭이벤트
+this.btn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var sBtnGbn = obj.name.substr(3);
+    
+    switch(sBtnGbn)
+    {
+        case "Add" :      //등록
+            var nAddRow = this.dsSubList.addRow();
+            
+            var sSampleKey = this.dsList.getColumn(this.dsList.rowposition, "key");
+            
+            this.dsSubList.setColumn(nAddRow,"key", sSampleKey);
+            break;
+            
+        case "Save" :     //수정
+            var sDsType;
+            var objDsSub = this.dsSubList;
+            for(var i=0; i<objDsSub.rowcount; i++){
+                if(objDsSub.getRowType(i) != 1) {
+                    sDsType = "Save";
+                    break;
+                }
+            }
+            
+            if(sDsType != "Save") {
+               alert("서브영역의 수정사항이 없습니다.");
+            } else {
+                take.tranSave(this, "SubSave", "Sample.sample02Sub", "dsSubList", "", "", "fnCallback");
+            }
+            break;
+        
+        case "Del" :      //삭제
+            var objDsSub = this.dsSubList;
+            var arrChkRow = take.getChkRow(objDsSub,"chk");
+            
+            if(arrChkRow.length == 0){
+                alert("선택된 항목이 없습니다.");
+                return;
+            }
+            
+            var bRowDel = take.confirm(this, "question", "선택된 항목들을 삭제 하시겠습니까?");
+            if (bRowDel){
+                for(var i=0; i<arrChkRow.length; i++) {
+                    objDsSub.deleteRow(arrChkRow[i]);
+                }
+                
+                take.tranSave(this, "SubDel", "Sample.sample02Sub", "dsSubList", "", "", "fnCallback");
+            }
+            break;
+            
+        default :
+            break;
+    } 
+};
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnInit : 초기화 함수
+ * @param  {String} N/A 
+ * @example this.fnInit();
+ */
+this.fnInit = function()
+{
+    this.fnCommonCode();
+}
+
+/**
+ * fnCommonCode : 코드호출 함수
+ * @param  {String} N/A 
+ * @example this.fnCommonCode();
+ */
+this.fnCommonCode = function ()
+{
+    take.tranCode(this, "00009", "dsCboUseYn", "ALL",
+	function(sId, nErrCd, sErrMsg)
+	{
+        if (this.dsCboUseYn.rowcount > 0){
+            this.divSearch.form.cboUseYn.set_index(1);  // 사용 셋팅
+        }
+        
+        this.fnSearch("List");
+    });
+};
+
+/**
+ * fnCheckForm : 저장전 유효성 체크
+ * @param  {String} sParam N/A
+ * @example this.fnCheckForm();
+ */
+this.fnCheckForm = function()
+{
+    var sRegCd = take.nvl(this.divDetail.form.edtRegCd.value, "");
+    
+    if(sRegCd == ""){
+        alert("필수값을 작성해주세요.");
+        this.divDetail.form.edtRegCd.setFocus();
+        return false;
+    }
+    
+    return true;
+}
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "List" : //조회 콜백
+            this.divDetail.form.staTitle.set_text("Title (총 " + this.dsList.rowcount + "건)");
+            break;
+            
+        case "Detail" : //조회 콜백
+            var sChk = this.dsDetail.getColumn(0,"chk1");
+            if(sChk == "01") {
+                this.divDetail.form.chk01.set_value("Y");
+                this.divDetail.form.chk02.set_value("N");
+            } else if(sChk == "02") {
+                this.divDetail.form.chk01.set_value("N");
+                this.divDetail.form.chk02.set_value("Y");
+            } else {
+                this.divDetail.form.chk01.set_value("N");
+                this.divDetail.form.chk02.set_value("N");
+            }
+            
+            this.fnSearch("SubList");
+            break;
+            
+        case "Save" :  //저장 콜백
+            this.fv_sNew = "N";
+            this.fnSearch("List");
+            break;
+            
+        case "Delete" :  //삭제 콜백
+            this.fnSearch("List");
+            break;
+            
+        case "Modify" :  //수정 콜백
+            this.fnSearch("List");
+            break;
+            
+        case "SubList" : // 서브리스트 조회 콜백
+            this.divDetail.form.staSubTitle.set_text("서브 Title (총 " + this.dsSubList.rowcount + "건)");
+            break;
+            
+        case "SubSave" :  //저장 콜백
+            this.fnSearch("SubList");
+            break;
+            
+        case "SubDel" :  //저장 콜백
+            this.fnSearch("SubList");
+            break;
+            
+        default :
+            break;
+    }        
+}
+]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="divDetail.form.edtRegCd" propid="value" datasetid="dsDetail" columnid="reg_cd"/>
+      <BindItem id="item1" compid="divDetail.form.edtData1" propid="value" datasetid="dsDetail" columnid="col1"/>
+      <BindItem id="item2" compid="divDetail.form.edtData2" propid="value" datasetid="dsDetail" columnid="col2"/>
+      <BindItem id="item3" compid="divDetail.form.edtData3" propid="value" datasetid="dsDetail" columnid="col3"/>
+      <BindItem id="item4" compid="divDetail.form.cboUseYn" propid="value" datasetid="dsDetail" columnid="use_yn"/>
+      <BindItem id="item5" compid="divSearch.form.edtKey" propid="value" datasetid="dsSearch" columnid="key"/>
+      <BindItem id="item6" compid="divSearch.form.edtText01" propid="value" datasetid="dsSearch" columnid="col1"/>
+      <BindItem id="item7" compid="divSearch.form.cboUseYn" propid="value" datasetid="dsSearch" columnid="use_yn"/>
+    </Bind>
+  </Form>
+</FDL>

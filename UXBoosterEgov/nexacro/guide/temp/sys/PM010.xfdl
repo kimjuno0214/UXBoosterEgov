@@ -1,0 +1,843 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="PM010" width="1659" height="832" titletext="프로젝트관리_프로젝트관리_프로젝트관리" onload="PM010_onload">
+    <Layouts>
+      <Layout height="832" mobileorientation="landscape" width="1659">
+        <Div id="divSearch" taborder="0" left="10" top="0" height="43" right="10" cssclass="div_WF_searchBox01" text="" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Static id="staTypeT" taborder="3" text="유형" left="20" top="10" width="80" height="21" maxwidth="" cssclass="sta_WF_textR"/>
+              <Static id="staProjectNmT" taborder="4" text="프로젝트명" left="355" top="10" width="80" height="21" maxwidth="" cssclass="sta_WF_textR"/>
+              <Combo id="cboType" taborder="0" text="Combo00" left="staTypeT:10" top="10" width="195" height="21" innerdataset="dsCboType" codecolumn="CODE" datacolumn="NAME"/>
+              <Static id="staUseYnT" taborder="5" text="사용여부" left="690" top="10" width="80" height="21" maxwidth="" cssclass="sta_WF_textR"/>
+              <Combo id="cboUseYn" taborder="2" text="전체" left="staUseYnT:10" top="10" height="21" innerdataset="dsCboUseYn" codecolumn="CODE" datacolumn="NAME" index="0" value="" width="195"/>
+              <Combo id="cboProjectNm" taborder="1" text="Combo00" left="staProjectNmT:10" top="10" width="195" height="21" innerdataset="dsCboProjectCd" codecolumn="PROJECT_CD" datacolumn="PROJECT_NM" readonly="false" index="-1"/>
+              <Static id="Static07_00_00" taborder="6" text="285" left="20" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00" taborder="7" text="20" left="0" top="0" width="20" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static07" taborder="8" text="50" left="305" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static07_00_00_00" taborder="9" text="285" left="355" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_01" taborder="10" text="50" left="640" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static07_00_00_00_00" taborder="11" text="285" left="690" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00_00_01" taborder="12" text="285" left="20" top="31" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00_00_00_01" taborder="13" text="285" left="355" top="31" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00_00_00_00_00" taborder="14" text="285" left="690" top="31" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnShowHide" taborder="2" left="48.16%" top="divSearch:0" width="60" height="10" cssclass="btn_WF_fold01"/>
+        <Div id="divDetail" taborder="1" top="73" bottom="10" left="10" right="10" minwidth="1020" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Static id="staDetailDescT" taborder="7" text="상세설명" left="686" cssclass="sta_WF_th01L" top="116" height="153" width="120"/>
+              <Static id="Static41" taborder="8" left="805" cssclass="sta_WF_td01L" right="0" height="153" top="116"/>
+              <TextArea id="txtDetailDesc" taborder="6" left="813" right="7" top="123" height="139" maxlength="600"/>
+              <Static id="Static21" taborder="12" left="330" top="26" height="303" cssclass="sta_WF_td01L" width="357"/>
+              <ImageViewer id="imgPm" taborder="13" left="361" top="52" width="294" height="251" fittocontents="none" stretch="fit" text="+" font="normal 30pt/normal &quot;Arial&quot;" onclick="divDetail_imgPm_onclick"/>
+              <Grid id="grdMultilanguageInfo" taborder="25" left="330" top="375" right="0" bottom="0" binddataset="dsMultiLanguageInfo" autofittype="col" autosizingtype="col">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="100"/>
+                      <Column size="600"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="구분"/>
+                      <Cell col="1" text="다국어"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:LANG_NM" autosizecol="limitmin" textAlign="center"/>
+                      <Cell col="1" text="bind:ML_LANG_TXT" autosizecol="limitmin"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="staMultiLanguageT" taborder="14" text="다국어 정보" left="330" top="349" cssclass="sta_WF_title02" right="150" height="21"/>
+              <Button id="btnMultiLanguage" taborder="15" text="다국어매핑" top="349" width="100" right="0" onclick="btnMultiLanguage_onclick" height="21"/>
+              <Static id="staRegT" taborder="16" text="등록자" left="686" cssclass="sta_WF_th01L" top="268" height="31" width="120"/>
+              <Static id="staReg" taborder="17" left="805" top="268" height="31" cssclass="sta_WF_td01L" right="688"/>
+              <Static id="staRegDtT" taborder="18" text="등록일" top="268" height="31" cssclass="sta_WF_th01L" width="120" left="staReg:-1"/>
+              <Static id="staRegDt" taborder="19" left="staRegDtT:-1" top="268" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Static id="staModT" taborder="20" text="수정자" left="686" cssclass="sta_WF_th01L" top="298" height="31" width="120"/>
+              <Static id="staMod" taborder="21" left="805" top="298" height="31" cssclass="sta_WF_td01L" right="688"/>
+              <Static id="staProjectDetailT" taborder="23" text="프로젝트 상세" left="340" cssclass="sta_WF_title02" right="142" top="0" height="21"/>
+              <Static id="staProjectInfoT" taborder="24" text="프로젝트 목록" left="0" width="312" cssclass="sta_WF_title02" top="0" height="21"/>
+              <Grid id="grdProjectInfo" taborder="26" left="0" top="26" width="310" binddataset="dsProjectInfo" autofittype="col" bottom="0" onselectchanged="grdProjectInfo_onselectchanged">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="100"/>
+                      <Column size="160"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="코드"/>
+                      <Cell col="1" text="프로젝트 명"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:PROJECT_CD" textAlign="center"/>
+                      <Cell col="1" text="bind:PROJECT_NM"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="staModDtT" taborder="27" text="수정일" top="298" height="31" cssclass="sta_WF_th01L" width="120" left="staMod:-1"/>
+              <Static id="staModDt" taborder="22" left="staModDtT:-1" top="298" height="31" cssclass="sta_WF_td01L" right="0" text=""/>
+              <Static id="staProjectId00" taborder="29" left="805" top="56" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Combo id="cboProjectComp" taborder="30" text="Combo00" left="813" top="61" height="21" innerdataset="dsCboProjComp" codecolumn="CODE" datacolumn="NAME" cssclass="cmb_WF_essential" width="130"/>
+              <Static id="staProjectCompT" taborder="28" text="회사" left="686" top="56" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="staDirectorT" taborder="11" text="담당자" left="950" top="56" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Edit id="edtDirector" taborder="4" left="1077" top="62" height="21" cssclass="edt_WF_essential" readonly="true" width="110"/>
+              <Button id="btnDirector" taborder="5" top="62" width="21" height="21" cssclass="btn_WF_search02" left="edtDirector:3" onclick="btnDirector_onclick"/>
+              <Static id="Static34_00" taborder="31" left="805" top="86" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Static id="staTypeT" taborder="9" text="유형" left="686" top="86" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Combo id="cboUseYn" taborder="3" text="Combo00" left="1077" top="91" height="21" innerdataset="dsCboUseYn" codecolumn="CODE" datacolumn="NAME" cssclass="cmb_WF_essential" width="110"/>
+              <Combo id="cboType" taborder="2" text="Combo00" left="813" top="91" height="21" innerdataset="dsCboType" codecolumn="CODE" datacolumn="NAME" cssclass="cmb_WF_essential" width="130"/>
+              <Static id="staUseYnT" taborder="10" text="사용여부" left="950" top="86" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static01" taborder="32" text="20" left="310" top="26" width="20" background="rgba(255,0,0,0.4)" visible="false" color="red" textAlign="center" bottom="4"/>
+              <Static id="Static24" taborder="33" text="20" left="330" height="20" background="rgba(255,0,0,0.4)" visible="false" right="0" textAlign="center" top="329"/>
+              <Static id="staProjectId" taborder="0" left="805" top="26" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Edit id="edtProjectNm" taborder="1" left="885" top="31" height="21" maxlength="15" inputfilter="space,symbol" width="130" cssclass="edt_WF_essential"/>
+              <Static id="staProjectNmT" taborder="34" text="프로젝트 ID / 명" left="686" top="26" width="120" height="31" cssclass="sta_WF_th01L"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static00" taborder="3" text="10" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" color="red" textAlign="center"/>
+        <Static id="Static24" taborder="4" text="20" left="0" height="20" background="rgba(255,0,0,0.4)" visible="false" right="0" textAlign="center" top="53"/>
+        <Static id="Static00_00" taborder="5" text="10" left="10" top="818" background="rgba(255,0,0,0.4)" visible="false" color="red" textAlign="center" height="10" right="0"/>
+        <Static id="Static00_01" taborder="6" text="10" left="1649" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" color="red" textAlign="center"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsProjectInfo" canrowposchange="dsProjectInfo_canrowposchange">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="255"/>
+          <Column id="PROJECT_NM" type="STRING" size="255"/>
+          <Column id="PROJECT_TYPE" type="STRING" size="255"/>
+          <Column id="MANAGER_CD" type="STRING" size="255"/>
+          <Column id="MANAGER_NM" type="STRING" size="255"/>
+          <Column id="DESC_TXT" type="STRING" size="255"/>
+          <Column id="USE_YN" type="STRING" size="255"/>
+          <Column id="REG_DT" type="STRING" size="255"/>
+          <Column id="CHK" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsMultiLanguageInfo">
+        <ColumnInfo>
+          <Column id="ML_CD" type="STRING" size="255" description="다국어코드"/>
+          <Column id="LANG_CD" type="STRING" size="255" description="언어코드"/>
+          <Column id="LANG_NM" type="STRING" size="255" description="언어명"/>
+          <Column id="ML_LANG_TXT" type="STRING" size="255" description="다국어"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="PROJECT_TYPE" type="STRING" size="256"/>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="USE_YN" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="PROJECT_TYPE"/>
+            <Col id="PROJECT_CD"/>
+            <Col id="USE_YN"/>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsProjectInfoDetail">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="255"/>
+          <Column id="PROJECT_NM" type="STRING" size="255"/>
+          <Column id="ML_CD" type="STRING" size="255"/>
+          <Column id="PROJECT_TYPE" type="STRING" size="255"/>
+          <Column id="MANAGER_CD" type="STRING" size="255"/>
+          <Column id="MANAGER_NM" type="STRING" size="255"/>
+          <Column id="PROJECT_IMG" type="STRING" size="255"/>
+          <Column id="PROJECT_BLOB" type="STRING" size="255"/>
+          <Column id="DESC_TXT" type="STRING" size="255"/>
+          <Column id="USE_YN" type="STRING" size="255"/>
+          <Column id="REG_DT" type="STRING" size="255"/>
+          <Column id="REG_CD" type="STRING" size="255"/>
+          <Column id="REG_NM" type="STRING" size="255"/>
+          <Column id="MOD_DT" type="STRING" size="255"/>
+          <Column id="MOD_CD" type="STRING" size="255"/>
+          <Column id="MOD_NM" type="STRING" size="255"/>
+          <Column id="COMP_CD" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsCboUseYn">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsCboType">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <FileDialog id="FileDialog00" onclose="FileDialog00_onclose"/>
+      <Dataset id="dsFile">
+        <ColumnInfo>
+          <Column id="FILE_PATH" type="STRING" size="256"/>
+          <Column id="FILE_NM" type="STRING" size="256"/>
+          <Column id="FILE_SAVE_NM" type="STRING" size="256"/>
+          <Column id="IMPORT_YN" type="STRING" size="256"/>
+          <Column id="FILE_TYPE" type="STRING" size="256"/>
+          <Column id="FILE_SIZE" type="STRING" size="256"/>
+          <Column id="FILE_BLOB" type="STRING" size="256"/>
+          <Column id="DESC_TXT" type="STRING" size="256"/>
+          <Column id="DELETE_YN" type="STRING" size="256"/>
+          <Column id="USER_CD" type="STRING" size="256"/>
+          <Column id="FILE_DEL_YN" type="STRING" size="256"/>
+          <Column id="ATTACH_CD" type="STRING" size="256"/>
+          <Column id="FILE_SEQ" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsCboProjectCd">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="PROJECT_NM" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsCboDetailUseYn">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsCboProjComp">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    pm > PM010
+*  @FileName    PM010.xfdl
+*  @Creator     김대승
+*  @CreateDate  2019.08.14
+*  @Version     1.0
+*  @Desction    프로젝트관리
+*
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2019.08.14      김대승             최초 생성
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+this.fv_sGdsAdminYn   = UXBooster.gdsUserInfo.getColumn(0, "ADMIN_YN"); 	// gds _ 관리자권한 여부
+this.fv_sGdsProjectCd = UXBooster.av_sProjectCd;  						// 글로변 변수_프로젝트코드
+
+// 파일 업로드 관련
+this.fv_sFileSize  = "";
+this.fv_bData 	   = null;
+this.fv_sFileSize  = "";
+this.fv_sFileType  = "PJT";
+
+this.fv_sSelectRow = "";
+this.fv_sProjectCd = "";
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.PM010_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {
+		// 초기화
+		this.fnInit();
+   }
+}
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "ProjectInfo";
+
+	this.dsProjectInfo.clearData();
+	this.dsProjectInfoDetail.clearData();
+
+	take.tranSelect
+	(
+		this,
+		"ProjectInfo",
+		"ProjectManagement.projectInfoList",
+		"dsSearch",
+		"dsProjectInfo",
+		"",
+		"fnCallback"
+	)
+};
+
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+this.fnSave = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "ProjectDetailSave";
+
+	if (   !take.isDsModified(this.dsFile)
+		&& !take.isDsModified(this.dsMultiLanguageInfo)
+		&& !take.isDsModified(this.dsProjectInfo)
+		&& !take.isDsModified(this.dsProjectInfoDetail)
+		)
+	{
+		//take.alert(this, "info", "변경된 내역이 없습니다.");
+		take.alert(this, "Info", "MS00000001");
+		return;
+	}
+
+	var bRowChange = take.confirm(this, "question", "MS00000072");
+	//take.confirm(this, "question", "저장 하시겠습니까?");
+	if (bRowChange)
+	{
+		var objDivDetail = this.divDetail.form;
+
+		var objDsProjDetail = this.dsProjectInfoDetail;
+		var objDsProjInfo 	= this.dsProjectInfo;
+
+		// 프로젝트 상세정보 저장
+		if(sTranId == "ProjectDetailSave")
+		{
+			if(!takeval.check(this, "Save")) return;
+
+			if (objDsProjInfo.rowcount>0)
+			{
+				// 우측 그리드 '프로젝트 상세' 저장
+				this.fv_sProjectCd = take.nvl(objDsProjDetail.getColumn(0, "PROJECT_CD"), "");
+				this.dsProjectInfoDetail.setColumn(0, "PROJECT_NM", take.nvl(this.divDetail.form.edtProjectNm.value, ""));
+				this.dsProjectInfoDetail.setColumn(0, "DESC_TXT", take.nvl(this.divDetail.form.txtDetailDesc.value, ""));
+				take.transaction
+				(
+					this,
+					"ProjectDetailSave",
+					"SVC_LOC::pm/projectSave.do",
+					"dsProjectInfoDetail=dsProjectInfoDetail:U dsFile=dsFile:U",
+					"",
+					"sProjectCd='"+this.fv_sProjectCd+"' sMenuCd='" + take.getProgInfo(this).ProgId + "'",
+					"fnCallback"
+				);
+			}
+		}
+	}
+
+	if(sTranId == "ProjectInfoDelete")
+	{
+		var nRow 	   = objDsProjInfo.rowposition;
+		var sProjectCd = take.nvl(objDsProjInfo.getColumn(nRow, "PROJECT_CD"), "");
+
+		// 프로젝트 상세정보 삭제
+		take.tranSave
+		(
+			this,
+			"ProjectInfoDelete",
+			"ProjectManagement.projectInfo",
+			"dsProjectInfoDetail",
+			"",
+			"PROJECT_CD='" + sProjectCd + "'",
+			"fnCallback"
+		)
+	}
+};
+
+/**
+ * fnAddRow : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+ * @example this.fnAddRow(sGrdId, nRow);
+ */
+this.fnAddRow = function(sGrdId, nRow)
+{
+    //공통 행추가에서 호출할 디폴트값 세팅
+    if (take.nvl(sGrdId, "")=="") sGrdId = "grdProjectInfo";
+
+    switch(sGrdId) {
+		case "grdProjectInfo":
+			var objDivDetail    = this.divDetail.form;			// Main Div
+			var objDsProjDetail = this.dsProjectInfoDetail;		// Right Detail Dataset
+
+			objDsProjDetail.clearData();
+			objDsProjDetail.addRow();
+
+			if(take.nvl(objDivDetail.staProjectId, "") != ""){
+				objDivDetail.staProjectId.set_text(take.getWord(this, "ML00001513"));
+			}
+
+			objDivDetail.cboType.set_index(0);
+			objDivDetail.cboUseYn.set_value("Y");
+
+			this.fv_sSelectRow = "-1";
+			objDivDetail.grdProjectInfo.selectRow(-1);
+		break;
+    }
+}
+
+/**
+ * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number, Array} arrnRow    deleteRow 리턴값
+ * @return {N/A} N/A
+ * @example this.fnDelRow(sGrdId, nRow);
+ */
+this.fnDelRow = function(sGrdId, arrnRow)
+{
+    //공통 행추가에서 호출할 디폴트값 세팅
+    if (take.nvl(sGrdId, "")=="") sGrdId = "grdProjectInfo";
+
+	if(this.dsProjectInfo.rowcount <= 0) {
+		//take.alert(this, "info", "프로젝트 목록이 없습니다.");
+		take.alert(this, "Info", "MS00000011", {text:this.divDetail.form.staProjectInfoT.text});
+		return;
+	}
+
+	var nRow     = this.dsProjectInfo.rowposition;
+	var nSelProj = this.dsProjectInfo.getColumn(nRow, "PROJECT_NM");
+	var bRowChange = take.confirm(this, "question", "MS00000071");
+	//take.confirm(this, "question", "{name}을(를) {text}하시겠습니까?", { name : nSelProj, text : "삭제"});
+
+	if (bRowChange)
+	{
+		// 삭제 되어야 하는 항목 RowType 'DELETE' <- 바꿔줌
+		var objDsProjDetail = this.dsProjectInfoDetail;
+		objDsProjDetail.set_enableevent(false);
+		objDsProjDetail.set_updatecontrol(false);
+
+		objDsProjDetail.setRowType(0, "D");
+
+		objDsProjDetail.set_updatecontrol(true);
+		objDsProjDetail.set_enableevent(true);
+
+		this.fnSave("ProjectInfoDelete");
+	}
+}
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+
+// grdProjectInfo_onselectchanged : 좌측 프로젝트목록 선택 값 변경시 선택된 row의 프로젝트 상세 정보 조회
+this.grdProjectInfo_onselectchanged = function(obj:nexacro.Grid,e:nexacro.GridSelectEventInfo)
+{
+	var objDivDetail = this.divDetail.form;
+	var nPreSelRow  = parseInt(take.nvl(this.fv_sSelectRow, "-1"));
+	var nCurrSelRow = parseInt(take.nvl(objDivDetail.grdProjectInfo.getSelectedRows(), "-1"));
+
+	if( nCurrSelRow != -1 && (nPreSelRow != nCurrSelRow))
+	{
+		var sRowType = this.dsProjectInfoDetail.getRowType(0);
+		var bRowChange = true;
+		if( "2" == sRowType || "4" == sRowType )
+		{
+			bRowChange = take.confirm(this, "question", "MS00000074");
+			//take.confirm(this, "Info", "작업중인 데이터는 저장되지 않습니다.\n그래도 이동하시겠습니까?");
+		}
+
+		if(bRowChange)
+		{
+			this.fnDetailSearch();
+		}
+		else
+		{
+			nPreSelRow = ( "2" == sRowType ) ? -1 : nPreSelRow;
+			objDivDetail.grdProjectInfo.selectRow(nPreSelRow);
+		}
+	}
+	if (nPreSelRow == 0 && (nPreSelRow == nCurrSelRow) && this.fv_sProjectCd != "")
+	{
+		this.fnDetailSearch();
+	}
+};
+
+// btnDirector_onclick : 담장자 돋보기 버튼 클릭 _ 관리자를 선택하는 Popup Open
+this.btnDirector_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	// 담당자 팝업 소스 작성
+	take.openPopup(this, "PM010P01", "biz::sys/PM010P01.xfdl", "", "",
+		function(sId, sCd){
+			if (take.nvl(sCd, "")!="")
+			{
+				var arrRtn = sCd.split(',');
+				this.dsProjectInfoDetail.setColumn(0, "MANAGER_CD", arrRtn[0]);
+				this.dsProjectInfoDetail.setColumn(0, "MANAGER_NM", arrRtn[1]);
+				this.divDetail.form.edtDirector.set_value(arrRtn[1]);
+			}
+		},
+	false);
+};
+
+// 이미지뷰어 + 클릭
+this.divDetail_imgPm_onclick = function(obj:nexacro.ImageViewer,e:nexacro.ClickEventInfo)
+{
+	// 업로드 소스 작성
+	this.FileDialog00.open('nexacro17', FileDialog.MULTILOAD);
+};
+
+// FileDialog00_onclose : 파일 다이얼로그 닫힐 때 발생
+this.FileDialog00_onclose = function(obj:nexacro.FileDialog,e:nexacro.FileDialogEventInfo)
+{
+	this.addFileList(e.virtualfiles);
+};
+
+// 파일추가 후처리 성공이벤트
+this.FileList_onsuccess = function(obj:nexacro.VirtualFile, e:nexacro.VirtualFileEventInfo)
+{
+	var objDsFile = this.dsFile;
+	switch (e.reason)
+	{
+		case 1:
+			this.divDetail.form.imgPm.set_text("");
+			this.fv_sFileSize = obj.getFileSize();
+
+			break;
+		case 3: // read() 실행시 추가 실행
+			this.divDetail.form.imgPm.set_image(e.binarydata);
+			this.fv_bData = e.binarydata;
+
+			this.dsFile.clearData();
+			var addidx = objDsFile.addRow();
+			objDsFile.setColumn(addidx, "FILE_NM", nexacro.trim(obj.filename));
+			objDsFile.setColumn(addidx, "FILE_BLOB", this.fv_bData);
+			objDsFile.setColumn(addidx, "IMPORT_YN", "N");
+			objDsFile.setColumn(addidx, "FILE_TYPE", this.fv_sFileType);
+			objDsFile.setColumn(addidx, "FILE_SIZE", this.fv_sFileSize);
+
+			break;
+		case 9:	// getFileSize() 실행시 추가 실행
+			if( nexacro._Browser == "Runtime" )
+			{
+				//파일 바이너리데이터 생성
+				obj.read();
+			}
+			else
+			{
+				var objIframe    	  = window.document.getElementsByTagName('iframe');
+				var objInput     	  = objIframe[0].contentWindow.document.getElementsByTagName("input");
+				var objImageView 	  = this.divDetail.form.imgPm;
+				//var objDsFile    	  = this.dsFile;
+
+				for (var i = 0; i < objInput.length; i++) {
+					if (objInput[i].type == "file") {
+						if( objInput[i].files.length > 0 )
+						{
+							var reader  = new FileReader();
+							reader.addEventListener("load", function(){
+								objImageView.set_image(reader.result);
+
+								objDsFile.setColumn(addidx, "FILE_BLOB", reader.result);
+								objDsFile.setColumn(addidx, "IMPORT_YN", "N");
+							});
+
+							reader.readAsDataURL(objInput[i].files[0], "EUC-KR");
+							objDsFile.clearData();
+							var addidx = objDsFile.addRow();
+							objDsFile.setColumn(addidx, "FILE_NM", nexacro.trim(objInput[i].files[0].name));
+							objDsFile.setColumn(addidx, "FILE_TYPE", this.fv_sFileType);
+							objDsFile.setColumn(addidx, "FILE_SIZE", this.fv_sFileSize);
+						}
+					}
+				}
+			}
+			break;
+		default :
+			break;
+	}
+}
+
+// 파일추가 후처리 실패이벤트
+this.FileList_onerror = function(obj:nexacro.VirtualFile, e:nexacro.VirtualFileErrorEventInfo)
+{
+	trace("errortype: "+e.errortype);
+	trace("errormsg: "+e.errormsg);
+	trace("statuscode: "+e.statuscode);
+}
+
+// btnMultiLanguage_onclick : 다국어 버튼 클릭 _ 다국어관리에서 등록한 다국어 정보를 선택하는 Popup화면 Open
+this.btnMultiLanguage_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	take.openPopup(this, "addMultiLanguage", "biz::sys/OM010P06.xfdl", "", "", "fnPopCallback", false);
+};
+
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnInit : 초기화 함수
+ * @example this.fnInit();
+ */
+this.fnInit = function()
+{
+	// 공통 코드조회 함수 호출
+    this.fnCommonCode();
+
+	// 접속한 사용자가 프로젝트 관리자인 경우에만 검색조건 프로젝트 선택 가능
+// 	this.divSearch.form.cboProjectNm.set_value(this.fv_sGdsProjectCd);
+// 	if(this.fv_sGdsAdminYn == "Y"){
+// 		this.divSearch.form.cboProjectNm.set_readonly(false);
+// 	}
+
+	//벨리데이션
+	takeval.add(this, "Save", this.divDetail.form.edtProjectNm, 	this.divDetail.form.staProjectNmT.text		,  "value", true, "string", [0,20], "");
+	takeval.add(this, "Save", this.divDetail.form.cboType, 	    	this.divDetail.form.staTypeT.text 		 	,  "value", true, "string", "", "");
+	takeval.add(this, "Save", this.divDetail.form.cboProjectComp,	this.divDetail.form.staProjectCompT.text  	,  "value", true, "string", "", "");
+	takeval.add(this, "Save", this.divDetail.form.cboUseYn, 		this.divDetail.form.staUseYnT.text  		,  "value", true, "string", "", "");
+	takeval.add(this, "Save", this.divDetail.form.edtDirector,  	this.divDetail.form.staDirectorT.text	 	,  "value", true, "string", [0,20], "");
+};
+
+/**
+ * fnCommonCode : 공통 코드조회
+ * @example this.fnCommonCode();
+ */
+this.fnCommonCode = function ()
+{
+	var objDivSearch = this.divSearch.form;
+
+	var arrGroupCodes = ["00002", "00009", "00009"];
+	var arrOutDs      = ["dsCboType", "dsCboUseYn", "dsCboDetailUseYn"];
+	var arrHeaderType = ["", "ALL", ""];
+
+	take.tranCode(this, arrGroupCodes, arrOutDs, arrHeaderType,
+		function(sId, nErrCd, sErrMsg)
+		{
+			take.tranSelect
+			(
+				this,
+				"projectCompList",
+				"ProjectManagement.projectCompList",
+				"",
+				"dsCboProjComp",
+				"",
+				function(sId, nErrCd, sErrMsg)
+				{
+					if (this.dsCboProjComp.rowcount > 0)
+					{
+						this.divDetail.form.cboProjectComp.set_index(0);
+					}
+					if (this.dsCboType.rowcount > 0)
+					{
+						objDivSearch.cboType.set_index(0);
+					}
+					if (this.dsCboUseYn.rowcount > 0)
+					{
+						objDivSearch.cboUseYn.set_index(1);
+					}
+					this.fnSearch("ProjectInfo");
+				}
+			);
+		}
+	);
+};
+
+/**
+ * fnDetailSearch : 좌측 그리드 메뉴목록 선택시 우측 디테일 데이터 조회 트랜잭션
+ * @example this.fnDetailSearch();
+ */
+this.fnDetailSearch = function ()
+{
+	var objDsProjInfo = this.dsProjectInfo;
+	var nRow 		  = objDsProjInfo.rowposition;
+
+	this.dsProjectInfoDetail.clearData();
+	this.fv_sSelectRow = this.divDetail.form.grdProjectInfo.getSelectedRows();
+
+	// 선택된 row의 프로젝트 상세 정보 조회
+	var sProjectCd = take.nvl(objDsProjInfo.getColumn(nRow, "PROJECT_CD"), "");
+	take.tranSelect
+	(
+		this,
+		"projectInfoDetail",
+		"ProjectManagement.projectInfoDetail",
+		"",
+		"dsProjectInfoDetail",
+		"PROJECT_CD='" + sProjectCd + "'",
+		function(sId, nErrCd, sErrMsg){
+			// 선택된 row의 다국어 정보 조회
+			this.dsMultiLanguageInfo.clearData();
+
+			var sProjectCd = take.nvl(this.dsProjectInfoDetail.getColumn(0, "PROJECT_CD"), "");		// 선택한 row 다국어 코드
+			var sMlCd = take.nvl(this.dsProjectInfoDetail.getColumn(0, "ML_CD"), "");		// 선택한 row 다국어 코드
+
+			take.tranSelect
+			(
+				this,
+				"multilanguageDetailList",
+				"ProjectManagement.projectLanguageList",
+				"",
+				"dsMultiLanguageInfo",
+				"sProjectCd='" + sProjectCd + "' sMlCd='" + sMlCd + "'",
+				"fnCallback"
+			);
+
+			if(this.dsProjectInfoDetail.rowcount <= 0){
+				this.dsProjectInfoDetail.addRow();
+			}
+
+			if(take.isEmpty(this.dsProjectInfoDetail.getColumn(0, "PROJECT_BLOB"))){
+				this.divDetail.form.imgPm.set_text("+");
+			}else{
+				this.divDetail.form.imgPm.set_text("")
+			}
+		}
+	);
+}
+
+/**
+ * addFileList : 멀티 파일 추가
+ * @example this.addFileList();
+ */
+this.addFileList = function(filelist)
+{
+	for (var i = 0, len = filelist.length, vFile; i < len; i++)
+	{
+		vFile = filelist[i];
+ 		vFile.addEventHandler("onsuccess", this.FileList_onsuccess, this);
+ 		vFile.addEventHandler("onerror", this.FileList_onerror , this);
+
+		vFile.open(null, nexacro.VirtualFile.openBinary);
+	}
+}
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : sId   	 - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : nErrCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : sErrMsg  - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script
+    } else {
+        //Etc Script
+    }
+
+    switch(sId)
+    {
+        case "ProjectInfo" : 		// 프로젝트 정보 조회 콜백
+			var nRowCount = this.dsProjectInfo.rowcount;
+			var objDiv    = this.divDetail.form;
+			if (nRowCount > 0){
+				//objDiv.staProjectInfoT.set_text("프로젝트 목록 ("+nRowCount+"건)");
+				objDiv.imgPm.set_visible(true);
+				this.fnDetailSearch();
+			} else {
+				//objDiv.staProjectInfoT.set_text("프로젝트 목록 (0건)");
+				objDiv.imgPm.set_visible(false);
+			}
+			take.tranSelect
+			(
+				this,
+				"projectInfoCode",
+				"ProjectManagement.projectInfoList",
+				"",
+				"dsCboProjectCd",
+				"",
+				function(sId, nErrCd, sErrMsg)
+				{
+					var objDsCboProj = this.dsCboProjectCd;
+					if (objDsCboProj.rowcount>0)
+					{
+						var addInsertRow = objDsCboProj.insertRow(0);
+						objDsCboProj.setColumn(addInsertRow, "PROJECT_CD", "");
+						objDsCboProj.setColumn(addInsertRow, "PROJECT_NM", take.getWord(this, "MS00000078"));
+					}
+				}
+			)
+            break;
+
+        case "projectInfoDetail" :  // 프로젝트 상세 조회 콜백
+			//this.fv_sSelectRow = this.divDetail.form.grdProjectInfo.getSelectedRows();
+            break;
+
+        case "multilanguageDetailList" : // 다국어 정보 조회 콜백
+            break;
+
+        case "ProjectDetailSave" :  // 프로젝트 상세정보 저장 콜백
+			this.fnSearch("ProjectInfo");
+            break;
+
+		 case "ProjectInfoDelete" :  // 프로젝트 상세정보 삭제 콜백
+			this.dsSearch.setColumn(0, "PROJECT_CD", "");
+			this.fnSearch("ProjectInfo");
+            break;
+    }
+}
+
+this.fnPopCallback = function (sId, nReturnVal)
+{
+	switch(sId) {
+	case "addMultiLanguage":
+		//팝업이 닫히면서 nReturnVal을 통해 값을 받을 수 있습니다
+		if(take.nvl(nReturnVal, "") != "") {
+			nReturnVal = nReturnVal.split(",")[0];
+			this.dsProjectInfoDetail.setColumn(0, "ML_CD", nReturnVal);
+		} else return;
+		// 선택된 row의 다국어 정보 조회
+		this.dsMultiLanguageInfo.clearData();
+		take.tranSelect(this, "multilanguageDetailList", "SystemCommon.multilanguageDetailList", "", "dsMultiLanguageInfo", "sMlCd='" + nReturnVal + "'", "fnCallback");
+		break;
+	default:
+	}
+};]]></Script>
+    <Bind>
+      <BindItem id="item6" compid="staRegDt" propid="text" datasetid="dsProjectInfoDetail" columnid="REG_DT"/>
+      <BindItem id="item9" compid="staModDt" propid="text" datasetid="dsProjectInfoDetail" columnid="MOD_DT"/>
+      <BindItem id="item0" compid="divDetail.form.cboUseYn" propid="value" datasetid="dsProjectInfoDetail" columnid="USE_YN"/>
+      <BindItem id="item1" compid="divDetail.form.cboType" propid="value" datasetid="dsProjectInfoDetail" columnid="PROJECT_TYPE"/>
+      <BindItem id="item2" compid="divDetail.form.edtDirector" propid="value" datasetid="dsProjectInfoDetail" columnid="MANAGER_NM"/>
+      <BindItem id="item3" compid="divDetail.form.edtProjectNm" propid="value" datasetid="dsProjectInfoDetail" columnid="PROJECT_NM"/>
+      <BindItem id="item4" compid="divDetail.form.txtDetailDesc" propid="value" datasetid="dsProjectInfoDetail" columnid="DESC_TXT"/>
+      <BindItem id="item5" compid="divDetail.form.staReg" propid="text" datasetid="dsProjectInfoDetail" columnid="REG_NM"/>
+      <BindItem id="item7" compid="divDetail.form.staRegDt" propid="text" datasetid="dsProjectInfoDetail" columnid="REG_DT"/>
+      <BindItem id="item8" compid="divDetail.form.staMod" propid="text" datasetid="dsProjectInfoDetail" columnid="MOD_NM"/>
+      <BindItem id="item10" compid="divDetail.form.staModDt" propid="text" datasetid="dsProjectInfoDetail" columnid="MOD_DT"/>
+      <BindItem id="item11" compid="divDetail.form.imgPm" propid="image" datasetid="dsProjectInfoDetail" columnid="PROJECT_BLOB"/>
+      <BindItem id="item12" compid="divDetail.form.staProjectId" propid="text" datasetid="dsProjectInfoDetail" columnid="PROJECT_CD"/>
+      <BindItem id="item13" compid="divSearch.form.cboType" propid="value" datasetid="dsSearch" columnid="PROJECT_TYPE"/>
+      <BindItem id="item14" compid="divSearch.form.cboProjectNm" propid="value" datasetid="dsSearch" columnid="PROJECT_CD"/>
+      <BindItem id="item15" compid="divSearch.form.cboUseYn" propid="value" datasetid="dsSearch" columnid="USE_YN"/>
+      <BindItem id="item16" compid="divDetail.form.staProjectId00" propid="text" datasetid="dsProjectInfoDetail" columnid="PROJECT_CD"/>
+      <BindItem id="item17" compid="divDetail.form.cboProjectComp" propid="value" datasetid="dsProjectInfoDetail" columnid="COMP_CD"/>
+    </Bind>
+  </Form>
+</FDL>

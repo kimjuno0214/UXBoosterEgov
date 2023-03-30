@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="sampleApi" width="1040" height="970" titletext="(샘플)대시보드 Api">
+    <Layouts>
+      <Layout height="970" mobileorientation="landscape" width="1040">
+        <Div id="Div00" taborder="0" text="Div00" left="590" top="207" width="410" height="130" url="frm::dbc/dbcWeather.xfdl" border="1px solid"/>
+        <Static id="Static00" taborder="1" text="날씨 Api" left="590" top="183" width="410" height="15" cssclass="sta_WF_title02"/>
+        <Div id="Div01" taborder="3" text="Div01" left="10" top="39" width="549" height="299" url="frm::dbc/dbcNews.xfdl" border="1px solid"/>
+        <Static id="Static00_00" taborder="2" text="네이버 뉴스 검색 Api" left="10" top="15" width="410" cssclass="sta_WF_title02" bottom="Div01:9"/>
+        <Static id="Static00_00_00" taborder="4" text="검색박스 활성화 CTRL + B" left="275" top="15" width="220" bottom="Div01:9"/>
+        <Static id="Static00_01" taborder="5" text="환율 Api" left="590" top="15" width="410" height="15" cssclass="sta_WF_title02"/>
+        <Div id="Div00_00" taborder="6" text="Div00" left="590" top="39" width="410" height="130" url="frm::dbc/dbcExchange.xfdl" border="1px solid"/>
+        <Static id="Static00_02" taborder="7" text="현재시간 Api" left="590" top="360" width="410" height="15" cssclass="sta_WF_title02"/>
+        <Div id="Div00_01" taborder="8" text="Div00" left="590" top="384" width="410" height="130" url="frm::dbc/dbcTime.xfdl" border="1px solid"/>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>

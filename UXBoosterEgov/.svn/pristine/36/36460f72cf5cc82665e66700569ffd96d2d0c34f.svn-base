@@ -1,0 +1,442 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="SASD020" width="1040" height="659" titletext="Job Schedule 이력" background="#FFFFFF" onload="SASD020_onload">
+    <Layouts>
+      <Layout height="659" mobileorientation="landscape" width="1040">
+        <Div id="divSearch" taborder="0" text="Div00" left="10" top="0" height="72" cssclass="div_WF_searchBox01" right="10">
+          <Layouts>
+            <Layout>
+              <Calendar id="calWrkDt2" taborder="1" left="239" top="10" width="110" height="21" autoselect="true" onkeydown="fn_NextWhenEnter"/>
+              <Static id="staSaleMonT" taborder="4" text="프로시져" left="10" top="40" width="90" height="21" cssclass="sta_WF_textRImport" border="1px solid transparent"/>
+              <Combo id="cboProcId" taborder="2" left="staSaleMonT:3" top="40" width="246" height="21" index="0" codecolumn="CODE" datacolumn="NAME" value="Y" innerdataset="dsCboJobKind" onkeydown="fn_NextWhenEnter"/>
+              <Static id="staOrdDtT00" taborder="5" text="프로시져 명/설명" left="cboProcId:20" top="40" width="118" height="21" cssclass="sta_WF_textR" border="1px solid transparent"/>
+              <Edit id="edtProcNm" taborder="3" left="staOrdDtT00:3" top="40" height="21" readonly="false" autoselect="true" imemode="none" maxlength="500" onkeyup="fn_NextWhenEnter" width="231"/>
+              <Static id="staOrdDtT" taborder="6" text="작업일자" left="10" top="10" width="90" height="21" cssclass="sta_WF_textRImport" border="1px solid transparent"/>
+              <Calendar id="calWrkDt1" taborder="0" left="staOrdDtT:3" top="10" width="110" height="21" autoselect="true" onkeydown="fn_NextWhenEnter"/>
+              <Static id="Static10" taborder="7" text="~" left="calWrkDt1:3" top="10" width="20" height="21" cssclass="sta_WF_textC"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnShowHide" taborder="2" left="48.08%" top="divSearch:0" width="40" height="10" cssclass="btn_WF_fold01" tabstop="false"/>
+        <Div id="divDetail" taborder="1" left="10" top="btnShowHide:10" bottom="10" right="10">
+          <Layouts>
+            <Layout>
+              <Grid id="grdMain" taborder="0" left="0" top="0" rtl="false" cellsizingtype="col" autoenter="select" right="0" binddataset="dsGrdMain" bottom="0" selecttype="multiarea" onkeydown="divDetail_grdMain_onkeydown" onmouseup="divDetail_grdMain_onmouseup" onvscroll="divDetail_grdMain_onvscroll" onexpandup="divDetail_grdMain_onexpandup" takegrid="sort,excel,movetocell">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="89"/>
+                      <Column size="200"/>
+                      <Column size="40"/>
+                      <Column size="90"/>
+                      <Column size="200"/>
+                      <Column size="220"/>
+                      <Column size="60"/>
+                      <Column size="180"/>
+                      <Column size="180"/>
+                      <Column size="80"/>
+                      <Column size="280"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="40" band="head"/>
+                      <Row size="26"/>
+                      <Row size="32" band="summ"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="code"/>
+                      <Cell col="1" text="name"/>
+                      <Cell col="2" text="순번"/>
+                      <Cell col="3" text="작업일자"/>
+                      <Cell col="4" text="프로시저ID"/>
+                      <Cell col="5" text="프로시저명"/>
+                      <Cell col="6" text="작업순번" expr="'작업\n순번'"/>
+                      <Cell col="7" text="작업시작일시"/>
+                      <Cell col="8" text="작업종료일시"/>
+                      <Cell col="9" text="작업결과"/>
+                      <Cell col="10" text="비고"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:SHOP_CD" displaytype="normal" edittype="none" comboautoselect="false" cssclass="expr:RNUM=='0'?'':'cellGrade07'" textAlign="center"/>
+                      <Cell col="1" text="bind:SHOP_NM" displaytype="normal" edittype="text" comboautoselect="false" cssclass="expr:RNUM=='0'?'':'cellGrade07'" editautoselect="true"/>
+                      <Cell col="2" textAlign="center" expr="currow+1" cssclass="expr:RNUM=='0'?'':'cellGrade07'"/>
+                      <Cell col="3" text="bind:WRK_DT" textAlign="center" displaytype="mask" maskeditformat="@@@@-@@-@@" maskedittype="string" cssclass="expr:RNUM=='0'?'':'cellGrade07'"/>
+                      <Cell col="4" text="bind:PROC_ID" displaytype="normal" edittype="none" comboautoselect="false" cssclass="expr:RNUM=='0'?'':'cellGrade07'"/>
+                      <Cell col="5" text="bind:PROC_NM" displaytype="normal" cssclass="expr:RNUM=='0'?'':'cellGrade07'" expandchar="..." expandshow="show" expandsize="22" expandimage="url('theme://images/transparent.png')"/>
+                      <Cell col="6" text="bind:WRK_SEQ_NO" displaytype="normal" textAlign="center" cssclass="expr:RNUM=='0'?'':'cellGrade07'"/>
+                      <Cell col="7" text="bind:WRK_STR_TIME_NM" textAlign="center" displaytype="normal" cssclass="expr:RNUM=='0'?'':'cellGrade07'"/>
+                      <Cell col="8" text="bind:WRK_END_TIME_NM" textAlign="center" displaytype="normal" cssclass="expr:RNUM=='0'?'':'cellGrade07'"/>
+                      <Cell col="9" text="bind:WRK_RESULT_GB" textAlign="center" displaytype="decoratetext" expr="WRK_RESULT_GB=='OK' ? WRK_RESULT_GB : &quot;&lt;b v='true'&gt;&lt;fc v='#FF0000'&gt;&quot;+WRK_RESULT_GB+&quot;&lt;/fc&gt;&lt;/b&gt;&quot;" cssclass="expr:RNUM=='0'?'':'cellGrade07'"/>
+                      <Cell col="10" text="bind:WRK_RESULT" displaytype="normal" cssclass="expr:RNUM=='0'?'':'cellGrade07'"/>
+                    </Band>
+                    <Band id="summary">
+                      <Cell expr="take.setComma(dataset.getRowCount()).toString()+' 건'" textAlign="right" padding="0px 3px"/>
+                      <Cell col="1" expr="take.setComma(dataset.getRowCount()).toString()+' 건'" textAlign="right" padding="0px 3px"/>
+                      <Cell col="2" textAlign="right" padding="0px 3px"/>
+                      <Cell col="3"/>
+                      <Cell col="4" expr="take.setComma(dataset.getRowCount()).toString()+' 건'" textAlign="right" padding="0px 3px"/>
+                      <Cell col="5"/>
+                      <Cell col="6"/>
+                      <Cell col="7" displaytype="number" textAlign="right" padding="0px 3px"/>
+                      <Cell col="8" displaytype="number" textAlign="right" padding="0px 3px"/>
+                      <Cell col="9" displaytype="number" textAlign="right" padding="0px 3px"/>
+                      <Cell col="10" displaytype="number" textAlign="right" padding="0px 3px"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Div id="divDesc" taborder="1" left="743" top="169" width="200" height="158" border="1px solid #c0c0c0" background="#bfcddb" visible="false">
+                <Layouts>
+                  <Layout>
+                    <TextArea id="txtDesc" taborder="1" left="6" top="35" width="187" height="113" wordWrap="char" border="1px solid #c0c0c0"/>
+                    <Button id="btnDescClose" taborder="0" text="x" left="164" top="4" width="28" height="25" onclick="divDesc_btnDescClose_onclick" tabstop="false"/>
+                  </Layout>
+                </Layouts>
+              </Div>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divTest" taborder="3" text="Div00" left="639" top="425" width="178" height="70" border="1px solid #808080" visible="false" background="#f2f2f2">
+          <Layouts>
+            <Layout>
+              <Button id="Button00" taborder="0" text="test" left="9" top="37" width="76" height="23" onclick="divTest_Button00_onclick"/>
+              <Button id="Button00_00" taborder="1" text="test2" left="93" top="37" width="74" height="23" onclick="divTest_Button00_00_onclick"/>
+              <Button id="Button01" taborder="2" text="sch" left="9" top="7" width="34" height="23" onclick="fnSearch"/>
+              <Button id="Button01_00" taborder="3" text="add" left="51" top="7" width="34" height="23" onclick="fnAddRow"/>
+              <Button id="Button01_00_00" taborder="4" text="del" left="93" top="7" width="34" height="23" onclick="fnDelRow"/>
+              <Button id="Button01_00_00_00" taborder="5" text="sav" left="133" top="7" width="34" height="23" onclick="fnSave"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsGrdMain" useclientlayout="true" cancolumnchange="dsGrdMain_cancolumnchange" onrowposchanged="dsGrdMain_onrowposchanged">
+        <ColumnInfo>
+          <Column id="SHOP_CD" type="STRING" size="256"/>
+          <Column id="SHOP_NM" type="STRING" size="256"/>
+          <Column id="WRK_DT" type="STRING" size="256"/>
+          <Column id="PROC_ID" type="STRING" size="256"/>
+          <Column id="PROC_NM" type="STRING" size="256"/>
+          <Column id="WRK_SEQ_NO" type="STRING" size="256"/>
+          <Column id="WRK_STR_TIME" type="STRING" size="256"/>
+          <Column id="WRK_END_TIME" type="STRING" size="256"/>
+          <Column id="WRK_STR_TIME_NM" type="STRING" size="256"/>
+          <Column id="WRK_END_TIME_NM" type="STRING" size="256"/>
+          <Column id="WRK_RESULT_GB" type="STRING" size="256"/>
+          <Column id="WRK_RESULT" type="STRING" size="256"/>
+          <Column id="REG_ID" type="STRING" size="256"/>
+          <Column id="REG_TIME" type="DATETIME" size="256"/>
+          <Column id="UPD_ID" type="STRING" size="256"/>
+          <Column id="UPD_TIME" type="DATETIME" size="256"/>
+          <Column id="RNUM" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsCboJobKind"/>
+      <Dataset id="dsTemp"/>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/*------------------------------------------------------------------------------------------
+|  SYSTEM FORM NAME
+|
+|  @MenuPath : sys > ST03.xfdl
+|  @FileName : ST03.xfdl
+|  @Desction : 시스템 > 통계 > Job Schedule 이력
+|
+|  History  :	1. Initial Release, 2020.07.23, s.w.Lee
+|					- 최초 작성
+|				2. Modification,    
+|					- 
++-------------------------------------------------------------------------------------------*/
+
+//공통 라이브러리 호출
+
+//=========================================================
+// 1.1 FORM 변수 선언 영역
+//=========================================================
+this.fv_sGdsProjectCd  = UXBooster.av_sProjectCd;  // 글로변 변수_프로젝트코드
+
+//=========================================================
+// 1.2 FORM EVENT 영역(onload등)
+//=========================================================
+this.SASD020_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	if( take.formOnLoad(this) ) { //공통 온로드(필수)
+		if (nexacro._Browser == "Runtime") this.divTest.set_visible(true);
+		
+		take.comBtnRoleAll(this, "YYYYNN");
+
+		// 지점
+		take.tranSelect( this
+						,"__jobDistinct"
+						,"Statistics.jobKind"
+						,""
+						,"dsCboJobKind"
+						,""
+						,	function(sId, nErrCd, sErrMsg) {
+								var iNewRow = this.dsCboJobKind.insertRow(0);
+								this.dsCboJobKind.setColumn(iNewRow,"CODE","");
+								this.dsCboJobKind.setColumn(iNewRow,"NAME","전체");
+								this.divSearch.form.cboProcId.set_index(0);
+							}
+						,false  // sync
+						);
+		// 년월
+		var sDt1 = takeEtc.getDtString(this,"TO_CHAR(SYSDATE-1,'YYYYMMDD')");
+		var sDt2 = takeEtc.getDtString(this,"TO_CHAR(SYSDATE,  'YYYYMMDD')");
+		this.divSearch.form.calWrkDt1.set_value(sDt1);
+		this.divSearch.form.calWrkDt2.set_value(sDt2);
+		
+		this.divSearch.form.edtProcNm.setFocus();
+	}
+}
+
+
+//=========================================================================
+//  2 필수 FUNCTION 영역 (fnInit, fnSearch, fnSave, fnAddRow, fnDelRow)
+//=========================================================================
+this.fnSearch = function(sTranId)
+{
+	var sDt1 = this.divSearch.form.calWrkDt1.value;
+	var sDt2 = this.divSearch.form.calWrkDt2.value;
+	if( take.isFromTo(sDt1,sDt2) == false ) {
+		take.alert(this, "info", "종료일이 시작일 이전입니다.");
+		this.divSearch.form.calWrkDt2.setFocus();
+		return;
+	}
+	
+	var sPara  =  "WRK_DT1=" + nexacro.wrapQuote(take.nvl(this.divSearch.form.calWrkDt1.value, ""));
+		sPara += " WRK_DT2=" + nexacro.wrapQuote(take.nvl(this.divSearch.form.calWrkDt2.value, ""));
+		sPara += " PROC_ID=" + nexacro.wrapQuote(take.nvl(this.divSearch.form.cboProcId.value, ""));
+		sPara += " PROC_NM=" + nexacro.wrapQuote(take.nvl(this.divSearch.form.edtProcNm.value, ""));
+	
+	this.dsGrdMain.clearData();
+	take.tranSelect( this
+					,"mainList"
+					,"Statistics.jobList"
+					,""
+					,"dsGrdMain"
+					,sPara
+					,"fnCallback"
+					);
+}
+
+this.fnAddRow = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+};
+
+//==================================================
+//  삭제
+//==================================================
+this.fnDelRow = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+};
+
+//==================================================
+//  저장
+//==================================================
+this.fnSave = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+};
+
+//=========================================================
+//  3 각 COMPONENT 별 EVENT 영역
+//=========================================================
+this.fnUserFunc = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{	
+};
+
+//===========================================================
+//  포커스 이동(엔터시)
+//===========================================================
+this.fn_NextWhenEnter = function(obj:nexacro.Calendar,e:nexacro.KeyEventInfo)
+{
+	if( e.keycode == 13 ) {
+		if( obj.parent.parent.name=="divSearch" ) {
+			switch(obj.name) {
+				case "edtProcNm":
+					this.fnSearch();
+					break;
+				default:
+					trace(this.divSearch.form.getNextComponent(obj,false));
+					this.divSearch.form.getNextComponent(obj,false).setFocus();
+					break;
+			}
+		}
+    }
+};
+
+//======================================
+//  Callback
+//======================================
+this.fnCallback = function(sSvcId, nErrCd, sErrMsg)
+{
+	if( sErrMsg == "SUCC" ) {
+	    //Success Script
+	}
+	else {
+	    //Etc Script
+	}
+
+	switch(sSvcId) {
+		case "mainList":
+// 			if( this.dsGrdMain.rowcount > 0 ) {
+// 				this.divDetail.form.grdMain.setFocus();
+// 			}
+			break;
+		default:
+			break;
+	}
+};
+
+
+this.divDetail_grdMain_onkeydown = function(obj:nexacro.Grid,e:nexacro.KeyEventInfo)
+{
+	if( e.ctrlkey == true && e.keycode == 86 ) {
+		// trace("XXXXX");
+	}
+	
+};
+
+this.divDetail_grdMain_onexpandup = function(obj:nexacro.Grid,e:nexacro.GridMouseEventInfo)
+{
+	if( e.row < 0 || take.getBindColName(obj, e.cell) != "PROC_NM" ) { // 필터등의 head 부분을 클릭했다면 return; && colid 체크
+		return;
+	}
+	
+	if( this.divDetail.form.divDesc.visible == true && this.fv_iExpandRow == e.row ) {
+		this.fv_iExpandRow = -1;
+		this.divDetail.form.divDesc.set_visible(false);
+		return;
+	}
+	
+	this.fv_iExpandRow = e.row;
+	
+	var cellRect = obj.getCellRect(e.row, e.cell);  //  "left", "top", "right", "bottom", "width", "height" 
+	// var left = cellRect.left;  // cell 왼쪽 라인에 맞추기.
+	var left = cellRect.left + (cellRect.width - this.divDetail.form.divDesc.width) +1;  // cell 오른쪽 라인에 맞추기.
+	var top  = cellRect.top + cellRect.height;
+	
+	if( top + this.divDetail.form.divDesc.getOffsetHeight() > this.divDetail.form.grdMain.getOffsetHeight() ) {
+		top = cellRect.top - this.divDetail.form.divDesc.getOffsetHeight();
+	}
+	
+	var sTxt = obj.getCellText(e.row, e.cell);
+		sTxt = sTxt+sTxt+sTxt+sTxt+sTxt+sTxt;
+	this.divDetail.form.divDesc.form.txtDesc.set_value(sTxt);
+	this.divDetail.form.divDesc.set_left(left);
+	this.divDetail.form.divDesc.set_top(top);
+	
+	this.divDetail.form.divDesc.set_visible(true);
+	this.divDetail.form.divDesc.form.txtDesc.setFocus();
+};
+
+this.divDesc_btnDescClose_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.divDetail.form.divDesc.set_visible(false);
+};
+
+this.divDetail_grdMain_onvscroll = function(obj:nexacro.Grid,e:nexacro.ScrollEventInfo)
+{
+	if( this.divDetail.form.divDesc.visible == true ) {
+		this.fv_iExpandRow = -1;
+		this.divDetail.form.divDesc.set_visible(false);
+	}	
+};
+
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	take.alert(this, "Info", "MS00000031");
+	take.alert(this, "Info", "ML00000001");
+
+	return;
+	take.alert(this, "Info", "MS00000001");
+	take.alert(this, "Info", "ML00000046");
+	take.alert(this, "Info", "ML00000003");
+
+	// take.alert(this, "Info", "MS00000004", {text:take.getWord(this, "ML00000005") });
+	// take.alert(this, "Info", "MS00000010", {text:take.getWord(this, "ML00001377") });
+
+	// take.alert(this, "Info", "MS00000008");
+	// take.alert(this, "Info", "ML00000046");
+
+	//this.divDetail.form.divDesc.form.txtDesc.setFocus();
+};
+
+
+this.Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	alert(this.parent.parent.btnDel.visible);
+	this.divSearch.form.staOrdDtT._cell_elem.handle.setAttribute("class", "fa fa-cloud fa-5x");
+};
+
+this.dsGrdMain_cancolumnchange = function(obj:nexacro.NormalDataset,e:nexacro.DSColChangeEventInfo)
+{
+	if( e.columnid == "SHOP_NM" ) {
+		if( take.isEmpty(e.newvalue) == true ) {
+			obj.set_enableevent(false);
+			obj.setColumn(e.row,"SHOP_CD","");
+			obj.setColumn(e.row,"SHOP_NM","");
+			obj.set_enableevent(true);
+			return false;
+		}
+		else {
+			this.dsTemp.clearData();
+			var sPara = "shopNm=" + nexacro.wrapQuote(take.nvl(e.newvalue, ""));
+			var bOk = false;
+			take.tranSelect(  this
+							, "shopList"
+							, "Com.shopList"
+							, ""
+							, "dsTemp"
+							, sPara
+							, function(sId, nErrCd, sErrMsg) {
+								if( this.dsTemp.rowcount == 0 ) {
+								}
+								else if( this.dsTemp.rowcount == 1 ) {
+									obj.set_enableevent(false);
+									obj.setColumn(e.row,"SHOP_CD",this.dsTemp.getColumn(0,"SHOP_CD"));
+									obj.setColumn(e.row,"SHOP_NM",this.dsTemp.getColumn(0,"SHOP_NM"));
+									obj.set_enableevent(true);
+								}
+								else {
+									take.openPopup(   this
+													, "comShopPop"
+													, "frm::com/comShopPop.xfdl"
+													, {shopNm:e.newvalue}
+													, ""
+													, 	function(sId, sRtn) {
+															if( take.isEmpty(sRtn) == true ) {
+																bOk = false;
+															}
+															else {
+																var sRtn = sRtn.split(",");
+																obj.set_enableevent(false);
+																obj.setColumn(e.row,"SHOP_CD",sRtn[0]);
+																obj.setColumn(e.row,"SHOP_NM",sRtn[1]);
+																obj.set_enableevent(true);
+																bOk = false;
+															}
+														}
+													, false
+													);
+								}
+							},false);
+			return false;
+		}
+	}
+	return true;
+};
+
+this.divTest_Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.divSearch.form.calWrkDt1.set_value('20200925');
+	this.divSearch.form.calWrkDt1.set_value('20200925');
+	this.fnSearch();
+};
+
+this.dsGrdMain_onrowposchanged = function(obj:nexacro.NormalDataset,e:nexacro.DSRowPosChangeEventInfo)
+{
+	trace('onrowposchanged >> ' + e.newrow);
+};
+]]></Script>
+  </Form>
+</FDL>

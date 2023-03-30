@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="NM010" width="1659" height="832" titletext="일정관리 Main">
+    <Layouts>
+      <Layout height="832" mobileorientation="landscape" width="1659">
+        <Static id="Static00" taborder="0" text="10" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" color="red" textAlign="center"/>
+        <Static id="Static03" taborder="1" text="10" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" color="red" textAlign="center" right="0"/>
+        <Button id="btnList" taborder="2" text="목록" top="2" width="46" height="23" right="10" onclick="btnList_onclick"/>
+        <Button id="btnAdd" taborder="3" text="일정추가" top="2" width="70" height="23" right="59" onclick="btnAdd_onclick" cssclass="btn_WF_plus01"/>
+        <Button id="btnMonthly" taborder="4" text="월간일정" left="10" top="1" width="110" height="27" cssclass="btn_WF_tab02" onclick="btnMonthly_onclick"/>
+        <Button id="btnWeekly" taborder="5" text="주간일정" left="btnMonthly:0" top="1" width="110" height="27" cssclass="btn_WF_tab01" onclick="btnWeekly_onclick"/>
+        <Div id="divDisplay" taborder="6" left="10" top="27" cssclass="dvi_WF_tabBox01" right="10" bottom="0" url="frm::mod/NM010T01.xfdl"/>
+        <Static id="Static18" taborder="7" left="1600" top="3" width="3" height="21" cssclass="sta_GD_Square" visible="false"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="COLUMN0" type="STRING" size="256"/>
+          <Column id="COLUMN1" type="STRING" size="256"/>
+          <Column id="COLUMN2" type="STRING" size="256"/>
+          <Column id="COLUMN3" type="STRING" size="256"/>
+          <Column id="COLUMN4" type="STRING" size="256"/>
+          <Column id="COLUMN5" type="STRING" size="256"/>
+          <Column id="COLUMN6" type="STRING" size="256"/>
+          <Column id="COLUMN7" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="Dataset01">
+        <ColumnInfo>
+          <Column id="COLUMN0" type="STRING" size="256"/>
+          <Column id="COLUMN1" type="STRING" size="256"/>
+          <Column id="COLUMN2" type="STRING" size="256"/>
+          <Column id="COLUMN3" type="STRING" size="256"/>
+          <Column id="COLUMN4" type="STRING" size="256"/>
+          <Column id="COLUMN5" type="STRING" size="256"/>
+          <Column id="COLUMN6" type="STRING" size="256"/>
+          <Column id="COLUMN7" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="COLUMN2">일정타이틀</Col>
+            <Col id="COLUMN0">12:00</Col>
+          </Row>
+          <Row>
+            <Col id="COLUMN0">13:00</Col>
+          </Row>
+          <Row>
+            <Col id="COLUMN0">14:00</Col>
+          </Row>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    1Depth > 2Depth
+*  @FileName    *.xfdl 
+*  @Creator     이동건
+*  @CreateDate  2019.09.17 
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    Date          Modifier            Description
+*******************************************************************************
+*  2019.09.17      이동건             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+//this.fv_nFormVal = null;     //용도
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload등)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.Form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this, true)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {    
+        //Script  
+   }
+}
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnInit, fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnInit : 초기화 함수 검색조건 초기화 및 온로드 세팅
+ * @return {N/A}    N/A
+ * @example this.fnInit();
+ */
+this.fnInit = function(){
+	//검색조건
+	var objDivSearch = this.divSearch.form;
+}
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Transation id";
+	this.divDisplay.form.fnInit();
+}
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+/**
+* component_onclick : ~ 버튼 클릭
+*/
+this.btnMonthly_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.btnMonthly.set_cssclass("btn_WF_tab02");
+	this.btnWeekly.set_cssclass("btn_WF_tab01");
+	this.divDisplay.set_url("frm::mod/NM010T01.xfdl");
+};
+
+this.btnWeekly_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.btnMonthly.set_cssclass("btn_WF_tab01");
+	this.btnWeekly.set_cssclass("btn_WF_tab02");
+	this.divDisplay.set_url("frm::mod/NM010T02.xfdl");
+};
+
+this.btnAdd_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	take.openPopup(this, "addPopUp", "frm::mod/NM010P01.xfdl", "", "", "fnPopCallback", false);
+};
+
+this.btnList_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	take.openPopup(this, "addPopUp", "frm::mod/NM010P03.xfdl", "", "", "fnPopCallback", false);
+};
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnUserFunction : 사용자 함수
+ * @param  {String} sParam 문자형 인자
+ * @param  {Number} nParam 숫자형 인자
+ * @example this.fnUserFunction(sParam, nParam);
+ */
+this.fnUserFunction = function(sParam, nParam)
+{    
+    //Script
+}
+this.fnPopCallback = function (sId)
+{
+	this.divDisplay.form.reload();
+};]]></Script>
+  </Form>
+</FDL>

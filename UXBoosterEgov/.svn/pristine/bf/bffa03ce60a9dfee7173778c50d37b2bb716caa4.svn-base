@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="publishing026" width="1040" height="659" titletext="접속자현황">
+    <Layouts>
+      <Layout height="659" mobileorientation="landscape" width="1040">
+        <Static id="Static00" taborder="0" text="Static00" left="0" top="0" width="10" background="red" bottom="0" visible="false"/>
+        <Static id="Static01" taborder="1" text="시스템사용이력" left="10" top="98" height="30" width="280" cssclass="sta_WF_title02"/>
+        <Grid id="Grid01" taborder="2" left="10" top="128" binddataset="dsLoginLog" autofittype="col" right="10" bottom="10" fillareatype="none">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="60"/>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="110"/>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="80"/>
+                <Column size="100"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="순번"/>
+                <Cell col="1" text="이력시간"/>
+                <Cell col="2" text="접속기기"/>
+                <Cell col="3" text="접속환경"/>
+                <Cell col="4" text="프로젝트명"/>
+                <Cell col="5" text="사용자ID"/>
+                <Cell col="6" text="사용자명"/>
+                <Cell col="7" text="로그인일시"/>
+                <Cell col="8" text="접속IP"/>
+                <Cell col="9" text="부서"/>
+                <Cell col="10" text="직책"/>
+                <Cell col="11" text="E-mail"/>
+                <Cell col="12" text="휴대전화"/>
+                <Cell col="13" text="전화번호"/>
+                <Cell col="14" text="FAX"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:rownum" textAlign="center"/>
+                <Cell col="1" text="bind:history_time" textAlign="center"/>
+                <Cell col="2" text="bind:login_device"/>
+                <Cell col="3" text="bind:login_browser"/>
+                <Cell col="4" text="bind:project_nm"/>
+                <Cell col="5" text="bind:user_cd" textAlign="center"/>
+                <Cell col="6" text="bind:user_nm" textAlign="center"/>
+                <Cell col="7" text="bind:login_dt" textAlign="center"/>
+                <Cell col="8" text="bind:login_ip" textAlign="center"/>
+                <Cell col="9" textAlign="left" text="bind:dept_nm"/>
+                <Cell col="10" textAlign="center" text="bind:user_position"/>
+                <Cell col="11" textAlign="center" text="bind:user_email"/>
+                <Cell col="12" textAlign="center" text="bind:user_mobile"/>
+                <Cell col="13" textAlign="center" text="bind:user_tel"/>
+                <Cell col="14" textAlign="center" text="bind:user_tax"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Div id="Div01" taborder="3" left="10" top="0" height="72" right="10" cssclass="div_WF_searchBox01" text="">
+          <Layouts>
+            <Layout>
+              <Static id="staProjectInfoSearch" taborder="0" text="프로젝트" left="20" top="10" width="80" height="21" cssclass="sta_WF_textRImport"/>
+              <Static id="staLoginInfoSearch" taborder="1" text="접속기기/환경" left="359" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="Combo00" taborder="9" text="Combo00" left="443" top="10" width="110" height="21"/>
+              <Edit id="edtLoginBrowserSearch" taborder="2" left="Combo00:2" top="10" width="110" height="21"/>
+              <Static id="staUserInfoSearch" taborder="3" text="사용자" left="698" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Static id="staMlGroupSearch00" taborder="4" text="시간" left="19" top="40" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="edtProjectInfoSearch" taborder="5" left="103" top="10" width="190" height="21"/>
+              <Edit id="edtUserInfoSearch" taborder="6" left="781" top="10" width="200" height="21"/>
+              <Button id="btnProjectSearch" taborder="7" top="10" width="21" height="21" cssclass="btn_WF_search02" left="edtProjectInfoSearch:4"/>
+              <Button id="btnUserSarch" taborder="8" top="9" width="21" height="22" cssclass="btn_WF_search02" left="edtUserInfoSearch:4"/>
+              <Static id="Static10" taborder="10" text="~" left="203" top="40" width="20" height="21" cssclass="sta_WF_textC"/>
+              <Edit id="edtLoginBrowserSearch00" taborder="11" left="103" top="40" width="100" height="21"/>
+              <Edit id="edtLoginBrowserSearch01" taborder="12" left="223" top="40" width="100" height="21"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="Button01" taborder="4" left="485" top="72" width="70" height="15" cssclass="btn_WF_fold01"/>
+        <Static id="Static09" taborder="5" text="Static03" left="0" top="87" height="10" background="red" visible="false" right="0"/>
+        <Static id="Static23" taborder="6" text="Static23" left="1" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static24" taborder="7" text="Static23" left="340" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static25" taborder="8" text="Static23" left="679" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static26" taborder="9" text="Static23" left="1018" top="-14" width="10" height="106" background="blue" visible="false"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsLoginLog">
+        <ColumnInfo>
+          <Column id="rownum" type="STRING" size="256"/>
+          <Column id="history_time" type="STRING" size="256"/>
+          <Column id="login_device" type="STRING" size="256"/>
+          <Column id="login_browser" type="STRING" size="256"/>
+          <Column id="project_cd" type="STRING" size="256"/>
+          <Column id="project_nm" type="STRING" size="256"/>
+          <Column id="user_id" type="STRING" size="256"/>
+          <Column id="user_nm" type="STRING" size="256"/>
+          <Column id="login_dt" type="STRING" size="256"/>
+          <Column id="login_ip" type="STRING" size="256"/>
+          <Column id="dept_nm" type="STRING" size="256"/>
+          <Column id="user_position" type="STRING" size="256"/>
+          <Column id="user_email" type="STRING" size="256"/>
+          <Column id="user_mobile" type="STRING" size="256"/>
+          <Column id="user_tel" type="STRING" size="256"/>
+          <Column id="user_tax" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

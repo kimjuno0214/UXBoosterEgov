@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv='X-UA-Compatible' content='IE=edge' />
+	<meta http-equiv="Cache-control" content="no-cache">
+	<meta http-equiv="Pragma" content="no-cache">
+	<title>POST</title>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		if (! window.NEXACROHTML){
+			window.NEXACROHTML = {};
+		}
+
+		var oParent = window.NEXACROWEBBROWSER;
+		function callNexacro(userdata){
+			var wb = window.NEXACROWEBBROWSER;
+			if ( wb ){
+				//HTML
+				wb.on_fire_onusernotify(wb, userdata);
+			} else {
+				//Runtime
+				window.document.title = userdata;
+			}
+		}
+
+		$().ready(function(){
+			callNexacro('load');
+		});
+
+		function requestDownloadFile(reqObj) {
+		    if (!reqObj || !reqObj.url) {
+		        return;
+		    }
+
+		    var isGetMethod = reqObj.method && reqObj.method.toUpperCase() === 'GET';
+		    $.ajax({
+		        url: reqObj.url,
+		        method: isGetMethod ? 'GET' : 'POST',
+		        xhrFields: {
+		            //responseType: 'arraybuffer'
+		            responseType: 'blob'
+		        },
+		        data: $.param(reqObj.data) // a=1&b=2&c=3 방식
+		        // data: JSON.stringify(reqObj.data) // {a:1, b:2, c:3} JSON 방식
+
+		    }).done(function(data, textStatus, jqXhr) {
+		        if (!data) {
+		            return;
+		        }
+		        try {
+		            var blob = new Blob([data], { type: jqXhr.getResponseHeader('content-type') });
+		            var fileName = getFileName(jqXhr.getResponseHeader('content-disposition'));
+		            	fileName = decodeURI(fileName);
+
+		            if (window.navigator.msSaveOrOpenBlob) { // IE 10+
+		                window.navigator.msSaveOrOpenBlob(blob, fileName);
+		            } else { // not IE
+		                var link = document.createElement('a');
+		                var url = window.URL.createObjectURL(blob);
+		                link.href = url;
+		                link.target = '_self';
+		                if (fileName) link.download = fileName;
+		                document.body.append(link);
+		                link.click();
+		                link.remove();
+		                window.URL.revokeObjectURL(url);
+		            }
+
+		            callNexacro('done');
+		        } catch (e) {
+		            console.error(e);
+		            callNexacro('error');
+		        }
+		    });
+		}
+
+		function getFileName (contentDisposition) {
+		    var fileName = contentDisposition
+		        .split(';')
+		        .filter(function(ele) {
+		            return ele.indexOf('filename') > -1
+		        })
+		        .map(function(ele) {
+		            return ele
+		                .replace(/"/g, '')
+		                .split('=')[1]
+		        });
+		    return fileName[0] ? fileName[0] : null
+		}
+    </script>
+</head>
+<body></body>
+</html>

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="frmBottom" width="1280" height="25" titletext="메인 하단 저작권안내">
+    <Layouts>
+      <Layout height="25" mobileorientation="landscape" width="1280">
+        <Static id="Static00" taborder="0" text="(07348)서울시 영등포구 도산로54길 6 (주)테이크 copyright (c)2019 Take CSS Corp. All rights reserved" left="0" top="0" height="25" right="0" cssclass="sta_btm_bg"/>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>

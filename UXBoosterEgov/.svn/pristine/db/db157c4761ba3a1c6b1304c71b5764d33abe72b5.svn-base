@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="publishing038" width="1040" height="659" titletext="휴가관리대장">
+    <Layouts>
+      <Layout height="659" mobileorientation="landscape" width="1040">
+        <Div id="Div01" taborder="0" left="10" top="0" height="43" right="10" cssclass="div_WF_searchBox01" text="">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="년도" left="20" top="10" width="80" height="21" cssclass="sta_WF_textRImport"/>
+              <Static id="Static05" taborder="1" text="사용자" left="359" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Calendar id="Calendar00" taborder="2" left="103" top="10" width="120" height="21"/>
+              <Edit id="Edit01" taborder="3" left="442" top="10" height="21" width="120"/>
+              <Button id="Button00" taborder="4" text="선택" top="9" width="46" height="23" cssclass="btn_WF_basic01" left="Edit01:6"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static18" taborder="1" text="휴가관리대장(00 건)" left="10" top="67" height="30" width="450" cssclass="sta_WF_title02"/>
+        <Button id="Button01" taborder="2" left="485" top="42" width="70" height="15" cssclass="btn_WF_fold01"/>
+        <Static id="Static09" taborder="3" text="Static03" left="0" top="57" height="10" background="red" visible="false" right="0"/>
+        <Static id="Static23" taborder="4" text="Static23" left="1" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static24" taborder="5" text="Static23" left="340" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static25" taborder="6" text="Static23" left="679" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static26" taborder="7" text="Static23" left="1018" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static01" taborder="8" text="Static03" left="-1" top="219" height="10" background="red" visible="false" right="1"/>
+        <Grid id="Grid01" taborder="9" left="10" top="97" binddataset="Dataset00" autofittype="col" cssclass="grd_WF_type02" right="10" bottom="10">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="48"/>
+                <Column size="150"/>
+                <Column size="100"/>
+                <Column size="120"/>
+                <Column size="60"/>
+                <Column size="40"/>
+                <Column size="40"/>
+                <Column size="40"/>
+                <Column size="40"/>
+                <Column size="40"/>
+                <Column size="40"/>
+                <Column size="40"/>
+                <Column size="40"/>
+                <Column size="40"/>
+                <Column size="40"/>
+                <Column size="40"/>
+                <Column size="40"/>
+                <Column size="60"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+                <Row size="30" band="summ"/>
+              </Rows>
+              <Band id="head">
+                <Cell rowspan="2" text="순번"/>
+                <Cell col="1" rowspan="2" text="부서"/>
+                <Cell col="2" rowspan="2" text="성명"/>
+                <Cell col="3" rowspan="2" text="입사일"/>
+                <Cell col="4" rowspan="2" text="휴가일수"/>
+                <Cell col="5" colspan="12" text="월별휴가사용내역"/>
+                <Cell col="17" rowspan="2" text="잔여일수"/>
+                <Cell row="1" col="5" text="1"/>
+                <Cell row="1" col="6" text="2"/>
+                <Cell row="1" col="7" text="3"/>
+                <Cell row="1" col="8" text="4"/>
+                <Cell row="1" col="9" text="5"/>
+                <Cell row="1" col="10" text="6"/>
+                <Cell row="1" col="11" text="7"/>
+                <Cell row="1" col="12" text="8"/>
+                <Cell row="1" col="13" text="9"/>
+                <Cell row="1" col="14" text="10"/>
+                <Cell row="1" col="15" text="11"/>
+                <Cell row="1" col="16" text="12"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="checkboxcontrol" edittype="checkbox"/>
+                <Cell col="1"/>
+                <Cell col="2"/>
+                <Cell col="3"/>
+                <Cell col="4"/>
+                <Cell col="5"/>
+                <Cell col="6"/>
+                <Cell col="7"/>
+                <Cell col="8"/>
+                <Cell col="9"/>
+                <Cell col="10"/>
+                <Cell col="11"/>
+                <Cell col="12"/>
+                <Cell col="13"/>
+                <Cell col="14"/>
+                <Cell col="15"/>
+                <Cell col="16"/>
+                <Cell col="17"/>
+              </Band>
+              <Band id="summary">
+                <Cell/>
+                <Cell col="1"/>
+                <Cell col="2"/>
+                <Cell col="3"/>
+                <Cell col="4"/>
+                <Cell col="5"/>
+                <Cell col="6"/>
+                <Cell col="7"/>
+                <Cell col="8"/>
+                <Cell col="9"/>
+                <Cell col="10"/>
+                <Cell col="11"/>
+                <Cell col="12"/>
+                <Cell col="13"/>
+                <Cell col="14"/>
+                <Cell col="15"/>
+                <Cell col="16"/>
+                <Cell col="17"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+          <Column id="Column5" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

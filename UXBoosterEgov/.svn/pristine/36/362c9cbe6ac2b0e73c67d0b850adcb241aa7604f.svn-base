@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="PM090P02" width="480" height="470" titletext="대시보드_대시보드관리_메뉴선택팝업" onload="Form_onload" background="#ffffff">
+    <Layouts>
+      <Layout height="470" mobileorientation="landscape" width="480">
+        <Div id="divSearch" taborder="0" left="20" top="46" height="43" cssclass="div_WF_searchBox01" right="20">
+          <Layouts>
+            <Layout>
+              <Static id="staMenuNmT" taborder="0" text="메뉴명/코드" left="10" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="edtMenuNm" taborder="1" left="staMenuNmT:10" top="10" right="7" height="21" onkeyup="divSearch_edtProgramNm_onkeyup"/>
+            </Layout>
+            <Layout name="default0"/>
+          </Layouts>
+        </Div>
+        <Button id="btnShowHide" taborder="1" left="43.75%" top="divSearch:0" width="60" height="10" cssclass="btn_WF_fold01" onclick="btnShowHide_onclick"/>
+        <Div id="divDetail" taborder="6" left="20" top="btnShowHide:20" right="20" bottom="63" text="">
+          <Layouts>
+            <Layout>
+              <Static id="Static24" taborder="0" text="메뉴 목록" left="0" top="10" height="20" cssclass="sta_WF_title02" right="0"/>
+              <Grid id="grdList" taborder="1" left="0" top="Static24:5" autofittype="col" right="0" oncelldblclick="divSearch_grdList_oncelldblclick" binddataset="dsMenuCd" bottom="0">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="80"/>
+                      <Column size="200"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="메뉴코드"/>
+                      <Cell col="1" text="메뉴명"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:CODE" textAlign="center"/>
+                      <Cell col="1" text="bind:NAME" displaytype="text" textAlign="left"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+            <Layout name="default0">
+              <Static id="Static24" taborder="0" text="검색 정보" left="10" top="10" height="20" cssclass="sta_WF_title02" right="10"/>
+              <Grid id="grdList" taborder="1" left="10" top="79" autofittype="col" right="10" height="350" oncelldblclick="divSearch_grdList_oncelldblclick" binddataset="dsProgramCd"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnMenuSearch" taborder="2" top="20" height="21" cssclass="btn_WF_search03" onclick="divSearch_btnMenuSearch_onclick" text="조회" width="46" right="20"/>
+        <Static id="Static01_00" taborder="3" text="H20" left="0" height="20" right="0" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" top="0"/>
+        <Static id="Static01_00_00" taborder="4" text="H20" left="0" height="20" right="0" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" top="99"/>
+        <Static id="Static01_00_01" taborder="5" text="H5" left="0" height="5" right="0" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" top="41"/>
+        <Static id="Static01_01" taborder="7" text="H20" left="0" height="20" right="0" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" top="407"/>
+        <Static id="Static01" taborder="8" text="H20" left="0" right="0" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" top="450" height="20"/>
+        <Button id="btnSend" taborder="9" height="23" cssclass="btn_WF_check01" text="확인" right="80" width="57" onclick="divSearch_btnSend_onclick" top="divDetail:20"/>
+        <Button id="btnCancle" taborder="10" height="23" cssclass="btn_WF_cancel01" text="닫기" right="20" width="57" onclick="btnCancle_onclick" top="divDetail:20"/>
+      </Layout>
+      <Layout height="470" mobileorientation="landscape" width="380" name="default0">
+        <Div id="divDetail" taborder="37" left="0" top="0" cssclass="dvi_WF_tabBox01" right="0" bottom="0" text=""/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsMenuCd">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    PM > PM090P02
+*  @FileName    PM090P02.xfdl 
+*  @Creator     김대승
+*  @CreateDate  2020.09.07 
+*  @Version     1.0
+*  @Desction    대시보드관리 - 메뉴선택 팝업
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2020.09.07       김대승             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+this.fv_sGdsProjectCd = null;		// gds _ 프로젝트코드
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.Form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {    
+		this.fv_sGdsProjectCd = UXBooster.gdsUserInfo.getColumn(0, "PROJECT_CD");	 // gds _ 프로젝트코드
+        this.fnInIt();
+   }
+}
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "menuInfoCode";
+	
+    // 프로그램 코드 조회
+	take.tranSelect
+	(
+		this,
+		"menuInfoCode", 
+		"DashManagement.menuInfoCode", 
+		"", 
+		"dsMenuCd", 
+		"PROJECT_CD='"+this.fv_sGdsProjectCd+"'", 
+		function(sId, nErrCd, sErrMsg)
+		{
+			
+		}
+	)
+}
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+/**
+* divSearch_btnProgramSearch_onclick : 메뉴 검색 버튼 클릭_fileter like
+*/
+this.divSearch_btnMenuSearch_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{	
+	var objDs = this.dsMenuCd;
+	var sStr  = take.nvl(this.divSearch.form.edtMenuNm.value, "");
+	
+	if (sStr == ""){
+		objDS.set_filterstr("");
+	}else {
+		sStr = "String(NAME).indexOf('" + sStr + "') >= 0 || String(CODE).indexOf('" + sStr + "') >= 0";
+		objDS.filter(sStr);
+	}
+};
+
+/**
+* divSearch_edtProgramNm_onkeyup : 검색조건 Edit 엔터 값
+*/
+this.divSearch_edtProgramNm_onkeyup = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+	if (e.keycode == 13)
+	{
+		this.btnMenuSearch.click();
+	}
+};
+
+/**
+* divSearch_grdList_oncelldblclick : 그리드 데이터라인 더블클릭 이벤트
+*/
+this.divSearch_grdList_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	this.fnSendData();
+};
+
+/**
+* divSearch_btnSend_onclick : 확인 버튼 클릭
+*/
+this.divSearch_btnSend_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fnSendData();
+};
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnInIt : 초기화 함수
+ * @example this.fnInIt();
+ */
+this.fnInIt = function()
+{    
+	// 공통 코드조회 함수 호출
+    this.fnSearch("menuInfoCode");
+}
+
+/**
+ * fnSendData : 그리드의 선택된 데이터 값 넘기기
+ * @param  {String} N/A 
+ * @example this.fnSendData();
+ */
+this.fnSendData = function()
+{
+	var objDs = this.dsMenuCd;
+	var nRow  = objDs.rowposition;
+	
+	var sRtn  = objDs.getColumn(nRow, "CODE");
+		sRtn += ','+ objDs.getColumn(nRow, "NAME");
+	this.close(sRtn);
+}
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallBack : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg  - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallBack = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "Transation id 01" : //조회 콜백
+            //Script
+            break;
+        case "Transation id 02" :  //조회 콜백
+            //Script
+            break;
+        case "Transation id 03" : //조회 콜백
+            //Script
+            break;
+        case "Save transation id 01" :  //저장 콜백
+            //Script
+            break;
+        case "Save transation id 01" :  //저장 콜백
+            //Script
+            break;
+        default :
+            break;
+    }        
+};
+]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="divSearch.form.edtMenuNm" propid="value" datasetid="dsSearch" columnid="USER_CD"/>
+    </Bind>
+  </Form>
+</FDL>

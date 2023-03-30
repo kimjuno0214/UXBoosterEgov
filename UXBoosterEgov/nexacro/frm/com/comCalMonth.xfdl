@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="comCalMonth" width="200" height="185" titletext="월 달력 Pop" onload="comCalMonth_onload" scrollbartype="none none" onclose="comCalMonth_onclose" background="#ffffff">
+    <Layouts>
+      <Layout height="185" mobileorientation="landscape" width="200">
+        <Static id="Static01" taborder="16" left="0" top="35" cssclass="sta_WF_calBox02" bottom="0" right="0"/>
+        <Static id="Static00" taborder="15" left="0" top="0" height="30" cssclass="sta_WF_calBox01" right="0"/>
+        <Edit id="edtYyyy" taborder="14" left="25" top="0" height="35" right="25" value="9999" text="9999" cssclass="ed_WF_calEdit"/>
+        <Button id="btnBefore" taborder="0" left="0" top="0" width="35" height="35" onclick="btnYear_onclick" cssclass="btn_WF_calPrev"/>
+        <Button id="btnNext" taborder="1" top="0" width="35" height="35" right="0" onclick="btnYear_onclick" cssclass="btn_WF_calNext"/>
+        <Button id="btn01" taborder="2" text="1월" left="10" top="45" width="20%" height="21.62%" onclick="btnMonth_onclick" sData="" cssclass="btn_WF_calMonth"/>
+        <Button id="btn02" taborder="3" text="2월" left="btn01:5" top="45" width="20%" height="21.62%" onclick="btnMonth_onclick" sData="" cssclass="btn_WF_calMonth"/>
+        <Button id="btn03" taborder="4" text="3월" left="btn02:5" top="45" width="20%" height="21.62%" onclick="btnMonth_onclick" sData="" cssclass="btn_WF_calMonth"/>
+        <Button id="btn04" taborder="5" text="4월" top="45" width="20%" height="21.62%" onclick="btnMonth_onclick" sData="" cssclass="btn_WF_calMonth" left="btn03:5"/>
+        <Button id="btn05" taborder="6" text="5월" left="10" top="btn01:5" width="20%" height="21.62%" onclick="btnMonth_onclick" sData="" cssclass="btn_WF_calMonth"/>
+        <Button id="btn06" taborder="7" text="6월" left="btn05:5" top="btn02:5" width="20%" height="21.62%" onclick="btnMonth_onclick" sData="" cssclass="btn_WF_calMonth"/>
+        <Button id="btn07" taborder="8" text="7월" left="btn06:5" top="btn03:5" width="20%" height="21.62%" onclick="btnMonth_onclick" sData="" cssclass="btn_WF_calMonth"/>
+        <Button id="btn08" taborder="9" text="8월" left="btn07:5" top="btn04:5" width="20%" height="21.62%" onclick="btnMonth_onclick" sData="" cssclass="btn_WF_calMonth"/>
+        <Button id="btn09" taborder="10" text="9월" left="10" top="btn05:5" width="20%" height="21.62%" onclick="btnMonth_onclick" sData="" cssclass="btn_WF_calMonth"/>
+        <Button id="btn10" taborder="11" text="10월" left="btn09:5" top="btn06:5" width="20%" height="21.62%" onclick="btnMonth_onclick" sData="" cssclass="btn_WF_calMonth"/>
+        <Button id="btn11" taborder="12" text="11월" left="btn10:5" top="btn07:5" width="20%" height="21.62%" onclick="btnMonth_onclick" sData="" cssclass="btn_WF_calMonth"/>
+        <Button id="btn12" taborder="13" text="12월" left="btn11:5" top="btn08:5" width="20%" height="21.62%" onclick="btnMonth_onclick" sData="" cssclass="btn_WF_calMonth"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[this.fv_sYyyy = null;
+this.fv_sMm = null;
+this.fv_objComp = null;
+this.fv_sPreVal = null;
+ 
+this.comCalMonth_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+    var sYyyyMm, sBtnId;
+    var arrYyyyMm, arrMonths;
+    var objBtn, objLocalInfo;
+    
+	//20200602 정해원 locale에 따른 다국어처리
+	objLocalInfo = nexacro.Locale.getLocaleInfo(take.nvl(nexacro.getApplication().av_sLangCd,"ko_KR"));
+    
+	if(!take.isEmpty(objLocalInfo))
+    {
+		arrMonths = objLocalInfo.month_names_narrow;
+        
+		for(keys in arrMonths)
+        {
+			sBtnId = (parseInt(keys)+1) + "";
+			sBtnId = sBtnId.padLeft(2,"0");
+            
+			this["btn"+sBtnId].set_text(arrMonths[keys]);
+		}
+        
+        sBtnId = "";
+	}
+        
+    this.fv_objComp = take.nvl(this.parent.objComp, "");
+	
+    sYyyyMm = nexacro.trim(take.nvl(this.parent.data, "-"));
+    
+    if (sYyyyMm.length<=1)
+    {
+        this.fv_sYyyy = this.fn_GetDate("yyyy");
+        this.fv_sMm = this.fn_GetDate("mm");
+        this.fv_sPreVal = "";
+    } else {
+        if (sYyyyMm.indexOf("-")>=0)
+        {
+            arrYyyyMm = sYyyyMm.split("-");
+            
+            this.fv_sYyyy = arrYyyyMm[0];
+            this.fv_sMm = arrYyyyMm[1];
+        } else {
+            this.fv_sYyyy = sYyyyMm.substr(0,4);
+            this.fv_sMm = sYyyyMm.substr(4);
+        }
+        
+        this.fv_sPreVal = this.fv_sYyyy + this.fv_sMm;
+    }
+    
+    this.edtYyyy.set_value(this.fv_sYyyy);
+    
+    sBtnId = "btn" + this.fv_sMm;
+    objBtn = this.components[sBtnId];
+    
+    objBtn.set_background("#005f96");
+    objBtn.set_color("#ffffff");
+    
+    //this.fnSetValue(false);
+};
+
+this.btnYear_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    var sGbn;
+    var nYyyy;
+    
+    sGbn = obj.name.substr(3);
+    nYyyy = nexacro.toNumber(this.fv_sYyyy);
+        
+	if (sGbn=="Before")
+    {
+        nYyyy--;
+    } else {
+        nYyyy++;
+    }
+    
+    this.fv_sYyyy = (nYyyy + "").padLeft(4, "0");
+    this.edtYyyy.set_value(this.fv_sYyyy);
+    
+    //this.fnSetValue();
+};
+
+this.btnMonth_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    var sBtnId;
+    //var objBtn;    
+    
+    this.fv_sMm = obj.name.substr(3);
+    
+    //sBtnId = "btn" + this.fv_sMm;
+    //objBtn = this.components[sBtnId];
+    
+    //objBtn.set_background("");
+    //objBtn.set_cssclass("");
+    obj.set_background("");
+    obj.set_background("#005f96");
+    obj.set_color("#ffffff");
+    //obj.set_cssclass("");
+    
+    this.fnSetValue();
+    
+    //선택되지 않은 버튼 초기화
+    //this.fnInitStyle(obj)
+    
+};
+
+this.fnInitStyle = function(objComp)
+{
+    var objBtn;
+    var sBtnId;
+    
+    for (var i=1; i<=12; i++)
+    {
+        sBtnId = "btn" + i.toString().padLeft(2,"0");
+        
+        if (objComp.name!=sBtnId)
+        {
+            objBtn = this.components[sBtnId];
+            objBtn.set_background("");
+            objBtn.set_color("");
+        }
+    }
+}
+
+
+this.fnSetValue = function(bClose)
+{
+    var objGrid, objDs, objParam;
+    var sColNm, sPreVal, sRtnVal;
+    
+    bClose = nexacro._nvl(bClose, true);
+    
+    this.fv_sYyyy = this.edtYyyy.value;
+    
+    if ( take.CompTypeName(this.fv_objComp)=="Grid")
+    {
+        objGrid = this.fv_objComp;
+        objDs = this.parent.objDataset;
+        objParam = this.parent.objParam;
+    
+        sColNm = take.getBindColName(objGrid, objParam.cell);
+        objDs.setColumn(objParam.row, sColNm, this.fv_sYyyy+this.fv_sMm);
+    } else {
+        sRtnVal = this.fv_sYyyy+this.fv_sMm;
+        
+        this.fv_objComp.set_value(sRtnVal);
+        
+        if (take.nvl(this.fv_objComp.onchanged,"")!="")
+        {
+            var objEvt = new nexacro.ChangedEventInfo(this.fv_objComp, "onchanged", this.fv_sPreVal, this.fv_sPreVal, sRtnVal, sRtnVal);
+            this.fv_objComp.onchanged._fireEvent(this.fv_objComp, objEvt);
+        }
+    }
+    
+    if (bClose) 
+    {
+	  this.parent.closePopup();
+   }
+};
+
+/**
+ * @class 현재일자를 구한다. <br>
+ * @param {String} [sFormat] - yyyymmdd/null : 일자, yyyymm : 년월, mmdd : 월일, yyyy : 년, mm : 월, dd : 일
+ * @return {String} 8자리 날짜(YYYYMMMDD)문자열
+ */
+this.fn_GetDate = function(sFormat) 
+{
+    if (nexacro._nvl(sFormat, "")=="") sFormat = "yyyymmdd";
+    
+	var d = new Date();
+	
+	var sYyyy, sMm, sDd;
+	
+	sYyyy = d.getFullYear();
+    
+    if (sFormat=="yyyy") return sYyyy;
+    
+    sMm = ((d.getMonth() + 1) + "").padLeft(2, '0');
+    
+    if (sFormat=="mm") return sMm;
+    if (sFormat=="yyyymm") return sYyyy + sMm;
+        
+    sDd = (d.getDate() + "").padLeft(2, '0');
+	
+    if (sFormat=="dd") return sDd;
+    if (sFormat=="mmdd") return sMm + sDd;
+    
+	return sYyyy + sMm + sDd;
+};]]></Script>
+  </Form>
+</FDL>

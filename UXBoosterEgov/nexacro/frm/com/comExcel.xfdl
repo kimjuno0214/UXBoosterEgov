@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="comExcel" width="140" height="90" titletext="엑셀다운로드" onload="form_onload">
+    <Layouts>
+      <Layout height="90" width="140" description="엑셀다운로드">
+        <Static id="Static00" taborder="0" text="엑셀다운로드용" left="0" top="0" right="0" bottom="0" background="#7a7a7a" visible="true"/>
+        <WebBrowser id="excelBrowser" taborder="1" left="84" top="21" visible="true" right="13" bottom="20" onloadcompleted="excelBrowser_onloadcompleted" onusernotify="excelBrowser_onusernotify"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <FileDownTransfer id="fdt"/>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[this.form_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.excelBrowser.set_url(take.getSvcUrl() + "post.html?" + nexacro.round((Math.random()*1000)));
+};
+
+//파라미터세팅
+this.fnGetParameter = function(arrParams){
+	var webUrlParam = "";
+	for (var paramKey in arrParams){
+		webUrlParam += "&" + paramKey + "=" + take.nvl(arrParams[paramKey], "");
+	}
+	
+	return webUrlParam;
+};
+
+//GET방식 다운로드
+this.fnWebDownloadGet = function(downloadUrl, sFilename, arrParams){
+	//웹페이지 호출
+	window.open(downloadUrl + "?filename=" + sFilename + this.fnGetParameter(arrParams));
+	
+	//webbrowser로 해도 첨부파일이 다운로드 되는경우 onloadcompleted가 먹질 않음(도움말 참조)
+	//nexacro.getEnvironment().set_usewaitcursor(true);
+	//this.excelBrowser.set_url(downloadUrl + "?filename=" + filename + this.fnGetParameter(arrParams));
+};
+
+//POST방식 다운로드
+this.fnWebDownloadPost = function(downloadUrl, sFilename, arrParams){
+	this.setWaitCursor(true);
+	
+	var params = {filename:sFilename};
+	if(!take.isEmpty(arrParams)){
+		params = Object.assign(params, arrParams);
+	}
+	
+	this.excelBrowser.callMethod("requestDownloadFile", { 
+		url: downloadUrl,
+		method: 'POST',
+		data: params
+	});
+};
+
+//FILEDOWNTRANSFER 다운로드
+this.fnDownloadFdt = function(downloadUrl, filename, arrParams){
+	this.fdt.set_url( downloadUrl);
+	this.fdt.clearPostDataList();
+	this.fdt.setPostData("filename", filename);
+	for (var paramKey in arrParams){
+		this.fdt.setPostData(paramKey, take.nvl(arrParams[paramKey], ""));
+	}
+	this.fdt.download();
+};
+
+this.excelBrowser_onloadcompleted = function(obj:nexacro.WebBrowser,e:nexacro.WebLoadCompEventInfo)
+{
+	//trace("completed-------" + e.eventid);
+};
+
+this.excelBrowser_onusernotify = function(obj:nexacro.WebBrowser,e:nexacro.WebUserNotifyEventInfo)
+{
+	if(take.isNull(e.userdata)){
+		return;
+	}else{
+		if(e.userdata != 'load'){
+			this.setWaitCursor(false);
+		}
+	}
+};
+]]></Script>
+  </Form>
+</FDL>

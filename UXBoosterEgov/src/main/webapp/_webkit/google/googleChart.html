@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      var objData, objOptions, objChart;
+
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() 
+      { 
+        objData = google.visualization.arrayToDataTable([
+          ['NAME', 'VALUE'],
+          //['Work',     25],
+          //['Eat',      25],
+          //['Commute',  25],
+          ['INIT', 100]
+        ]);
+        console.dir(objData);
+        objOptions = {
+          title: 'My Daily Activities',
+          pieHole: 0.4,
+        };
+
+        objChart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        objChart.draw(objData, objOptions);
+      }
+
+      function fnCreateChart(arrCol, arrData, objOpt, nSelIdx)
+      {
+        try
+        {
+          objData = new google.visualization.DataTable();
+
+          var nCnt;
+
+          if (!(arrCol=="" || arrCol==null || arrCol==undefined))
+          {
+            nCnt = arrCol.length;
+           
+            for (var i=0;i<nCnt;i++)
+            {
+              objData.addColumn(arrCol[i][0], arrCol[i][1]);            
+            }
+          }
+        
+          if (arrData=="" || arrData==null || arrData==undefined)
+          {
+            window.document.title = "CallBack:(-1) Data is null.";
+            return false;
+          }
+
+          objData.addRows(arrData);
+
+          console.dir(objData);
+          //objOptions = {title: objOpt[0], pieHole: 0.4,};
+
+          objOptions = objOpt;
+
+          objChart.draw(objData, objOptions);
+      
+          objChart.setSelection([{row: nSelIdx, column: null}]);
+      
+          console.dir(objChart.getSelection());
+      
+          window.document.title = "CallBack:(00)";
+        } catch(e) {
+          console.log(e);
+          window.document.title = "CallBack:(-1)" + e;
+        }
+      }
+
+      //function fnCreateChart(arrData, objOpt, nSelIdx)
+      //{
+      //  try
+      //  {
+      //    console.dir(objChart.getSelection());
+      //
+      //    if (arrData=="" || arrData==null || arrData==undefined)
+      //    {
+      //      window.document.title = "CallBack:(-1) Data is null.";
+      //      return false;
+      //    }
+      //          
+      //    objData = new google.visualization.arrayToDataTable(arrData);
+      //
+      //    objOptions = {
+      //      title: objOpt[0],
+      //      pieHole: 0.4,
+      //    };
+      //
+      //    objChart.draw(objData, objOptions);
+      //
+      //    objChart.setSelection([{row: 3, column: null}]);
+      //
+      //    console.dir(objChart.getSelection());
+      //
+      //    window.document.title = "CallBack:(00)";
+      //  } catch (e) {
+      //    window.document.title = "CallBack:(-1)" + e;
+      //  }
+      //  
+      //};
+    </script>
+  </head>
+  <body>
+    <div id="donutchart" style="width: 500px; height: 500px;"></div>
+  </body>
+</html>

@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="smpOnceTimer" width="300" height="300" titletext="New Form">
+    <Layouts>
+      <Layout height="300" mobileorientation="landscape" width="300">
+        <Button id="Button00" taborder="0" text="Button00" left="56" top="25" width="206" height="57" onclick="Button00_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[this.fv_objTimer1 = null;
+this.fv_objTimer2 = null;
+
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fv_objTimer1 = 
+            nexacro._OnceCallbackTimer.callonce
+            (
+                this,
+                function () 
+                {
+                    try {
+                        this.fnTimer(1);
+                    } catch(e) {
+                        trace("fnTimer call error : " + e);
+                        if(this.fv_objTimer1 ) this.fv_objTimer1.stop();
+                        this.fnTimer(1);
+                    }
+				},
+                1
+            ); 
+    this.fv_objTimer2 = 
+            nexacro._OnceCallbackTimer.callonce
+            (
+                this,
+                function () 
+                {
+                    try {
+                        this.fnTimer(2);
+                    } catch(e) {
+                        trace("fnTimer call error : " + e);
+                        if(this.fv_objTimer2 ) this.fv_objTimer2.stop();
+                        this.fnTimer(2);
+                    }
+				},
+                1
+            ); 
+    this.fnTimer(3);
+};
+
+this.fnTimer = function(nId)
+{
+    trace("fnTimer --> " + nId);
+}
+
+
+
+// nexacro._OnceCallbackTimer.callonce
+//             (
+//                 this,
+//                 function () 
+//                 {
+//                     //function
+// 				},
+//                 1
+//             ); ]]></Script>
+  </Form>
+</FDL>

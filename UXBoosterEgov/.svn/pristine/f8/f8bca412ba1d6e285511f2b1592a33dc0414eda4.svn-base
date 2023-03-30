@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="dbcUserInfoNew" width="354" height="315" titletext="사용자 정보" onload="dbcUserInfo_onload">
+    <Layouts>
+      <Layout height="315" mobileorientation="landscape" width="354">
+        <Div id="divMain" taborder="0" left="0" top="0" formscrollbartype="none none" right="0" bottom="0">
+          <Layouts>
+            <Layout>
+              <Static id="staInfoBg" taborder="3" top="0" background="#2d2f3b" left="0" right="0" bottom="0"/>
+              <Static id="staUser" taborder="0" text="사용자&#13;&#10;&lt;fs v='11'&gt;hongkil (홍길동)&lt;/fs&gt;" left="21" top="94" width="270" height="51" usedecorate="true" cssclass="sta_WF_mainInfo"/>
+              <Static id="staIP" taborder="2" text="마지막 로그인 IP&#13;&#10;&lt;fs v='11'&gt;000.000.000.000&lt;/fs&gt;" left="21" width="270" height="50" usedecorate="true" cssclass="sta_WF_mainInfo" top="243"/>
+              <Static id="staLoginDt" taborder="1" text="마지막 로그인 날짜&#13;&#10;&lt;fs v='11'&gt;2019-08-31 14:30&lt;/fs&gt;" left="21" top="169" width="270" height="50" usedecorate="true" cssclass="sta_WF_mainInfo"/>
+              <Static id="staUniv" taborder="4" text="소속&#13;&#10;&lt;fs v='11'&gt;OOOO&lt;/fs&gt;" left="21" top="20" width="270" height="50" usedecorate="true" cssclass="sta_WF_mainInfo"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[this.fv_objGdsUserInfo = nexacro.getApplication().gdsUserInfo;
+
+this.dbcUserInfo_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.fnUserInfoSet(this.fv_objGdsUserInfo);
+};
+
+/**
+ * fnUserInfoSet : 사용자 정보 세팅
+ * @param  {Object} objDs UserInfo Dataset
+ * @return {N/A}    N/A
+ * @example this.fnUserInfoSet(nexacro.getApplication().gdsUserInfo);
+ */
+this.fnUserInfoSet = function(objDs)
+{
+    var sUniv, sUserId, sUserNm, sLastLoginDt, sLastLoginIp;
+    var objDiv;
+    
+    objDiv = this.divMain.form;
+    
+    sDeptNm   	 = take.nvl(objDs.getColumn(0,"DEPT_NM")   ,"");
+    sUserId      = take.nvl(objDs.getColumn(0,"USER_ID")    ,"");
+    sUserNm      = take.nvl(objDs.getColumn(0,"USER_NM")    ,"");
+    sLastLoginDt = take.nvl(objDs.getColumn(0,"LAST_LOGIN_DT") ,"");
+    sLastLoginIp = take.nvl(objDs.getColumn(0,"LOGIN_IP")    ,"");
+    
+    objDiv.staUniv.set_text("소속\n<fs v='11'>" + (sDeptNm==""?"없음":sDeptNm+"") + "</fs>");
+    objDiv.staUser.set_text("사용자\n<fs v='11'>" + sUserId + " (" + sUserNm + ")</fs>");
+    objDiv.staLoginDt.set_text("마지막 로그인 날짜\n<fs v='11'>" + sLastLoginDt +"</fs>");
+    objDiv.staIP.set_text("마지막 로그인 IP\n<fs v='11'>" + sLastLoginIp + "</fs>");
+}]]></Script>
+  </Form>
+</FDL>

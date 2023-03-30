@@ -1,0 +1,489 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="form" width="213" height="21" titletext="월 기간달력" onload="form_onload" ontimer="comCalMon_ontimer">
+    <Layouts>
+      <Layout height="21" width="213">
+        <Calendar id="cal_FrYm" taborder="0" left="0" top="0" width="100" height="21" dateformat="yyyy-MM" editformat="yyyy-MM" popuptype="none" onchanged="cal_onchanged" chkData="" autoselect="true" ondropdown="cal_ondropdown"/>
+        <PopupDiv id="pdv_YM" visible="false" left="0" top="25" width="378" height="281" cssclass="pdiv_cal">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="17" left="10" top="66" width="172" height="166" border="1px solid #4d4d4d" background="#ffffff"/>
+              <Static id="Static01" taborder="43" left="192" top="66" width="172" height="166" border="1px solid #4d4d4d" background="#ffffff"/>
+              <Static id="sta_FrYYYY" taborder="2" text="9999" left="11" top="67" height="28" onclick="pdv_YM_sta_YYYY_onclick" width="171" cssclass="sta_cal_month"/>
+              <Static id="sta_ToYYYY" taborder="20" text="9999" left="193" top="67" height="28" onclick="pdv_YM_sta_YYYY_onclick" width="171" cssclass="sta_cal_month"/>
+              <Button id="btn_FrBefore" taborder="1" left="17" top="69" width="21" height="21" onclick="btn_onclick" cssclass="btn_cal_prev"/>
+              <Button id="btn_FrNext" taborder="0" top="69" width="21" height="21" onclick="btn_onclick" left="159" cssclass="btn_cal_next"/>
+              <Button id="btn_Fr01" taborder="3" text="01" left="13" top="96" width="40" height="43" onclick="btn_onclick" cssclass="btn_cal_01"/>
+              <Button id="btn_Fr02" taborder="4" text="02" left="55" top="96" width="40" height="43" onclick="btn_onclick" cssclass="btn_cal_02"/>
+              <Button id="btn_Fr03" taborder="5" text="03" left="97" top="96" width="40" height="43" onclick="btn_onclick" cssclass="btn_cal_03"/>
+              <Button id="btn_Fr04" taborder="6" text="04" left="139" top="96" width="40" height="43" onclick="btn_onclick" cssclass="btn_cal_04"/>
+              <Button id="btn_Fr05" taborder="7" text="05" left="13" top="140" width="40" height="43" onclick="btn_onclick" cssclass="btn_cal_05"/>
+              <Button id="btn_Fr06" taborder="8" text="06" left="55" top="140" width="40" height="43" onclick="btn_onclick" cssclass="btn_cal_06"/>
+              <Button id="btn_Fr07" taborder="9" text="07" left="97" top="140" width="40" height="43" onclick="btn_onclick" cssclass="btn_cal_07"/>
+              <Button id="btn_Fr08" taborder="10" text="08" left="139" top="140" width="40" height="43" onclick="btn_onclick" cssclass="btn_cal_08"/>
+              <Button id="btn_Fr09" taborder="11" text="09" left="13" top="185" width="40" height="43" onclick="btn_onclick" cssclass="btn_cal_09"/>
+              <Button id="btn_Fr10" taborder="12" text="10" left="55" top="185" width="40" height="43" onclick="btn_onclick" cssclass="btn_cal_10"/>
+              <Button id="btn_Fr11" taborder="13" text="11" left="97" top="185" width="40" height="43" onclick="btn_onclick" cssclass="btn_cal_11"/>
+              <Button id="btn_Fr12" taborder="14" text="12" left="139" top="185" width="40" height="43" onclick="btn_onclick" cssclass="btn_cal_12"/>
+              <Button id="btn_Ok" taborder="15" text="확인" left="129" top="242" width="55" height="25" onclick="pdv_Ym_btn_Ok_onclick" cssclass="btn_pop_ok"/>
+              <Button id="btn_Cancle" taborder="16" text="취소" left="186" top="242" width="55" height="25" onclick="pdv_Ym_btn_Cancle_onclick" cssclass="btn_pop_ok"/>
+              <Button id="btn_ToBefore" taborder="18" left="199" top="69" width="21" height="21" onclick="btn_onclick" cssclass="btn_cal_prev"/>
+              <Button id="btn_ToNext" taborder="19" top="69" width="21" height="21" onclick="btn_onclick" left="339" cssclass="btn_cal_next"/>
+              <Button id="btn_To01" taborder="21" text="01" left="195" top="97" width="40" height="43" onclick="btn_onclick" cssclass="btn_cal_01"/>
+              <Button id="btn_To02" taborder="22" text="02" left="237" top="97" width="40" height="43" onclick="btn_onclick" cssclass="btn_cal_02"/>
+              <Button id="btn_To03" taborder="23" text="03" left="279" top="97" width="40" height="43" onclick="btn_onclick" cssclass="btn_cal_03"/>
+              <Button id="btn_To04" taborder="24" text="04" left="321" top="97" width="40" height="43" onclick="btn_onclick" cssclass="btn_cal_04"/>
+              <Button id="btn_To05" taborder="25" text="05" left="195" top="141" width="40" height="43" onclick="btn_onclick" cssclass="btn_cal_05"/>
+              <Button id="btn_To06" taborder="26" text="06" left="237" top="141" width="40" height="43" onclick="btn_onclick" cssclass="btn_cal_06"/>
+              <Button id="btn_To07" taborder="27" text="07" left="279" top="141" width="40" height="43" onclick="btn_onclick" cssclass="btn_cal_07"/>
+              <Button id="btn_To08" taborder="28" text="08" left="321" top="141" width="40" height="43" onclick="btn_onclick" cssclass="btn_cal_08"/>
+              <Button id="btn_To09" taborder="29" text="09" left="195" top="186" width="40" height="43" onclick="btn_onclick" cssclass="btn_cal_09"/>
+              <Button id="btn_To10" taborder="30" text="10" left="237" top="186" width="40" height="43" onclick="btn_onclick" cssclass="btn_cal_10"/>
+              <Button id="btn_To11" taborder="31" text="11" left="279" top="186" width="40" height="43" onclick="btn_onclick" cssclass="btn_cal_11"/>
+              <Button id="btn_To12" taborder="32" text="12" left="321" top="186" width="40" height="43" onclick="btn_onclick" cssclass="btn_cal_12"/>
+              <Button id="btn_PreYy" taborder="33" text="전년" left="10" top="10" width="70" height="22" onclick="btn_onclick"/>
+              <Button id="btn_ToYy" taborder="34" text="당년" left="10" top="34" width="70" height="22" onclick="btn_onclick"/>
+              <Button id="btn_ToMon" taborder="35" text="당월" left="82" top="34" width="69" height="22" onclick="btn_onclick"/>
+              <Button id="btn_PreMon" taborder="36" text="전월" left="82" top="10" width="69" height="22" onclick="btn_onclick"/>
+              <Button id="btn_FrHalf" taborder="37" text="상반기" left="153" top="10" width="70" height="22" onclick="btn_onclick"/>
+              <Button id="btn_SeHalf" taborder="38" text="하반기" left="153" top="34" width="70" height="22" onclick="btn_onclick"/>
+              <Button id="btn_TwoQuarter" taborder="39" text="2/4분기" left="225" top="34" width="68" height="22" onclick="btn_onclick"/>
+              <Button id="btn_OneQuarter" taborder="40" text="1/4분기" left="225" top="10" width="68" height="22" onclick="btn_onclick"/>
+              <Button id="btn_FourQuarter" taborder="41" text="4/4분기" left="295" top="34" width="68" height="22" onclick="btn_onclick"/>
+              <Button id="btn_TrheeQuarter" taborder="42" text="3/4분기" left="295" top="10" width="68" height="22" onclick="btn_onclick"/>
+            </Layout>
+          </Layouts>
+        </PopupDiv>
+        <Static id="Static00" taborder="1" text="~" left="102" top="1" width="8" height="20"/>
+        <Calendar id="cal_ToYm" taborder="2" left="113" top="0" width="100" height="21" dateformat="yyyy-MM" editformat="yyyy-MM" popuptype="none" ondropdown="cal_ondropdown" onchanged="cal_onchanged" chkData="" autoselect="true"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/******************************************************************************																																		
+* Name     	: comCalMonFT.xfdl
+* Title    	: 월 기간달력
+* Desc     	: 
+* 작성자	: hsi                                                                                                                           
+* 작성일	: 2018-04-17
+************** 소스 수정 이력 ***********************************************
+*  date          		Modifier                Description
+*******************************************************************************
+*  2018.04.17     	      hsi  	            	최초 생성 
+*******************************************************************************
+*/
+
+/************************************************************************************************
+ * FORM 변수 선언 영역
+ ************************************************************************************************/
+this.fv_YM = this.gfn_GetDate().substr(0, 6);
+this.fv_CalCallback;
+this.fv_Dbclick = "N";
+this.fv_PopYn = "N";
+/************************************************************************************************
+ * FORM EVENT 영역(onload, onbeforeclose)
+ ************************************************************************************************/
+/***************************************************************************
+ * Even   : form_onload
+ * Desc   : 초기화 영역
+ ****************************************************************************/
+this.form_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{	
+	
+};
+
+/***************************************************************************
+ * Even   : comCalMon_ontimer
+ * Desc   : ontimer 시간 함수
+ ****************************************************************************/
+this.comCalMon_ontimer = function(obj:nexacro.Form,e:nexacro.TimerEventInfo)
+{
+	if(e.timerid== 0) {
+		this.fv_Dbclick = "N";
+		this.killTimer(0);
+	}
+};
+
+/***************************************************************************
+ * Even   : fn_InitComp
+ * Desc   : 날짜 컴포넌트 초기화
+ ****************************************************************************/
+this.fn_InitComp = function(obj) 
+{
+	if(obj.parent instanceof nexacro.ChildFrame) this.fv_PopYn = "Y";
+	
+	// 바인딩 데이터셋 설정시 자동설정
+	if(!this.gfn_IsNull(this.parent.bindDataset)) {
+		var objDs = eval("obj." + this.parent.bindDataset);
+	
+		if(this.gfn_IsNull(objDs) || this.gfn_IsNull(this.parent.bindFrCol) || this.gfn_IsNull(this.parent.bindToCol)) {
+			this.gfn_Alert("정확하지 않은 설정입니다.");
+			return false;
+		}
+		
+		this.removeChild("FR_YM");
+		this.removeChild("TO_YM");
+		
+		var objBindItem = new BindItem("FR_YM", "cal_FrYm", "value", objDs.name, this.parent.bindFrCol);
+		this.addChild("FR_YM", objBindItem);
+		objBindItem.bind();
+		
+		objBindItem = new BindItem("TO_YM", "cal_ToYm", "value", objDs.name, this.parent.bindToCol);
+		this.addChild("TO_YM", objBindItem);
+		objBindItem.bind();
+	}
+	
+	// 바인딩 콜백 설정시 
+	if(!this.gfn_IsNull(this.parent.bindCallback)) this.fv_CalCallback = this.parent.bindCallback;
+	
+	// readOnly 세팅
+	if(this.parent.calendarReadOnly) this.fn_SetEnable(false);
+	
+	// 필수 세팅
+	if(!this.gfn_IsNull(this.parent.calendarRequired)) this.fn_SetRequired(true, this.parent.calendarRequired);	
+	
+	// 기초값 설정시 
+	if(!this.gfn_IsNull(this.parent.calendarInitFrYm)) { /*
+		this.cal_FrYm.set_value(this.fv_YM);
+	} else { */
+		this.cal_FrYm.set_value(this.parent.calendarInitFrYm);
+	}	
+	
+	if(!this.gfn_IsNull(this.parent.calendarInitToYm)) { /*
+		this.cal_ToYm.set_value(this.fv_YM);
+	} else { */
+		this.cal_ToYm.set_value(this.parent.calendarInitToYm);
+	}	
+};
+
+/************************************************************************************************
+ * 각 COMPONENT 별 EVENT 영역
+ ************************************************************************************************/
+/***************************************************************************
+ * Even   : cal_ondropdown
+ * Desc   : popDiv컴포넌트 띄우기
+ ****************************************************************************/
+this.cal_ondropdown = function(obj:nexacro.Calendar,e:nexacro.EventInfo)
+{
+	this.fv_YM = this.gfn_GetDate().substr(0, 6);
+	trace(this.fv_YM.substr(4, 2));
+	var sFrMon, sToMon, sForMon;
+	
+	if (this.gfn_IsNull(this.cal_FrYm.value)) sFrMon = this.fv_YM.substr(4, 2);
+	else sFrMon = this.cal_FrYm.value.substr(4,2);
+	
+	if (this.gfn_IsNull(this.cal_ToYm.value)) sToMon = this.fv_YM.substr(4, 2);
+	else sToMon = this.cal_ToYm.value.substr(4,2);
+	
+	// 달력세팅
+	if (this.gfn_IsNull(this.cal_FrYm.value)) {
+		this.pdv_YM.form.sta_FrYYYY.set_text(this.fv_YM.substr(0, 4));
+		this.pdv_YM.form.sta_ToYYYY.set_text(this.fv_YM.substr(0, 4));
+	} else {
+		this.pdv_YM.form.sta_FrYYYY.set_text(this.cal_FrYm.value.substr(0, 4));
+		this.pdv_YM.form.sta_ToYYYY.set_text(this.cal_ToYm.value.substr(0, 4));
+	}
+	
+	for(var i = 1; i < 13; i++) {
+		if(i < 10) sForMon = "0" + i;
+		else sForMon = i;
+		
+		if(sForMon == sFrMon) eval("this.pdv_YM.form.btn_Fr" + sForMon).sData = "Y";
+		else eval("this.pdv_YM.form.btn_Fr" + sForMon).sData = "";
+	}
+	
+	for(var i = 1; i < 13; i++) {
+		if(i < 10) sForMon = "0" + i;
+		else sForMon = i;
+		
+		if(sForMon == sToMon) eval("this.pdv_YM.form.btn_To" + sForMon).sData = "Y";
+		else eval("this.pdv_YM.form.btn_To" + sForMon).sData = "";
+	}
+	
+	var nTop = 24, nLeft = 0;
+	
+	if(this.fv_PopYn == "N") {
+		// 상단 팝업
+		if ((system.clientToScreenY(this.cal_FrYm, this.getOwnerFrame().form.div_Work.getOffsetTop()) - 
+			 system.clientToScreenY(this.getOwnerFrame().form.div_Work, 0) + this.pdv_YM.getOffsetHeight() - 40) > this.getOwnerFrame().form.div_Work.getOffsetHeight()) {
+			nTop = -1 * (this.pdv_YM.getOffsetHeight() + 1);
+		}
+		
+		// 우측 정렬
+		if((this.getOwnerFrame().getOffsetWidth() + 280) < (system.clientToScreenX(this.cal_FrYm, this.getOwnerFrame().form.div_Work.getOffsetLeft()) + 
+															this.pdv_YM.getOffsetWidth())) {
+			nLeft = -217;
+		}
+	} else {
+		// 상단 팝업
+		if ((system.clientToScreenY(this.cal_FrYm, this.getOwnerFrame().getOffsetTop()) - 
+			 system.clientToScreenY(this.getOwnerFrame(), 0) + this.pdv_YM.getOffsetHeight() - 40) > this.getOwnerFrame().getOffsetHeight()) {
+			nTop = -1 * (this.pdv_YM.getOffsetHeight() + 1);
+		}
+		
+		// 우측 정렬
+		if((this.getOwnerFrame().getOffsetWidth() + 280) < (system.clientToScreenX(this.cal_FrYm, this.getOwnerFrame().getOffsetLeft()) + 
+															this.pdv_YM.getOffsetWidth())) {
+			nLeft = -217;
+		}	
+	}
+	
+	this.pdv_YM.trackPopupByComponent(this,nLeft,nTop);
+};
+
+/***************************************************************************
+ * Even   : cal_onchanged
+ * Desc   : 날짜 변경시.
+ ****************************************************************************/
+this.cal_onchanged = function(obj:nexacro.Calendar,e:nexacro.ChangeEventInfo)
+{
+	if(!this.gfn_IsNull(obj.value)) {
+		if(!this.gfn_IsYM(obj.value.substr(0, 6))) {
+			this.gfn_Alert("잘못된 날짜 형식입니다.");
+			obj.set_value(this.fv_YM);
+		}
+	}
+	
+	// 콜백지정시 콜백함수 실행.
+	var oRtn = {};
+	
+	oRtn.frYm = this.cal_FrYm.value.substr(0, 6);
+	oRtn.toYm = this.cal_ToYm.value.substr(0, 6);
+	
+ 	try 
+	{
+ 		//eval("this.getOwnerFrame().form.div_Work.form." + this.fv_CalCallback + "(oRtn)");
+		if (this.fv_PopYn=="Y")
+		{
+			var arrPopFrame = nexacro.getPopupFrames();
+			eval("arrPopFrame['"+this.getOwnerFrame().name+"'].form." + this.fv_CalCallback + "(oRtn)");
+			
+		} else {
+			console.dir(eval('this.getOwnerFrame().form.div_Work.form'));
+			trace("fv_CalCallback --> " + this.fv_CalCallback);
+			eval("this.getOwnerFrame().form.div_Work.form." + this.fv_CalCallback + "(oRtn)");			
+		}
+ 	} catch(e) {
+		trace("error --> " + e);
+		this.lookupFunc(this.fv_CalCallback).call(oRtn);
+ 	}
+	
+};
+
+/***************************************************************************
+ * Even   : btn_onclick
+ * Desc   : 월 버튼 클릭시.
+ ****************************************************************************/
+this.btn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	if(obj.name == "btn_FrBefore") {	// from <
+		this.pdv_YM.form.sta_FrYYYY.set_text(nexacro.toNumber(this.pdv_YM.form.sta_FrYYYY.text) - 1);
+	} else if(obj.name == "btn_ToBefore") {	// to <
+		this.pdv_YM.form.sta_ToYYYY.set_text(nexacro.toNumber(this.pdv_YM.form.sta_ToYYYY.text) - 1);
+	} else if(obj.name == "btn_FrNext") {	// from >
+		this.pdv_YM.form.sta_FrYYYY.set_text(nexacro.toNumber(this.pdv_YM.form.sta_FrYYYY.text) + 1);
+	} else if(obj.name == "btn_ToNext") {	// to >
+		this.pdv_YM.form.sta_ToYYYY.set_text(nexacro.toNumber(this.pdv_YM.form.sta_ToYYYY.text) + 1);
+	} else if(obj.name == "btn_PreMon") {			// 전월
+		this.fn_SetRtnVal(this.gfn_AddMonth(this.fv_YM + "01", -1), this.gfn_AddMonth(this.fv_YM + "01", -1));
+	} else if(obj.name == "btn_ToMon") {			// 당월
+		this.fn_SetRtnVal(this.fv_YM, this.fv_YM);
+	} else if(obj.name == "btn_PreYy") {			// 전년
+		this.fn_SetRtnVal(this.gfn_AddMonth(this.fv_YM + "01", -12).substr(0, 4) + "01", this.gfn_AddMonth(this.fv_YM + "01", -12).substr(0, 4) + "12");
+	} else if(obj.name == "btn_ToYy") {				// 당년
+		this.fn_SetRtnVal(this.fv_YM.substr(0, 4) + "01", this.fv_YM.substr(0, 4) + "12");
+	} else if(obj.name == "btn_FrHalf") {			// 상반기
+		this.fn_SetRtnVal(this.fv_YM.substr(0, 4) + "01", this.fv_YM.substr(0, 4) + "06");
+	} else if(obj.name == "btn_SeHalf") {			// 하반기
+		this.fn_SetRtnVal(this.fv_YM.substr(0, 4) + "07", this.fv_YM.substr(0, 4) + "12");
+	} else if(obj.name == "btn_OneQuarter") {		// 1분기
+		this.fn_SetRtnVal(this.fv_YM.substr(0, 4) + "01", this.fv_YM.substr(0, 4) + "03");
+	} else if(obj.name == "btn_TwoQuarter") {		// 2분기
+		this.fn_SetRtnVal(this.fv_YM.substr(0, 4) + "04", this.fv_YM.substr(0, 4) + "06");
+	} else if(obj.name == "btn_TrheeQuarter") {		// 3분기
+		this.fn_SetRtnVal(this.fv_YM.substr(0, 4) + "07", this.fv_YM.substr(0, 4) + "09");
+	} else if(obj.name == "btn_FourQuarter") {		// 4분기
+		this.fn_SetRtnVal(this.fv_YM.substr(0, 4) + "10", this.fv_YM.substr(0, 4) + "12");
+	} else if(obj.name.indexOf("btn_Fr") > -1) {
+		var sForMon, sMon = obj.name.replace("btn_Fr", "");
+		
+		// 달력세팅
+		for(var i = 1; i < 13; i++) {
+			if(i < 10) sForMon = "0" + i;
+			else sForMon = i;
+			
+			if(sForMon == sMon) eval("this.pdv_YM.form.btn_Fr" + sForMon).sData = "Y";
+			else eval("this.pdv_YM.form.btn_Fr" + sForMon).sData = "";
+		}
+		//this.fn_SetRtnVal(this.pdv_YM.form.sta_YYYY.text + sMon);
+	} else if(obj.name.indexOf("btn_To") > -1) {
+		var sForMon, sMon = obj.name.replace("btn_To", "");
+		
+		// 달력세팅
+		for(var i = 1; i < 13; i++) {
+			if(i < 10) sForMon = "0" + i;
+			else sForMon = i;
+			
+			if(sForMon == sMon) eval("this.pdv_YM.form.btn_To" + sForMon).sData = "Y";
+			else eval("this.pdv_YM.form.btn_To" + sForMon).sData = "";
+		}
+		//this.fn_SetRtnVal(this.pdv_YM.form.sta_YYYY.text + sMon);
+	}	
+};
+
+/***************************************************************************
+ * Even   : pdv_Ym_btn_Ok_onclick
+ * Desc   : 확인
+ ****************************************************************************/
+this.pdv_Ym_btn_Ok_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var sForMon, sFrMon, sToMon, sBtnId;
+		
+	// 달력세팅
+	for(var k = 0; k < 2; k++) {
+		if(k == 0) sBtnId = "this.pdv_YM.form.btn_Fr";
+		else sBtnId = "this.pdv_YM.form.btn_To";
+		
+		for(var i = 1; i < 13; i++) {
+			if(i < 10) sForMon = "0" + i;
+			else sForMon = i;
+			
+			if(eval(sBtnId + sForMon).sData == "Y") {
+				if(k == 0) sFrMon = sForMon;
+				else sToMon = sForMon;
+				
+				break;
+			}	
+		}
+	}	
+	
+	this.fn_SetRtnVal(this.pdv_YM.form.sta_FrYYYY.text + sFrMon, this.pdv_YM.form.sta_ToYYYY.text + sToMon);
+};
+
+/***************************************************************************
+ * Even   : pdv_Ym_btn_Cancle_onclick
+ * Desc   : 취소
+ ****************************************************************************/
+this.pdv_Ym_btn_Cancle_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.pdv_YM.closePopup();
+};
+
+/***************************************************************************
+ * Even   : pdv_YM_sta_YYYY_onclick
+ * Desc   : 년도 당년으로 변경.
+ ****************************************************************************/
+this.pdv_YM_sta_YYYY_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	if(this.fv_Dbclick == "Y") {
+		this.fv_Dbclick = "N";
+		
+		obj.set_text(this.fv_YM.substr(0, 4));
+	} else {
+		this.fv_Dbclick = "Y";
+		
+		this.setTimer( 0, 1000 );
+	}
+};
+
+/************************************************************************************************
+ * 사용자 FUNCTION 영역
+ ************************************************************************************************/
+/***************************************************************************
+ * Even   : fn_SetVal
+ * Desc   : 받은값 세팅
+ ****************************************************************************/
+this.fn_SetVal = function(frYm, toym)
+{
+	if(!this.gfn_IsNull(frYm)) {
+		if(this.gfn_IsYM(frYm.replace("-", ""))) {
+			this.cal_FrYm.set_value(frYm);
+		} else {
+			this.gfn_Alert("날짜 형식이 아닙니다.");
+		}
+	} else {
+		this.cal_FrYm.set_value("");
+	}
+	
+	if(!this.gfn_IsNull(toym)) {
+		if(this.gfn_IsYM(toym.replace("-", ""))) {
+			this.cal_ToYm.set_value(toym);
+		} else {
+			this.gfn_Alert("날짜 형식이 아닙니다.");
+		}
+	} else {
+		this.cal_ToYm.set_value("");
+	}	
+};
+
+/***************************************************************************
+ * Even   : fn_GetVal
+ * Desc   : 현재값 리턴
+ ****************************************************************************/
+this.fn_GetVal = function()
+{
+	var oRtn = {};
+	
+	oRtn.frYm = this.cal_FrYm.value.substr(0, 6);
+	oRtn.toYm = this.cal_ToYm.value.substr(0, 6);
+	
+	return oRtn;
+};
+
+/***************************************************************************
+ * Even   : fn_SetRtnVal
+ * Desc   : 값 지정하고 리턴
+ ****************************************************************************/
+this.fn_SetRtnVal = function(frYm, toYm)
+{
+	this.cal_FrYm.set_value(frYm);
+	this.cal_ToYm.set_value(toYm);
+	
+	this.cal_onchanged(this.cal_FrYm);
+	
+	this.pdv_YM.closePopup();
+	
+	
+};
+
+/***************************************************************************
+ * Even   : fn_SetEnable
+ * Desc   : read only 설정.
+ ****************************************************************************/
+this.fn_SetEnable = function(gubun)
+{
+	this.cal_FrYm.set_readonly(!gubun);
+	this.cal_ToYm.set_readonly(!gubun);
+};
+
+/***************************************************************************
+ * Even   : fn_SetRequired
+ * Desc   : 필수 설정.
+ ****************************************************************************/
+this.fn_SetRequired = function(gubun, chkData)
+{
+	if(gubun == true) {
+		this.cal_FrYm.set_cssclass("essential");
+		this.cal_FrYm.chkData = chkData.split("|")[0];
+		
+		this.cal_ToYm.set_cssclass("essential");
+		this.cal_ToYm.chkData = chkData.split("|")[1];
+	} else {
+		this.cal_FrYm.set_cssclass("");
+		this.cal_FrYm.chkData = "";
+		
+		this.cal_ToYm.set_cssclass("");
+		this.cal_ToYm.chkData = "";
+	}
+};
+
+/************************************************************************************************
+ * CRUD 및 TRANSACTION 서비스 호출 처리
+ ************************************************************************************************/
+ 
+/************************************************************************************************
+ * CALLBACK 콜백 처리부분(Transaction, Popup)
+ ************************************************************************************************/
+
+
+]]></Script>
+  </Form>
+</FDL>

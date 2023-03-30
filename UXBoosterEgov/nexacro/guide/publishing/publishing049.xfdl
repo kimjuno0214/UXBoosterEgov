@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="publishing049" width="1040" height="659" titletext="타임라인상세">
+    <Layouts>
+      <Layout height="659" mobileorientation="landscape" width="1040">
+        <Static id="Static00" taborder="0" text="10" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" color="red" textAlign="center"/>
+        <Static id="Static08" taborder="1" text="10" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" color="red" textAlign="center" right="0"/>
+        <Div id="divDetail" taborder="2" left="10" top="0" bottom="10" right="10">
+          <Layouts>
+            <Layout>
+              <Static id="Static01" taborder="0" text="Test" left="10" top="0" height="30" cssclass="sta_WF_title02" width="740"/>
+              <ListView id="ListView00" taborder="1" left="0" top="30" cssclass="lst_WF_timeLineDetail" binddataset="Dataset00" right="0" bottom="0">
+                <Formats>
+                  <Format id="default">
+                    <Band id="body" width="100%" height="240">
+                      <Cell id="Cell05" left="0" top="0" height="110" border="0px solid #c7c7c7" right="0" background="#ececec" borderRadius="0px"/>
+                      <Cell id="Cell06" left="0" top="109" border="1px solid #c7c7c7" right="0" background="#ffffff" bottom="0"/>
+                      <Cell id="Cell00" left="10" top="6" width="120" height="30" cssclass="cellBox01" text="bind:Column0"/>
+                      <Cell id="Cell01" left="135" top="6" width="180" height="30" text="bind:Column1" cssclass="cellBox01"/>
+                      <Cell id="Cell02" left="320" top="6" height="30" cssclass="cellBox02" text="bind:Column2" right="47"/>
+                      <Cell id="Cell03" left="10" top="42" height="60" text="bind:Column3" cssclass="cellBox03" right="10"/>
+                      <Cell id="Cell04" left="10" top="114" height="120" text="bind:Column4" right="10"/>
+                      <Cell id="Cell07" top="6" text="X" height="30" right="10" width="30"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </ListView>
+              <Button id="Button01" taborder="2" text="타임라인추가" top="4" width="90" height="23" cssclass="btn_WF_basic01" right="0"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static22" taborder="3" text="10" left="0" height="10" background="rgba(255,0,0,0.4)" visible="false" right="0" bottom="0" textAlign="center"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">사용자명</Col>
+            <Col id="Column1">2019-08-15 16:27:38</Col>
+            <Col id="Column2">제목제목제목제목제목제목제목제목제목</Col>
+            <Col id="Column3">내용</Col>
+            <Col id="Column4">이미지</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">사용자명</Col>
+            <Col id="Column1">2019-08-15 16:27:38</Col>
+            <Col id="Column2">제목제목제목제목제목제목제목제목제목</Col>
+            <Col id="Column3">내용</Col>
+            <Col id="Column4">이미지</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">사용자명</Col>
+            <Col id="Column1">2019-08-15 16:27:38</Col>
+            <Col id="Column2">제목제목제목제목제목제목제목제목제목</Col>
+            <Col id="Column3">내용</Col>
+            <Col id="Column4">이미지</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

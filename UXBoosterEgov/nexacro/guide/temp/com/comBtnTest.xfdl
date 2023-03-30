@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="comBtnTest" width="455" height="50" titletext="공통버튼 팝업">
+    <Layouts>
+      <Layout height="50" mobileorientation="landscape" width="455">
+        <Button id="btnAdd" taborder="0" text="등록" top="10" width="70" height="30" cssclass="btn_WF_check01" onclick="commonbtn_onclick" left="10"/>
+        <Button id="btnSearch" taborder="1" text="조회" top="10" width="70" height="30" cssclass="btn_WF_search01" onclick="commonbtn_onclick" left="83"/>
+        <Button id="btnSave" taborder="2" text="수정" top="10" width="70" height="30" cssclass="btn_WF_new01" onclick="commonbtn_onclick" left="156"/>
+        <Button id="btnDel" taborder="3" text="삭제" top="10" width="70" height="30" cssclass="btn_WF_delete01" onclick="commonbtn_onclick" left="229"/>
+        <Button id="btnExcel" taborder="4" text="엑셀" top="10" width="70" height="30" cssclass="btn_WF_save01" onclick="commonbtn_onclick" left="302"/>
+        <Button id="btnReport" taborder="5" text="출력" top="10" width="70" height="30" cssclass="btn_WF_print01" onclick="commonbtn_onclick" left="375"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/**
+* commonbtn_onclick : ~ 공통 버튼 클릭
+*/
+this.commonbtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var sBtnGbn;
+    var objDivWork;
+    
+    sBtnGbn = obj.name.substr(3);
+    objDivWork = this.opener;
+    
+    switch(sBtnGbn)
+    {
+        case "Add" :      //등록
+            objDivWork.fnAddRow();
+            break;
+            
+        case "Search" :   //조회
+            objDivWork.fnSearch();
+            break;
+            
+        case "Save" :     //수정
+            objDivWork.fnSave();
+            break;
+        
+        case "Del" :      //삭제
+            objDivWork.fnDelRow();
+            break;
+        
+        case "Excel" :   //엑셀
+            objDivWork.fnExcel();
+            break;
+            
+        case "Report" :   //레포트
+            objDivWork.fnReport();
+            break;
+            
+        default :
+            break;
+    }   
+};]]></Script>
+  </Form>
+</FDL>

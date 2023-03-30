@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="smpNewFile" width="1659" height="832" titletext="(샘플)파일UI기능">
+    <Layouts>
+      <Layout height="832" width="1659">
+        <Button id="btnFileMulti" taborder="0" text="파일 선택 [멀티]" left="428" top="30" width="110" height="30" onclick="btnFileMulti_onclick"/>
+        <Button id="btnDragFileMulti" taborder="1" text="파일 drag&amp;drop 세팅 [멀티]" left="541" top="30" width="160" height="30" onclick="btnDragFileMulti_onclick"/>
+        <Grid id="grdFile" taborder="2" left="5" top="btnFileMulti:3" width="696" height="278" binddataset="dsFile">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="288"/>
+                <Column size="239"/>
+                <Column size="80"/>
+                <Column size="244"/>
+                <Column size="115"/>
+                <Column size="137"/>
+                <Column size="165"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="파일전체명"/>
+                <Cell col="1" text="파일명"/>
+                <Cell col="2" text="확장자"/>
+                <Cell col="3" text="파일 경로"/>
+                <Cell col="4" text="파일 사이즈(M)"/>
+                <Cell col="5" text="파일 타입"/>
+                <Cell col="6" text="마지막 수정일"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:fullName"/>
+                <Cell col="1" text="bind:fileName"/>
+                <Cell col="2" text="bind:extName"/>
+                <Cell col="3" text="bind:filePath"/>
+                <Cell col="4" text="bind:fileSize"/>
+                <Cell col="5" text="bind:fileType"/>
+                <Cell col="6" text="bind:lastModified"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Edit id="edtFile" taborder="6" left="98" top="390" width="327" height="30"/>
+        <Button id="btnFileSingle" taborder="3" text="파일 선택 [단건]" left="428" top="390" width="110" height="30" onclick="btnFileSingle_onclick"/>
+        <Button id="btnDragFileSingle" taborder="4" text="파일 drag&amp;drop 세팅 [단건]" left="541" top="390" width="160" height="30" onclick="btnDragFileSingle_onclick"/>
+        <Static id="staFile" taborder="5" text="파일명" left="5" top="390" width="90" height="30" cssclass="sta_WF_textR"/>
+        <ImageViewer id="imgView" taborder="7" text="미리보기" left="5" top="edtFile:3" width="422" height="330" stretch="fixaspectratio"/>
+        <Static id="Static18" taborder="8" text="첨부파일 [멀티]" left="0" top="0" height="30" width="450" cssclass="sta_WF_title02"/>
+        <Static id="Static18_00" taborder="9" text="첨부파일 [단건]" left="0" top="350" height="30" width="450" cssclass="sta_WF_title02"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsFile">
+        <ColumnInfo>
+          <Column id="fullName" type="STRING" size="256"/>
+          <Column id="fileName" type="STRING" size="256"/>
+          <Column id="extName" type="STRING" size="256"/>
+          <Column id="filePath" type="STRING" size="256"/>
+          <Column id="fileSize" type="STRING" size="256"/>
+          <Column id="fileType" type="STRING" size="256"/>
+          <Column id="lastModified" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <FileUpTransfer id="FileUpTransferM"/>
+      <FileUpTransfer id="FileUpTransferS"/>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[//멀티 파일 선택
+this.btnFileMulti_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var objOption = {"multi":true, "size":10, "accept":["doc","pptx","xlsx"]};
+    
+    this.FileUpTransferM.takeOpenFile(this, "fileAddMulti01", "fnFileMultiCallBack", this.dsFile, objOption);
+};
+
+//멀티 파일 drag&drop 세팅
+this.btnDragFileMulti_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var objOption = {"multi":true, "size":10, "accept":["doc","pptx","xlsx"]};
+    
+    this.FileUpTransferM.setTakeDragFile(this, "fileAddMulti01", "fnFileMultiCallBack", this.grdFile, this.dsFile, objOption);
+};
+
+//멀티 파일 콜백
+this.fnFileMultiCallBack = function(sId, objRtn)
+{
+    trace(sId + " / " + objRtn.result);
+    
+    if (objRtn.result)
+    {
+        trace(objRtn.message);
+        console.dir(objRtn);
+    } else {
+        take.alert(this, "info", objRtn.message, "");
+        return;
+    }
+}
+
+//싱글[단건] 파일 선택
+this.btnFileSingle_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var objOption = {"multi":false, "size":10, "accept":["png"]};
+    
+    this.FileUpTransferS.takeOpenFile(this, "fileAddSingle01", "fnFileSingleCallBack", this.dsFile, objOption);
+};
+
+//싱글[단건] 파일 drag&drop 세팅
+this.btnDragFileSingle_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var objOption = {"multi":false, "size":10, "accept":["png"]};
+    
+    this.FileUpTransferS.setTakeDragFile(this, "fileAddSingle01", "fnFileSingleCallBack", this.imgView, this.dsFile, objOption);
+};
+
+//싱글[단건] 파일 콜백
+this.fnFileSingleCallBack = function(sId, objRtn)
+{
+    trace(sId + " / " + objRtn.result);
+    
+    if (objRtn.result)
+    {
+        trace(objRtn.message);
+        console.dir(objRtn);
+        
+        if (take.nvl(objRtn[0].fullName,"")!="")
+        {
+            //에디터에 파일명 표기
+            this.edtFile.set_value(objRtn[0].fullName);
+            
+            //바이너리파일 가져오기
+            this.FileUpTransferS.getBinary(this, objRtn[0].fullName, "fnBinaryCallBack");
+        }
+    } else {
+        take.alert(this, "info", objRtn.message, "");
+        return;
+    }
+}
+
+//바이너리 가져오기 콜백
+this.fnBinaryCallBack = function(sFullName, objRtn)
+{
+    trace("파일명 : " + sFullName);
+    
+    if (objRtn.result)
+    {
+        trace(objRtn.binary);
+        
+        //바이너리 세팅
+        this.imgView.set_image(objRtn.binary);
+    } else {
+        take.alert(this, "info", objRtn.message, "");
+        return;
+    }
+}]]></Script>
+  </Form>
+</FDL>

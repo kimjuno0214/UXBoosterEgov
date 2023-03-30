@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="frmMain" width="1280" height="800" titletext="New Form">
+    <Layouts>
+      <Layout height="800" mobileorientation="landscape" width="1280">
+        <Div id="divLeft" left="0" top="40" width="230" bottom="26" url="frm::frmLeft.xfdl"/>
+        <Div id="divMdi" taborder="1" left="240" top="40" height="30" right="0" url="frm::frmMdi.xfdl"/>
+        <Div id="divBottom" taborder="2" left="0" height="26" bottom="0" right="0" url="frm::frmBottom.xfdl"/>
+        <Div id="divWork" taborder="3" left="240" top="70" right="0" bottom="26" url="frm::frmWork.xfdl"/>
+        <Div id="divTop" taborder="5" left="0" top="0" height="40" right="0" url="frm::frmTop.xfdl"/>
+        <Button id="Button12" taborder="6" left="divLeft:0" top="40" width="10" bottom="26" cssclass="btn_LF_conFold"/>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>

@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="sampleMdiOpen" width="1280" height="720" titletext="MDI 오픈 샘플">
+    <Layouts>
+      <Layout height="720" mobileorientation="landscape" width="1280">
+        <Button id="btnMenu" taborder="0" text="메뉴오픈" left="364" top="122" width="82" height="30" onclick="btnMenu_onclick"/>
+        <Static id="staTitle" taborder="1" text="- MDI 오픈" left="10" top="12" width="150" height="30" font="bold 11pt/normal &quot;Noto Sans CJK KR DemiLight&quot;,&quot;맑은 고딕&quot;"/>
+        <Static id="Static03" taborder="2" text="1. 메뉴 아이디로 오픈" left="30" top="122" width="140" height="30"/>
+        <Static id="Static00" taborder="3" text="2. 폼 URL로 오픈" left="30" top="170" width="140" height="30"/>
+        <Edit id="edtMenu" taborder="4" left="200" top="122" width="160" height="30" value="M0015" text="M0015"/>
+        <Button id="btnUrl" taborder="5" text="URL오픈" left="364" top="170" width="82" height="30" onclick="btnUrl_onclick"/>
+        <Edit id="edtUrl" taborder="6" left="200" top="170" width="160" height="30" value="biz::sys/GM010.xfdl" text="biz::sys/GM010.xfdl"/>
+        <Static id="Static01" taborder="7" text="--&gt; 메뉴 또는 특정 Form을 오픈할때 사용합니다.&#13;&#10;     넘긴 파라메터는 'this.parent.UserParam' 으로 가져옵니다.&#13;&#10;     (주의: 파라메터는 String으로 넘겨야 합니다.)" left="30" top="50" width="430" height="60" font="11pt/normal &quot;Noto Sans CJK KR DemiLight&quot;,&quot;맑은 고딕&quot;" color="crimson"/>
+        <Static id="staTitle00" taborder="8" text="- MDI 공통 버튼 제어" left="10" top="230" width="150" height="30" font="bold 11pt/normal &quot;Noto Sans CJK KR DemiLight&quot;,&quot;맑은 고딕&quot;"/>
+        <Static id="Static02" taborder="9" text="1. 공통 버튼 전체 제어" left="20" top="277" width="140" height="30"/>
+        <Static id="Static04" taborder="10" text="2. 공통 버튼 개별 제어" left="20" top="355" width="140" height="30"/>
+        <Button id="btnRoleAll" taborder="11" text="take.comBtnRoleAll(this,&quot;YYYYN&quot;)" left="40" top="310" width="260" height="30" onclick="btnRoleAll_onclick"/>
+        <Button id="btnRoleOne" taborder="12" text="take.comBtnRoleOne(this, &quot;Print&quot;, true)" left="40" top="390" width="260" height="30" onclick="btnRoleOne_onclick"/>
+        <Static id="Static05" taborder="13" left="170" top="277" width="550" height="30" font="11pt/normal &quot;Noto Sans CJK KR DemiLight&quot;,&quot;맑은 고딕&quot;" color="crimson" text="--&gt; 조회, 신규, 삭제, 저장, 출력 순으로5자리 'Y'or'N'으로 처리 (ex:&quot;YYYYN&quot;)"/>
+        <Static id="Static06" taborder="14" left="170" top="355" width="660" height="30" font="11pt/normal &quot;Noto Sans CJK KR DemiLight&quot;,&quot;맑은 고딕&quot;" color="crimson" text="--&gt; 버튼 아이디 등록 : 'Add', 조회 : 'Search', 수정 : 'Save', 삭제 : 'Del', 출력 : 'Report'"/>
+        <Static id="staTitle01" taborder="15" text="- MDI Form 객체 가져오기" left="10" top="450" width="200" height="30" font="bold 11pt/normal &quot;Noto Sans CJK KR DemiLight&quot;,&quot;맑은 고딕&quot;"/>
+        <Static id="Static07" taborder="16" text="1. 메뉴 아이디로 MDI Form 객체 가져오기" left="20" top="495" width="270" height="30"/>
+        <Button id="btnMdiForm" taborder="17" text="take.getMdiForm(this, &quot;M0015&quot;)" left="40" top="530" width="260" height="30" onclick="btnMdiForm_onclick"/>
+        <Button id="btnMenuPop" taborder="18" text="메뉴팝업오픈" left="456" top="122" width="114" height="30" onclick="btnMenuPop_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.btnMenu_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    var sMenuId, sParam, sCallFunc;
+    
+    sMenuId = this.edtMenu.value;
+    sParam = "test";
+    sCallFunc = "fnTest";
+    
+	take.mdiOpenMenu(this, sMenuId, sParam, sCallFunc);
+};
+
+this.btnUrl_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    var sUrl, sParam, sCallFunc;
+    
+    sUrl = this.edtUrl.value;
+    sParam = "test";
+    sCallFunc = "fnTest";
+    
+	take.mdiOpenMenu(this, sUrl, sParam, sCallFunc);
+};
+
+this.btnRoleAll_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	take.comBtnRoleAll(this,"YYYYN");
+};
+
+this.btnRoleOne_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	take.comBtnRoleOne(this, "Print", true);
+};
+
+this.btnMdiForm_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var objForm = take.getMdiForm(this, "M0015")
+    
+    alert(objForm.name);
+    //trace(objForm.name + " --> " + objForm.dsCCodeList.saveXML());
+    
+};
+
+this.btnMenuPop_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var sMenuId = this.edtMenu.value;
+	var sUserParam="";
+    var sCallBack="";
+    var sOption="";
+    
+    take.openMenuPop(sMenuId, sUserParam, sOption, sCallBack);
+};
+]]></Script>
+  </Form>
+</FDL>

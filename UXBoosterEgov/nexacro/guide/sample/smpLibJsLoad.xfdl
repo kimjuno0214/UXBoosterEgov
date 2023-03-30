@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="smpLibJsLoad" width="1040" height="659" titletext="(샘플)라이브러리 호출" onload="smpLibJsLoad_onload">
+    <Layouts>
+      <Layout height="659" width="1040">
+        <Button id="btnLoadLibJs" taborder="0" text="JS Load" left="129" top="45" width="131" height="25" onclick="btnLoadLibJs_onclick"/>
+        <Button id="btnJsTest" taborder="1" text="JS 사용" left="129" top="100" width="131" height="25" onclick="btnJsTest_onclick"/>
+        <Static id="Static18" taborder="2" text="업무별 공통 Javasript 사용" left="0" top="0" height="30" cssclass="sta_WF_title02" right="820"/>
+        <Static id="staLoadLibJsT" taborder="3" text="Javascript Load" left="10" top="45" width="110" height="25"/>
+        <Static id="Static00" taborder="4" text="take.loadLibJs(라이브러리명.js) &#13;&#10;ex) take.loadLibJs(&quot;example.js&quot;);" left="275" top="45" width="300" height="43"/>
+        <Static id="staJsTestT" taborder="5" text="Javascript 사용" left="10" top="100" width="100" height="25"/>
+        <Static id="Static00_00" taborder="6" text="라이브러리명.함수명(인자); &#13;&#10;ex) example.fnTest(this,&quot;test&quot;);" left="275" top="100" width="300" height="43"/>
+        <TextArea id="TextArea00" taborder="7" left="10" top="219" value="/***************************************************************************&#10; *  2021.07.19 made by take ymko                                           *&#10; *  UXBooster Example javascript Library                                           *&#10; ***************************************************************************/&#10;&#10;/***************************************************************************&#10; * 필수 작성 요소&#10; ***************************************************************************/&#10;// 중복 방지를 위해 호출&#10;var example = createNS(&quot;example&quot;);&#10;&#10;// 이름 명시 명시 (load 되었는지 여부 확인할때 사용)&#10;example.name = &quot;EXAMPLE&quot;;&#10;&#10;/****************************************************************************************&#10; * 각 업무단에서 사용할 script 작성 Start&#10; *&#10; * js에 함수 작성 --&gt; example.함수아이디         &#10; * &#9;ex: example.fnTest = function(...){...};&#10; *&#10; * 업무단 함수 사용 --&gt; example.함수(인자)  &#10; * &#9;ex: example.fnTest(this, &quot;test&quot;);&#10; *****************************************************************************************/&#10;&#10;/**&#10; * 업무 라이브러리 테스트&#10; * @param {object}&#9;pThis&#9;폼&#10; * @param {string}    &#9;sText&#9;텍스트 &#10; * @return {boolean} &#9;성공 여부&#10; */&#10;example.fnTest = function(pThis, sText)&#10;{&#10;    take.alert(pThis, &quot;Info&quot;, sText);&#10;}&#10;&#10;/***************************************************************************&#10; * 각 업무별 script 작성 End&#10; ***************************************************************************/&#10;" bottom="10" right="10" readonly="false" wordWrap="char"/>
+        <Static id="staJsTestT00" taborder="8" text="Javascript 작성 법" left="10" top="190" width="150" height="25"/>
+        <Static id="staJsLoc" taborder="9" text="Javascript 위치 : &quot;UXBooster\nexacro\_extlib_\lib\라이브러리명.js&quot;" left="10" top="150" width="670" height="25"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[//폼 온로드 이벤트
+this.smpLibJsLoad_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	//js load
+    //take.loadLibJs(현재폼, js, 콜백함수);
+    //비동기로 동작하여 호출후 바로 스크립트를 실행해야 할 경우 콜백 지정
+    take.loadLibJs(
+        this,
+        "example.js"
+        //"fnTest",    //function을 string으로 지정한 경우
+        //this.fnTest  //function을 지정한 경우
+        //function()   //function을 바로 작성한 경우
+        //{
+            //example.fnTest(this, "test");
+        //}
+    );
+};
+
+//js load 버튼 클릭
+this.btnLoadLibJs_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{    
+	///js load
+    //take.loadLibJs(현재폼, js, 콜백함수);
+    //비동기로 동작하여 호출후 바로 스크립트를 실행해야 할 경우 콜백 지정
+    take.loadLibJs(
+        this,
+        "example.js"
+        //"fnTest",    //function을 string으로 지정한 경우
+        //this.fnTest  //function을 지정한 경우
+        //function()   //function을 바로 작성한 경우
+        //{
+            //example.fnTest(this, "test");
+        //}
+    );
+};
+
+this.btnJsTest_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	// 업무 Script 호출
+	example.fnTest(this,"test");
+};
+]]></Script>
+  </Form>
+</FDL>

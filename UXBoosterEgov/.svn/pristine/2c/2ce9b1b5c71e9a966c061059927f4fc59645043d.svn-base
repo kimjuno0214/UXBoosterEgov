@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="OM010P06" width="880" height="500" titletext="다국어매핑팝업" onload="OM010P05_onload" background="#ffffff">
+    <Layouts>
+      <Layout>
+        <Button id="btnSearch" taborder="0" text="조회" top="20" height="23" onclick="btnSearch_onclick" cssclass="btn_WF_search03" left="814" width="46"/>
+        <Div id="divSearch" taborder="1" text="Div00" left="20" top="48" height="43" right="20" cssclass="div_WF_searchBox01">
+          <Layouts>
+            <Layout>
+              <Static id="Static07" taborder="4" text="H20" left="20" height="10" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" top="0" width="285"/>
+              <Static id="Static06" taborder="6" text="W&#13;&#10;20" background="#fd9da0" opacity="0.5" textAlign="center" width="20" top="0" bottom="0" visible="false" left="0"/>
+              <Static id="staCode" taborder="0" text="다국어그룹" left="20" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="cboMlGroupSearch" taborder="1" text="Combo00" top="10" height="21" innerdataset="dsMlGroupCode" codecolumn="CODE" datacolumn="NAME" left="staCode:10" width="195" cssclass="cmb_WF_essential"/>
+              <Static id="staCode00" taborder="2" text="다국어" left="355" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="edtMlInfoSearch" taborder="3" top="10" height="21" right="198" onkeyup="edtMlInfoSearch_onkeyup" left="staCode00:10"/>
+              <Static id="Static08" taborder="5" text="H20" left="20" height="11" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" top="30" width="285"/>
+              <Static id="Static09" taborder="7" text="W&#13;&#10;50" background="#fd9da0" opacity="0.5" textAlign="center" width="50" top="0" bottom="0" visible="false" left="305"/>
+              <Static id="Static11" taborder="8" text="H20" left="355" height="10" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" top="0" width="285"/>
+              <Static id="Static10" taborder="9" text="H20" left="355" height="11" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" top="30" width="285"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static01" taborder="2" text="H20" left="0" height="20" right="0" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" top="0"/>
+        <Static id="Static02" taborder="3" text="W&#13;&#10;20" background="#fd9da0" opacity="0.5" textAlign="center" width="20" top="0" bottom="0" visible="false" left="0"/>
+        <Static id="Static04" taborder="4" text="W&#13;&#10;20" background="#fd9da0" opacity="0.5" textAlign="center" top="0" bottom="0" visible="false" left="860" width="20"/>
+        <Button id="btnShowHide" taborder="5" left="46.48%" top="89" width="60" height="10" cssclass="btn_WF_fold01" onclick="btnShowHide_onclick"/>
+        <Div id="divDetail" taborder="6" text="Div00" left="20" top="btnShowHide:20" right="20" bottom="62">
+          <Layouts>
+            <Layout>
+              <Grid id="grdMultilanguageInfo" taborder="0" left="0" top="26" autofittype="col" right="0" binddataset="dsMultilanguageInfo" bottom="0" oncelldblclick="grdMultilanguageInfo_oncelldblclick" readonly="true">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="130" band="left"/>
+                      <Column size="200"/>
+                      <Column size="150" band="right"/>
+                      <Column size="150" band="right"/>
+                      <Column size="40" band="right"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="다국어코드" autosizecol="limitmin"/>
+                      <Cell col="1" text="다국어명" autosizecol="limitmin"/>
+                      <Cell col="2" text="기타" autosizecol="limitmin"/>
+                      <Cell col="3" text="상세설명" autosizecol="limitmin"/>
+                      <Cell col="4" text="사용" autosizecol="limitmin"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:ML_CD" textAlign="center" autosizecol="limitmin"/>
+                      <Cell col="1" text="bind:ML_NM" edittype="none" autosizecol="limitmin"/>
+                      <Cell col="2" text="bind:ML_ETC" edittype="none" autosizecol="limitmin"/>
+                      <Cell col="3" text="bind:DESC_TXT" edittype="none" autosizecol="limitmin"/>
+                      <Cell col="4" text="bind:USE_YN" displaytype="checkboxcontrol" textAlign="center" autosizecol="limitmin" checkboxtruevalue="Y" checkboxfalsevalue="N"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="Static24" taborder="1" text="다국어 목록" left="0" top="0" height="21" cssclass="sta_WF_title02" right="0"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static03" taborder="7" text="H20" left="0" height="20" bottom="42" right="0" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" onclick="Static01_01_onclick"/>
+        <Button id="btnSave" taborder="8" height="23" cssclass="btn_WF_check01" text="확인" width="57" onclick="btnSave_onclick" top="Static03:0" right="80"/>
+        <Button id="btnCancel" taborder="9" height="23" cssclass="btn_WF_cancel01" text="닫기" width="57" top="458" left="btnSave:3" onclick="btnCancel_onclick"/>
+        <Static id="Static05" taborder="10" text="H20" left="0" height="20" bottom="0" right="0" background="#fd9da0" opacity="0.5" textAlign="center" visible="false"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsMlGroupCode">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsMultilanguageInfo">
+        <ColumnInfo>
+          <Column id="CHK" type="STRING" size="256"/>
+          <Column id="ML_CD" type="STRING" size="256"/>
+          <Column id="ML_GROUP" type="STRING" size="256"/>
+          <Column id="ML_NM" type="STRING" size="256"/>
+          <Column id="ML_ETC" type="STRING" size="256"/>
+          <Column id="DESC_TXT" type="STRING" size="256"/>
+          <Column id="USE_YN" type="STRING" size="256"/>
+          <Column id="REG_DT" type="STRING" size="256"/>
+          <Column id="REG_CD" type="STRING" size="256"/>
+          <Column id="REG_NM" type="STRING" size="256"/>
+          <Column id="MOD_DT" type="STRING" size="256"/>
+          <Column id="MOD_CD" type="STRING" size="256"/>
+          <Column id="MOD_NM" type="STRING" size="256"/>
+          <Column id="ML_TYPE" type="STRING" size="256"/>
+          <Column id="ML_TYPE_NM" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  다국어관리
+*
+*  @MenuPath    시스템공통 > 다국어관리 > 다국어관리
+*  @FileName    OM010P06.xfdl 
+*  @Creator     이동건
+*  @CreateDate  2019.08.17 
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2019.11.17      이동건             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+//this.fv_nFormVal = null;     //용도
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* formid_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.OM010P05_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+	{    
+		if(!take.isEmpty(this.getOwnerFrame().argInSearchText)){
+			this.divSearch.form.edtMlInfoSearch.set_value(this.getOwnerFrame().argInSearchText);
+		}
+	
+        take.tranCode(this, ["00011"], ["dsMlGroupCode"], ["ALL"], 
+        function (sId, nErrCd, sErrMsg)
+		{
+			this.divSearch.form.cboMlGroupSearch.set_index(1);
+			this.fnTran('List');
+		});
+   }
+}
+
+/*********************************************************
+* 2.1 TRANSACTION 서비스 호출 처리
+ ********************************************************/
+/**
+ * fnTran : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnTran("ID");
+ */
+this.fnTran = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Group";
+    
+    //변수선언
+    var sUrl   = "",      //서비스 URL
+        sInDs  = "",      //데이터셋을 검색조건으로 보낼경우 사용 -->선택
+        sOutDs = "",      //데이터를 받아올 데이터셋 지정
+        sParam = "",      //파라메터 사용 안 할 경우       
+        sCallBack = "";        //콜백 처리 함수
+
+    sCallBack  = "fnCallback" ; 
+    
+    switch(sTranId)
+    {
+		case "List" :  
+			this.dsMultilanguageInfo.clearData();
+			
+			var sMlGroup = this.divSearch.form.cboMlGroupSearch.value;	
+			var sMlNm    = take.nvl(this.divSearch.form.edtMlInfoSearch.value, "");
+			take.tranSelect
+			(
+				this,
+				"List",
+				"SystemCommon.multilanguageInfoList",
+				"",
+				"dsMultilanguageInfo",
+				"sMlGroup='" + sMlGroup + "' ML_NM='" + sMlNm + "'",
+				sCallBack
+			);
+			
+            break;
+        default :
+            break;
+    }
+}
+
+/*********************************************************
+ * 2.2 CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "List" :  			//다국어목록 콜백
+            //trace(this.dsMultilanguageInfo.saveXML());
+            break;        
+        default :
+            break;
+    }        
+} 
+
+/*********************************************************
+* 3 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+//N/A
+
+/*********************************************************
+ * 4 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+//조회 버튼 클릭 이벤트
+this.btnSearch_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fnTran('List');
+};
+
+//선택 버튼 클릭 이벤트
+this.btnSelect_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fnSelect();
+};
+
+//다국어 리스트 더블 클릭 이벤트
+this.grdMultilanguageInfo_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	this.fnSelect();
+};
+/*********************************************************
+* 5 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnUserFunction : 사용자 함수
+ * @param  {String} sParam 문자형 인자
+ * @param  {Number} nParam 숫자형 인자
+ * @example this.fnSelect(sParam, nParam);
+ */
+this.fnSelect = function()
+{    
+    var objDs    = this.dsMultilanguageInfo;
+    var nFromRow = objDs.rowposition;
+	if(nFromRow == -1) {
+		take.alert(this, "warn", "다국어를 선택해주세요", ""); 
+		return;
+	}
+	
+	var sRtn 	 = objDs.getColumn(nFromRow, "ML_CD");
+		sRtn	+= ','+ objDs.getColumn(nFromRow, "ML_NM");
+		sRtn	+= ','+ objDs.getColumn(nFromRow, "DESC_TXT");
+		sRtn	+= ','+ objDs.getColumn(nFromRow, "ML_TYPE");
+		sRtn	+= ','+ objDs.getColumn(nFromRow, "ML_TYPE_NM");
+		
+	//var sMlCd = this.dsMultilanguageInfo.getColumn(nFromRow, "ML_CD");
+	
+	this.close(sRtn);
+}
+
+// 다국어명 검색
+this.edtMlInfoSearch_onkeyup = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+	if(e.keycode == 13){
+		this.fnTran("List");
+	}	
+};
+this.btnCancel_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.close();
+};
+]]></Script>
+  </Form>
+</FDL>

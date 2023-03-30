@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="smpMultiCombo" width="1280" height="720" titletext="멀티콤보" onload="Form_onload">
+    <Layouts>
+      <Layout height="720" mobileorientation="landscape" width="1280">
+        <Grid id="grdCode01" taborder="0" left="60" top="187" height="211" binddataset="dsCode01" right="818">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="200"/>
+                <Column size="200"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="code"/>
+                <Cell col="1" text="name"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:code"/>
+                <Cell col="1" text="bind:name"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Combo id="cmbCode01" taborder="1" text="" left="170" top="62" width="160" height="30" innerdataset="dsCode01" codecolumn="code" datacolumn="name" index="-1" value=""/>
+        <Combo id="Combo00" taborder="2" text="" left="170" top="110" width="160" height="30" type="search" index="-1" innerdataset="dsCode01" codecolumn="code" datacolumn="name" multicombo="true" onitemchanged="Combo00_onitemchanged"/>
+        <Button id="btnGetCode" taborder="3" text="멀티콤보값 가져오기" left="331" top="110" width="130" height="30" onclick="Button00_onclick"/>
+        <Static id="staCombo" taborder="4" text="- 일반 콤보" left="60" top="62" width="110" height="30" font="bold 11pt/normal &quot;Noto Sans CJK KR DemiLight&quot;,&quot;맑은 고딕&quot;"/>
+        <Static id="staCombo00" taborder="5" text="- 멀티 콤보" left="60" top="110" width="110" height="30" font="bold 11pt/normal &quot;Noto Sans CJK KR DemiLight&quot;,&quot;맑은 고딕&quot;"/>
+        <Static id="Static00" taborder="6" text="--&gt; 'multicombo' User Property 추가 후 'true'로 세팅" left="600" top="110" width="370" height="30" font="11pt/normal &quot;Noto Sans CJK KR DemiLight&quot;,&quot;맑은 고딕&quot;" color="crimson"/>
+        <Button id="btnSetting" taborder="7" text="멀티콤보값 세팅" left="464" top="110" width="130" height="30" onclick="btnSetting_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsCode01">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="name" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">01</Col>
+            <Col id="name">일</Col>
+          </Row>
+          <Row>
+            <Col id="code">02</Col>
+            <Col id="name">이</Col>
+          </Row>
+          <Row>
+            <Col id="code">03</Col>
+            <Col id="name">삼</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    alert("text --> " + this.Combo00.text +" / value --> " + this.Combo00.multivalue);
+};
+
+this.Combo00_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{	
+    var sTxt =  "prevalue --> " + e.prevalue + " / postvalue --> " + e.postvalue +"\n";
+        sTxt += "pretext --> " + e.pretext + " / posttext --> " + e.posttext;
+    
+    trace("Combo00_onitemchanged\n" + sTxt);
+    
+};
+
+this.btnSetting_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.Combo00.set_Multivalue("01,02,03");
+};
+
+]]></Script>
+  </Form>
+</FDL>

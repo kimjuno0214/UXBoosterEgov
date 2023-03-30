@@ -1,0 +1,499 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="smpForm07" width="1659" height="832" titletext="Sample07" onload="Form_onload" background="#ffffff">
+    <Layouts>
+      <Layout height="832" mobileorientation="landscape" width="1659">
+        <Div id="divSearch" taborder="0" left="10" top="0" height="43" cssclass="div_WF_searchBox01" right="10">
+          <Layouts>
+            <Layout>
+              <Static id="staDeptT" taborder="0" text="부서명" left="20" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Static id="staUseYnT" taborder="1" text="사용여부" left="355" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="cboUseYn" taborder="2" left="staUseYnT:10" top="10" width="195" height="21" index="0" innerdataset="dsCboUseYn" codecolumn="CODE" datacolumn="NAME" text="사용" value="Y" onitemchanged="divSearch_cboUseYn_onitemchanged" cssclass="cmb_WF_essential"/>
+              <Static id="Static07_00" taborder="3" text="20" left="0" top="0" width="20" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static07_00_00" taborder="4" text="285" left="20" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00_00_00" taborder="5" text="285" left="20" top="31" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07" taborder="6" text="50" left="305" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static07_00_00_01" taborder="7" text="285" left="355" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00_00_01_01" taborder="8" text="285" left="355" top="31" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Combo id="cmbDept" taborder="9" left="staDeptT:10" top="10" width="195" height="21" innerdataset="dsDept" codecolumn="DEPT_CD" datacolumn="DEPT_NM" onitemchanged="divSearch_cmbDept_onitemchanged"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnShowHide" taborder="2" left="47.12%" top="43" width="60" height="10" cssclass="btn_WF_fold01"/>
+        <Div id="divDetail" taborder="1" left="10" top="73" bottom="10" right="10" text="">
+          <Layouts>
+            <Layout>
+              <Static id="staTitleL" taborder="0" text="사용자 목록" top="0" cssclass="sta_WF_title02" usedecorate="true" height="21" left="0" width="310"/>
+              <Grid id="grdList" taborder="1" left="0" top="staTitleL:5" binddataset="dsUserList" autosizingtype="row" bottom="0" onselectchanged="divDetail_grdList_onselectchanged" width="310" cssclass="grd_WF_Tree" treeinitstatus="expand,all" treeusecheckbox="false" treeuseline="false" scrollbarsize="10" nodataimage="url('theme://images/Alert_nodataimage.png')">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="298"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="26"/>
+                    </Rows>
+                    <Band id="body">
+                      <Cell text="bind:USER_NM" autosizerow="limitmin" displaytype="treeitemcontrol" edittype="tree" treelevel="bind:DEPT_LEVEL"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Div id="divSubDetail" taborder="2" left="grdList:20" top="0" height="327" right="0">
+                <Layouts>
+                  <Layout>
+                    <Static id="staTitleR" taborder="0" text="사용자 정보" top="0" cssclass="sta_WF_title02" usedecorate="true" height="21" left="0" right="0"/>
+                    <Static id="staIdT" taborder="1" text="ID" top="26" width="120" height="31" cssclass="sta_WF_th01L" left="0"/>
+                    <Static id="Static10" taborder="2" top="26" height="31" cssclass="sta_WF_td01L" left="118" right="0"/>
+                    <Static id="staNameT" taborder="3" text="성명" top="26" width="120" height="31" cssclass="sta_WF_th01L" left="334"/>
+                    <Static id="staBirthDayT" taborder="4" text="생년월일" top="56" width="120" height="31" cssclass="sta_WF_th01L" left="0"/>
+                    <Static id="Static10_00" taborder="5" top="56" height="31" cssclass="sta_WF_td01L" left="118" right="0"/>
+                    <Static id="staMobileT" taborder="6" text="모바일" top="86" width="120" height="31" cssclass="sta_WF_th01L" left="0"/>
+                    <Static id="Static10_00_00" taborder="7" top="86" height="31" cssclass="sta_WF_td01L" left="118" right="0"/>
+                    <Static id="staFaxT" taborder="8" text="팩스" top="116" width="120" height="31" cssclass="sta_WF_th01L" left="0"/>
+                    <Static id="Static10_00_00_00" taborder="9" top="116" height="31" cssclass="sta_WF_td01L" left="118" right="0"/>
+                    <Static id="staAddressT" taborder="10" text="주소" top="146" width="120" height="31" cssclass="sta_WF_th01L" left="0"/>
+                    <Static id="Static10_00_00_00_00" taborder="11" top="146" height="31" cssclass="sta_WF_td01L" left="118" right="0"/>
+                    <Static id="staDeptNmT" taborder="12" text="부서명" top="176" width="120" height="31" cssclass="sta_WF_th01L" left="0"/>
+                    <Static id="Static10_00_00_00_00_00" taborder="13" top="176" height="31" cssclass="sta_WF_td01L" left="118" right="0"/>
+                    <Static id="staUseYnT" taborder="14" text="사용유무" top="206" width="120" height="31" cssclass="sta_WF_th01L" left="0"/>
+                    <Static id="Static10_00_00_00_00_00_00" taborder="15" top="206" height="31" cssclass="sta_WF_td01L" left="118" right="0"/>
+                    <Static id="staLoginDateT" taborder="16" text="로그인일자" top="236" width="120" height="31" cssclass="sta_WF_th01L" left="0"/>
+                    <Static id="Static10_00_00_00_00_00_00_00" taborder="17" top="236" height="31" cssclass="sta_WF_td01L" left="118" right="0"/>
+                    <Static id="staLoginBrowserT" taborder="18" text="로그인 브라우저" top="266" width="120" height="31" cssclass="sta_WF_th01L" left="0"/>
+                    <Static id="Static10_00_00_00_00_00_00_00_00" taborder="19" top="266" height="31" cssclass="sta_WF_td01L" left="118" right="0"/>
+                    <Static id="staJoinDateT" taborder="20" text="가입일자" top="296" width="120" height="31" cssclass="sta_WF_th01L" left="0"/>
+                    <Static id="Static10_00_00_00_00_00_00_00_00_00" taborder="21" top="296" cssclass="sta_WF_td01L" left="118" right="0" height="31"/>
+                    <Static id="staEmailT" taborder="22" text="이메일" top="56" width="120" height="31" cssclass="sta_WF_th01L" left="334"/>
+                    <Static id="staTelT" taborder="23" text="유선전화" top="86" width="120" height="31" cssclass="sta_WF_th01L" left="334"/>
+                    <Static id="staPostNoT" taborder="24" text="우편번호" top="116" width="120" height="31" cssclass="sta_WF_th01L" left="334"/>
+                    <Static id="staStatusT" taborder="25" text="상태" top="176" width="120" height="31" cssclass="sta_WF_th01L" left="334"/>
+                    <Static id="staAgreeYnT" taborder="26" text="동의유무" top="206" width="120" height="31" cssclass="sta_WF_th01L" left="334"/>
+                    <Static id="staPwChangeDateT" taborder="27" text="비밀번호 변경일자" top="236" width="120" height="31" cssclass="sta_WF_th01L" left="334"/>
+                    <Static id="staLoginIpT" taborder="28" text="로그인 IP" top="266" width="120" height="31" cssclass="sta_WF_th01L" left="334"/>
+                    <Static id="staId" taborder="29" left="127" top="26" width="200" height="31"/>
+                    <Static id="staName" taborder="30" left="461" top="26" width="200" height="31"/>
+                    <Static id="staEmail" taborder="31" left="461" top="56" width="200" height="31"/>
+                    <Static id="staBirthDay" taborder="32" left="127" top="56" width="200" height="31"/>
+                    <Static id="staTel" taborder="33" left="461" top="86" width="200" height="31"/>
+                    <Static id="staMobile" taborder="34" left="127" top="86" width="200" height="31"/>
+                    <Static id="staPostNo" taborder="35" left="461" top="116" width="200" height="31"/>
+                    <Static id="staFax" taborder="36" left="127" top="116" width="200" height="31"/>
+                    <Static id="staAddress" taborder="37" left="127" top="146" width="533" height="31"/>
+                    <Static id="staStatus" taborder="38" left="461" top="176" width="200" height="31"/>
+                    <Static id="staDeptNm" taborder="39" left="127" top="176" width="200" height="31"/>
+                    <Static id="staAgreeYn" taborder="40" left="461" top="206" width="200" height="31"/>
+                    <Static id="staUseYn" taborder="41" left="127" top="206" width="200" height="31"/>
+                    <Static id="staPwChangeDate" taborder="42" left="461" top="236" width="200" height="31"/>
+                    <Static id="staLoginDate" taborder="43" left="127" top="236" width="200" height="31"/>
+                    <Static id="staLoginIp" taborder="44" left="461" top="266" width="200" height="31"/>
+                    <Static id="staLoginBrowser" taborder="45" left="127" top="266" width="200" height="31"/>
+                    <Static id="staJoinDate" taborder="46" left="127" top="296" width="200" height="31"/>
+                  </Layout>
+                </Layouts>
+              </Div>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static24" taborder="3" text="20" left="0" height="20" background="rgba(255,0,0,0.4)" visible="false" right="0" textAlign="center" top="53"/>
+        <Static id="Static01" taborder="4" text="10" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" textAlign="center"/>
+        <Static id="Static00_00" taborder="5" text="10" left="10" top="822" background="rgba(255,0,0,0.4)" visible="false" color="red" textAlign="center" right="0" bottom="0"/>
+        <Static id="Static00_01" taborder="6" text="10" left="1649" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" color="red" textAlign="center"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsList">
+        <ColumnInfo>
+          <Column id="USER_CD" type="STRING" size="256"/>
+          <Column id="USER_ID" type="STRING" size="256"/>
+          <Column id="USER_NM" type="STRING" size="256"/>
+          <Column id="USER_ENG_NM" type="STRING" size="256"/>
+          <Column id="USER_BIRTHDAY" type="STRING" size="256"/>
+          <Column id="USER_EMAIL" type="STRING" size="256"/>
+          <Column id="USER_MOBILE" type="STRING" size="256"/>
+          <Column id="USER_TEL" type="STRING" size="256"/>
+          <Column id="USER_FAX" type="STRING" size="256"/>
+          <Column id="POST_CD" type="STRING" size="256"/>
+          <Column id="USER_ADDR" type="STRING" size="256"/>
+          <Column id="DEPT_CD" type="STRING" size="256"/>
+          <Column id="DEPT_NM" type="STRING" size="256"/>
+          <Column id="USER_POSITION" type="STRING" size="256"/>
+          <Column id="USER_POSITION_NM" type="STRING" size="256"/>
+          <Column id="USER_STATUS" type="STRING" size="256"/>
+          <Column id="USER_STATUS_NM" type="STRING" size="256"/>
+          <Column id="DESC_TXT" type="STRING" size="256"/>
+          <Column id="USE_YN" type="STRING" size="256"/>
+          <Column id="USE_YN_NM" type="STRING" size="256"/>
+          <Column id="AGREE_YN" type="STRING" size="256"/>
+          <Column id="AGREE_YN_NM" type="STRING" size="256"/>
+          <Column id="LAST_LOGIN_DT" type="STRING" size="256"/>
+          <Column id="PW_CHANGE_DT" type="STRING" size="256"/>
+          <Column id="LOGIN_BROWSER" type="STRING" size="256"/>
+          <Column id="LOGIN_IP" type="STRING" size="256"/>
+          <Column id="JOIN_DATE" type="STRING" size="256"/>
+          <Column id="VALID_START_DATE" type="STRING" size="256"/>
+          <Column id="VALID_END_DATE" type="STRING" size="256"/>
+          <Column id="REG_DT" type="STRING" size="256"/>
+          <Column id="REG_NM" type="STRING" size="256"/>
+          <Column id="MOD_DT" type="STRING" size="256"/>
+          <Column id="MOD_NM" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsCboUseYn">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsDept" canrowposchange="dsDept_canrowposchange">
+        <ColumnInfo>
+          <Column id="DEPT_CD" type="STRING" size="256"/>
+          <Column id="DEPT_NM" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsUserList">
+        <ColumnInfo>
+          <Column id="USER_CD" type="STRING" size="256"/>
+          <Column id="USER_NM" type="STRING" size="256"/>
+          <Column id="DEPT_CD" type="STRING" size="256"/>
+          <Column id="DEPT_LEVEL" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    1Depth > 2Depth
+*  @FileName    smpForm07.xfdl 
+*  @Creator     김대승
+*  @CreateDate  2020.10.26
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    Date          Modifier            Description
+*******************************************************************************
+*  2020.10.26      김대승             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+//this.fv_nFormVal = null;     //용도
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload등)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.Form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this, true)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {    
+        //초기화
+        this.fnInit();
+   }
+}
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnInit, fnSearch, fnSave, fnAddRow, fnDelRow, fnExcel, fnPrint)
+********************************************************/
+/**
+ * fnInit : 초기화 함수 검색조건 초기화 및 온로드 세팅
+ * @return {N/A}    N/A
+ * @example this.fnInit();
+ */
+this.fnInit = function()
+{
+	var objDivSearch;
+	
+	objDivSearch = this.divSearch.form;
+	
+	//공통코드
+	this.fnCommonCode();
+    
+	//벨리데이션 등록
+	takeval.add(this, "Search", objDivSearch.cboUseYn, objDivSearch.staUseYnT.text, "value", true, "string", "", "");
+}
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "deptSelect";
+	
+	// Object
+	var objDsUserList, objDsList, objDsDept, objDivSearch;
+	// Variable
+	var sDeptCd, sUserCd, sUseYn;
+	
+	objDsUserList = this.dsUserList;
+	objDsList 	  = this.dsList;
+	objDsDept     = this.dsDept;
+	objDivSearch  = this.divSearch.form;
+	
+	switch(sTranId) {
+		case "UserListSelect":		
+			// 벨리데이션 체크
+			if(!takeval.check(this, "Search")) return;
+			
+			objDsUserList.clearData();
+			objDsList.clearData();
+			
+			sDeptCd = take.nvl(objDivSearch.cmbDept.value, "");
+			sUseYn  = take.nvl(objDivSearch.cboUseYn.value, "");
+			
+			take.tranSelect
+			(
+				this, 
+				"UserListSelect", 
+				"Sample.smpForm07UserListSelect", 
+				"", 
+				"dsUserList", 
+				"sDeptCd=" + sDeptCd + " sUseYn=" + sUseYn, 
+				"fnCallBack",
+				false
+			);
+			break;
+		
+        case "deptSelect":
+            objDsUserList.clearData();
+			objDsList.clearData();
+			
+            sUseYn  = objDivSearch.cboUseYn.value;
+			
+            take.tranSelect
+			(
+                this, 
+                sTranId, 
+                "Sample.smpForm07DeptSelect", 
+                "", 
+                "dsDept", 
+				"sUseYn=" + sUseYn, 
+                "fnCallBack"
+            );
+            break;
+			
+        case "userSelect":
+			objDsList.clearData();
+			
+            sUserCd = objDsUserList.getColumn(objDsUserList.rowposition, "USER_CD");
+			
+			take.tranSelect
+			(
+                this, 
+                sTranId, 
+                "Sample.smpForm07Select", 
+                "", 
+                "dsList", 
+                "sUserCd=" + sUserCd, 
+                "fnCallBack"
+			);
+            break;
+			
+        default:
+    }
+}
+
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+this.fnSave = function(sTranId)
+{    
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "";
+}
+
+/**
+ * fnAddRow : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+ * @example this.fnAddRow(sGrdId, nRow);
+ */
+this.fnAddRow = function(sGrdId, nRow)
+{
+    //공통 행추가에서 호출할 디폴트값 세팅
+    if (take.nvl(sGrdId, "")=="") sGrdId = "";
+}
+
+/**
+ * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number, Array} arrnRow    deleteRow 리턴값
+ * @return {N/A} N/A
+ * @example this.fnDelRow(sGrdId, nRow); 
+ */
+this.fnDelRow = function(sGrdId, arrnRow)
+{    
+    //공통 행추가에서 호출할 디폴트값 세팅
+    if (take.nvl(sGrdId, "")=="") sGrdId = "";
+}
+
+/**
+ * fnExcel : 엑셀 다운로드 함수 (필수) --> 공통 엑셀 다운로드에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @return {N/A} N/A
+ * @example this.fnExcel(sGrdId, nRow); 
+ */
+this.fnExcel = function(sGrdId)
+{    
+    return false;
+}
+
+/**
+ * fnPrint : 출력 함수 (필수)
+ * @param  {N/A} N/A
+ * @return {N/A} N/A
+ * @example this.fnPrint(); 
+ */
+this.fnPrint = function()
+{    
+    return false;
+}
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+ ********************************************************/
+//사용자 목록 선택 변경이벤트
+this.divDetail_grdList_onselectchanged = function(obj:nexacro.Grid,e:nexacro.GridSelectEventInfo)
+{
+    this.fnSearch("userSelect");
+};
+
+//사용유무 콤보 변경 이벤트
+this.divSearch_cboUseYn_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	this.fnSearch("UserListSelect");
+};
+
+//부서 콤보 변경 이벤트
+this.divSearch_cmbDept_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	this.fnSearch("UserListSelect");
+};
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnCommonCode : 코드호출 함수
+ * @param  {String} N/A 
+ * @example this.fnCommonCode();
+ */
+this.fnCommonCode = function ()
+{
+	// Object
+	var objDsCboUseYn, objDivSearch;
+	// Variable
+	var sDeptCd
+	
+	objDsCboUseYn = this.dsCboUseYn;
+	objDivSearch  = this.divSearch.form;
+	
+    var sOutDs      = ["dsCboUseYn"];
+    var sGroupCodes = ["00009"];
+    var sHeaderType = ["SEL"];
+	
+    take.tranCode
+	(
+        this, 
+        sGroupCodes, 
+        sOutDs, 
+        sHeaderType,
+        function(sId, nErrCd, sErrMsg)
+        {
+            if (objDsCboUseYn.rowcount > 0){
+                objDivSearch.cboUseYn.set_index(0);
+            }
+        },
+		false
+	);
+};
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : sId      - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : nErrCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : sErrMsg  - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallBack = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+	
+	// Object
+	var objDsDept, objDsUserList, objDivDetail, objDivSearch;
+	// Variable
+	var nInsertRow;
+	
+	objDivSearch  = this.divSearch.form;
+	objDivDetail  = this.divDetail.form;
+	objDsDept 	  = this.dsDept;
+	objDsUserList = this.dsUserList;
+	
+    switch(sId)
+    {
+		case "deptSelect" : // 검색조건 부서코드 조회 콜백	
+            if(objDsDept.rowcount > 0){
+				nInsertRow = objDsDept.insertRow(0)
+				objDsDept.setColumn(nInsertRow, "DEPT_CD", "");
+				objDsDept.setColumn(nInsertRow, "DEPT_NM", "전체");
+				objDivSearch.cmbDept.set_index(0);
+				this.fnSearch("UserListSelect");
+			}
+            break;
+			
+        case "UserListSelect" :  //마스터 조회 콜백
+			this.fnSearch("userSelect");
+            break;
+			
+        case "userSelect" : //디테일 조회 콜백	
+            break;
+			
+        default :
+            break;
+    }         
+} ]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="divDetail.form.divSubDetail.form.staId" propid="text" datasetid="dsList" columnid="USER_ID"/>
+      <BindItem id="item1" compid="divDetail.form.divSubDetail.form.staName" propid="text" datasetid="dsList" columnid="USER_NM"/>
+      <BindItem id="item2" compid="divDetail.form.divSubDetail.form.staEmail" propid="text" datasetid="dsList" columnid="USER_EMAIL"/>
+      <BindItem id="item3" compid="divDetail.form.divSubDetail.form.staBirthDay" propid="text" datasetid="dsList" columnid="USER_BIRTHDAY"/>
+      <BindItem id="item4" compid="divDetail.form.divSubDetail.form.staTel" propid="text" datasetid="dsList" columnid="USER_TEL"/>
+      <BindItem id="item5" compid="divDetail.form.divSubDetail.form.staMobile" propid="text" datasetid="dsList" columnid="USER_MOBILE"/>
+      <BindItem id="item6" compid="divDetail.form.divSubDetail.form.staPostNo" propid="text" datasetid="dsList" columnid="POST_CD"/>
+      <BindItem id="item7" compid="divDetail.form.divSubDetail.form.staFax" propid="text" datasetid="dsList" columnid="USER_FAX"/>
+      <BindItem id="item8" compid="divDetail.form.divSubDetail.form.staAddress" propid="text" datasetid="dsList" columnid="USER_ADDR"/>
+      <BindItem id="item9" compid="divDetail.form.divSubDetail.form.staStatus" propid="text" datasetid="dsList" columnid="USER_STATUS_NM"/>
+      <BindItem id="item10" compid="divDetail.form.divSubDetail.form.staDeptNm" propid="text" datasetid="dsList" columnid="DEPT_NM"/>
+      <BindItem id="item11" compid="divDetail.form.divSubDetail.form.staAgreeYn" propid="text" datasetid="dsList" columnid="AGREE_YN_NM"/>
+      <BindItem id="item12" compid="divDetail.form.divSubDetail.form.staUseYn" propid="text" datasetid="dsList" columnid="USE_YN_NM"/>
+      <BindItem id="item13" compid="divDetail.form.divSubDetail.form.staPwChangeDate" propid="text" datasetid="dsList" columnid="PW_CHANGE_DT"/>
+      <BindItem id="item14" compid="divDetail.form.divSubDetail.form.staLoginDate" propid="text" datasetid="dsList" columnid="LAST_LOGIN_DT"/>
+      <BindItem id="item15" compid="divDetail.form.divSubDetail.form.staLoginIp" propid="text" datasetid="dsList" columnid="LOGIN_IP"/>
+      <BindItem id="item16" compid="divDetail.form.divSubDetail.form.staLoginBrowser" propid="text" datasetid="dsList" columnid="LOGIN_BROWSER"/>
+      <BindItem id="item17" compid="divDetail.form.divSubDetail.form.staJoinDate" propid="text" datasetid="dsList" columnid="JOIN_DATE"/>
+    </Bind>
+  </Form>
+</FDL>

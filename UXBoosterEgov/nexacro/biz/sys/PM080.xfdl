@@ -1,0 +1,879 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="PM080" width="1659" height="832" titletext="프로젝트관리_공휴일관리_공휴일관리" onload="PM080_onload">
+    <Layouts>
+      <Layout height="832" width="1659">
+        <Div id="divSearch" taborder="0" left="10" top="0" height="43" right="10" cssclass="div_WF_searchBox01" text="" minwidth="1300" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Static id="staUseYnT" taborder="3" text="사용여부" left="1025" top="10" height="21" cssclass="sta_WF_textR" width="80"/>
+              <Combo id="cboUseYn" taborder="2" text="Combo00" left="staUseYnT:10" top="10" height="21" innerdataset="dsUseYn" codecolumn="CODE" datacolumn="NAME" width="195" index="-1"/>
+              <Static id="staProjectNmT" taborder="4" text="프로젝트명" left="20" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Static id="staHolidayT" taborder="5" text="공휴일" left="355" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="cboFrHolidt" taborder="0" left="staHolidayT:10" top="10" width="90" height="21" innerdataset="dsMonth" codecolumn="CODE" datacolumn="NAME" autoselect="true" index="0" text="전체" value=""/>
+              <Static id="staDash" taborder="6" text="~" left="cboFrHolidt:0" top="10" width="15" height="21" cssclass="sta_WF_textC"/>
+              <Combo id="cboToHolidt" taborder="1" left="staDash:0" top="10" width="90" height="21" innerdataset="dsMonth" codecolumn="CODE" datacolumn="NAME" autoselect="true" index="0" text="전체" value=""/>
+              <Static id="staHolidayT00" taborder="7" text="월" left="690" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="cboMonthSearch" taborder="8" left="staHolidayT00:10" top="10" width="195" height="21" innerdataset="dsMonth" codecolumn="CODE" datacolumn="NAME" autoselect="true" index="0" text="선택" value=""/>
+              <Combo id="cboProjectNm" taborder="9" text="Combo00" left="staProjectNmT:10" top="10" width="195" height="21" codecolumn="CODE" datacolumn="NAME" innerdataset="dsProjectInfo" cssclass="cmb_WF_essential"/>
+              <Static id="Static07_00" taborder="10" text="20" left="0" top="0" width="20" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static07_00_00" taborder="11" text="285" left="20" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00_00_01" taborder="12" text="285" left="20" top="31" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07" taborder="13" text="50" left="305" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static07_00_00_00" taborder="14" text="285" left="355" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00_00_00_01" taborder="15" text="285" left="355" top="31" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_01" taborder="16" text="50" left="640" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static07_00_00_00_00" taborder="17" text="285" left="690" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00_00_00_00_00" taborder="18" text="285" left="690" top="31" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_01_00" taborder="19" text="50" left="975" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static07_00_00_00_00_01" taborder="20" text="285" left="1025" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00_00_00_00_01_00" taborder="21" text="285" left="1025" top="31" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnShowHide" taborder="1" left="48.16%" top="43" width="60" height="10" cssclass="btn_WF_fold01"/>
+        <Div id="divDetail" taborder="2" left="0" top="73" bottom="10" right="10" minwidth="1300" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Static id="staHolidayListT" taborder="0" text="공휴일 목록" left="10" top="0" height="21" width="310" cssclass="sta_WF_title02"/>
+              <Static id="staHolidayDetailT" taborder="1" text="공휴일 상세" left="340" top="0" height="21" cssclass="sta_WF_title02" right="140"/>
+              <Grid id="grdHolidayList" taborder="2" left="10" top="26" width="310" autofittype="col" bottom="0" binddataset="dsHolidayList" onselectchanged="grdHolidayList_onselectchanged">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="103"/>
+                      <Column size="48"/>
+                      <Column size="54"/>
+                      <Column size="126"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="일자"/>
+                      <Cell col="1" text="(양/음)"/>
+                      <Cell col="2" text="반복여부"/>
+                      <Cell col="3" text="공휴일명"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="expr:comp.parent.parent.parent.fnSetDateFormat(currow,&quot;DATE&quot;)" textAlign="center"/>
+                      <Cell col="1" text="expr:comp.parent.parent.parent.fnSetDateFormat(currow,&quot;LUNAR&quot;)" textAlign="center"/>
+                      <Cell col="2" text="expr:REPEAT_YN==&quot;Y&quot;?&quot;O&quot;:(REPEAT_YN==&quot;N&quot;?&quot;X&quot;:&quot;&quot;)" textAlign="center"/>
+                      <Cell col="3" text="bind:HOLIDAY_NM" edittype="text"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="Static33" taborder="3" left="458" top="26" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Static id="Static34" taborder="11" left="458" top="56" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Static id="Static36" taborder="12" left="456" top="86" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Static id="Static41" taborder="13" left="458" top="116" cssclass="sta_WF_td01L" right="0" height="153"/>
+              <Static id="staHoliNmT" taborder="14" text="공휴일명" left="340" top="26" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="staHoliDtT" taborder="15" text="공휴일" left="340" top="86" width="120" height="31" cssclass="sta_WF_th01L" onclick="divDetail_staHoliDtT_onclick"/>
+              <Static id="staTypeTstaHoliDtT" taborder="16" text="유형" left="340" top="56" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Combo id="cboType" taborder="5" left="staTypeTstaHoliDtT:7" top="61" width="200" height="21" innerdataset="dsHolidayType" codecolumn="CODE" datacolumn="NAME" cssclass="cmb_WF_essential"/>
+              <TextArea id="txtDetail" taborder="10" left="467" top="121" right="7" height="143" maxlength="1000"/>
+              <Static id="staRegNm" taborder="18" left="458" top="268" height="31" cssclass="sta_WF_td01L" width="217"/>
+              <Static id="staRegDtT" taborder="19" text="등록일" left="674" top="268" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="staRegDt" taborder="17" left="staRegDtT:-1" top="268" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Static id="staRegNmT" taborder="20" text="등록자" left="340" top="268" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="staDetailT" taborder="21" text="상세설명" left="340" top="116" width="120" cssclass="sta_WF_th01L" height="153"/>
+              <Static id="staModNm" taborder="23" left="458" top="298" height="31" cssclass="sta_WF_td01L" width="217"/>
+              <Static id="staModDtT" taborder="24" text="수정일" left="674" top="298" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="staModDt" taborder="22" left="staModDtT:-1" top="298" cssclass="sta_WF_td01L" right="0" height="31"/>
+              <Static id="staModNmT" taborder="25" text="수정자" left="340" top="298" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Edit id="edtHoliNm" taborder="4" left="staHoliNmT:7" top="31" height="21" width="200" maxlength="10" cssclass="edt_WF_essential"/>
+              <Static id="staUseYnT" taborder="27" text="사용여부" left="edtHoliNm:7" top="26" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="staRepeatT" taborder="26" text="반복여부" left="cboType:7" top="56" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Combo id="cboUseYn" taborder="7" text="Combo00" top="31" height="21" innerdataset="dsUseYn" codecolumn="CODE" datacolumn="NAME" width="200" left="staUseYnT:7"/>
+              <Static id="staSolLunT" taborder="31" text="양/음력" left="674" top="86" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Combo id="cboSolLun" taborder="9" left="staSolLunT:7" top="91" height="21" innerdataset="dsLunar" codecolumn="CODE" datacolumn="NAME" width="200"/>
+              <Static id="Static24" taborder="37" text="20" left="340" height="20" background="rgba(255,0,0,0.4)" visible="false" right="0" textAlign="center" top="329"/>
+              <Static id="staMultiLangT" taborder="28" text="다국어 정보" left="340" top="Static24:0" height="21" cssclass="sta_WF_title02" right="140"/>
+              <Grid id="grdMultiLang" taborder="30" left="340" top="staMultiLangT:5" right="0" bottom="0" binddataset="dsProgMultiLangDetail" autofittype="col">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="100"/>
+                      <Column size="600"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="구분"/>
+                      <Cell col="1" text="다국어"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:LANG_NM" textAlign="center"/>
+                      <Cell col="1" text="bind:ML_LANG_TXT" edittype="text"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Button id="btnMultiLang" taborder="29" text="다국어매핑" top="349" width="100" right="0" onclick="divDetail_btnMultiLang_onclick" height="21"/>
+              <Combo id="cboRepeat" taborder="8" left="staRepeatT:7" top="61" height="21" innerdataset="dsRepeatYn" codecolumn="CODE" datacolumn="NAME" onitemchanged="divDetail_cboRepeat_onitemchanged" cssclass="cmb_WF_essential" width="200" text=""/>
+              <Combo id="cmbHolMonth" taborder="32" text="선택" left="467" top="91" width="82" height="21" innerdataset="dsMonth" codecolumn="CODE" datacolumn="NAME" index="0" value="" cssclass="cmb_WF_essential"/>
+              <Static id="staHolMonth" taborder="34" text="월" left="cmbHolMonth:3" top="90" width="15" height="21"/>
+              <Combo id="cmbHolDay" taborder="33" text="전체" left="staHolMonth:3" top="91" width="83" height="21" innerdataset="dsDay" codecolumn="CODE" datacolumn="NAME" index="0" value="" cssclass="cmb_WF_essential"/>
+              <Static id="staHolDay" taborder="35" text="일" left="cmbHolDay:3" top="90" width="15" height="21"/>
+              <Calendar id="calHolidayYMD" taborder="6" left="staHoliDtT:7" top="91" width="200" height="21" cssclass="cal_WF_essential"/>
+              <Static id="Static01" taborder="36" text="20" left="320" top="0" width="20" background="rgba(255,0,0,0.4)" visible="false" color="red" textAlign="center" bottom="4"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static01" taborder="3" text="10" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" textAlign="center"/>
+        <Static id="Static24" taborder="4" text="20" left="0" height="20" background="rgba(255,0,0,0.4)" visible="false" right="0" textAlign="center" top="53"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsHolidayList" onrowposchanged="dsHolidayList_onrowposchanged">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="255"/>
+          <Column id="HOLIDAY_CD" type="STRING" size="255"/>
+          <Column id="HOLIDAY_YMD" type="STRING" size="255"/>
+          <Column id="HOLIDAY_NM" type="STRING" size="255"/>
+          <Column id="LUNAR_CD" type="STRING" size="255"/>
+          <Column id="HOLIDAY_TYPE" type="STRING" size="255"/>
+          <Column id="REPEAT_YN" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsHolidayDetail">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="255"/>
+          <Column id="HOLIDAY_CD" type="STRING" size="255"/>
+          <Column id="HOLIDAY_YMD" type="STRING" size="255"/>
+          <Column id="HOLIDAY_NM" type="STRING" size="255"/>
+          <Column id="ML_CD" type="STRING" size="255"/>
+          <Column id="LUNAR_CD" type="STRING" size="255"/>
+          <Column id="HOLIDAY_TYPE" type="STRING" size="255"/>
+          <Column id="DESC_TXT" type="STRING" size="255"/>
+          <Column id="REPEAT_YN" type="STRING" size="256"/>
+          <Column id="USE_YN" type="STRING" size="255"/>
+          <Column id="REG_NM" type="STRING" size="256"/>
+          <Column id="REG_DT" type="STRING" size="255"/>
+          <Column id="REG_CD" type="STRING" size="255"/>
+          <Column id="MOD_NM" type="STRING" size="256"/>
+          <Column id="MOD_DT" type="STRING" size="255"/>
+          <Column id="MOD_CD" type="STRING" size="255"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsProgMultiLangDetail">
+        <ColumnInfo>
+          <Column id="ML_CD" type="STRING" size="255"/>
+          <Column id="LANG_CD" type="STRING" size="255"/>
+          <Column id="LANG_NM" type="STRING" size="255"/>
+          <Column id="ML_LANG_TXT" type="STRING" size="255"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsHolidayType">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="255"/>
+          <Column id="NAME" type="STRING" size="255"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsProjectInfo">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="255"/>
+          <Column id="NAME" type="STRING" size="255"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsUseYn">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsLunar">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsRepeatYn">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsMonth">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="NAME">선택</Col>
+            <Col id="CODE"> </Col>
+          </Row>
+          <Row>
+            <Col id="CODE">01</Col>
+            <Col id="NAME">01</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">02</Col>
+            <Col id="NAME">02</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">03</Col>
+            <Col id="NAME">03</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">04</Col>
+            <Col id="NAME">04</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">05</Col>
+            <Col id="NAME">05</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">06</Col>
+            <Col id="NAME">06</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">07</Col>
+            <Col id="NAME">07</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">08</Col>
+            <Col id="NAME">08</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">09</Col>
+            <Col id="NAME">09</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">10</Col>
+            <Col id="NAME">10</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">11</Col>
+            <Col id="NAME">11</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">12</Col>
+            <Col id="NAME">12</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsDay">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="NAME">선택</Col>
+            <Col id="CODE"/>
+          </Row>
+          <Row>
+            <Col id="CODE">01</Col>
+            <Col id="NAME">01</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">02</Col>
+            <Col id="NAME">02</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">03</Col>
+            <Col id="NAME">03</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">04</Col>
+            <Col id="NAME">04</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">05</Col>
+            <Col id="NAME">05</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">06</Col>
+            <Col id="NAME">06</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">07</Col>
+            <Col id="NAME">07</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">08</Col>
+            <Col id="NAME">08</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">09</Col>
+            <Col id="NAME">09</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">10</Col>
+            <Col id="NAME">10</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">11</Col>
+            <Col id="NAME">11</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">12</Col>
+            <Col id="NAME">12</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">13</Col>
+            <Col id="NAME">13</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">14</Col>
+            <Col id="NAME">14</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">15</Col>
+            <Col id="NAME">15</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">16</Col>
+            <Col id="NAME">16</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">17</Col>
+            <Col id="NAME">17</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">18</Col>
+            <Col id="NAME">18</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">19</Col>
+            <Col id="NAME">19</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">20</Col>
+            <Col id="NAME">20</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">21</Col>
+            <Col id="NAME">21</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">22</Col>
+            <Col id="NAME">22</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">23</Col>
+            <Col id="NAME">23</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">24</Col>
+            <Col id="NAME">24</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">25</Col>
+            <Col id="NAME">25</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">26</Col>
+            <Col id="NAME">26</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">27</Col>
+            <Col id="NAME">27</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">28</Col>
+            <Col id="NAME">28</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">29</Col>
+            <Col id="NAME">29</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">30</Col>
+            <Col id="NAME">30</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">31</Col>
+            <Col id="NAME">31</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="SCHEDULE_SEQ" type="STRING" size="256"/>
+          <Column id="ALLDAY_YN" type="STRING" size="256"/>
+          <Column id="CATEGORY_CD" type="STRING" size="256"/>
+          <Column id="DIVISION_CD" type="STRING" size="256"/>
+          <Column id="SCHEDULE_START_DATE" type="STRING" size="256"/>
+          <Column id="SCHEDULE_START_TIME" type="STRING" size="256"/>
+          <Column id="SCHEDULE_END_DATE" type="STRING" size="256"/>
+          <Column id="SCHEDULE_END_TIME" type="STRING" size="256"/>
+          <Column id="SCHEDULE_TITLE" type="STRING" size="256"/>
+          <Column id="SCHEDULE_TXT" type="STRING" size="256"/>
+          <Column id="SCHEDULE_PLACE" type="STRING" size="256"/>
+          <Column id="SCHEDULE_PARTICIPANT" type="STRING" size="256"/>
+          <Column id="PUSH_YN" type="STRING" size="256"/>
+          <Column id="PUSH_INFO" type="STRING" size="256"/>
+          <Column id="REG_DT" type="STRING" size="256"/>
+          <Column id="REG_CD" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    1DEPTH > 2DEPTH
+*  @FileName    PM080.xfdl 
+*  @Creator     이동건
+*  @CreateDate  2019.08.16 
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2019.08.16      이동건             최초 생성
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+//this.fv_nFormVal = null;     //용도
+this.fv_sHoliCd = "";
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* PM080_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.PM080_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {    
+        this.fnInit();
+   }
+}
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnInit, fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnInit : 초기화 함수 검색조건 초기화 및 온로드 세팅
+ * @return {N/A}    N/A
+ * @example this.fnInit();
+ */
+this.fnInit = function(){
+	//검색조건
+	var objDivSearch = this.divSearch.form;
+	take.tranSelect(this, "ProjectInfo", "ProjectManagement.projectInfoCode", "", "dsProjectInfo", "", "fnCallback");
+	take.tranCode(this, ["00009", "00009","00013","00012"], ["dsUseYn","dsRepeatYn","dsHolidayType","dsLunar"], "ALL", "fnCallback");
+};
+
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    this.dsHolidayList.clearData();
+	this.dsHolidayDetail.clearData();
+	
+	//공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Transation id";
+	var objDivSearch 			= this.divSearch.form;
+	var sProjectNm 				= take.nvl(objDivSearch.cboProjectNm.value,"");
+	var nHolidayFrom 			= take.nvl(objDivSearch.cboFrHolidt.value,"");
+	var nHolidayTo				= take.nvl(objDivSearch.cboToHolidt.value,"");
+	var schedule_search_month 	= take.nvl(objDivSearch.cboMonthSearch.value,"");
+	var bUseYn 					= take.nvl(objDivSearch.cboUseYn.value,"");
+	
+	if( !take.isEmpty(nHolidayFrom) && !take.isEmpty(nHolidayTo) ){
+		if( parseInt(nHolidayFrom) > parseInt(nHolidayTo) ){
+			take.alert(this, "", "공휴일 기간이 잘못되었습니다.");
+			return;
+		}
+	}
+	
+ 	takeval.add(this, "Search", this.divSearch.form.cboProjectNm, "프로젝트명", "value", true, "string", "", "");
+ 	if(!takeval.check(this, "Search")) return;
+	
+    take.tranSelect(this
+		, "holidayList"
+		, "ProjectManagement.projectHolidayList"
+		, ""
+		, "dsHolidayList"
+		,"PROJECT_CD='"+sProjectNm
+		+"' START_DATE='"+nHolidayFrom
+		+"' END_DATE='"+nHolidayTo
+		+"' USE_YN='"+bUseYn
+		+"' SCHEDULE_SEARCH_MONTH ='"+schedule_search_month+"'"
+	, "fnCallback");
+}
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+this.fnSave = function(sTranId)
+{    
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "saveHoliday";
+	this.dsSearch.clearData();
+	var objDivDetail = this.divDetail.form;
+	var sHolMonth, sHolDay, sOrgMd;	
+	var objDsSearch = this.dsSearch;
+	takeval.add(this, "Save", objDivDetail.cboType,  		this.divDetail.form.staTypeTstaHoliDtT.text		, "value", true, "string", "", "");
+	takeval.add(this, "Save", objDivDetail.cboRepeat,  		this.divDetail.form.staRepeatT.text				, "value", true, "string", "", "");
+	takeval.add(this, "Save", objDivDetail.edtHoliNm,  		this.divDetail.form.staHoliNmT.text				, "value", true, "string", "", "");
+	
+	//this.dsHolidayDetail.setColumn(0,"ML_CD", sMl_cd);
+	//this.dsHolidayDetail.setColumn(0,"PROJECT_CD", "PM00000001");
+
+	//add 된 validation 날리기
+	//takeval.getGroupList()를 통해서 찾고 있다면 지우기
+	//takeval.getFindObjValidator를 통해서도 아이디를 찾을 수도 있음
+	//takeval.remove(); 사용하기 
+	
+	if(this.divDetail.form.cboRepeat.value == "Y"){
+		takeval.add(this, "Save", objDivDetail.cmbHolMonth,  	this.divDetail.form.staHoliDtT.text,		"value", true, "string", "", "");
+		takeval.add(this, "Save", objDivDetail.cmbHolDay,  		this.divDetail.form.staHoliDtT.text,		"value", true, "string", "", "");
+		sHolMonth 	= objDivDetail.cmbHolMonth.value;
+		sHolDay 	= objDivDetail.cmbHolDay.value;
+		
+		//반복이 되면 매년 진행이기 때문에 "YYYY- > 9999"
+		sOrgMd = sHolMonth + sHolDay;
+		sOrgMd = "9999"+sOrgMd;
+		this.dsHolidayDetail.setColumn(0,"HOLIDAY_YMD", sOrgMd);
+		
+		//일정관리 테이블에 넣기위한 데이터
+		objDsSearch.addRow();
+		objDsSearch.setColumn(0,"ALLDAY_YN"			,"Y"); //반복
+		objDsSearch.setColumn(0,"CATEGORY_CD"			,"A"); // C:회사 , T: 팀, P:개인, A:공휴일(반복)
+		objDsSearch.setColumn(0,"SCHEDULE_START_DATE"	,sOrgMd);
+		objDsSearch.setColumn(0,"SCHEDULE_START_TIME"	,"9999");
+		objDsSearch.setColumn(0,"SCHEDULE_END_DATE"	,sOrgMd);
+		objDsSearch.setColumn(0,"SCHEDULE_END_TIME"	,"9999");
+		var sScheduleNm = objDivDetail.edtHoliNm.value;
+		objDsSearch.setColumn(0,"SCHEDULE_TITLE"		,take.nvl(sScheduleNm, ""));
+		objDsSearch.setColumn(0,"SCHEDULE_TXT"		,take.nvl(sScheduleNm, ""));
+		objDsSearch.setColumn(0,"SCHEDULE_PLACE"		,"");
+		objDsSearch.setColumn(0,"SCHEDULE_PARTICIPANT","");
+	}else{
+		takeval.add(this, "Save", objDivDetail.calHolidayYMD,  	this.divDetail.form.staHoliDtT.text,		"value", true, "string", "", "");
+		sOrgMd = objDivDetail.calHolidayYMD.value;
+		this.dsHolidayDetail.setColumn(0,"HOLIDAY_YMD", sOrgMd);
+	}
+	
+	if(!takeval.check(this, "Save")) return;
+	//var sProjectCd 	= UXBooster.av_sProjectCd;
+	//var nRow 		= this.divDetail.form.grdHolidayList.getSelectedRows();
+	//var sProjectCd 	= this.dsHolidayList.getColumn(nRow, "PROJECT_CD");
+	var sProjectCd 	= take.nvl(this.divSearch.form.cboProjectNm.value,"");
+	
+	//국가 공휴일 및 회사공휴일인 경우에는 캘린더 테이블에 데이터 저장 필요
+// 	if(true){
+// 		take.tranSave(this, sTranId, "ProjectManagement.projectHoliday", "dsHolidayDetail", "", "PROJECT_CD='"+sProjectCd+"'", "fnCallback");
+// 	}else{
+// 	//기타 공휴일인 경우
+// 		take.tranSave(this, sTranId, "ProjectManagement.projectHoliday", "dsHolidayDetail", "", "PROJECT_CD='"+sProjectCd+"'", "fnCallback");
+// 	}
+	//tranSave -> transaction 변경 2021.05.17 전영찬
+	take.transaction
+	(
+		this,
+		sTranId,
+		"SVC_LOC::pm/projectHolidaySave.do",
+		"dsHolidayDetail=dsHolidayDetail:U",
+		"",
+		"PROJECT_CD='"+sProjectCd+"'",
+		"fnCallback"
+	);
+    
+}
+/**
+ * fnAddRow : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+ * @example this.fnAddRow(sGrdId, nRow);
+ */
+this.fnAddRow = function(sGrdId, nRow)
+{
+    //공통 행추가에서 호출할 디폴트값 세팅
+    if (take.nvl(sGrdId, "")=="") sGrdId = "Grid00";
+    this.dsHolidayDetail.clearData();
+	this.dsHolidayDetail.addRow();
+	var objDivDetail = this.divDetail.form;
+	//objDivDetail.mskHolidt.set_value("");
+	objDivDetail.cboType.set_value("01");
+	objDivDetail.cboSolLun.set_value("S");
+	objDivDetail.cboUseYn.set_value("Y");
+	objDivDetail.cboRepeat.set_value("Y");
+	this.fnSwitchRepeat(true);
+	objDivDetail.cmbHolMonth.set_value("");
+	objDivDetail.cmbHolDay.set_value("");
+	objDivDetail.calHolidayYMD.set_value("")
+}
+
+/**
+ * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number, Array} arrnRow    deleteRow 리턴값
+ * @return {N/A} N/A
+ * @example this.fnDelRow(sGrdId, nRow); 
+ */
+this.fnDelRow = function(sGrdId, arrnRow)
+{    
+    //공통 행추가에서 호출할 디폴트값 세팅
+    if (take.nvl(sGrdId, "")=="") sGrdId = "Grid00";
+
+	var nRow = this.dsHolidayList.rowposition;
+	var nSelHoli = this.dsHolidayList.getColumn(nRow, "HOLIDAY_NM");
+	var bolConfirm = take.confirm(this, "question", "{name}을(를) {text}하시겠습니까?", { name : nSelHoli, text : "삭제"});
+    
+	var objDsHoliDetail = this.dsHolidayDetail;
+	if(bolConfirm){		
+		objDsHoliDetail.set_enableevent(false);
+		objDsHoliDetail.set_updatecontrol(false);
+		objDsHoliDetail.setRowType(0, 8);
+		objDsHoliDetail.set_enableevent(true);
+		objDsHoliDetail.set_updatecontrol(true);
+		
+		//tranSave -> transaction 변경 2021.05.17 전영찬
+		//take.tranSave(this, "HoliDelete", "ProjectManagement.projectHoliday", "dsHolidayDetail", "", "HOLIDAY_CD='"+this.fv_sHoliCd+"'", "fnCallback");
+		take.transaction
+		(
+			this,
+			"HoliDelete",
+			"SVC_LOC::pm/projectHolidaySave.do",
+			"dsHolidayDetail=dsHolidayDetail:U",
+			"",
+			"HOLIDAY_CD='"+this.fv_sHoliCd+"'",
+			"fnCallback"
+		);
+	}
+}
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+/**
+* component_onclick : ~ 버튼 클릭
+*/
+this.grdHolidayList_onselectchanged = function(obj:nexacro.Grid,e:nexacro.GridSelectEventInfo)
+{
+	var nRow = e.row;
+	var sProjCd = this.dsHolidayList.getColumn(nRow, "PROJECT_CD");
+	//var sHoliCd = this.dsHolidayList.getColumn(nRow, "HOLIDAY_CD");
+	this.fv_sHoliCd = this.dsHolidayList.getColumn(nRow, "HOLIDAY_CD");
+	
+	take.tranSelect(this, "holidayDetail", "ProjectManagement.projectHolidayDetail", "", "dsHolidayDetail",
+		"PROJECT_CD='"+take.nvl(sProjCd, "")
+		+"' HOLIDAY_CD='"+take.nvl(this.fv_sHoliCd, "")+"'"
+	, "fnCallback"
+	);
+};
+
+this.divDetail_cboRepeat_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	var objDetailForm = this.divDetail.form;
+	var nMonth = take.getTodayTime().month;
+	var nDay = take.getTodayTime().day;
+	var nYMD = take.getTodayTime().date;
+	
+	if(e.postvalue == "Y"){
+		this.fnSwitchRepeat(true);
+		this.divDetail.form.cmbHolMonth.set_value(nMonth);
+		this.divDetail.form.cmbHolDay.set_value(nDay);
+	}else{
+		this.fnSwitchRepeat(false);
+		this.divDetail.form.calHolidayYMD.set_value(nYMD);
+	}
+};
+
+this.dsHolidayList_onrowposchanged = function(obj:nexacro.NormalDataset,e:nexacro.DSRowPosChangeEventInfo)
+{
+	this.dsHolidayList.getColumn(this.dsHolidayList.rowposition, "");
+};
+
+this.divDetail_btnMultiLang_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	take.openPopup(this, "addMultiLanguage", "biz::sys/OM010P06.xfdl", null, "", "fnPopCallback", false);
+};
+
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnUserFunction : 사용자 함수
+ * @param  {String} sParam 문자형 인자
+ * @param  {Number} nParam 숫자형 인자
+ * @example this.fnUserFunction(sParam, nParam);
+ */
+this.fnSetDateFormat = function (nRow, sType)
+{
+	var sDate  	= this.dsHolidayList.getColumn(nRow, "HOLIDAY_YMD");
+	var sLunar  = this.dsHolidayList.getColumn(nRow, "LUNAR_CD");
+	sLunar = sLunar == "S" ? "양력" : "음력";
+
+	if(sDate.substr(0,4) == "9999"){
+		sDate		= sDate.replace(/(\d\d\d\d)(\d\d)(\d\d)/g, '$2-$3');
+	}else{
+		sDate		= sDate.replace(/(\d\d\d\d)(\d\d)(\d\d)/g, '$1-$2-$3');
+	}
+	
+	if(sType == "DATE"){
+		return sDate;
+	}else{
+		return sLunar;
+	}
+};
+
+this.fnSwitchRepeat = function (bolRepeat)
+{
+	var objDetailForm = this.divDetail.form;
+	
+	if(bolRepeat){
+		objDetailForm.cmbHolMonth.set_visible(true);
+		objDetailForm.cmbHolDay.set_visible(true);
+		objDetailForm.staHolMonth.set_visible(true);
+		objDetailForm.staHolDay.set_visible(true);
+		objDetailForm.calHolidayYMD.set_visible(false);
+	}else{
+		objDetailForm.cmbHolMonth.set_visible(false);
+		objDetailForm.cmbHolDay.set_visible(false);
+		objDetailForm.staHolMonth.set_visible(false);
+		objDetailForm.staHolDay.set_visible(false);
+		objDetailForm.calHolidayYMD.set_visible(true);
+	}
+};
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : sId      - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : nErrCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : sErrMsg  - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }
+	
+    switch(sId)
+    {
+        case "ProjectInfo":
+			var bolAdminYn = UXBooster.gdsUserInfo.getColumn(0,"ADMIN_YN");
+			if(bolAdminYn == "Y"){
+				this.divSearch.form.cboProjectNm.set_enable(true);
+			}else{
+				this.divSearch.form.cboProjectNm.set_enable(false);
+			}
+			this.divSearch.form.cboProjectNm.set_value(UXBooster.av_sProjectCd);
+			this.fnSearch();
+ 		break;
+ 		
+		case "holidayList" : //조회 콜백
+            this.dsHolidayDetail.clearData();
+			var nRow = 0;
+			var objDsHoliday = this.dsHolidayList;
+			var sProjCd = objDsHoliday.getColumn(nRow, "PROJECT_CD");
+			var sHoliCd = objDsHoliday.getColumn(nRow, "HOLIDAY_CD");
+			take.tranSelect(this, "holidayDetail", "ProjectManagement.projectHolidayDetail", "", "dsHolidayDetail",
+				"PROJECT_CD='"+take.nvl(sProjCd, "")
+				+"' HOLIDAY_CD='"+take.nvl(sHoliCd, "")+"'"
+				, "fnCallback");
+        break;
+		case "holidayDetail":
+			var objDsHoliday = this.dsHolidayList;
+			var nDsCnt 	= objDsHoliday.rowcount;
+			var sHolMonth, sHolDay;
+			//this.divDetail.form.staHolidayListT.set_text("공휴일 목록 ("+nDsCnt+"건)");
+			var nRow 		= objDsHoliday.rowposition;
+			var bolRepeat 	= objDsHoliday.getColumn(nRow, "REPEAT_YN");
+			var nDt			= objDsHoliday.getColumn(nRow, "HOLIDAY_YMD");
+			var objDetailForm = this.divDetail.form;
+			if(bolRepeat == "Y"){
+				nDt = nDt.substr(4,4);
+				this.fnSwitchRepeat(true);
+				sHolMonth = nDt.substr(0,2);
+				sHolDay = nDt.substr(2,2);
+				this.divDetail.form.cmbHolMonth.set_value(sHolMonth);
+				this.divDetail.form.cmbHolDay.set_value(sHolDay);
+// 				objDetailForm.mskHolidt.set_format("##-##");
+// 				objDetailForm.mskHolidt.set_value(nDt);
+			}else{
+				this.fnSwitchRepeat(false);
+				this.divDetail.form.calHolidayYMD.set_value(nDt);
+// 				objDetailForm.mskHolidt.set_format("####-##-##");
+// 				objDetailForm.mskHolidt.set_value(nDt);
+			}
+			//다국어 셋팅
+			this.dsProgMultiLangDetail.clearData();
+			var sMlCd = this.dsHolidayDetail.getColumn(nRow, "ML_CD");
+			take.tranSelect(this, "multilanguageDetailList", "SystemCommon.multilanguageDetailList", "", "dsProgMultiLangDetail", "sMlCd='" + sMlCd + "'", "fnCallback");
+		break;
+			
+        case "saveHoliday" : //조회 콜백
+			//take.tranSave(this, "saveToCalendar", "ScheduleManagement.scheduleInfo", "dsSearch", "", "PROJECT_CD='"+sProjectCd+"'", "fnCallback");
+			this.fnSearch();
+			break;
+			
+        case "codetran.multi" :  //저장 콜백
+			this.divSearch.form.cboUseYn.set_index(0);
+            break;
+			
+        case "HoliDelete" :  //저장 콜백
+            this.fnSearch();
+            break;
+		case "saveToCalendar":
+			this.fnSearch();
+			break;
+        default :
+            break;
+    }
+}
+
+this.fnPopCallback = function (sId, nReturnVal)
+{
+	switch(sId) {
+	case "addMultiLanguage":
+		//팝업이 닫히면서 nReturnVal을 통해 값을 받을 수 있습니다
+		if(take.nvl(nReturnVal, "") != "") {
+			nReturnVal = nReturnVal.split(",")[0];
+			this.dsHolidayDetail.setColumn(0, "ML_CD", nReturnVal);
+		}else return;
+		
+		// 선택된 row의 다국어 정보 조회
+		this.dsProgMultiLangDetail.clearData();
+		take.tranSelect(this, "multilanguageDetailList", "SystemCommon.multilanguageDetailList", "", "dsProgMultiLangDetail", "sMlCd='" + nReturnVal + "'", "fnCallback");
+		
+		break;
+	default:
+	}
+};]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="divDetail.form.edtHoliNm" propid="value" datasetid="dsHolidayDetail" columnid="HOLIDAY_NM"/>
+      <BindItem id="item1" compid="divDetail.form.cboUseYn" propid="value" datasetid="dsHolidayDetail" columnid="USE_YN"/>
+      <BindItem id="item3" compid="divDetail.form.cboType" propid="value" datasetid="dsHolidayDetail" columnid="HOLIDAY_TYPE"/>
+      <BindItem id="item4" compid="divDetail.form.txtDetail" propid="value" datasetid="dsHolidayDetail" columnid="DESC_TXT"/>
+      <BindItem id="item5" compid="divDetail.form.staRegNm" propid="text" datasetid="dsHolidayDetail" columnid="REG_NM"/>
+      <BindItem id="item6" compid="divDetail.form.staRegDt" propid="text" datasetid="dsHolidayDetail" columnid="REG_DT"/>
+      <BindItem id="item7" compid="divDetail.form.staModNm" propid="text" datasetid="dsHolidayDetail" columnid="MOD_NM"/>
+      <BindItem id="item8" compid="divDetail.form.staModDt" propid="text" datasetid="dsHolidayDetail" columnid="MOD_DT"/>
+      <BindItem id="item11" compid="divDetail.form.cboSolLun" propid="value" datasetid="dsHolidayDetail" columnid="LUNAR_CD"/>
+      <BindItem id="item12" compid="divDetail.form.cboRepeat" propid="value" datasetid="dsHolidayDetail" columnid="REPEAT_YN"/>
+    </Bind>
+  </Form>
+</FDL>

@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="SC010T03" width="1018" height="318" titletext="시스템공통_시스템관리_약관등록" onload="take_onload">
+    <Layouts>
+      <Layout height="318" mobileorientation="landscape" width="1018">
+        <Static id="Static17" taborder="0" text="Static03" left="798" top="28" width="220" height="10" background="red" visible="false"/>
+        <Tab id="tabPolicy" taborder="1" tabindex="0" left="10" top="12" showextrabutton="true" right="10" bottom="10">
+          <Tabpages>
+            <Tabpage id="tpgPolicyInfo" text="시스템이용약관">
+              <Layouts>
+                <Layout>
+                  <TextArea id="txtPolicyInfo" taborder="0" left="10" top="10" right="10" bottom="10"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="tpgPrivacyInfo" text="개인정보처리방침">
+              <Layouts>
+                <Layout>
+                  <TextArea id="txtPrivacyInfo" taborder="0" left="10" top="10" right="10" bottom="10"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+        <Button id="btnSaveSub" taborder="2" text="저장" top="5" width="46" height="23" cssclass="btn_WF_basic01" right="10" onclick="btnSaveSub_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/**
+*  약관등록
+*
+*  @MenuPath    시스템공통 > 시스템관리 > 약관등록
+*  @FileName    SC010T03.xfdl 
+*  @Creator     천우성
+*  @CreateDate  2019.08.16
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2019.08.16      천우성             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+this.fv_nSystemId = 'S000000001';     //시스템ID
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* formid_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.take_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {    
+        this.fnTran('Detail');
+   }
+}
+
+/*********************************************************
+* 2.1 TRANSACTION 서비스 호출 처리
+ ********************************************************/
+/**
+ * fnTran : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnTran("ID");
+ */
+this.fnTran = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Detail";
+    
+    //변수선언
+    var sUrl   = "",      //서비스 URL
+        sInDs  = "",      //데이터셋을 검색조건으로 보낼경우 사용 -->선택
+        sOutDs = "",      //데이터를 받아올 데이터셋 지정
+        sParam = "",      //파라메터 사용 안 할 경우       
+        sCallBack = "";        //콜백 처리 함수
+
+    sCallBack  = "fnCallback" ; 
+    
+    switch(sTranId)
+    {
+        case "Detail" :  
+			this.dsSystemPolicy.clearData();
+			
+			take.tranSelect(this, "Detail", "SystemCommon.systemInfoDetail", "", "dsSystemPolicy", "SYSTEM_ID='" + this.fv_nSystemId + "'", sCallBack);
+			
+            break;
+		case "Save" :
+		
+			take.tranSave(this, "Save", "SystemCommon.systemInfoPolicy", "dsSystemPolicy", "", "", sCallBack);
+			
+            break;
+        default :
+            break;
+    }
+}
+
+/*********************************************************
+ * 2.2 CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "Detail" : //조회 콜백
+            //Script
+            break;
+        case "Save" :  //저장 콜백
+            this.fnTran('Detail');
+            break;
+        default :
+            break;
+    }        
+} 
+
+/*********************************************************
+* 3 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Transation id";
+    
+    this.fnTran(sTranId);
+}
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+this.fnSave = function(sTranId)
+{    
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Save transation id";
+    
+    this.fnTran(sTranId);
+}
+/**
+ * fnAddRow : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+ * @example this.fnAddRow(sGrdId, nRow);
+ */
+this.fnAddRow = function(sGrdId, nRow)
+{
+    //공통 행추가에서 호출할 디폴트값 세팅
+    if (take.nvl(sGrdId, "")=="") sGrdId = "Grid00";
+    
+    //Script
+}
+
+/**
+ * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number, Array} arrnRow    deleteRow 리턴값
+ * @return {N/A} N/A
+ * @example this.fnDelRow(sGrdId, nRow); 
+ */
+this.fnDelRow = function(sGrdId, arrnRow)
+{    
+    //공통 행추가에서 호출할 디폴트값 세팅
+    if (take.nvl(sGrdId, "")=="") sGrdId = "Grid00";
+    
+    //Script
+}
+
+/*********************************************************
+ * 4 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+/**
+* component_onclick : ~ 버튼 클릭
+*/
+this.component_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    //Script
+};
+
+/*********************************************************
+* 5 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnUserFunction : 사용자 함수
+ * @param  {String} sParam 문자형 인자
+ * @param  {Number} nParam 숫자형 인자
+ * @example this.fnUserFunction(sParam, nParam);
+ */
+this.fnUserFunction = function(sParam, nParam)
+{    
+    //Script
+}
+
+this.btnSaveSub_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fnTran('Save');
+};
+]]></Script>
+    <Objects>
+      <Dataset id="dsSystemPolicy">
+        <ColumnInfo>
+          <Column id="SYSTEM_ID" type="STRING" size="256"/>
+          <Column id="POLICY_INFO" type="STRING" size="256"/>
+          <Column id="PRIVACY_INFO" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="tabPolicy.tpgPolicyInfo.form.txtPolicyInfo" propid="value" datasetid="dsSystemPolicy" columnid="POLICY_INFO"/>
+      <BindItem id="item1" compid="tabPolicy.tpgPrivacyInfo.form.txtPrivacyInfo" propid="value" datasetid="dsSystemPolicy" columnid="PRIVACY_INFO"/>
+    </Bind>
+  </Form>
+</FDL>

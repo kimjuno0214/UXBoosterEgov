@@ -1,0 +1,1436 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="sampleDoc" width="1024" height="600" titletext="New Form" onload="sampleDoc_onload">
+    <Layouts>
+      <Layout height="600" mobileorientation="landscape" width="1024">
+        <Button id="btnInfo" taborder="0" text="  Reroad" top="9" height="27" width="80" onclick="btnInfo_onclick" right="10" cssclass="btn_WF_reset01" color="#ffffff"/>
+        <Button id="btnBind" taborder="1" text="Bind" left="10" top="13" width="100" height="27" onclick="btnTab_onclick" cssclass="btn_WF_tab02"/>
+        <Button id="btnDataset" taborder="2" text="Dataset" left="111" top="13" width="100" height="27" onclick="btnTab_onclick" cssclass="btn_WF_tab01"/>
+        <Div id="divBind" taborder="3" left="10" top="40" bottom="10" right="10" cssclass="dvi_WF_tabBox01">
+          <Layouts>
+            <Layout>
+              <Grid id="grdBind" taborder="0" left="0" top="0" right="0" bottom="0" binddataset="dsBind" autosizingtype="col" autosizebandtype="allband" cellsizingtype="col" onkeydown="grid_onkeydown" selecttype="multirow">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="291"/>
+                      <Column size="160"/>
+                      <Column size="144"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="Component" autosizecol="limitmin"/>
+                      <Cell col="1" text="Dataset" autosizecol="limitmin"/>
+                      <Cell col="2" text="Column" autosizecol="limitmin"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:comp" font="12px/normal &quot;Helvetica&quot;" padding="0px" autosizecol="limitmin"/>
+                      <Cell col="1" text="bind:dataset" font="12px/normal &quot;Helvetica&quot;" padding="0px" autosizecol="limitmin"/>
+                      <Cell col="2" text="bind:col" font="12px/normal &quot;Helvetica&quot;" padding="0px" autosizecol="limitmin"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnTran" taborder="4" text="Transaction" left="313" top="13" width="80" height="27" onclick="btnTab_onclick" cssclass="btn_WF_tab01"/>
+        <Button id="btnComp" taborder="5" text="Comp" left="212" top="13" width="100" height="27" onclick="btnTab_onclick" cssclass="btn_WF_tab01"/>
+        <Div id="divDataset" taborder="6" left="1045" top="40" bottom="10" background="#ffffff" width="619" visible="false" enable="false" cssclass="dvi_WF_tabBox01">
+          <Layouts>
+            <Layout>
+              <Grid id="grdDataset" taborder="0" left="0" top="0" bottom="0" binddataset="dsDataset" width="200" oncellclick="divDataset_grdDataset_oncellclick" cellsizingtype="col" onkeydown="grid_onkeydown" selecttype="multirow">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="135"/>
+                      <Column size="60"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="Dataset" padding="0px"/>
+                      <Cell col="1" text="Data"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:dsname" font="12px/normal &quot;Helvetica&quot;" padding="0px"/>
+                      <Cell col="1" displaytype="buttoncontrol" text="View" padding="0px" font="12px/normal &quot;Helvetica&quot;"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Grid id="grdDatasetCol" taborder="1" left="205" top="0" right="0" bottom="0" binddataset="dsColInfo" cellsizingtype="col" onkeydown="grid_onkeydown" selecttype="multirow">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="100"/>
+                      <Column size="100"/>
+                      <Column size="80"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="Column"/>
+                      <Cell col="1" text="Type"/>
+                      <Cell col="2" text="Size"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:colname" font="12px/normal &quot;Helvetica&quot;" padding="0px"/>
+                      <Cell col="1" text="bind:coltype" font="12px/normal &quot;Helvetica&quot;" padding="0px"/>
+                      <Cell col="2" text="bind:colsize" font="12px/normal &quot;Helvetica&quot;" padding="0px"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divComp" taborder="7" left="1685" top="40" bottom="10" background="#ffffff" width="619" visible="false" enable="false" cssclass="dvi_WF_tabBox01">
+          <Layouts>
+            <Layout>
+              <Grid id="grdComp" taborder="0" left="0" top="0" bottom="0" binddataset="dsComp" width="370" autosizebandtype="allband" autosizingtype="col" oncellclick="divComp_grdComp_oncellclick" cellsizingtype="col" onkeydown="grid_onkeydown" selecttype="multirow">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="358"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="Component" autosizecol="limitmin"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:compnm" font="12px/normal &quot;Helvetica&quot;" padding="0px" tooltiptext="bind:comptype" autosizecol="limitmin"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Grid id="grdProp" taborder="1" left="375" top="0" right="0" binddataset="dsPropInfo" height="300" autosizingtype="col" autosizebandtype="allband" cellsizingtype="col" onkeydown="grid_onkeydown" selecttype="multirow">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="149"/>
+                      <Column size="89"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="Property" autosizecol="limitmin"/>
+                      <Cell col="1" text="Value" autosizecol="limitmin"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:property" font="12px/normal &quot;Helvetica&quot;" padding="0px" autosizecol="limitmin"/>
+                      <Cell col="1" text="bind:propvalue" font="12px/normal &quot;Helvetica&quot;" padding="0px" autosizecol="limitmin"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Grid id="grdEvent" taborder="2" top="300" binddataset="dsEvent" bottom="0" left="375" right="0" oncellclick="divComp_grdEvent_oncellclick" autosizebandtype="allband" autosizingtype="col" cellsizingtype="col">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="234"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="Event" autosizecol="limitmin"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:eventnm" font="12px/normal &quot;Helvetica&quot;" padding="0px" autosizecol="limitmin"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </Div>
+        <PopupDiv id="pDivFunck" left="3644" top="70" width="220" height="530" border="1px solid" background="#ffffff">
+          <Layouts>
+            <Layout>
+              <TextArea id="txtFunc" taborder="0" left="5" top="36" right="5" bottom="5" font="12px/normal &quot;Helvetica&quot;" readonly="true"/>
+              <Button id="btnClose" taborder="1" text="Close" top="5" width="50" height="27" font="12px/normal &quot;Helvetica&quot;" right="5" onclick="pDivFunck_btnClose_onclick"/>
+              <Static id="staText" taborder="2" text="- Event" left="5" top="5" height="30" right="80" font="bold 12px/normal &quot;Helvetica&quot;"/>
+            </Layout>
+          </Layouts>
+        </PopupDiv>
+        <Div id="divTran" taborder="12" left="2325" top="40" bottom="10" background="#ffffff" width="619" enable="false" visible="false" cssclass="dvi_WF_tabBox01">
+          <Layouts>
+            <Layout>
+              <Grid id="grdTran" taborder="0" left="0" top="0" bottom="0" binddataset="dsTran" width="350" autosizebandtype="allband" autosizingtype="col" oncellclick="divTran_grdTran_oncellclick" cellsizingtype="col" onkeydown="grid_onkeydown" selecttype="multirow">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="329"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="Transaction id" autosizecol="limitmin"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:tranid" font="12px/normal &quot;Helvetica&quot;" padding="0px" autosizecol="limitmin"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Grid id="grdTranVal" taborder="1" left="355" top="0" right="0" binddataset="dsTranInfo" bottom="0" autosizebandtype="allband" autosizingtype="col" cellsizingtype="col" onkeydown="grid_onkeydown" selecttype="multirow">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="100"/>
+                      <Column size="146"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="Param" autosizecol="limitmin"/>
+                      <Cell col="1" text="Value" autosizecol="limitmin"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:tranparam" font="12px/normal &quot;Helvetica&quot;" padding="0px" autosizecol="limitmin"/>
+                      <Cell col="1" text="bind:tranvalue" font="12px/normal &quot;Helvetica&quot;" padding="0px" autosizecol="limitmin" tooltiptext="bind:tranvalue"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </Div>
+        <PopupDiv id="pDivDataset" visible="false" left="3894" top="70" width="400" height="530" background="#ffffff" border="1px solid">
+          <Layouts>
+            <Layout>
+              <TextArea id="txtXML" taborder="0" left="5" top="63" right="5" bottom="5" font="12px/normal &quot;Helvetica&quot;" readonly="true" visible="false" enable="false"/>
+              <Button id="btnClose" taborder="1" text="Close" top="5" width="50" height="27" font="12px/normal &quot;Helvetica&quot;" right="5" onclick="pDivDataset_btnClose_onclick"/>
+              <Static id="staText" taborder="2" text="- Dataset" left="5" top="5" height="30" right="80" font="bold 12px/normal &quot;Helvetica&quot;"/>
+              <Button id="btnData" taborder="3" text="Data" top="36" height="27" onclick="pDivDataset_btnTab_onclick" left="5" right="50.00%" cssclass="btn_WF_tab02"/>
+              <Button id="btnXML" taborder="4" text="XML(all)" top="36" height="27" onclick="pDivDataset_btnTab_onclick" left="btnData:1" right="5" cssclass="btn_WF_tab01"/>
+              <Grid id="grdData" taborder="5" left="5" top="63" right="5" bottom="5" scrollbartype="fixed fixed" onkeydown="grid_onkeydown" selecttype="multirow" cellsizingtype="col"/>
+            </Layout>
+          </Layouts>
+        </PopupDiv>
+        <Button id="btnVar" taborder="12" text="Variables" left="394" top="13" width="80" height="27" onclick="btnTab_onclick" cssclass="btn_WF_tab01"/>
+        <Div id="divVar" taborder="13" left="2985" top="40" bottom="10" right="-2580" cssclass="dvi_WF_tabBox01" enable="false" visible="false">
+          <Layouts>
+            <Layout>
+              <Grid id="grdVar" taborder="0" left="0" top="0" right="0" bottom="0" binddataset="dsVar" autosizingtype="col" autosizebandtype="allband" cellsizingtype="col" onkeydown="grid_onkeydown" selecttype="multirow">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="291"/>
+                      <Column size="160"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="Variable" autosizecol="limitmin"/>
+                      <Cell col="1" text="Value" autosizecol="limitmin"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:variable" font="12px/normal &quot;Helvetica&quot;" padding="0px" autosizecol="limitmin"/>
+                      <Cell col="1" text="bind:value" font="12px/normal &quot;Helvetica&quot;" padding="0px" autosizecol="limitmin"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static22" taborder="11" left="863" top="36" width="57" height="4" background="rgba(255,0,0,0.4)" visible="false" color="red" textAlign="center"/>
+        <Edit id="edtFormId" taborder="12" left="480" top="16" height="20" readonly="true" right="96"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[this.fv_objForm = null;
+
+this.sampleDoc_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.fv_objForm = this.opener;    
+    this.edtFormId.set_value("application." + this.opener._unique_id);
+    this.btnInfo.click();
+};
+
+//form에 대한 프러퍼티 및 이벤트 처리 필요
+this.btnInfo_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    //console.dir(this);
+//     this.alert("Data조회 후 가져오기 하셔야 정확한 정보를 가져올 수 있습니다.");	    
+    this.fnBindInfo();
+//     this.fnDatasetInfo();
+//     this.fnTranInfo();
+//     this.fnCompInfo(); 
+//     this.fnVarInfo();
+};
+
+this.btnTab_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    var objDiv = this.components[obj.name.replace("btn","div")];
+    this.fnDivSetTab(obj, objDiv);
+    
+    //var sFn = "fn"+obj.name.substr(3)+"Info";
+    
+    //this[sFn].call(this);    
+};
+
+this.fnDivSetTab = function(objBtn, objDiv)
+{
+    var sGbn;
+    
+    this.divBind.set_visible(false);
+    this.divComp.set_visible(false);
+    this.divDataset.set_visible(false);
+    this.divTran.set_visible(false);
+    this.divVar.set_visible(false);
+    
+    this.divBind.set_enable(false);
+    this.divComp.set_enable(false);
+    this.divDataset.set_enable(false);
+    this.divTran.set_enable(false);
+    this.divVar.set_enable(false);
+    
+    this.btnBind.set_cssclass("btn_WF_tab01");
+    this.btnComp.set_cssclass("btn_WF_tab01");
+    this.btnDataset.set_cssclass("btn_WF_tab01");
+    this.btnTran.set_cssclass("btn_WF_tab01");
+    this.btnVar.set_cssclass("btn_WF_tab01");
+        
+    objDiv.set_visible(true);
+    objDiv.set_enable(true);
+    objDiv.set_top(40);
+    objDiv.set_bottom(10);
+    objDiv.set_left(10);
+    objDiv.set_right(10);
+    objBtn.set_cssclass("btn_WF_tab02");
+    
+    sGbn = objDiv.name.substr(3);
+    
+    switch(sGbn) 
+    {
+        case "Bind":
+            this.fnBindInfo();
+            break;
+        case "Comp":            
+            this.fnCompInfo();
+            break;
+        case "Dataset":
+            this.fnDatasetInfo();             
+            break;
+        case "Tran":        
+            this.fnTranInfo();        
+            break;
+        case "Var":
+            this.fnVarInfo();
+            break;
+    }
+    
+}
+
+
+this.divComp_grdEvent_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+    var objPdiv, objDiv, objCompDs, objDs;
+    var sFunc, sEvent, sCompNm;
+        
+    objDiv = this.divComp;
+    objPdiv = this.pDivFunck;
+    objCompDs = this.dsComp;
+    objDs = this.dsEvent;
+    
+    sCompNm = objCompDs.getColumn(objCompDs.rowposition,"compnm")
+    sFunc = objDs.getColumn(e.row, "func");
+    sEvent = sCompNm + " : " + objDs.getColumn(e.row, "eventnm");
+    
+    objPdiv.form.staText.set_text(sEvent);
+    objPdiv.form.txtFunc.set_value(sFunc);
+    
+    objPdiv.form.txtFunc.scrollTo(0,0);
+    
+	objPdiv.trackPopup(objDiv.getOffsetLeft(), objDiv.getOffsetTop()+30, objDiv.getOffsetWidth(), objDiv.getOffsetHeight()-30);
+};
+
+
+this.pDivFunck_btnClose_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.pDivFunck.closePopup();
+};
+
+this.pDivDataset_btnClose_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.pDivDataset.closePopup();
+};
+
+this.divDataset_grdDataset_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+    if (e.cell==1)
+    {
+        this.fnDataView(e.row);
+    } else {
+        this.fnColInfo(e.row);
+    }
+};
+
+this.divComp_grdComp_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	if (this.dsComp.getColumn(e.row, "comptype")!="Grid.Cell")
+    {
+        this.fnPropInfo(e.row);
+        this.fnEventInfo(e.row);
+    } else {
+        this.fnCellInfo(e.row);
+        this.dsEvent.clearData();
+    }
+};
+
+this.divTran_grdTran_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	this.fnTranParam(e.row);
+};
+
+
+this.grid_onkeydown = function(obj:nexacro.Grid,e:nexacro.KeyEventInfo)
+{
+    if (e.ctrlkey)
+	{
+        if (e.keycode==67)
+        {
+            this.fnCopy(obj, e);
+            e.stopPropagation();
+        } 
+    }
+};
+
+this.pDivDataset_btnTab_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var sName;
+    var objPDiv, objBtnXml, objBtnData, objGrid, objTxt;
+    
+    objPDiv = this.pDivDataset.form;
+    objBtnXml = objPDiv.btnXML;
+    objBtnData = objPDiv.btnData;
+    objGrid = objPDiv.grdData;
+    objTxt = objPDiv.txtXML;
+    
+    objBtnData.set_cssclass("btn_WF_tab01");
+    objGrid.set_visible(false);
+    objGrid.set_enable(false);
+        
+    objBtnXml.set_cssclass("btn_WF_tab01");
+    objTxt.set_visible(false);
+    objTxt.set_enable(false);
+        
+    obj.set_visible(true);
+    obj.set_enable(true);
+    obj.set_cssclass("btn_WF_tab02");
+        
+    sName = obj.name.replace("btn","");
+    
+    if (sName == "Data")
+    {        
+        objGrid.set_visible(true);
+        objGrid.set_enable(true);
+    } else {
+        objTxt.set_visible(true);
+        objTxt.set_enable(true);
+    }
+};
+
+this.dsComp_onrowposchanged = function(obj:nexacro.NormalDataset,e:nexacro.DSRowPosChangeEventInfo)
+{
+	if (this.dsComp.getColumn(e.newrow, "comptype")!="Grid.Cell")
+    {
+        this.fnPropInfo(e.newrow);
+        this.fnEventInfo(e.newrow);
+    } else {
+        this.fnCellInfo(e.newrow);
+        this.dsEvent.clearData();
+    }
+};
+
+this.dsDataset_onrowposchanged = function(obj:nexacro.NormalDataset,e:nexacro.DSRowPosChangeEventInfo)
+{
+	this.fnColInfo(e.newrow);
+};
+
+this.dsTran_onrowposchanged = function(obj:nexacro.NormalDataset,e:nexacro.DSRowPosChangeEventInfo)
+{
+	this.fnTranParam(e.newrow);
+};
+
+this.fnCompInfo = function(sParent, objForm)
+{
+    var arrComp = new Array();
+    var objComp, objDs;
+    var nCnt, nRow;
+    var sType, sScope;
+
+    objDs = this.dsComp;
+    
+    if (take.nvl(sParent,"")=="") sParent = "this";
+    if (take.nvl(objForm,"")=="") 
+    {
+        objDs.clearData();
+        objForm = this.fv_objForm;    
+    }
+    
+    if (!objDs.hasOwnProperty("_objComp"))
+    {
+        objDs["_objComp"] = new Object();
+    }
+
+    if (objForm._type_name=="Tab")
+    {
+        arrComp = arrComp.concat(objForm.tabpages._idArray);
+    } else {
+        arrComp = arrComp.concat(objForm.components._idArray);
+        arrComp = arrComp.concat(objForm.objects._idArray);
+    }
+    
+    nCnt = arrComp.length;
+    
+    if (nCnt<=0) return;
+    
+    objDs.set_enableevent(false);
+
+    //Div에 연결된 폼일경우만 폼 객체의 정보를 삽입
+    if (take.nvl(objForm.parent.url,"")!="")
+    {
+        //폼 객체 
+        nRow = objDs.addRow();
+
+        objDs.setColumn(nRow, "compnm", sParent + (sParent=="this"?"":".form"));                
+        objDs.setColumn(nRow, "comptype", "Form");
+        //objDs._objComp[nRow] = (sParent=="this"?this.fv_objForm :objForm);
+        objDs._objComp[nRow] = objForm;
+    }
+    
+    for (var i=0; i<nCnt; i++)
+    {
+        objComp = objForm[arrComp[i]];
+        nRow = objDs.addRow();
+        
+        sScope = sParent + "." + objComp.name;
+        sType =  objComp._type_name;
+        objDs.setColumn(nRow, "compnm", sScope);
+        objDs.setColumn(nRow, "comptype", sType);
+        
+        objDs._objComp[nRow] = objComp;
+        
+        switch(sType) 
+        {
+            case "Tab":
+                this.fnCompInfo(sScope, objComp);
+                break;
+            case "Div":
+            case "TabpageControl":
+            case "PopupDiv":
+                
+                this.fnCompInfo(sScope, objComp.form);
+                
+                if (take.nvl(objComp.url,"")!="") 
+                {
+                    this.fnBindInfo(sScope, objComp.form);
+                    this.fnTranInfo(sScope, objComp.form);
+                    this.fnDatasetInfo(sScope, objComp.form);
+                    this.fnVarInfo(sScope, objComp.form);
+                }
+                break;
+            case "Grid":
+                this.fnGridInfo(sScope, objComp, objDs, "head");
+                this.fnGridInfo(sScope, objComp, objDs, "body");
+                this.fnGridInfo(sScope, objComp, objDs, "summary");
+                break;
+            
+            default:
+        }
+    }
+    
+    objDs.set_rowposition(0);
+    
+    objDs.set_enableevent(true);
+        
+    if (objDs.getColumn(0, "comptype")!="Grid.Cell")
+    {
+        this.fnPropInfo(0);
+        this.fnEventInfo(0);
+    } else {
+        this.fnCellInfo(0);
+    }
+}
+
+this.fnBindInfo = function(sParent, objForm)
+{
+    var arrBind, objBind, objItem, objBindDs;
+    var sText = "";
+    var nCnt, nRow;
+    
+    objBindDs = this.dsBind;
+    
+    if (take.nvl(sParent,"")=="") sParent = "this";
+    if (take.nvl(objForm,"")=="") 
+    {
+        objForm = this.fv_objForm ;
+        objBindDs.clearData()
+    }
+    objBind = objForm.binds;
+    arrBind = objBind._idArray ;
+    
+    nCnt = arrBind.length;
+    
+    if (nCnt<=0) return;
+    
+     objBindDs.set_enableevent(false);
+    
+    for (var i=0; i<nCnt; i++)
+    {
+        objItem = objBind[arrBind[i]];
+        
+        nRow = objBindDs.addRow();
+        
+        objBindDs.setColumn(nRow, "comp"   , sParent + "." + objItem.compid + "." + objItem.propid);
+        objBindDs.setColumn(nRow, "dataset", objItem.datasetid);
+        objBindDs.setColumn(nRow, "col"    , objItem.columnid);
+        
+        //sText += "this." + objItem.compid + "." + objItem.propid + "\t" 
+        //      +  objItem.datasetid + "." + objItem.columnid + "\t\n";
+    }        
+    
+    objBindDs.set_rowposition(0);
+    
+    //trace("바인드 정보 \n" + sText);
+    objBindDs.set_enableevent(true);
+    
+    
+}
+
+this.fnDatasetInfo = function(sParent, objForm)
+{
+    var objInfo, objDataset, objDs, objColInfo, objApp, objAppDs;
+    var arrInfo;
+    var nCnt, nRow;
+
+    objDs = this.dsDataset;
+
+    if (take.nvl(sParent,"")=="") sParent = "this";
+    if (take.nvl(objForm,"")=="")
+    {
+        objForm = this.fv_objForm ;
+        objDs.clearData();
+    }
+    
+    if (!objDs.hasOwnProperty("_objForm"))
+    {
+        objDs["_objForm"] = new Object();
+    }
+    
+    objDs.set_enableevent(false);
+    
+    //Application dataset 
+    if (sParent=="this")
+    {
+        objApp = nexacro.getApplication();
+        
+        objAppDs =objApp._datasets;
+        
+        for (var x in objAppDs)
+        {
+            nRow = objDs.addRow();
+            objDs.setColumn(nRow, "dsname", "application." + objAppDs[x].name);
+
+            objDs._objForm[nRow] = objApp;
+        }
+    }
+    
+    objInfo = objForm.objects;    
+    arrInfo = objInfo._idArray;
+    
+    nCnt = arrInfo.length;
+    
+    if (nCnt<=0)
+    {
+        objDs.set_enableevent(true);
+        return;
+    }
+    
+   
+    for (var i=0; i<nCnt; i++)
+    {
+        
+        objDataset = objInfo[arrInfo[i]];
+        
+        if (objDataset._type_name=="Dataset")
+        {
+            nRow = objDs.addRow();
+            objDs.setColumn(nRow, "dsname", sParent + "." + objDataset.name);
+
+            objDs._objForm[nRow] = objForm;
+        }
+    }
+    
+    objDs.set_rowposition(0);
+    
+    objDs.set_enableevent(true);
+        
+    this.fnColInfo(0);
+}
+
+this.fnColInfo = function(nCRow)
+{
+    var objForm, objDataset, objColInfo, objDs, objInfo;
+    var nRow, nCnt;
+    var arrColInfo
+    var sDsNm;
+    
+    objForm = take.nvl(this.dsDataset._objForm[nCRow],"");
+    
+    if (objForm=="") return;
+    
+    sDsNm = this.dsDataset.getColumn(nCRow, "dsname")
+    
+    sDsNm = sDsNm.substr(sDsNm.lastIndexOf(".")+1);
+
+    if (objForm._type_name == "Application")
+    {
+        objDataset = objForm[sDsNm];
+    } else {
+        objDataset = objForm.objects[sDsNm];
+    }
+
+    if (objDataset._type_name != "Dataset") return;
+    
+    objColInfo = objDataset.colinfos;
+    arrColInfo = objColInfo._idArray;
+    objDs = this.dsColInfo;
+    
+    nCnt = arrColInfo.length;
+    
+    if (nCnt<=0) return;
+    
+    objDs.set_enableevent(false);
+    
+    objDs.clearData();
+    
+    for ( var i=0; i<nCnt; i++)
+    {
+        objInfo = objColInfo[arrColInfo[i]]
+
+        nRow = objDs.addRow();
+        objDs.setColumn(nRow, "colname", objInfo.name);
+        objDs.setColumn(nRow, "coltype", objInfo.type);
+        objDs.setColumn(nRow, "colsize", objInfo.size);
+    }
+    
+    objDs.set_rowposition(0);
+    
+    objDs.set_enableevent(true);
+    
+}
+
+this.fnDataView = function(nCRow)
+{
+    var objForm, objDataset, objPdiv, objDiv;
+    var sDsNm, sXML;
+    
+    objForm = take.nvl(this.dsDataset._objForm[nCRow],"");
+    
+    if (objForm=="") return;
+    
+    sDsNm = this.dsDataset.getColumn(nCRow, "dsname")    
+    sDsNm = sDsNm.substr(sDsNm.lastIndexOf(".")+1);
+
+    if (objForm._type_name == "Application")
+    {
+        objDataset = objForm[sDsNm];
+    } else {
+        objDataset = objForm.objects[sDsNm];
+    }
+            
+    objDiv = this.divDataset;
+    objPdiv = this.pDivDataset;
+
+    objPdiv.form.staText.set_text("- " + sDsNm);
+    if (objForm._type_name == "Application")
+    {
+        objPdiv.form.grdData.set_binddataset(objDataset.name);
+    } else {
+        console.dir(objDataset);
+        this.dsTemp.loadXML(objDataset.saveXML("dsTemp", "all"));
+        //objPdiv.form.grdData.setBindDataset(objDataset);
+        objPdiv.form.grdData.setBindDataset(this.dsTemp);
+    }
+        
+    objPdiv.form.grdData.createFormat();
+    
+    objPdiv.form.txtXML.set_value(objDataset.saveXML(sDsNm, "all"));        
+    objPdiv.form.txtXML.scrollTo(0,0);
+    
+	objPdiv.trackPopup(objDiv.getOffsetLeft(), objDiv.getOffsetTop()+30, objDiv.getOffsetWidth(), objDiv.getOffsetHeight()-30);
+}
+
+this.fnGridInfo = function(sPScope, objComp, objDs, sGbn)
+{    
+    var nCnt, nRow;   
+    
+    nCnt = objComp.getCellCount(sGbn);
+    
+    for (var k=0;k<nCnt;k++)
+    {
+        nRow = objDs.addRow();
+        
+         objDs._objComp[nRow] = objComp;
+         
+        sScope = sPScope + "." + sGbn + ".";
+        sScope += k + "(";
+        
+        if (sGbn=="body") {
+            sScope += take.nvl(this.getBindColName(objComp, k),k) + " : ";
+            //body일때 텍스트는 head를 가져온다
+            sScope += objComp.getCellProperty("head", k, "text") + ")";
+        } else {
+            sScope += objComp.getCellProperty(sGbn, k, "text") + ")";
+        }
+                
+        objDs.setColumn(nRow, "compnm", sScope);
+        objDs.setColumn(nRow, "comptype", "Grid.Cell");
+        objDs.setColumn(nRow, "etc", sGbn + "." + k);
+    }
+}
+
+this.fnPropInfo = function(nCRow)
+{
+    var objComp, objProto, objPropDs;
+    var nRow, nCnt;    
+    
+    objComp = take.nvl(this.dsComp._objComp[nCRow], "");
+
+    if (objComp=="") return;
+    
+    objProto = eval("new nexacro." + objComp._type_name);
+    objPropDs = this.dsPropInfo;
+    
+    objPropDs.clearData();
+    
+    objPropDs.set_enableevent(false);
+    
+    for (var x in objComp)
+    {
+        if (!nexacro._isFunction(objComp[x]) && x.substr(0,1)!="_" && !(typeof(objComp[x]) === "object"))
+        {
+            if (objProto[x]!=objComp[x] && x!="name")
+            {
+                nRow = objPropDs.addRow()
+                objPropDs.setColumn(nRow, "property", x);
+                objPropDs.setColumn(nRow, "propvalue", objComp[x]);
+                //trace("\t", x + "-->" + objComp[x]);
+            }
+        }
+    }
+    
+    objPropDs.set_rowposition(0);
+    
+    objPropDs.set_enableevent(true);
+        
+}
+
+this.fnCellInfo = function(nCRow)
+{
+    var objComp, objProto, objCell, objPropDs, objDsComp;
+    var nRow, nCell;
+    var sGbn;
+    var arrInfo;
+    var aCellVal, aProtoVal;
+    
+    objDsComp = this.dsComp;
+    objComp = take.nvl(objDsComp._objComp[nCRow], "");
+
+    if (objComp=="") return;
+    
+    objFormat  = objComp.body.parent;    
+    objProto = new nexacro.GridCellInfo;
+    
+    arrInfo = objDsComp.getColumn(nCRow, "etc").split(".");
+    sGbn = arrInfo[0];
+    nCell = nexacro.toNumber(arrInfo[1]);
+    
+    if (sGbn=="head")
+    {
+        objCell =  objFormat._headcells[nCell];
+    } else if (sGbn=="body") {
+        objCell =  objFormat._bodycells[nCell];
+    } else {
+        objCell =  objFormat._summcells[nCell];
+    }
+    
+    objPropDs = this.dsPropInfo;
+    
+    objPropDs.clearData();
+    
+    objPropDs.set_enableevent(false);
+    
+    for (var z in objCell)
+    {
+        if (!nexacro._isFunction(objCell[z]) && z.substr(0,1)!="_")
+        {   
+        
+             if (typeof(objCell[z]) === "object")
+             {
+                 try {
+                     aCellVal = objCell[z]._value;
+                     aProtoVal = objProto[z]._value;
+                 } catch (e) {
+                    //trace(z + " --> " + e);
+                    aCellVal = take.nvl(objCell[z],"");
+                    aProtoVal = take.nvl(objProto[z],"");
+                 }
+             } else {
+                 aCellVal = take.nvl(objCell[z],"");
+                 aProtoVal = take.nvl(objProto[z],"");
+             }
+            
+            if (aCellVal!=aProtoVal && z!="name" && z!="id" && z!="parent")
+            {
+                //trace("\t" + z + "\t --> \t" + objCell[z] + "\t" + typeof(objCell[z]) + "\t" + objProto[z] + "\t" + typeof(objProto[z]));
+                //console.dir(objCell[z]);
+                nRow = objPropDs.addRow()
+                objPropDs.setColumn(nRow, "property", z);
+                objPropDs.setColumn(nRow, "propvalue", objCell[z]);
+            }
+        }
+    }
+    
+    objPropDs.set_rowposition(0);
+    
+    objPropDs.set_enableevent(true);
+    
+}
+
+this.fnEventInfo = function(nCRow)
+{
+    var objComp, objEventList, objEvent, objHandle, objEventDs;
+    var nRow;    
+    
+    objComp = take.nvl(this.dsComp._objComp[nCRow], "");
+
+    if (objComp=="") return;
+    
+    objEventList = objComp._event_list;
+    
+    objEventDs = this.dsEvent;
+    objEventDs.clearData();
+    
+    objEventDs.set_enableevent(false);
+    
+    for (var x in objEventList)
+    {
+        objEvent = objComp[x];
+        
+        if (typeof(objEvent) === "object")
+        {
+            objHandle = objEvent._user_handlers;
+            
+            for (var z in objHandle)
+            {
+                nRow = objEventDs.addRow();
+                objEventDs.setColumn(nRow, "eventnm", x + "[" + z + "]");
+                objEventDs.setColumn(nRow, "func", objHandle[z].handler);
+            }
+        }
+    }
+    
+    objEventDs.set_rowposition(0);
+    
+    objEventDs.set_enableevent(true);
+    
+}
+
+this.fnTranInfo = function(sParent, objForm)
+{
+    var objTranInfo, objInfo, objTranDs;
+    var nRow;
+    
+    objTranDs = this.dsTran;
+    
+    if (take.nvl(sParent,"")=="") sParent = "this";
+    if (take.nvl(objForm,"")=="")
+    {
+        objForm = this.fv_objForm ;
+        objTranDs.clearData();
+    }
+    
+    if (!objTranDs.hasOwnProperty("_objForm"))
+    {
+        objTranDs["_objForm"] = new Object();
+    }
+    
+    objTranInfo = objForm._objTranInfo;
+    
+    objTranDs.set_enableevent(false);
+    
+    for (var x in objTranInfo)
+    {
+        nRow = objTranDs.addRow()
+        
+        objTranDs.setColumn(nRow, "tranid", sParent + "." + x);
+
+        objTranDs._objForm[nRow] = objForm;
+    }
+    
+    objTranDs.set_rowposition(0);
+    
+    objTranDs.set_enableevent(true);
+        
+    this.fnTranParam(0);
+}
+
+this.fnTranParam = function(nCRow)
+{
+    var objForm, objTranInfo, objTranDs;
+    var nRow;
+    var sId;
+        
+    objForm = take.nvl(this.dsTran._objForm[nCRow],"");
+
+    if (objForm=="") return;
+    
+    sId = this.dsTran.getColumn(nCRow, "tranid");
+    sId = sId.substr(sId.lastIndexOf(".")+1);
+
+    objTranInfo = objForm._objTranInfo[sId];
+    objTranDs = this.dsTranInfo;
+    
+    objTranDs.clearData();
+    
+    objTranDs.set_enableevent(false);
+    
+    for (var x in objTranInfo)
+    {
+        nRow = objTranDs.addRow()
+        
+        objTranDs.setColumn(nRow, "tranparam", x);
+        objTranDs.setColumn(nRow, "tranvalue", objTranInfo[x]);
+    }
+    
+    objTranDs.set_rowposition(0);
+    
+    objTranDs.set_enableevent(true);
+    
+}
+
+this.fnVarInfo = function(sParent, objForm)
+{
+    var objDs, objProto, objApp, objAppVar;
+    var sText = "", sKey;
+    var nRow;
+    
+    objDs = this.dsVar;
+    
+    if (take.nvl(sParent,"")=="") sParent = "this";
+    if (take.nvl(objForm,"")=="") 
+    {
+        objForm = this.fv_objForm ;
+        objDs.clearData()
+    }
+    
+    objProto = new nexacro.Form;
+        
+    objDs.set_enableevent(false);
+    
+    if (sParent=="this")
+    {
+        objApp = nexacro.getApplication();
+        objAppVar = objApp._variables;
+        for (var z in objAppVar)
+        {
+            nRow = objDs.addRow();                    
+            objDs.setColumn(nRow, "variable"   , "application." + objAppVar[z]);
+            objDs.setColumn(nRow, "value", objApp[objAppVar[z]]);
+        }
+    }
+    
+    for (var x in objForm)
+    {
+        sKey = x.toString();
+        if (!nexacro._isFunction(objForm[sKey]) && sKey.substr(0,1)!="_" && !(typeof(objForm[sKey]) === "object"))
+        {
+            if (!("set_"+sKey in objProto)) //if (!(objProto.hasOwnProperty("set_"+sKey)))
+            {
+                if (sKey!="scrollbars")
+                {
+                    nRow = objDs.addRow();
+                    
+                    objDs.setColumn(nRow, "variable"   , sParent + "." + sKey);
+                    objDs.setColumn(nRow, "value", objForm[sKey]);
+                }
+            }
+        }
+    }        
+    
+    objDs.set_rowposition(0);
+    
+    //trace("바인드 정보 \n" + sText);
+    objDs.set_enableevent(true);
+}
+
+this.getBindColName = function(objGrid, nIdx)
+{
+	if (take.nvl(objGrid,"")=="" || take.nvl(nIdx,-1)<0) return "";
+
+	var sText, sColId;
+	var nSubCell;
+
+	sText  = "";
+	sColId = "";
+	nSubCell = objGrid.getCellProperty("body", nIdx, "subcell");
+
+	if ( nSubCell > 0 )
+	{
+		sText = objGrid.getSubCellProperty("body", nIdx, 0, "text");
+	} else {
+		sText = objGrid.getCellProperty("body", nIdx, "text");
+	}
+
+	if ( take.nvl(sText, "") != "")
+	{
+		if ( sText.search(/^BIND\(/) > -1 )
+		{
+			sColId = sText.replace(/^BIND\(/, "");
+			sColId = sColId.substr(0, sColId.length-1);
+		} else if ( sText.search(/^bind:/) > -1 ) {
+			sColId = sText.replace(/^bind:/, "");
+		}
+	}
+
+	return sColId;
+}
+
+this.fnCopy = function(objGrid, objInfo)
+{
+    var sSelType, sBroserType, sCopyData;
+    var objDs, objDataArea;
+    var nSRow, nERow, nSCol, nECol;
+    
+    objDs = objGrid.getBindDataset();
+    
+    nSRow = nexacro.toNumber(objGrid.selectstartrow);
+	nERow = nexacro.toNumber(objGrid.selectendrow);
+	nSCol = nexacro.toNumber(objGrid.selectstartcol);
+	nECol = nexacro.toNumber(objGrid.selectendcol);
+	
+    sSelType = objGrid.selecttype;
+    
+    if (sSelType=="row" || sSelType=="multirow" )
+    {
+		//nSCol = objGrid.getCellPos();
+        nSCol = 0;
+		nECol = nexacro.toNumber(objGrid.getCellCount("body") -1);
+	}
+    
+    sCopyData = "";
+    
+    //멀티 head row 는 확인 필요(?)
+    for (var k=nSCol;k<=nECol;k++)
+    {
+        sCopyData += objGrid.getCellProperty("head", k, "text") + (k==nECol?"\n":"\t");
+    }
+    
+    for(var i=nSRow;i<=nERow;i++)
+    {
+        for(var j=nSCol; j<=nECol; j++)
+        {
+            //trace("objGrid.getCellValue("+i+","+j+")"  + objGrid.getCellValue(i,j) );
+            
+            sCopyData += objGrid.getCellValue(i,j);            
+            if (j<nECol) sCopyData += "\t";
+        }
+        
+        if (i<nERow) sCopyData += "\n";
+    }
+    
+    //trace(sCopyData);
+    //if (nSRow==nERow && nSCol==nECol) //그리드 데이터 1개만 복사하는 경우
+    //{
+    //    //sCopyData = objGrid.getCellValue(objGrid.currentrow,objGrid.currentcol);
+    //    sCopyData = objGrid.getCellValue(nSRow,nSCol);
+    //} else {
+    //    for(var i=nSRow;i<=nERow;i++)
+    //    {
+    //        for(var j=nSCol; j<=nECol; j++)
+    //        {
+    //            sCopyData += objGrid.getCellValue(i,j) + (j<nECol?"\t":"\n");
+    //        }
+    //    }
+    //}
+    
+    sBroserType = nexacro._BrowserType.substring(0, 2);
+
+    if(system.navigatorname == "nexacro EmbedRuntime" 
+       || system.navigatorname == "nexacro" 
+       || nexacro._Browser == "Runtime"
+       || (system.navigatorname == "IE" && sBroserType == "IE")) // IE,Runtime인 경우
+    {
+        system.clearClipboard();
+		system.setClipboard("CF_TEXT", sCopyData);
+	} else {
+        objDataArea = this.fnCreateTextArea(sCopyData);
+		nexacro._OnceCallbackTimer.callonce(
+            this, 
+            function(){
+                document.body.removeChild(objDataArea);
+            }, 100);
+	}	
+}
+
+this.fnCreateTextArea = function(sData)
+{
+	var objTextArea = document.createElement("TEXTAREA");
+    
+	objTextArea.style.position = 'absolute';
+	objTextArea.value = sData;
+	document.body.appendChild(objTextArea);
+	objTextArea.style.left = '-1000px';
+	objTextArea.select();
+    
+	return objTextArea;
+};
+
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    var objAppVar = nexacro.getApplication()._variables;
+    
+    for (var x in objAppVar)
+    {
+        trace( x + " --> " + objAppVar[x]);
+    }
+    
+//     var objComp, objProto;
+//     
+//     objComp = this.fv_objForm ;
+//     objProto = new nexacro.Form;
+//     
+//     for (var x in objComp)
+//     {
+//         if (!nexacro._isFunction(objComp[x]) && x.substr(0,1)!="_" && !(typeof(objComp[x]) === "object"))
+//         {
+//             if (objProto[x]!=objComp[x] && x!="name")
+//             {
+//                 trace("\t" + x + "\t-->\t" + objComp[x]);
+//             }
+//         }
+//     }
+    
+//     for (var x in objTranInfo)
+//     {
+//         if (!nexacro._isFunction(objTranInfo[x]))
+//         {
+//             trace("\t" + x + "\t-->\t" + objTranInfo[x]);
+//         }
+//         
+// //         objInfo = objTranInfo[x];
+// //         
+// //         for (var z in objInfo)
+// //         {
+// //             trace("\t" + z + "\t-->\t" + objInfo[z]);
+// //         }
+//     }
+    
+//     var objFormat  = this.Grid00.body.parent;
+//     
+//     var objProto = new nexacro.GridCellInfo;
+//     var objHeadCell  = objFormat._headcells;
+//     //var objBodyCell  = objFormat._bodycells;
+//     //var objSummCell  = objFormat._summcells ;
+// 
+//     objComp = objHeadCell;
+//     
+//     for (var x in objHeadCell)
+//     {
+//         objCell = objHeadCell[x];
+//         trace(objCell);
+//         for (var z in objCell)
+//         {
+//             if (!nexacro._isFunction(objCell[z]) && z.substr(0,1)!="_" && !(typeof(objCell[z]) === "object"))
+//             {
+//                 if (objProto[z]!=objCell[z] && z!="name")
+//                 {
+//                     trace(x + " / " + z + " --> " + objCell[z]);
+//                 }
+//             }
+//         }
+//     }
+//GridBandInfo
+//_bodyBand 
+//_headBand 
+//_summBand
+
+//body
+//head
+//summery
+
+//     var objComp, objProto;
+//     
+// 	objComp = this.Static00._event_list;
+// //     objProto = eval("new nexacro." + objComp._type_name);
+// //         
+//      for (var x in objComp)
+//      {
+// //         //if (!nexacro._isFunction(objComp[x]) && x.substr(0,1)!="_" && !(typeof(objComp[x]) === "object"))
+//         if (!nexacro._isFunction(objComp[x]))
+// //         if (!nexacro._isFunction(objComp[x]) && !(typeof(objComp[x]) === "object"))
+//          {
+// //             if (objProto[x]!=objComp[x] && x!="name")
+// //             {   
+//                  trace("\t", x + "-->" + objComp[x]);
+//                  
+//                  
+//                  for ( var z in objComp[x])
+//                  {
+//                     trace("\t 2222222222222 ", z + "-->" + objComp[x][z]);
+//                  }
+// //             }
+//          }
+//      }
+
+};
+
+
+this.fnObjectTrace = function(obj, sGbn, sOpt)
+{
+    sGbn = take.nvl(sGbn, "").toLowerCase();
+    sOpt = take.nvl(sOpt, "");
+    
+    if (sGbn=="")
+    {
+        for (var x in obj)
+        {
+            if (!nexacro._isFunction(obj[x]))
+            {
+                if (x.substr(0,1)!=sOpt)
+                {
+                    trace(x.toString() + "-->" + obj[x.toString()]);
+                }
+            }
+        }        
+        return;
+    }
+    
+    if (sGbn=="all")
+    {
+        for (var x in obj)
+        {
+            if (x.substr(0,1)!=sOpt)
+            {
+                trace(x.toString() + "-->" + obj[x.toString()]);
+            }
+        }        
+        return;
+    }
+    
+    if (sGbn=="function")
+    {
+        for (var x in obj)
+        {
+            if (nexacro._isFunction(obj[x.toString()]))
+            {
+                if (x.substr(0,1)!=sOpt)
+                {
+                    trace(x.toString() + "-->" + obj[x.toString()]);
+                }
+            }
+        }        
+        return;
+    }
+    
+    if (sGbn=="object")
+    {
+        for (var x in obj)
+        {
+            if (typeof(obj[x.toString()]) === "object")
+            {
+                if (x.substr(0,1)!=sOpt)
+                {
+                    trace(x.toString() + "-->" + obj[x.toString()]);
+                }
+            }
+        }        
+        return;
+    }
+}
+
+]]></Script>
+    <Objects>
+      <Dataset id="dsBind">
+        <ColumnInfo>
+          <Column id="comp" type="STRING" size="256"/>
+          <Column id="dataset" type="STRING" size="256"/>
+          <Column id="col" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsDataset" onrowposchanged="dsDataset_onrowposchanged">
+        <ColumnInfo>
+          <Column id="dsname" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsColInfo">
+        <ColumnInfo>
+          <Column id="colname" type="STRING" size="256"/>
+          <Column id="coltype" type="STRING" size="256"/>
+          <Column id="colsize" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsComp" onrowposchanged="dsComp_onrowposchanged">
+        <ColumnInfo>
+          <Column id="compnm" type="STRING" size="256"/>
+          <Column id="comptype" type="STRING" size="256"/>
+          <Column id="etc" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsPropInfo">
+        <ColumnInfo>
+          <Column id="property" type="STRING" size="256"/>
+          <Column id="propvalue" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsEvent">
+        <ColumnInfo>
+          <Column id="eventnm" type="STRING" size="256"/>
+          <Column id="func" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsTran" onrowposchanged="dsTran_onrowposchanged">
+        <ColumnInfo>
+          <Column id="tranid" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsTranInfo">
+        <ColumnInfo>
+          <Column id="tranparam" type="STRING" size="256"/>
+          <Column id="tranvalue" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsVar">
+        <ColumnInfo>
+          <Column id="variable" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsTemp"/>
+    </Objects>
+  </Form>
+</FDL>

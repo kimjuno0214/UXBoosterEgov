@@ -1,0 +1,452 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="PU010P01" width="800" height="407" titletext="푸시알림 작성" cssclass="fm_work" background="#ffffff" onload="form_onload">
+    <Layouts>
+      <Layout height="407" mobileorientation="landscape" width="800">
+        <Static id="Static01" taborder="0" left="10" top="127" height="31" cssclass="sta_WF_th01L" right="10"/>
+        <Edit id="edtTitle" taborder="5" left="17" top="132" height="20" right="19" displaynulltext="제목을 입력해 주세요."/>
+        <Static id="Static02" taborder="1" left="10" top="157" cssclass="sta_WF_th01L" right="10" height="240"/>
+        <Static id="Static22" taborder="2" text="10" left="0" height="10" background="red" visible="false" right="0" bottom="790" textAlign="center"/>
+        <Static id="Static00" taborder="3" text="10" left="0" top="0" width="10" background="red" bottom="0" visible="false" textAlign="center"/>
+        <Static id="Static03" taborder="4" text="10" left="0" height="10" background="red" visible="false" right="0" textAlign="center" top="0"/>
+        <Div id="divPopOption" taborder="7" left="10" top="35" height="41" right="10" cssclass="div_WF_replyBox01">
+          <Layouts>
+            <Layout>
+              <Static id="staPopTarget" taborder="0" text="요청 시간" left="365" top="8" width="74" height="25" textAlign="right"/>
+              <Static id="Static01" taborder="5" text="프로젝트" left="9" top="9" width="100" height="22" textAlign="right"/>
+              <Combo id="cboProject" taborder="1" left="Static01:10" top="8" width="207" height="25" innerdataset="dsProjectInfo" codecolumn="PROJECT_CD" datacolumn="PROJECT_NM"/>
+              <Calendar id="calPushStartDate" taborder="2" left="520" top="7" width="103" height="25" dateformat="yyyy-MM-dd"/>
+              <Combo id="cboPushHour" taborder="3" text="Combo00" left="628" top="7" width="60" height="25" innerdataset="dsTimeHour" codecolumn="CODE" datacolumn="NAME" onitemchanged="cboStartHour_onitemchanged"/>
+              <Static id="Static20_00" taborder="6" text=":" left="688" top="7" width="25" height="25" textAlign="center"/>
+              <Combo id="cboPushMin" taborder="4" text="Combo00" left="713" top="7" height="25" innerdataset="dsTimeMin" codecolumn="CODE" datacolumn="NAME" width="60"/>
+              <CheckBox id="chkSendNow" taborder="7" text="즉시" left="455" top="7" width="55" height="25" onchanged="divPopOption_chkSendNow_onchanged"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnSave" taborder="8" text="전송" left="690" top="10" width="101" height="25" visible="true" onclick="btnSave_onclick" cssclass="btn_WF_basic01"/>
+        <Static id="Static04" taborder="9" text="10" left="0" height="10" background="red" visible="false" right="0" textAlign="center" top="117"/>
+        <Static id="Static00_00" taborder="10" text="10" top="10" background="red" bottom="0" visible="false" textAlign="center" right="0" width="10"/>
+        <Div id="divPopOption00" taborder="11" left="10" top="76" height="41" right="10" cssclass="div_WF_replyBox01">
+          <Layouts>
+            <Layout>
+              <Static id="staPopTarget" taborder="0" text="사용자" left="365" top="8" width="74" height="25" textAlign="right"/>
+              <Edit id="edtPopTarget" taborder="1" left="506" top="8" width="141" height="25" enable="false"/>
+              <Button id="btnSchPopTarget" taborder="2" text="찾기" left="654" top="8" width="53" height="25" cssclass="btn_WF_search01" onclick="divPopOption_btnSchPopTarget_onclick" enable="false"/>
+              <Static id="Static01" taborder="3" text="권한" left="9" top="9" width="100" height="22" textAlign="right"/>
+              <Combo id="cboProject" taborder="5" left="119" top="8" width="207" height="25" enable="false"/>
+              <CheckBox id="CheckBox00" taborder="4" text="모두" left="449" top="8" width="57" height="25" value="true" enable="false"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Edit id="edtBody" taborder="6" left="17" top="162" height="228" right="19" displaynulltext="내용을 입력해 주세요."/>
+        <Static id="Static04_00" taborder="12" text="10" left="-9" background="red" visible="false" right="9" textAlign="center" bottom="0" height="10"/>
+        <Static id="Static01_00" taborder="13" text="푸쉬알림 작성" left="10" top="10" width="100" height="22" textAlign="right"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="PUSH_TIME" type="STRING" size="256"/>
+          <Column id="PUSH_AUTH" type="STRING" size="256"/>
+          <Column id="PUSH_USER" type="STRING" size="256"/>
+          <Column id="BOARD_SEQ" type="STRING" size="256"/>
+          <Column id="BOARD_TITLE" type="STRING" size="256"/>
+          <Column id="BOARD_TXT" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsPushInfo">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="MENU_CD" type="STRING" size="256"/>
+          <Column id="TOKEN_VAL" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsTimeHour">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">00</Col>
+            <Col id="NAME">00</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">01</Col>
+            <Col id="NAME">01</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">02</Col>
+            <Col id="NAME">02</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">03</Col>
+            <Col id="NAME">03</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">04</Col>
+            <Col id="NAME">04</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">05</Col>
+            <Col id="NAME">05</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">06</Col>
+            <Col id="NAME">06</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">07</Col>
+            <Col id="NAME">07</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">08</Col>
+            <Col id="NAME">08</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">09</Col>
+            <Col id="NAME">09</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">10</Col>
+            <Col id="NAME">10</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">11</Col>
+            <Col id="NAME">11</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">12</Col>
+            <Col id="NAME">12</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">13</Col>
+            <Col id="NAME">13</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">14</Col>
+            <Col id="NAME">14</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">15</Col>
+            <Col id="NAME">15</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">16</Col>
+            <Col id="NAME">16</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">17</Col>
+            <Col id="NAME">17</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">18</Col>
+            <Col id="NAME">18</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">19</Col>
+            <Col id="NAME">19</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">20</Col>
+            <Col id="NAME">20</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">21</Col>
+            <Col id="NAME">21</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">22</Col>
+            <Col id="NAME">22</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">23</Col>
+            <Col id="NAME">23</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">99</Col>
+            <Col id="NAME">99</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsTimeMin">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">00</Col>
+            <Col id="NAME">00</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">10</Col>
+            <Col id="NAME">10</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">15</Col>
+            <Col id="NAME">15</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">20</Col>
+            <Col id="CODE">20</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">25</Col>
+            <Col id="NAME">25</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">30</Col>
+            <Col id="NAME">30</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">35</Col>
+            <Col id="NAME">35</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">40</Col>
+            <Col id="NAME">40</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">45</Col>
+            <Col id="NAME">45</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">50</Col>
+            <Col id="NAME">50</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">55</Col>
+            <Col id="NAME">55</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">99</Col>
+            <Col id="NAME">99</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsProjectInfo" canrowposchange="dsProjectInfo_canrowposchange">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="255"/>
+          <Column id="PROJECT_NM" type="STRING" size="255"/>
+          <Column id="PROJECT_TYPE" type="STRING" size="255"/>
+          <Column id="MANAGER_CD" type="STRING" size="255"/>
+          <Column id="MANAGER_NM" type="STRING" size="255"/>
+          <Column id="DESC_TXT" type="STRING" size="255"/>
+          <Column id="USE_YN" type="STRING" size="255"/>
+          <Column id="REG_DT" type="STRING" size="255"/>
+          <Column id="CHK" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    1Depth > 2Depth
+*  @FileName    *.xfdl 
+*  @Creator     홍길동
+*  @CreateDate  yyyy.MM.DD 
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    Date          Modifier            Description
+*******************************************************************************
+*  YYYY.MM.DD      홍길동             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+this.fv_sProjectCd = nexacro.getApplication().av_sProjectCd;
+this.fv_sMenuCd = take.nvl(this.parent.sMenuCd, "");
+this.fv_nNowMin = "";
+this.fv_nNowHour = "";
+this.fv_nToday = "";
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload등)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this, true)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {    
+       this.fnInit();
+   }
+}
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnInit, fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnInit : 초기화 함수 검색조건 초기화 및 온로드 세팅
+ * @return {N/A}    N/A
+ * @example this.fnInit();
+ */
+this.fnInit = function(){
+	//검색조건
+	
+	var objForm = this.divPopOption.form;
+	this.dsProjectInfo.clearData();
+	take.tranSelect
+	(
+		this, 
+		"ProjectInfo", 
+		"ProjectManagement.projectInfoList", 
+		"", 
+		"dsProjectInfo", 
+		"", 
+		function ()
+		{
+			objForm.cboProject.set_index(7);
+		}
+	);
+	
+	this.fnGetDBnowTime();
+	
+	objForm.chkSendNow.set_value(true);
+	objForm.calPushStartDate.set_enable(false);
+	objForm.cboPushHour.set_enable(false);
+	objForm.cboPushMin.set_enable(false);
+}
+
+this.fnSave = function(sTranId)
+{    
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Save";
+	var sProjectCd = this.divPopOption.form.cboProject.value;
+	var objPushDs = this.dsPushInfo;
+	var objSearchDs = this.dsSearch;
+	objPushDs.clearData();
+	objPushDs.addRow();
+	objSearchDs.clearData();
+	objSearchDs.addRow();
+	
+	
+	objPushDs.setColumn(0, "PROJECT_CD"	, sProjectCd);
+	objPushDs.setColumn(0, "MENU_CD"		, "");
+	objPushDs.setColumn(0, "TOKEN_VAL"	, "1");
+	
+	objSearchDs.setColumn(0, "PROJECT_CD", sProjectCd);
+	objSearchDs.setColumn(0, "PUSH_TIME", "");
+	objSearchDs.setColumn(0, "PUSH_AUTH", "");
+	objSearchDs.setColumn(0, "PUSH_USER", "");
+	objSearchDs.setColumn(0, "BOARD_SEQ", "");
+	objSearchDs.setColumn(0, "BOARD_TITLE", this.edtTitle.value);
+	objSearchDs.setColumn(0, "BOARD_TXT", this.edtBody.value);
+	
+	take.transaction(this, "Save", "SVC_LOC::push/pushSend.do", "dsSearch=dsSearch dsPushInfo=dsPushInfo:U", "", "", "fnCallback");
+};
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+this.btnPrev_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.close();
+};
+this.divPopOption_chkSendNow_onchanged = function(obj:nexacro.CheckBox,e:nexacro.CheckBoxChangedEventInfo)
+{
+	var objForm = this.divPopOption.form;
+	this.fnGetDBnowTime();
+	
+	if(obj.value){
+		objForm.calPushStartDate.set_enable(false);
+		objForm.cboPushHour.set_enable(false);
+		objForm.cboPushMin.set_enable(false);
+	}else{
+		
+		objForm.calPushStartDate.set_enable(true);
+		objForm.cboPushHour.set_enable(true);
+		objForm.cboPushMin.set_enable(true);
+	}
+};
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+this.btnSave_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var bolConfirm = take.confirm(this, "info", "알림을 전송하시겠습니까?", "");
+	if(bolConfirm) this.fnSave("Save");
+};
+this.fnGetDBnowTime = function ()
+{
+	var objDiv = this.divPopOption.form;
+	
+	this.fv_nToday = take.getTodayTime().date;
+	this.fv_nNowHour = take.getTodayTime().hh;
+	this.fv_nNowMin  = take.getTodayTime().mm;
+	var nTempNowMin  = this.fv_nNowMin;
+	this.fv_nNowMin	 = nTempNowMin.lpad(2,"0");
+
+	if(this.fv_nNowMin > 54) this.fv_nNowMin = 50;
+	nTempNowMin = Math.round(nTempNowMin/10)*10;
+	nTempNowMin = nTempNowMin.toString();
+	this.fv_nNowMin = nTempNowMin.lpad(2,"0");
+	
+	objDiv.calPushStartDate.set_value(this.fv_nToday);
+
+	var nHourRow 	= this.dsTimeHour.findRowExpr("CODE=='" + this.fv_nNowHour +"'");
+	var nMinRow 	= this.dsTimeMin.findRowExpr("CODE=='" + this.fv_nNowMin +"'");
+	var nHourCode 	= this.dsTimeHour.getColumn(nHourRow, "CODE");
+	var nMinCode 	= this.dsTimeMin.getColumn(nMinRow, "CODE");
+
+	objDiv.cboPushHour.set_value(nHourCode);
+	objDiv.cboPushMin.set_value(nMinCode);
+	
+};
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : sId      - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : nErrCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : sErrMsg  - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "Save" : //저장 콜백
+            //Script			
+			take.alert(this, "", "전송이 완료되었습니다.");
+			this.close();
+            break;
+		
+        case "Search" :  //조회 콜백
+            break;        
+        default :
+            break;
+    }        
+} 
+
+]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="edtTitle" propid="value" datasetid="dsNotice" columnid="BOARD_TITLE"/>
+      <BindItem id="item7" compid="edtBody" propid="value" datasetid="dsNotice" columnid="BOARD_TITLE"/>
+      <BindItem id="item1" compid="divPopOption.form.calPushStartDate" propid="value" datasetid="dsNotice" columnid="POPUP_START_DT"/>
+    </Bind>
+  </Form>
+</FDL>

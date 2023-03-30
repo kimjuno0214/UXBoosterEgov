@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="dbcNotice" width="354" height="315" titletext="공지사항" onload="dbcNotice_onload">
+    <Layouts>
+      <Layout height="315" mobileorientation="landscape" width="354">
+        <Div id="divMain" taborder="1" left="0" top="0" right="0" bottom="0">
+          <Layouts>
+            <Layout>
+              <Grid id="grdNotice01" taborder="0" left="0" top="0" cssclass="grd_WF_trans" autofittype="col" oncellclick="grdNotice_oncellclick" bottom="0" binddataset="dsNotice" right="0">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="25" band="left"/>
+                      <Column size="80"/>
+                      <Column size="80" band="right"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="40"/>
+                    </Rows>
+                    <Band id="body">
+                      <Cell displaytype="imagecontrol" text="expr:comp.parent.parent.parent.fnSetTitle( currow, dataset.getColumn(currow, 'BOARD_TITLE') )" padding="0px"/>
+                      <Cell col="1" text="bind:BOARD_TITLE" cssclass="expr:dataset.getColumn( currow, 'IMPORT_YN' ) == 'Y' ? 'import' : ''"/>
+                      <Cell col="2" text="bind:REG_DT" color="#555555" displaytype="mask" calendardateformat="yyyy-MM-dd" maskeditformat="####-##-##" maskedittype="string"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsNotice">
+        <ColumnInfo>
+          <Column id="NO" type="STRING" size="256"/>
+          <Column id="BOARD_TITLE" type="STRING" size="256"/>
+          <Column id="USER_NM" type="STRING" size="256"/>
+          <Column id="REG_DT" type="STRING" size="256"/>
+          <Column id="READ_CNT" type="STRING" size="256"/>
+          <Column id="REPLY_CNT" type="STRING" size="256"/>
+          <Column id="ATTACH_CNT" type="STRING" size="256"/>
+          <Column id="BOARD_TXT" type="STRING" size="256"/>
+          <Column id="DEPT_NM" type="STRING" size="256"/>
+          <Column id="BOARD_ATTACH" type="STRING" size="256"/>
+          <Column id="IMPORT_YN" type="STRING" size="256"/>
+          <Column id="POPUP_YN" type="STRING" size="256"/>
+          <Column id="POPUP_START_DT" type="STRING" size="256"/>
+          <Column id="POPUP_END_DT" type="STRING" size="256"/>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="MENU_CD" type="STRING" size="256"/>
+          <Column id="BOARD_SEQ" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="MENU_CD" type="STRING" size="256"/>
+          <Column id="BOARD_SEQ" type="STRING" size="256"/>
+          <Column id="POPUP_YN" type="STRING" size="256"/>
+          <Column id="ATTACH_CD" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsReadUser">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="MENU_CD" type="STRING" size="256"/>
+          <Column id="BOARD_SEQ" type="STRING" size="256"/>
+          <Column id="USER_CD" type="STRING" size="256"/>
+          <Column id="READ_CNT" type="STRING" size="256"/>
+          <Column id="FIRST_READ_DT" type="STRING" size="256"/>
+          <Column id="LAST_READ_DT" type="STRING" size="256"/>
+          <Column id="DEPT_NM" type="STRING" size="256"/>
+          <Column id="USER_NM" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[this.fv_sTitle = null;
+this.fv_objGdsUserInfo = nexacro.getApplication().gdsUserInfo;
+this.fv_sProjectCd = nexacro.getApplication().av_sProjectCd;
+this.fv_sMenuCd = "M0028";
+
+this.dbcNotice_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{    
+    if (this.parent.btran)
+    {
+        this.fnSearch();
+    }
+};
+
+this.fnSearch = function()
+{
+	var arrNamespace = new Array();
+	arrNamespace.push("BoardManagement.boardInfoList");
+	arrNamespace.push("BoardManagement.boardReaduserList");
+	
+	var arrOutDs = new Array();
+	arrOutDs.push("dsNotice");
+	arrOutDs.push("dsReadUser");
+	
+	var sParam = "PROJECT_CD="+this.fv_sProjectCd;
+	sParam += " MENU_CD="+this.fv_sMenuCd;
+	
+	this.dsNotice.clearData();
+	this.dsReadUser.clearData();
+	
+    take.tranSelect(this,"SearchNotice",arrNamespace,"dsSearch", arrOutDs, sParam, "fnCallback");
+}
+
+this.grdNotice_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	var objDs 			= obj.getBindDataset();
+	var sBoardSeq 		= objDs.getColumn( objDs.rowposition, "BOARD_SEQ" );
+	var sBoardAttach 	= objDs.getColumn( objDs.rowposition, "BOARD_ATTACH" );
+	
+	this.fnCallPopup(sBoardSeq, sBoardAttach, "CM010P02");
+};
+
+this.fnCallPopup = function(sBoardSeq, sBoardAttach, sPopForm)
+{
+	var arrParam = {
+					sBoardSeq 	 : sBoardSeq
+				  , sBoardAttach : sBoardAttach
+				  , sProjectCd	 : this.fv_sProjectCd
+				  , sMenuCd		 : this.fv_sMenuCd
+				  };
+		
+	take.openPopup(this, sPopForm, "frm::mod/"+sPopForm+".xfdl", arrParam, "resizable=true", "", false);
+};]]></Script>
+  </Form>
+</FDL>

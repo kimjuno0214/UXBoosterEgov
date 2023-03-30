@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd" >
+<properties>
+	<comment>application properties</comment>
+	
+	<!-- System Info -->
+	<entry key="system.mode">local</entry>
+	<entry key="system.name">TAKE_NEXABOOSTER</entry>
+	<entry key="system.error.page">common/error</entry>
+	<entry key="system.error.session">common/sesError</entry>
+	
+	<!-- Database Info -->
+	<entry key="db.type">oracle</entry>
+	<entry key="db.driver.classname">oracle.jdbc.driver.OracleDriver</entry>
+	<entry key="db.url">jdbc:oracle:thin:@3.34.134.72:1521:takedb</entry>
+	<entry key="db.username">takeit</entry>
+	<entry key="db.password">take0801</entry>
+	
+	<!-- 첨부파일 저장 경로 -->
+	<entry key="file.upload.path">C:\\UXBoosterEgov\\data\\AttachFiles</entry>
+	<entry key="tmp.upload.path">C:\\UXBoosterEgov\\data\\AttachFiles\\tmp</entry>
+	
+	<!-- 화면설계서 -->
+	<entry key="nexacro.path">C:\\UXBoosterEgov\\workspace\\UXBoosterEgov\\nexacro</entry>
+	<entry key="word.template.path">C:\\UXBoosterEgov\\workspace\\UXBoosterEgov\\template\\template.dotx</entry>
+	
+	<!-- Non Check Query -->
+	<entry key="non.check.query">Main.dbdatetime,Main.userButtonRoleSelect,Main.selectUserFormRoleBtn</entry>
+	
+</properties>

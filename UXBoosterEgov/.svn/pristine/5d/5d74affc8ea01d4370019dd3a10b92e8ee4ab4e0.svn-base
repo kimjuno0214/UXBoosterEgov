@@ -1,0 +1,461 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="BM010P02" width="850" height="650" titletext="게시판상세조회" onload="BM010P02_onload" ontimer="BM010P02_ontimer" background="#ffffff">
+    <Layouts>
+      <Layout height="650" mobileorientation="landscape" width="850">
+        <Static id="Static01" taborder="0" left="20" top="46" height="31" cssclass="sta_WF_th01L" right="20"/>
+        <Edit id="edtTitle" taborder="1" left="27" top="51" height="21" right="30" readonly="true"/>
+        <Static id="Static02" taborder="2" left="20" cssclass="sta_WF_th01L" right="20" bottom="304" top="76"/>
+        <Static id="Static22" taborder="3" text="10" left="20" height="20" background="red" visible="false" right="20" textAlign="center" top="0" opacity="0.3"/>
+        <Static id="Static16" taborder="4" text="10" top="0" width="20" background="red" bottom="0" visible="false" textAlign="center" right="0" opacity="0.3"/>
+        <Static id="Static00" taborder="5" text="10" left="0" top="0" width="20" background="red" bottom="0" visible="false" textAlign="center" opacity="0.3"/>
+        <Div id="divFile" taborder="6" left="20" height="47" cssclass="div_WF_replyBox01" right="20" formscrollbartype="auto none" bottom="297" formscrolltype="horizontal">
+          <Layouts>
+            <Layout>
+              <Button id="btnAllDown" taborder="1" text="일괄다운" top="19" right="10" width="70" onclick="divFile_btnAllDown_onclick" cssclass="btn_WF_Download" bottom="5"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <WebBrowser id="wbWebEditor" taborder="7" left="27" onloadcompleted="wbWebEditor_onloadcompleted" right="31" bottom="354" top="87"/>
+        <Button id="btnDelete" taborder="9" text="삭제" top="20" width="46" height="21" visible="true" cssclass="btn_WF_cancel02" onclick="btnDelete_onclick" right="20"/>
+        <Button id="btnModify" taborder="8" text="수정" top="20" height="21" cssclass="btn_WF_save02" width="46" right="btnDelete:3" onclick="btnModify_onclick"/>
+        <ListView id="livReply" taborder="10" left="20" height="160" binddataset="dsReply" cssclass="lst_WF_reply" right="20" oncellclick="livReply_oncellclick" bottom="127">
+          <Formats>
+            <Format id="default">
+              <Band id="body" width="100%" height="79">
+                <Cell id="liv_staRegNm" left="10" top="10" width="80" height="23" text="bind:REG_NM"/>
+                <Cell id="liv_staRegDt" left="89" top="10" width="110" height="23" text="bind:REG_DT"/>
+                <Cell id="liv_txtReply" left="10" top="35" height="37" text="bind:REPLY_TXT" right="10" displaytype="expr:(REG_CD == nexacro.getApplication().gdsUserInfo.getColumn(0, &quot;USER_CD&quot;)) ? 'textareacontrol' : 'normal' " edittype="expr:(REG_CD == nexacro.getApplication().gdsUserInfo.getColumn(0, &quot;USER_CD&quot;)) ? 'textarea' : 'none' "/>
+                <Cell id="liv_btnDel" top="10" width="60" height="23" text="expr:(REG_CD == nexacro.getApplication().gdsUserInfo.getColumn(0, &quot;USER_CD&quot;)) ? '삭제' : ''" right="10" displaytype="expr:(REG_CD == nexacro.getApplication().gdsUserInfo.getColumn(0, &quot;USER_CD&quot;)) ? 'buttoncontrol' : 'none'" edittype="expr:(REG_CD == nexacro.getApplication().gdsUserInfo.getColumn(0, &quot;USER_CD&quot;)) ? 'button' : 'none'"/>
+                <Cell id="liv_btnMod" top="10" width="60" height="23" text="expr:(REG_CD == nexacro.getApplication().gdsUserInfo.getColumn(0, &quot;USER_CD&quot;)) ? '수정' : ''" right="75" displaytype="expr:(REG_CD == nexacro.getApplication().gdsUserInfo.getColumn(0, &quot;USER_CD&quot;)) ? 'buttoncontrol' : 'none' " edittype="expr:(REG_CD == nexacro.getApplication().gdsUserInfo.getColumn(0, &quot;USER_CD&quot;)) ? 'button' : 'none'"/>
+              </Band>
+            </Format>
+          </Formats>
+        </ListView>
+        <Div id="divReplyReg" taborder="11" left="20" cssclass="div_WF_replyBox01" right="20" height="59" bottom="63">
+          <Layouts>
+            <Layout>
+              <TextArea id="taReplyTxt" taborder="0" left="10" top="10" right="83" bottom="10"/>
+              <Button id="btnReplyReg" taborder="1" text="댓글등록" top="10" width="70" right="10" bottom="10" onclick="divReplyReg_btnReplyReg_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static04" taborder="12" text="10" left="20" height="10" background="red" visible="false" right="20" textAlign="center" top="296" opacity="0.3"/>
+        <Button id="btnClose" taborder="13" top="607" height="23" cssclass="btn_WF_cancel01" width="58" text="닫기" left="772" onclick="btnClose_onclick"/>
+        <Static id="Static04_00" taborder="14" text="20" left="20" height="20" background="red" visible="false" right="20" textAlign="center" top="630" opacity="0.3"/>
+        <Static id="Static04_00_00" taborder="15" text="20" left="20" height="20" background="red" visible="false" right="20" textAlign="center" top="587" opacity="0.3"/>
+        <Static id="Static04_01" taborder="16" text="10" left="20" height="10" background="red" visible="false" right="20" textAlign="center" top="353" opacity="0.3"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsNotice">
+        <ColumnInfo>
+          <Column id="NO" type="STRING" size="256"/>
+          <Column id="BOARD_TITLE" type="STRING" size="256"/>
+          <Column id="USER_NM" type="STRING" size="256"/>
+          <Column id="REG_DT" type="STRING" size="256"/>
+          <Column id="READ_CNT" type="STRING" size="256"/>
+          <Column id="REPLY_CNT" type="STRING" size="256"/>
+          <Column id="ATTACH_CNT" type="STRING" size="256"/>
+          <Column id="BOARD_TXT" type="STRING" size="256"/>
+          <Column id="DEPT_NM" type="STRING" size="256"/>
+          <Column id="BOARD_ATTACH" type="STRING" size="256"/>
+          <Column id="IMPORT_YN" type="STRING" size="256"/>
+          <Column id="POPUP_YN" type="STRING" size="256"/>
+          <Column id="POPUP_START_DT" type="STRING" size="256"/>
+          <Column id="POPUP_END_DT" type="STRING" size="256"/>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="MENU_CD" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsFile">
+        <ColumnInfo>
+          <Column id="FILE_PATH" type="STRING" size="256"/>
+          <Column id="FILE_NM" type="STRING" size="256"/>
+          <Column id="FILE_SAVE_NM" type="STRING" size="256"/>
+          <Column id="IMPORT_YN" type="STRING" size="256"/>
+          <Column id="FILE_TYPE" type="STRING" size="256"/>
+          <Column id="FILE_SIZE" type="STRING" size="256"/>
+          <Column id="FILE_BLOB" type="STRING" size="256"/>
+          <Column id="DESC_TXT" type="STRING" size="256"/>
+          <Column id="DELETE_YN" type="STRING" size="256"/>
+          <Column id="USER_CD" type="STRING" size="256"/>
+          <Column id="FILE_DEL_YN" type="STRING" size="256"/>
+          <Column id="ATTACH_CD" type="STRING" size="256"/>
+          <Column id="FILE_SEQ" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="MENU_CD" type="STRING" size="256"/>
+          <Column id="BOARD_SEQ" type="STRING" size="256"/>
+          <Column id="FILE_PATH" type="STRING" size="256"/>
+          <Column id="ATTACH_CD" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsReply">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="MENU_CD" type="STRING" size="256"/>
+          <Column id="BOARD_SEQ" type="STRING" size="256"/>
+          <Column id="REPLY_TXT" type="STRING" size="256"/>
+          <Column id="REPLY_SEQ" type="STRING" size="256"/>
+          <Column id="REG_DT" type="STRING" size="256"/>
+          <Column id="REG_CD" type="STRING" size="256"/>
+          <Column id="REG_NM" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <FileDownTransfer id="FileDownTransfer00"/>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    1Depth > 2Depth
+*  @FileName    *.xfdl 
+*  @Creator     홍길동
+*  @CreateDate  yyyy.MM.DD 
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    Date          Modifier            Description
+*******************************************************************************
+*  YYYY.MM.DD      홍길동             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+//this.fv_nFormVal = null;     //용도
+this.fv_bWebOnload = false;
+this.fv_objGdsUserInfo = nexacro.getApplication().gdsUserInfo;
+this.fv_sProjectCd = nexacro.getApplication().av_sProjectCd;
+this.fv_sMenuCd = take.nvl(this.parent.sMenuCd, this.opener.fv_sMenuCd);
+this.fv_sBoardSeq = take.nvl(this.parent.sBoardSeq, "");
+this.fv_sAttachCd = take.nvl(this.parent.sBoardAttach, "");
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload등)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.BM010P02_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	this.ProgId = "GM00000041";
+	this.ProgNm = "GM00000041";
+	
+	if (take.formOnLoad(this, true)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+	{
+		var sBaseUrl = take.getSvcUrl();		
+		this.wbWebEditor.set_url(sBaseUrl + "editor/SummerNote/boardDetail.html");
+		this.setTimer(1,100);
+		//Script
+		this.fnUISetting(this.opener.fv_arrUserParam);
+	}
+};
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnInit, fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Search";
+	
+	this.dsSearch.clearData();
+	this.dsSearch.addRow();
+	this.dsSearch.setColumn(0, "PROJECT_CD", this.fv_sProjectCd);
+	this.dsSearch.setColumn(0, "MENU_CD", this.fv_sMenuCd);
+	this.dsSearch.setColumn(0, "BOARD_SEQ", this.fv_sBoardSeq);
+	this.dsSearch.setColumn(0, "ATTACH_CD", this.fv_sAttachCd);
+	
+	//Script
+	take.transaction(this, sTranId, "SVC_LOC::cm/boardSelect.do", "dsSearch=dsSearch", "dsNotice=dsNotice dsReply=dsReply dsFile=dsFile", "", "fnCallback");
+};
+
+/**
+ * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number, Array} arrnRow    deleteRow 리턴값
+ * @return {N/A} N/A
+ * @example this.fnDelRow(sGrdId, nRow); 
+ */
+this.fnDelRow = function(sGrdId, arrnRow)
+{
+	var sAttachCd = this.dsNotice.getColumn(0, "BOARD_ATTACH");
+	var sParam = "";
+		sParam += "sProjectCd="	+ this.fv_sProjectCd+"";
+		sParam += " sMenuCd="	+ this.fv_sMenuCd+"";
+		sParam += " sBoardSeq="	+ this.fv_sBoardSeq+"";
+		sParam += " sAttachCd="	+ sAttachCd+"";
+	
+	take.transaction(this, "Delete", "SVC_LOC::cm/boardDelete.do", "dsNotice=dsNotice", "", sParam, "fnCallback");
+};
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+this.wbWebEditor_onloadcompleted = function(obj:nexacro.WebBrowser,e:nexacro.WebLoadCompEventInfo)
+{
+	if (e.url.indexOf("boardDetail.html") != -1)
+	{
+		this.fv_bWebOnload = true;
+	}
+};
+
+this.BM010P02_ontimer = function(obj:nexacro.Form,e:nexacro.TimerEventInfo)
+{
+	if (e.timerid==1)
+	{
+        if (this.fv_bWebOnload == true)
+		{
+            this.killTimer(1);
+            this.fnSearch();
+		}
+	}
+};
+
+this.btnClose_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.close();
+};
+
+this.btnModify_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.opener.fnCallPopup(this.fv_sBoardSeq, this.fv_sAttachCd, "BM010P03");
+	this.close();
+};
+
+this.btnDelete_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	//var bConfirm = take.confirm(this, "", "해당 글을 삭제하시겠습니까?");
+	var bConfirm = take.confirm(this, "question", "MS00000071");
+	if( !bConfirm ) return;
+	
+	this.fnDelRow();
+};
+
+// 댓글등록 버튼 클릭
+this.divReplyReg_btnReplyReg_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var nRow = this.dsReply.addRow();
+	var sUserCd = this.fv_objGdsUserInfo.getColumn(0, "USER_CD");
+	this.dsReply.setColumn(nRow, "PROJECT_CD", this.fv_sProjectCd);
+	this.dsReply.setColumn(nRow, "MENU_CD", this.fv_sMenuCd);
+	this.dsReply.setColumn(nRow, "BOARD_SEQ", this.fv_sBoardSeq);
+	this.dsReply.setColumn(nRow, "REG_CD", sUserCd);
+	this.dsReply.setColumn(nRow, "REPLY_TXT", this.divReplyReg.form.taReplyTxt.text);
+	take.tranSave(this, "ReplySave", "BoardManagement.boardReply", "dsReply", "", "", "fnCallback");
+};
+
+this.livReply_oncellclick = function(obj:nexacro.ListView,e:nexacro.ListViewClickEventInfo)
+{
+	var nRow = obj.getSelectedRows();
+	var sCellTxt = obj.getCellText(nRow, "body", e.cellid);
+	if(sCellTxt == "삭제")
+	{
+		//trace(nRow + "  삭제");
+		//var bDel = take.confirm(this, "", "해당 댓글을 삭제하시겠습니까?");
+		var bDel = take.confirm(this, "question", "MS00000071");
+		if(bDel)
+		{
+			this.dsReply.deleteRow(nRow);
+			take.tranSave(this, "ReplyDelete", "BoardManagement.boardReply", "dsReply", "", "", "fnCallback");	
+		}
+	}
+	else if(sCellTxt == "수정")
+	{
+		//trace(nRow + "  수정");
+		take.tranSave(this, "ReplyModify", "BoardManagement.boardReply", "dsReply", "", "", "fnCallback");	
+	}
+};
+
+// 일괄다운버튼 클릭
+this.divFile_btnAllDown_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var downloadUrl = take.getSvcUrl() + "zipDownload.do";
+		downloadUrl += "?sAttachCd="+this.fv_sAttachCd;
+	
+	this.FileDownTransfer00.set_url(downloadUrl);
+	this.FileDownTransfer00.download();
+};
+
+// 파일 개별 다운
+this.staFile_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	var downloadUrl = take.getSvcUrl() + "file/downloadAtchFile.do";
+	this.FileDownTransfer00.setPostData("atchFileId"	, obj.attachCd);
+	this.FileDownTransfer00.setPostData("fileSeq"		, obj.fileSeq);
+	this.FileDownTransfer00.setPostData("isDirect"		, "N");
+	this.FileDownTransfer00.set_url(downloadUrl);
+	this.FileDownTransfer00.download();
+};
+
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+// 초기 ui 세팅
+this.fnUISetting = function(arrUserParam)
+{
+	var sReplyYn = "Y";
+	var sAttachYn = "Y";
+	
+	if(arrUserParam){
+		if(arrUserParam.reply_yn)
+			sReplyYn = take.nvl(arrUserParam.reply_yn, "Y");
+		if(arrUserParam.attach_yn)
+			sAttachYn = take.nvl(arrUserParam.attach_yn, "Y");
+	}
+	
+	var nFormHeight = this.getOffsetHeight();
+	if( "N" == sAttachYn )
+	{
+		var nFileHegit = this.divFile.getOffsetHeight();
+		nFormHeight = nFormHeight - nFileHegit;
+		
+		this.divFile.set_height(0);		
+	}
+	
+	if( "N" == sReplyYn )
+	{
+		var nLivReplyHegit = this.livReply.getOffsetHeight();
+		nFormHeight = nFormHeight - nLivReplyHegit;
+		this.livReply.set_height(0);
+		
+		var nDivReplyRegHegit = this.divReplyReg.getOffsetHeight();
+		nFormHeight = nFormHeight - nDivReplyRegHegit;
+		this.divReplyReg.set_height(0);
+	}
+	this.set_height(nFormHeight);
+	this.resetScroll();
+};
+
+this.fnGoList = function()
+{
+	this.opener.fnSearch();
+	this.close();
+};
+
+this.fnReplySearch = function()
+{
+	var sParam = "PROJECT_CD="	+ this.fv_sProjectCd;
+		sParam += " MENU_CD="	+ this.fv_sMenuCd;
+		sParam += " BOARD_SEQ="	+ this.fv_sBoardSeq;
+		
+	take.tranSelect(this, "ReplySearch", "BoardManagement.boardReplyList", "dsSearch", "dsReply", sParam, "fnCallback");
+};
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : sId      - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : nErrCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : sErrMsg  - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "Search" : //조회 콜백
+            //Script			
+			var sContents = this.dsNotice.getColumn(0, "BOARD_TXT");
+			this.wbWebEditor.getProperty("window").callMethod("fn_setHtml", sContents);
+			
+			var nLeft = 10, nTop = 10, nWidth = 125, nHeight = 25, nInterval = 10;
+			for( var i=0; i<this.dsFile.getRowCount(); i++ )
+			{
+				var sFileNm 	= this.dsFile.getColumn(i, "FILE_NM");
+				var sAttachCd 	= this.dsFile.getColumn(i, "ATTACH_CD");
+				var sFileSeq 	= this.dsFile.getColumn(i, "FILE_SEQ");
+				var objStatic 	= new Static();
+				var sId 		= "sta" + sAttachCd + "_" + sFileSeq;
+				
+				objStatic.init(sId, nLeft, nTop, nWidth, nHeight, null, null);
+				objStatic.set_cssclass("sta_WF_fileData01");
+				objStatic.set_text( take.textLengthOverCut(sFileNm, 15, "...") );
+				objStatic.set_tooltiptext(sFileNm);
+				objStatic.attachCd = sAttachCd;
+				objStatic.fileSeq = sFileSeq;
+				
+				this.divFile.addChild(sId, objStatic);
+				
+				objStatic.addEventHandler( "onclick", this.staFile_onclick, this);
+				objStatic.show();
+				
+				nLeft = nLeft + nWidth + nInterval;
+			}
+			
+			// 마지막에 padding효과를 위해 공백 static추가
+			var objStatic = new Static();
+			var sId = "staBlank";
+			objStatic.init(sId, nLeft, nTop, 90, nHeight, null, null);			
+			objStatic.set_text("");
+			this.divFile.addChild(sId, objStatic);			
+			objStatic.show();
+			
+			this.divFile.form.resetScroll();
+			
+            break;
+		case "Delete" : //삭제 콜백
+			//take.alert(this, "Info", "삭제가 완료되었습니다.");
+			take.alert(this, "Info", "MS00000003");
+			this.fnGoList();
+			
+			break;
+		case "ReplySave" : //댓글 등록 콜백
+			//take.alert(this, "Info", "댓글 등록이 완료되었습니다.");
+			take.alert(this, "Info", "MS00000002");
+			
+			this.divReplyReg.form.taReplyTxt.set_value("");			
+			this.fnReplySearch();
+		
+			break;
+		case "ReplyDelete" : //댓글 삭제 콜백
+			//take.alert(this, "", "댓글 삭제가 완료되었습니다.");
+			take.alert(this, "Info", "MS00000003");
+			this.fnReplySearch();
+		
+			break;
+		case "ReplyModify" : //댓글 수정 콜백
+			//take.alert(this, "Info", "댓글 수정이 완료되었습니다.");
+			take.alert(this, "Info", "MS00000005");
+			this.fnReplySearch();
+		
+			break;	
+        default :
+            break;
+    }        
+};]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="edtTitle" propid="value" datasetid="dsNotice" columnid="BOARD_TITLE"/>
+    </Bind>
+  </Form>
+</FDL>

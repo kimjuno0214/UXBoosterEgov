@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="sample01" width="1040" height="800" titletext="New Form">
+    <Layouts>
+      <Layout height="800" mobileorientation="landscape" width="1040">
+        <Static id="Static00" taborder="0" text="10" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" color="red" textAlign="center"/>
+        <Static id="Static03" taborder="1" text="10" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" color="red" textAlign="center" right="0"/>
+        <Button id="Button00" taborder="2" text="목록" top="2" width="60" height="23" cssclass="btn_WF_basic02" right="10"/>
+        <Button id="Button01" taborder="3" text="일정추가" top="2" width="60" height="23" cssclass="btn_WF_basic01" right="75"/>
+        <Button id="Button02" taborder="4" text="월간일정" left="10" top="0" width="100" height="27" cssclass="btn_WF_tab02"/>
+        <Button id="Button03" taborder="5" text="주간일정" left="112" top="0" width="100" height="27" cssclass="btn_WF_tab01"/>
+        <Div id="Div02" taborder="6" left="10" top="27" height="420" cssclass="dvi_WF_tabBox01" right="10">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="범주" left="10" top="10" width="359" height="30"/>
+              <Calendar id="Calendar00" taborder="1" left="10" top="40" width="359" height="330" type="monthonly"/>
+              <Static id="Static01" taborder="2" left="379" top="10" height="30" cssclass="sta_WF_th01L" width="629"/>
+              <ListView id="ListView00" taborder="3" left="379" top="39" height="146" width="629" binddataset="Dataset00" cssclass="lst_WF_schedule">
+                <Formats>
+                  <Format id="default">
+                    <Band id="body" width="100%" height="72">
+                      <Cell id="Cell01" left="10" top="36" width="430" height="24" text="bind:Column0" cssclass="cellTitle"/>
+                      <Cell id="Cell03" top="36" height="24" text="bind:Column1" width="159" right="10" cssclass="cellCategory03"/>
+                      <Cell id="Cell05" left="10" top="10" width="100" height="24" text="bind:Column2"/>
+                      <Cell id="Cell07" left="120" top="10" width="115" height="24" text="bind:Column3" cssclass="cellTime"/>
+                      <Cell id="Cell09" left="255" top="10" width="115" height="24" text="bind:Column4" cssclass="cellTime"/>
+                      <Cell id="Cell11" top="10" width="159" height="24" text="bind:Column5" right="10"/>
+                      <Cell id="Cell00" left="235" top="10" width="15" height="24" text="~"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </ListView>
+              <Static id="Static02" taborder="4" text="2019.08.31" left="459" top="10" width="140" height="30"/>
+              <Static id="Static03" taborder="5" text="해당일정수" left="619" top="10" width="140" height="30"/>
+              <Static id="Static04" taborder="6" text="개인" left="779" top="10" width="140" height="30" cssclass="sta_WF_icoGroup01"/>
+              <Static id="Static05" taborder="7" left="379" top="195" height="30" cssclass="sta_WF_th01L" width="629"/>
+              <ListView id="ListView01" taborder="8" left="379" top="224" height="146" width="629" binddataset="Dataset00" cssclass="lst_WF_schedule">
+                <Formats>
+                  <Format id="default">
+                    <Band id="body" width="100%" height="72">
+                      <Cell id="Cell01" left="10" top="36" width="430" height="24" text="bind:Column0" cssclass="cellTitle"/>
+                      <Cell id="Cell03" top="36" height="24" text="bind:Column1" width="159" right="10" cssclass="cellCategory03"/>
+                      <Cell id="Cell05" left="10" top="10" width="100" height="24" text="bind:Column2"/>
+                      <Cell id="Cell11" top="10" width="159" height="24" text="bind:Column5" right="10"/>
+                      <Cell id="Cell07" left="120" top="10" width="115" height="24" text="bind:Column3" cssclass="cellTime"/>
+                      <Cell id="Cell09" left="255" top="10" width="115" height="24" text="bind:Column4" cssclass="cellTime"/>
+                      <Cell id="Cell00" left="235" top="10" width="15" height="24" text="~"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </ListView>
+              <Static id="Static06" taborder="9" text="2019.08.31" left="459" top="195" width="140" height="30"/>
+              <Static id="Static07" taborder="10" text="해당일정수" left="619" top="195" width="140" height="30"/>
+              <Static id="Static08" taborder="11" text="개인" left="779" top="195" width="140" height="30" cssclass="sta_WF_icoGroup01"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+          <Column id="Column5" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">일정 제목</Col>
+            <Col id="Column1">범주 영역</Col>
+            <Col id="Column2">2019.08.25</Col>
+            <Col id="Column3">시작시간</Col>
+            <Col id="Column4">종료시간</Col>
+            <Col id="Column5">참여자</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">일정 제목</Col>
+            <Col id="Column1">범주 영역</Col>
+            <Col id="Column2">2019.08.31</Col>
+            <Col id="Column3">시작시간</Col>
+            <Col id="Column4">종료시간</Col>
+            <Col id="Column5">참여자</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

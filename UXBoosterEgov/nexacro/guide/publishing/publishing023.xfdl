@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="publishing023" width="1040" height="659" titletext="프로그램메시지관리">
+    <Layouts>
+      <Layout height="659" mobileorientation="landscape" width="1040">
+        <Div id="Div01" taborder="0" left="10" top="0" height="43" right="10" cssclass="div_WF_searchBox01" text="">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="구분" left="20" top="10" width="80" height="21" cssclass="sta_WF_textRImport"/>
+              <Static id="Static05" taborder="1" text="메시지" left="359" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="Edit11" taborder="2" left="442" top="10" width="110" height="21"/>
+              <Combo id="Combo00" taborder="3" text="Combo00" left="103" top="10" width="110" height="21"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static18" taborder="1" text="Test" left="10" top="67" height="30" width="450" cssclass="sta_WF_title02"/>
+        <Static id="Static20" taborder="2" text="Test" left="300" top="67" height="30" cssclass="sta_WF_title02" right="180"/>
+        <Static id="Static45" taborder="3" text="Static00" left="290" top="89" width="10" background="red" visible="false" height="200"/>
+        <Button id="Button01" taborder="4" left="485" top="42" width="70" height="15" cssclass="btn_WF_fold01"/>
+        <Static id="Static09" taborder="5" text="Static03" left="0" top="57" height="10" background="red" visible="false" right="0"/>
+        <Static id="Static23" taborder="6" text="Static23" left="1" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static24" taborder="7" text="Static23" left="340" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static25" taborder="8" text="Static23" left="679" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static26" taborder="9" text="Static23" left="1018" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Grid id="Grid01" taborder="10" left="300" top="97" autofittype="col" right="10" bottom="259" binddataset="Dataset00">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="59"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="30" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="Column0"/>
+                <Cell col="1" text="Column1"/>
+                <Cell col="2" text="Column2"/>
+                <Cell col="3" text="Column3"/>
+                <Cell col="4" text="Column4"/>
+                <Cell col="5" text="Column5"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0" displaytype="checkboxcontrol" edittype="checkbox"/>
+                <Cell col="1" text="bind:Column1"/>
+                <Cell col="2" text="bind:Column2"/>
+                <Cell col="3" text="bind:Column3"/>
+                <Cell col="4" text="bind:Column4"/>
+                <Cell col="5" text="bind:Column5"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static00" taborder="11" text="Test" left="300" top="410" height="30" cssclass="sta_WF_title02" right="180"/>
+        <Button id="Button03" taborder="12" text="다국어매핑" top="413" width="100" height="23" cssclass="btn_WF_basic01" right="10"/>
+        <Grid id="Grid02" taborder="13" left="300" top="442" right="10" bottom="10" autofittype="col" binddataset="Dataset00">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="30" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="순번"/>
+                <Cell col="1" text="구분"/>
+                <Cell col="2" text="다국어"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0"/>
+                <Cell col="1" text="bind:Column1"/>
+                <Cell col="2" text="bind:Column2"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static22" taborder="14" text="Static03" left="382" top="400" width="220" height="10" background="red" visible="false"/>
+        <Grid id="Grid00" taborder="15" left="10" top="97" width="280" binddataset="Dataset00" autofittype="col" bottom="10">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="100"/>
+                <Column size="160"/>
+              </Columns>
+              <Rows>
+                <Row size="30" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="순번"/>
+                <Cell col="1" text="코드"/>
+                <Cell col="2" text="프로그램 명"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0" displaytype="checkboxcontrol" edittype="checkbox"/>
+                <Cell col="1" text="bind:Column1"/>
+                <Cell col="2" text="bind:Column2"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">Common Code</Col>
+            <Col id="Column1">0</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0002]언어코드</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0003]다국어_대분류</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0002]언어코드</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0003]다국어_대분류</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0002]언어코드</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0003]다국어_대분류</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0002]언어코드</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0003]다국어_대분류</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0002]언어코드</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0003]다국어_대분류</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0002]언어코드</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0003]다국어_대분류</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

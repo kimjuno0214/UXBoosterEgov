@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="dbcDirectorAtten" width="295" height="650" titletext="부재현황" onload="dashDirectorAtten_onload" scrollbartype="none none" border="0px none">
+    <Layouts>
+      <Layout height="650" mobileorientation="landscape" width="295">
+        <Div id="divTop" taborder="0" left="0" top="0" height="50" cssclass="div_MF_DashboardTop" right="0">
+          <Layouts>
+            <Layout>
+              <Static id="staTitle" taborder="0" text="재실 현황" left="5" top="0" height="40" cssclass="sta_MF_Title" right="30"/>
+              <Button id="btnReload" taborder="1" top="10" height="20" cssclass="btn_WF_reset01" width="20" right="5" onclick="divTop_divHead_btnReload_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divMain" taborder="1" text="bottom" left="0" top="40" cssclass="div_MF_DashboardBot" right="0" bottom="0">
+          <Layouts>
+            <Layout>
+              <Static id="staToday" taborder="1" text="기준시" top="0" width="100" height="15" cssclass="sta_MF_Date" left="5"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <PopupDiv id="PopupDiv00" text="PopupDiv00" visible="false" left="468" top="10" width="285" height="50" oncloseup="PopupDiv00_oncloseup">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" left="0" top="0" height="50" cssclass="sta_MF_Member" visible="true" right="0"/>
+              <Button id="Button02" taborder="1" text="부재중" left="145" top="10" width="60" height="28" cssclass="btn_MF_MemberIcon03"/>
+              <Button id="Button01" taborder="2" text="회의중" left="80" top="10" width="60" height="28" cssclass="btn_MF_MemberIcon02"/>
+              <Button id="Button00" taborder="3" text="재실" left="15" top="10" width="60" height="28" cssclass="btn_MF_MemberIcon01"/>
+              <Button id="Button02_00" taborder="4" text="외근중" left="210" top="10" width="60" height="28" cssclass="btn_MF_MemberIcon03"/>
+            </Layout>
+          </Layouts>
+        </PopupDiv>
+        <Div id="divItem01" taborder="2" left="465" top="70" height="50" enableevent="false" right="-455">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" left="0" top="0" height="50" cssclass="sta_MF_Member" right="0"/>
+              <Button id="Button02" taborder="1" text="부재중" top="11" height="28" cssclass="btn_MF_MemberIcon03" visible="true" width="60" right="15"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsList">
+        <ColumnInfo>
+          <Column id="NO" type="STRING" size="256"/>
+          <Column id="SABUN" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+          <Column id="NAME_eng" type="STRING" size="256"/>
+          <Column id="POSITION" type="STRING" size="256"/>
+          <Column id="STATUS" type="STRING" size="256"/>
+          <Column id="DESTINATION" type="STRING" size="256"/>
+          <Column id="BASE_DT" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="NO">0</Col>
+            <Col id="SABUN">01</Col>
+            <Col id="NAME">천우성</Col>
+            <Col id="POSITION">대표이사</Col>
+            <Col id="DESTINATION">세아네트웍스</Col>
+          </Row>
+          <Row>
+            <Col id="NO">1</Col>
+            <Col id="SABUN">02</Col>
+            <Col id="POSITION">수석</Col>
+            <Col id="NAME">김태규</Col>
+            <Col id="DESTINATION"/>
+          </Row>
+          <Row>
+            <Col id="NO">2</Col>
+            <Col id="SABUN">03</Col>
+            <Col id="POSITION">수석</Col>
+            <Col id="NAME">고영민</Col>
+            <Col id="DESTINATION"/>
+          </Row>
+          <Row>
+            <Col id="NO">3</Col>
+            <Col id="SABUN">04</Col>
+            <Col id="POSITION">수석</Col>
+            <Col id="NAME">김진표</Col>
+            <Col id="DESTINATION">동방엔디에스</Col>
+          </Row>
+          <Row>
+            <Col id="NO">4</Col>
+            <Col id="SABUN">05</Col>
+            <Col id="POSITION">선임</Col>
+            <Col id="NAME">이동건</Col>
+          </Row>
+          <Row>
+            <Col id="NO">5</Col>
+            <Col id="SABUN">06</Col>
+            <Col id="POSITION">선임</Col>
+            <Col id="NAME">김대승</Col>
+          </Row>
+          <Row>
+            <Col id="NO">6</Col>
+            <Col id="SABUN">07</Col>
+            <Col id="POSITION">선임</Col>
+            <Col id="NAME">전영찬</Col>
+            <Col id="DESTINATION">동방엔디에스</Col>
+          </Row>
+          <Row>
+            <Col id="NO">7</Col>
+            <Col id="SABUN">08</Col>
+            <Col id="POSITION">선임</Col>
+            <Col id="NAME">신준민</Col>
+          </Row>
+          <Row>
+            <Col id="NO">8</Col>
+            <Col id="SABUN">09</Col>
+            <Col id="POSITION">수석</Col>
+            <Col id="NAME">정해원</Col>
+            <Col id="DESTINATION">세아네트웍스</Col>
+          </Row>
+          <Row>
+            <Col id="NO">9</Col>
+            <Col id="SABUN">10</Col>
+            <Col id="POSITION">수석</Col>
+            <Col id="NAME">디자이너</Col>
+            <Col id="DESTINATION">외부</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    1Depth > 2Depth
+*  @FileName    *.xfdl 
+*  @Creator     홍길동
+*  @CreateDate  yyyy.MM.DD 
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    Date          Modifier            Description
+*******************************************************************************
+*  YYYY.MM.DD      홍길동             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+//this.fv_nFormVal = null;     //용도
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload등)
+********************************************************/
+/**
+* dashDirectorAtten_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.dashDirectorAtten_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {    
+        //Script  
+   }
+}
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnSearch, fnAddRow, fnSave, fnDelRow, fnExcel...)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Transation id";
+    take.tranSelect(this,sTranId,"Namespace","sInDataset", "sOutDataset", "sParam", "fnCallback");
+}
+
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+this.fnSave = function(sTranId)
+{    
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Save transation id";
+    take.tranSave(this, sTranId, "NAMESPACE", "sInDs", "sOutDs", "sParam", "fnCallback");
+}
+
+/**
+ * fnAddRow : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+ * @example this.fnAddRow(sGrdId, nRow);
+ */
+this.fnAddRow = function(sGrdId, nRow)
+{
+    //공통 행추가에서 호출할 디폴트값 세팅
+    if (take.nvl(sGrdId, "")=="") sGrdId = "Grid00";
+    
+    //Script
+}
+
+/**
+ * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number, Array} arrnRow    deleteRow 리턴값
+ * @return {N/A} N/A
+ * @example this.fnDelRow(sGrdId, nRow); 
+ */
+this.fnDelRow = function(sGrdId, arrnRow)
+{    
+    //공통 행추가에서 호출할 디폴트값 세팅
+    if (take.nvl(sGrdId, "")=="") sGrdId = "Grid00";
+    
+    //Script
+}
+
+/**
+ * fnExcel : 엑셀 export 함수 (필수) --> 공통 Excel download에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @return {N/A} N/A
+ * @example this.fnDelRow(sGrdId, nRow); 
+ */
+this.fnExcel = function(fnExcel)
+{    
+    //공통 Excel download에서 호출할 디폴트값 세팅
+    if (take.nvl(sGrdId, "")=="") sGrdId = "Grid00";
+    
+    //Script
+}
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+/**
+* component_onclick : ~ 버튼 클릭
+*/
+this.component_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    //Script
+};
+
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnUserFunction : 사용자 함수
+ * @param  {String} sParam 문자형 인자
+ * @param  {Number} nParam 숫자형 인자
+ * @example this.fnUserFunction(sParam, nParam);
+ */
+this.fnUserFunction = function(sParam, nParam)
+{    
+    //Script
+}
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "Transation id 01" : //조회 콜백
+            //Script
+            break;
+        case "Transation id 02" :  //조회 콜백
+            //Script
+            break;
+        case "Transation id 03" : //조회 콜백
+            //Script
+            break;
+        case "Save transation id 01" :  //저장 콜백
+            //Script
+            break;
+        case "Save transation id 01" :  //저장 콜백
+            //Script
+            break;
+        default :
+            break;
+    }        
+} ]]></Script>
+  </Form>
+</FDL>

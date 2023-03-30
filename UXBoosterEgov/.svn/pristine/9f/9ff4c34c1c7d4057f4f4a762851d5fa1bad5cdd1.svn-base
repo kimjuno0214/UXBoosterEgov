@@ -1,0 +1,58 @@
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<html style="height:100%">
+<head>
+<script src="/oz70/ozhviewer/jquery-2.0.3.min.js"></script>
+<link rel="stylesheet" href="/oz70/ozhviewer/jquery-ui.css" type="text/css"/>
+<script src="/oz70/ozhviewer/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="/oz70/ozhviewer/ui.dynatree.css" type="text/css"/>
+<script type="text/javascript" src="/oz70/ozhviewer/jquery.dynatree.js" charset="utf-8"></script>
+<script type="text/javascript" src="/oz70/ozhviewer/OZJSViewer.js" charset="utf-8"></script>
+</head>
+<body style="width:98%;height:98%">
+<div id="OZViewer" style="width:98%;height:98%"></div>
+<script type="text/javascript" >
+    var ozObjArg;
+
+    function SetOZParamters_OZViewer1(objArg, sReportNm){
+    	console.log("SetOZParamters_OZViewer1111111 ==> param!!!!!!!!!!!!!!!!!! ");
+            
+        ozObjArg = objArg;
+        start_ozjs("OZViewer","/oz70/ozhviewer/");
+        //start_ozjs("OZViewer","http://10.255.3.57:8080/oz70/ozhviewer/");
+    }
+    
+    function SetOZParamters_OZViewer(){
+    	console.log("SetOZParamters_OZViewer ==> param!!!!!!!!!!!!!!!!!! ")
+    	try {
+	        var oz;
+	            
+	        oz = document.getElementById('OZViewer');
+	        oz.sendToActionScript('connection.servlet','/oz70/server');
+
+	        //oz.sendToActionScript('connection.datafromserver',  ozObjArg['connection.datafromserver']);
+	        //oz.sendToActionScript('connection.reportname',      ozObjArg['connection.reportname']);
+	        //oz.sendToActionScript('odi.dsEstimateInfo2.args1',  ozObjArg['odi.dsEstimateInfo2.args1']);
+	        //oz.sendToActionScript('odi.dsEstimateInfo2.pcount', ozObjArg['odi.dsEstimateInfo2.pcount']);
+	        //oz.sendToActionScript('odi.odinames',               ozObjArg['odi.odinames']);
+	        //oz.sendToActionScript('viewer.mode',                ozObjArg['viewer.mode']);
+
+          for (var x in ozObjArg)
+          {
+              oz.sendToActionScript(x, ozObjArg[x]);
+          }
+
+          oz.sendToActionScript("odi.dsEstimateInfo2.usescheduleddata", "ozp://xml/OzSdmMakerForMiplatform.js");
+
+	        window.document.title = "CallBack:(00)";
+	        return true;
+	    } catch (e) {
+	        console.log("error : " + e);
+	        window.document.title = "CallBack:(-1)"+ e;
+	        //return false;
+	    }
+    }
+
+   	
+</script>
+</body>
+</html>

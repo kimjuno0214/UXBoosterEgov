@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+* 관리자 > 시스템관리 관련
+*
+* @filename mappers/doore/DooreMapper.xml
+* @author 	doore
+* @since 	2022.12.27
+* @version 	1.0
+* @see
+*
+* << 변경 이력(Modification Information) >>
+*
+* 변경번호 : #1
+* 변경일자 : 2022.12.27
+* 변경사람 : doore
+* 변경내용 : 신규 생성
+ -->
+<mapper namespace="Doore">
+
+	<select id="selectColumnList" parameterType="map" timeout="0" resultType="map" useCache="false">
+		<![CDATA[
+		/*
+		 *
+		 * CommonMapper.selectComCodeList
+		 * 공통코드 조회
+		 * @author dooresoft
+		 * @since 2021.12.20
+		 */
+		]]>		
+        SELECT UPPER(TABLE_SCHEMA) TABLE_SCHEMA
+             , UPPER(TABLE_NAME) TABLE_NAME
+             , ORDINAL_POSITION
+             , COLUMN_NAME
+             , COLUMN_TYPE
+             , COLUMN_KEY
+             , IS_NULLABLE, EXTRA
+             , COLUMN_COMMENT
+        FROM   INFORMATION_SCHEMA.COLUMNS
+        WHERE  UPPER(TABLE_SCHEMA) = UPPER(#{schema})
+        AND    UPPER(TABLE_NAME) = UPPER(#{tableName})
+        ORDER BY TABLE_SCHEMA, TABLE_NAME, ORDINAL_POSITION;
+	</select>
+
+</mapper>

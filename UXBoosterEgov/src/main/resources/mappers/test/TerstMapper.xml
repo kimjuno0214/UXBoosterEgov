@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+*
+* @filename mappers/safety/SafetyMapper.xml
+* @author 	safety
+* @since 	2023.01.19
+* @version 	1.0
+* @see
+*
+* << 변경 이력(Modification Information) >>
+*
+* 변경번호 : #1
+* 변경일자 : 2023.01.19
+* 변경사람 : safety
+* 변경내용 : 신규 생성
+ -->
+<mapper namespace="test">
+
+	
+
+</mapper>

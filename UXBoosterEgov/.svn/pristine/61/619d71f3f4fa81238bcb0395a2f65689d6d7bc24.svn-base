@@ -1,0 +1,615 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="HR020" width="1659" height="932" titletext="휴가승인관리" onload="Form_onload">
+    <Layouts>
+      <Layout height="932" mobileorientation="landscape" width="1659">
+        <Div id="divSearch" taborder="0" left="10" top="0" height="43" right="10" cssclass="div_WF_searchBox01" text="" minwidth="1300" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Static id="staPeriod" taborder="0" text="기간" left="20" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Calendar id="calDateFrom" taborder="1" left="103" top="10" width="90" height="21" dateformat="yyyy-MM-dd"/>
+              <Static id="staMlGroupSearch01" taborder="9" text="~" left="calDateFrom:0" top="10" width="15" height="21" cssclass="sta_WF_textC"/>
+              <Calendar id="calDateTo" taborder="2" top="10" width="90" height="21" left="staMlGroupSearch01:0" dateformat="yyyy-MM-dd"/>
+              <Static id="staReason" taborder="7" text="휴가사유" left="calDateTo:50" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="cboReason" taborder="3" text="Combo00" left="staReason:10" top="10" width="195" height="21" codecolumn="CODE" datacolumn="NAME" innerdataset="dsReason"/>
+              <Static id="staUser" taborder="8" text="사용자" left="cboReason:50" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="edtUserNm" taborder="4" left="staUser:10" top="10" height="21" width="174" onchanged="divSearch_edtUserNm_onchanged"/>
+              <Button id="btnUser" taborder="5" top="10" width="21" height="21" cssclass="btn_WF_search02" left="edtUserNm:2" onclick="divSearch_btnUser_onclick"/>
+              <Static id="Static07" taborder="10" text="10" left="332" top="0" width="2" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static08" taborder="11" text="10" left="665" top="0" width="2" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="staApproval" taborder="12" text="승인여부" left="btnUser:50" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="cboApproval" taborder="6" left="staApproval:10" top="10" width="195" height="21" innerdataset="dsApproval" datacolumn="NAME" codecolumn="CODE"/>
+              <Edit id="edtUserCd" taborder="13" left="855" top="10" height="21" width="78" visible="false" readonly="true"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnShowHide" taborder="6" left="48.16%" top="divSearch:0" width="60" height="10" cssclass="btn_WF_fold01"/>
+        <Div id="divDetail" taborder="1" left="10" top="btnShowHide:20" right="10" bottom="10" minwidth="1300" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Static id="staVacation" taborder="0" text="휴가승인목록(00 건)" left="0" top="0" height="30" width="450" cssclass="sta_WF_title02"/>
+              <Static id="staInfo" taborder="1" text="휴가계획 상세" left="0" top="326" height="30" cssclass="sta_WF_title02" right="0"/>
+              <Grid id="grdLeaveList" taborder="2" left="0" top="30" binddataset="dsVacationList" autofittype="col" right="0" height="286" onselectchanged="divDetail_grdLeaveList_onselectchanged">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="50"/>
+                      <Column size="100"/>
+                      <Column size="100"/>
+                      <Column size="100"/>
+                      <Column size="130"/>
+                      <Column size="60"/>
+                      <Column size="100"/>
+                      <Column size="60"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="순번"/>
+                      <Cell col="1" text="등록일"/>
+                      <Cell col="2" text="부서"/>
+                      <Cell col="3" text="이름"/>
+                      <Cell col="4" text="기간"/>
+                      <Cell col="5" text="일수"/>
+                      <Cell col="6" text="휴가유형"/>
+                      <Cell col="7" text="승인"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="expr:currow+1" textAlign="center"/>
+                      <Cell col="1" text="bind:REG_DATE" textAlign="center"/>
+                      <Cell col="2" text="bind:REG_DEPT_NM" textAlign="center"/>
+                      <Cell col="3" textAlign="center" text="bind:REG_NM"/>
+                      <Cell col="4" text="bind:VACATION_PERIOD" textAlign="center"/>
+                      <Cell col="5" text="expr:DAY_CNT + &quot;일&quot;" textAlign="center"/>
+                      <Cell col="6" textAlign="center" text="bind:VACATION_TYPE_NM"/>
+                      <Cell col="7" textAlign="center" text="bind:APP_TYPE_NM"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="staReasonT" taborder="7" text="휴가유형" left="0" top="356" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="staReason" taborder="3" left="staReasonT:-1" top="356" height="31" cssclass="sta_WF_td01L" width="630"/>
+              <Static id="staLeaveMemoT" taborder="6" text="비고" left="0" top="416" width="120" cssclass="sta_WF_th01L" bottom="0"/>
+              <Static id="Static08" taborder="4" left="staLeaveMemoT:-1" top="416" cssclass="sta_WF_td01L" bottom="0" width="630"/>
+              <Static id="staLeavePeriodT" taborder="9" text="기간" left="0" top="386" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="staLeavePeriod" taborder="10" left="staLeavePeriodT:-1" top="386" height="31" cssclass="sta_WF_td01L" width="630"/>
+              <Static id="staApprovalMemoT" taborder="17" text="반려사유" left="Static08:-1" top="476" width="120" cssclass="sta_WF_th01L" bottom="0" help=""/>
+              <TextArea id="txtLeaveMemo" taborder="5" left="staLeaveMemoT:6" top="423" bottom="6" readonly="true" right="staApprovalMemoT:6"/>
+              <Button id="btnApproval" taborder="8" text="승인" top="330" width="46" height="23" cssclass="btn_WF_save02" right="0" onclick="btn_onclick"/>
+              <Static id="staApproverNmT" taborder="14" text="승인자" left="Static08:-1" top="416" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="staApproverNm" taborder="11" left="staApproverNmT:-1" top="416" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Static id="staApprovalT" taborder="13" text="승인구분" left="Static08:-1" top="446" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="staApproval" taborder="12" left="staApprovalT:-1" top="446" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Static id="Static17" taborder="15" left="staApprovalMemoT:-1" top="476" cssclass="sta_WF_td01L" right="0" bottom="0"/>
+              <TextArea id="txtApprovalMemo" taborder="16" left="staApprovalMemoT:6" right="6" bottom="6" top="483"/>
+              <Static id="staRequestDateT" taborder="18" text="요청일" left="staReason:-1" top="356" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="staRequestDate" taborder="19" left="staRequestDateT:-1" top="356" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Static id="staRequestUserT" taborder="20" text="요청자" left="staLeavePeriod:-1" top="386" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="staRequestUser" taborder="21" left="staRequestUserT:-1" top="386" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Static id="Static06" taborder="22" text="10" left="0" top="316" height="10" background="rgba(255,0,0,0.4)" visible="false" color="red" textAlign="center" right="0"/>
+              <Button id="btnSearch" taborder="23" text="조회" top="0" height="23" onclick="btnSearch_onclick" cssclass="btn_WF_search02" right="0" width="46" visible="false"/>
+              <Button id="btnReturn" taborder="24" text="반려" top="330" width="46" height="23" cssclass="btn_WF_cancel02" right="49" onclick="btn_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static00" taborder="2" text="10" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" textAlign="center" right="0"/>
+        <Static id="Static24" taborder="3" text="10" left="0" height="20" background="rgba(255,0,0,0.4)" visible="false" right="0" textAlign="center" top="53"/>
+        <Static id="Static01" taborder="4" text="10" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" textAlign="center"/>
+        <Static id="Static22" taborder="5" text="10" left="0" height="10" background="rgba(255,0,0,0.4)" visible="false" right="0" bottom="0" textAlign="center"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsVacationList">
+        <ColumnInfo>
+          <Column id="ROWNUM" type="STRING" size="256"/>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="VACATION_SEQ" type="STRING" size="256"/>
+          <Column id="REG_DATE" type="STRING" size="256"/>
+          <Column id="REG_DEPT" type="STRING" size="256"/>
+          <Column id="REG_DEPT_NM" type="STRING" size="256"/>
+          <Column id="REG_CD" type="STRING" size="256"/>
+          <Column id="REG_NM" type="STRING" size="256"/>
+          <Column id="VACATION_PERIOD" type="STRING" size="256"/>
+          <Column id="DAT_CNT" type="STRING" size="256"/>
+          <Column id="VACATION_TYPE" type="STRING" size="256"/>
+          <Column id="VACATION_TYPE_NM" type="STRING" size="256"/>
+          <Column id="APP_TYPE" type="STRING" size="256"/>
+          <Column id="APP_TYPE_NM" type="STRING" size="256"/>
+          <Column id="APP_DESC" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsReason">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsApproval">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256" description="프로젝트 코드"/>
+          <Column id="VACATION_TYPE" type="STRING" size="256" description="휴가유형"/>
+          <Column id="VACATION_SEQ" type="STRING" size="256" description="휴가SEQ"/>
+          <Column id="START_DATE" type="STRING" size="256" description="시작일"/>
+          <Column id="END_DATE" type="STRING" size="256" description="종료일"/>
+          <Column id="REG_CD" type="STRING" size="256" description="사용자(등록자)"/>
+          <Column id="REG_CD2" type="STRING" size="256" description="사용자(등록자)"/>
+          <Column id="APP_TYPE" type="STRING" size="256" description="승인여부"/>
+          <Column id="USER_NM" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsVacationDetail">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256" description="프로젝트코드"/>
+          <Column id="VACATION_SEQ" type="STRING" size="256" description="휴가일련번호"/>
+          <Column id="VACATION_TYPE" type="STRING" size="256" description="휴가유형"/>
+          <Column id="VACATION_TYPE_NM" type="STRING" size="256" description="휴가유형명"/>
+          <Column id="REMARK_TXT" type="STRING" size="256" description="비고"/>
+          <Column id="APP_CD" type="STRING" size="256" description="승인자코드"/>
+          <Column id="APP_NM" type="STRING" size="256" description="승인자명"/>
+          <Column id="APP_TYPE" type="STRING" size="256" description="승인구분"/>
+          <Column id="APP_TYPE_NM" type="STRING" size="256" description="승인구분명"/>
+          <Column id="APP_DESC" type="STRING" size="256" description="취소사유"/>
+          <Column id="REG_DT" type="STRING" size="256" description="등록일"/>
+          <Column id="VACATION_PERIOD" type="STRING" size="256" description="기간"/>
+          <Column id="REG_CD" type="STRING" size="256" description="등록자코드"/>
+          <Column id="REG_NM" type="STRING" size="256" description="등록자명"/>
+          <Column id="MOD_DT" type="STRING" size="256" description="수정일시"/>
+          <Column id="MOD_CD" type="STRING" size="256" description="수정자코드"/>
+          <Column id="VACATION_CNT" type="STRING" size="256" description="휴가일수"/>
+          <Column id="VACATION_DATE_TYPE" type="STRING" size="256" description="휴가날짜유형"/>
+          <Column id="SCHEDULE_SEQ" type="STRING" size="256" description="일정일련번호"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsSchedule">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="255"/>
+          <Column id="SCHEDULE_SEQ" type="STRING" size="255"/>
+          <Column id="ALLDAY_YN" type="STRING" size="255"/>
+          <Column id="CATEGORY_CD" type="STRING" size="255"/>
+          <Column id="DIVISION_CD" type="STRING" size="255"/>
+          <Column id="SCHEDULE_START_DATE" type="STRING" size="255"/>
+          <Column id="SCHEDULE_START_TIME" type="STRING" size="255"/>
+          <Column id="SCHEDULE_END_DATE" type="STRING" size="255"/>
+          <Column id="SCHEDULE_END_TIME" type="STRING" size="255"/>
+          <Column id="SCHEDULE_TITLE" type="STRING" size="255"/>
+          <Column id="SCHEDULE_TXT" type="STRING" size="255"/>
+          <Column id="SCHEDULE_PLACE" type="STRING" size="255"/>
+          <Column id="SCHEDULE_PARTICIPANT" type="STRING" size="255"/>
+          <Column id="PUSH_YN" type="STRING" size="255"/>
+          <Column id="PUSH_INFO" type="STRING" size="255"/>
+          <Column id="REG_DT" type="STRING" size="255"/>
+          <Column id="REG_NM" type="STRING" size="255"/>
+          <Column id="REG_CD" type="STRING" size="255"/>
+          <Column id="MOD_DT" type="STRING" size="255"/>
+          <Column id="MOD_NM" type="STRING" size="255"/>
+          <Column id="MOD_CD" type="STRING" size="255"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  휴가승인관리
+*
+*  @MenuPath    테이크 > 휴가 > 휴가승인관리
+*  @FileName    HR020.xfdl 
+*  @Creator     전영찬
+*  @CreateDate  2019.09.16
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2019.09.16      전영찬             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+this.fv_sProjectCd = nexacro.getApplication().av_sProjectCd;    // ProjectCd
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.Form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {
+        this.fnInit();
+   }
+}
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "VacationList";
+    
+    switch(sTranId) {
+    case "VacationList":
+        var objDsSc = this.dsSearch;
+		var sCalFrom = objDsSc.getColumn(0, "START_DATE");
+		var sCalTo	 = objDsSc.getColumn(0, "END_DATE");
+		if( !take.isEmpty(sCalFrom) && !take.isEmpty(sCalTo) ){
+			var bFromTo = take.isFromTo(sCalFrom, sCalTo);		
+			if( !bFromTo ){
+				take.alert(this, "", "기간이 잘못되었습니다.");
+				return;
+			}
+		}
+		
+		objDsSc.setColumn(0, "PROJECT_CD", this.fv_sProjectCd);
+        
+        this.dsVacationList.clearData();
+		
+		if(take.nvl(this.divSearch.form.edtUserNm.value, "") == "") objDsSc.setColumn(0, "REG_CD", "");
+		
+        take.tranSelect(this, sTranId, "HumanResourceManagement.vacationApprovalList", "dsSearch", "dsVacationList", "", "fnCallback");
+    	break;
+    
+    case "VacationDetail":
+        this.dsVacationDetail.clearData();
+        
+        take.tranSelect(this, sTranId, "HumanResourceManagement.vacationApprovalDetail", "dsSearch", "dsVacationDetail", "", "fnCallback");
+    	break;
+    default:
+    }
+}
+
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+//this.fnSave = function(sTranId)
+this.fnSave = function(sTranId)
+{    
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Save";
+    
+	if(sTranId == "Update") {
+		//Update
+		var sInDs, sParam;
+		if(this.dsVacationDetail.getColumn(0, "APP_TYPE") == "02") {
+			this.fnSchedule();
+			
+			sInDs		= "dsVacationDetail=dsVacationDetail:U dsSchedule=dsSchedule:U";
+			sParam		= "svcId='" + "Approval" + "'";
+		} else {
+			sInDs		= "dsVacationDetail=dsVacationDetail:U";
+			sParam		= "svcId='" + "Return" + "'";
+		}
+		
+		take.transaction(this, sTranId, "SVC_LOC::hr/vacationApproval.do", sInDs, "", sParam, "fnCallback");
+		//take.tranSave(this, sTranId, sNameSpace, sInDs, "", "", "fnCallback");
+	}
+}
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+//조회버튼
+this.btnSearch_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fnSearch("VacationList");
+};
+
+// 리스트변경 디테일 조회
+this.divDetail_grdLeaveList_onselectchanged = function(obj:nexacro.Grid,e:nexacro.GridSelectEventInfo)
+{
+	var objDs = this.dsSearch;
+    var objDsVl = this.dsVacationList;
+    
+    //objDs.clearData();
+    //objDs.addRow();
+    objDs.setColumn(0, "VACATION_SEQ", objDsVl.getColumn(e.row, "VACATION_SEQ"));
+    objDs.setColumn(0, "REG_CD2", objDsVl.getColumn(e.row, "REG_CD"));
+    
+//     if(this.dsVacationList.getColumn(e.row, "APP_TYPE") != '01') {
+//         this.divDetail.form.txtApprovalMemo.set_readonly(true);
+//     } else {
+//         this.divDetail.form.txtApprovalMemo.set_readonly(false);
+//     }
+    
+    this.fnSearch("VacationDetail");
+};
+
+//승인, 반려 버튼
+this.btn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    var objDsDetail = this.dsVacationDetail;
+    var sUserCd = nexacro.getApplication().gdsUserInfo.getColumn(0,"USER_CD");
+
+    if(sUserCd != objDsDetail.getColumn(0, "APP_CD")) {
+        alert("승인자 본인만 결재가 가능합니다.");
+        return;
+    }
+    
+    var nBtnNM = obj.text;
+    var sConfirm = nBtnNM + " 처리가 완료됩니다.\n진행 하시겠습니까?";
+    
+    if(nBtnNM == "반려") {
+//		if (take.nvl(objDsDetail.getColumn(0, "APP_TYPE"), "")=="02") {
+//			objDsDetail.setColumn(0, "APP_DESC", "반려 처리.");
+//		} else {
+			//if (take.nvl(this.divDetail.form.txtApprovalMemo.value, "")=="") {
+			if (take.nvl(objDsDetail.getColumn(0, "APP_DESC"), "")=="") {
+				alert("반려사유를 입력해주세요.");
+				return false;
+			}
+//		}
+		objDsDetail.setColumn(0, "APP_TYPE", "03");
+	} else {    //승인
+		objDsDetail.setColumn(0, "APP_TYPE", "02");
+	}
+    
+	if (objDsDetail.getRowType(0) == 4) {
+        var bRowChange = take.confirm(this, "question", sConfirm);
+        
+        if (bRowChange){
+			this.fnSave("Update");
+        }
+    }
+};
+
+//사용자 선택 버튼 클릭.
+this.divSearch_btnUser_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    take.openPopup(this, "comUserPop", "frm::com/comUserPop.xfdl", "", "showtitlebar=true", "", false);
+};
+
+//사용자 이름 빈칸일때
+this.divSearch_edtUserNm_onchanged = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
+{
+	var sValue = take.nvl(obj.value, "");
+    
+    if (sValue == "")
+	{
+		this.divSearch.form.edtUserCd.set_value("");
+	}
+};
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnInit : 초기화 함수
+ * @param  {String} N/A 
+ * @example this.fnInit();
+ */
+this.fnInit = function()
+{
+    var objDivS = this.divSearch.form;
+    var objDateTime = take.getTodayTime();
+    //var sBegDay = objDateTime.year + (objDateTime.month-1) + objDateTime.day; // 시작일 한달전 셋팅
+    var aBegDay = take.getAddMonths(objDateTime.date,-1); // 시작일 한달전 셋팅
+    //var sLastDay = objDateTime.year + objDateTime.month + take.getDaysInMonth(objDateTime.year, objDateTime.month); //이번달 마지막일자
+    
+    var sBegDay = (take.getStrData(aBegDay)).date; // 시작일 한달전 셋팅
+    
+    
+    objDivS.calDateFrom.set_value(sBegDay);                 // 시작일
+    objDivS.calDateTo.set_value(objDateTime.date);// 종료일(현재일)
+    
+    this.fnCommonCode();
+}
+
+/**
+ * fnCommonCode : 코드호출 함수
+ * @param  {String} N/A 
+ * @example this.fnCommonCode();
+ */
+this.fnCommonCode = function ()
+{
+    var sOutDs      = ["dsReason", "dsApproval"];
+    var sGroupCodes = ["00023", "00025"];
+    var sHeaderType = ["ALL", "ALL"];
+
+    take.tranCode(this, sGroupCodes, sOutDs, sHeaderType,
+    function(sId, nErrCd, sErrMsg)
+    {
+        if (this.dsReason.rowcount > 0){
+            this.divSearch.form.cboReason.set_index(0);
+        }
+        
+        if (this.dsApproval.rowcount > 0){
+            this.divSearch.form.cboApproval.set_index(0);
+        }
+
+        this.fnSearch("VacationList");
+    });
+};
+
+/**
+ * fnBtnVisible : 승인구분에 따른 버튼처리
+ * @param  {String} N/A 
+ * @example this.fnBtnVisible();
+ */
+this.fnBtnVisible = function()
+{
+    // app_type -> A(승인), C(반려), R(기안)
+    var sAppType = this.dsVacationDetail.getColumn(0, "APP_TYPE");
+    var objDivDetail = this.divDetail.form;
+    
+    //objDivDetail.cboApproval.set_value(sAppType);
+    
+    switch(sAppType) {
+        case "02":
+            objDivDetail.btnReturn.set_right(0);
+            objDivDetail.btnApproval.set_right(49);
+            //objDivDetail.btnReturn.set_visible(true);
+            objDivDetail.btnReturn.set_visible(true);
+            objDivDetail.btnApproval.set_visible(false);
+            break;
+        case "03":
+            objDivDetail.btnReturn.set_right(49);
+            objDivDetail.btnApproval.set_right(0);
+            objDivDetail.btnReturn.set_visible(false);
+            //objDivDetail.btnApproval.set_visible(false);
+            objDivDetail.btnApproval.set_visible(true);
+            break;
+        case "01":
+            objDivDetail.btnReturn.set_right(0);
+            objDivDetail.btnApproval.set_right(49);
+            objDivDetail.btnReturn.set_visible(true);
+            objDivDetail.btnApproval.set_visible(true);
+            break;
+        default:
+    }
+}
+
+this.fnSchedule = function()
+{    
+    var objDsVac	= this.dsVacationDetail;
+	var sDateType 	= objDsVac.getColumn(0, "VACATION_DATE_TYPE");
+	var sPeriod		= objDsVac.getColumn(0, "VACATION_PERIOD");
+		sPeriod 	= nexacro.replaceAll(sPeriod, " ", "");
+		//trace("sPeriod :: " +sPeriod);
+	var sStartDt	= sPeriod.split("~")[0];
+		sStartDt 	= nexacro.replaceAll(sStartDt, "-", "");
+		//trace("sStartDt :: " +sStartDt);
+	var sEndDt		= sPeriod.split("~")[1];
+		sEndDt 		= nexacro.replaceAll(sEndDt, "-", "");
+		//trace("sEndDt :: " +sEndDt);
+	var sTxt		= objDsVac.getColumn(0, "REMARK_TXT");
+	var sUserNm		= objDsVac.getColumn(0, "REG_NM");
+	var sVacaType	= objDsVac.getColumn(0, "VACATION_TYPE_NM");
+	
+	var objDs 		= this.dsSchedule;
+	var nAddRow 	= objDs.addRow();
+	var sStartTime, sEndTime, sAllDay, sTitle;
+	
+	//종일인 경우에는 99시 99분으로 셋팅
+	if(sDateType == "01"){
+		// 종일
+		sAllDay 	= "Y";
+		sStartTime 	= "9999";
+		sEndTime 	= "9999";
+		sTitle		= sUserNm + " " + sVacaType;
+	} else if(sDateType == "02"){
+		//반차 AM
+		sAllDay 	= "N";
+		sStartTime	= "0900";
+		sEndTime 	= "1200";
+		sTitle		= sUserNm + " " + sVacaType + "(오전)";
+	} else {
+		//반차 PM
+		sAllDay 	= "N";
+		sStartTime 	= "1300";
+		sEndTime 	= "1800";
+		sTitle		= sUserNm + " " + sVacaType + "(오후)";
+	}
+	
+	objDs.setColumn(0, "SCHEDULE_START_TIME"	, sStartTime);
+	objDs.setColumn(0, "SCHEDULE_END_TIME"		, sEndTime);
+	objDs.setColumn(0, "ALLDAY_YN"				, sAllDay);
+    objDs.setColumn(0, "CATEGORY_CD"			, "C");
+	objDs.setColumn(0, "SCHEDULE_START_DATE"	, sStartDt);
+	objDs.setColumn(0, "SCHEDULE_END_DATE"		, sEndDt);
+	objDs.setColumn(0, "SCHEDULE_TITLE"			, sTitle);
+	objDs.setColumn(0, "SCHEDULE_TXT"			, sTxt);
+}
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "VacationList" : //조회 콜백
+            this.divDetail.form.staVacation.set_text("휴가승인목록 (" + this.dsVacationList.rowcount + "건)");
+            
+            if(this.dsVacationList.rowcount <= 0) {
+                this.divDetail.form.btnReturn.set_visible(false);
+                this.divDetail.form.btnApproval.set_visible(false);
+            }
+            break;
+            
+        case "VacationDetail" : //조회 콜백
+            //Script
+            this.fnBtnVisible();
+            break;
+            
+        case "Update" :  //저장 콜백
+			this.dsSchedule.clearData();
+			
+            this.fnSearch("VacationList");
+            break;
+            
+        default :
+            break;
+    }        
+}
+
+/**
+* fnPopCallback : popup callback
+* @param  : N/A
+* @return : N/A
+* @example :  
+*/
+this.fnPopCallback = function(sRtn)
+{
+    var arrRtn = sRtn.split(',');
+    this.divSearch.form.edtUserNm.set_value(arrRtn[1]);
+    this.divSearch.form.edtUserCd.set_value(arrRtn[0]);
+}
+]]></Script>
+    <Bind>
+      <BindItem id="item1" compid="divDetail.form.staRequestDate" propid="text" datasetid="dsVacationDetail" columnid="REG_DT"/>
+      <BindItem id="item2" compid="divDetail.form.staLeavePeriod" propid="text" datasetid="dsVacationDetail" columnid="VACATION_PERIOD"/>
+      <BindItem id="item3" compid="divDetail.form.staRequestUser" propid="text" datasetid="dsVacationDetail" columnid="REG_NM"/>
+      <BindItem id="item4" compid="divDetail.form.staApproverNm" propid="text" datasetid="dsVacationDetail" columnid="APP_NM"/>
+      <BindItem id="item6" compid="divDetail.form.txtLeaveMemo" propid="value" datasetid="dsVacationDetail" columnid="REMARK_TXT"/>
+      <BindItem id="item7" compid="divDetail.form.txtApprovalMemo" propid="value" datasetid="dsVacationDetail" columnid="APP_DESC"/>
+      <BindItem id="item0" compid="divDetail.form.staReason" propid="text" datasetid="dsVacationDetail" columnid="VACATION_TYPE_NM"/>
+      <BindItem id="item5" compid="divDetail.form.staApproval" propid="text" datasetid="dsVacationDetail" columnid="APP_TYPE_NM"/>
+      <BindItem id="item8" compid="divSearch.form.cboApproval" propid="value" datasetid="dsSearch" columnid="APP_TYPE"/>
+      <BindItem id="item9" compid="divSearch.form.calDateFrom" propid="value" datasetid="dsSearch" columnid="START_DATE"/>
+      <BindItem id="item10" compid="divSearch.form.calDateTo" propid="value" datasetid="dsSearch" columnid="END_DATE"/>
+      <BindItem id="item11" compid="divSearch.form.cboReason" propid="value" datasetid="dsSearch" columnid="VACATION_TYPE"/>
+      <BindItem id="item12" compid="divSearch.form.edtUserCd" propid="value" datasetid="dsSearch" columnid="REG_CD"/>
+    </Bind>
+  </Form>
+</FDL>

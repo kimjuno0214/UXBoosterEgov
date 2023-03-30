@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="publishing006" width="1018" height="318" titletext="공통버튼단축키관리">
+    <Layouts>
+      <Layout height="318" mobileorientation="landscape" width="1018">
+        <Button id="Button01" taborder="0" text="저장" top="5" width="46" height="23" cssclass="btn_WF_basic01" right="10"/>
+        <Static id="Static17" taborder="1" text="Static03" left="798" top="28" width="220" height="10" background="red" visible="false"/>
+        <Static id="Static03" taborder="2" text="입력" left="10" top="37" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="Static10" taborder="3" left="129" top="37" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="Static04" taborder="4" text="수정" left="10" top="67" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="Static11" taborder="5" left="129" top="67" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="Static05" taborder="6" text="삭제" left="10" top="97" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="Static13" taborder="7" left="129" top="97" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="Static06" taborder="8" text="저장" left="10" top="127" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="Static12" taborder="9" left="129" top="127" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="Static07" taborder="10" text="인쇄" left="10" top="157" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="Static15" taborder="11" left="129" top="157" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="Static08" taborder="12" text="엑셀" left="10" top="187" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="Static14" taborder="13" left="129" top="187" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="Static09" taborder="14" text="메뉴얼" left="10" top="217" width="120" cssclass="sta_WF_th01L" height="31"/>
+        <Static id="Static00" taborder="15" left="129" top="217" cssclass="sta_WF_td01L" right="10" height="31"/>
+        <Edit id="Edit00" taborder="16" left="136" top="42" width="354" height="21"/>
+        <Edit id="Edit01" taborder="17" left="136" top="72" width="354" height="21"/>
+        <Edit id="Edit02" taborder="18" left="136" top="102" width="354" height="21"/>
+        <Edit id="Edit03" taborder="19" left="136" top="132" width="354" height="21"/>
+        <Edit id="Edit04" taborder="20" left="136" top="162" width="354" height="21"/>
+        <Edit id="Edit05" taborder="21" left="136" top="192" width="354" height="21"/>
+        <Edit id="Edit06" taborder="22" left="136" top="222" width="354" height="21"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+          <Column id="Column5" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column4">버튼</Col>
+            <Col id="Column5">Text</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+            <Col id="Column5">Text</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+            <Col id="Column5">Text</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+            <Col id="Column5">Text</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+            <Col id="Column5">Text</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+            <Col id="Column5">Text</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+            <Col id="Column5">Text</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+            <Col id="Column5">Text</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+            <Col id="Column5">Text</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+            <Col id="Column5">Text</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

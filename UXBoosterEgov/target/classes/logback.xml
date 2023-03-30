@@ -1,0 +1,69 @@
+<configuration>
+    <property resource="/spring/config/jdbcs.properties" />
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+		<encoder>
+       		<pattern>%d{HH:mm:ss.SSS} [%t] %-5p %logger{26}:%L - %m%n</pattern>
+		</encoder>
+
+		<!-- myBatis 에서 주석에 'NOT_SQL_LOG'를 넣고 로그에서는 제외한다. -->
+		<filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+			<evaluator>
+				<expression>return message.contains("NOT_SQL_LOG");</expression>
+			</evaluator>
+			<OnMismatch>NEUTRAL</OnMismatch>
+			<OnMatch>DENY</OnMatch>
+		</filter>
+	</appender>
+	
+	<property scope="context" name="log_home" value="/logs/app" />
+
+  <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+    <file>${log_home}/myApp.log</file>
+    <encoder>
+      <pattern>%msg%n</pattern>
+    </encoder>
+  </appender>
+
+	<appender name="DBOUT" class="kr.co.takeit.logging.TakeDBAppender">
+        <connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">
+            <driverClass>${logback.jdbc.driverClassName}</driverClass>
+            <url>${logback.jdbc.url}</url>
+            <user>${logback.jdbc.username}</user>
+            <password>${logback.jdbc.password}</password>
+        </connectionSource>
+
+        <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+			<evaluator class="ch.qos.logback.classic.boolex.OnMarkerEvaluator">
+				<marker>USERDBLOG</marker>
+			</evaluator>
+			<OnMatch>NEUTRAL</OnMatch>
+			<OnMismatch>DENY</OnMismatch>
+		</filter>
+    </appender>
+
+	<!-- 3rdparty Loggers -->
+	<!-- <logger name="org.springframework" level="info" />
+	<logger name="jdbc.sql" level="error" additivity="false"/>
+    <logger name="jdbc.sqlonly" level="debug" />
+    <logger name="jdbc.sqltiming" level="off"/>
+    <logger name="jdbc.audit" level="off"/>
+    <logger name="jdbc.connection" level="off" additivity="false" />
+    <logger name="jdbc.sql.connection" level="off" additivity="false"/>
+    <logger name="jdbc.resultset" level="off"/>
+    <logger name="jdbc.resultsettable" level="debug" />
+    <logger name="org.mybatis" level="error"/>
+    <logger name="com.nhncorp.lucy" level="off"/>
+    <logger name="org.apache.http" level="error"/>
+    <logger name="com.nexacro17" level="off" />
+    <logger name="kr.co.takeit.nexacro" level="debug" /> -->
+
+	<!-- Root Logger -->
+	<root level="error">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="DBOUT" />
+		<appender-ref ref="FILE" />
+	</root>
+<typeAliases></typeAliases>
+</configuration>

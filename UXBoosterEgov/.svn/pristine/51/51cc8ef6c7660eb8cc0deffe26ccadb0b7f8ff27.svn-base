@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="SC010T05" width="1018" height="318" titletext="시스템공통_시스템관리_공통버튼단축키" onload="take_onload">
+    <Layouts>
+      <Layout height="318" mobileorientation="landscape" width="1018">
+        <Button id="btnSaveSub" taborder="0" text="저장" top="5" width="46" height="23" cssclass="btn_WF_basic01" right="10" onclick="btnSaveSub_onclick"/>
+        <Static id="Static17" taborder="1" text="Static03" left="798" top="28" width="220" height="10" background="red" visible="false"/>
+        <Static id="staShortcutInputTitle" taborder="2" text="입력" left="10" top="37" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="Static10" taborder="3" left="129" top="37" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="staShortcutDeleteTitle" taborder="4" text="삭제" left="10" top="67" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="Static11" taborder="5" left="129" top="67" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="staShortcutSaveTitle" taborder="6" text="저장" left="10" top="97" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="Static13" taborder="7" left="129" top="97" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="staShortcutPrintTitle" taborder="8" text="인쇄" left="10" top="127" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="Static12" taborder="9" left="129" top="127" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="staShortcutExcelTitle" taborder="10" text="엑셀" left="10" top="157" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="Static15" taborder="11" left="129" top="157" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="staShortcutManualTitle" taborder="12" text="매뉴얼" left="10" top="187" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="Static14" taborder="13" left="129" top="187" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Edit id="edtShortcutInput" taborder="14" left="136" top="42" width="354" height="21"/>
+        <Edit id="edtShortcutDelete" taborder="15" left="136" top="72" width="354" height="21"/>
+        <Edit id="edtShortcutSave" taborder="16" left="136" top="102" width="354" height="21"/>
+        <Edit id="edtShortcutPrint" taborder="17" left="136" top="132" width="354" height="21"/>
+        <Edit id="edtShortcutExcel" taborder="18" left="136" top="162" width="354" height="21"/>
+        <Edit id="edtShortcutManual" taborder="19" left="136" top="192" width="354" height="21"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/**
+*  공통버튼단축키
+*
+*  @MenuPath    시스템공통 > 시스템관리 > 공통버튼단축키
+*  @FileName    SC010T05.xfdl 
+*  @Creator     천우성
+*  @CreateDate  2019.08.17 
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2019.08.17      천우성             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+this.fv_nSystemId = 'S000000001';     //시스템ID
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* formid_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.take_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {    
+        this.fnTran('Detail');
+   }
+}
+
+/*********************************************************
+* 2.1 TRANSACTION 서비스 호출 처리
+ ********************************************************/
+/**
+ * fnTran : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnTran("ID");
+ */
+this.fnTran = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Detail";
+    
+    //변수선언
+    var sUrl   = "",      //서비스 URL
+        sInDs  = "",      //데이터셋을 검색조건으로 보낼경우 사용 -->선택
+        sOutDs = "",      //데이터를 받아올 데이터셋 지정
+        sParam = "",      //파라메터 사용 안 할 경우       
+        sCallBack = "";        //콜백 처리 함수
+
+    sCallBack  = "fnCallback" ; 
+    
+    switch(sTranId)
+    {
+        case "Detail" :  
+			this.dsSystemButton.clearData();
+			
+			take.tranSelect(this, "Detail", "SystemCommon.systemInfoDetail", "", "dsSystemButton", "SYSTEM_ID='" + this.fv_nSystemId + "'", sCallBack);
+			
+            break;
+		case "Save" :
+		
+			take.tranSave(this, "Save", "SystemCommon.systemInfoButton", "dsSystemButton", "", "", sCallBack);
+			
+            break;
+        default :
+            break;
+    }
+}
+
+/*********************************************************
+ * 2.2 CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "Detail" : //조회 콜백
+            //Script
+            break;
+        case "Save" :  //저장 콜백
+            
+			this.fnTran('Detail');
+            break;
+        default :
+            break;
+    }        
+} 
+
+/*********************************************************
+* 3 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Transation id";
+    
+    this.fnTran(sTranId);
+}
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+this.fnSave = function(sTranId)
+{    
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Save transation id";
+    
+    this.fnTran(sTranId);
+}
+/**
+ * fnAddRow : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+ * @example this.fnAddRow(sGrdId, nRow);
+ */
+this.fnAddRow = function(sGrdId, nRow)
+{
+    //공통 행추가에서 호출할 디폴트값 세팅
+    if (take.nvl(sGrdId, "")=="") sGrdId = "Grid00";
+    
+    //Script
+}
+
+/**
+ * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number, Array} arrnRow    deleteRow 리턴값
+ * @return {N/A} N/A
+ * @example this.fnDelRow(sGrdId, nRow); 
+ */
+this.fnDelRow = function(sGrdId, arrnRow)
+{    
+    //공통 행추가에서 호출할 디폴트값 세팅
+    if (take.nvl(sGrdId, "")=="") sGrdId = "Grid00";
+    
+    //Script
+}
+
+/*********************************************************
+ * 4 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+/**
+* component_onclick : ~ 버튼 클릭
+*/
+this.component_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    //Script
+};
+
+/*********************************************************
+* 5 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnUserFunction : 사용자 함수
+ * @param  {String} sParam 문자형 인자
+ * @param  {Number} nParam 숫자형 인자
+ * @example this.fnUserFunction(sParam, nParam);
+ */
+this.fnUserFunction = function(sParam, nParam)
+{    
+    //Script
+}
+
+this.btnSaveSub_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fnTran('Save');
+};
+]]></Script>
+    <Objects>
+      <Dataset id="dsSystemButton">
+        <ColumnInfo>
+          <Column id="SYSTEM_ID" type="STRING" size="256"/>
+          <Column id="SHORTCUT_INPUT" type="STRING" size="256"/>
+          <Column id="SHORTCUT_DELETE" type="STRING" size="256"/>
+          <Column id="SHORTCUT_SAVE" type="STRING" size="256"/>
+          <Column id="SHORTCUT_PRINT" type="STRING" size="256"/>
+          <Column id="SHORTCUT_EXCEL" type="STRING" size="256"/>
+          <Column id="SHORTCUT_MANUAL" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="edtShortcutInput" propid="value" datasetid="dsSystemButton" columnid="SHORTCUT_INPUT"/>
+      <BindItem id="item1" compid="edtShortcutDelete" propid="value" datasetid="dsSystemButton" columnid="SHORTCUT_DELETE"/>
+      <BindItem id="item2" compid="edtShortcutSave" propid="value" datasetid="dsSystemButton" columnid="SHORTCUT_SAVE"/>
+      <BindItem id="item3" compid="edtShortcutPrint" propid="value" datasetid="dsSystemButton" columnid="SHORTCUT_PRINT"/>
+      <BindItem id="item4" compid="edtShortcutExcel" propid="value" datasetid="dsSystemButton" columnid="SHORTCUT_EXCEL"/>
+      <BindItem id="item5" compid="edtShortcutManual" propid="value" datasetid="dsSystemButton" columnid="SHORTCUT_MANUAL"/>
+    </Bind>
+  </Form>
+</FDL>

@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="login" width="1280" height="800" titletext="New Form">
+    <Layouts>
+      <Layout height="800" mobileorientation="landscape" width="1280">
+        <Div id="Div00" taborder="0" left="150" top="72" width="1000" height="556">
+          <Layouts>
+            <Layout>
+              <Div id="Div00" taborder="0" left="0" top="0" width="580" height="556" url="guide::publishing/loginBanner.xfdl"/>
+              <Div id="Div01" taborder="1" left="580" top="0" width="420" height="556" cssclass="div_WF_loginBg">
+                <Layouts>
+                  <Layout>
+                    <Static id="Static00" taborder="0" text="회원등록" top="25" width="84" height="25" cssclass="sta_WF_chgLoginBox" right="25"/>
+                    <Static id="Static01" taborder="1" left="95" top="120" width="231" height="40" cssclass="sta_WF_loginLogo"/>
+                    <Edit id="Edit00" taborder="2" left="95" top="180" width="231" height="30" displaynulltext="아이디"/>
+                    <Edit id="Edit01" taborder="3" left="95" top="220" width="231" height="30" displaynulltext="비밀번호"/>
+                    <CheckBox id="CheckBox00" taborder="4" text="아이디 저장" left="95" top="256" width="150" height="20"/>
+                    <Static id="Static02" taborder="5" text="이 페이지는 &lt;fc v='#0066ff'&gt;개인정보처리방침&lt;/fc&gt; 및 &lt;fc v='#0066ff'&gt;서비스 약관&lt;/fc&gt;의 &#13;적용을 받습니다.&#13;" left="95" top="282" width="231" height="50" usedecorate="true"/>
+                    <Button id="Button00" taborder="6" text="로그인" left="95" top="342" width="231" height="40" cssclass="btn_WF_login" onclick="Div00_Div01_Button00_onclick"/>
+                    <Button id="Button01" taborder="7" text="아이디/비밀먼호 찾기" left="95" top="387" width="231" height="40" cssclass="btn_WF_findInfo"/>
+                  </Layout>
+                </Layouts>
+              </Div>
+              <Button id="Button00" taborder="2" left="10" top="249" width="37" height="66" cssclass="btn_loginLeft"/>
+              <Button id="Button01" taborder="3" top="249" width="37" height="66" cssclass="btn_loginRight" right="440"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="Div01" taborder="1" left="1200" top="70" width="420" height="556" cssclass="div_WF_loginBg">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="로그인" top="25" width="84" height="25" cssclass="sta_WF_chgLoginBox" right="25"/>
+              <Static id="Static01" taborder="1" left="95" top="79" width="231" height="40" cssclass="sta_WF_loginLogo"/>
+              <Edit id="Edit00" taborder="2" left="95" top="129" width="231" height="30" displaynulltext="이름"/>
+              <Edit id="Edit01" taborder="3" left="95" top="169" width="231" height="30" displaynulltext="아이디"/>
+              <CheckBox id="CheckBox00" taborder="4" text="UXBooster 시스템 이용약관에 동의함." left="95" top="365" width="220" height="20"/>
+              <Button id="Button00" taborder="5" text="회원가입" left="95" top="421" width="231" height="40" cssclass="btn_WF_login"/>
+              <Button id="Button01" taborder="6" text="취소" left="95" top="466" width="231" height="40" cssclass="btn_WF_findInfo"/>
+              <Edit id="Edit02" taborder="7" left="95" top="209" width="231" height="30" displaynulltext="비밀번호"/>
+              <Edit id="Edit03" taborder="8" left="95" top="249" width="231" height="30" displaynulltext="비밀번호확인"/>
+              <Edit id="Edit04" taborder="9" left="95" top="289" width="231" height="30" displaynulltext="정보1"/>
+              <Edit id="Edit05" taborder="10" left="95" top="329" width="231" height="30" displaynulltext="정보2"/>
+              <CheckBox id="CheckBox01" taborder="11" text="개인정보처리 동의" left="95" top="385" width="220" height="20"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.Div00_Div01_Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	//
+};
+]]></Script>
+  </Form>
+</FDL>

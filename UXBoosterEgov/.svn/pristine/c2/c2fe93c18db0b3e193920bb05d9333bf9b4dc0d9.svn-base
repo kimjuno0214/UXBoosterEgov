@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="comFileSingle" width="530" height="21" titletext="ATTACH_INFO(SINGLE)" onload="comFileSingle_onload">
+    <Layouts>
+      <Layout height="21" width="530">
+        <Button id="btnFileDel" taborder="3" text="파일삭제" top="0" width="70" cssclass="btn_WF_cancel02" right="0" height="21" onclick="btnFileDel_onclick"/>
+        <Button id="btnFileAdd" taborder="1" text="파일추가" top="0" width="70" cssclass="btn_WF_plus01" right="btnFileDel:2" height="21" onclick="btnFileAdd_onclick"/>
+        <Edit id="edtFile" taborder="0" left="0" top="0" height="21" right="btnFileAdd:2" readonly="true" oneditclick="edtFile_oneditclick" cursor="pointer"/>
+        <Div id="divComFile" taborder="2" left="78" top="40" width="452" url="frm::com/comFileSYS.xfdl" bottom="-165" visible="false"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/**
+ *  SYSTEM FORM NAME
+ *
+ *  @MenuPath    -
+ *  @FileName    comFileSingle.xfdl
+ *  @Creator     정해원
+ *  @CreateDate  2020.09.23
+ *  @Version     1.0
+ *  @Desction    첨부파일공통(일반) - ATTACH_INFO와 연동
+ *
+ *
+ ************** 소스 수정 이력 *************************************************
+ *    date          Modifier            Description
+ *******************************************************************************
+ *  2020.09.23      정해원             최초 생성
+ *******************************************************************************
+ */
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+	this.fv_divFile;
+	this.fv_atchFileTypeCd;
+	this.fv_blob;
+	this.fv_objDs;
+	this.fv_sColumnId;
+	this.fv_objViewer;
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload등)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.comFileSingle_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+	{
+		this.fnInit();
+	}
+};
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnInit, fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+this.fnInit = function(){
+};
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+ ********************************************************/
+	/**
+	 * 파일첨부 버튼
+	 */
+	this.btnFileAdd_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo){
+		this.fv_blob = null;
+		var objThis = this;
+		this.fv_divFile.fn_browseFile(
+			function(rtnValue){
+				if(rtnValue.result){
+					var resultData = rtnValue.resultData;
+					objThis.edtFile.set_value(resultData.fileName);
+					
+					if( nexacro._Browser == "Runtime" ){
+						objThis.alert('runtime에서 미리보기가 되지 않고 있음');
+						objThis.fv_blob = "data:image/png;base64," + resultData.fileBlob;
+						objThis.fn_setBlobData();
+					} else {
+						var objFile = objThis.fv_divFile.fileDialog._handle.ownerDocument.getElementById(objThis.fv_divFile.fileDialog._handle.id);
+						if(objFile.files.length > 0){
+							//로드
+							var reader = new FileReader();
+							reader.readAsDataURL(objFile.files[0]);
+
+							//로드 후
+							reader.onload = function(){
+								objThis.fv_blob = reader.result;
+								objThis.fn_setBlobData();
+							};
+						}
+					}
+				}
+			}
+		);
+	};
+
+	/**
+	 * 파일삭제 버튼
+	 */
+	this.btnFileDel_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+	{
+		var objThis = this;
+		this.fv_divFile.fn_deleteFileRow(0, function(rtnValue){
+			if(!rtnValue.result){
+				take.alert(this, "error", rtnValue.resultMessage);
+			}else{
+				objThis.edtFile.set_value(null);
+				if(!take.isEmpty(objThis.fv_objViewer)) {
+					objThis.fv_objViewer.set_image(null);
+				}
+			}
+		});
+	};
+
+	/**
+	 * 파일다운로드
+	 */
+	this.edtFile_oneditclick = function(obj:nexacro.Edit,e:nexacro.EditClickEventInfo)
+	{
+		if(this.fv_divFile.dsFile.getRowCount() > 0)
+			this.fv_divFile.fn_downloadFile(0);
+	};
+
+/*********************************************************
+ * 4 사용자 FUNCTION 영역
+ ********************************************************/
+	/*
+	 * 첨부파일 초기화
+	 */
+	this.fnInitComponent = function(objThis){
+		// 첨부파일 활성화
+		this.fv_divFile = this.divComFile.form;
+		this.fv_divFile.fn_setAtchFileTypeCd(this.fn_getAtchFileTypeCd());
+		this.fv_divFile.fv_isGrid = false;	//싱글모드
+		this.fv_divFile.fnInitComponent(objThis);
+	};
+
+	this.fn_setAtchFileTypeCd = function(sTypeCd){
+		this.fv_atchFileTypeCd = sTypeCd;
+	};
+	this.fn_getAtchFileTypeCd = function(){
+		return this.fv_atchFileTypeCd;
+	};
+	
+	//첨부파일ID세팅
+	this.fn_setAtchFileId = function(sAtchFileId){
+		this.fv_divFile.fn_setAtchFileId(sAtchFileId);
+	};
+	
+	this.fnSearchAtchFileId = function(fnCallback){
+		this.fv_divFile.fnSearchAtchFileId(fnCallback);
+	};
+	
+	//첨부파일ID로 정보조회
+	this.fnSearchFileList = function(fnCallBack){
+		var objThis = this;
+		this.fv_divFile.fnSearchFileList(
+			function(rtnValue){
+				if(!take.isEmpty(objThis.fv_objViewer)) {
+					objThis.fv_objViewer.set_image(objThis.fn_getDownloadUrl());
+					objThis.edtFile.set_value(objThis.fv_divFile.dsFile.getColumn(0, "FILE_NM"));
+				}
+			}
+		);
+	}
+	
+	this.fn_isUpdate = function(){
+		return this.fv_divFile.fn_isUpdate();
+	};
+	
+	this.fnUploadSaveFileList = function(fnCallback){
+		this.fv_divFile.fnUploadSaveFileList(fnCallback);
+	};
+	
+	this.fn_setImageViewerDataset = function(objDs, sColumnId){
+		this.fv_objDs = objDs;
+		this.fv_sColumnId = sColumnId;
+	};
+	
+	this.fn_setImageViewer = function(objViewer){
+		this.fv_objViewer = objViewer;
+	};
+	
+	this.fn_setBlobData = function(){
+		if(!take.isEmpty(this.fv_objDs)) {
+			this.fv_objDs.setColumn(this.fv_objDs.rowposition, this.fv_sColumnId, this.fv_blob);
+		}
+		
+		if(!take.isEmpty(this.fv_objViewer)) {
+			this.fv_objViewer.set_image(this.fv_blob);
+		}
+	};
+	
+	this.fn_getDownloadUrl = function(){
+		var atchFileId 	= this.fv_divFile.dsFile.getColumn(0, "ATTACH_CD");
+		var fileSeq 	= this.fv_divFile.dsFile.getColumn(0, "FILE_SEQ");
+		var downloadUrl = this.fv_divFile.fn_getDownloadUrl();
+		
+		return downloadUrl + "?atchFileId=" + atchFileId + "&fileSeq=" + fileSeq;
+	};]]></Script>
+    <Objects/>
+    <Bind>
+      <BindItem id="item0" compid="edtFile" propid="value" datasetid="dsFile" columnid="FILE_NM"/>
+    </Bind>
+  </Form>
+</FDL>

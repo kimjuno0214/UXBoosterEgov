@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="publishing050" width="460" height="496" titletext="타임라인등록">
+    <Layouts>
+      <Layout height="496" mobileorientation="landscape" width="460">
+        <Div id="Div02" taborder="0" left="0" top="0" width="460" height="496" cssclass="dvi_WF_tabBox01">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="1" text="일시" left="10" top="43" width="100" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static01" taborder="2" left="108" top="43" height="31" cssclass="sta_WF_td01L" width="340"/>
+              <Static id="Static02" taborder="3" text="등급" left="10" top="73" width="100" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static04" taborder="4" left="108" top="73" height="31" cssclass="sta_WF_td01L" width="340"/>
+              <Button id="Button01" taborder="5" text="삭제" top="10" width="50" height="23" cssclass="btn_WF_basic01" right="65"/>
+              <Button id="Button02" taborder="6" text="저장" top="10" width="50" height="23" cssclass="btn_WF_basic01" right="10"/>
+              <Static id="Static05" taborder="7" text="제목" left="10" top="103" width="100" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static06" taborder="8" left="108" top="103" height="31" cssclass="sta_WF_td01L" width="340"/>
+              <Static id="Static07" taborder="9" text="내용" left="10" top="133" width="100" height="201" cssclass="sta_WF_th01L"/>
+              <Static id="Static08" taborder="10" left="108" top="133" height="201" cssclass="sta_WF_td01L" width="340"/>
+              <Static id="Static09" taborder="11" text="파일" left="10" top="333" width="100" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static11" taborder="12" left="108" top="333" height="31" cssclass="sta_WF_td01L" width="340"/>
+              <Calendar id="Calendar00" taborder="13" left="115" top="48" width="110" height="21"/>
+              <Edit id="Edit11" taborder="0" left="115" top="108" width="326" height="21"/>
+              <TextArea id="TextArea00" taborder="14" left="115" top="139" width="326" height="189"/>
+              <Combo id="Combo00" taborder="15" text="Combo00" left="115" top="78" width="110" height="21"/>
+              <Button id="Button00" taborder="16" text="첨부" top="337" width="50" height="23" cssclass="btn_WF_basic01" right="294"/>
+              <Edit id="Edit00" taborder="17" left="Calendar00:3" top="48" width="64" height="21"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">사용자명</Col>
+            <Col id="Column1">2019-08-15 16:27:38</Col>
+            <Col id="Column2">제목제목제목제목제목제목제목제목제목</Col>
+            <Col id="Column3">내용</Col>
+            <Col id="Column4">이미지</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">사용자명</Col>
+            <Col id="Column1">2019-08-15 16:27:38</Col>
+            <Col id="Column2">제목제목제목제목제목제목제목제목제목</Col>
+            <Col id="Column3">내용</Col>
+            <Col id="Column4">이미지</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">사용자명</Col>
+            <Col id="Column1">2019-08-15 16:27:38</Col>
+            <Col id="Column2">제목제목제목제목제목제목제목제목제목</Col>
+            <Col id="Column3">내용</Col>
+            <Col id="Column4">이미지</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

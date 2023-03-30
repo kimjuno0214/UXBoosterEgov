@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="smpCalMonth" width="1040" height="659" titletext="New Form">
+    <Layouts>
+      <Layout height="659" width="1040">
+        <Calendar id="Calendar00" taborder="0" left="49" top="39" width="219" height="49" dateformat="yyyy-MM" editformat="yyyy-MM" calendartype="Month"/>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>

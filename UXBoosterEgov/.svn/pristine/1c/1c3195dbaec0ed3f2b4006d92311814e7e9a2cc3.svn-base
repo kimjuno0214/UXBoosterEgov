@@ -1,0 +1,320 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="comDashBar01" width="354" height="315" titletext="바차트(바 색상이 다를경우)" onload="comDashBar01_onload">
+    <Layouts>
+      <Layout height="315" mobileorientation="landscape" width="354">
+        <Div id="divBottom" taborder="1" left="0" top="226" right="0" height="89">
+          <Layouts>
+            <Layout>
+              <Static id="staValue" taborder="1" text="0" cssclass="sta_MF_NumDec" left="5" usedecorate="true" right="5" top="25" bottom="5" visible="false"/>
+              <Static id="staText" taborder="0" text="text" left="5" top="0" height="25" cssclass="sta_MF_TitleS06" right="5" visible="false"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divMain" taborder="0" left="0" top="20" right="0" bottom="divBottom:0" formscrollbartype="none none" formscrolltype="none">
+          <Layouts>
+            <Layout>
+              <BasicChart id="chart" taborder="2" left="5" top="20" binddataset="dsList" categorycolumn="bind:TEXT" enableanimation="true" duration="700" right="5" bottom="0">
+                <Contents><![CDATA[{
+	"board": {
+		"id": "board",
+		"visible": false
+	},
+	"categoryaxis": {
+		"id": "categoryaxis",
+		"visible": true,
+		"axislinestyle": "#c5c5c5",
+		"axislineopacity": "0.4",
+		"ticklineopacity": "0",
+		"labeltextfont": "12px \"NanumGothic\"",
+		"labelgap": "0",
+		"ticksize": "10"
+	},
+	"valueaxes": [
+		{
+			"id": "valueaxis0",
+			"boardlinevisible": "true",
+			"visible": "true",
+			"labeltextfont": "12px \"NanumGothic\"",
+			"labeltype": "number",
+			"labelmask": "#,###,##0",
+			"axislinestyle": "#c5c5c5",
+			"boardlinestyle": "#c5c5c5",
+			"axislineopacity": "0.4",
+			"boardlineopacity": "0.4",
+			"ticklineopacity": "0",
+			"gap": "0",
+			"labelgap": "0",
+			"ticksize": "0",
+			"autotickscale": "1"
+		}
+	],
+	"seriesset": [
+		{
+			"id": "series0",
+			"barvisible": true,
+			"barsize": "80",
+			"itemtextvisible": "true",
+			"itemtextcolor": "#ffffff",
+			"itemtextfont": "12px \"NanumGothic\"",
+			"valuecolumn": "bind:VALUE",
+			"selecttype": "bind",
+			"selectcolumn": "bind:SELECT",
+			"selectbarfillstyle": "aliceblue",
+			"itemtexttype": "number",
+			"tooltiptext": "expr:TEXT + \":\" + VALUE",
+			"itemtextmask": "#,###,##0",
+			"baritemtextposition": "",
+			"baropacity": "1",
+			"linetype": "",
+			"tooltiptexttype": "text",
+			"barlinestyle": "0px solid transparent",
+			"barfillstyle": "#81ddc6,#f35e58,#edc683,#fe8c68"
+		}
+	],
+	"tooltip": {
+		"id": "tooltip",
+		"background": "#4b4b4b",
+		"linestyle": "0px",
+		"textcolor": "#ffffff",
+		"textfont": "12px \"NanumGothic\"",
+		"padding": "0px 0px 0px 10px"
+	}
+}]]></Contents>
+              </BasicChart>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="staToday" taborder="2" top="0" width="100" height="20" cssclass="sta_MF_Time" left="5" text="기준날짜(년,월,일)" fittocontents="width"/>
+        <Static id="staUnit" taborder="3" text="기준(단위, 출처등)" top="0" width="100" height="20" cssclass="sta_MF_Unit" right="5" textAlign="right" fittocontents="width"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsList" useclientlayout="false">
+        <ColumnInfo>
+          <ConstColumn id="BASEDT" type="STRING" size="30" value="2020.01.29 23:38"/>
+          <ConstColumn id="REFER" type="STRING" size="30" value="단위 : 백만원"/>
+          <Column id="TEXT" type="STRING" size="256"/>
+          <Column id="VALUE" type="BIGDECIMAL" size="256"/>
+          <Column id="SELECT" type="STRING" size="256" description="선택여부"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="VALUE">49919</Col>
+            <Col id="TEXT">목표</Col>
+            <Col id="SELECT">false</Col>
+          </Row>
+          <Row>
+            <Col id="TEXT">예측</Col>
+            <Col id="VALUE">48645</Col>
+            <Col id="SELECT">false</Col>
+          </Row>
+          <Row>
+            <Col id="TEXT">실적</Col>
+            <Col id="VALUE">49213</Col>
+            <Col id="SELECT">false</Col>
+          </Row>
+          <Row>
+            <Col id="TEXT">전년</Col>
+            <Col id="VALUE">43535</Col>
+            <Col id="SELECT">false</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[// 1. bar에서 static 차트 변경
+// bar : this.divMain.form.chart.set_rotateaxis(false);
+// static : chart.set_rotateaxis(false);
+// 
+// 2. bar에서 line 차트 변경
+// this.divMain.form.chart.seriesset0.set_barvisible(false);
+// this.divMain.form.chart.seriesset0.set_linevisible(true);
+// this.divMain.form.chart.seriesset0.set_linetype("curve");
+// 
+// 3. 라인 차트 체우기
+// this.divMain.form.chart.seriesset0.set_lineareavisible(true);
+// 
+// 3. point 차트
+// this.divMain.form.chart.seriesset0.set_barvisible(false);
+// this.divMain.form.chart.seriesset0.set_linevisible(false);
+// this.divMain.form.chart.seriesset0.set_lineareavisible(false);
+// this.divMain.form.chart.seriesset0.set_pointvisible(true);
+// - point 모양 : "circle", "square", "diamond", "triangle", "cross"
+// - 모양 변경시 : this.divMain.form.chart.seriesset0.set_pointshape("circle");
+// 
+// 4. 차트그룹핑
+// this.divMain.form.chart.set_bargrouping(true);
+
+this.fv_nReload = null;
+this.fv_sDashId = null;
+this.fv_sDashType = null;
+this.fv_objUserParam = null;
+
+//dsList에 contents 값을 변경하여 테스트
+//값이 없을 경우         : 차트만 보여짐
+//값이 한개일 경우       : {contents:[{text:"실적",value:"49,213"}]}
+//값이 한개 이상일 경우 : {contents:[{text:"달성률(목표)",value:"98%"},{text:"신장률(전년)",value:"113%"}]}
+
+this.comDashBar01_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+    var sDashParam = take.nvl(this.parent.dashparam,"");
+    
+    sDashParam = '{contents:[{text:"달성률(목표)",value:"98%"},{text:"신장률(전년)",value:"113%"}]}';
+    
+    if (sDashParam!="")
+    {
+        this.fv_objUserParam = take.StringToObject(sDashParam);
+        console.dir(this.fv_objUserParam);
+    }
+	
+    this.fv_sDashId      = this.parent.dashid;
+    this.fv_sDashType    = this.parent.dashtype;
+    this.fv_nReload      = parseInt(take.nvl(this.parent.reloadtime,"0"));
+    
+    if (this.parent.btran)
+    {
+        this.fnSearch();
+    } else {
+        this.fnInit();
+    }
+};
+
+this.fnInit = function() 
+{
+    
+    var objDs, objMain, objBottom, objContents;
+    var sTitle, sBaseDt, sRefer, sReload, sContents, sWid;
+    var arrConts, arrRectText, arrRectVal;
+    var nHet = 25;
+
+    objMain = this.divMain.form;
+    objBottom = this.divBottom.form;
+    objDs = this.dsList;
+    
+    
+    sBaseDt = objDs.getConstColumn("BASEDT");
+    sRefer = objDs.getConstColumn("REFER");    
+    objMain.staToday.set_text("기준 일시: " + sBaseDt);
+    objMain.staUnit.set_text(sRefer);
+    this.divMain.form.resetScroll();
+    
+    try {
+        objContents = this.fv_objUserParam;;
+        console.dir(objContents);
+        
+        if (objContents!="")
+        {
+            if(objContents.hasOwnProperty("contents"))
+            {
+                arrConts = objContents.contents;
+                if (arrConts.constructor === Array)
+                {
+                    nCnt = arrConts.length;
+                    if (nCnt>0)
+                    {   
+                        objBottom.staText.set_visible(false);
+                        objBottom.staValue.set_visible(false);
+                        if (nCnt==1)
+                        {
+                            this.fnNewSta(objBottom, "staText0", "sta_MF_TitleS06", arrConts[0].text, "", [5,0,null,nHet,5,null]);
+                            this.fnNewSta(objBottom, "staValue0", "sta_MF_NumDec", arrConts[0].value, "", [5,nHet,null,null,5,5]);
+                        } else {
+                            sWid = nexacro.round((100/nCnt),0) + "%";
+                            for (var i=0; i<nCnt; i++)
+                            {
+                                if (i==0) 
+                                {
+                                    arrRectText = [5,0,sWid,nHet,null,null];
+                                    arrRectvalue = [5,nHet,sWid,null,null,5];
+                                } else {
+                                    arrRectText = ["staText"+(i-1)+":0",0,sWid,nHet,null,null];
+                                    arrRectvalue = ["staValue"+(i-1)+":0",nHet,sWid,null,null,5];
+                                }
+                                this.fnNewSta(objBottom, "staText"+i, "sta_MF_TitleS06", arrConts[i].text, "", arrRectText);
+                                this.fnNewSta(objBottom, "staValue"+i, "sta_MF_NumDec", arrConts[i].value, "", arrRectvalue);
+                                if (i>0 && i<nCnt)
+                                {
+                                    this.fnNewSta(objBottom, "staLine"+i, "sta_MF_Vline", arrConts[i].value, "", ["staText"+(i-1)+":0",0,1,null,null,5]);
+                                }
+                            }
+                        }
+                    } else {
+                        throw "Contents count is zero.";
+                    }
+                } else {
+                    throw "Contents value is not Array.";
+                }                            
+            } else {
+                throw "Contents not found.";
+            }
+        } else {
+            throw "dashparam object is null.";
+        }  
+        console.dir(objContents);
+    } catch (e) {
+        trace(e);
+        this.divBottom.set_height(0);                
+    }
+    this.resetScroll();
+}
+
+this.fnSearch = function()
+{
+//     take.tranSelect(
+//         this,
+//         "dashSelect"+this.fv_sDashId,
+//         this.fv_objUserParam.mapperid,
+//         "",
+//         "dsList",
+//         "",
+//         function(sId, sErr, sMsg)
+//         {
+            var objMain, objDs;
+            
+            objMain = this.divMain.form;
+            objDs = this.dsList;
+            
+            objMain.staToday.set_text("기준 일시: " + objDs.getConstColumn("BASEDT"));
+            objMain.staUnit.set_text(objDs.getConstColumn("REFER"));
+            objMain.resetScroll();
+//         },
+//         false
+//     );
+}
+/**
+ * fnNewSta : Static Component 동적 생성
+ * @param  {String} sScope  생성 위치
+ * @param  {String} sStaId  스테틱 아이디
+ * @param  {String} sCss    CSS클래스
+ * @param  {String} sStaTxt 스테틱 TEXT
+ * @param  {String} sEvent  스테틱 이벤트
+ * @param  {Array}  nRect   스테틱 생성 좌표
+ * @return {Object} objSta  생성된 버튼 Object
+ * @example this.fnNewSta(sParam, nParam);
+ */ 
+this.fnNewSta = function(objScope, sStaId, sCss, sStaTxt, sEvent, arrRect)
+{
+	//스테틱 컴포넌트 생성
+	var objSta = new Static();
+	objSta.init(sStaId, arrRect[0], arrRect[1], arrRect[2], arrRect[3], arrRect[4], arrRect[5]);
+	objScope.addChild(sStaId, objSta);
+    if (take.nvl(sEvent,"")!="") objSta.addEventHandler("onclick", sEvent, this); //스테틱에 부여할 이벤트
+	objSta.show();
+
+	//CSS 클래스가 있을경우만 세팅
+    //trace("sCss --> " + sCss);
+	if (sCss!="") objSta.set_cssclass(sCss);
+
+	//버튼 text 및 기본 값 세팅
+	objSta.set_tooltiptext(sStaTxt);
+	objSta.set_tooltiptype("hover");
+	objSta.set_enable(true);
+	objSta.set_text(sStaTxt);
+	objSta.set_visible(true);
+
+	//보이기
+	return objSta;
+};
+]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="frmMdiPopUp" width="1195" height="745" titletext="UXBooster" onload="frmMdiPopUp_onload">
+    <Layouts>
+      <Layout height="745" width="1195">
+        <Div id="divWork" taborder="0" left="10" top="10" right="10" bottom="10" async="false" visible="true" url="frm::frmWork.xfdl"/>
+        <Static id="Static11" taborder="1" top="181" height="7" cssclass="sta_Guide_Width" visible="false" right="0" width="13"/>
+        <Static id="Static12" taborder="2" text="13" top="168" width="13" height="12" cssclass="sta_Guide_Size" visible="false" right="0"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    1DEPTH > 2DEPTH
+*  @FileName    *.xfdl
+*  @Creator     홍길동
+*  @CreateDate  yyyy.MM.DD
+*  @Version     1.0
+*  @Desction    설명
+*
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  YYYY.MM.DD      홍길동             최초 생성
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+//this.fv_nFormVal = null;     //용도
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* frmMdiPopUp_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.frmMdiPopUp_onload = function(obj,e)
+{
+    var sUrl = this.parent.Url;
+    var sProgNm = this.parent.ProgNm; 
+    var sProgId = this.parent.ProgId; 
+    var sUserParam = this.parent.UserParam;	
+	var objWorkDiv = this.divWork; 
+
+    objWorkDiv.UserParam = sUserParam;
+    objWorkDiv.ProgId = sProgId;
+	//objWorkDiv.ManualUrl = sManualUrl;
+
+    
+    objWorkDiv.form.divForm.ProgId = sProgId;
+    objWorkDiv.form.divForm.ProgNm = sProgNm;
+    objWorkDiv.form.divForm.FormNm = sProgNm;
+    objWorkDiv.form.divForm.UserParam = sUserParam;
+    //trace("objWorkDiv.form.divForm.ProgId --> " + objWorkDiv.form.divForm.ProgId);
+    //메뉴 Url 연결
+    objWorkDiv.form.divForm.set_url(sUrl);
+		
+    objWorkDiv.form.divForm.form.ProgId = sProgId;
+    objWorkDiv.form.divForm.form.ProgNm = sProgNm;
+    objWorkDiv.form.divForm.form.FormNm = sProgNm;
+    objWorkDiv.form.divForm.form.UserParam = sUserParam;
+    //trace(" objWorkDiv.form.divForm.form.UserParam --> " + objWorkDiv.form.divForm.form.UserParam);
+
+    objWorkDiv.form.ProgId = sProgId; 
+    
+    //Work Form에 메뉴명 세팅
+    objWorkDiv.form.staTitle.set_text(sProgNm + "(" + sProgId +")");
+    
+    objWorkDiv.form.fnBtnRole();
+};
+
+/*********************************************************
+* 2.1 TRANSACTION 서비스 호출 처리
+ ********************************************************/
+//N/A
+
+/*********************************************************
+ * 2.2 CALLBACK 콜백 처리부분
+ ********************************************************/
+//N/A
+
+/*********************************************************
+* 3 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+//N/A
+
+/*********************************************************
+ * 4 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+//N/A
+/**
+* divComBtn_button_onclick : 공통 버튼 클릭
+*/
+
+/*********************************************************
+* 5 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnUserFunction : 사용자 함수
+ * @param  {String} sParam 문자형 인자
+ * @param  {Number} nParam 숫자형 인자
+ * @example this.fnUserFunction(sParam, nParam);
+ */
+this.fnUserFunction = function(sParam,nParam)
+{
+    //Script
+};]]></Script>
+  </Form>
+</FDL>

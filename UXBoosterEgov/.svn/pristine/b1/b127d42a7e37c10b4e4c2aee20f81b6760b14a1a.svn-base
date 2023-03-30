@@ -1,0 +1,530 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="dbcUniversalTime" width="295" height="155" titletext="세계시간" onload="dashUniversalTime_onload" ontimer="dashUniversalTime_ontimer">
+    <Layouts>
+      <Layout height="155" mobileorientation="landscape" width="295">
+        <Div id="divTop" taborder="0" left="0" top="0" height="40" cssclass="div_MF_DashboardTop" right="0">
+          <Layouts>
+            <Layout>
+              <Button id="btnRefresh" taborder="0" top="10" height="20" cssclass="btn_WF_reset01" width="20" right="5" onclick="divTop_btnRefresh_onclick"/>
+              <Static id="staWeatherT" taborder="1" text="세계시간" left="5" top="0" height="40" cssclass="sta_MF_Title" verticalAlign="middle" right="30"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divMain" taborder="1" left="0" top="40" cssclass="div_MF_DashboardBot" right="0" bottom="0">
+          <Layouts>
+            <Layout>
+              <Static id="Static06" taborder="0" top="272" height="6" visible="false" width="450" cssclass="sta_GD_Square" left="0"/>
+              <Static id="Static09" taborder="1" text="Static03" left="147" top="32" width="1" height="76" cssclass="sta_MF_Vline" background="darkgray"/>
+              <Static id="staCountryDate1" taborder="2" text="2018년07월02일 목요일" left="5" width="140" height="25" cssclass="sta_MF_WeatherText01" textAlign="center" verticalAlign="middle" bottom="5"/>
+              <Static id="staSecL" taborder="8" text="00" left="100" top="50" width="45" height="30" textAlign="center" cssclass="sta_MF_UnivesalTime" visible="true" font="16px/normal &quot;Verdana&quot;,&quot;Arial&quot;" verticalAlign="middle"/>
+              <Static id="staTimeHourL" taborder="3" text="00" left="5" top="40" height="40" cssclass="sta_MF_NumberN" usedecorate="true" visible="true" width="45"/>
+              <Static id="staSecR" taborder="9" text="00" top="50" width="45" height="30" textAlign="center" cssclass="sta_MF_UnivesalTime" visible="true" font="16px/normal &quot;Verdana&quot;,&quot;Arial&quot;" verticalAlign="middle" left="245"/>
+              <Static id="staTimeHourR" taborder="4" text="00" top="40" height="40" cssclass="sta_MF_NumberN" usedecorate="true" left="155" width="45"/>
+              <Combo id="cboCountry" taborder="5" left="5" top="20" width="140" height="20" innerdataset="dsCountry" codecolumn="code" datacolumn="name" text="" value="Asia/Seoul" index="0" displaynulltext="Asia/Seoul" onitemchanged="divMain_cboCountry_onitemchanged"/>
+              <Combo id="cboCountry2" taborder="6" left="150" top="20" width="140" height="20" innerdataset="dsCountry2" codecolumn="code" datacolumn="name" text="한국" value="Asia/Seoul" index="0" displaynulltext="Europe/Paris" onitemchanged="divMain_cboCountry2_onitemchanged"/>
+              <Static id="staCountryDate2" taborder="7" text="2018년07월01일 수요일" left="150" width="140" height="25" cssclass="sta_MF_WeatherText01" textAlign="center" verticalAlign="middle" bottom="5"/>
+              <Static id="staTimeMinR" taborder="10" text="00" left="200" top="40" width="45" height="40" cssclass="sta_MF_NumberN"/>
+              <Static id="staTimeMinL" taborder="11" text="00" left="50" top="40" width="45" height="40" cssclass="sta_MF_NumberN"/>
+              <Static id="staDataTime" taborder="12" text="UTC/GMT 기준" top="0" height="15" cssclass="sta_MF_Date" visible="false" width="80" right="5"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    1DEPTH > 2DEPTH
+*  @FileName    dashUniversalTime.xfdl 
+*  @Creator     최규헌
+*  @CreateDate  yyyy.MM.DD 
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  YYYY.MM.DD      홍길동             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+//sta_MF_NumberB
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+//this.fv_nFormVal = null;     //용도
+var WorldTimeL = "";
+var WorldTimeR = "";
+this.fv_WorldTimeL = "";
+this.fv_WorldTimeR = "";
+var gdsWorldTime = "";
+this.CodeL = "";
+this.CodeR = "";
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* dashUniversalTime_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.dashUniversalTime_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+//   if (takeit.formOnLoad(this))
+//   {    
+		//takedomain.LangService(this); // 다국어 설정
+		
+		this.setTimer(0, 1000); //
+ 		//this.setTimer(1,1000);//
+ 		this.setTimer(2,500);	//
+		
+		var objApp = nexacro.getApplication();
+ 		var user_id = objApp.gdsUserInfo.getColumn(0,"USER_ID");
+		var worldtime_cd = objApp.gdsUserInfo.getColumn(0,"WORLDTIME_CD");
+		
+		//trace(objApp.gdsUserInfo.saveXML());
+		
+		var split_cd = worldtime_cd.split(",");
+		this.fv_WorldTimeL = split_cd[0];
+		this.fv_WorldTimeR = split_cd[1];
+		
+		this.CodeL = split_cd[0];
+		this.CodeR = split_cd[1];
+		
+//   		trace("### WorldTimeL ==> " + this.fv_WorldTimeL);
+//   		trace("### WorldTimeR ==> " + this.fv_WorldTimeR);
+// 		trace("### this.CodeL ==> " + this.CodeL);
+//   		trace("### this.CodeR ==> " + this.CodeR);
+		
+		//this.fnInit();
+		
+//   }
+}
+
+/*********************************************************
+* 2.1 TRANSACTION 서비스 호출 처리
+ ********************************************************/
+/**
+ * fnTran : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnTran("ID");
+ */
+this.fnTran = function(sTranId)
+{
+	var sUrl, sInDs, sOutDs, sParam, sCallBack;
+	var country1, country2;
+	
+	if (takeit.nvl(sTranId, "")=="") sTranId = "init";
+    
+	if (takeit.nvl(sTranId, "")=="") return;
+    
+    switch(sTranId)
+    {
+		// 세계시간이 있는 페이지 전환시 fnTran을 불러오는데 case : init 시작.
+		case "init" :
+				this.fnInit();
+			break;
+			
+        case "CountrySearchL" :
+			this.dsList.clearData();
+		
+			var country1 = this.divMain.form.cboCountry.value;
+			this.fv_WorldTimeL = country1;
+			
+			sParam  = "";	
+			sParam += "country1 =" + nexacro.wrapQuote(country1);
+			
+			sUrl   = "SVC_LOC::dash/dashUniversalTime.do",	//서비스 URL
+			sInDs  = "",      								//데이터셋을  검색조건으로 보낼경우 사용 -->선택
+			sOutDs = "dsList=dsList",      					//데이터를 받아올 데이터셋 지정
+			sCallBack = "fnCallback"; 
+			
+            break;
+
+		case "CountrySearchR" :
+			this.dsList.clearData();
+		
+			country2 = this.divMain.form.cboCountry2.value;
+			this.fv_WorldTimeR = country2;
+			
+			sParam  = "";	
+			sParam += "country1 =" + nexacro.wrapQuote(country2);
+			
+			sUrl   = "SVC_LOC::dash/dashUniversalTime.do",	//서비스 URL
+			sInDs  = "",      								//데이터셋을  검색조건으로 보낼경우 사용 -->선택
+			sOutDs = "dsList=dsList",      					//데이터를 받아올 데이터셋 지정
+			sCallBack = "fnCallback"; 
+			
+            break;
+			
+		// user가 선택한 정보 저장(개인화)
+		case "User_WorldTime" :
+			var sSaveCodeL = this.divMain.form.cboCountry.value;
+			var sSaveCodeR = this.divMain.form.cboCountry2.value;
+			if(takeit.nvl(this.divMain.form.cboCountry2.value, "") =="") sSaveCodeR = "Europe/Paris";
+
+			var sSaveWorldTimeCd = sSaveCodeL + "," + sSaveCodeR;
+			
+			sUrl   = "SVC_LOC::comm/userConfigUpdate.do",     				//서비스 URL
+			sInDs  = "",													//데이터셋을 검색조건으로 보낼경우 사용 -->선택
+			sOutDs = "",     												//데이터를 받아올 데이터셋 지정
+			sParam =  "sWorldTimeCd='"+sSaveWorldTimeCd+"'";				//보낼 param
+			sCallBack = "fnCallback"; 
+			break;
+    }
+
+    //트랜젝션 공통함수 호출 -->필수(모든 트랜젝션을 공통으로 처리)
+    takeit.transaction(this,sTranId, sUrl, sInDs, sOutDs, sParam, sCallBack);
+}
+
+/*********************************************************
+ * 2.2 CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( nErrCd == "SUCC" )
+    {	
+        
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "CountrySearchL" : //왼쪽
+			
+			var select_country = this.dsList.getColumn(0, "COUNTRY");		// 2018-06-27 11:33:59 (GMT+0900)
+			var select_country_nm = this.dsList.getColumn(0, "COUNTRY_NM");	// 한국 표준시
+			
+			var country_nm = select_country_nm;								// 선택한 지역의 표준시
+			var select_country_time = select_country.substr(11,8);			// 선택한 지역의 시간
+			var select_country_date = select_country.substr(0,10);			// 선택한 지역의 날짜
+			
+			var objDate = new Date(select_country_date);
+			var nDay = objDate.getUTCDay();
+			var sConvertDay = "";
+			
+			if (nDay == 0) {
+				sConvertDay = "일";
+			} else if (nDay == 1) {
+				sConvertDay = "월";
+			} else if (nDay == 2) {
+				sConvertDay = "화";
+			} else if (nDay == 3) {
+				sConvertDay = "수";
+			} else if (nDay == 4) {
+				sConvertDay = "목";
+			} else if (nDay == 5) {
+				sConvertDay = "금";
+			} else if (nDay == 6) {
+				sConvertDay = "토";
+			}
+			
+			var YearL = select_country_date.substr(0,4);
+			var MonthL = select_country_date.substr(5,2);
+			var DayL = select_country_date.substr(8,2);
+			
+			var DDateL = YearL+"년 "+MonthL+"월 "+DayL+"일 "+sConvertDay+"요일"
+			
+			//this.divMain.form.staTime1.set_text(select_country_time);		// 11:33:55
+			//this.divMain.form.staCountryNm.set_text(country_nm);			// ex) 한국표준시
+			//this.divMain.form.staCountryDate1.set_text(select_country_date);	// 2018-07-07
+			this.divMain.form.staCountryDate1.set_text(DDateL); // 년 월 일 요일
+			
+			WorldTimeL = select_country;
+			this.fnTimeGet();
+			
+			// 왼쪽 세계시간 변경
+			if (this.CodeL != this.divMain.form.cboCountry.value)
+			{
+				var objApp = nexacro.getApplication();
+				this.fnTran("User_WorldTime");
+			}
+			
+            break;
+			
+		case "CountrySearchR" : //오른쪽
+		
+			var select_country = this.dsList.getColumn(0, "COUNTRY");
+			var select_country_nm = this.dsList.getColumn(0, "COUNTRY_NM");	// 표준시
+			
+			var country_nm = select_country_nm;	
+			var select_country_time = select_country.substr(11,8);
+			var select_country_date = select_country.substr(0,10);
+			
+			var objDate = new Date(select_country_date);
+			var nDay = objDate.getUTCDay();
+			var sConvertDay = "";
+			
+			if (nDay == 0) {
+				sConvertDay = "일";
+			} else if (nDay == 1) {
+				sConvertDay = "월";
+			} else if (nDay == 2) {
+				sConvertDay = "화";
+			} else if (nDay == 3) {
+				sConvertDay = "수";
+			} else if (nDay == 4) {
+				sConvertDay = "목";
+			} else if (nDay == 5) {
+				sConvertDay = "금";
+			} else if (nDay == 6) {
+				sConvertDay = "토";
+			}
+			
+			var YearR = select_country_date.substr(0,4);
+			var MonthR = select_country_date.substr(5,2);
+			var DayR = select_country_date.substr(8,2);
+			
+			var DDateR = YearR+"년 "+MonthR+"월 "+DayR+"일 "+sConvertDay+"요일"
+			
+			//this.divMain.form.staTime2.set_text(select_country_time);
+			//this.divMain.form.staCountryNm2.set_text(country_nm);
+			this.divMain.form.staCountryDate2.set_text(DDateR);
+			
+			
+			WorldTimeR = select_country;
+			this.fnTimeGet();
+			
+			// 오른쪽 세계시간 변경
+			if (this.CodeR != this.divMain.form.cboCountry2.value)
+			{	
+				var objApp = nexacro.getApplication();
+				this.fnTran("User_WorldTime");
+			}
+			
+            break;
+			
+		case "User_WorldTime" : 
+			//마지막 사용자의 정보 gdsUserInfo에 SetColumn
+			var objApp = nexacro.getApplication();
+			objApp.gdsUserInfo.setColumn(0, "WORLDTIME_CD", gdsWorldTime);
+
+		break;
+
+    }
+}
+
+/*********************************************************
+* 3 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (takeit.nvl(sTranId, "")=="") sTranId = "";
+    
+    this.fnTran(sTranId);
+}
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+this.fnSave = function(sTranId)
+{    
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (takeit.nvl(sTranId, "")=="") sTranId = "Save transation id";
+    
+    this.fnTran(sTranId);
+}
+
+/*********************************************************
+ * 4 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+// 지역/도시 선택 Left
+this.divMain_cboCountry_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	this.fnTran("CountrySearchL");
+};
+// 지역/도시 선택 Right
+this.divMain_cboCountry2_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	this.fnTran("CountrySearchR");
+};
+
+// Refresh
+this.divTop_btnRefresh_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fnTran("CountrySearchL");
+	this.fnTran("CountrySearchR");
+};
+
+/*********************************************************
+* 5 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnUserFunction : 사용자 함수
+ * @param  {String} sParam 문자형 인자
+ * @param  {Number} nParam 숫자형 인자
+ * @example this.fnUserFunction(sParam, nParam);
+ */
+
+// 국가선택 Left
+this.fnInit = function()
+{
+	takeit.tranSelect(this, "LSearch", "Dash.dashUniversalTimeSelect", "", "dsCountry", "", "fnCallback");
+	if (this.fv_WorldTimeL == "") {
+		this.divMain.form.cboCountry.set_value("Asia/Seoul");
+	} else {
+		this.divMain.form.cboCountry.set_value(this.fv_WorldTimeL);
+	}
+	
+	this.fnTran("CountrySearchL");
+	
+	this.fnInit2();
+}
+// 국가선택 Right
+this.fnInit2 = function ()
+{
+	takeit.tranSelect(this, "RSearch", "Dash.dashUniversalTimeSelect", "",   "dsCountry2", "", "fnCallback");
+	if (this.fv_WorldTimeR == "undefined") {
+		this.divMain.form.cboCountry2.set_value("Europe/Paris");
+	} else {
+		this.divMain.form.cboCountry2.set_value(this.fv_WorldTimeR);
+	}
+    
+	this.fnTran("CountrySearchR");
+};
+
+/************************************************************************
+ * 시간계산
+ ************************************************************************/
+this.fnTimeGet = function ()
+{
+	//ex 2018-06-29 14:37:37 (CEST +0200)
+	var WorldTimeGapL, WorldTimeGapR;
+	
+	WorldTimeGapL = WorldTimeL.substr(25,3);
+	WorldTimeGapR = WorldTimeR.substr(25,3);
+	
+	//this.divMain.form.staTime1.set_text(this.getWorldTime(WorldTimeGapL));
+	//this.divMain.form.staTime2.set_text(this.getWorldTime(WorldTimeGapR));
+	
+	this.divMain.form.staTimeHourL.set_text(this.getWorldTime(WorldTimeGapL));
+	this.divMain.form.staTimeMinL.set_text(this.getWorldTimeMin(WorldTimeGapL));
+	this.divMain.form.staSecL.set_text(this.getWorldTimeSec(WorldTimeGapL));
+	
+	this.divMain.form.staTimeHourR.set_text(this.getWorldTime(WorldTimeGapR));
+	this.divMain.form.staTimeMinR.set_text(this.getWorldTimeMin(WorldTimeGapR));
+	this.divMain.form.staSecR.set_text(this.getWorldTimeSec(WorldTimeGapR));
+};
+
+this.dashUniversalTime_ontimer = function(obj:nexacro.Form,e:nexacro.TimerEventInfo)
+{
+	if (e.timerid == 0)
+	{
+		this.fnTimeGet();
+	}
+	else if (e.timerid == 2)
+	{
+		this.test();
+	}
+	
+};
+this.test = function()
+{
+	if( this.divMain.form.staColL.text != "" ) {
+
+		this.divMain.form.staColL.set_text("");
+	}
+	else {
+		this.divMain.form.staColL.set_text(":");
+	}
+	if( this.divMain.form.staColR.text != "" ) {
+		this.divMain.form.staColR.set_text("");
+	}
+	else {
+		this.divMain.form.staColR.set_text(":");
+	}
+}
+
+this.getWorldTime = function(offSet)
+{
+	var objDate = new Date();
+	var nTime = objDate.getTime() + (objDate.getTimezoneOffset() * 60000) + (offSet * 3600000);
+	
+	objDate.setTime(nTime);
+	
+ 	var s =
+ 			this.fn_getDate(objDate.getHours(), 2);
+//			+ ':' +
+// 			this.fn_getDate(objDate.getMinutes(), 2);
+// 			+ ':' +
+//  			this.fn_getDate(objDate.getSeconds(), 2);
+//			this.fn_getDate(objDate.getSeconds(), 2);
+ 
+ 	return s;
+}
+this.getWorldTimeSec = function(offSet)
+{
+	var objDate = new Date();
+	var nTime = objDate.getTime() + (objDate.getTimezoneOffset() * 60000) + (offSet * 3600000);
+	
+	objDate.setTime(nTime);
+	
+ 	var s =
+			this.fn_getDate(objDate.getSeconds(), 2);
+  	return s;
+}
+this.getWorldTimeMin = function(offSet)
+{
+	var objDate = new Date();
+	var nTime = objDate.getTime() + (objDate.getTimezoneOffset() * 60000) + (offSet * 3600000);
+	
+	objDate.setTime(nTime);
+	
+ 	var s =
+			this.fn_getDate(objDate.getMinutes(), 2);
+  	return s;
+}
+
+this.fn_getDate = function(n, digits) 
+{
+  var zero = '';
+  n = n.toString();
+
+  if (n.length < digits) {
+    for (i = 0; i < digits - n.length; i++)
+      zero += '0';
+  }
+  return zero + n;
+}
+]]></Script>
+    <Objects>
+      <Dataset id="dsCountry">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="name" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsCountry2">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="name" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsList"/>
+    </Objects>
+  </Form>
+</FDL>

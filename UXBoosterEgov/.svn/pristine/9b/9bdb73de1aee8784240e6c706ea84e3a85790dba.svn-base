@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="publishing005" width="1018" height="318" titletext="로그인정책">
+    <Layouts>
+      <Layout height="318" mobileorientation="landscape" width="1018">
+        <Button id="Button01" taborder="0" text="저장" top="5" width="46" height="23" cssclass="btn_WF_basic01" right="10"/>
+        <Static id="Static17" taborder="1" text="Static03" left="798" top="28" width="220" height="10" background="red" visible="false"/>
+        <Static id="Static03" taborder="2" text="문자숫자혼합체크" left="10" top="37" width="220" height="31" cssclass="sta_WF_th01Limport"/>
+        <Static id="Static10" taborder="3" left="229" top="37" height="31" cssclass="sta_WF_td01L" right="518"/>
+        <Static id="Static04" taborder="4" text="최소길이" left="10" top="67" width="220" height="31" cssclass="sta_WF_th01Limport"/>
+        <Static id="Static11" taborder="5" left="229" top="67" height="31" cssclass="sta_WF_td01L" right="518"/>
+        <Static id="Static05" taborder="6" text="오류입력접속제한" left="10" top="97" width="220" height="31" cssclass="sta_WF_th01Limport"/>
+        <Static id="Static13" taborder="7" left="229" top="97" height="31" cssclass="sta_WF_td01L" right="518"/>
+        <Static id="Static06" taborder="8" text="최근 사용한 비밀번호 사용금지" left="10" top="127" width="220" height="31" cssclass="sta_WF_th01Limport"/>
+        <Static id="Static12" taborder="9" left="229" top="127" height="31" cssclass="sta_WF_td01L" right="518"/>
+        <Static id="Static07" taborder="10" text="최초 로그인 비밀번호 변경여부" left="10" top="157" width="220" height="31" cssclass="sta_WF_th01Limport"/>
+        <Static id="Static15" taborder="11" left="229" top="157" height="31" cssclass="sta_WF_td01L" right="518"/>
+        <Static id="Static08" taborder="12" text="비밀번호 체크일 수 (0~120일)" left="10" top="187" width="220" height="31" cssclass="sta_WF_th01Limport"/>
+        <Static id="Static14" taborder="13" left="229" top="187" height="31" cssclass="sta_WF_td01L" right="518"/>
+        <Static id="Static09" taborder="14" text="비밀번호 포함 불가 문자열" left="499" top="37" width="220" cssclass="sta_WF_th01Limport" bottom="100"/>
+        <Static id="Static00" taborder="15" left="718" top="36" cssclass="sta_WF_td01L" right="10" bottom="100"/>
+        <Combo id="Combo01" taborder="16" text="Combo00" left="237" top="42" width="250" height="21"/>
+        <Spin id="Spin00" taborder="17" left="237" top="72" width="250" height="21"/>
+        <Combo id="Combo00" taborder="18" text="Combo00" left="237" top="102" width="250" height="21"/>
+        <Combo id="Combo02" taborder="19" text="Combo00" left="237" top="132" width="250" height="21"/>
+        <Combo id="Combo03" taborder="20" text="Combo00" left="237" top="162" width="250" height="21"/>
+        <Spin id="Spin01" taborder="21" left="237" top="192" width="250" height="21"/>
+        <Button id="Button00" taborder="22" top="159" width="23" height="23" cssclass="btn_WF_basic01" right="16" text="+"/>
+        <Button id="Button02" taborder="23" top="189" width="23" height="23" cssclass="btn_WF_basic01" right="16" text="-"/>
+        <Grid id="Grid00" taborder="24" left="725" top="42" height="171" binddataset="Dataset00" autofittype="col" right="52">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="30"/>
+              </Rows>
+              <Band id="body">
+                <Cell text="bind:Column1" displaytype="editcontrol" edittype="text"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+          <Column id="Column5" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column4">버튼</Col>
+            <Col id="Column5">Text</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+            <Col id="Column5">Text</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+            <Col id="Column5">Text</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+            <Col id="Column5">Text</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+            <Col id="Column5">Text</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+            <Col id="Column5">Text</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+            <Col id="Column5">Text</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+            <Col id="Column5">Text</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+            <Col id="Column5">Text</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+            <Col id="Column5">Text</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

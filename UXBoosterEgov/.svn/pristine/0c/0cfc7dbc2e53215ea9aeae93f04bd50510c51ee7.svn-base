@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="smpTakeTab" width="1024" height="600" titletext="New Form" onload="smpTakeTab_onload">
+    <Layouts>
+      <Layout height="600" width="1024">
+        <Div id="Div00" taborder="0" text="Div00" left="30" top="42" width="660" height="385" border="1px solid">
+          <Layouts>
+            <Layout>
+              <Button id="btnTab00" taborder="0" text="tab00" left="-1" top="2" width="120" height="50" cssclass="btn_WF_tab02"/>
+              <Button id="btnTab01" taborder="1" text="tab01" left="119" top="2" width="120" height="50" cssclass="btn_WF_tab01"/>
+              <Button id="btnTab02" taborder="2" text="tab02" left="239" top="2" width="120" height="50" cssclass="btn_WF_tab01"/>
+              <Div id="divTab00" taborder="3" text="tab00" left="-1" top="52" width="580" height="325" cssclass="dvi_WF_tabBox01">
+                <Layouts>
+                  <Layout/>
+                </Layouts>
+              </Div>
+              <Div id="divTab01" taborder="4" text="tab01" left="-1" top="382" width="580" height="325" cssclass="dvi_WF_tabBox01" visible="false" enable="false">
+                <Layouts>
+                  <Layout/>
+                </Layouts>
+              </Div>
+              <Div id="divTab02" taborder="5" text="tab02" left="-1" top="712" width="580" height="325" cssclass="dvi_WF_tabBox01" enable="false" visible="false">
+                <Layouts>
+                  <Layout/>
+                </Layouts>
+              </Div>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.smpTakeTab_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	take.TabSetting(
+        this,
+        "testtab",
+        {"this.Div00.form.btnTab00" : this.Div00.form.divTab00 , 
+         "this.Div00.form.btnTab01" : this.Div00.form.divTab01 , 
+         "this.Div00.form.btnTab02" : this.Div00.form.divTab02}, 
+//          [[this.Div00.form.btnTab00,this.Div00.form.divTab00],
+//          [this.Div00.form.btnTab01,this.Div00.form.divTab01], 
+//          [this.Div00.form.btnTab02,this.Div00.form.divTab02]], 
+//         [{"button":this.Div00.form.btnTab00,"div":this.Div00.form.divTab00},
+//          {"button":this.Div00.form.btnTab01,"div":this.Div00.form.divTab01}, 
+//          {"button":this.Div00.form.btnTab02,"div":this.Div00.form.divTab02}], 
+        this.Div00.form.btnTab00);
+};
+]]></Script>
+  </Form>
+</FDL>

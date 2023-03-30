@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="HR030P01" width="540" height="370" titletext="휴가승인목록" onload="Form_onload">
+    <Layouts>
+      <Layout height="370" mobileorientation="landscape" width="540">
+        <Div id="divSearch" taborder="37" left="0" top="0" cssclass="dvi_WF_tabBox01" right="0" bottom="0" text="">
+          <Layouts>
+            <Layout>
+              <Static id="staTitle" taborder="2" text="휴가승인목록" left="20" top="20" height="20" cssclass="sta_WF_title02" right="20"/>
+              <Grid id="grdLeaveList" taborder="1" top="staTitle:10" binddataset="dsVacaList" autofittype="col" bottom="20" onselectchanged="div_detail_grdLeaveList_onselectchanged" left="20" nodatatext="휴가 승인건이 없습니다." right="20">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="100"/>
+                      <Column size="70"/>
+                      <Column size="160"/>
+                      <Column size="69"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="신청일"/>
+                      <Cell col="1" text="일수"/>
+                      <Cell col="2" text="휴가유형"/>
+                      <Cell col="3" text="승인"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:REG_DT" textAlign="center"/>
+                      <Cell col="1" text="bind:DAY_CNT" textAlign="center"/>
+                      <Cell col="2" text="bind:VACATION_TYPE_NM" textAlign="center"/>
+                      <Cell col="3" text="bind:APP_TYPE_NM" textAlign="center"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="USER_CD" type="STRING" size="256"/>
+          <Column id="APP_TYPE" type="STRING" size="256"/>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="YYYY" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="APP_TYPE">02</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsVacaList" onrowposchanged="dsVacaList_onrowposchanged">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256" description="프로젝트코드"/>
+          <Column id="VACATION_SEQ" type="STRING" size="256" description="휴가일련번호"/>
+          <Column id="REG_DT" type="STRING" size="256" description="일자"/>
+          <Column id="DAY_CNT" type="STRING" size="256" description="일수"/>
+          <Column id="VACATION_TYPE" type="STRING" size="256" description="휴가유형"/>
+          <Column id="VACATION_TYPE_NM" type="STRING" size="256" description="휴가유형명"/>
+          <Column id="APP_TYPE" type="STRING" size="256" description="승인구분"/>
+          <Column id="APP_TYPE_NM" type="STRING" size="256" description="승인구분명"/>
+          <Column id="APP_DESC" type="STRING" size="256" description="취소사유"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  사원찾기팝업
+*
+*  @MenuPath    공통 > 사원찾기팝업
+*  @FileName    comUserPop.xfdl 
+*  @Creator     전영찬
+*  @CreateDate  2019.12.03
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2019.12.03      전영찬             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.Form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+    if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+    {    
+        this.fnInit();
+    }
+}
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "userList";
+    
+    this.dsVacaList.clearData();
+    this.dsSearch.setColumn(0,"PROJECT_CD", this.parent.PROJECT_CD);
+	this.dsSearch.setColumn(0,"USER_CD", this.parent.USER_CD);
+	this.dsSearch.setColumn(0,"YYYY", this.parent.YYYY);
+    
+	take.tranSelect(this, sTranId, "HumanResourceManagement.userVacationList", "dsSearch", "dsVacaList", "", "fnCallback");
+}
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+//N/A
+
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnInit : 초기화 함수
+ * @param  {String} N/A 
+ * @example this.fnInit();
+ */
+this.fnInit = function()
+{
+    this.fnSearch();
+}
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "userList" :  //저장 콜백
+            this.divSearch.form.staTitle.set_text("휴가승인목록 (" + this.dsVacaList.rowcount + "건)");
+            break;
+        default :
+            break;
+    }        
+}
+]]></Script>
+  </Form>
+</FDL>

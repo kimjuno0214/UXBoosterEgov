@@ -1,0 +1,613 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="PL010P02" width="880" height="810" titletext="품목선택팝업" onload="OM010P05_onload" background="#ffffff">
+    <Layouts>
+      <Layout>
+        <Button id="btnSearch" taborder="0" text="조회" top="20" height="23" onclick="btnSearch_onclick" cssclass="btn_WF_search03" width="48" right="20"/>
+        <Div id="divSearch" taborder="1" text="Div00" left="20" top="48" height="43" right="20" cssclass="div_WF_searchBox01">
+          <Layouts>
+            <Layout>
+              <Static id="Static07" taborder="3" text="H20" left="20" height="10" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" top="0" width="285"/>
+              <Static id="Static06" taborder="5" text="W&#13;&#10;20" background="#fd9da0" opacity="0.5" textAlign="center" width="20" top="0" bottom="0" visible="false" left="0"/>
+              <Static id="staCode" taborder="0" text="품목명" left="310" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Static id="staCode00" taborder="1" text="세부품목명" left="595" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="edtMlInfoSearch" taborder="2" top="10" height="21" right="8" onkeyup="edtMlInfoSearch_onkeyup" left="staCode00:10"/>
+              <Static id="Static08" taborder="4" text="H20" left="20" height="11" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" top="30" width="285"/>
+              <Static id="Static09" taborder="6" text="W&#13;&#10;50" background="#fd9da0" opacity="0.5" textAlign="center" width="50" top="0" bottom="0" visible="false" left="545"/>
+              <Static id="Static11" taborder="7" text="H20" left="325" height="10" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" top="0" width="285"/>
+              <Static id="Static10" taborder="8" text="H20" left="325" height="11" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" top="30" width="285"/>
+              <Edit id="edtMlInfoSearch00" taborder="9" top="10" height="21" right="293" onkeyup="edtMlInfoSearch_onkeyup" left="400"/>
+              <Static id="staCode01" taborder="10" text="인증종류" left="20" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="edtMlInfoSearch00_00" taborder="11" top="10" height="21" right="583" onkeyup="edtMlInfoSearch_onkeyup" left="110"/>
+              <Static id="Static09_00" taborder="12" text="W&#13;&#10;50" background="#fd9da0" opacity="0.5" textAlign="center" width="50" top="0" bottom="0" visible="false" left="255"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static01" taborder="2" text="H20" left="0" height="20" right="0" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" top="0"/>
+        <Static id="Static02" taborder="3" text="W&#13;&#10;20" background="#fd9da0" opacity="0.5" textAlign="center" width="20" top="0" bottom="0" visible="false" left="0"/>
+        <Static id="Static04" taborder="4" text="W&#13;&#10;20" background="#fd9da0" opacity="0.5" textAlign="center" top="0" bottom="0" visible="false" left="860" width="20"/>
+        <Button id="btnShowHide" taborder="5" left="46.48%" top="89" width="60" height="10" cssclass="btn_WF_fold01" onclick="btnShowHide_onclick"/>
+        <Div id="divDetail" taborder="6" text="Div00" left="20" top="btnShowHide:20" right="20" bottom="62">
+          <Layouts>
+            <Layout>
+              <Grid id="grdMultilanguageInfo" takegrid="checkbox" taborder="0" left="0" top="26" autofittype="col" right="0" binddataset="dsList" bottom="0" readonly="false">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="120"/>
+                      <Column size="200"/>
+                      <Column size="200"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="인증종류"/>
+                      <Cell col="1" text="품목명"/>
+                      <Cell col="2" text="세부품목명" autosizecol="limitmin"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:Column0"/>
+                      <Cell col="1" text="bind:Column1"/>
+                      <Cell col="2" text="bind:Column2" edittype="none" autosizecol="limitmin" textAlign="left"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="Static24" taborder="1" text="목품 목록" left="0" top="0" height="21" cssclass="sta_WF_title02" right="0"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static03" taborder="7" text="H20" left="0" height="20" bottom="42" right="0" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" onclick="Static01_01_onclick"/>
+        <Button id="btnSave" taborder="8" height="23" cssclass="btn_WF_check01" text="확인" width="57" onclick="btnSave_onclick" top="Static03:0" right="80"/>
+        <Button id="btnCancel" taborder="9" cssclass="btn_WF_cancel01" text="닫기" width="57" onclick="btnCancel_onclick" left="btnSave:3" height="23" bottom="20"/>
+        <Static id="Static05" taborder="10" text="H20" left="0" height="20" bottom="0" right="0" background="#fd9da0" opacity="0.5" textAlign="center" visible="false"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsList">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+          <Column id="Column5" type="STRING" size="256"/>
+          <Column id="Column6" type="STRING" size="256"/>
+          <Column id="Column7" type="STRING" size="256"/>
+          <Column id="Column8" type="STRING" size="256"/>
+          <Column id="Column9" type="STRING" size="256"/>
+          <Column id="Column10" type="STRING" size="256"/>
+          <Column id="Column11" type="STRING" size="256"/>
+          <Column id="Column12" type="STRING" size="256"/>
+          <Column id="Column13" type="STRING" size="256"/>
+          <Column id="Column14" type="STRING" size="256"/>
+          <Column id="Column15" type="STRING" size="256"/>
+          <Column id="Column16" type="STRING" size="256"/>
+          <Column id="Column17" type="STRING" size="256"/>
+          <Column id="Column18" type="STRING" size="256"/>
+          <Column id="Column19" type="STRING" size="256"/>
+          <Column id="Column20" type="STRING" size="256"/>
+          <Column id="Column21" type="STRING" size="256"/>
+          <Column id="Column22" type="STRING" size="256"/>
+          <Column id="Column23" type="STRING" size="256"/>
+          <Column id="Column24" type="STRING" size="256"/>
+          <Column id="Column25" type="STRING" size="256"/>
+          <Column id="Column26" type="STRING" size="256"/>
+          <Column id="Column27" type="STRING" size="256"/>
+          <Column id="Column28" type="STRING" size="256"/>
+          <Column id="Column29" type="STRING" size="256"/>
+          <Column id="Column30" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">안전인증</Col>
+            <Col id="Column1">어린이용 물놀이기구</Col>
+            <Col id="Column2">공기주입 물놀이기구</Col>
+            <Col id="Column20">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전인증</Col>
+            <Col id="Column1">어린이용 물놀이기구</Col>
+            <Col id="Column2">수영보조용품(착용형)</Col>
+            <Col id="Column20">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전인증</Col>
+            <Col id="Column1">어린이용 물놀이기구</Col>
+            <Col id="Column2">수영보조용품(비착용형)</Col>
+            <Col id="Column20">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">자동차용 어린이 보호장치</Col>
+            <Col id="Column2">휴대용 유아침대</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">자동차용 어린이 보호장치</Col>
+            <Col id="Column2">유아용좌석</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">자동차용 어린이 보호장치</Col>
+            <Col id="Column2">부스터 좌석</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">유아용 섬유제품</Col>
+            <Col id="Column2">하네스/조끼형 보호장치</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">유아용 섬유제품</Col>
+            <Col id="Column2">외의류(유섬)</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">유아용 섬유제품</Col>
+            <Col id="Column2">중의류(유섬)</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">유아용 섬유제품</Col>
+            <Col id="Column2">내의류(유섬)</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">유아용 섬유제품</Col>
+            <Col id="Column2">침구류(유섬)</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">유아용 섬유제품</Col>
+            <Col id="Column2">신발류(유섬)</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">유아용 섬유제품</Col>
+            <Col id="Column2">양말류(유섬)</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">유아용 섬유제품</Col>
+            <Col id="Column2">장갑류(유섬)</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">유아용 섬유제품</Col>
+            <Col id="Column2">모자류(유섬)</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">유아용 섬유제품</Col>
+            <Col id="Column2">가방류(유섬)</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">유아용 섬유제품</Col>
+            <Col id="Column2">신생아용품(유섬)</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">합성수지제 어린이용품</Col>
+            <Col id="Column2">어린이용 침대가드</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">합성수지제 어린이용품</Col>
+            <Col id="Column2">유아용 노리개젖꼭지</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">합성수지제 어린이용품</Col>
+            <Col id="Column2">유아용 노리개젖꼭지 걸이</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">합성수지제 어린이용품</Col>
+            <Col id="Column2">바닥매트</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">어린이용 스포츠 보호 용품(보호 장구 및 안전모)</Col>
+            <Col id="Column2">보호장구</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">어린이용 스케이트보드</Col>
+            <Col id="Column2">A등급</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">어린이용 스케이트보드</Col>
+            <Col id="Column2">B등급</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">아동용 이단침대</Col>
+            <Col id="Column2">어린이용 이단침대</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">완구</Col>
+            <Col id="Column2">활동완구</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">완구</Col>
+            <Col id="Column2">미술공예 완구</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">완구</Col>
+            <Col id="Column2">퍼즐 완구</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">완구</Col>
+            <Col id="Column2">파티완구</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">완구</Col>
+            <Col id="Column2">봉제인형</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">완구</Col>
+            <Col id="Column2">기능성 완구</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">완구</Col>
+            <Col id="Column2">게임 완구</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">완구</Col>
+            <Col id="Column2">승용 완구</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">완구</Col>
+            <Col id="Column2">발사체 완구</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">완구</Col>
+            <Col id="Column2">역할놀이 완구</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">완구</Col>
+            <Col id="Column2">악기완구</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">완구</Col>
+            <Col id="Column2">운동완구</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">완구</Col>
+            <Col id="Column2">유아완구</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">완구</Col>
+            <Col id="Column2">블록완구</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">완구</Col>
+            <Col id="Column2">모형완구</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">완구</Col>
+            <Col id="Column2">자석완구</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">완구</Col>
+            <Col id="Column2">조종완구</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">완구</Col>
+            <Col id="Column2">가구완구</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">완구</Col>
+            <Col id="Column2">교육용 완구(교구)</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">완구</Col>
+            <Col id="Column2">조립완구</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">완구</Col>
+            <Col id="Column2">기타완구(작동완구)</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">유아용 삼륜차</Col>
+            <Col id="Column2">유아용 삼륜차</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">어린이용 자전거</Col>
+            <Col id="Column2">어린이용 자전거</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">학용품</Col>
+            <Col id="Column2">크레용·크레파스</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">학용품</Col>
+            <Col id="Column2">연필류·연필심</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">학용품</Col>
+            <Col id="Column2">샤프연필·샤프연필심</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">학용품</Col>
+            <Col id="Column2">지우개</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">학용품</Col>
+            <Col id="Column2">파스텔</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">학용품</Col>
+            <Col id="Column2">그림물감</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">학용품</Col>
+            <Col id="Column2">분필</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">학용품</Col>
+            <Col id="Column2">마킹펜류</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">학용품</Col>
+            <Col id="Column2">연필깎이</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">학용품</Col>
+            <Col id="Column2">필통</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">학용품</Col>
+            <Col id="Column2">색종이</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">학용품</Col>
+            <Col id="Column2">공책</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">학용품</Col>
+            <Col id="Column2">스케치북</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">학용품</Col>
+            <Col id="Column2">점토류</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">학용품</Col>
+            <Col id="Column2">문구용 풀</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">학용품</Col>
+            <Col id="Column2">악기류</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">유아용 캐리어</Col>
+            <Col id="Column2">프레임 없는 캐리어</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">안전확인</Col>
+            <Col id="Column1">유아용 캐리어</Col>
+            <Col id="Column2">프레임 있는 캐리어</Col>
+            <Col id="Column20">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">공급자적합성</Col>
+            <Col id="Column1">어린이용 안경테 및 선글라스</Col>
+            <Col id="Column2">안경테</Col>
+            <Col id="Column20">3</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">공급자적합성</Col>
+            <Col id="Column1">어린이용 안경테 및 선글라스</Col>
+            <Col id="Column2">선글라스</Col>
+            <Col id="Column20">3</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">공급자적합성</Col>
+            <Col id="Column1">어린이용 우산 및 양산</Col>
+            <Col id="Column2">우산</Col>
+            <Col id="Column20">3</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">공급자적합성</Col>
+            <Col id="Column1">어린이용 우산 및 양산</Col>
+            <Col id="Column2">양산</Col>
+            <Col id="Column20">3</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">공급자적합성</Col>
+            <Col id="Column1">어린이용 우산 및 양산</Col>
+            <Col id="Column2">우산 겸용 양산</Col>
+            <Col id="Column20">3</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">공급자적합성</Col>
+            <Col id="Column1">어린이용 바퀴달린 운동화</Col>
+            <Col id="Column2">어린이용 바퀴달린 운동화</Col>
+            <Col id="Column20">3</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">공급자적합성</Col>
+            <Col id="Column1">어린이용 장신구</Col>
+            <Col id="Column2">어린이용 장신구</Col>
+            <Col id="Column20">3</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">공급자적합성</Col>
+            <Col id="Column1">어린이용 킥보드</Col>
+            <Col id="Column2">수동식</Col>
+            <Col id="Column20">3</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">공급자적합성</Col>
+            <Col id="Column1">어린이용 킥보드</Col>
+            <Col id="Column2">전동식</Col>
+            <Col id="Column20">3</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">공급자적합성</Col>
+            <Col id="Column1">아동용 섬유제품</Col>
+            <Col id="Column2">내의류(아섬)</Col>
+            <Col id="Column20">3</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">공급자적합성</Col>
+            <Col id="Column1">아동용 섬유제품</Col>
+            <Col id="Column2">중의류(아섬)</Col>
+            <Col id="Column20">3</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">공급자적합성</Col>
+            <Col id="Column1">아동용 섬유제품</Col>
+            <Col id="Column2">외의류(아섬)</Col>
+            <Col id="Column20">3</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">공급자적합성</Col>
+            <Col id="Column1">아동용 섬유제품</Col>
+            <Col id="Column2">침구류(아섬)</Col>
+            <Col id="Column20">3</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">공급자적합성</Col>
+            <Col id="Column1">아동용 섬유제품</Col>
+            <Col id="Column2">기타 제품류(아섬)</Col>
+            <Col id="Column20">3</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">공급자적합성</Col>
+            <Col id="Column1">아동용 섬유제품</Col>
+            <Col id="Column2">양말류(아섬)</Col>
+            <Col id="Column20">3</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">공급자적합성</Col>
+            <Col id="Column1">아동용 섬유제품</Col>
+            <Col id="Column2">장갑류(아섭)</Col>
+            <Col id="Column20">3</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">공급자적합성</Col>
+            <Col id="Column1">아동용 섬유제품</Col>
+            <Col id="Column2">모자류(아섬)</Col>
+            <Col id="Column20">3</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">공급자적합성</Col>
+            <Col id="Column1">기타어린이제품</Col>
+            <Col id="Column2">기타어린이제품</Col>
+            <Col id="Column20">3</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[]]></Script>
+  </Form>
+</FDL>

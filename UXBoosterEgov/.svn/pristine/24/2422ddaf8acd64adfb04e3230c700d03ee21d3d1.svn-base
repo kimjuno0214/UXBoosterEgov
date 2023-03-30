@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="comMenualPop" width="600" height="700" titletext="출력팝업" onload="comPrintPop_onload" ontimer="comPrintPop_ontimer" background="#ffffff">
+    <Layouts>
+      <Layout height="700" mobileorientation="landscape" width="600">
+        <Static id="Static02" taborder="0" left="10" top="10" cssclass="sta_WF_th01L" right="10" bottom="10"/>
+        <Static id="Static22" taborder="1" text="10" left="0" height="10" background="red" visible="false" right="0" textAlign="center" top="0"/>
+        <Static id="Static16" taborder="2" text="10" top="0" background="red" bottom="0" visible="false" textAlign="center" width="10" right="0"/>
+        <Static id="Static00" taborder="3" text="10" left="0" top="0" width="10" background="red" bottom="0" visible="false" textAlign="center"/>
+        <Static id="Static03" taborder="4" text="10" left="0" background="red" visible="false" right="0" textAlign="center" height="10" bottom="0"/>
+        <WebBrowser id="wbWebEditor" taborder="5" left="20" top="20" onloadcompleted="wbWebEditor_onloadcompleted" right="20" bottom="20"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsManual">
+        <ColumnInfo>
+          <Column id="MENU_NM" type="STRING" size="256"/>
+          <Column id="MANUAL_TXT" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    1Depth > 2Depth
+*  @FileName    *.xfdl 
+*  @Creator     홍길동
+*  @CreateDate  yyyy.MM.DD 
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    Date          Modifier            Description
+*******************************************************************************
+*  YYYY.MM.DD      홍길동             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload등)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.comPrintPop_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this, true)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {
+		//this.alert(this.opener.dsSearch.saveXML());
+		//this.alert(this.parent.sPdfType+","+this.parent.sNamespace+",sSearch="+this.opener.dsSearch.saveXML());
+		var sSearch = this.fnDatasetToStr(this.opener.dsSearch);
+		var sReportUrl = take.getSvcUrl() + "report.do?"
+						+ "sPdfType="+this.parent.sPdfType
+						+ "&sNamespace="+this.parent.sNamespace
+						+ sSearch;
+		//this.alert(sReportUrl);
+		this.wbWebEditor.set_url(sReportUrl);
+   }
+}
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnInit, fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnInit : 초기화 함수 검색조건 초기화 및 온로드 세팅
+ * @return {N/A}    N/A
+ * @example this.fnInit();
+ */
+this.fnInit = function(){
+	//검색조건
+	var objDivSearch = this.divSearch.form;
+}
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Transation id";
+    take.tranSelect(this,sTranId,"Namespace","sInDataset", "sOutDataset", "sParam", "fnCallback");
+}
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+this.wbWebEditor_onloadcompleted = function(obj:nexacro.WebBrowser,e:nexacro.WebLoadCompEventInfo)
+{
+	if (e.url.indexOf("boardDetail.html") != -1)
+	{
+		this.fv_bWebOnload = true;
+	}
+};
+
+this.comPrintPop_ontimer = function(obj:nexacro.Form,e:nexacro.TimerEventInfo)
+{
+	if (e.timerid==1)
+	{
+        if (this.fv_bWebOnload == true)
+		{
+            this.killTimer(1);
+            
+			//Script
+			var sNamespaces = "SystemCommon.manualSelect";
+			var sInDs = "";
+			var sOutDs = "dsManual";
+			var sParam = "sProjectCd='"+nexacro.getApplication().av_sProjectCd+"' sMenuCd='"+take.nvl(this.parent.sMenuCd, "")+"'";
+			
+			take.tranSelect(this, "Search", sNamespaces, sInDs, sOutDs, sParam, "fnCallback");
+		}
+	}
+};
+
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnUserFunction : 사용자 함수
+ * @param  {String} sParam 문자형 인자
+ * @param  {Number} nParam 숫자형 인자
+ * @example this.fnUserFunction(sParam, nParam);
+ */
+this.fnUserFunction = function(sParam, nParam)
+{    
+    //Script
+}
+
+this.fnDatasetToStr = function(obj)
+{    
+    var sSearch = '';
+	for( var i=0; i<obj.rowcount; i++ ){
+		for( var j=0; j<obj.colcount; j++ ){
+			//this.alert(obj.getColID() + "=" + take.nvl(obj.getColumn(i, j), ""));
+			sSearch += "&" + obj.getColID(j) + "=" + take.nvl(obj.getColumn(i, j), "");
+		}
+	}
+	return sSearch;
+}
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : sId      - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : nErrCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : sErrMsg  - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "Search" : //조회 콜백
+            //Script
+			var sContents = this.dsManual.getColumn(0, "MANUAL_TXT");
+
+			//20210118 정해원 게시판 내용 조회 불가
+			//callMethod의 파라미터에 html태그 있을 경우 호출 안 됨
+			//this.wbWebEditor.getProperty("window").callMethod("fn_setHtml", sContents);
+			var docWeb = this.wbWebEditor.getProperty("document").getProperty("all");
+				docWeb.getProperty("inputData").setProperty("value", take.nvl(sContents, ""));
+			
+			this.wbWebEditor.getProperty("window").callMethod("fn_setHtml");
+			
+            break;
+        default :
+            break;
+    }        
+}]]></Script>
+  </Form>
+</FDL>

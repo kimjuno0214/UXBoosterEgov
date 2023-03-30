@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="publishing039" width="800" height="410" titletext="공지사항상세팝업">
+    <Layouts>
+      <Layout height="410" mobileorientation="landscape" width="800">
+        <Div id="Div02" taborder="0" left="10" top="10" cssclass="dvi_WF_tabBox01" right="10" height="360">
+          <Layouts>
+            <Layout>
+              <Static id="Static01" taborder="0" left="0" top="0" height="31" cssclass="sta_WF_th01L" right="0"/>
+              <Edit id="Edit11" taborder="1" left="10" top="5" height="21" right="10"/>
+              <Static id="Static02" taborder="2" left="0" top="30" height="261" cssclass="sta_WF_th01L" right="0"/>
+              <TextArea id="TextArea00" taborder="3" left="10" top="40" height="242" right="10"/>
+              <Div id="Div02" taborder="4" left="10" top="300" height="47" cssclass="div_WF_replyBox01" right="10" formscrollbartype="none none">
+                <Layouts>
+                  <Layout>
+                    <Button id="Button00" taborder="1" text="일괄다운" top="10" height="25" cssclass="btn_WF_basic01" right="10" width="80"/>
+                    <Static id="Static00" taborder="1" text="첨부파일" left="10" top="10" width="133" height="25" cssclass="sta_WF_fileData01"/>
+                    <Static id="Static01" taborder="2" text="첨부파일" left="153" top="10" width="133" height="25" cssclass="sta_WF_fileData01"/>
+                    <Static id="Static02" taborder="3" text="첨부파일" left="296" top="10" width="133" height="25" cssclass="sta_WF_fileData01"/>
+                    <Static id="Static03" taborder="4" text="첨부파일" left="439" top="10" width="133" height="25" cssclass="sta_WF_fileData01"/>
+                  </Layout>
+                </Layouts>
+              </Div>
+            </Layout>
+          </Layouts>
+        </Div>
+        <CheckBox id="CheckBox00" taborder="1" text="오늘하루그만보기" left="9" width="114" height="20" bottom="10"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column4">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="Dataset01">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">작성자</Col>
+            <Col id="Column1">작성일</Col>
+            <Col id="Column2">댓글내용</Col>
+            <Col id="Column3">수정버튼</Col>
+            <Col id="Column4">삭제버튼</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">작성자</Col>
+            <Col id="Column1">작성일</Col>
+            <Col id="Column2">댓글내용</Col>
+            <Col id="Column3">수정버튼</Col>
+            <Col id="Column4">삭제버튼</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

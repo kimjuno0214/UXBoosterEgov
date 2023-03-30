@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+*
+* @filename mappers/safety/SploreMapper.xml
+* @author 	doore
+* @since 	2023.03.23
+* @version 	1.0
+* @see
+*
+* << 변경 이력(Modification Information) >>
+*
+* 변경번호 : #1
+* 변경일자 : 2023.03.23
+* 변경사람 : doore
+* 변경내용 : 신규 생성
+ -->
+<mapper namespace="splore"> 
+	
+	<select id="sploreSelect" parameterType="map" timeout="0" resultType="map" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* splore.sploreSelect 
+		* TB_SPLORE 조회
+		* @author dooresoft
+		* @since 2023.03.23
+		*/
+		]]>
+		SELECT B.SPLORE_ID                                         -- 시료ID
+             , A.ODR_ID                                            -- 차수ID
+             , A.DETAIL_GDS_ID                                     -- 세부품목ID
+             , C.GDS_CD											   -- 품목코드
+             , FN_GET_COM_NM('GDS_CD', C.GDS_CD) GDS_NM			   -- 품목명
+             , C.DETAIL_GDS_NM									   -- 세부품목명
+             , (SELECT IFNULL(PLAN_QY, 0) FROM TB_ODR_GDS WHERE  ODR_ID = A.ODR_ID AND DETAIL_GDS_ID = A.DETAIL_GDS_ID) PLAN_QY
+             , (SELECT COUNT(*) FROM TB_SPLORE WHERE ODR_ID = A.ODR_ID AND DETAIL_GDS_ID = A.DETAIL_GDS_ID) PURC_QY
+             , B.SESE_GDS_NM                                       -- 세세부품목명
+             , B.REG_SPLORE_NO                                     -- 등록시료번호
+             , B.SPLORE_NO                                         -- 시료번호
+             , B.MFBIZ                                             -- 제조업체
+             , B.INCM_ENTRPS                                       -- 수입업체
+             , B.NTSL_ENTRPS                                       -- 판매업체
+             , B.CERT_NO                                           -- 인증번호
+             , B.MODEL_NM                                          -- 모델명
+             , B.CERT_YMD                                          -- 인증일자
+             , B.EXMN_TRGT_MODEL_NM                                -- 조사대상모델명
+             , B.BRND                                              -- 브랜드
+             , B.MNFCTUR_YMD                                       -- 제조일자
+             , B.PURC_YMD                                          -- 구입일자
+             , B.PURC_PC                                           -- 구입가격
+             , B.QY                                                -- 수량
+             , B.PURC_OFFIC                                        -- 구입처
+             , B.PURC_MAN                                          -- 구입자
+             , B.MNFCTUR_NTN                                       -- 제조국가
+             , B.DSTR_DIV                                          -- 유통구분
+             , B.PURC_AREA                                         -- 구입지역
+             , B.DLVY_STTUS                                        -- 배송상태
+             , B.MKR_ADDR                                          -- 제조사주소
+             , B.MKR_CTTPC                                         -- 제조사연락처
+             , B.PURC_OFFIC_ADDR                                   -- 구입처주소
+             , B.PURC_OFFIC_CTTPC                                  -- 구입처연락처
+             , B.CNT_PARTCL_ADDR                                   -- 수입자주소
+             , B.CNT_PARTCL_CTTPC                                  -- 수입자연락처
+             , B.SELER_ADDR                                        -- 판매자주소
+             , B.SELER_CTTPC                                       -- 판매자연락처
+             , B.RADI_MEAS                                         -- 방사능측정
+             , B.BRCD_NO                                           -- 바코드번호
+             , B.GDS_NO                                            -- 상품번호
+             , B.URL                                               -- URL
+             , B.DIV_NM                                            -- 구분명
+             , B.TRSF_INST_CD                                     -- 인계기관코드
+             , FN_GET_COM_NM('TEST_INST_CD', B.TRSF_INST_CD) TRSF_INST_NM		   -- 인계기관명
+             , B.CERT_INST_CD                                      -- 인증기관코드
+             , FN_GET_COM_NM('TEST_INST_CD', B.CERT_INST_CD) CERT_INST_NM		   -- 인증기관명
+             , B.RM                                                -- 비고
+		FROM   TB_ODR_GDS A LEFT OUTER JOIN TB_SPLORE B ON A.ODR_ID = B.ODR_ID AND A.DETAIL_GDS_ID = B.DETAIL_GDS_ID
+             , TB_GDS C
+        WHERE  1 = 1
+        AND    A.DETAIL_GDS_ID = C.DETAIL_GDS_ID
+        <if test=" SPLORE_ID != null and SPLORE_ID != '' " >
+        AND   B.SPLORE_ID = #{SPLORE_ID}
+        </if>
+        <if test=" ODR_ID != null and ODR_ID != '' " >
+        AND   A.ODR_ID = #{ODR_ID}
+        </if>
+        ORDER BY FN_GET_COM_SN('GDS_CD', C.GDS_CD), C.SN, B.REG_SPLORE_NO
+	</select>
+
+	<insert id="sploreInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* splore.sploreInsert 
+		* TB_SPLORE 등록
+		* @author dooresoft
+		* @since 2023.03.23
+		*/
+		]]>
+		INSERT INTO TB_SPLORE (
+                SPLORE_ID                                         -- 시료ID
+              , ODR_ID                                            -- 차수ID
+              , DETAIL_GDS_ID                                     -- 세부품목ID
+              , SESE_GDS_NM                                       -- 세세부품목명
+              , REG_SPLORE_NO                                     -- 등록시료번호
+              , SPLORE_NO                                         -- 시료번호
+              , MFBIZ                                             -- 제조업체
+              , INCM_ENTRPS                                       -- 수입업체
+              , NTSL_ENTRPS                                       -- 판매업체
+              , CERT_NO                                           -- 인증번호
+              , MODEL_NM                                          -- 모델명
+              , CERT_YMD                                          -- 인증일자
+              , EXMN_TRGT_MODEL_NM                                -- 조사대상모델명
+              , BRND                                              -- 브랜드
+              , MNFCTUR_YMD                                       -- 제조일자
+              , PURC_YMD                                          -- 구입일자
+              , PURC_PC                                           -- 구입가격
+              , QY                                                -- 수량
+              , PURC_OFFIC                                        -- 구입처
+              , PURC_MAN                                          -- 구입자
+              , MNFCTUR_NTN                                       -- 제조국가
+              , DSTR_DIV                                          -- 유통구분
+              , PURC_AREA                                         -- 구입지역
+              , DLVY_STTUS                                        -- 배송상태
+              , MKR_ADDR                                          -- 제조사주소
+              , MKR_CTTPC                                         -- 제조사연락처
+              , PURC_OFFIC_ADDR                                   -- 구입처주소
+              , PURC_OFFIC_CTTPC                                  -- 구입처연락처
+              , CNT_PARTCL_ADDR                                   -- 수입자주소
+              , CNT_PARTCL_CTTPC                                  -- 수입자연락처
+              , SELER_ADDR                                        -- 판매자주소
+              , SELER_CTTPC                                       -- 판매자연락처
+              , RADI_MEAS                                         -- 방사능측정
+              , BRCD_NO                                           -- 바코드번호
+              , GDS_NO                                            -- 상품번호
+              , URL                                               -- URL
+              , DIV_NM                                            -- 구분명
+              , TRSF_INST_CD                                      -- 인계기관코드
+              , CERT_INST_CD                                      -- 인증기관코드
+              , RM                                                -- 비고
+              , REG_DT                                            -- 등록일시
+              , RGTR_ID)                                          -- 등록자ID
+		VALUES (
+                FN_GET_KEY('TB_SPLORE', 'SPL')                    -- 시료ID
+              , #{ODR_ID}                                         -- 차수ID
+              , #{DETAIL_GDS_ID}                                  -- 세부품목ID
+              , #{SESE_GDS_NM}                                    -- 세세부품목명
+              , FN_GET_KEY(ODR_ID, 'REG')                         -- 등록시료번호
+              , #{SPLORE_NO}                                      -- 시료번호
+              , #{MFBIZ}                                          -- 제조업체
+              , #{INCM_ENTRPS}                                    -- 수입업체
+              , #{NTSL_ENTRPS}                                    -- 판매업체
+              , #{CERT_NO}                                        -- 인증번호
+              , #{MODEL_NM}                                       -- 모델명
+              , #{CERT_YMD}                                       -- 인증일자
+              , #{EXMN_TRGT_MODEL_NM}                             -- 조사대상모델명
+              , #{BRND}                                           -- 브랜드
+              , #{MNFCTUR_YMD}                                    -- 제조일자
+              , #{PURC_YMD}                                       -- 구입일자
+              , CASE WHEN LENGTH(#{PURC_PC}) = 0 THEN NULL ELSE #{PURC_PC} END                                    -- 구입가격
+              , CASE WHEN LENGTH(#{QY}) = 0 THEN NULL ELSE #{QY} END#                                             -- 수량
+              , #{PURC_OFFIC}                                     -- 구입처
+              , #{PURC_MAN}                                       -- 구입자
+              , #{MNFCTUR_NTN}                                    -- 제조국가
+              , #{DSTR_DIV}                                       -- 유통구분
+              , #{PURC_AREA}                                      -- 구입지역
+              , #{DLVY_STTUS}                                     -- 배송상태
+              , #{MKR_ADDR}                                       -- 제조사주소
+              , #{MKR_CTTPC}                                      -- 제조사연락처
+              , #{PURC_OFFIC_ADDR}                                -- 구입처주소
+              , #{PURC_OFFIC_CTTPC}                               -- 구입처연락처
+              , #{CNT_PARTCL_ADDR}                                -- 수입자주소
+              , #{CNT_PARTCL_CTTPC}                               -- 수입자연락처
+              , #{SELER_ADDR}                                     -- 판매자주소
+              , #{SELER_CTTPC}                                    -- 판매자연락처
+              , #{RADI_MEAS}                                      -- 방사능측정
+              , #{BRCD_NO}                                        -- 바코드번호
+              , #{GDS_NO}                                         -- 상품번호
+              , #{URL}                                            -- URL
+              , #{DIV_NM}                                         -- 구분명
+              , #{TRSF_INST_CD}                                   -- 인계기관코드
+              , #{CERT_INST_CD}                                   -- 인증기관코드
+              , #{RM}                                             -- 비고
+              , NOW()                                             -- 등록일시
+              , #{_sessionUserCd}                                 -- 등록자ID
+		)
+	</insert>
+
+	<update id="sploreUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* splore.sploreUpdate 
+		* TB_SPLORE 수정
+		* @author dooresoft
+		* @since 2023.03.23
+		*/
+		]]>
+		UPDATE TB_SPLORE
+		SET    MDFCN_DT =NOW()
+		     , MDFR_ID = #{_sessionUserCd}
+		<if test=" SESE_GDS_NM != null and SESE_GDS_NM != '' ">
+		     , SESE_GDS_NM = #{SESE_GDS_NM}                                                    -- 세세부품목명
+		</if>
+		<if test=" MFBIZ != null and MFBIZ != '' ">
+		     , MFBIZ = #{MFBIZ}                                                                -- 제조업체
+		</if>
+		<if test=" INCM_ENTRPS != null and INCM_ENTRPS != '' ">
+		     , INCM_ENTRPS = #{INCM_ENTRPS}                                                    -- 수입업체
+		</if>
+		<if test=" NTSL_ENTRPS != null and NTSL_ENTRPS != '' ">
+		     , NTSL_ENTRPS = #{NTSL_ENTRPS}                                                    -- 판매업체
+		</if>
+		<if test=" CERT_NO != null and CERT_NO != '' ">
+		     , CERT_NO = #{CERT_NO}                                                            -- 인증번호
+		</if>
+		<if test=" MODEL_NM != null and MODEL_NM != '' ">
+		     , MODEL_NM = #{MODEL_NM}                                                          -- 모델명
+		</if>
+		<if test=" CERT_YMD != null and CERT_YMD != '' ">
+		     , CERT_YMD = #{CERT_YMD}                                                          -- 인증일자
+		</if>
+		<if test=" EXMN_TRGT_MODEL_NM != null and EXMN_TRGT_MODEL_NM != '' ">
+		     , EXMN_TRGT_MODEL_NM = #{EXMN_TRGT_MODEL_NM}                                      -- 조사대상모델명
+		</if>
+		<if test=" BRND != null and BRND != '' ">
+		     , BRND = #{BRND}                                                                  -- 브랜드
+		</if>
+		<if test=" MNFCTUR_YMD != null and MNFCTUR_YMD != '' ">
+		     , MNFCTUR_YMD = #{MNFCTUR_YMD}                                                    -- 제조일자
+		</if>
+		<if test=" PURC_YMD != null and PURC_YMD != '' ">
+		     , PURC_YMD = #{PURC_YMD}                                                          -- 구입일자
+		</if>
+		<if test=" PURC_PC != null ">
+		     , PURC_PC = CASE WHEN LENGTH(#{PURC_PC}) = 0 THEN NULL ELSE #{PURC_PC} END                                                -- 구입가격
+		</if>
+		<if test=" QY != null ">
+		     , QY = CASE WHEN LENGTH(#{QY}) = 0 THEN NULL ELSE #{QY} END                                                               -- 수량
+		</if>
+		<if test=" PURC_OFFIC != null and PURC_OFFIC != '' ">
+		     , PURC_OFFIC = #{PURC_OFFIC}                                                      -- 구입처
+		</if>
+		<if test=" PURC_MAN != null and PURC_MAN != '' ">
+		     , PURC_MAN = #{PURC_MAN}                                                          -- 구입자
+		</if>
+		<if test=" MNFCTUR_NTN != null and MNFCTUR_NTN != '' ">
+		     , MNFCTUR_NTN = #{MNFCTUR_NTN}                                                    -- 제조국가
+		</if>
+		<if test=" DSTR_DIV != null and DSTR_DIV != '' ">
+		     , DSTR_DIV = #{DSTR_DIV}                                                          -- 유통구분
+		</if>
+		<if test=" PURC_AREA != null and PURC_AREA != '' ">
+		     , PURC_AREA = #{PURC_AREA}                                                        -- 구입지역
+		</if>
+		<if test=" DLVY_STTUS != null and DLVY_STTUS != '' ">
+		     , DLVY_STTUS = #{DLVY_STTUS}                                                      -- 배송상태
+		</if>
+		<if test=" MKR_ADDR != null and MKR_ADDR != '' ">
+		     , MKR_ADDR = #{MKR_ADDR}                                                          -- 제조사주소
+		</if>
+		<if test=" MKR_CTTPC != null and MKR_CTTPC != '' ">
+		     , MKR_CTTPC = #{MKR_CTTPC}                                                        -- 제조사연락처
+		</if>
+		<if test=" PURC_OFFIC_ADDR != null and PURC_OFFIC_ADDR != '' ">
+		     , PURC_OFFIC_ADDR = #{PURC_OFFIC_ADDR}                                            -- 구입처주소
+		</if>
+		<if test=" PURC_OFFIC_CTTPC != null and PURC_OFFIC_CTTPC != '' ">
+		     , PURC_OFFIC_CTTPC = #{PURC_OFFIC_CTTPC}                                          -- 구입처연락처
+		</if>
+		<if test=" CNT_PARTCL_ADDR != null and CNT_PARTCL_ADDR != '' ">
+		     , CNT_PARTCL_ADDR = #{CNT_PARTCL_ADDR}                                            -- 수입자주소
+		</if>
+		<if test=" CNT_PARTCL_CTTPC != null and CNT_PARTCL_CTTPC != '' ">
+		     , CNT_PARTCL_CTTPC = #{CNT_PARTCL_CTTPC}                                          -- 수입자연락처
+		</if>
+		<if test=" SELER_ADDR != null and SELER_ADDR != '' ">
+		     , SELER_ADDR = #{SELER_ADDR}                                                      -- 판매자주소
+		</if>
+		<if test=" SELER_CTTPC != null and SELER_CTTPC != '' ">
+		     , SELER_CTTPC = #{SELER_CTTPC}                                                    -- 판매자연락처
+		</if>
+		<if test=" RADI_MEAS != null and RADI_MEAS != '' ">
+		     , RADI_MEAS = #{RADI_MEAS}                                                        -- 방사능측정
+		</if>
+		<if test=" BRCD_NO != null and BRCD_NO != '' ">
+		     , BRCD_NO = #{BRCD_NO}                                                            -- 바코드번호
+		</if>
+		<if test=" GDS_NO != null and GDS_NO != '' ">
+		     , GDS_NO = #{GDS_NO}                                                              -- 상품번호
+		</if>
+		<if test=" URL != null and URL != '' ">
+		     , URL = #{URL}                                                                    -- URL
+		</if>
+		<if test=" DIV_NM != null and DIV_NM != '' ">
+		     , DIV_NM = #{DIV_NM}                                                              -- 구분명
+		</if>
+		<if test=" TRSF_INST_CD != null and TRSF_INST_CD != '' ">
+		     , TRSF_INST_CD = #{TRSF_INST_CD}                                                 -- 인계기관코드
+		</if>
+		<if test=" CERT_INST_CD != null and CERT_INST_CD != '' ">
+		     , CERT_INST_CD = #{CERT_INST_CD}                                                  -- 인증기관코드
+		</if>
+		<if test=" RM != null and RM != '' ">
+		     , RM = #{RM}                                                                      -- 비고
+		</if>
+		WHERE  SPLORE_ID = #{SPLORE_ID}
+	</update>
+
+	<delete id="sploreDelete" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* splore.sploreDelete 
+		* TB_SPLORE 삭제
+		* @author dooresoft
+		* @since 2023.03.23
+		*/
+		]]>
+		DELETE FROM TB_SPLORE
+		WHERE  1 = 1
+		AND SPLORE_ID = #{SPLORE_ID}
+	</delete>
+
+</mapper>

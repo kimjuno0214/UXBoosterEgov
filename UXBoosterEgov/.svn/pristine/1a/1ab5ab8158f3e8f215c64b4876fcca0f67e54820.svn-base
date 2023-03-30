@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="sample01" width="1040" height="1080" titletext="New Form">
+    <Layouts>
+      <Layout height="1080" mobileorientation="landscape" width="1040">
+        <Static id="Static00" taborder="0" text="10" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" color="red" textAlign="center"/>
+        <Static id="Static03" taborder="1" text="10" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" color="red" textAlign="center" right="0"/>
+        <Button id="Button00" taborder="2" text="목록" top="0" width="60" height="23" cssclass="btn_WF_basic02" right="10"/>
+        <Button id="Button01" taborder="3" text="파일첨부" top="0" width="60" height="23" cssclass="btn_WF_basic01" right="75"/>
+        <Button id="Button02" taborder="4" text="삭제" top="0" width="60" height="23" cssclass="btn_WF_basic01" right="140"/>
+        <Button id="Button03" taborder="5" text="저장" top="0" width="60" height="23" cssclass="btn_WF_basic01" right="205"/>
+        <Static id="Static01" taborder="6" left="10" top="28" height="31" cssclass="sta_WF_th01L" right="10"/>
+        <Edit id="Edit11" taborder="7" left="17" top="33" width="823" height="21"/>
+        <CheckBox id="CheckBox00" taborder="8" text="공지사항으로 지정하기" left="865" top="33" width="150" height="20"/>
+        <Static id="Static02" taborder="9" left="10" top="58" height="261" cssclass="sta_WF_th01L" right="10"/>
+        <TextArea id="TextArea00" taborder="10" left="17" top="68" height="242" right="20"/>
+        <Grid id="Grid00" taborder="11" left="10" top="328" height="124" binddataset="Dataset00" autofittype="col" right="10">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="38"/>
+                <Column size="353"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="순번"/>
+                <Cell col="1" text="파일명"/>
+                <Cell col="2" text="파일경로"/>
+                <Cell col="3" text="파일사이즈"/>
+                <Cell col="4" text="삭제"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0"/>
+                <Cell col="1" text="bind:Column1"/>
+                <Cell col="2" text="bind:Column2"/>
+                <Cell col="3" text="bind:Column3"/>
+                <Cell col="4" text="bind:Column4" displaytype="buttoncontrol" edittype="button"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Div id="Div00" taborder="12" left="10" top="457" height="200" cssclass="div_WF_replyBox02" right="10">
+          <Layouts>
+            <Layout>
+              <Div id="Div00" taborder="0" left="10" top="10" height="89" cssclass="div_WF_replyBox03" right="10">
+                <Layouts>
+                  <Layout>
+                    <Static id="Static00" taborder="0" text="작성자" left="20" top="10" width="90" height="25"/>
+                    <Static id="Static01" taborder="1" text="2019.08.09" left="110" top="10" width="90" height="25" cssclass="sta_WF_replyDate"/>
+                    <Static id="Static02" taborder="2" text="댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용" left="20" top="35" height="43" cssclass="sta_WF_replyText" right="10"/>
+                    <Button id="Button03" taborder="3" text="삭제" top="11" width="60" height="23" cssclass="btn_WF_basic01" right="10"/>
+                    <Button id="Button00" taborder="4" text="수정" top="11" width="60" height="23" cssclass="btn_WF_basic01" right="75"/>
+                  </Layout>
+                </Layouts>
+              </Div>
+              <Div id="Div01" taborder="1" left="10" top="99" height="89" cssclass="div_WF_replyBox03" right="10">
+                <Layouts>
+                  <Layout>
+                    <Static id="Static00" taborder="0" text="작성자" left="20" top="10" width="90" height="25"/>
+                    <Static id="Static01" taborder="1" text="2019.08.09" left="110" top="10" width="90" height="25" cssclass="sta_WF_replyDate"/>
+                    <Static id="Static02" taborder="2" text="댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용댓글내용내용" left="20" top="35" height="43" cssclass="sta_WF_replyText" right="10"/>
+                    <Button id="Button03" taborder="3" text="삭제" top="11" width="60" height="23" cssclass="btn_WF_basic01" right="10"/>
+                    <Button id="Button00" taborder="4" text="수정" top="11" width="60" height="23" cssclass="btn_WF_basic01" right="75"/>
+                  </Layout>
+                </Layouts>
+              </Div>
+            </Layout>
+          </Layouts>
+        </Div>
+        <ListView id="ListView00" taborder="13" left="10" top="668" height="180" binddataset="Dataset01" cssclass="lst_WF_reply" right="10">
+          <Formats>
+            <Format id="default">
+              <Band id="body" width="100%" height="89">
+                <Cell id="Cell00" left="10" top="10" width="80" height="23" text="bind:Column0"/>
+                <Cell id="Cell01" left="89" top="10" width="110" height="23" text="bind:Column1"/>
+                <Cell id="Cell02" left="10" top="33" height="43" text="bind:Column2" right="10"/>
+                <Cell id="Cell03" top="10" width="60" height="23" text="bind:Column4" right="10" displaytype="buttoncontrol" edittype="button"/>
+                <Cell id="Cell04" top="10" width="60" height="23" text="bind:Column3" right="75" displaytype="buttoncontrol" edittype="button"/>
+              </Band>
+            </Format>
+          </Formats>
+        </ListView>
+        <Div id="Div01" taborder="14" left="10" top="853" height="80" cssclass="div_WF_replyBox01" right="10">
+          <Layouts>
+            <Layout>
+              <TextArea id="TextArea00" taborder="0" left="10" top="10" height="60" right="100"/>
+              <Button id="Button00" taborder="1" text="등록" top="10" width="80" height="60" cssclass="btn_WF_basic01" right="10"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column4">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="Column4">버튼</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="Dataset01">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">작성자</Col>
+            <Col id="Column1">작성일</Col>
+            <Col id="Column2">댓글내용</Col>
+            <Col id="Column3">수정버튼</Col>
+            <Col id="Column4">삭제버튼</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">작성자</Col>
+            <Col id="Column1">작성일</Col>
+            <Col id="Column2">댓글내용</Col>
+            <Col id="Column3">수정버튼</Col>
+            <Col id="Column4">삭제버튼</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

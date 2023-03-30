@@ -1,0 +1,8 @@
+﻿{
+admin off
+}
+:4098
+{
+root "C:/UXBoosterEgov/workspace/UXBoosterEgov/src/main/webapp"
+file_server
+}

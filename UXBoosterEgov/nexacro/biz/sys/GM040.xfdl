@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="GM040" width="1659" height="659" titletext="프로그램_프로그램관리_NONMENU" onload="GM010_onload">
+    <Layouts>
+      <Layout height="659" mobileorientation="landscape" width="1659">
+        <Div id="divSearch" taborder="0" left="10" top="0" height="43" cssclass="div_WF_searchBox01" text="" minwidth="1300" maxwidth="" right="10">
+          <Layouts>
+            <Layout>
+              <Static id="Static07_00" taborder="5" text="20" left="0" top="0" width="20" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="staPrefixT" taborder="2" text="Prefix" left="20" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="cboPrefix" taborder="0" left="staPrefixT:10" top="10" width="195" height="21" innerdataset="dsProgPrefix" codecolumn="CODE" datacolumn="NAME"/>
+              <Static id="staProgNmT" taborder="3" text="프로그램 ID" left="355" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="edtProgNm" taborder="1" left="staProgNmT:10" top="10" width="195" height="21" onkeyup="divSearch_edtProgNm_onkeyup"/>
+              <Static id="Static07_00_00" taborder="4" text="285" left="20" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00_00_00" taborder="6" text="285" left="20" top="31" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="11"/>
+              <Static id="Static07" taborder="7" text="50" left="305" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static07_00_00_01" taborder="8" text="285" left="355" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_01" taborder="9" text="50" left="640" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static07_00_00_01_00" taborder="10" text="285" left="690" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00_00_01_00_00" taborder="11" text="285" left="690" top="31" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="11"/>
+              <Static id="Static07_00_00_01_01" taborder="12" text="285" left="355" top="31" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="11"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnShowHide" taborder="1" left="48.16%" top="divSearch:0" height="10" cssclass="btn_WF_fold01" width="60"/>
+        <Div id="divDetail" taborder="2" left="10" top="73" right="10" bottom="10" text="" minwidth="1300" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Static id="Static34" taborder="5" left="449" top="26" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Static id="staRegBack" taborder="8" left="449" top="Static34:-1" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Static id="staModBak" taborder="11" left="449" top="staRegBack:-1" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Static id="staProgListT" taborder="0" text="메뉴 목록" left="0" top="0" height="21" cssclass="sta_WF_title02" right="1329"/>
+              <Grid id="grdProgList" taborder="2" left="0" top="26" width="310" autofittype="col" onselectchanged="grdProgList_onselectchanged" bottom="0" binddataset="dsProgList">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="70"/>
+                      <Column size="240"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="순번"/>
+                      <Cell col="1" text="프로그램 ID"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="expr:currow + 1" textAlign="center"/>
+                      <Cell col="1" text="bind:PROGRAM_ID"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="staProgDetailT" taborder="1" text="메뉴 상세" left="330" top="0" height="21" cssclass="sta_WF_title02" right="0"/>
+              <Static id="staProgIdT" taborder="6" text="프로그램 ID(폼명)" left="664" top="26" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Edit id="edtProgId" taborder="3" left="staProgIdT:7" top="31" height="21" width="200" cssclass="edt_WF_essential"/>
+              <Static id="staPrefixT" taborder="7" text="Prefix" left="330" top="26" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Combo id="cboPrefix" taborder="4" left="457" top="31" height="21" innerdataset="dsProgDetailPrefix" codecolumn="CODE" datacolumn="NAME" width="200" cssclass="cmb_WF_essential"/>
+              <Static id="staRegNmT" taborder="10" text="등록자" left="330" top="staPrefixT:-1" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="staModNmT" taborder="13" text="수정자" left="330" top="staRegNmT:-1" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static01" taborder="14" text=".xfdl" left="edtProgId:3" top="31" width="77" height="21"/>
+              <Static id="staRegDtT" taborder="9" text="등록일" left="664" top="staProgIdT:-1" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="staModDtT" taborder="12" text="수정일" left="664" top="staRegDtT:-1" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="staRegNm" taborder="15" left="459" top="cboPrefix:9" width="200" height="21" text=""/>
+              <Static id="staModNm" taborder="16" left="459" top="staRegNm:9" width="200" height="21" text=""/>
+              <Static id="staRegDt" taborder="17" left="staRegDtT:7" top="edtProgId:9" width="210" height="21" text=""/>
+              <Static id="staModDt" taborder="18" left="staModDtT:7" top="staRegDt:9" width="210" height="21"/>
+              <Static id="Static01_00" taborder="19" text="20" left="310" top="0" width="20" background="rgba(255,0,0,0.4)" visible="false" color="red" textAlign="center" bottom="0"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static01" taborder="3" text="10" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" textAlign="center"/>
+        <Static id="Static24" taborder="4" text="20" left="0" height="20" background="rgba(255,0,0,0.4)" visible="false" right="0" textAlign="center" top="53"/>
+        <Static id="Static00_00" taborder="5" text="10" left="10" top="649" background="rgba(255,0,0,0.4)" visible="false" color="red" textAlign="center" height="10" right="0"/>
+        <Static id="Static00_01" taborder="6" text="10" left="1649" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" color="red" textAlign="center"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsProgList">
+        <ColumnInfo>
+          <Column id="PROGRAM_PREFIX" type="STRING" size="255"/>
+          <Column id="PROGRAM_ID" type="STRING" size="255"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsProgDetail">
+        <ColumnInfo>
+          <Column id="PROGRAM_PREFIX" type="STRING" size="255"/>
+          <Column id="PROGRAM_ID" type="STRING" size="255"/>
+          <Column id="REG_DT" type="STRING" size="255"/>
+          <Column id="REG_USER" type="STRING" size="255"/>
+          <Column id="REG_NM" type="STRING" size="255"/>
+          <Column id="MOD_DT" type="STRING" size="255"/>
+          <Column id="MOD_USER" type="STRING" size="255"/>
+          <Column id="MOD_NM" type="STRING" size="255"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsProgPrefix">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="PROGRAM_PREFIX" type="STRING" size="256"/>
+          <Column id="PROGRAM_ID" type="STRING" size="256"/>
+          <Column id="USE_YN" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="USE_YN"/>
+            <Col id="PROGRAM_PREFIX"/>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsProgDetailPrefix">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    1DEPTH > 2DEPTH
+*  @FileName    GM040.xfdl 
+*  @Creator     전영찬
+*  @CreateDate  2021.06.01
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2021.06.01      전영찬             최초 생성
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+//this.fv_nFormVal = null;     //용도
+this.fv_sProgId = "";
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload등)
+********************************************************/
+/**
+* GM010_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.GM010_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {    
+      this.fnInit();
+   }
+}
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnInit, fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnInit : 초기화 함수 검색조건 초기화 및 온로드 세팅
+ * @return {N/A}    N/A
+ * @example this.fnInit();
+ */
+this.fnInit = function(){
+   //검색조건
+   var objDivSearch = this.divSearch.form;
+   //onload 공통 코드
+   take.tranCode(this, ["00006"], ["dsProgPrefix"], "ALL", "fnCallback"); 
+   
+   var objDivDetail = this.divDetail.form;
+   takeval.add(this, "Save", objDivDetail.cboPrefix,    this.divDetail.form.staPrefixT.text,       	"value", true, "string", "", "");
+   takeval.add(this, "Save", objDivDetail.edtProgId,    this.divDetail.form.staProgIdT.text,    	"value", true, "string", "", "");
+};
+
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "progList";
+
+	this.dsProgList.clearData();
+    take.tranSelect(this, sTranId, "ProgramManagement.nonMenuList" ,"dsSearch" ,"dsProgList" ,"" ,"fnCallback");
+}
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+this.fnSave = function(sTranId)
+{    
+   //공통 조회에서 호출할 디폴트값 세팅 필요
+   if (take.nvl(sTranId, "")=="") sTranId = "progDetailUpdate";
+   var objProgGrd = this.divDetail.form.grdProgList;
+   var objProgDs = this.dsProgList;
+   var objDivDetail = this.divDetail.form;
+   
+	var sRegExp = take.nvl(objDivDetail.edtProgId.value, "");
+	var sRegPattern= /[^A-Za-z0-9_]/g;
+	if(sRegExp.match(sRegPattern)){
+		take.alert(this, "info", "영어, 숫자, 언더바만 가능합니다.", "");
+		return;
+	}
+	
+   if(!takeval.check(this, "Save")) return;
+   
+   var bolConfirm 	= take.confirm(this, "question", "저장하시겠습니까?");
+   
+   if(bolConfirm) take.transaction(this, sTranId, "SVC_LOC::gm/nonMenuSave.do", "dsProgDetail=dsProgDetail:U", "", "PROGRAM_ID_U='"+this.fv_sProgId+"'", "fnCallback");
+}
+/**
+ * fnAddRow : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+ * @example this.fnAddRow(sGrdId, nRow);
+ */
+this.fnAddRow = function(sGrdId, nRow)
+{
+    //공통 행추가에서 호출할 디폴트값 세팅
+    if (take.nvl(sGrdId, "")=="") sGrdId = "grdProgList";
+    
+   this.dsProgDetail.clearData();
+   this.dsProgDetail.addRow();
+   
+   this.dsProgDetail.setColumn(0, "USE_YN", "Y");
+   
+   //take.tranSave(this, sTranId, "ProgramManagement.programInfo", "dsProgSave", "", "", "fnCallback");
+}
+
+/**
+ * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number, Array} arrnRow    deleteRow 리턴값
+ * @return {N/A} N/A
+ * @example this.fnDelRow(sGrdId, nRow); 
+ */
+this.fnDelRow = function(sGrdId, arrnRow)
+{    
+    //공통 행추가에서 호출할 디폴트값 세팅
+   if (take.nvl(sGrdId, "")=="") sGrdId = "grdProgList";
+   
+   //var nRow 			= this.dsProgList.rowposition;
+   //var nSelProg 		= this.dsProgList.getColumn(nRow, "PROGRAM_NM");
+   var objDsProgDetail 	= this.dsProgDetail;
+   
+   var bolConfirm 		= take.confirm(this, "question", "{name}을(를) {text}하시겠습니까?", { name : nSelProg, text : "삭제"});
+   if(bolConfirm){
+		objDsProgDetail.set_enableevent(false);
+		objDsProgDetail.set_updatecontrol(false);
+		objDsProgDetail.setRowType(0, 8);
+		objDsProgDetail.set_enableevent(true);
+		objDsProgDetail.set_updatecontrol(true);
+		
+		//take.transaction(this, "progDelete", "SVC_LOC::gm/programInfoDelete.do", "dsProgDetail=dsProgDetail:U", "", "PROGRAM_ID='"+this.fv_sProgId+"'", "fnCallback");
+		take.transaction(this, "progDelete", "SVC_LOC::gm/nonMenuSave.do", "dsProgDetail=dsProgDetail:U", "", "", "fnCallback");
+   }
+}
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+/**
+* component_onclick : ~ 버튼 클릭
+*/
+
+this.grdProgList_onselectchanged = function(obj:nexacro.Grid,e:nexacro.GridSelectEventInfo)
+{
+   var nRow = e.row;
+   if(nRow == -1) return;
+   this.fv_sProgId = this.dsProgList.getColumn(nRow, "PROGRAM_ID");
+   take.tranSelect(this, "progDetail", "ProgramManagement.nonMenuDetail", "", "dsProgDetail", "PROGRAM_ID='"+this.fv_sProgId+"'", "fnCallback");
+};
+
+this.divSearch_edtProgNm_onkeyup = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+	if(e.keycode == 13){
+		this.fnSearch("progList");
+	}
+};
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnUserFunction : 사용자 함수
+ * @param  {String} sParam 문자형 인자
+ * @param  {Number} nParam 숫자형 인자
+ * @example this.fnUserFunction(sParam, nParam);
+ */
+this.fnUserFunction = function(sParam, nParam)
+{    
+    //Script
+}
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : sId      - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : nErrCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : sErrMsg  - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+
+      case "progList" :  //저장 콜백
+         var nCnt = this.dsProgList.rowcount;
+            //this.divDetail.form.staProgListT.set_text("프로그램 목록 ("+nCnt+"건)");
+            break;   
+         
+        case "progDetail" :  //조회 콜백
+            break;
+		
+        case "codetran.multi" : //조회 콜백
+			this.dsProgDetailPrefix.copyData(this.dsProgPrefix);
+			this.dsProgDetailPrefix.deleteRow(0);
+			this.fnSearch();
+            break;
+			
+        case "progDetailUpdate" :  //저장 콜백
+            this.fnSearch();
+            break;
+			
+        case "progDelete":
+			//alert("progDelete");
+			this.fnSearch();
+			break;
+      
+        default :
+            break;
+    }        
+};]]></Script>
+    <Bind>
+      <BindItem id="item1" compid="divDetail.form.edtProgId" propid="value" datasetid="dsProgDetail" columnid="PROGRAM_ID"/>
+      <BindItem id="item3" compid="divDetail.form.cboPrefix" propid="value" datasetid="dsProgDetail" columnid="PROGRAM_PREFIX"/>
+      <BindItem id="item7" compid="divSearch.form.cboPrefix" propid="value" datasetid="dsSearch" columnid="PROGRAM_PREFIX"/>
+      <BindItem id="item9" compid="divSearch.form.edtProgNm" propid="value" datasetid="dsSearch" columnid="PROGRAM_ID"/>
+      <BindItem id="item6" compid="divDetail.form.staRegNm" propid="text" datasetid="dsProgDetail" columnid="REG_NM"/>
+      <BindItem id="item8" compid="divDetail.form.staRegDt" propid="text" datasetid="dsProgDetail" columnid="REG_DT"/>
+      <BindItem id="item12" compid="divDetail.form.staModDt" propid="text" datasetid="dsProgDetail" columnid="MOD_DT"/>
+      <BindItem id="item13" compid="divDetail.form.staModNm" propid="text" datasetid="dsProgDetail" columnid="MOD_NM"/>
+    </Bind>
+  </Form>
+</FDL>

@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="sample01" width="1040" height="685" titletext="팝업샘플">
+    <Layouts>
+      <Layout height="685" mobileorientation="landscape" width="1040">
+        <Div id="Div02" taborder="4" left="10" top="10" width="500" height="430" cssclass="dvi_WF_tabBox01">
+          <Layouts>
+            <Layout>
+              <ImageViewer id="ImageViewer00" taborder="0" text="ImageViewer00" left="10" top="10" height="280" right="10"/>
+              <Div id="Div00" taborder="1" left="10" top="300" width="478" height="118" cssclass="div_WF_replyBox02">
+                <Layouts>
+                  <Layout>
+                    <Static id="Static00" taborder="0" text="이미지" left="9" top="9" width="100" height="100" cssclass="sta_WF_imgBox01"/>
+                    <Static id="Static01" taborder="1" text="이미지" left="119" top="9" width="100" height="100" cssclass="sta_WF_imgBox01"/>
+                    <Static id="Static02" taborder="2" text="이미지" left="229" top="9" width="100" height="100" cssclass="sta_WF_imgBox01"/>
+                    <Static id="Static03" taborder="3" text="이미지" left="339" top="9" width="100" height="100" cssclass="sta_WF_imgBox01"/>
+                    <Static id="Static04" taborder="4" text="이미지" left="449" top="9" width="100" height="100" cssclass="sta_WF_imgBox01"/>
+                  </Layout>
+                </Layouts>
+              </Div>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">이미지파일001</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">이미지파일002</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">이미지파일003</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">이미지파일004</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

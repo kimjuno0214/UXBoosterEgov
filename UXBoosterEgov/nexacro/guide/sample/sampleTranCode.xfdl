@@ -1,0 +1,431 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="sampleTranCode" width="1024" height="768" titletext="New Form">
+    <Layouts>
+      <Layout height="768" mobileorientation="landscape" width="1024">
+        <Button id="Button00" taborder="0" text="take.tranCode(Single)" left="20" top="15" width="170" height="50" onclick="Button00_onclick"/>
+        <Grid id="Grid00" taborder="1" left="15" top="95" width="190" height="150" binddataset="Dataset00">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="CODE"/>
+                <Cell col="1" text="NAME"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:CODE"/>
+                <Cell col="1" text="bind:NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="Grid01" taborder="2" left="215" top="95" width="190" height="150" binddataset="Dataset01">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="CODE"/>
+                <Cell col="1" text="NAME"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:CODE"/>
+                <Cell col="1" text="bind:NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="Grid02" taborder="3" left="615" top="95" width="190" height="150" binddataset="Dataset03">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="CODE"/>
+                <Cell col="1" text="NAME"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:CODE"/>
+                <Cell col="1" text="bind:NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="Grid03" taborder="4" left="415" top="95" width="190" height="150" binddataset="Dataset02">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="CODE"/>
+                <Cell col="1" text="NAME"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:CODE"/>
+                <Cell col="1" text="bind:NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="Grid04" taborder="5" left="815" top="95" width="190" height="150" binddataset="Dataset04">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="CODE"/>
+                <Cell col="1" text="NAME"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:CODE"/>
+                <Cell col="1" text="bind:NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="Grid05" taborder="6" left="15" top="275" width="190" height="150" binddataset="Dataset05">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="CODE"/>
+                <Cell col="1" text="NAME"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:CODE"/>
+                <Cell col="1" text="bind:NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="Grid06" taborder="7" left="215" top="275" width="190" height="150" binddataset="Dataset06">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="CODE"/>
+                <Cell col="1" text="NAME"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:CODE"/>
+                <Cell col="1" text="bind:NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="Grid07" taborder="8" left="615" top="275" width="190" height="150" binddataset="Dataset08">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="CODE"/>
+                <Cell col="1" text="NAME"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:CODE"/>
+                <Cell col="1" text="bind:NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="Grid08" taborder="9" left="415" top="275" width="190" height="150" binddataset="Dataset07">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="CODE"/>
+                <Cell col="1" text="NAME"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:CODE"/>
+                <Cell col="1" text="bind:NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="Grid09" taborder="10" left="815" top="275" width="190" height="150" binddataset="Dataset09">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="CODE"/>
+                <Cell col="1" text="NAME"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:CODE"/>
+                <Cell col="1" text="bind:NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="Grid10" taborder="11" left="15" top="455" width="190" height="150" binddataset="Dataset10">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="CODE"/>
+                <Cell col="1" text="NAME"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:CODE"/>
+                <Cell col="1" text="bind:NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static00" taborder="12" text="252" left="16" top="74" width="187" height="20" background="ivory" font="bold 10pt/normal &quot;Nanum Barun Gothic&quot;,&quot;맑은 고딕&quot;"/>
+        <Static id="Static01" taborder="13" text="240" left="216" top="74" width="187" height="20" background="ivory" font="bold 10pt/normal &quot;Nanum Barun Gothic&quot;,&quot;맑은 고딕&quot;"/>
+        <Static id="Static02" taborder="14" text="253" left="616" top="74" width="187" height="20" background="ivory" font="bold 10pt/normal &quot;Nanum Barun Gothic&quot;,&quot;맑은 고딕&quot;"/>
+        <Static id="Static03" taborder="15" text="209" left="416" top="74" width="187" height="20" background="ivory" font="bold 10pt/normal &quot;Nanum Barun Gothic&quot;,&quot;맑은 고딕&quot;"/>
+        <Static id="Static04" taborder="16" text="072" left="816" top="74" width="187" height="20" background="ivory" font="bold 10pt/normal &quot;Nanum Barun Gothic&quot;,&quot;맑은 고딕&quot;"/>
+        <Static id="Static05" taborder="17" text="259" left="816" top="254" width="187" height="20" background="ivory" font="bold 10pt/normal &quot;Nanum Barun Gothic&quot;,&quot;맑은 고딕&quot;"/>
+        <Static id="Static06" taborder="18" text="245" left="616" top="254" width="187" height="20" background="ivory" font="bold 10pt/normal &quot;Nanum Barun Gothic&quot;,&quot;맑은 고딕&quot;"/>
+        <Static id="Static07" taborder="19" text="244" left="416" top="254" width="187" height="20" background="ivory" font="bold 10pt/normal &quot;Nanum Barun Gothic&quot;,&quot;맑은 고딕&quot;"/>
+        <Static id="Static08" taborder="20" text="263" left="216" top="254" width="187" height="20" background="ivory" font="bold 10pt/normal &quot;Nanum Barun Gothic&quot;,&quot;맑은 고딕&quot;"/>
+        <Static id="Static09" taborder="21" text="262" left="16" top="254" width="187" height="20" background="ivory" font="bold 10pt/normal &quot;Nanum Barun Gothic&quot;,&quot;맑은 고딕&quot;"/>
+        <Static id="Static10" taborder="22" text="upMenuIdSelect" left="16" top="434" width="187" height="20" background="ivory" font="bold 10pt/normal &quot;Nanum Barun Gothic&quot;,&quot;맑은 고딕&quot;"/>
+        <Button id="takeMultiCode" taborder="23" text="take.tranCode(Multi)" left="202" top="15" width="288" height="49" onclick="takeMultiCode_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    this.Dataset00.clearData();
+    this.Dataset01.clearData();
+    this.Dataset02.clearData();
+    this.Dataset03.clearData();
+    this.Dataset04.clearData();
+    this.Dataset05.clearData();
+    this.Dataset06.clearData();
+    this.Dataset07.clearData();
+    this.Dataset08.clearData();
+    this.Dataset09.clearData();
+    this.Dataset10.clearData();
+    
+	take.tranCode(this, "252", "Dataset00", "", function (sId, nErrCd, sErrMsg) { trace("252 --> " + this.Dataset00.rowcount); });
+    take.tranCode(this, "240", "Dataset01", "", function (sId, nErrCd, sErrMsg) { trace("240 --> " + this.Dataset01.rowcount); });
+    take.tranCode(this, "209", "Dataset02", "", function (sId, nErrCd, sErrMsg) { trace("209 --> " + this.Dataset02.rowcount); });
+    take.tranCode(this, "253", "Dataset03", "", function (sId, nErrCd, sErrMsg) { trace("253 --> " + this.Dataset03.rowcount); });
+    take.tranCode(this, "072", "Dataset04", "", function (sId, nErrCd, sErrMsg) { trace("072 --> " + this.Dataset04.rowcount); });
+    take.tranCode(this, "262", "Dataset05", "", function (sId, nErrCd, sErrMsg) { trace("262 --> " + this.Dataset05.rowcount); });
+    take.tranCode(this, "263", "Dataset06", "", function (sId, nErrCd, sErrMsg) { trace("263 --> " + this.Dataset06.rowcount); });
+    take.tranCode(this, "244", "Dataset07", "", function (sId, nErrCd, sErrMsg) { trace("244 --> " + this.Dataset07.rowcount); });
+    take.tranCode(this, "245", "Dataset08", "", function (sId, nErrCd, sErrMsg) { trace("245 --> " + this.Dataset08.rowcount); });
+    take.tranCode(this, "259", "Dataset09", "", function (sId, nErrCd, sErrMsg) { trace("259 --> " + this.Dataset09.rowcount); });
+    take.tranSelect
+        (
+            this,  //Form 객체
+            "test",
+            "TakeSystemMapper.upMenuIdSelect",
+            "",
+            "Dataset10",
+            "",
+            function (sId, nErr, sMsg) //sCallBack
+            {
+                if (sId=="")
+                {
+                    trace("TakeSystemMapper.upMenuIdSelect --> " + this.Dataset10.rowcount);
+                }
+            }
+        );
+};
+
+// this.Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+// {
+// 	this.Dataset00.clearData();
+//     this.Dataset01.clearData();
+//     this.Dataset02.clearData();
+//     this.Dataset03.clearData();
+//     this.Dataset04.clearData();
+//     this.Dataset05.clearData();
+//     this.Dataset06.clearData();
+//     this.Dataset07.clearData();
+//     this.Dataset08.clearData();
+//     this.Dataset09.clearData();
+//     this.Dataset10.clearData();
+//     
+// 	this.transaction("252_Dataset00", "SVC_LOC::codeSelect.do", "", "Dataset00=Dataset00", "sDataset='Dataset00' sGroupId='252'", "fnCallBack" );
+//     this.transaction("240_Dataset01", "SVC_LOC::codeSelect.do", "", "Dataset01=Dataset01", "sDataset='Dataset01' sGroupId='240'", "fnCallBack");
+//     this.transaction("209_Dataset02", "SVC_LOC::codeSelect.do", "", "Dataset02=Dataset02", "sDataset='Dataset02' sGroupId='209'", "fnCallBack");
+//     this.transaction("253_Dataset03", "SVC_LOC::codeSelect.do", "", "Dataset03=Dataset03", "sDataset='Dataset03' sGroupId='253'", "fnCallBack");
+//     this.transaction("072_Dataset04", "SVC_LOC::codeSelect.do", "", "Dataset04=Dataset04", "sDataset='Dataset04' sGroupId='072'", "fnCallBack");
+//     this.transaction("262_Dataset05", "SVC_LOC::codeSelect.do", "", "Dataset05=Dataset05", "sDataset='Dataset05' sGroupId='262'", "fnCallBack");
+//     this.transaction("263_Dataset06", "SVC_LOC::codeSelect.do", "", "Dataset06=Dataset06", "sDataset='Dataset06' sGroupId='263'", "fnCallBack");
+//     this.transaction("244_Dataset07", "SVC_LOC::codeSelect.do", "", "Dataset07=Dataset07", "sDataset='Dataset07' sGroupId='244'", "fnCallBack");
+//     this.transaction("245_Dataset08", "SVC_LOC::codeSelect.do", "", "Dataset08=Dataset08", "sDataset='Dataset08' sGroupId='245'", "fnCallBack");
+//     this.transaction("259_Dataset09", "SVC_LOC::codeSelect.do", "", "Dataset09=Dataset09", "sDataset='Dataset09' sGroupId='259'", "fnCallBack");
+//     this.transaction("TakeSystemMapper.upMenuIdSelect_Dataset10", "SVC_LOC::select.do", "", "Dataset10=Dataset10", "sNameSpace='TakeSystemMapper.upMenuIdSelect' sDataset='Dataset10'" , "fnCallBack" );
+// };
+
+this.fnCallBack = function(sId, nErrCd, sErrMsg)
+{
+    var arrInfo = sId.split("_");
+    var sSvcId = arrInfo[0];
+    var objDs = this.objects[arrInfo[1]];
+    
+    trace(sSvcId+ " --> errorcd : (" + nErrCd + ")" + sErrMsg +" / rowcount : " + objDs.rowcount);
+    
+}
+this.takeMultiCode_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.Dataset00.clearData();
+    this.Dataset01.clearData();
+    this.Dataset02.clearData();
+    
+    take.tranCode
+        (
+            this, 
+            ["252","240","209"], 
+            ["Dataset00","Dataset01","Dataset02"], 
+            ["NO","ALL","NO"],
+            function(sId, nErrCd, sErrMsg)
+            {
+                trace("Dataset00 --> " + this.Dataset00.saveXML());
+                trace("Dataset01 --> " + this.Dataset01.saveXML());
+                trace("Dataset02 --> " + this.Dataset02.saveXML());
+            }
+        );
+};]]></Script>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="Dataset01">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="Dataset02">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="Dataset03">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="Dataset04">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="Dataset05">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="Dataset06">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="Dataset07">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="Dataset08">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="Dataset09">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="Dataset10">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

@@ -1,0 +1,693 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="BAS020M01" width="1659" height="832" onload="Form_onload" titletext="공통시험항목관리">
+    <Layouts>
+      <Layout height="832" width="1659">
+        <Div id="divSearch" taborder="0" left="10" top="0" height="43" right="10" cssclass="div_WF_searchBox01" text="" minwidth="1300" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Static id="Static07_00" taborder="0" text="20" left="0" top="0" width="20" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static07_00_00" taborder="1" text="285" left="20" top="0" width="250" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00_00_01" taborder="2" text="285" left="20" top="31" width="250" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07" taborder="3" text="50" left="270" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static07_00_00_00" taborder="4" text="285" left="320" top="0" width="240" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00_00_00_00" taborder="5" text="285" left="320" top="31" width="240" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_01" taborder="6" text="50" left="560" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static07_01_00" taborder="7" text="50" left="1140" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static07_01_00_00" taborder="8" text="50" left="850" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static07_00_00_00_01" taborder="9" text="285" left="610" top="0" width="240" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00_00_00_00_00" taborder="10" text="285" left="610" top="31" width="240" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00_00_00_00_00_00" taborder="11" text="285" left="900" top="31" width="240" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00_00_00_00_00_00_00" taborder="12" text="285" left="900" top="0" width="240" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="staTestItemCd00" taborder="13" text="시험항목" left="30" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="edtTestItemCd" taborder="14" left="110" top="10" width="160" height="21" onkeyup="divSearch_edtTestItemCd_onkeyup"/>
+              <Static id="staUseYn00_00" taborder="15" text="사용여부" left="320" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="cboUseYn" taborder="16" left="400" top="10" height="21" innerdataset="dsUseYn" codecolumn="CODE" datacolumn="NAME" width="160" value="어린이" text="" index="0"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnShowHide" taborder="1" left="48.16%" top="divSearch:0" width="60" height="10" cssclass="btn_WF_fold01"/>
+        <Div id="divDetail" taborder="2" left="10" top="73" right="10" bottom="10" text="" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Static id="staTitle" taborder="0" text="공통 시험항목 목록" left="0" top="0" height="21" cssclass="sta_WF_title02" right="1329"/>
+              <Grid id="gridRefe" taborder="6" top="26" autofittype="col" binddataset="dsRefe" right="0" bottom="2" width="264">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="120"/>
+                      <Column size="100"/>
+                      <Column size="80"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="적용일자"/>
+                      <Cell col="1" text="기준치" cssclass="cellImport"/>
+                      <Cell col="2" text="부등호" cssclass="cellImport"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:APLCN_YMD" textAlign="center" displaytype="date"/>
+                      <Cell col="1" text="bind:REFE" textAlign="center" edittype="normal"/>
+                      <Cell col="2" text="bind:INEQ_CD" textAlign="center" displaytype="combotext" combodataset="dsIneqCd" combocodecol="CODE" combodatacol="NAME" edittype="combo"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Grid id="gridMain" taborder="1" left="0" top="26" autofittype="col" takegrid="sort" binddataset="dsList" right="gridRefe:10" bottom="2" onexpandup="divDetail_gridMain_onexpandup" oncellclick="divDetail_gridMain_oncellclick">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="0"/>
+                      <Column size="40"/>
+                      <Column size="170"/>
+                      <Column size="120"/>
+                      <Column size="120"/>
+                      <Column size="120"/>
+                      <Column size="120"/>
+                      <Column size="120"/>
+                      <Column size="120"/>
+                      <Column size="80"/>
+                      <Column size="90"/>
+                      <Column size="50"/>
+                      <Column size="50"/>
+                      <Column size="90"/>
+                      <Column size="90"/>
+                      <Column size="50"/>
+                      <Column size="50"/>
+                      <Column size="50"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="시험ID"/>
+                      <Cell col="1" text="No"/>
+                      <Cell col="2" text="시험항목" cssclass="cellImport"/>
+                      <Cell col="3" text="시험구분"/>
+                      <Cell col="4" text="분류1"/>
+                      <Cell col="5" text="분류2"/>
+                      <Cell col="6" text="분류3"/>
+                      <Cell col="7" text="분류4"/>
+                      <Cell col="8" text="분류5"/>
+                      <Cell col="9" text="부속문서"/>
+                      <Cell col="10" text="결함구분"/>
+                      <Cell col="11" text="검출한계"/>
+                      <Cell col="12" text="단위"/>
+                      <Cell col="13" text="계산방법"/>
+                      <Cell col="14" text="위해정보코드"/>
+                      <Cell col="15" text="수수료"/>
+                      <Cell col="16" text="순번"/>
+                      <Cell col="17" text="사용여부"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:TEST_ID"/>
+                      <Cell col="1" textAlign="center" suppress="0" edittype="none" text="expr:currow + 1"/>
+                      <Cell col="2" text="bind:TEST_ITEM_NM" textAlign="left" edittype="none" combodataset="dsTestItemCdGrid" combocodecol="CODE" combodatacol="NAME" suppress="0" displaytype="normal" expandimage="url('theme://images/btn_GridExpand_N.png')" expandshow="show" expandsize="21"/>
+                      <Cell col="3" text="bind:TEST_DIV" textAlign="left" suppress="0" edittype="normal"/>
+                      <Cell col="4" text="bind:CL_1" textAlign="left" suppress="0" edittype="normal"/>
+                      <Cell col="5" text="bind:CL_2" textAlign="left" edittype="normal" suppress="0"/>
+                      <Cell col="6" text="bind:CL_3" textAlign="left" edittype="normal" suppress="0"/>
+                      <Cell col="7" text="bind:CL_4" textAlign="left" edittype="normal" suppress="0"/>
+                      <Cell col="8" textAlign="left" edittype="normal" text="bind:CL_5" suppress="0"/>
+                      <Cell col="9" textAlign="left" edittype="normal" text="bind:ATACH_DOC" suppress="0"/>
+                      <Cell col="10" text="bind:FAUL_DIV_CD" textAlign="left" edittype="combo" combodataset="dsFaulDivCd" combocodecol="CODE" combodatacol="NAME" suppress="0"/>
+                      <Cell col="11" text="bind:DETC_LIMIT" textAlign="left" edittype="normal" suppress="0"/>
+                      <Cell col="12" text="bind:UNIT" textAlign="left" edittype="normal" suppress="0"/>
+                      <Cell col="13" text="bind:CALC_MTH_CD" textAlign="left" edittype="combo" combodataset="dsCalcMthCd" combocodecol="CODE" combodatacol="NAME" suppress="0"/>
+                      <Cell col="14" text="bind:HARM_INFO_CD" textAlign="center" edittype="none" suppress="0" displaytype="normal" expandshow="show" expandimage="url('theme://images/btn_GridExpand_N.png')" tooltiptext="bind:HARM_INFO_NM" expandsize="21"/>
+                      <Cell col="15" text="bind:FEE" edittype="normal"/>
+                      <Cell col="16" text="bind:SN" textAlign="center" edittype="normal" suppress="0" editinputtype="dot,digit"/>
+                      <Cell col="17" text="bind:USE_YN" textAlign="center" edittype="combo" suppress="0" editinputtype="dot,digit" displaytype="combotext" combodataset="dsUseYnGrid" combocodecol="CODE" combodatacol="NAME"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Button id="btnAddAplcnYmd" taborder="7" text="  적용일자생성  " top="0" height="21" cssclass="btn_WF_Custom" fittocontents="width" visible="true" onclick="divDetail_btnAddAplcnYmd_onclick" width="110" right="gridRefe:10"/>
+              <Button id="btnAddHarmInfo" taborder="2" text="  위해정보코드등록  " top="0" width="110" height="21" cssclass="btn_WF_Custom" right="btnAddAplcnYmd:3" fittocontents="width" visible="true" onclick="divDetail_btnAddHarmInfo_onclick"/>
+              <Button id="btnDownExcel" taborder="4" text="  엑셀다운로드  " top="0" width="110" height="21" cssclass="btn_WF_Custom" right="btnAddHarmInfo:3" fittocontents="width" visible="true" onclick="btnExcelDownload_onclick"/>
+              <Button id="btnUploadExcel" taborder="3" text="  엑셀업로드  " top="0" width="110" height="21" cssclass="btn_WF_Custom" right="btnDownExcel:3" fittocontents="width" visible="true" onclick="btnExcelUpload_onclick"/>
+              <Static id="staProgListTitle00_01" taborder="5" text="기준치" cssclass="sta_WF_title02" width="150" bottom="gridRefe:5" height="21" right="110"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static01" taborder="3" text="10" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" textAlign="center"/>
+        <Static id="Static24" taborder="4" text="20" left="0" height="20" background="rgba(255,0,0,0.4)" visible="false" right="0" textAlign="center" top="53"/>
+        <Static id="Static01_00" taborder="5" text="10" left="0" top="0" background="rgba(255,0,0,0.4)" bottom="0" visible="false" textAlign="center" width="10"/>
+        <Static id="Static01_00_00" taborder="6" text="10" top="0" background="rgba(255,0,0,0.4)" bottom="0" visible="false" textAlign="center" width="10" right="0"/>
+        <Static id="Static00_00" taborder="7" text="10" left="10" background="rgba(255,0,0,0.4)" visible="false" color="red" textAlign="center" height="10" right="0" bottom="0"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsList" oncolumnchanged="dsList_oncolumnchanged" onrowposchanged="dsList_onrowposchanged">
+        <ColumnInfo>
+          <Column id="TEST_ID" type="STRING" size="255"/>
+          <Column id="GDS_CD" type="STRING" size="255"/>
+          <Column id="TEST_ITEM_CD" type="STRING" size="255"/>
+          <Column id="TEST_ITEM_NM" type="STRING" size="256"/>
+          <Column id="CERT_FLD_CD" type="STRING" size="255"/>
+          <Column id="CERT_KND_CD" type="STRING" size="255"/>
+          <Column id="CL_1" type="STRING" size="255"/>
+          <Column id="CL_2" type="STRING" size="255"/>
+          <Column id="CL_3" type="STRING" size="255"/>
+          <Column id="CL_4" type="STRING" size="255"/>
+          <Column id="CL_5" type="STRING" size="255"/>
+          <Column id="ATACH_DOC" type="STRING" size="255"/>
+          <Column id="FAUL_DIV_CD" type="STRING" size="255"/>
+          <Column id="DETC_LIMIT" type="STRING" size="255"/>
+          <Column id="UNIT" type="STRING" size="255"/>
+          <Column id="CALC_MTH_CD" type="STRING" size="255"/>
+          <Column id="HARM_INFO_CD" type="STRING" size="255"/>
+          <Column id="SN" type="STRING" size="255"/>
+          <Column id="USE_YN" type="STRING" size="255"/>
+          <Column id="TEST_DIV" type="STRING" size="256"/>
+          <Column id="FEE" type="STRING" size="256"/>
+          <Column id="TEST_DIV_CD" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="USE_YN" type="STRING" size="256"/>
+          <Column id="TEST_ITEM_CD" type="STRING" size="256"/>
+          <Column id="GDS_CD" type="STRING" size="256"/>
+          <Column id="TEST_NM" type="STRING" size="256"/>
+          <Column id="CERT_FLD_CD" type="STRING" size="256"/>
+          <Column id="TEST_DIV_CD" type="STRING" size="256"/>
+          <Column id="DETAIL_GDS_ID" type="STRING" size="256"/>
+          <Column id="TEST_ID" type="STRING" size="256"/>
+          <Column id="SEARCH_DETAIL_GDS_ID" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsAplcnYmd">
+        <ColumnInfo>
+          <ConstColumn id="CODE" type="STRING" size="30"/>
+          <ConstColumn id="NAME" type="STRING" size="30"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsTestDivCd">
+        <ColumnInfo>
+          <ConstColumn id="CODE" type="STRING" size="30"/>
+          <ConstColumn id="NAME" type="STRING" size="30"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsUseYn">
+        <ColumnInfo>
+          <ConstColumn id="CODE" type="STRING" size="30"/>
+          <ConstColumn id="NAME" type="STRING" size="30"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsUseYnGrid">
+        <ColumnInfo>
+          <ConstColumn id="CODE" type="STRING" size="30"/>
+          <ConstColumn id="NAME" type="STRING" size="30"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsFaulDivCd">
+        <ColumnInfo>
+          <ConstColumn id="CODE" type="STRING" size="30"/>
+          <ConstColumn id="NAME" type="STRING" size="30"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsTestItemCd">
+        <ColumnInfo>
+          <ConstColumn id="CODE" type="STRING" size="30"/>
+          <ConstColumn id="NAME" type="STRING" size="30"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsIneqCd">
+        <ColumnInfo>
+          <ConstColumn id="CODE" type="STRING" size="30"/>
+          <ConstColumn id="NAME" type="STRING" size="30"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsCalcMthCd">
+        <ColumnInfo>
+          <ConstColumn id="CODE" type="STRING" size="30"/>
+          <ConstColumn id="NAME" type="STRING" size="30"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsHarmInfoCd">
+        <ColumnInfo>
+          <ConstColumn id="CODE" type="STRING" size="30"/>
+          <ConstColumn id="NAME" type="STRING" size="30"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsExcelUpload"/>
+      <Dataset id="dsTestItemCdGrid">
+        <ColumnInfo>
+          <ConstColumn id="CODE" type="STRING" size="30"/>
+          <ConstColumn id="NAME" type="STRING" size="30"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsRefe"/>
+      <Dataset id="dsGdsCdGrid"/>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  공통시험항목관리 화면
+*
+*  @MenuPath    안전성조사 > 기초정보관리 > 공통시험항목관리
+*  @FileName    BAS020M02.xfdl 
+*  @Creator     doore
+*  @CreateDate  2023.02.17 
+*  @Version     1.0
+*  @Desction    설명 : 시험항목관리
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2023.02.17      doore               최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+this.fv_objGdsUserInfo = nexacro.getApplication().gdsUserInfo;
+this.fv_sProjectCd = nexacro.getApplication().av_sProjectCd;
+this.fv_sMenuCd = "";
+this.fv_objProgInfo;
+this.fv_harmInfo = "";
+this.fv_testItem = "";
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* formid_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.Form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this)) 
+   {    
+		// 공통코드 세팅
+		take.tranCode(this, 
+							[
+							"YN"
+							,"YN"
+							,"FAUL_DIV_CD"
+							,"TEST_ITEM_CD"
+							,"TEST_ITEM_CD"
+							,"CALC_MTH_CD"
+							,"HARM_INFO_CD"
+							,"FAUL_DIV_CD"
+							,"INEQ_CD"
+							]
+		                  , [
+							"dsUseYn"
+							,"dsUseYnGrid"
+							,"dsFaulDivCd"
+							,"dsTestItemCd"
+							,"dsTestItemCdGrid"
+							,"dsCalcMthCd"
+							,"dsHarmInfoCd"
+							,"dsFaulDivCd"
+							,"dsIneqCd"
+							]
+						  , ["ALL","","","","","",""],
+		function(sId, nErrCd, sErrMsg)
+		{
+			this.divSearch.form.cboUseYn.set_index(1);
+			this.fnSearch();
+		});
+	}
+};
+
+/*********************************************************
+ * 2.1 CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+		case "Search" :
+			if (this.dsList.rowcount > 0) 
+			{
+				var nRowCount = this.dsList.rowcount.toLocaleString("ko-KR");
+				this.divDetail.form.staTitle.set_text("공통시험항목 목록 ("+nRowCount+"건)");
+			}
+			else {
+				this.divDetail.form.staTitle.set_text("공통시험항목 목록");
+			}
+
+			break;
+		case "Save"	 :
+			take.alert(this, "", "저장 되었습니다.");
+			this.fnSearch();
+			
+			break;
+        case "Delete" : 
+			take.alert(this, "", "삭제가 완료되었습니다.");
+			this.fnSearch();
+			
+            break;
+        default :
+            break;
+    }        
+};
+/*********************************************************
+* 3 필수 FUNCTION 영역 (fnSearch, fnSave, fnAdd, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Search";
+	
+	this.dsList.clearData();
+	
+	//2023.03.06 김준오_ '공통','어린이제품' 호출
+	this.dsSearch.setColumn(0, "TEST_DIV_CD", "01");
+	this.dsSearch.setColumn(0, "CERT_FLD_CD", "03");
+		
+    take.tranSelect(this, "SearchCommon", "basicInfo.commonTestItemSelect", "dsSearch", "dsList", "", "fnCallback");
+};
+
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+this.fnSave = function(sTranId)
+{    
+	if (take.nvl(sTranId, "")=="") sTranId = "Save";
+	
+	//데이터셋 수정 여부 확인
+	if (!take.isDsModified(this.dsList) && !take.isDsModified(this.dsRefe))
+    {
+        take.alert(this, "Info", "변경된 데이터가 없습니다.");
+        return false;
+    }
+	
+	//저장 전 벨리데이션 체크
+    var bRtn = 
+        takeval.checkComp(
+            this,                          			//현재 Form Object
+            this.divDetail.form.gridMain,  	//벨리데이션 대상 컴포넌트 (Grid 및 Form류[this,div,tabpase])
+            "cellImport",                  			 //필수 입력 css값
+            "",                							//성공 Call Back 함수
+            true);                        			  //동기 여부
+			
+	if(bRtn) 
+	{
+		var sParam = "sNameSpace=basicInfo.testItemInsert|basicInfo.testItemUpdate|basicInfo.testItemDelete,"
+											+"basicInfo.aplcnRefeInsert|basicInfo.aplcnRefeUpdate|basicInfo.aplcnRefeDelete" 
+											+" sDataset=dsList|dsRefe";
+
+		take.transaction(this, sTranId, "SVC_LOC::doore/saveList.do", "dsList=dsList:U dsRefe=dsRefe:U", "", sParam, "fnCallback", false);
+	}
+};
+
+/**
+ * fnAdd : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+ * @example this.fnAddRow(sGrdId, nRow);
+ */
+this.fnAddRow = function(sGrdId, nRow)
+{
+    //변수에 값 세팅
+    var objDs = this.dsList;       //행 추가할 데이터셋
+		
+    //넘어온 Row값이 없으면 : 공통 등록 버튼을 통해 호출된 경우
+    if (take.nvl(nRow,"")=="") {
+		if(this.divDetail.form.gridMain.currentrow > -1) nRow = objDs.insertRow(this.divDetail.form.gridMain.currentrow + 1);
+		else nRow = objDs.addRow();
+    }
+	
+	// 기본정보 세팅
+	this.dsList.setColumn(nRow, "TEST_DIV_CD","01")
+	this.dsList.setColumn(nRow, "CERT_FLD_CD", "03");
+	this.dsList.setColumn(nRow, "USE_YN", "Y");
+};
+
+/**
+ * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number, Array} arrnRow    deleteRow 리턴값
+ * @return {N/A} N/A
+ * @example this.fnDelRow(sGrdId, nRow); 
+ */
+this.fnDelRow = function(sGrdId, arrnRow)
+{   
+	// row 상태가 insert 인경우만 삭제 가능
+	if(this.dsList.getRowType(this.dsList.rowposition) == 2) this.dsList.deleteRow();
+	else 
+	{
+		take.alert(this, "Info", "저장된 행은 삭제 할 수 없습니다.\n\n사용여부를 'N'으로 변경하여 주십시오.");
+		return false;
+	}
+};
+
+/*********************************************************
+ * 4 각 COMPONENT 별 EVENT 영역
+ ********************************************************/
+
+/**
+ * 조회조건에서 enter 입력시 처리
+ */
+this.divSearch_edtTitle_onkeyup = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+	if( e.keycode == 13 )
+	{
+		this.fnSearch();
+	}
+};
+
+/**
+ * divDetail_btnAddAplcnYmd_onclick : 작용일자 생성 버튼 클릭 이벤트
+ */
+this.divDetail_btnAddAplcnYmd_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	if (take.isDsModified(this.dsList))
+    {
+        take.alert(this, "Info", "풍목 정보를 저장후 작업하여 주십시오.");
+        return false;
+    }
+	
+	var sTestDivCd = this.dsList.getColumn(this.dsList.rowposition, "TEST_DIV_CD");
+	var sTestId = this.dsList.getColumn(this.dsList.rowposition, "TEST_ID");
+	
+	var arrParam = {
+				sTestDivCd : sTestDivCd,
+				sTestId : sTestId
+				};
+
+	take.openPopup(this, "addAplcnYmd", "biz::bas/BAS020P04.xfdl", arrParam, "resizable=false", 
+		function(){
+			this.fnSearchRefe();
+		}
+	);
+};
+
+/**
+ *  위해정보코드 등록 팝업 호출
+ */
+this.divDetail_btnAddHarmInfo_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	//인증분야 코드세팅 : '03'(어린이제품)
+	var sCertFldCd = "03";
+
+	var arrParam = {
+					sCertFldCd : sCertFldCd
+				  };
+
+	take.openPopup(this, "addTestItemCd", "biz::bas/BAS020P03.xfdl",arrParam, "resizable=true", 
+		function(){
+			this.fnSearch();
+		}
+	);
+};
+
+/**
+ * 위해정보코드 조회 버튼 클릭 event,
+ * 시험항목 조회 버튼 클릭 event
+ */
+this.divDetail_gridMain_onexpandup = function(obj:nexacro.Grid,e:nexacro.GridMouseEventInfo)
+{
+	if(take.getBindColName(obj, e.cell) == "HARM_INFO_CD")
+	{
+		this.fv_harmInfo = "";
+		
+		var sCertFldCd = this.dsList.getColumn(this.dsList.rowposition, "CERT_FLD_CD");
+	
+		if(take.isEmpty(sCertFldCd)) 
+		{
+			alert("인증분야를 선택 후 작업하여 주십시오.");
+			return false;
+		}
+		var arrParam = {
+					sCertFldCd : sCertFldCd
+				  };
+		
+		take.openPopup(this, "addTestItemCd", "biz::bas/BAS020P02.xfdl", arrParam, "", function(){
+				if(!take.isEmpty(this.fv_harmInfo.CODE_ID))
+				{
+					this.dsList.setColumn(e.row, "HARM_INFO_CD", this.fv_harmInfo.CODE_ID);
+					this.dsList.setColumn(e.row, "HARM_INFO_NM", this.fv_harmInfo.REF2);
+				}
+			});
+	}
+	
+	if(take.getBindColName(obj, e.cell) == "TEST_ITEM_NM")
+	{
+		this.fv_testItem = "";
+		
+		var sCertFldCd = this.dsList.getColumn(this.dsList.rowposition, "CERT_FLD_CD");
+		
+		var arrParam = {
+					sCertFldCd : sCertFldCd
+					};
+		
+		take.openPopup(this, "selectTestItemCd", "biz::bas/BAS020P05.xfdl", arrParam, "", function(){
+				if(!take.isEmpty(this.fv_testItem.CODE_ID))
+				{
+					this.dsList.setColumn(e.row, "TEST_ITEM_NM", this.fv_testItem.CODE_NM);
+					this.dsList.setColumn(e.row, "TEST_ITEM_CD", this.fv_testItem.CODE_ID);
+				}
+			});	
+	}
+};
+
+/**
+ * 엑셀다운로드 버튼 클릭 이벤트
+ */
+this.btnExcelDownload_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	gFnExcelDown (this, this.divDetail.form.gridMain, "시험항목_" + this.divSearch.form.edtTestItemCd.text);
+};
+
+/* 엑셀 업로드 클릭 이벤트 */
+this.btnExcelUpload_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	gFnExcelUpload(this, this.dsExcelUpload, 2, this.fnExcelImport_onsuccess, this.fnExcelImport_onerror);
+};
+
+/*********************************************************
+* 5 사용자 FUNCTION 영역
+********************************************************/
+/*
+	excel 업로드 성공
+*/
+this.fnExcelImport_onsuccess = function(obj:ExcelImportObject,  e:nexacro.ExcelImportEventInfo)
+{
+	var nCnt = this.dsExcelUpload.rowcount;
+    this.dsList.clearData();
+	var strMapp =  gFnGetMappingString(this.divDetail.form.gridMain);
+	
+	this.dsList.set_enableevent(false);
+	for(var i = 0; i < nCnt; i++) {
+		var nRow = this.dsList.addRow();
+		this.dsList.copyRow(nRow, this.dsExcelUpload, i, strMapp);
+		
+		//var returnObj = gFn_dataset2Object(this.dsList, this.dsList.rowposition);
+		var sGdsCd = this.dsList.getColumn(nRow, "GDS_CD");
+		var sTestItemNm = this.dsList.getColumn(nRow, "TEST_ITEM_NM");
+		//var sTestItemCd = this.dsList.getColumn(nRow, "TEST_ITEM_CD");
+		
+		//품목코드 세팅 : CODE = GDS_CD, REF1 = CERT_FLD_CD, REF2 = CERT_KND_CD
+		this.dsGdsCdGrid.filter("");
+		this.dsGdsCdGrid.filter("NAME == '" + sGdsCd + "'");
+		
+		if(this.dsGdsCdGrid.rowcount == 1)
+		{
+			this.dsList.setColumn(nRow, "GDS_CD", this.dsGdsCdGrid.getColumn(0, "CODE")); 
+			this.dsList.setColumn(nRow, "TEST_DIV_CD", "01");
+			this.dsList.setColumn(nRow, "CERT_FLD_CD", "03");
+			this.dsList.setColumn(nRow, "TEST_ITEM_CD", gFnGetCodeId(this.dsTestItemCdGrid, sTestItemNm)); 
+		} 
+		else
+		{
+			this.dsList.setColumn(nRow, "GDS_CD", ""); 
+			this.dsList.setColumn(nRow, "TEST_DIV_CD", "01");
+			this.dsList.setColumn(nRow, "CERT_FLD_CD", "03");
+			this.dsList.setColumn(nRow, "TEST_ITEM_CD", gFnGetCodeId(this.dsTestItemCdGrid, sTestItemNm)); 
+		}
+		this.dsGdsCdGrid.filter("");
+	}
+	this.dsList.set_enableevent(true);
+	
+	// 데이터셋 처리 : TEST_ID가 있는 경우 update, 없는 경우 insert
+	this.dsList.set_updatecontrol(false);
+	for(var i = 0; i < this.dsList.rowcount; i++)
+	{
+		if(take.isEmpty(this.dsList.getColumn(i, "TEST_ID"))) this.dsList.setRowType(i, "I");
+		else this.dsList.setRowType(i, "U");
+	}
+	this.dsList.set_updatecontrol(true);
+	this.divDetail.form.gridMain.selectRow(0);
+} 
+
+/*
+	기준치 조회
+*/
+this.fnSearchRefe = function()
+{
+	this.dsRefe.clearData();
+	
+	this.dsSearch.setColumn(0, "TEST_ID", this.dsList.getColumn(this.dsList.rowposition, "TEST_ID"));
+	this.dsSearch.setColumn(0, "DETAIL_GDS_ID", "GDS9999999999");
+	
+	if(take.isEmpty(this.dsList.getColumn(this.dsList.rowposition, "TEST_ID"))) return false;
+	
+	take.tranSelect(this, "SearchREFE", "basicInfo.aplcnRefeSelect", "dsSearch", "dsRefe", "", "fnCallback");
+}
+
+/*
+	시험항목 검색조건 엔터 값 조회
+*/
+this.divSearch_edtTestItemCd_onkeyup = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+	if(e.keycode == 13){
+		this.fnSearch();
+	}
+};
+/*
+	데이터셋의 변경에 따른 기준치 조회
+*/
+this.dsList_onrowposchanged = function(obj:nexacro.NormalDataset,e:nexacro.DSRowPosChangeEventInfo)
+{
+	this.fnSearchRefe();
+};
+]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="divSearch.form.cboCertFldCd" propid="value" datasetid="dsSearch" columnid="CERT_FLD_CD"/>
+      <BindItem id="item2" compid="divSearch.form.cboCertKndCd" propid="value" datasetid="dsSearch" columnid="CERT_KND_CD"/>
+      <BindItem id="item1" compid="divSearch.form.cboUseYn" propid="value" datasetid="dsSearch" columnid="USE_YN"/>
+      <BindItem id="item4" compid="divSearch.form.cboGdsCd" propid="value" datasetid="dsSearch" columnid="GDS_CD"/>
+      <BindItem id="item3" compid="divSearch.form.edtTestItemCd" propid="value" datasetid="dsSearch" columnid="TEST_NM"/>
+      <BindItem id="item5" compid="divSearch.form.edtTestItemCd" propid="value" datasetid="dsSearch" columnid="TEST_NM"/>
+      <BindItem id="item6" compid="divSearch.form.cboUseYn" propid="value" datasetid="dsSearch" columnid="USE_YN"/>
+    </Bind>
+  </Form>
+</FDL>

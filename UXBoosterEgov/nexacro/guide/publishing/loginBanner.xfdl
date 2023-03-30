@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="loginBanner" width="580" height="556" titletext="New Form">
+    <Layouts>
+      <Layout height="556" mobileorientation="landscape" stepcount="3" width="580">
+        <Static id="Static00" taborder="0" left="0" top="0" width="580" height="556" cssclass="sta_WF_loginBanner01"/>
+        <Static id="Static01" taborder="1" left="0" top="0" width="580" height="556" cssclass="sta_WF_loginBanner02" positionstep="1"/>
+        <Static id="Static02" taborder="2" left="0" top="0" width="580" height="556" cssclass="sta_WF_loginBanner03" positionstep="2"/>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>

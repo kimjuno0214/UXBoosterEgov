@@ -1,0 +1,444 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="sampleExcel" width="1040" height="970" titletext="엑셀다운로드" onload="form_onload">
+    <Layouts>
+      <Layout height="970" mobileorientation="landscape" width="1040" description="(대용량)엑셀다운로드">
+        <Static id="Static01" taborder="0" text="10" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="141" visible="false" textAlign="center"/>
+        <Static id="Static00" taborder="1" text="10" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="141" visible="false" textAlign="center" right="0"/>
+        <Static id="Static24" taborder="2" text="10" left="0" background="rgba(255,0,0,0.4)" visible="false" right="0" textAlign="center" height="10" bottom="0"/>
+        <Static id="Static24_00" taborder="3" text="10" left="10" height="10" background="rgba(255,0,0,0.4)" visible="false" right="-10" textAlign="center" top="0"/>
+        <Div id="divDetail" taborder="4" text="Div00" left="10" top="10" height="540" right="10">
+          <Layouts>
+            <Layout>
+              <Button id="btnDownload" taborder="0" text="대용량&#13;&#10;엑셀다운로드" top="4" width="120" height="51" left="10" onclick="divDetail_btnDownload_onclick"/>
+              <Static id="Static00" taborder="1" text="SampleController.java - createExcel 참고" left="145" top="20" width="235" height="28"/>
+              <Grid id="grdExcel" taborder="2" left="170" top="213" width="780" height="147" binddataset="dsExcel">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="24" band="head"/>
+                      <Row size="24"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="Column0"/>
+                      <Cell col="1" text="Column1"/>
+                      <Cell col="2" text="Column2"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:Column0"/>
+                      <Cell col="1" text="bind:Column1"/>
+                      <Cell col="2" text="bind:Column2"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Button id="btnGridExcel" taborder="3" text="그리드 엑셀&#13;&#10;(userProperty 필요없음)" top="213" width="140" height="39" left="10" onclick="divDetail_btnGridExcel_onclick"/>
+              <Button id="btnGridExcelRight" taborder="4" text="그리드 우클릭 엑셀&#13;&#10;userProperty 필요&#13;&#10;takegrid&#13;&#10;gridTitle&#13;&#10;&#13;&#10;권한-엑셀 필요" top="376" width="140" height="104" left="10"/>
+              <Grid id="grdExcelRight" taborder="5" left="170" top="376" width="780" height="147" binddataset="dsExcel" takegrid="popup,excel" gridTitle="그리드제목입니다">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="24" band="head"/>
+                      <Row size="24"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="Column0"/>
+                      <Cell col="1" text="Column1"/>
+                      <Cell col="2" text="Column2"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:Column0"/>
+                      <Cell col="1" text="expr:Column2 == &quot;1&quot; ? &quot;ggg&quot; : &quot;aaaaaaaa&quot;" cssclass="expr:Column2 == &quot;1&quot; ? &quot;ggg&quot; : &quot;aaaaaaaa&quot;"/>
+                      <Cell col="2" text="bind:Column2"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Button id="btnDownloadCSV" taborder="6" text="대용량&#13;&#10;CSV 다운로드" top="58" width="120" height="51" left="10" onclick="divDetail_btnDownloadCSV_onclick"/>
+              <Button id="btnGridCsv" taborder="7" text="그리드 csv 다운로드" top="306" width="140" height="23" left="171" onclick="divDetail_btnGridCsv_onclick" visible="false"/>
+              <Button id="btnGridCsvImport" taborder="8" text="그리드 csv 업로드" top="330" width="140" height="23" left="171" onclick="divDetail_btnGridCsvImport_onclick" visible="false"/>
+              <Button id="btnGridPdf" taborder="9" text="그리드 PDF&#13;&#10;(userProperty 필요없음)" top="254" width="140" height="39" left="10" onclick="divDetail_btnGridPdf_onclick" visible="false"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divExcel" taborder="5" text="Div00" left="510" top="20" width="98" height="45" url="frm::com/comExcel.xfdl" visible="false"/>
+        <Div id="divExcelUpDown" taborder="6" text="Div00" left="10" top="560" height="280" right="10">
+          <Layouts>
+            <Layout>
+              <Button id="btnExcelDownload" taborder="0" text="엑셀템플릿&#13;&#10;다운로드" top="10" width="140" height="59" left="10" onclick="divExcelUpDown_btnExcelDownload_onclick"/>
+              <Grid id="grdTemplate" taborder="1" left="171" top="11" width="780" height="121" binddataset="dsExcelData">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                    </Columns>
+                    <Rows>
+                      <Row band="head" size="24"/>
+                      <Row size="24"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="COLUMN0"/>
+                      <Cell col="1" text="COLUMN1"/>
+                      <Cell col="2" text="COLUMN2"/>
+                      <Cell col="3" text="COLUMN3"/>
+                      <Cell col="4" text="PRGRSTS"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:COLUMN0"/>
+                      <Cell col="1" text="bind:COLUMN1"/>
+                      <Cell col="2" text="bind:COLUMN2"/>
+                      <Cell col="3" text="bind:COLUMN3"/>
+                      <Cell col="4" text="bind:PRGRSTS"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Button id="btnExcelUpload" taborder="2" text="엑셀업로드" top="71" width="140" height="59" left="10" onclick="divExcelUpDown_btnExcelUpload_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Grid id="grdUpload" taborder="7" left="180" top="700" width="780" height="121" binddataset="dsExcelDataImport">
+          <Formats>
+            <Format id="default"/>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    1Depth > 2Depth
+*  @FileName    *.xfdl 
+*  @Creator     홍길동
+*  @CreateDate  yyyy.MM.DD 
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    Date          Modifier            Description
+*******************************************************************************
+*  YYYY.MM.DD      홍길동             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+this.form_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+	{
+	}
+};
+
+this.divDetail_btnDownload_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.divExcel.form.fnWebDownloadPost(
+		take.getSvcUrl() + "sample/createExcel.do"
+		, "한글테스트test.xlsx"
+		, {
+			  param1 : "test1"
+			, param2 : "test2"
+		}
+	);
+};
+
+this.divDetail_btnGridExcel_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	//ExportExcelGrid 파일명, 시트명, 타이틀명
+	this.divDetail.form.grdExcel.ExportExcelGrid( "test"
+								, "test1시트"
+								, "제목입니다.");
+};
+
+
+this.divDetail_btnGridPdf_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	//ExportPdfGrid
+	//this.divDetail.form.grdExcel.gridTitle = "sldfkjsldkfj";
+	this.divDetail.form.grdExcel.ExportPdfGrid("PDF제목");
+};
+
+this.divDetail_btnGridCsv_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.setWaitCursor(true);
+	
+	var fnBeforeUnload = (nexacro._Browser != "Runtime") ? window.onbeforeunload : null;
+	
+	var sFileName = "CSV템플릿";
+    var sSvcUrl   = take.getSvcUrl() + "XExportImport.do";
+	var exportObj = new ExcelExportObject("XExport", this);
+	
+	exportObj.addEventHandler("onsuccess", 
+		function(obj, successEvent) {
+			//다운로드 성공
+			this.setWaitCursor(false);
+			
+			if (fnBeforeUnload != "null"){
+				window.onbeforeunload = null;
+				nexacro._OnceCallbackTimer.callonce(
+					this,
+					function(){
+						window.onbeforeunload = fnBeforeUnload;
+					},
+					100
+				);
+			}
+		}, 
+	this);
+	
+	exportObj.addEventHandler("onerror", 
+		function (obj, errorEvent) {
+			//다운로드 실패
+			this.setWaitCursor(false);
+	   }, 
+	this);
+	
+	exportObj.set_exporturl(sSvcUrl);
+	exportObj.set_exporttype(nexacro.ExportTypes.CSV);
+	exportObj.set_exportfilename(sFileName);	
+	exportObj.set_exporteventtype("itemrecord");
+	exportObj.set_exportuitype("none");
+	exportObj.set_exportmessageprocess("%d[%d/%d]");
+	
+	// 익스포트할 그리드 추가
+	exportObj.addExportItem(nexacro.ExportItemTypes.GRID, this.divExcelUpDown.form.grdTemplate, "Sheet1!A1", "allband", "allrecord");
+	// 익스포트
+	var result = exportObj.exportData();
+};
+
+this.divDetail_btnGridCsvImport_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.setWaitCursor(true);
+	this.dsExcelDataImport.clear();
+	
+	if(this.all["XImport"])
+	{
+		var objDel = this.removeChild("XImport");
+			objDel.destroy();
+			objDel = null;
+	}
+    var objImport = new nexacro.ExcelImportObject("XImport", this); 
+    var sSvcUrl   = take.getSvcUrl() + "XExportImport.do";
+	
+    objImport.set_importtype(nexacro.ImportTypes.CSV);
+    objImport.addEventHandler("onsuccess", 
+		function(obj, successEvent) {
+			this.setWaitCursor(false);
+			take.alert(this, "Info", "CSV 업로드 성공");
+		}, 
+	this);
+	
+    objImport.addEventHandler("onerror", 
+		function(obj, errorEvent) {
+			this.setWaitCursor(false);
+			take.alert(this, "Info", "CSV 업로드 실패" + errorEvent.errormsg);
+		}, 
+	this);
+	
+	objImport.set_importurl(sSvcUrl);
+	this.alert('Import 할 파일의 형식이 CSV 인 경우 Import 할 영역이 적용되지 않습니다.');
+	//objImport.importData("", "Sheet1!A2", "dsExcel=output1");
+	objImport.importData("", "[command=getsheetdata;output=outDs;body=Sheet1!A2;]", "[dsExcel=outDs]");
+	objImport = null;
+};
+
+
+this.divDetail_btnDownloadCSV_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	//쿼리명, 파일명, 파라미터
+	this.divExcel.form.fnWebDownloadPost(
+		  take.getSvcUrl() + "sample/csv.do"
+		, "한글테스트test.csv"
+		, {
+		      namespace : "Sample.sampleTableSelect"
+			, param1 : "test1"
+			, param2 : "test2"
+		}
+	);
+};
+
+this.divExcelUpDown_btnExcelDownload_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.setWaitCursor(true);
+	
+	var fnBeforeUnload = (nexacro._Browser != "Runtime") ? window.onbeforeunload : null;
+	
+	var sFileName = "엑셀템플릿";
+    var sSvcUrl   = take.getSvcUrl() + "XExportImport.do";
+	var exportObj = new ExcelExportObject("XExport", this);
+	
+	exportObj.addEventHandler("onsuccess", 
+		function(obj, successEvent) {
+			//다운로드 성공
+			this.setWaitCursor(false);
+			if (fnBeforeUnload != "null"){
+				window.onbeforeunload = null;
+				nexacro._OnceCallbackTimer.callonce(
+					this,
+					function(){
+						window.onbeforeunload = fnBeforeUnload;
+					},
+					100
+				);
+			}
+		}, 
+	this);
+	
+	exportObj.addEventHandler("onerror", 
+		function (obj, errorEvent) {
+			//다운로드 실패
+			this.setWaitCursor(false);
+	   }, 
+	this);
+	
+	exportObj.set_exporturl(sSvcUrl);
+	exportObj.set_exporttype(nexacro.ExportTypes.EXCEL);
+	exportObj.set_exportfilename(sFileName);	
+	exportObj.set_exporteventtype("itemrecord");
+	exportObj.set_exportuitype("none");
+	exportObj.set_exportmessageprocess("%d[%d/%d]");
+	
+	// 익스포트할 그리드 추가
+	exportObj.addExportItem(nexacro.ExportItemTypes.GRID, this.divExcelUpDown.form.grdTemplate, "Sheet1!A1", "allband", "allrecord");
+	// 익스포트
+	var result = exportObj.exportData();
+};
+
+
+this.divExcelUpDown_btnExcelUpload_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.dsExcelDataImport.clear();
+	
+	if(this.all["XImport"])
+	{
+		var objDel = this.removeChild("XImport");
+			objDel.destroy();
+			objDel = null;
+	}
+    var objImport = new nexacro.ExcelImportObject("XImport", this); 
+    var sSvcUrl   = take.getSvcUrl() + "XExportImport.do";
+	
+    objImport.set_importtype(nexacro.ImportTypes.EXCEL);
+    objImport.addEventHandler("onsuccess", 
+		function(obj, successEvent) {
+			take.alert(this, "Info", "엑셀 업로드 성공\n서버로 전송합니다.");
+			
+			this.grdUpload.createFormat();
+			
+			//서버로 전송
+			take.transaction
+			(
+				this
+				, "saveExcel"
+				, "SVC_LOC::sample/saveExcel.do"
+				, "dsExcelDataImport=dsExcelDataImport"
+				, "dsExcelData=outDs"
+				, "PARAMETER1='1' PARAMETER2='2'"
+				, function(sId, nErrCd, sErrMsg){
+					if( sErrMsg == "SUCC" )
+					{
+						take.alert(this, "Info", "완료");
+					} else {
+						take.alert(this, "Error", sErrMsg);
+					}
+				}
+			);
+		}, 
+	this);
+	
+    objImport.addEventHandler("onerror", 
+		function(obj, errorEvent) {
+			take.alert(this, "Info", "엑셀 업로드 실패" + errorEvent.errormsg);
+		}, 
+	this);
+	
+	objImport.set_importurl(sSvcUrl);
+	objImport.importData("", "[Command=getsheetdata;head=Sheet1!A1:E1;body=Sheet1!A2]", "dsExcelDataImport");
+	objImport = null;
+};
+this.divDetail_btnGridExcelRight_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	
+};
+]]></Script>
+    <Objects>
+      <Dataset id="dsExcel">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">1</Col>
+            <Col id="Column1">1</Col>
+            <Col id="Column2">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">2</Col>
+            <Col id="Column1">2</Col>
+            <Col id="Column2">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">3</Col>
+            <Col id="Column1">3</Col>
+            <Col id="Column2">한글테스트</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsExcelData">
+        <ColumnInfo>
+          <Column id="COLUMN0" type="STRING" size="256"/>
+          <Column id="COLUMN1" type="STRING" size="256"/>
+          <Column id="COLUMN2" type="STRING" size="256"/>
+          <Column id="COLUMN3" type="STRING" size="256"/>
+          <Column id="PRGRSTS" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="COLUMN0">1</Col>
+            <Col id="COLUMN1">1</Col>
+            <Col id="COLUMN2">1</Col>
+            <Col id="COLUMN3">1</Col>
+          </Row>
+          <Row>
+            <Col id="COLUMN0">2</Col>
+            <Col id="COLUMN1">2</Col>
+            <Col id="COLUMN2">2</Col>
+            <Col id="COLUMN3">2</Col>
+          </Row>
+          <Row>
+            <Col id="COLUMN0">3</Col>
+            <Col id="COLUMN1">3</Col>
+            <Col id="COLUMN2">3</Col>
+            <Col id="COLUMN3">3</Col>
+          </Row>
+          <Row>
+            <Col id="COLUMN0">4</Col>
+            <Col id="COLUMN1">4</Col>
+            <Col id="COLUMN2">4</Col>
+            <Col id="COLUMN3">4</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsExcelDataImport"/>
+    </Objects>
+  </Form>
+</FDL>

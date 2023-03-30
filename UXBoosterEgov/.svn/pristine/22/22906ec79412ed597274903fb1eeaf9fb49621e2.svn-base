@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="dbcAt03" width="1425" height="607" titletext="대시보드 샘플03">
+    <Layouts>
+      <Layout height="607" mobileorientation="landscape" width="1425">
+        <ImageViewer id="ImageViewer00" taborder="0" left="0" top="0" right="0" bottom="0" image="url('theme::UXBooster/images/dbc/Dashboard_03.png')" stretch="fit" border="0px solid #ffffff"/>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>

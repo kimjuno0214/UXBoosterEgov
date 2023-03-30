@@ -1,0 +1,485 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="comFind" classname="comFind" left="0" top="0" width="370" height="214" titletext="찾기" onload="comFind_onload" onkeydown="comFind_onkeydown" border="1px solid #c0c0c0" background="#ffffff">
+    <Layouts>
+      <Layout>
+        <Static id="Static10_00_00_00" taborder="18" left="129" top="100" height="81" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="Static10_00_00" taborder="16" left="129" top="70" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="Static10" taborder="1" left="129" top="10" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <CheckBox id="chkEqual" taborder="7" text="전체문자일치" value="" left="134" top="150" width="211" height="23" onchanged="chkCommon_onchanged"/>
+        <CheckBox id="chkCheckCase" taborder="5" text="대소문자구분" left="134" top="128" width="211" height="23" onchanged="chkCommon_onchanged" value="false"/>
+        <Static id="staCode00_00" taborder="15" text="검색방향" left="10" top="70" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="Static09_00" taborder="6" text="Static03" left="0" top="181" height="5" background="red" visible="false" right="0"/>
+        <Button id="btnNext" taborder="8" text="다음찾기" onclick="btnNext_onclick" width="80" height="23" cssclass="btn_WF_search01" right="179" bottom="5"/>
+        <Button id="btnClose" taborder="9" text="닫기" width="58" height="23" onclick="btnClose_onclick" cssclass="btn_WF_cancel01" right="118" bottom="5"/>
+        <Static id="staCode" taborder="0" text="검색범위" left="10" top="10" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Combo id="cboSchCol" taborder="2" left="134" top="15" height="21" innerdataset="@dsColInfo" codecolumn="COLID" datacolumn="COLNM" autoselect="true" onitemchanged="cboSchCol_onitemchanged" right="16"/>
+        <CheckBox id="chkRepeat" taborder="4" text="반복검색" onchanged="chkCommon_onchanged" left="134" top="106" width="211" height="23" value="true"/>
+        <Static id="Static09_00_01" taborder="10" text="h10" left="0" background="rgba(224,159,30,0.40)" visible="false" textAlign="center" verticalAlign="middle" font="normal 7pt/normal &quot;Arial&quot;" height="10" top="0" width="400"/>
+        <Static id="Static09_00_00_00" taborder="11" text="w&#13;&#10;1&#13;&#10;0" left="0" top="0" height="240" background="RGBA(224,159,30,0.40)" visible="false" textAlign="center" verticalAlign="middle" font="normal 7pt/normal &quot;Arial&quot;" width="10"/>
+        <Static id="Static09_00_00_00_00" taborder="12" text="w&#13;&#10;1&#13;&#10;0" top="10" height="240" background="RGBA(224,159,30,0.40)" visible="false" textAlign="center" verticalAlign="middle" font="normal 7pt/normal &quot;Arial&quot;" width="10" right="0"/>
+        <Static id="Static10_00" taborder="14" left="129" top="40" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="staCode00" taborder="13" text="검색문자" left="10" top="40" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Edit id="edtSchVal" taborder="3" left="134" top="45" height="21" autoselect="true" onkeydown="edtSchVal_onkeydown" onchanged="edtSchVal_onchanged" right="16"/>
+        <Static id="staCode00_00_00" taborder="17" text="검색옵션" left="10" top="100" width="120" height="81" cssclass="sta_WF_th01L"/>
+        <Static id="Static09_00_00" taborder="19" text="Static03" left="10" background="red" visible="false" right="0" bottom="0" height="5"/>
+        <Combo id="cboDirection" taborder="20" left="134" top="74" height="23" innerdataset="dsDirect" codecolumn="CODE" datacolumn="NAME" index="0" autoselect="true" onitemchanged="cboSchCol_onitemchanged" text="아래로" value="DOWN" right="16"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsColInfo" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="COLID" type="STRING" size="256"/>
+          <Column id="COLNM" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsDirect">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/***************************************************************************************************
+ * 업무구분		: 포탈(대시보드) 시스템 구축
+ * 화 면 명		: comFind.xfdl
+ * 화면설명		: 그리드 공통 찾기 팝업
+ * 작 성 자		: TOBESOFT
+ * 작 성 일		:  
+ * 수정이력		
+ ***************************************************************************************************
+ *	수 정 일		수 정 자		수정 내용
+ ***************************************************************************************************
+ *									내부팝업입니다. 직접 사용하지 마세요. 
+ ***************************************************************************************************/
+ 
+/***************************************************************************************************
+ *	FORM 변수 선언 영역
+ ***************************************************************************************************/
+this.fvGrd,this.fvDst,this.fvRow;
+ 
+/***************************************************************************************************
+ *	FORM EVENT 영역 (onload)
+ ***************************************************************************************************/ 
+/**
+ *	comFind_onload		: onload Event
+ *	@ return 			: N/A
+ */
+this.comFind_onload = function(obj:Form, e:LoadEventInfo)
+{
+	var objParamInfo = this.parent.gridInfo;
+	
+	if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+	{
+		take.tranCode(this, ["00040"], ["dsDirect"], "NONE", 
+			function(){
+				this.cboDirection.set_value("DOWN");
+			}
+		);
+		
+		var objParamInfo = this.parent.gridInfo;
+		
+		/* 대상그리드에 대한 컬럼정보 수집 */
+		this.fvGrd	 = objParamInfo["grid"];
+		this.fvDst	 = this.fvGrd.getBindDataset();
+		this.fvRow	 = this.fnInitFind();
+
+		var nRow	 = objParamInfo["row" ];
+		var nCell	 = objParamInfo["cell"];
+		var nCol	 = objParamInfo["col" ];
+		var nComboIdx=  0;
+		var nFindRow = -1;
+
+		/* 찾기 및 바꾸기 컬럼정보 설정 */
+		this.fnGatherColInfo();
+		
+		if (nRow == -1) 
+		{		
+			// Head를 선택했을때
+			var sCellTxt = this.fvGrd._xfnTrim(this.fvGrd.getCellProperty("head", nCell, "text"));
+				sCellTxt = this.fvGrd._xfnRemoveSortMarkText(sCellTxt);
+				
+				nFindRow = this.dsColInfo.findRow("COLNM", sCellTxt );
+		}
+		else if (nRow >= 0) 
+		{	
+			// Body를 선택했을때
+			var sCellTxt = this.fvGrd._xfnTrim(this.fvGrd.getCellProperty("body", nCell, "text"));
+
+			if (sCellTxt.toLowerCase().indexOf("bind:") >= 0) 
+			{
+				sCellTxt = sCellTxt.substr(5);			
+				nFindRow = this.dsColInfo.findRow("COLID", sCellTxt);
+			}
+		}
+		
+		if (nFindRow >= 0) 
+		{
+			nComboIdx = nFindRow;
+			this.edtSchVal.setFocus();
+		}
+		this.fv_nComboIdx = nComboIdx;
+		this.cboSchCol.set_index(nComboIdx);
+	}
+};
+
+/**
+ *	comFind_onkeydown	: onkeydown Event
+ *	@ return 			: N/A
+ *	@ example 			: N/A
+ */
+this.comFind_onkeydown = function(obj:Form, e:nexacro.KeyEventInfo)
+{
+	if (e.keycode == 27) this.fvGrd._xfnClose(this, "");
+}
+
+/***************************************************************************************************
+ *	TRANSACTION 서비스 호출 처리
+ ***************************************************************************************************/ 
+ 
+/***************************************************************************************************
+ *	CALLBACK 콜백 호출 처리   
+ ***************************************************************************************************/  
+ 
+/***************************************************************************************************
+ *	각 COMPONENT 별 EVENT 영역
+ ***************************************************************************************************/  
+/**
+ *	edtSchVal_onkeydown	: onkeydown Event
+ *	@ return 			: N/A
+ *	@ example 			: N/A
+ */
+this.edtSchVal_onkeydown = function(obj:Edit, e:nexacro.KeyEventInfo)
+{
+	if (e.keycode == "13") this.btnNext.click();
+}
+
+/**
+ *	edtSchVal_onchanged	: onchanged Event
+ *	@ return 			: N/A
+ *	@ example 			: N/A
+ */
+this.edtSchVal_onchanged = function(obj:Edit, e:nexacro.ChangeEventInfo)
+{
+	this.fnInitFind();
+}
+
+/**
+ *	cboSchCol_onitemchanged	: onitemchanged Event
+ *	@ return 				: N/A
+ *	@ example 				: N/A
+ */
+this.cboSchCol_onitemchanged = function(obj:Combo, e:nexacro.ItemChangeEventInfo)
+{
+	this.fnInitFind();
+	this.fv_nComboIdx = e.postindex;
+	trace("this.fv_nComboIdx >>>  "+this.fv_nComboIdx);
+}
+
+/**
+ *	chkCommon_onchanged	: onchanged  Event
+ *	@ return 				: N/A
+ *	@ example 				: N/A
+ */
+this.chkCommon_onchanged = function(obj:CheckBox, e:nexacro.CheckBoxChangeEventInfo)
+{
+	this.fnInitFind();
+}
+
+/**
+ *	btnNext_onclick	: onclick Event
+ *	@ return 		: N/A
+ *	@ example 		: N/A
+ */
+this.btnNext_onclick = function(obj:Button,  e:ClickEventInfo)
+{
+	var nOldFindRow	= this.fvRow;			// 기존 찾은 값
+	var nNewFindRow	= this.fnGetFindData();	// 현재 찾은 값
+    var nCell;
+	
+	// 기존에 찾는 Row가 지금 찾은 Row와 같으면
+	if (nOldFindRow >= 0 && nOldFindRow == nNewFindRow) 
+	{
+		this.alert("현재 찾은 데이터 외 더 이상 찾는 데이터가 없습니다.");
+		this.edtSchVal.setFocus();
+		return;
+	}
+
+	this.fvRow	= nNewFindRow;
+	
+	if (nNewFindRow < 0)  
+	{
+		if (nOldFindRow >= 0) 
+			this.alert("더 이상 찾는 데이터가 없습니다.");
+		else 
+			this.alert("찾는 데이터가 없습니다."			);
+			
+		this.edtSchVal.setFocus();
+		return;
+	}
+	else 
+	{
+        //nCell = this.parent.gridInfo["cell"];        
+        nCell = this.fvGrd.getBindCellIndex( "body", this.fvGrd._xfnTrim(this.cboSchCol.value));
+        
+		this.fvDst.set_rowposition(nNewFindRow);
+		this.fvGrd.setCellPos(nCell);
+        
+        if (this.fvGrd.selecttype.indexOf("area")>=0)
+        {
+            this.fvGrd.selectArea( nNewFindRow, nCell, nNewFindRow, nCell );
+        }
+        
+// 		if (this.fvGrd.selecttype != "row")
+// 		{
+// 			this.fvGrd.clearSelect();
+// 			this.fvGrd.selectRow(nNewFindRow, true);
+// 		}
+	}
+}
+
+/**
+ *	btnClose_onclick 	: onclick Event
+ *	@ return 			: N/A
+ *	@ example 			: N/A
+ */
+this.btnClose_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.fvGrd._xfnClose(this, "");
+}
+
+/***************************************************************************************************
+ *	사용자 FUNCTION 영역
+ ***************************************************************************************************/  
+ /**
+ *	fnInitFind 	: 검색 Row 값 초기화
+ *	@ return 	: N/A
+ *	@ example 	: N/A
+ */
+this.fnInitFind = function()
+{
+	this.fvRow	= -1;
+    this.fvDst.set_rowposition(0);
+}
+
+/**
+ *	fnGatherColInfo	: 검색범위 Dataset 생성
+ *	@ return 		: N/A
+ *	@ example 		: N/A
+ */
+this.fnGatherColInfo = function()
+{
+	this.dsColInfo.set_enableevent(false);
+	
+	for (var i=0; i<this.fvGrd.getCellCount("body"); i++)
+	{
+		if (this.fvGrd.getCellProperty("body", i, "displaytype") != "image")	
+		{
+			/* head와 body의 column index가 다른경우 확인해야함 */
+			var sCellTxt	= this.fvGrd._xfnTrim(this.fvGrd.getCellProperty("body", i, "text"));
+			
+			var nCellRow	= parseInt(this.fvGrd._xfnTrim(this.fvGrd.getCellProperty("body", i, "row")));
+			var nCellCol	= parseInt(this.fvGrd._xfnTrim(this.fvGrd.getCellProperty("body", i, "col")));
+			
+			if (sCellTxt.toLowerCase().indexOf("bind:") < 0) continue;
+				sCellTxt = sCellTxt.substr(5);
+
+			var objColInfo	= this.fvDst.getColumnInfo(sCellTxt);
+			
+			if (this.fvGrd._xfnIsEmpty(objColInfo)) continue;
+			
+			 // 공통체크박스 제외
+			if (sCellTxt == "chk") continue;
+		
+			/* 마지막 Row에 대한 명칭을 가져온다 */
+			var sHeadTxt		= this.fnGetHeadText(this.fvGrd, nCellCol, nCellRow);
+				sHeadTxt		= this.fvGrd._xfnNvl(sHeadTxt, sCellTxt);
+
+			var nRow	= this.dsColInfo.addRow();
+			this.dsColInfo.setColumn(nRow, "COLID", sCellTxt);
+			this.dsColInfo.setColumn(nRow, "COLNM", sHeadTxt);
+		}
+	}
+	
+	this.dsColInfo.set_enableevent(true);
+}
+
+/**
+ *	fnGetHeadText	: 대상 그리드 Head 정보 추출
+ *	@ return 		: N/A
+ *	@ example 		: N/A
+ */
+this.fnGetHeadText = function(objGrid, nBodyCol, nBodyRow)
+{
+	var sHeadTxt	= "";
+	var nHeadCnt	= objGrid.getCellCount("head");
+	var nBodyCnt	= objGrid.getCellCount("body");
+	var nHeadRowCnt = parseInt(objGrid.getCellProperty("head", nHeadCnt-1, "row"));
+	var nBodyRowCnt = parseInt(objGrid.getCellProperty("body", nBodyCnt-1, "row"));
+
+	for(var i=0; i<nHeadCnt; i++)
+	{		
+		var nHeadCol = objGrid.getCellProperty("head", i, "col");
+		var nHeadRow = objGrid.getCellProperty("head", i, "row");
+		
+		// Head, Body라인이 동일한 경우
+		if (nHeadRowCnt == nBodyRowCnt) 
+		{ 
+			if (nHeadRow > nBodyRow) break;
+		}
+		else if (nHeadRowCnt > nBodyRowCnt) 
+		{
+			// Head가 Body라인보다 많은경우
+			/* 전체Head라인 - 현재검색중인 Body라인 < 현재Head라인 */
+			if (nHeadRowCnt - (nBodyRowCnt - nBodyRow) < nHeadRow) break;
+		}
+		else 
+		{
+			//해당경우가 발생할 경우 제한사항 추가해야함
+		}
+
+		if (nHeadCol == nBodyCol) 
+			sHeadTxt	= objGrid._xfnRemoveSortMarkText(objGrid.getCellProperty("head", i, "text"));
+	}	
+	
+	return sHeadTxt;
+}
+
+/**
+ *	fnGetFindData	: 대상 그리드에서 일치하는 값 찾기
+ *	@ return 		: N/A
+ *	@ example 		: N/A
+ */
+this.fnGetFindData = function()
+{
+	var strSearchColId	= this.fvGrd._xfnTrim(this.cboSchCol.value);
+	var strSearchString	= this.fvGrd._xfnNullToEmpty(this.edtSchVal.value); // String
+
+	if (this.fvGrd._xfnIsEmpty(strSearchColId)) 
+	{
+		this.alert("검색범위를 선택하세요.");
+		this.cboSchCol.setFocus();
+		return;
+	}
+	
+	if (this.fvGrd._xfnIsEmptyTrim(strSearchString)) 
+	{
+		this.alert("검색문자를 입력하세요." );
+		this.edtSchVal.setFocus();
+		return;
+	}
+	
+	var nCurrow			= Math.max(this.fvDst.rowposition, 0);
+	
+	var nFindRow		= -1; //초기화
+	var bEqualSearch	= this.chkEqual.isChecked();
+	var bCheckCase		= this.chkCheckCase.isChecked();
+	var bRepeat			= this.chkRepeat.isChecked();
+	var strDirection	= this.cboDirection.value;
+	var strColType		= this.fvDst.getColumnInfo(strSearchColId).type.toUpperCase();
+
+	// STRING 으로 취급하여 처리하며 INT,FLOAT,BIGDECIMAL,DATE 의 경우 전체일치 검색으로 처리
+	switch(strColType)
+	{
+		case "INT" 		  :
+		case "FLOAT" 	  :
+		case "BIGDECIMAL" :
+			if (!this.fvGrd._xfnIsDigit(strSearchString	   )) return false;	// 숫자는 무조건 일치
+		break;
+
+		case "DATE" :
+			if (!this.fvGrd._xfnIsStringDate(strSearchString)) return false;	// 날짜는 무조건 일치
+		break;
+	}
+
+	var nStartRow  = nCurrow;
+
+	// 순차검색
+	if (strDirection == "DOWN")
+	{
+		if (nCurrow == this.fvRow) nStartRow++;
+
+		for (var i=nStartRow; i<this.fvDst.getRowCount(); i++)
+		{				
+			var strColData	= String(this.fvDst.getColumn(i, strSearchColId)); 		// String
+
+			if (this.fnIsMatching(strColData, strSearchString, bEqualSearch, bCheckCase)) 
+			{
+				nFindRow	= i;
+				break;
+			}
+		}
+		
+		if (bRepeat && nFindRow < 0) 
+		{
+			for (var i=0; i<nStartRow; i++)
+			{				
+				var strColData	= String(this.fvDst.getColumn(i, strSearchColId)); // String
+
+				if (this.fnIsMatching(strColData, strSearchString, bEqualSearch, bCheckCase)) 
+				{
+					nFindRow	= i;
+					break;
+				}
+			}
+		}
+	}
+	else 
+	{ 
+		// 역순검색
+		if (nCurrow == this.fvRow) nStartRow--;
+
+		for (var i=nStartRow; i>=0; i--)
+		{		
+			var strColData	= String(this.fvDst.getColumn(i, strSearchColId));
+			
+			if (this.fnIsMatching(strColData, strSearchString, bEqualSearch, bCheckCase)) 
+			{
+				nFindRow	= i;
+				break;
+			}
+		}
+		if (bRepeat && nFindRow < 0) 
+		{
+			for (var i=this.fvDst.getRowCount()-1; i>nStartRow; i--)
+			{		
+				var strColData	= String(this.fvDst.getColumn(i, strSearchColId));
+				
+				if (this.fnIsMatching(strColData, strSearchString, bEqualSearch, bCheckCase)) 
+				{
+					nFindRow	= i;
+					break;
+				}
+			}
+		}
+	}
+	return nFindRow;
+}
+
+/**
+ *	fnGetFindData	: 대상 그리드에서 일치하는 값 여부
+ *	@ return 		: N/A
+ *	@ example 		: N/A
+ */
+this.fnIsMatching = function(strTarget, strSubString, bEqual, bCheckCase)
+{
+	if (!bCheckCase) 
+	{
+		strTarget		= strTarget.toUpperCase();
+		strSubString	= strSubString.toUpperCase();
+	}
+
+	if (strTarget == strSubString) 
+	{
+		return true;
+	}
+	else if (!bEqual && strTarget.indexOf(strSubString) >= 0) 
+	{
+		return true;
+	}
+	
+	return false;
+}]]></Script>
+  </Form>
+</FDL>

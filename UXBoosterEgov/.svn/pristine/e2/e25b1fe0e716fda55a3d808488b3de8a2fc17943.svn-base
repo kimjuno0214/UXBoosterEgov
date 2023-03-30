@@ -1,0 +1,1776 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+* 관리자 > 시스템관리 관련
+*
+* @filename mappers/adm/SystemCommonMapper.xml
+* @author takeit
+* @since 2019.08.02
+* @version 1.0
+* @see
+*
+* << 변경 이력(Modification Information) >>
+*
+* 변경번호 : #1
+* 변경일자 : 2019.08.02
+* 변경사람 : takeit
+* 변경내용 : 신규 생성
+ -->
+<mapper namespace="SystemCommon">
+	<!-- system_info(시스템정보) START -->
+
+	<resultMap type="takeResultMap" id="policyMap">
+        <result column="POLICY_INFO" property="POLICY_INFO" jdbcType="CLOB" javaType="java.lang.String" />
+        <result column="PRIVACY_INFO" property="PRIVACY_INFO" jdbcType="CLOB" javaType="java.lang.String" />
+    </resultMap>
+
+    <resultMap type="takeResultMap" id="fileMap">
+        <result column="FILE_BLOB" property="FILE_BLOB" jdbcType="CLOB" javaType="java.lang.String" />
+    </resultMap>
+
+    <resultMap type="takeResultMap" id="manualMap">
+        <result column="MANUAL_TXT" property="MANUAL_TXT" jdbcType="CLOB" javaType="java.lang.String" />
+    </resultMap>
+
+
+    <select id="systemInfoDetail" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		 * SystemCommon.systemInfoDetail
+		 * 시스템정보 상세
+		 * @author takeit
+		 * @since 2019.08.02
+		 */
+		]]>
+		SELECT
+			S.SYSTEM_ID					-- 시스템ID
+			, S.SYSTEM_NM				-- 시스템명
+			, S.MANAGER_CD				-- 담당자코드
+			, U.USER_NM AS MANAGER_NM	-- 담당자명
+			, (
+				SELECT
+					<if test="_databaseId == 'Oracle'">
+					TO_CHAR(TO_TIMESTAMP(DEPLOY_DATE||DEPLOY_TIME, 'YYYYMMDDHH24MI'), 'YYYY-MM-DD HH24:MI')
+					</if>
+					<if test="_databaseId == 'SQL Server'">
+					CONVERT(CHAR, CONVERT(DATETIME, DEPLOY_DATE||DEPLOY_TIME), 'YYYY-MM-DD HH24:MI')
+					</if>
+					<if test="_databaseId == 'MySQL'">
+					DATE_FORMAT(CONCAT(DEPLOY_DATE, DEPLOY_TIME), '%Y-%m-%d %H:%i')
+					</if>
+					<if test="_databaseId == 'PostgreSQL'">
+					TO_CHAR(TO_TIMESTAMP(DEPLOY_DATE||DEPLOY_TIME, 'YYYYMMDDHH24MI'), 'YYYY-MM-DD HH24:MI')
+					</if> 
+					
+				FROM SYSTEM_DEPLOY X
+				WHERE X.SYSTEM_ID = S.SYSTEM_ID
+					AND X.DEPLOY_SEQ = (
+						SELECT MAX(DEPLOY_SEQ) FROM SYSTEM_DEPLOY
+					)
+			) AS LAST_DEPLOY_DT			-- 최종배포일시
+			, S.LOGO_IMG				-- 회사로고이미지
+			, S.BANNER_IMG				-- 배너이미지
+			, S.POLICY_INFO				-- 시스템이용약관
+			, S.PRIVACY_INFO			-- 개인정보처리방침
+			, S.SYSTEM_VERSION			-- 버전정보
+			, S.SYSTEM_LICENSE			-- 라이센스
+			, S.DESC_TXT				-- 상세설명
+			, S.SHORTCUT_INPUT			-- 신규단축키
+			, S.SHORTCUT_DELETE			-- 삭제단축키
+			, S.SHORTCUT_SAVE			-- 저장단축키
+			, S.SHORTCUT_PRINT			-- 인쇄단축키
+			, S.SHORTCUT_EXCEL			-- 엑셀단축키
+			, S.SHORTCUT_MANUAL			-- 매뉴얼단축키
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="S.REG_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			</include> AS REG_DT		-- 등록일시
+			, S.REG_CD					-- 등록자코드
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="S.MOD_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			</include> AS MOD_DT		-- 수정일시
+			, S.MOD_CD					-- 수정자코드
+		FROM SYSTEM_INFO S
+			INNER JOIN USER_INFO U ON S.MANAGER_CD = U.USER_CD
+		WHERE S.SYSTEM_ID = #{SYSTEM_ID}
+	</select>
+
+	<select id="systemInfoDetail2" parameterType="map" timeout="0" resultMap="policyMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.systemInfoDetail
+		* 시스템정보 상세
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		SELECT
+			S.SYSTEM_ID					-- 시스템ID
+			, S.SYSTEM_NM				-- 시스템명
+			, S.MANAGER_CD				-- 담당자코드
+			, U.USER_NM AS MANAGER_NM	-- 담당자명
+			, (
+				SELECT 
+					<if test="_databaseId == 'Oracle'">
+					TO_CHAR(TO_TIMESTAMP(DEPLOY_DATE||DEPLOY_TIME, 'YYYYMMDDHH24MI'), 'YYYY-MM-DD HH24:MI')
+					</if>
+					<if test="_databaseId == 'SQL Server'">
+					CONVERT(CHAR, CONVERT(DATETIME, DEPLOY_DATE||DEPLOY_TIME), 'YYYY-MM-DD HH24:MI')
+					</if>
+					<if test="_databaseId == 'MySQL'">
+					DATE_FORMAT(CONCAT(DEPLOY_DATE, DEPLOY_TIME), '%Y-%m-%d %H:%i')
+					</if>
+					<if test="_databaseId == 'PostgreSQL'">
+					TO_CHAR(TO_TIMESTAMP(DEPLOY_DATE||DEPLOY_TIME, 'YYYYMMDDHH24MI'), 'YYYY-MM-DD HH24:MI')
+					</if>				
+				FROM SYSTEM_DEPLOY X
+				WHERE X.SYSTEM_ID = S.SYSTEM_ID
+					AND X.DEPLOY_SEQ = (
+						SELECT MAX(DEPLOY_SEQ) FROM SYSTEM_DEPLOY
+					)
+			) AS LAST_DEPLOY_DT			-- 최종배포일시
+			, S.LOGO_IMG				-- 회사로고이미지
+			, S.BANNER_IMG				-- 배너이미지
+			, S.POLICY_INFO				-- 시스템이용약관
+			, S.PRIVACY_INFO			-- 개인정보처리방침
+			, S.SYSTEM_VERSION			-- 버전정보
+			, S.SYSTEM_LICENSE			-- 라이센스
+			, S.DESC_TXT				-- 상세설명
+			, S.SHORTCUT_INPUT			-- 신규단축키
+			, S.SHORTCUT_DELETE			-- 삭제단축키
+			, S.SHORTCUT_SAVE			-- 저장단축키
+			, S.SHORTCUT_PRINT			-- 인쇄단축키
+			, S.SHORTCUT_EXCEL			-- 엑셀단축키
+			, S.SHORTCUT_MANUAL			-- 매뉴얼단축키
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="S.REG_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			</include> AS REG_DT		-- 등록일시
+			, S.REG_CD					-- 등록자코드
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="S.MOD_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			</include> AS MOD_DT		-- 수정일시
+			, S.MOD_CD					-- 수정자코드
+		FROM SYSTEM_INFO S
+			INNER JOIN USER_INFO U ON S.MANAGER_CD = U.USER_CD
+		WHERE S.SYSTEM_ID = #{SYSTEM_ID}
+	</select>
+
+	<update id="systemInfoMainUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.systemInfoMainUpdate
+		* 시스템정보 수정(메인)
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		UPDATE SYSTEM_INFO
+		SET
+			SYSTEM_NM = #{SYSTEM_NM}				-- 시스템명
+			, MANAGER_CD = #{MANAGER_CD}			-- 담당자코드
+			, SYSTEM_VERSION = #{SYSTEM_VERSION}	-- 버전정보
+			, SYSTEM_LICENSE = #{SYSTEM_LICENSE}	-- 라이센스
+			, DESC_TXT = #{DESC_TXT}				-- 상세설명
+			, MOD_DT = <include refid="CommonInc.sysdate" />						-- 수정일시
+			, MOD_CD = #{_sessionUserCd}			-- 수정자코드
+		WHERE SYSTEM_ID = #{SYSTEM_ID}				-- 시스템ID
+	</update>
+
+	<update id="systemInfoImageUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.systemInfoImageUpdate
+		* 시스템정보 수정(이미지)
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		UPDATE SYSTEM_INFO
+		SET
+			LOGO_IMG = #{LOGO_IMG}				-- 회사로고이미지
+			, BANNER_IMG = #{BANNER_IMG}			-- 배너이미지
+			, MOD_DT = <include refid="CommonInc.sysdate" />						-- 수정일시
+			, MOD_CD = #{_sessionUserCd}			-- 수정자코드
+		WHERE SYSTEM_ID = #{SYSTEM_ID}				-- 시스템ID
+	</update>
+
+	<update id="systemInfoPolicyUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.systemInfoPolicyUpdate
+		* 시스템정보 수정(정책-시스템이용약관,개인정보처리방침)
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		UPDATE SYSTEM_INFO
+		SET
+			POLICY_INFO = #{POLICY_INFO,jdbcType=CLOB}			-- 시스템이용약관
+			, PRIVACY_INFO = #{PRIVACY_INFO,jdbcType=CLOB}		-- 개인정보처리방침
+			, MOD_DT = <include refid="CommonInc.sysdate" />						-- 수정일시
+			, MOD_CD = #{_sessionUserCd}			-- 수정자코드
+		WHERE SYSTEM_ID = #{SYSTEM_ID}				-- 시스템ID
+	</update>
+
+	<update id="systemInfoButtonUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.systemInfoButtonUpdate
+		* 시스템정보 수정(공통버튼단축키)
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		UPDATE SYSTEM_INFO
+		SET
+			SHORTCUT_INPUT = #{SHORTCUT_INPUT}	-- 신규단축키
+			, SHORTCUT_DELETE = #{SHORTCUT_DELETE}	-- 삭제단축키
+			, SHORTCUT_SAVE = #{SHORTCUT_SAVE}		-- 저장단축키
+			, SHORTCUT_PRINT = #{SHORTCUT_PRINT}	-- 인쇄단축키
+			, SHORTCUT_EXCEL = #{SHORTCUT_EXCEL}	-- 엑셀단축키
+			, SHORTCUT_MANUAL = #{SHORTCUT_MANUAL}	-- 매뉴얼단축키
+			, MOD_DT = <include refid="CommonInc.sysdate" />						-- 수정일시
+			, MOD_CD = #{_sessionUserCd}			-- 수정자코드
+		WHERE SYSTEM_ID = #{SYSTEM_ID}				-- 시스템ID
+	</update>
+	<!-- system_info(시스템정보) END -->
+
+	<!-- system_deploy(시스템배포관리) START -->
+	<select id="systemDeployList" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.systemDeployList
+		* 시스템배포관리 목록
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		SELECT
+			S.SYSTEM_ID																		-- 시스템ID
+			, S.DEPLOY_SEQ																	-- 배포일련번호
+			, <include refid="CommonInc.rownum" />
+			
+			<if test="_databaseId == 'Oracle'">
+			, TO_CHAR(TO_TIMESTAMP(S.DEPLOY_DATE, 'YYYYMMDD'), 'YYYY-MM-DD') AS DEPLOY_DATE	-- 배포일자
+			, TO_CHAR(TO_TIMESTAMP(S.DEPLOY_TIME, 'HH24MI'), 'HH24:MI') AS DEPLOY_TIME		-- 배포일시
+			</if>
+			<if test="_databaseId == 'SQL Server'">
+			, CONVERT(CHAR, CONVERT(DATETIME, S.DEPLOY_DATE), 'YYYY-MM-DD') AS DEPLOY_DATE	-- 배포일자
+			, CONVERT(CHAR, CONVERT(DATETIME, S.DEPLOY_TIME), 'HH24:MI') AS DEPLOY_TIME		-- 배포일시
+			</if>
+			<if test="_databaseId == 'MySQL'">
+			, DATE_FORMAT(S.DEPLOY_DATE, '%Y-%m-%d') AS DEPLOY_DATE	-- 배포일자
+			, DATE_FORMAT(CONCAT(S.DEPLOY_DATE, S.DEPLOY_TIME, '00'), '%H:%i') AS DEPLOY_TIME	-- 배포일자
+			</if>
+			<if test="_databaseId == 'PostgreSQL'">
+			, TO_CHAR(TO_TIMESTAMP(S.DEPLOY_DATE, 'YYYYMMDD'), 'YYYY-MM-DD') AS DEPLOY_DATE	-- 배포일자
+			, TO_CHAR(TO_TIMESTAMP(S.DEPLOY_TIME, 'HH24MI'), 'HH24:MI') AS DEPLOY_TIME		-- 배포일시
+			</if> 
+			
+			, S.DEPLOY_CD																	-- 배포자코드
+			, U.USER_NM AS DEPLOY_NM														-- 배포자명
+			, S.DEPLOY_TYPE																	-- 배포유형
+			, S.DEPLOY_DESC																	-- 배포내용
+			, S.USE_YN																		-- 사용여부
+		FROM SYSTEM_DEPLOY S
+			LEFT OUTER JOIN USER_INFO U ON S.DEPLOY_CD = U.USER_CD
+		WHERE S.SYSTEM_ID = #{SYSTEM_ID}
+			AND S.USE_YN = 'Y'
+		ORDER BY S.DEPLOY_SEQ DESC
+	</select>
+
+	<insert id="systemDeployInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.systemDeployInsert
+		* 시스템배포관리 입력
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		<selectKey keyProperty="maxSeq" resultType="String" order="BEFORE">
+			SELECT 
+			
+			<if test="_databaseId == 'Oracle'">
+			LPAD(TO_NUMBER((NVL(MAX(DEPLOY_SEQ), '0') + 1) ), 5, '00000') AS maxSeq
+			</if>
+			<if test="_databaseId == 'SQL Server'">
+			LPAD(CONVERT(NUMERIC(ISNULL(MAX(DEPLOY_SEQ), '0') + 1) ), 5, '00000') AS maxSeq
+			</if>
+			<if test="_databaseId == 'MySQL'">
+			LPAD((IFNULL(MAX(DEPLOY_SEQ), '0') + 1), 5, '00000') AS maxSeq
+			</if>
+			<if test="_databaseId == 'PostgreSQL'">
+			LPAD(TO_NUMBER((COALESCE(MAX(DEPLOY_SEQ), '0') + 1) ), 5, '00000') AS maxSeq
+			</if>
+			
+			FROM SYSTEM_DEPLOY
+			WHERE SYSTEM_ID = #{SYSTEM_ID}
+		</selectKey>
+		INSERT INTO SYSTEM_DEPLOY (
+			SYSTEM_ID
+			, DEPLOY_SEQ
+			, DEPLOY_DATE
+			, DEPLOY_TIME
+			, DEPLOY_CD
+			, DEPLOY_TYPE
+			, DEPLOY_DESC
+			, USE_YN
+			, REG_DT
+			, REG_CD
+		)
+		VALUES (
+			#{SYSTEM_ID}		-- 시스템ID
+			, #{maxSeq}			-- 배포일련번호
+			, #{DEPLOY_DATE}	-- 배포일자
+			, #{DEPLOY_TIME}	-- 배포일시
+			, #{DEPLOY_CD}		-- 배포자코드
+			, #{DEPLOY_TYPE}	-- 배포유형
+			, #{DEPLOY_DESC}	-- 배포내용
+			, 'Y'				-- 사용여부
+			, <include refid="CommonInc.sysdate" />				-- 등록일시
+			, #{_sessionUserCd}	-- 등록자코드
+		)
+	</insert>
+
+	<update id="systemDeployUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.systemDeployUpdate
+		* 시스템배포관리 수정
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		UPDATE SYSTEM_DEPLOY
+		SET
+			DEPLOY_DATE = #{DEPLOY_DATE}	-- 배포일자
+			, DEPLOY_TIME = #{DEPLOY_TIME}	-- 배포일시
+			, DEPLOY_CD = #{DEPLOY_CD}		-- 배포자코드
+			, DEPLOY_TYPE = #{DEPLOY_TYPE}	-- 배포유형
+			, DEPLOY_DESC = #{DEPLOY_DESC}	-- 배포내용
+			, MOD_DT = <include refid="CommonInc.sysdate" />				-- 수정일시
+			, MOD_CD = #{_sessionUserCd}	-- 수정자코드
+		WHERE SYSTEM_ID = #{SYSTEM_ID}		-- 시스템ID
+			AND DEPLOY_SEQ = #{DEPLOY_SEQ}	-- 배포일련번호
+	</update>
+
+	<delete id="systemDeployDelete" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.systemDeployDelete
+		* 시스템배포관리 삭제
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		UPDATE SYSTEM_DEPLOY
+		SET
+			USE_YN = 'N'					-- 사용여부
+			, MOD_DT = <include refid="CommonInc.sysdate" />				-- 수정일시
+			, MOD_CD = #{_sessionUserCd}	-- 수정자코드
+		WHERE SYSTEM_ID = #{SYSTEM_ID}		-- 시스템ID
+			AND DEPLOY_SEQ = #{DEPLOY_SEQ}	-- 배포일련번호
+	</delete>
+	<!-- system_deploy(시스템배포관리) END -->
+
+	<!-- system_login_policy(시스템로그인정책) START -->
+	<select id="systemLoginPolicyDetail" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.systemLoginPolicyDetail
+		* 시스템로그인정책 상세
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		SELECT
+			SYSTEM_ID			-- 시스템ID
+			, POLICY_SEQ		-- 로그인정책일련번호
+			, MIX_CD			-- 문자숫자혼합구분
+			, MIN_LENGTH		-- 최소길이
+			, ERROR_CNT			-- 오류입력수
+			, RECENT_USE_YN		-- 최근사용비밀번호사용여부
+			, FIRST_CHANGE_YN	-- 최초로그인비밀번호변경여부
+			, CHECK_CNT			-- 비밀번호체크일수
+			, IMPOSSIBLE_TXT	-- 비밀번호불가문자열
+		FROM SYSTEM_LOGIN_POLICY
+		WHERE SYSTEM_ID = #{SYSTEM_ID}
+			AND POLICY_SEQ = (
+				SELECT MAX(POLICY_SEQ) FROM SYSTEM_LOGIN_POLICY
+				WHERE SYSTEM_ID = #{SYSTEM_ID}
+			)
+	</select>
+
+	<insert id="systemLoginPolicyUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.systemLoginPolicyInsert
+		* 시스템로그인정책 입력
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		<selectKey keyProperty="maxSeq" resultType="String" order="BEFORE">
+			SELECT
+			
+			<if test="_databaseId == 'Oracle'">
+			LPAD(TO_NUMBER((NVL(MAX(POLICY_SEQ), '0') + 1) ), 5, '00000') AS maxSeq
+			</if>
+			<if test="_databaseId == 'SQL Server'">
+			LPAD(CONVERT(NUMERIC(ISNULL(MAX(POLICY_SEQ), '0') + 1) ), 5, '00000') AS maxSeq
+			</if>
+			<if test="_databaseId == 'MySQL'">
+			LPAD((IFNULL(MAX(POLICY_SEQ), '0') + 1), 5, '00000') AS maxSeq
+			</if>
+			<if test="_databaseId == 'PostgreSQL'">
+			LPAD(TO_NUMBER((COALESCE(MAX(POLICY_SEQ), '0') + 1) ), 5, '00000') AS maxSeq
+			</if>
+			
+			FROM SYSTEM_LOGIN_POLICY
+			WHERE SYSTEM_ID = #{SYSTEM_ID}
+		</selectKey>
+		INSERT INTO SYSTEM_LOGIN_POLICY (
+			SYSTEM_ID
+			, POLICY_SEQ
+			, MIX_CD
+			, MIN_LENGTH
+			, ERROR_CNT
+			, CHECK_CNT
+			, RECENT_USE_YN
+			, FIRST_CHANGE_YN
+			, IMPOSSIBLE_TXT
+			, REG_DT
+			, REG_CD
+		)
+		VALUES (
+			#{SYSTEM_ID}
+			, #{maxSeq}
+			, #{MIX_CD}
+			
+			<if test="_databaseId == 'Oracle'">
+			, TO_NUMBER(#{MIN_LENGTH})
+			, TO_NUMBER(#{ERROR_CNT})
+			, TO_NUMBER(#{CHECK_CNT})
+			</if>
+			<if test="_databaseId == 'SQL Server'">
+			, CONVERT(NUMERIC, #{MIN_LENGTH})
+			, CONVERT(NUMERIC, #{ERROR_CNT})
+			, CONVERT(NUMERIC, #{CHECK_CNT})
+			</if>
+			<if test="_databaseId == 'MySQL'">
+			, CAST(#{MIN_LENGTH} AS UNSIGNED)
+			, CAST(#{ERROR_CNT} AS UNSIGNED)
+			, CAST(#{CHECK_CNT} AS UNSIGNED)
+			</if>
+			<if test="_databaseId == 'PostgreSQL'">
+			, TO_NUMBER(#{MIN_LENGTH})
+			, TO_NUMBER(#{ERROR_CNT})
+			, TO_NUMBER(#{CHECK_CNT})
+			</if>
+			
+			, #{RECENT_USE_YN}
+			, #{FIRST_CHANGE_YN}			
+			, #{IMPOSSIBLE_TXT}
+			, <include refid="CommonInc.sysdate" />
+			, #{_sessionUserCd}
+		)
+	</insert>
+	<!-- system_login_policy(시스템로그인정책) END -->
+
+	<!-- multilanguage_info(다국어정보) START -->
+	<select id="multilanguageInfoGroup" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.multilanguageInfoGroup
+		* 다국어 그룹
+		* @author takeit
+		* @since 2019.08.05
+		*/
+		]]>
+		<if test="_databaseId == 'Oracle'">
+		SELECT '0' AS CODE_ID, '다국어그룹' AS CODE_NM, TO_CHAR('0') AS PATH, 0 AS LEV FROM DUAL
+		UNION ALL
+		SELECT C.CODE_ID, C.CODE_NM, ('0' || ',' || C.CODE_ID) AS PATH, 1 AS LEV
+		FROM CODE_INFO C
+		WHERE C.GROUP_ID = '00011'
+		</if>
+		<if test="_databaseId == 'SQL Server'">
+		</if>
+		<if test="_databaseId == 'MySQL'">
+		SELECT '0' AS CODE_ID, '다국어그룹' AS CODE_NM, '0' AS PATH, 0 AS LEV FROM DUAL
+		UNION ALL
+		SELECT C.CODE_ID, C.CODE_NM, CONCAT('0' , ',' , C.CODE_ID) AS PATH, 1 AS LEV
+		FROM CODE_INFO C
+		WHERE C.GROUP_ID = '00011'
+		</if>
+		<if test="_databaseId == 'PostgreSQL'">
+		SELECT '0' AS CODE_ID, '다국어그룹' AS CODE_NM, CAST('0' AS CHAR(500)) AS PATH, 0 AS LEV
+		UNION ALL
+		SELECT C.CODE_ID, C.CODE_NM, CONCAT('0', ',', C.CODE_ID) AS PATH, 1 AS LEV
+		FROM CODE_INFO C
+		WHERE C.GROUP_ID = '00011'
+		</if>
+	</select>
+
+	<select id="multilanguageInfoList" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.multilanguageInfoList
+		* 다국어정보 목록
+		* @author takeit
+		* @since 2019.08.05
+		*/
+		]]>
+		SELECT
+			'0' AS CHK				-- 체크박스
+			, ML.ML_CD				-- 다국어코드
+			, ML.ML_GROUP			-- 다국어그룹
+			, ML.ML_NM				-- 다국어명
+			, ML.ML_ETC				-- 다국어기타사항
+			, ML.DESC_TXT			-- 상세설명
+			, ML.USE_YN				-- 사용여부
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="ML.REG_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			</include> AS REG_DT	-- 등록일시
+			, ML.REG_CD				-- 등록자코드
+			, U1.USER_NM AS REG_NM	-- 등록자명
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="ML.MOD_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			</include> AS MOD_DT	-- 수정일시
+			, ML.MOD_CD				-- 수정자코드
+			, U2.USER_NM AS MOD_NM	-- 수정자명
+			, C.CODE_ID AS ML_TYPE
+			, C.CODE_NM	AS ML_TYPE_NM
+		FROM MULTILANGUAGE_INFO ML
+			LEFT OUTER JOIN USER_INFO U1 ON ML.REG_CD = U1.USER_CD
+			LEFT OUTER JOIN USER_INFO U2 ON ML.MOD_CD = U2.USER_CD
+			LEFT OUTER JOIN CODE_INFO C  ON C.GROUP_ID = '00011' AND C.CODE_ID = ML.ML_GROUP
+		WHERE 1 = 1
+		<if test=" sMlGroup != null and sMlGroup != '' ">
+			AND ML.ML_GROUP = #{sMlGroup}
+		</if>
+		<if test=" ML_GROUP != null and ML_GROUP != '' ">
+			AND ML.ML_GROUP = #{ML_GROUP}
+		</if>
+		<if test=" ML_CD != null and ML_CD != '' ">
+			AND ML.ML_CD LIKE
+			<if test="_databaseId == 'Oracle'">
+			('%' || #{ML_CD} || '%')
+			</if>
+			<if test="_databaseId == 'SQL Server'">
+			('%' || #{ML_CD} || '%')
+			</if>
+			<if test="_databaseId == 'MySQL'">
+			CONCAT('%' , #{ML_CD} , '%')
+			</if>
+			<if test="_databaseId == 'PostgreSQL'">
+			('%' || #{ML_CD} || '%')
+			</if> 
+			
+		</if>
+		<if test=" ML_NM != null and ML_NM != '' ">
+			AND ML.ML_NM LIKE 
+			<if test="_databaseId == 'Oracle'">
+			('%' || #{ML_NM} || '%')
+			</if>
+			<if test="_databaseId == 'SQL Server'">
+			('%' || #{ML_NM} || '%')
+			</if>
+			<if test="_databaseId == 'MySQL'">
+			CONCAT('%' , #{ML_NM} , '%')
+			</if>
+			<if test="_databaseId == 'PostgreSQL'">
+			('%' || #{ML_NM} || '%')
+			</if> 
+		</if>
+		<if test=" USE_YN != null and USE_YN != '' ">
+			AND ML.USE_YN = #{USE_YN}
+		</if>
+		ORDER BY ML.ML_CD
+	</select>
+
+	<insert id="multilanguageInfoInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.multilanguageInfoInsert
+		* 다국어정보 입력
+		* @author takeit
+		* @since 2019.08.05
+		*/
+		]]>
+		<selectKey keyProperty="maxCd" resultType="String" order="BEFORE">
+			SELECT 
+			
+			<if test="_databaseId == 'Oracle'">
+			('ML' || LPAD(TO_NUMBER((NVL(MAX(SUBSTR(ML_CD, 3, 8)), '0') + 1) ), 8, '00000000')) AS maxCd
+			</if>
+			<if test="_databaseId == 'SQL Server'">
+			('ML' || LPAD(CONVERT(NUMERIC, (ISNULL(MAX(SUBSTR(ML_CD, 3, 8)), '0') + 1) ), 8, '00000000')) AS maxCd
+			</if>
+			<if test="_databaseId == 'MySQL'">
+			CONCAT('ML' , LPAD((IFNULL(MAX(SUBSTR(ML_CD, 3, 8)), '0') + 1), 8, '00000000')) AS maxCd
+			</if>
+			<if test="_databaseId == 'PostgreSQL'">
+			('ML' || LPAD(TO_NUMBER((COALESCE(MAX(SUBSTR(ML_CD, 3, 8)), '0') + 1) ), 8, '00000000')) AS maxCd
+			</if> 
+			
+			FROM MULTILANGUAGE_INFO
+		</selectKey>
+		INSERT INTO MULTILANGUAGE_INFO (
+			ML_CD
+			, ML_GROUP
+			, ML_NM
+			, ML_ETC
+			, DESC_TXT
+			, USE_YN
+			, REG_DT
+			, REG_CD
+		)
+		VALUES (
+			#{maxCd}			-- 다국어코드
+			, #{ML_GROUP}		-- 다국어그룹
+			, #{ML_NM}			-- 다국어명
+			, #{ML_ETC}			-- 다국어기타사항
+			, #{DESC_TXT}		-- 상세설명
+			, #{USE_YN}			-- 사용여부
+			, <include refid="CommonInc.sysdate" />				-- 등록일시
+			, #{_sessionUserCd}	-- 등록자코드
+		)
+	</insert>
+
+	<update id="multilanguageInfoUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.multilanguageInfoUpdate
+		* 다국어정보 수정
+		* @author takeit
+		* @since 2019.08.05
+		*/
+		]]>
+		UPDATE MULTILANGUAGE_INFO
+		SET
+			ML_GROUP = #{ML_GROUP}		-- 다국어그룹
+			, ML_NM = #{ML_NM}			-- 다국어명
+			, ML_ETC = #{ML_ETC}		-- 다국어기타사항
+			, DESC_TXT = #{DESC_TXT}	-- 상세설명
+			, USE_YN = #{USE_YN}		-- 사용여부
+			, MOD_DT = <include refid="CommonInc.sysdate" />			-- 수정일시
+			, MOD_CD = #{_sessionUserCd}-- 수정자코드
+		WHERE ML_CD = #{ML_CD}			-- 다국어코드
+	</update>
+
+	<delete id="multilanguageInfoDelete" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.multilanguageInfoDelete
+		* 메세지정보 삭제
+		* @author takeit
+		* @since 2019.08.05
+		*/
+		]]>
+		DELETE FROM MULTILANGUAGE_INFO
+		WHERE ML_CD = #{ML_CD}			-- 다국어코드
+	</delete>
+	<!-- multilanguage_info(다국어정보) END -->
+
+	<!-- multilanguage_detail(다국어상세정보) START -->
+	<select id="multilanguageDetailList" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.multilanguageDetailList
+		* 다국어상세 목록
+		* @author takeit
+		* @since 2019.08.05
+		*/
+		]]>
+		SELECT
+			 <include refid="CommonInc.rownum" />								<!--  순번  -->
+			, ifnull(#{sMlCd},'') AS ML_CD												-- 다국어코드
+			, C.CODE_ID AS LANG_CD											-- 언어코드
+			, (CASE WHEN NAME.ML_LANG_TXT IS NULL THEN C.CODE_NM ELSE NAME.ML_LANG_TXT END) AS LANG_NM					-- 언어명
+			, (CASE WHEN M.ML_CD IS NULL THEN 'N' ELSE 'Y' END) AS IS_SAVE	-- 저장여부
+			, M.ML_LANG_TXT													-- 다국어
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="M.REG_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			</include> AS REG_DT											-- 등록일시
+			, M.REG_CD														-- 등록자코드
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="M.MOD_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			</include> AS MOD_DT											-- 수정일시
+			, M.MOD_CD														-- 수정자코드
+		FROM CODE_INFO C
+        LEFT JOIN MULTILANGUAGE_DETAIL NAME
+          ON NAME.ML_CD = C.ML_CD
+         AND NAME.LANG_CD = #{sLangCd}
+		LEFT OUTER JOIN MULTILANGUAGE_DETAIL M ON C.CODE_ID = M.LANG_CD AND M.ML_CD = #{sMlCd}
+		WHERE C.GROUP_ID = '00001'	-- 언어코드
+		ORDER BY C.CODE_ORDER
+	</select>
+
+	<insert id="multilanguageDetailInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.multilanguageDetailInsert
+		* 다국어상세정보 입력
+		* @author takeit
+		* @since 2019.08.05
+		*/
+		]]>
+		INSERT INTO MULTILANGUAGE_DETAIL (
+			ML_CD
+			, LANG_CD
+			, ML_LANG_TXT
+			, REG_DT
+			, REG_CD
+		)
+		VALUES (
+			#{ML_CD}			-- 다국어코드
+			, #{LANG_CD}		-- 언어코드
+			, #{ML_LANG_TXT}	-- 다국어
+			, <include refid="CommonInc.sysdate" />				-- 등록일시
+			, #{_sessionUserCd}	-- 등록자코드
+		)
+	</insert>
+
+	<update id="multilanguageDetailUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.multilanguageDetailUpdate
+		* 다국어상세정보 수정
+		* @author takeit
+		* @since 2019.08.05
+		*/
+		]]>
+		UPDATE MULTILANGUAGE_DETAIL
+		SET
+			ML_LANG_TXT = #{ML_LANG_TXT}	-- 다국어
+			, MOD_DT = <include refid="CommonInc.sysdate" />				-- 수정일시
+			, MOD_CD = #{_sessionUserCd}	-- 수정자코드
+		WHERE ML_CD = #{ML_CD}				-- 다국어코드
+			AND LANG_CD = #{LANG_CD}		-- 언어코드
+	</update>
+	<!-- multilanguage_detail(다국어상세정보) END -->
+
+	<!-- code_info(코드정보) START -->
+	<select id="codeInfoGroup" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		 * SystemCommon.codeInfoGroup
+		 * 코드그룹
+		 * @author takeit
+		 * @since 2019.08.02
+		 */
+		]]>
+		<if test="_databaseId == 'Oracle'">
+		SELECT CODE_KEY, GROUP_ID, CODE_ID, '[' || CODE_ID || '] ' || CODE_NM AS CODE_NM, PARENT_KEY, LEV, CODE_ORDER, REF1, REF2, REF3, REF4, REF5
+		FROM (
+			SELECT CODE_KEY, GROUP_ID, CODE_ID, CODE_NM, PARENT_KEY, (LEVEL-1) AS LEV, CODE_ORDER, USE_YN, REF1, REF2, REF3, REF4, REF5
+			  FROM CODE_INFO
+              WHERE PARENT_KEY = '0'
+                OR (PARENT_KEY = '0000000000'
+			         <if test="CODE_NM != null and CODE_NM != '' ">
+			            AND (
+							UPPER(CODE_NM) LIKE ('%' || UPPER(#{CODE_NM}) || '%')
+							OR UPPER(CODE_ID) LIKE ('%' || UPPER(#{CODE_NM}) || '%')
+						)
+	    	         </if>
+                     <if test="USE_YN != null and USE_YN != '' ">
+                        AND USE_YN = #{USE_YN}
+                     </if>
+                 )
+			START WITH PARENT_KEY = '0'
+			CONNECT BY PRIOR CODE_KEY = PARENT_KEY
+		) ORDER BY TO_NUMBER(CODE_ORDER)
+		</if>
+		<if test="_databaseId == 'SQL Server'">
+		</if>
+		<if test="_databaseId == 'MySQL'">
+		SELECT A.CODE_KEY, A.GROUP_ID, A.CODE_ID, A.CODE_NM, A.PARENT_KEY, A.CODE_ORDER, A.LEV
+		FROM
+		(
+			SELECT C.CODE_KEY, C.GROUP_ID, C.CODE_ID, C.CODE_NM, C.PARENT_KEY, C.CODE_ORDER, 0 AS LEV
+			FROM CODE_INFO C
+			WHERE C.PARENT_KEY IN ('0') 
+			
+			UNION ALL
+			
+			SELECT C.CODE_KEY, C.GROUP_ID, C.CODE_ID, C.CODE_NM, C.PARENT_KEY, C.CODE_ORDER, 1 AS LEV
+			FROM CODE_INFO C
+			WHERE C.PARENT_KEY IN ('0000000000')
+			<if test="CODE_NM != null and CODE_NM != '' ">
+			AND C.CODE_NM LIKE CONCAT('%' , #{CODE_NM} , '%')
+	    	</if>
+            <if test="USE_YN != null and USE_YN != '' ">
+            AND USE_YN = #{USE_YN}
+            </if> 
+		) A
+		ORDER BY CAST(A.CODE_ORDER AS UNSIGNED)
+		</if>
+		<if test="_databaseId == 'PostgreSQL'">
+		WITH RECURSIVE TEMP (CODE_KEY, GROUP_ID, CODE_ID, CODE_NM, PARENT_KEY, C_PATH, LEV, CYCLE) AS
+			(
+				SELECT C.CODE_KEY, C.GROUP_ID, C.CODE_ID, C.CODE_NM, C.PARENT_KEY, ARRAY[C.CODE_KEY] AS C_PATH, 0 AS LEV, FALSE AS CYCLE
+				FROM CODE_INFO C
+				WHERE C.PARENT_KEY IN ('0')
+
+				<if test="CODE_ID != NULL and CODE_ID != '' ">
+				    AND C.CODE_KEY IN (
+						SELECT PARENT_KEY FROM CODE_INFO
+						WHERE 1 = 1
+							AND (
+								CODE_ID LIKE ('%' || #{CODE_ID} || '%') OR CODE_NM LIKE ('%' || #{CODE_ID} || '%')
+							)
+						)
+				</if>
+
+				<if test="GROUP_ID != NULL and GROUP_ID != '' ">
+				    AND C.CODE_KEY IN (
+						SELECT CODE_KEY FROM CODE_INFO
+						WHERE PARENT_KEY = '0000000000'
+							AND (
+								CODE_ID LIKE ('%' || #{GROUP_ID} || '%') OR CODE_NM LIKE ('%' || #{GROUP_ID} || '%')
+							)
+						)
+				</if>
+
+				<if test="USE_YN != NULL and USE_YN != '' ">
+				    AND C.CODE_KEY IN (
+						SELECT CODE_KEY FROM CODE_INFO
+						WHERE PARENT_KEY = '0000000000'
+							AND USE_YN = #{USE_YN}
+						)
+				</if>
+
+				UNION ALL
+				SELECT C.CODE_KEY, C.GROUP_ID, C.CODE_ID, C.CODE_NM, C.PARENT_KEY, CAST(C_PATH||C.CODE_KEY AS VARCHAR(10)[]) AS C_PATH, (LEV + 1) AS LEV, (C.CODE_KEY = ANY(C_PATH)) AS CYCLE
+				FROM CODE_INFO C
+					INNER JOIN TEMP ON C.PARENT_KEY = TEMP.CODE_KEY
+				WHERE C.PARENT_KEY IN ('0000000000')
+			)
+		SELECT CODE_KEY, GROUP_ID, CODE_ID, ('[' || CODE_ID || '] ' || CODE_NM) AS CODE_NM, PARENT_KEY, C_PATH, LEV, CYCLE
+		FROM TEMP
+		ORDER BY C_PATH
+		</if>
+	</select>
+
+	<select id="codeInfoGroupCode" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		 * SystemCommon.codeInfoGroupCode
+		 * 그룹코드정보 (검색조건용)
+		 * @author takeit
+		 * @since 2019.08.02
+		 */
+		]]>
+		SELECT X.CODE, X.NAME
+		FROM (
+			SELECT '' AS CODE, '전체' AS NAME, '0' AS CODE_ORDER 
+			<include refid="CommonInc.dual" />
+			UNION ALL
+			SELECT
+				C.CODE_KEY AS CODE		-- 코드KEY
+				, C.CODE_NM	AS NAME		-- 코드명
+				, C.CODE_ORDER
+			FROM CODE_INFO C
+			WHERE C.PARENT_KEY = '0000000000'
+		) X
+		ORDER BY 
+			<include refid="CommonInc.toNumber" >
+				<property name="arg1" value="X.CODE_ORDER"/>
+			</include>, X.CODE
+	</select>
+
+	<select id="codeInfoList" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		 *
+		 * SystemCommon.codeInfoList
+		 * 코드정보 목록
+		 * @author takeit
+		 * @since 2019.08.02
+		 */
+		]]>
+		SELECT
+			'0' AS CHK
+			, C.CODE_KEY			-- 코드KEY
+			, C.GROUP_ID			-- 그룹ID
+			, C.CODE_ID				-- 코드ID
+			, C.PARENT_KEY			-- 부모KEY
+			, C.CODE_NM				-- 코드명
+			, C.ML_CD				-- 다국어코드
+			, C.REF1				-- 참조1
+			, C.REF2				-- 참조2
+			, C.REF3				-- 참조3
+			, C.REF4				-- 참조4
+			, C.REF5				-- 참조5
+			, C.DESC_TXT			-- 상세설명
+			, <include refid="CommonInc.toNumber" >
+				<property name="arg1" value="C.CODE_ORDER"/>
+			  </include> AS CODE_ORDER			-- 코드정렬순서
+			, C.USE_YN              -- 사용여부
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="C.REG_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			  </include>  AS REG_DT	-- 등록일시
+			, C.REG_CD				-- 등록자코드
+			, U1.USER_NM AS REG_NM	-- 등록자명
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="C.MOD_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			  </include>  AS MOD_DT	-- 수정일시
+			, C.MOD_CD				-- 수정자코드
+			, U2.USER_NM AS MOD_NM	-- 수정자명
+		FROM CODE_INFO C
+			LEFT OUTER JOIN USER_INFO U1 ON C.REG_CD = U1.USER_CD
+			LEFT OUTER JOIN USER_INFO U2 ON C.MOD_CD = U2.USER_CD
+		WHERE 1 = 1
+		<if test="sParentKey != null and sParentKey != '' ">
+		    AND C.PARENT_KEY = #{sParentKey}
+		</if>
+		<if test="PARENT_KEY != null and PARENT_KEY != '' ">
+		    AND C.PARENT_KEY = #{PARENT_KEY}
+		</if>
+		<if test="GROUP_ID != null and GROUP_ID != '' ">
+		    AND C.GROUP_ID = #{GROUP_ID}
+		</if>
+		<if test="REF1 != null and REF1 != '' ">
+		    AND C.REF1 = #{REF1}
+		</if>
+		<if test="REF2 != null and REF2 != '' ">
+		    AND C.REF2 = #{REF2}
+		</if>
+		<if test="REF3 != null and REF3 != '' ">
+		    AND C.REF3 = #{REF3}
+		</if>
+		<if test="REF4 != null and REF4 != '' ">
+		    AND C.REF4 = #{REF4}
+		</if>
+		<if test="REF5 != null and REF5 != '' ">
+		    AND C.REF5 = #{REF5}
+		</if>
+		<if test=" CODE_NM != null and CODE_NM != '' ">
+			AND C.CODE_NM LIKE 
+			<if test="_databaseId == 'Oracle'">
+			('%' || #{CODE_NM} || '%')
+			</if>
+			<if test="_databaseId == 'SQL Server'">
+			('%' || #{CODE_NM} || '%')
+			</if>
+			<if test="_databaseId == 'MySQL'">
+			CONCAT('%' , #{CODE_NM} , '%')
+			</if>
+			<if test="_databaseId == 'PostgreSQL'">
+			('%' || #{CODE_NM} || '%')
+			</if>
+		</if>
+		<if test=" USE_YN != null and USE_YN != '' ">
+			AND C.USE_YN = #{USE_YN}
+		</if>
+		ORDER BY <include refid="CommonInc.toNumber" >
+			       <property name="arg1" value="C.CODE_ORDER"/>
+			     </include>
+			   , C.CODE_ID
+	</select>
+
+	<insert id="codeInfoInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.codeInfoInsert
+		* 코드정보 입력
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		INSERT INTO CODE_INFO (
+			CODE_KEY
+			, GROUP_ID
+			, CODE_ID
+			, PARENT_KEY
+			, CODE_NM
+			, ML_CD
+			<if test="REF1 != '' and REF1 != null">
+			, REF1																
+			</if>
+			<if test="REF2 != '' and REF2 != null">
+			, REF2																
+			</if>
+			<if test="REF3 != '' and REF3 != null">
+			, REF3																
+			</if>
+			<if test="REF4 != '' and REF4 != null">
+			, REF4
+			</if>
+			<if test="REF5 != '' and REF5 != null">
+			, REF5
+			</if>
+			, DESC_TXT
+			, CODE_ORDER
+			, USE_YN
+			, REG_DT
+			, REG_CD
+		)
+		VALUES (
+			  FN_GET_KEY('CODE_INFO', '')							                -- code key
+			, #{GROUP_ID}															-- 그룹ID
+			, #{CODE_ID}
+			, #{PARENT_KEY}															-- 부모KEY
+			, #{CODE_NM}															-- 코드명
+			, #{ML_CD}																-- 다국어코드
+			<if test="REF1 != '' and REF1 != null">
+			, #{REF1}																-- 참조1
+			</if>
+			<if test="REF2 != '' and REF2 != null">
+			, #{REF2}																-- 참조2
+			</if>
+			<if test="REF3 != '' and REF3 != null">
+			, #{REF3}																-- 참조3
+			</if>
+			<if test="REF4 != '' and REF4 != null">
+			, #{REF4}																-- 참조4
+			</if>
+			<if test="REF5 != '' and REF5 != null">
+			, #{REF5}																-- 참조5
+			</if>	
+			, #{DESC_TXT}															-- 상세설명
+			, #{CODE_ORDER}															-- 코드정렬순서
+			, #{USE_YN}						                                        -- 사용여부
+			, <include refid="CommonInc.sysdate" />									-- 등록일시
+			, #{_sessionUserCd}														-- 등록자코드
+		)
+	</insert>
+
+	<update id="codeInfoUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		 * SystemCommon.codeInfoUpdate
+		 * 코드정보 수정
+		 * @author takeit
+		 * @since 2019.08.02
+		 */
+		]]>
+		UPDATE CODE_INFO
+		SET
+			GROUP_ID = #{GROUP_ID}			-- 그룹ID
+			, CODE_ID = #{CODE_ID}			-- 코드ID
+			, PARENT_KEY = #{PARENT_KEY}	-- 부모KEY
+			, CODE_NM = #{CODE_NM}			-- 코드명
+			, ML_CD = #{ML_CD}				-- 다국어코드
+			, REF1 = #{REF1}				-- 참조1
+			, REF2 = #{REF2}				-- 참조2
+			, REF3 = #{REF3}				-- 참조3
+			, REF4 = #{REF4}				-- 참조4
+			, REF5 = #{REF5}				-- 참조5
+			, DESC_TXT = #{DESC_TXT}		-- 상세설명
+			<if test="CODE_ORDER != null and CODE_ORDER != '' ">
+			, CODE_ORDER = #{CODE_ORDER}	-- 코드정렬순서
+			</if>
+			, USE_YN = #{USE_YN}
+			, MOD_DT = <include refid="CommonInc.sysdate" />				-- 수정일시
+			, MOD_CD = #{_sessionUserCd}	-- 수정자코드
+		WHERE CODE_KEY = #{CODE_KEY}		-- 코드KEY
+	</update>
+
+	<delete id="codeInfoDelete" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.codeInfoDelete
+		* 코드정보 삭제
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		DELETE FROM CODE_INFO
+		WHERE CODE_KEY = #{CODE_KEY}		-- 코드KEY
+	</delete>
+	<!-- code_info(코드정보) END -->
+
+	<insert id="attachInfoInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		 * SystemCommon.attachInfoInsert
+		 * 파일정보 입력
+		 * @author takeit
+		 * @since 2019.08.02
+		 */
+		]]>
+
+		<selectKey keyProperty="ATTACH_CD" resultType="String" order="BEFORE">
+			<if test="_databaseId == 'Oracle'">
+		    SELECT ('AF' || LPAD(TO_NUMBER((NVL(MAX(SUBSTR(ATTACH_CD, 3, 9)), '0') + 1) ), 8, '0')) AS ATTACH_CD
+			FROM ATTACH_INFO
+		    </if>
+			<if test="_databaseId == 'SQL Server'">
+			SELECT ('AF' || LPAD(CONVERT(NUMERIC, (ISNULL(MAX(SUBSTR(ATTACH_CD, 3, 9)), '0') + 1) ), 8, '0')) AS ATTACH_CD
+			FROM ATTACH_INFO
+		    </if>
+			<if test="_databaseId == 'MySQL'">
+			SELECT CONCAT('AF' , LPAD((IFNULL(MAX(SUBSTR(ATTACH_CD, 3, 9)), '0') + 1), 8, '0')) AS ATTACH_CD
+			FROM ATTACH_INFO
+		    </if>
+			<if test="_databaseId == 'PostgreSQL'">
+			SELECT ('AF' || LPAD(CAST((COALESCE(MAX(SUBSTR(attach_cd, 3, 9)), '0')::INT + 1) AS TEXT), 8, '0')) AS ATTACH_CD
+			FROM ATTACH_INFO
+		    </if>
+		</selectKey>
+
+		INSERT INTO ATTACH_INFO (
+			ATTACH_CD
+			, ATTACH_TYPE
+			, REG_DT
+			, REG_CD
+		)
+		VALUES (
+			#{ATTACH_CD}																-- 파일KEY
+			, #{ATTACH_TYPE}														-- 파일유형
+			, <include refid="CommonInc.sysdate" />																	-- 등록일시
+			, #{_sessionUserCd}														-- 등록자코드
+		)
+	</insert>
+
+	<delete id="attachInfoDelete" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.attachInfoDelete
+		* 파일마스터정보 삭제
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		DELETE FROM ATTACH_INFO
+		WHERE ATTACH_CD = #{ATTACH_CD}		-- 파일KEY
+	</delete>
+
+	<insert id="attachInfoFileInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.attachInfoFileInsert
+		* 파일상세정보 입력
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+
+		<selectKey keyProperty="FILE_SEQ" resultType="String" order="BEFORE">
+			SELECT 
+			<if test="_databaseId == 'Oracle'">
+			(LPAD(TO_NUMBER(NVL(MAX(SUBSTR(FILE_SEQ, 1, 10)), '0') + 1 ), 10, '0')) AS FILE_SEQ
+			</if>
+			<if test="_databaseId == 'SQL Server'">
+			(LPAD(CONVERT(NUMERIC, ISNULL(MAX(SUBSTR(FILE_SEQ, 1, 10)), '0') + 1 ), 10, '0')) AS FILE_SEQ
+			</if>
+			<if test="_databaseId == 'MySQL'">
+			CONCAT('AF' , LPAD((IFNULL(MAX(SUBSTR(ATTACH_CD, 3, 9)), '0') + 1), 8, '0')) AS ATTACH_CD
+			</if>
+			<if test="_databaseId == 'PostgreSQL'">
+			(LPAD(TO_NUMBER(COALESCE(MAX(SUBSTR(FILE_SEQ, 1, 10)), '0') + 1 ), 10, '0')) AS FILE_SEQ
+			</if> 
+			
+			FROM ATTACH_FILE
+			WHERE ATTACH_CD = #{ATTACH_CD}
+		</selectKey>
+
+		INSERT INTO ATTACH_FILE
+			(ATTACH_CD
+			,FILE_SEQ
+			,FILE_PATH
+			,PROJECT_CD
+			,MENU_CD
+			,FILE_NM
+			,FILE_SAVE_NM
+			,IMPORT_YN
+			,FILE_TYPE
+			,FILE_SIZE
+			,FILE_BLOB
+			,DESC_TXT
+			,DELETE_YN
+			,DELETE_DT
+			,REG_DT
+			,REG_CD)
+		VALUES
+			(#{ATTACH_CD}
+			,#{FILE_SEQ}
+			,#{FILE_PATH}
+			,#{PROJECT_CD}
+			,#{MENU_CD}
+			,#{FILE_NM}
+			
+			<if test="_databaseId == 'Oracle'">
+			,#{ATTACH_CD} || '_' || #{FILE_SEQ} || '.' || #{FILE_TYPE}
+			</if>
+			<if test="_databaseId == 'SQL Server'">
+			,#{ATTACH_CD} || '_' || #{FILE_SEQ} || '.' || #{FILE_TYPE}
+			</if>
+			<if test="_databaseId == 'MySQL'">
+			,CONCAT(#{ATTACH_CD} , '_' , #{FILE_SEQ} , '.' , #{FILE_TYPE})
+			</if>
+			<if test="_databaseId == 'PostgreSQL'">
+			,#{ATTACH_CD} || '_' || #{FILE_SEQ} || '.' || #{FILE_TYPE}
+			</if>
+			
+			,#{IMPORT_YN}
+			,#{FILE_TYPE}
+			,#{FILE_SIZE}
+			,#{FILE_BLOB,jdbcType=CLOB}
+			,#{DESC_TXT}
+			,#{DELETE_YN}
+			,#{DELETE_DT}
+			,<include refid="CommonInc.sysdate" />
+			,#{_sessionUserCd})
+	</insert>
+
+	<delete id="attachInfoFileDelete" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.attachInfoFileDelete
+		* 파일상세정보 삭제
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		UPDATE ATTACH_FILE
+		SET DELETE_YN = 'Y'
+			, MOD_DT = <include refid="CommonInc.sysdate" />
+			, MOD_CD = #{_sessionUserCd}
+		WHERE ATTACH_CD = #{ATTACH_CD}		-- 파일Key
+		<if test=" FILE_SEQ != null and FILE_SEQ != '' ">
+			AND FILE_SEQ = #{FILE_SEQ}
+		</if>
+	</delete>
+
+	<select id="multiFileInfoList" parameterType="map" timeout="0" resultMap="fileMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.multiFileInfoList
+		* 파일정보 목록
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		SELECT
+			ATTACH_CD
+			, FILE_SEQ
+			, FILE_PATH
+			, PROJECT_CD
+			, MENU_CD
+			, FILE_NM
+			, FILE_SAVE_NM
+			, IMPORT_YN
+			, FILE_TYPE
+			, FILE_SIZE
+			, FILE_BLOB
+			, DESC_TXT
+			, DELETE_YN
+			, DELETE_DT
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="REG_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			</include> AS REG_DT	-- 등록일시
+			, REG_CD
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="MOD_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			</include> AS MOD_DT	-- 수정일시
+			, MOD_CD
+		FROM ATTACH_FILE
+		WHERE 1 = 1
+		<if test="FILE_PATH != null and FILE_PATH != '' ">
+		    AND FILE_PATH = #{FILE_PATH}
+		</if>
+
+		<if test="ATTACH_CD != null ">
+			AND
+			<foreach collection="ATTACH_CD" item="item"  open="(" close=")" separator="or"  >
+				 ATTACH_CD = #{item}
+	 		</foreach>
+ 		</if>
+
+		<if test="FILE_SEQ != null and FILE_SEQ != '' ">
+		    AND FILE_SEQ = #{FILE_SEQ}
+		</if>
+
+		ORDER BY ATTACH_CD, FILE_SEQ
+	</select>
+
+	<select id="fileInfoList" parameterType="map" timeout="0" resultMap="fileMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.fileInfoList
+		* 파일정보 목록
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		SELECT
+			F.ATTACH_CD
+			, F.FILE_SEQ
+			, F.FILE_PATH
+			, F.PROJECT_CD
+			, F.MENU_CD
+			, F.FILE_NM
+			, F.FILE_SAVE_NM
+			, F.IMPORT_YN
+			, F.FILE_TYPE
+			, F.FILE_SIZE
+			, F.FILE_BLOB
+			, F.DESC_TXT
+			, F.DELETE_YN
+			, F.DELETE_DT
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="F.REG_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			</include> AS REG_DT	-- 등록일시
+			, F.REG_CD
+			, U1.USER_NM AS REG_NM	-- 등록자명
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="F.MOD_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			</include> AS MOD_DT	-- 수정일시
+			, F.MOD_CD
+			, U2.USER_NM AS MOD_NM	-- 수정자명
+			, '1' AS CHK
+		FROM ATTACH_FILE F
+			LEFT OUTER JOIN USER_INFO U1 ON F.REG_CD = U1.USER_CD
+			LEFT OUTER JOIN USER_INFO U2 ON F.MOD_CD = U2.USER_CD
+		WHERE 1 = 1
+			AND F.DELETE_YN != 'Y'
+			AND F.ATTACH_CD = #{ATTACH_CD}
+		<if test="FILE_PATH != null and FILE_PATH != '' ">
+		    AND F.FILE_PATH = #{FILE_PATH}
+		</if>
+		<if test="FILE_SEQ != null and FILE_SEQ != '' ">
+		    AND F.FILE_SEQ = #{FILE_SEQ}
+		</if>
+
+		<if test="LIST_FILE_SEQ != null ">
+			<foreach collection="LIST_FILE_SEQ" item="item" open="AND (" close=")" separator="OR">
+				F.FILE_SEQ = #{item.FILE_SEQ}
+			</foreach>
+		</if>
+
+		ORDER BY F.ATTACH_CD, F.FILE_SEQ
+	</select>
+
+	<!-- Document용 -->
+	<select id="maxAttachCdSelect" parameterType="map" timeout="0" resultType="string" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.maxAttachCdSelect
+		* 시스템정보 상세
+		* @author takeit
+		* @since 2019.10.14
+		*/
+		]]>
+		SELECT 
+		
+		<if test="_databaseId == 'Oracle'">
+		('AF' || LPAD(TO_NUMBER((NVL(MAX(SUBSTR(ATTACH_CD, 3, 9)), '0') + 1) ), 8, '0')) AS ATTACH_CD
+		</if>
+		<if test="_databaseId == 'SQL Server'">
+		('AF' || LPAD(CONVERT(NUMERIC, (ISNULL(MAX(SUBSTR(ATTACH_CD, 3, 9)), '0') + 1) ), 8, '0')) AS ATTACH_CD
+		</if>
+		<if test="_databaseId == 'MySQL'">
+		CONCAT('AF' , LPAD((IFNULL(MAX(SUBSTR(ATTACH_CD, 3, 9)), '0') + 1), 8, '0')) AS ATTACH_CD
+		</if>
+		<if test="_databaseId == 'PostgreSQL'">
+		('AF' || LPAD(TO_NUMBER((COALESCE(MAX(SUBSTR(ATTACH_CD, 3, 9)), '0') + 1) ), 8, '0')) AS ATTACH_CD
+		</if>
+		FROM ATTACH_INFO
+	</select>
+
+	<insert id="attachInfo2Insert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.attachInfo2Insert
+		* 파일정보 입력
+		* @author takeit
+		* @since 2019.10.14
+		*/
+		]]>
+		INSERT INTO ATTACH_INFO (
+			ATTACH_CD
+			, ATTACH_TYPE
+			, REG_DT
+			, REG_CD
+		)
+		VALUES (
+			#{sAttachCd}		-- 파일Key
+			, #{sAttachType}	-- 파일유형
+			, <include refid="CommonInc.sysdate" />				-- 등록일시
+			, #{sRegCd}			-- 등록자코드
+		)
+	</insert>
+
+	<select id="maxFileSeqSelect" parameterType="map" timeout="0" resultType="string" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.maxFileSeqSelect
+		* 시스템정보 상세
+		* @author takeit
+		* @since 2019.10.14
+		*/
+		]]>
+		SELECT 
+		<if test="_databaseId == 'Oracle'">
+		(LPAD(TO_NUMBER(NVL(MAX(SUBSTR(FILE_SEQ, 1, 10)), '0') + 1 ), 10, '0')) AS FILE_SEQ
+		</if>
+		<if test="_databaseId == 'SQL Server'">
+		(LPAD(CONVERT(NUMERIC, ISNULL(MAX(SUBSTR(FILE_SEQ, 1, 10)), '0') + 1 ), 10, '0')) AS FILE_SEQ
+		</if>
+		<if test="_databaseId == 'MySQL'">
+		(LPAD((IFNULL(MAX(SUBSTR(FILE_SEQ, 1, 10)), '0') + 1 ), 10, '0')) AS FILE_SEQ
+		</if>
+		<if test="_databaseId == 'PostgreSQL'">
+		(LPAD(TO_NUMBER(COALESCE(MAX(SUBSTR(FILE_SEQ, 1, 10)), '0') + 1 ), 10, '0')) AS FILE_SEQ
+		</if>
+		FROM ATTACH_FILE
+		WHERE ATTACH_CD = #{ATTACH_CD}
+	</select>
+
+	<insert id="attachInfoFile2Insert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.attachInfoFile2Insert
+		* 파일상세정보 입력
+		* @author takeit
+		* @since 2019.10.14
+		*/
+		]]>
+		INSERT INTO ATTACH_FILE
+			(ATTACH_CD
+			, FILE_SEQ
+			, PROJECT_CD
+			, MENU_CD
+			, FILE_PATH
+			, FILE_NM
+			, FILE_SAVE_NM
+			, IMPORT_YN
+			, FILE_TYPE
+			, FILE_SIZE
+			, FILE_BLOB
+			, DESC_TXT
+			, DELETE_YN
+			, DELETE_DT
+			, REG_DT
+			, REG_CD)
+		VALUES
+			(#{ATTACH_CD}
+			, #{FILE_SEQ}
+			, #{PROJECT_CD}
+			, #{MENU_CD}
+			, #{FILE_PATH}
+			, #{FILE_NM}
+			, #{FILE_SAVE_NM}
+			, #{IMPORT_YN}
+			, #{FILE_TYPE}
+			, #{FILE_SIZE}
+			, #{FILE_BLOB,jdbcType=CLOB}
+			, #{DESC_TXT}
+			, #{DELETE_YN}
+			, #{DELETE_DT}
+			, <include refid="CommonInc.sysdate" />
+			, #{REG_CD})
+	</insert>
+
+	<!-- 사용자 인증 이력 -->
+	<insert id="authHistoryInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.authHistoryInsert
+		* 사용자인증이력 입력
+		* @author takeit
+		* @since 2019.10.22
+		*/
+		]]>
+		<selectKey keyProperty="maxSeq" resultType="String" order="BEFORE">
+			<if test="_databaseId == 'Oracle'">
+		    SELECT (TO_CHAR(SYSDATE, 'YYYYMMDD') || LPAD(TO_NUMBER((NVL(MAX(SUBSTR(AUTH_SEQ, 9, 9)), '0') + 1) ), 9, '00000000')) AS maxSeq
+			FROM AUTH_HISTORY
+			WHERE AUTH_SEQ LIKE (TO_CHAR(SYSDATE, 'YYYYMMDD') || '%')
+		    </if>
+			<if test="_databaseId == 'SQL Server'">
+			SELECT (CONVERT(CHAR, SYSDATE, 'YYYYMMDD') || LPAD(CONVERT(NUMERIC, (ISNULL(MAX(SUBSTR(AUTH_SEQ, 9, 9)), '0') + 1) ), 9, '00000000')) AS maxSeq
+			FROM AUTH_HISTORY
+			WHERE AUTH_SEQ LIKE (CONVERT(CHAR, SYSDATE, 'YYYYMMDD') || '%')
+		    </if>
+			<if test="_databaseId == 'MySQL'">
+			SELECT CONCAT(DATE_FORMAT(NOW(), '%Y%m%d') , LPAD((IFNULL(MAX(SUBSTR(AUTH_SEQ, 9, 9)), '0') + 1), 9, '00000000')) AS maxSeq
+			FROM AUTH_HISTORY
+			WHERE AUTH_SEQ LIKE CONCAT(DATE_FORMAT(NOW(), '%Y%m%d') , '%')
+		    </if>
+			<if test="_databaseId == 'PostgreSQL'">
+			SELECT (TO_CHAR(NOW(), 'YYYYMMDD') || LPAD(CAST((COALESCE(MAX(SUBSTR(AUTH_SEQ, 9, 9)), '0')::INT + 1) AS TEXT), 9, '00000000')) AS maxSeq
+			FROM AUTH_HISTORY
+			WHERE AUTH_SEQ LIKE (TO_CHAR(NOW(), 'YYYYMMDD') || '%')
+		    </if>
+		</selectKey>
+		INSERT INTO AUTH_HISTORY (
+			AUTH_SEQ
+			, AUTH_TYPE
+			, AUTH_DT
+			, USER_CD
+			, USER_ID
+			, USER_NM
+			, USER_EMAIL
+			, AUTH_VAL
+			, AUTH_RESULT
+		)
+		VALUES (
+			#{maxSeq}			-- 인증일련번호
+			, #{AUTH_TYPE}		-- 인증타입
+			, <include refid="CommonInc.sysdate" />				-- 인증일시
+			, #{USER_CD}		-- 사용자코드
+			, #{USER_ID}		-- 사용자ID
+			, #{USER_NM}		-- 사용자명
+			, #{USER_EMAIL}		-- 사용자이메일
+			, #{AUTH_VAL}		-- 인증코드
+			, #{AUTH_RESULT}	-- 인증결과
+		)
+	</insert>
+
+	<select id="authConfirm" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.authConfirm
+		* 인증값 확인
+		* @author takeit
+		* @since 2019.10.22
+		*/
+		]]>
+		SELECT
+			USER_CD			-- 사용자코드
+			, USER_ID		-- 사용자ID
+			, USER_NM		-- 사용자명
+			, USER_EMAIL	-- 사용자이메일
+		FROM AUTH_HISTORY
+		WHERE AUTH_TYPE = #{sAuthType}
+			AND USER_NM = #{sUserNm}
+			AND USER_EMAIL = #{sUserEmail}
+			AND AUTH_VAL = #{sAuthVal}
+			AND AUTH_SEQ = (
+				SELECT MAX(AUTH_SEQ) FROM AUTH_HISTORY
+				WHERE  USER_NM = #{sUserNm}
+					AND USER_EMAIL = #{sUserEmail}
+					<if test=" sUserId != null and sUserId != '' ">
+						AND USER_ID = #{sUserId}
+					</if>
+			)
+		<if test=" sUserId != null and sUserId != '' ">
+			AND USER_ID = #{sUserId}
+		</if>
+	</select>
+
+	<select id="manualSelect" parameterType="map" timeout="0" resultMap="manualMap" useCache="false">
+		<![CDATA[
+		/*
+		 * SystemCommon.manualSelect
+		 * 매뉴얼 상세
+		 * @author takeit
+		 * @since 2019.11.07
+		 */
+		]]>
+		SELECT MENU_NM AS MANUAL_NM
+			 , MANUAL_TXT
+		  FROM PROJECT_MENU
+		 WHERE PROJECT_CD = #{sProjectCd}
+           AND MENU_CD = #{sMenuCd}
+	</select>
+
+	<select id="dashManualSelect" parameterType="map" timeout="0" resultMap="manualMap" useCache="false">
+		<![CDATA[
+		/*
+		 * SystemCommon.dashManualSelect
+		 * 매뉴얼 상세
+		 * @author takeit
+		 * @since 2020.09.23
+		 */
+		]]>
+		SELECT DASH_NM AS MANUAL_NM
+			 , MANUAL_TXT
+		  FROM DASH_INFO
+		 WHERE PROJECT_CD = #{sProjectCd}
+		   AND DASH_CD = #{sDashCd}
+	</select>
+
+	<!-- 데모ID 추가 -->
+	<select id="maxUserCdSelect" parameterType="map" timeout="0" resultType="string" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.maxUserCdSelect
+		* 신규 사용자코드 가져오기
+		* @author takeit
+		* @since 2020.01.27
+		*/
+		]]>
+		SELECT 
+		
+		<if test="_databaseId == 'Oracle'">
+		('U' || LPAD(TO_NUMBER(NVL(MAX(SUBSTR(USER_CD, 2, 9)), '0') + 1 ), 9, '0')) AS USER_CD
+		</if>
+		<if test="_databaseId == 'SQL Server'">
+		('U' || LPAD(CONVERT(NUMERIC, ISNULL(MAX(SUBSTR(USER_CD, 2, 9)), '0') + 1 ), 9, '0')) AS USER_CD
+		</if>
+		<if test="_databaseId == 'MySQL'">
+		CONCAT('U' , LPAD((IFNULL(MAX(SUBSTR(USER_CD, 2, 9)), '0') + 1 ), 9, '0')) AS USER_CD
+		</if>
+		<if test="_databaseId == 'PostgreSQL'">
+		('U' || LPAD(TO_NUMBER(COALESCE(MAX(SUBSTR(USER_CD, 2, 9)), '0') + 1 ), 9, '0')) AS USER_CD
+		</if>
+		FROM USER_INFO
+	</select>
+
+	<insert id="demoUserInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.demoUserInsert
+		* 데모 사용자 생성
+		* @author takeit
+		* @since 2020.01.27
+		*/
+		]]>
+		INSERT INTO USER_INFO(
+			USER_CD
+			, USER_ID
+			, USER_NM
+			, USER_PW
+			, USER_STATUS
+			, USE_YN
+			, AGREE_YN
+			, AGREE_DT
+			, LOGIN_FAIL_CNT
+			, PW_CHANGE_DT
+			, MAIN_PROJECT
+			, VALID_YN
+			, VALID_START_DATE
+			, VALID_END_DATE
+			, REG_DT
+			, REG_CD
+		)
+		VALUES(
+			#{USER_CD}
+			, #{USER_ID}
+			, #{USER_NM}
+			, #{USER_PW}
+			, '02'
+			, 'Y'
+			, 'Y'
+			, <include refid="CommonInc.sysdate" />
+			, '0'
+			, <include refid="CommonInc.sysdate" />
+			, 'PM00000009'
+			, 'Y'
+			, #{VALID_START_DATE}
+			, #{VALID_END_DATE}
+			, <include refid="CommonInc.sysdate" />
+			, 'U000000001'
+		)
+	</insert>
+
+	<insert id="demoProjectUserInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.demoProjectUserInsert
+		* 데모 프로젝트 사용자 추가
+		* @author takeit
+		* @since 2020.01.27
+		*/
+		]]>
+		INSERT INTO PROJECT_USER(
+			PROJECT_CD
+			, USER_CD
+			, USE_YN
+			, REG_DT
+			, REG_CD
+		)
+		VALUES(
+			'PM00000009'
+			, #{USER_CD}
+			, 'Y'
+			, <include refid="CommonInc.sysdate" />
+			, 'U000000001'
+		)
+	</insert>
+
+	<insert id="demoProjectUserRoleInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* SystemCommon.demoProjectUserRoleInsert
+		* 데모 프로젝트 권한 추가
+		* @author takeit
+		* @since 2020.01.27
+		*/
+		]]>
+		INSERT INTO PROJECT_USER_ROLE(
+			PROJECT_CD
+			, USER_CD
+			, ROLE_CD
+			, REG_DT
+			, REG_CD
+		)
+		VALUES(
+			'PM00000009'
+			, #{USER_CD}
+			, 'R0001'
+			, <include refid="CommonInc.sysdate" />
+			, 'U000000001')
+	</insert>
+</mapper>

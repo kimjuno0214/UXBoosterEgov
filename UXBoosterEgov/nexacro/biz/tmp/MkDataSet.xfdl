@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="PL020S01" width="1249" height="625" titletext="데이터셋만들기" onload="OM010P05_onload" background="#ffffff">
+    <Layouts>
+      <Layout>
+        <Static id="staProgDetailT00_00" taborder="0" text="데이터" left="10" top="10" height="21" cssclass="sta_WF_title02" width="500"/>
+        <Grid id="grdProgList00" taborder="1" left="10" top="staProgDetailT00_00:5" autofittype="col" onselectchanged="grdProgList_onselectchanged" bottom="255" binddataset="dsList" right="10" selecttype="area">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="24" band="head"/>
+                <Row size="24" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell rowspan="3" text="Column0"/>
+                <Cell col="1" rowspan="3" text="Column1"/>
+                <Cell col="2" rowspan="3" text="Column2"/>
+                <Cell col="3" rowspan="3" text="Column3"/>
+                <Cell col="4" rowspan="3" text="Column4"/>
+                <Cell col="5" rowspan="3" text="Column5"/>
+                <Cell col="6" rowspan="3" text="Column6"/>
+                <Cell col="7" rowspan="3" text="Column7"/>
+                <Cell col="8" rowspan="3" text="Column8"/>
+                <Cell col="9" rowspan="3" text="Column9"/>
+                <Cell col="10" rowspan="3" text="Column10"/>
+                <Cell col="11" rowspan="3" text="Column11"/>
+                <Cell col="12" rowspan="3" text="Column12"/>
+                <Cell col="13" rowspan="3" text="Column13"/>
+                <Cell col="14" rowspan="3" text="Column14"/>
+                <Cell col="15" rowspan="3" text="Column15"/>
+                <Cell col="16" rowspan="3" text="Column16"/>
+                <Cell col="17" rowspan="3" text="Column17"/>
+                <Cell col="18" rowspan="3" text="Column18"/>
+                <Cell col="19" rowspan="3" text="Column19"/>
+                <Cell col="20" rowspan="3" text="Column20"/>
+                <Cell col="21" rowspan="3" text="Column21"/>
+                <Cell col="22" rowspan="3" text="Column22"/>
+                <Cell col="23" rowspan="3" text="Column23"/>
+                <Cell col="24" rowspan="3" text="Column24"/>
+                <Cell col="25" rowspan="3" text="Column25"/>
+                <Cell col="26" rowspan="3" text="Column26"/>
+                <Cell col="27" rowspan="3" text="Column27"/>
+                <Cell col="28" rowspan="3" text="Column28"/>
+                <Cell col="29" rowspan="3" text="Column29"/>
+                <Cell col="30" rowspan="3" text="Column30"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0" textAlign="left" edittype="normal"/>
+                <Cell col="1" text="bind:Column1" textAlign="left" edittype="normal"/>
+                <Cell col="2" text="bind:Column2" textAlign="left" edittype="normal"/>
+                <Cell col="3" text="bind:Column3" textAlign="left" edittype="normal"/>
+                <Cell col="4" text="bind:Column4" textAlign="left" edittype="normal"/>
+                <Cell col="5" text="bind:Column5" textAlign="left" edittype="normal"/>
+                <Cell col="6" text="bind:Column6" textAlign="left" edittype="normal"/>
+                <Cell col="7" text="bind:Column7" textAlign="left" edittype="normal"/>
+                <Cell col="8" text="bind:Column8" textAlign="left" edittype="normal"/>
+                <Cell col="9" text="bind:Column9" textAlign="left" edittype="normal"/>
+                <Cell col="10" text="bind:Column10" textAlign="left" edittype="normal"/>
+                <Cell col="11" text="bind:Column11" textAlign="left" edittype="normal"/>
+                <Cell col="12" text="bind:Column12" textAlign="left" edittype="normal"/>
+                <Cell col="13" text="bind:Column13" textAlign="left" edittype="normal"/>
+                <Cell col="14" text="bind:Column14" textAlign="left" edittype="normal"/>
+                <Cell col="15" text="bind:Column15" textAlign="left" edittype="normal"/>
+                <Cell col="16" text="bind:Column16" textAlign="left" edittype="normal"/>
+                <Cell col="17" text="bind:Column17" textAlign="left" edittype="normal"/>
+                <Cell col="18" text="bind:Column18" textAlign="left" edittype="normal"/>
+                <Cell col="19" text="bind:Column19" textAlign="left" edittype="normal"/>
+                <Cell col="20" text="bind:Column20" textAlign="left" edittype="normal"/>
+                <Cell col="21" text="bind:Column20" textAlign="left" edittype="normal"/>
+                <Cell col="22" text="bind:Column21" textAlign="left" edittype="normal"/>
+                <Cell col="23" text="bind:Column22" textAlign="left" edittype="normal"/>
+                <Cell col="24" text="bind:Column23" textAlign="left" edittype="normal"/>
+                <Cell col="25" text="bind:Column24" textAlign="left" edittype="normal"/>
+                <Cell col="26" text="bind:Column25" textAlign="left" edittype="normal"/>
+                <Cell col="27" text="bind:Column26" textAlign="left" edittype="normal"/>
+                <Cell col="28" text="bind:Column27" textAlign="left" edittype="normal"/>
+                <Cell col="29" text="bind:Column28" textAlign="left" edittype="normal"/>
+                <Cell col="30" text="bind:Column29" textAlign="left" edittype="normal"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static01" taborder="2" text="10" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" textAlign="center"/>
+        <Static id="Static24" taborder="3" text="20" left="0" height="10" background="rgba(255,0,0,0.4)" visible="false" right="0" textAlign="center" top="0"/>
+        <Static id="Static01_00" taborder="4" text="10" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" textAlign="center" right="0"/>
+        <Static id="Static24_00" taborder="5" text="20" left="0" height="10" background="rgba(255,0,0,0.4)" visible="false" right="0" textAlign="center" bottom="0"/>
+        <Button id="btnDeployAdd" taborder="6" text="엑셀업로드" top="9" height="23" cssclass="btn_WF_basic01" onclick="btnExcelUpload_onclick" width="90" right="9"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsList">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+          <Column id="Column5" type="STRING" size="256"/>
+          <Column id="Column6" type="STRING" size="256"/>
+          <Column id="Column7" type="STRING" size="256"/>
+          <Column id="Column8" type="STRING" size="256"/>
+          <Column id="Column9" type="STRING" size="256"/>
+          <Column id="Column10" type="STRING" size="256"/>
+          <Column id="Column11" type="STRING" size="256"/>
+          <Column id="Column12" type="STRING" size="256"/>
+          <Column id="Column13" type="STRING" size="256"/>
+          <Column id="Column14" type="STRING" size="256"/>
+          <Column id="Column15" type="STRING" size="256"/>
+          <Column id="Column16" type="STRING" size="256"/>
+          <Column id="Column17" type="STRING" size="256"/>
+          <Column id="Column18" type="STRING" size="256"/>
+          <Column id="Column19" type="STRING" size="256"/>
+          <Column id="Column20" type="STRING" size="256"/>
+          <Column id="Column21" type="STRING" size="256"/>
+          <Column id="Column22" type="STRING" size="256"/>
+          <Column id="Column23" type="STRING" size="256"/>
+          <Column id="Column24" type="STRING" size="256"/>
+          <Column id="Column25" type="STRING" size="256"/>
+          <Column id="Column26" type="STRING" size="256"/>
+          <Column id="Column27" type="STRING" size="256"/>
+          <Column id="Column28" type="STRING" size="256"/>
+          <Column id="Column29" type="STRING" size="256"/>
+          <Column id="Column30" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsExcelUpload"/>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/*
+	excel 업로드
+*/
+this.btnExcelUpload_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	if(this.all["XImport"])
+	{
+		var objDel = this.removeChild("XImport");
+			objDel.destroy();
+			objDel = null;
+	}
+    var objImport = new nexacro.ExcelImportObject("XImport", this); 
+    var sSvcUrl   = take.getSvcUrl() + "XExportImport.do";
+	
+    objImport.set_importtype(nexacro.ImportTypes.EXCEL);
+	objImport.addEventHandler("onsuccess", this.fnExcelImport_onsuccess, this);
+	objImport.addEventHandler("onerror", this.fnExcelImport_onerror, this);	
+	
+	objImport.set_importurl(sSvcUrl);
+	objImport.importData("", "[Command=getsheetdata;body=!A2]", "dsExcelUpload");
+	objImport = null;
+
+};
+
+/*
+	excel 업로드 성공
+*/
+this.fnExcelImport_onsuccess = function(obj:ExcelImportObject,  e:nexacro.ExcelImportEventInfo)
+{
+	var nCnt = this.dsExcelUpload.rowcount;
+    this.dsList.clearData();
+	var startCol = 0;
+	
+	for(var i = 0; i <= 50; i++) {
+		if(i == 0) {
+			this.fv_mpaStr = "Column0=Column0";
+		} else {
+			this.fv_mpaStr = this.fv_mpaStr + ",Column" + (i) + "=" + "Column" + (i);		 
+		}
+	}
+	
+	for(var i = 0; i < nCnt; i++) {
+		var nRow = this.dsList.addRow();
+		this.dsList.copyRow(nRow,this.dsExcelUpload, i, this.fv_mpaStr);
+	}
+	
+	trace(this.dsList.saveXML());
+	
+} 
+     
+/*
+	excel 업로드 실패
+*/
+this.fnExcelImport_onerror = function(obj:ExcelImportObject,  e:nexacro.ExcelImportErrorEventInfo)
+{   
+	alert("excel upload 실패");
+}
+]]></Script>
+  </Form>
+</FDL>

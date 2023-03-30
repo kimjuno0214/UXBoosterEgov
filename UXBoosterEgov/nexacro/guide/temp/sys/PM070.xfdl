@@ -1,0 +1,538 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="PM070" width="1659" height="832" titletext="프로젝트관리_양식관리_양식관리" onload="PM070_onload" ontimer="PM070_ontimer">
+    <Layouts>
+      <Layout height="832" mobileorientation="landscape" width="1659">
+        <Div id="divSearch" taborder="2" left="10" top="0" height="43" right="10" cssclass="div_WF_searchBox01" text="" minwidth="1020" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Static id="staProjectNmT" taborder="0" text="프로젝트명" left="20" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="cboProject" taborder="1" left="staProjectNmT:10" top="10" width="195" height="21" index="0" innerdataset="dsProject" codecolumn="CODE" datacolumn="NAME" text="사용" value="Y" cssclass="cmb_WF_essential"/>
+              <Static id="staTemplateNmT" taborder="4" text="양식명" left="355" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="edtTemplateNm" taborder="2" left="staTemplateNmT:10" top="10" width="195" height="21" onkeydown="divSearch_onkeydown"/>
+              <Static id="staUseYn" taborder="5" text="사용여부" left="690" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="cboUseYn" taborder="3" left="staUseYn:10" top="10" width="195" height="21" index="-1" innerdataset="dsUseYnAll" codecolumn="CODE" datacolumn="NAME" text="사용" value="Y"/>
+              <Static id="Static07_00" taborder="6" text="20" left="0" top="0" width="20" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static07_00_00_01" taborder="7" text="285" left="20" top="31" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00_00" taborder="8" text="285" left="20" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07" taborder="9" text="50" left="305" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static07_00_00_00" taborder="10" text="285" left="355" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00_00_00_01" taborder="11" text="285" left="355" top="31" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_01" taborder="12" text="50" left="640" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static07_00_00_00_00" taborder="13" text="285" left="690" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00_00_00_00_00" taborder="14" text="285" left="690" top="31" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnShowHide" taborder="1" left="48.16%" top="43" width="60" height="10" cssclass="btn_WF_fold01"/>
+        <Div id="divDetail" taborder="0" left="10" top="73" right="10" bottom="10" minwidth="1020" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Static id="Static18" taborder="1" text="양식 목록" left="0" top="0" height="21" width="310" cssclass="sta_WF_title02"/>
+              <Static id="Static20" taborder="2" text="양식 상세정보" left="330" top="0" height="21" cssclass="sta_WF_title02" right="0"/>
+              <Grid id="grdMain" taborder="0" left="0" top="26" width="310" binddataset="dsTemplateList" autofittype="col" bottom="0" onselectchanged="grdMain_onselectchanged" takegrid="sort">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="82"/>
+                      <Column size="175"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="양식ID"/>
+                      <Cell col="1" text="양식명"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:TEMPLATE_CD" textAlign="center"/>
+                      <Cell col="1" text="bind:TEMPLATE_NM"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="Static33" taborder="3" left="449" top="26" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Static id="Static34" taborder="8" left="449" top="56" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Static id="Static36" taborder="9" left="449" top="86" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Static id="Static41" taborder="10" left="449" top="116" cssclass="sta_WF_td01L" right="0" height="97"/>
+              <Static id="staTemplateIdT" taborder="11" text="양식ID" left="330" top="26" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="staUseYnT" taborder="12" text="사용여부" left="330" top="86" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Combo id="cboUseYn" taborder="5" text="사용" left="staUseYnT:7" top="91" width="230" height="21" innerdataset="dsUseYn" codecolumn="CODE" datacolumn="NAME" index="0" value="Y" cssclass="cmb_WF_essential"/>
+              <Static id="staTemplateNmT" taborder="13" text="양식명" left="330" top="56" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Edit id="edtTemplateNm" taborder="4" left="staTemplateNmT:7" top="61" height="21" width="230" cssclass="edt_WF_essential"/>
+              <Static id="staDescTxtT" taborder="16" text="상세설명" left="330" top="116" width="120" cssclass="sta_WF_th01L" height="97"/>
+              <TextArea id="taDescTxt" taborder="6" left="staDescTxtT:7" top="122" right="7" height="85"/>
+              <WebBrowser id="wbWebEditor" taborder="7" left="330" top="217" right="0" onloadcompleted="wbWebEditor_onloadcompleted" bottom="65" onsize="divDetail_wbWebEditor_onsize"/>
+              <Static id="Static04" taborder="14" left="449" cssclass="sta_WF_td01L" text="" height="31" right="0" top="wbWebEditor:4"/>
+              <Static id="staRegNmT" taborder="15" text="등록자" left="330" width="120" cssclass="sta_WF_th01L" height="31" top="wbWebEditor:4"/>
+              <Static id="Static06" taborder="17" left="449" cssclass="sta_WF_td01L" text="" right="0" top="Static04:-1" bottom="0"/>
+              <Static id="staModDtT" taborder="18" text="수정일" left="666" width="120" cssclass="sta_WF_th01L" height="31" bottom="0"/>
+              <Static id="staModNmT" taborder="19" text="수정자" left="330" width="120" cssclass="sta_WF_th01L" height="31" top="staRegNmT:-1"/>
+              <Static id="staTemplateId" taborder="20" left="staTemplateIdT:7" top="31" width="110" height="21"/>
+              <Static id="staRegNm" taborder="21" left="staRegNmT:9" width="150" height="21" top="wbWebEditor:9"/>
+              <Static id="staModNm" taborder="22" left="staModNmT:9" width="150" height="21" top="staRegNm:9"/>
+              <Static id="staRegDtT00" taborder="25" text="등록일" left="666" width="120" cssclass="sta_WF_th01L" height="31" bottom="30"/>
+              <Static id="staRegDt" taborder="24" left="staRegDtT00:7" width="120" height="21" top="wbWebEditor:9"/>
+              <Static id="staModDt" taborder="23" left="staModDtT:7" width="120" height="21" top="staRegDt:9"/>
+              <Static id="Static01" taborder="26" text="20" left="310" top="26" width="20" background="rgba(255,0,0,0.4)" visible="false" color="red" textAlign="center" bottom="4"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static01" taborder="3" text="10" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" textAlign="center"/>
+        <Static id="Static24" taborder="4" text="20" left="0" height="20" background="rgba(255,0,0,0.4)" visible="false" right="0" textAlign="center" top="53"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsTemplateList">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="TEMPLATE_CD" type="STRING" size="256"/>
+          <Column id="TEMPLATE_NM" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="TEMPLATE_CD" type="STRING" size="256"/>
+          <Column id="USE_YN" type="STRING" size="256"/>
+          <Column id="PROJECT_NM" type="STRING" size="256"/>
+          <Column id="TEMPLATE_NM" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsTemplateDetail">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="TEMPLATE_CD" type="STRING" size="256"/>
+          <Column id="TEMPLATE_NM" type="STRING" size="256"/>
+          <Column id="ML_CD" type="STRING" size="256"/>
+          <Column id="TEMPLATE_TXT" type="STRING" size="256"/>
+          <Column id="DESC_TXT" type="STRING" size="256"/>
+          <Column id="USE_YN" type="STRING" size="256"/>
+          <Column id="REG_DT" type="STRING" size="256"/>
+          <Column id="REG_CD" type="STRING" size="256"/>
+          <Column id="REG_NM" type="STRING" size="256"/>
+          <Column id="MOD_DT" type="STRING" size="256"/>
+          <Column id="MOD_CD" type="STRING" size="256"/>
+          <Column id="MOD_NM" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsProject">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsUseYnAll">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsUseYn">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    1DEPTH > 2DEPTH
+*  @FileName    *.xfdl 
+*  @Creator     홍길동
+*  @CreateDate  yyyy.MM.DD 
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  YYYY.MM.DD      홍길동             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+//this.fv_nFormVal = null;     //용도
+this.fv_bWebOnload = false;
+this.fv_sProjectCd = nexacro.getApplication().av_sProjectCd;
+this.fv_sSelTemplateCd = "";	
+this.fv_sSelectRow = "";
+this.fv_sSaveTemplateCd = "";
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* formid_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.PM070_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {    
+        //Script
+		var sBaseUrl = take.getSvcUrl();    
+		this.divDetail.form.wbWebEditor.set_url(sBaseUrl + "editor/SummerNote/summer.html");		
+		this.setTimer(1,100);
+   }
+};
+
+/*********************************************************
+* 2.1 TRANSACTION 서비스 호출 처리
+ ********************************************************/
+/**
+ * fnTran : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnTran("ID");
+ */
+this.fnTran = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Search";
+    
+    //변수선언
+	var sUrl   = "",      //서비스 URL
+        sInDs  = "",     //데이터셋을 검색조건으로 보낼경우 사용 -->선택
+        sOutDs = "",    //데이터를 받아올 데이터셋 지정
+        sParam = "",    //파라메터 사용 안 할 경우       
+        sCallBack;       //콜백 처리 함수
+    sCallBack  = "fnCallback" ; 
+	
+	var sParentKey, sCodeKey, sCodeId, sCodeNm, sLevel, sUseYn;
+    var objDs;
+	var nCurRow, nCnt;
+    
+    switch(sTranId)
+    {
+        case "CodeSearch" :  // 코드조회
+            var sOutDs = ["dsUseYnAll", "dsProject"];
+            var sNameSpaces = ["Main.codeSimpleSelect", "ProjectManagement.projectInfoCode"];
+			var sParam = "sHeaderType=ALL sGroupId=00009";
+			
+            take.tranSelect(this, "CodeSearch", sNameSpaces, "dsSearch", sOutDs, sParam,
+            function(sId, nErrCd, sErrMsg){
+				//callback
+                var nFindRow = this.dsProject.findRow("CODE", this.fv_sProjectCd);
+				this.divSearch.form.cboProject.set_index(nFindRow);
+				this.divSearch.form.cboUseYn.set_index(0);
+				
+                // PM00000001 관리자 아닐시 콤보 변경 X 처리
+                if(this.fv_sProjectCd != "PM00000001") {
+                    this.divSearch.form.cboProject.set_readonly();
+                }
+                
+				this.dsUseYn.clearData();
+				for( var i=1; i<this.dsUseYnAll.rowcount; i++ )
+				{
+					var nRow = this.dsUseYn.addRow();
+					this.dsUseYn.copyRow(nRow, this.dsUseYnAll, i);
+				}
+				
+				this.fnSearch();
+			});
+         
+            break;
+        case "Search" :   // 조회
+            take.tranSelect(this, "Search", "ProjectManagement.projectTemplateList", "dsSearch", "dsTemplateList", "", sCallBack);
+         
+            break;
+        case "DetailSearch" :    // 상세조회
+			this.dsSearch.clearData();
+			this.dsSearch.addRow();
+			
+			this.fv_sSelectRow = this.divDetail.form.grdMain.getSelectedRows();
+			var nSelRow = this.dsTemplateList.rowposition;
+			var sProjectCd = this.dsTemplateList.getColumn(this.fv_sSelectRow, "PROJECT_CD");
+			var sTemplateCd =  this.dsTemplateList.getColumn(this.fv_sSelectRow, "TEMPLATE_CD");
+			
+			if( take.nvl(this.fv_sSaveTemplateCd,"") != "" && this.fv_sSaveTemplateCd != sTemplateCd)
+			{
+				return false;
+			}
+			this.fv_sSaveTemplateCd = "";
+			
+			this.dsSearch.setColumn(0, "PROJECT_CD", sProjectCd);
+			this.dsSearch.setColumn(0, "TEMPLATE_CD", sTemplateCd);
+			
+			this.dsTemplateDetail.clearData();
+			
+			take.tranSelect(this, "DetailSearch", "ProjectManagement.projectTemplateDetail", "dsSearch", "dsTemplateDetail", "", sCallBack);			
+            break;
+        
+        default :
+            break;
+    }
+}
+
+/*********************************************************
+ * 2.2 CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "Search" : //조회 콜백
+            //Script
+			this.divDetail.form.wbWebEditor.getProperty("window").callMethod("setContents", "");
+			
+			var nFRow = this.dsTemplateList.findRowAsNF("TEMPLATE_CD", this.fv_sSaveTemplateCd);			
+			if( nFRow != -1 )
+			{
+				this.divDetail.form.grdMain.selectRow(nFRow);				
+			}
+// 			var sContents = this.dsTemplateDetail.getColumn(0, "TEMPLATE_TXT");
+// 			this.divDetail.form.wbWebEditor.getProperty("window").callMethod("setContents", sContents);
+			
+            break;
+        case "DetailSearch" :  //조회 콜백
+            //Script			
+			var sContents = this.dsTemplateDetail.getColumn(0, "TEMPLATE_TXT");
+			this.divDetail.form.wbWebEditor.getProperty("window").callMethod("setContents", sContents);
+			
+            break;
+		case "Save" : //저장 콜백	
+			//Script
+			//take.alert(this, "String", "저장이 완료되었습니다.", "");
+			take.alert(this, "Info", "MS00000002");
+			this.fv_sSaveTemplateCd = this.dsTemplateDetail.getColumn(0, "TEMPLATE_CD");
+			
+			this.fnSearch();
+			
+			break;
+		case "Delete" : //삭제 콜백
+			//Script
+			//take.alert(this, "String", "삭제가 완료되었습니다.", "");
+			take.alert(this, "Info", "MS00000003");
+			this.fnSearch();
+			
+			break;
+        default :
+            break;
+    }        
+} 
+
+/*********************************************************
+* 3 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Search";
+	
+	this.dsSearch.clearData();
+	this.dsSearch.addRow();
+	
+	this.dsSearch.setColumn(0, "PROJECT_CD", this.divSearch.form.cboProject.value);
+	this.dsSearch.setColumn(0, "TEMPLATE_CD", this.divSearch.form.edtTemplateNm.value);
+	this.dsSearch.setColumn(0, "USE_YN", this.divSearch.form.cboUseYn.value);
+	
+	this.dsTemplateList.clearData();
+	this.dsTemplateDetail.clearData();
+	
+    take.tranSelect(this,sTranId,"ProjectManagement.projectTemplateList","dsSearch", "dsTemplateList", "", "fnCallback");
+}
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+this.fnSave = function(sTranId)
+{    
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Save";
+	
+	takeval.add(this, "Save", this.divDetail.form.edtTemplateNm, "양식명", "value", true, "string", "", "");
+	//takeval.add(this, "Save", this.divDetail.form.taDescTxt, "상세설명", "text", true, "string", "", "");
+	
+	var rtnBol = takeval.check(this, "Save");
+	if( !rtnBol )
+	{
+		return false;
+	}
+	
+	var sContents = this.divDetail.form.wbWebEditor.getProperty("window").callMethod("getContents", 1);
+	this.dsTemplateDetail.setColumn(0, "TEMPLATE_TXT", sContents);
+	
+	take.tranSave(this, sTranId, "ProjectManagement.projectTemplate", "dsTemplateDetail", "dsTemplateDetail", "", "fnCallback");
+}
+/**
+ * fnAddRow : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+ * @example this.fnAddRow(sGrdId, nRow);
+ */
+this.fnAddRow = function(sGrdId, nRow)
+{
+    //Script
+	//var nRow = this.dsTemplateList.addRow();
+	this.dsTemplateDetail.clearData();
+	var nDetailRow = this.dsTemplateDetail.addRow();
+	this.dsTemplateDetail.setColumn(nDetailRow, "PROJECT_CD", this.divSearch.form.cboProject.value);
+	this.dsTemplateDetail.setColumn(nDetailRow, "USE_YN", "Y");
+	this.divDetail.form.wbWebEditor.getProperty("window").callMethod("setContents", "");
+	
+	this.divDetail.form.grdMain.selectRow(-1);
+}
+
+/**
+ * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number, Array} arrnRow    deleteRow 리턴값
+ * @return {N/A} N/A
+ * @example this.fnDelRow(sGrdId, nRow); 
+ */
+this.fnDelRow = function(sGrdId, arrnRow)
+{   
+    //Script
+	var nRow = this.dsTemplateList.rowposition;
+	var sTemplateCd = take.nvl(this.dsTemplateList.getColumn(nRow, "TEMPLATE_CD"), "");
+	
+	if( "" == sTemplateCd )
+	{
+		//take.alert(this, "Info", "삭제할 양식이 존재하지않습니다.");
+		take.alert(this, "Info", "MS00000009", {text:this.divDetail.form.Static20.text});
+		return false;
+	}
+	
+	var bConfirm = take.confirm(this, "question", "MS00000071");
+	//take.confirm(this, "", "해당양식을 삭제 하시겠습니까?");
+	if(bConfirm)
+	{
+		this.dsTemplateDetail.deleteRow(0);
+		take.tranSave(this, "Delete", "ProjectManagement.projectTemplate", "dsTemplateDetail", "", "", "fnCallback");
+	}	
+};
+
+/*********************************************************
+ * 4 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+/**
+* component_onclick : ~ 버튼 클릭
+*/
+this.component_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    //Script
+};
+
+/*********************************************************
+* 5 사용자 FUNCTION 영역
+********************************************************/
+this.grdMain_onselectchanged = function(obj:nexacro.Grid,e:nexacro.GridSelectEventInfo)
+{
+	this.fnGridSelChange();
+};
+
+// 메인그리드 행 선택
+this.fnGridSelChange = function()
+{
+	this.fv_sSelTemplateCd = take.nvl(this.dsTemplateDetail.getColumn(0, "TEMPLATE_CD"), "");
+	var sPreContents = take.nvl(this.dsTemplateDetail.getColumn(0, "TEMPLATE_TXT"), "");
+	var sCurrContents = this.divDetail.form.wbWebEditor.getProperty("window").callMethod("getContents", 1);
+	var nPreSelRow = parseInt(take.nvl(this.fv_sSelectRow, "-1"));
+	var nCurrSelRow = parseInt(take.nvl(this.divDetail.form.grdMain.getSelectedRows(), "-1"));
+	
+	//trace("!@!@>> nCurrSelRow:  " + nCurrSelRow + ",   nPreSelRow:  " + nPreSelRow + ",   this.fv_sSelTemplateCd:   " + this.fv_sSelTemplateCd);
+	
+	var bRowChange = true;
+	if( nCurrSelRow != -1 && (nPreSelRow != nCurrSelRow) )
+	{
+		var sRowType = this.dsTemplateDetail.getRowType(0);
+		
+		if( "2" == sRowType || "4" == sRowType || ( this.dsTemplateDetail.rowcount > 0 && sPreContents != sCurrContents) )
+		{
+			bRowChange = take.confirm(this, "question", "MS00000074");
+			//take.confirm(this, "String", "작업중인 데이터는 저장되지 않습니다.\n그래도 이동하시겠습니까?");
+		}
+		
+		if(bRowChange)
+		{
+			this.fnTran("DetailSearch");
+		}
+		else
+		{
+			nPreSelRow = ( "2" == sRowType ) ? -1 : nPreSelRow;
+			this.divDetail.form.grdMain.selectRow(nPreSelRow);
+		}
+	}
+	else if((nCurrSelRow == nPreSelRow) && (nCurrSelRow == 0) && ( "" == this.fv_sSelTemplateCd ))
+	{
+		this.fnTran("DetailSearch");
+	}
+}
+
+this.wbWebEditor_onloadcompleted = function(obj:nexacro.WebBrowser,e:nexacro.WebLoadCompEventInfo)
+{
+	if (e.url.indexOf("summer.html") != -1)
+	{
+		this.fv_bWebOnload = true;
+	}
+};
+
+this.divDetail_wbWebEditor_onsize = function(obj:nexacro.WebBrowser,e:nexacro.SizeEventInfo)
+{
+	this.divDetail.form.wbWebEditor.getProperty("window").callMethod("setHeight", (this.divDetail.form.wbWebEditor.getOffsetHeight()-85));
+};
+
+this.PM070_ontimer = function(obj:nexacro.Form,e:nexacro.TimerEventInfo)
+{
+	if (e.timerid==1)
+	{
+        if (this.fv_bWebOnload == true)
+		{
+            this.killTimer(1);
+            this.divDetail.form.wbWebEditor.getProperty("window").callMethod("fnEditorReady", (this.divDetail.form.wbWebEditor.getOffsetHeight()-65));
+			//this.fnSearch();
+			this.fnTran("CodeSearch");
+		}
+	}
+};
+
+this.divSearch_onkeydown = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+	if( e.keycode == 13 )
+	{
+		this.fnSearch();
+	}
+};]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="divDetail.form.cboUseYn" propid="value" datasetid="dsTemplateDetail" columnid="USE_YN"/>
+      <BindItem id="item1" compid="divDetail.form.edtTemplateNm" propid="value" datasetid="dsTemplateDetail" columnid="TEMPLATE_NM"/>
+      <BindItem id="item2" compid="divDetail.form.taDescTxt" propid="value" datasetid="dsTemplateDetail" columnid="DESC_TXT"/>
+      <BindItem id="item3" compid="divDetail.form.staTemplateId" propid="text" datasetid="dsTemplateDetail" columnid="TEMPLATE_CD"/>
+      <BindItem id="item4" compid="divDetail.form.staRegNm" propid="text" datasetid="dsTemplateDetail" columnid="REG_NM"/>
+      <BindItem id="item5" compid="divDetail.form.staModNm" propid="text" datasetid="dsTemplateDetail" columnid="MOD_NM"/>
+      <BindItem id="item6" compid="divDetail.form.staModDt" propid="text" datasetid="dsTemplateDetail" columnid="MOD_DT"/>
+      <BindItem id="item7" compid="divDetail.form.staRegDt" propid="text" datasetid="dsTemplateDetail" columnid="REG_DT"/>
+    </Bind>
+  </Form>
+</FDL>

@@ -1,0 +1,628 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="sampleComFile" width="1280" height="1590" titletext="(샘플)파일업로드 공통" onload="form_onload">
+    <Layouts>
+      <Layout height="1590" mobileorientation="landscape" width="1280">
+        <Static id="Static01" taborder="0" text="10" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="141" visible="false" textAlign="center"/>
+        <Div id="divBasic" taborder="1" text="Div00" left="10" top="180" height="249" right="10">
+          <Layouts>
+            <Layout>
+              <Div id="divComFile" taborder="0" text="Div00" left="8" top="79" width="770" url="frm::com/comFileSYS.xfdl" bottom="0" takefile="{&quot;isSingle&quot;:true,&quot;isVisibleTypeCd&quot;:true,&quot;addDelBtnEnable&quot;:true,&quot;saveBtnEnable&quot;:true,&quot;atchFileTypeCd&quot;:&quot;06&quot;}"/>
+              <Button id="btnInit" taborder="1" text=" 초기화" top="15" width="70" height="23" cssclass="btn_WF_basic01" onclick="btnInit_onclick" left="636" takefile="" visible="false" enable="false"/>
+              <Button id="btnNew" taborder="2" text="신규파일ID생성" top="48" width="90" height="23" cssclass="btn_WF_basic01" onclick="btnNew_onclick" left="616"/>
+              <Edit id="edtAtchFileId" taborder="3" left="469" top="48" width="140" height="23" takefile="{isSingle : true,isVisibleTypeCd : false,addDelBtnEnable : true,saveBtnEnable : true,atchFileTypeCd : ''}" text="{isSingle:&quot;true&quot;,isVisibleTypeCd:&quot;true&quot;,addDelBtnEnable:&quot;true&quot;,saveBtnEnable:&quot;true&quot;,atchFileTypeCd:&quot;06&quot;}"/>
+              <Button id="btnSearch" taborder="4" text="파일조회" top="48" width="70" height="23" cssclass="btn_WF_basic01" onclick="btnSearch_onclick" left="708"/>
+              <Static id="Static18" taborder="5" text="단순 첨부파일(복수)" left="0" top="0" height="30" width="450" cssclass="sta_WF_title02"/>
+              <Edit id="edtTakeFile" taborder="6" left="228" top="15" width="406" height="23" takefile="{&quot;isSingle&quot;:true,&quot;isVisibleTypeCd&quot;:true,&quot;addDelBtnEnable&quot;:true,&quot;saveBtnEnable&quot;:true,&quot;atchFileTypeCd&quot;:&quot;06&quot;}" value="{&quot;isSingle&quot;:true,&quot;isVisibleTypeCd&quot;:true,&quot;addDelBtnEnable&quot;:true,&quot;saveBtnEnable&quot;:true,&quot;atchFileTypeCd&quot;:&quot;06&quot;}" text="{&quot;isSingle&quot;:true,&quot;isVisibleTypeCd&quot;:true,&quot;addDelBtnEnable&quot;:true,&quot;saveBtnEnable&quot;:true,&quot;atchFileTypeCd&quot;:&quot;06&quot;}" visible="false" enable="false"/>
+              <TextArea id="TextArea00" taborder="7" left="786" top="48" height="192" value="takefile userproperty&#10;&#10;{&#10;  &quot;isSingle&quot;: true, //탐색기 단건선택 여부(default:false)&#10;  &quot;isVisibleTypeCd&quot;: true, //파일구분 컬럼 표시 여부(default:false)&#10;  &quot;addDelBtnEnable&quot;: true, //파일추가/삭제 버튼 표시 여부(default:true)&#10;  &quot;saveBtnEnable&quot;: true, //저장 버튼 표시 여부(default:true)&#10;  &quot;atchFileTypeCd&quot;: &quot;06&quot; //파일구분공통코드(default:기타(06) -&gt; 첨부유형코드(00007) 참조)&#10;}" readonly="true" right="0"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static00" taborder="2" text="10" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="141" visible="false" textAlign="center" right="0"/>
+        <Static id="Static24" taborder="3" text="10" left="0" height="10" background="rgba(255,0,0,0.4)" visible="false" right="0" textAlign="center" top="259"/>
+        <Static id="Static24_00" taborder="4" text="10" left="10" height="10" background="rgba(255,0,0,0.4)" visible="false" right="-10" textAlign="center" top="0"/>
+        <Div id="divMasterFile" taborder="5" text="Div00" left="10" top="489" height="251" width="780">
+          <Layouts>
+            <Layout>
+              <Static id="Static18" taborder="0" text="마스터정보 첨부파일 예제" left="0" top="0" height="30" width="450" cssclass="sta_WF_title02"/>
+              <Static id="staUserIdT" taborder="1" text="제목" left="0" top="30" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+              <Static id="Static33" taborder="2" left="119" top="30" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Edit id="edtUserId" taborder="3" left="126" top="35" height="21" readonly="true" onchanged="divDetail_edtUserId_onchanged" right="6"/>
+              <Static id="staUserNmT" taborder="4" text="내용" left="0" top="60" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+              <Static id="Static34" taborder="5" top="60" height="31" cssclass="sta_WF_td01L" right="0" left="119"/>
+              <Edit id="edtUserNm" taborder="6" left="126" top="65" height="21" readonly="true" onchanged="divDetail_edtUserId_onchanged" right="6"/>
+              <Static id="Static34_00" taborder="8" top="90" cssclass="sta_WF_td01L" right="0" left="119" bottom="0"/>
+              <Static id="staUserNmT00" taborder="7" text="첨부파일" left="0" top="90" width="120" cssclass="sta_WF_th01Limport" bottom="0"/>
+              <Div id="divComFile" taborder="9" text="Div00" left="126" top="90" url="frm::com/comFileSYS.xfdl" bottom="0" right="6" takefile="{&quot;isSingle&quot;:false,&quot;isVisibleTypeCd&quot;:false,&quot;addDelBtnEnable&quot;:true,&quot;saveBtnEnable&quot;:false,&quot;atchFileTypeCd&quot;:&quot;04&quot;}"/>
+              <Static id="Static09_00_00" taborder="10" text="w&#13;&#10;6" left="120" top="342" height="250" background="rgba(255,0,0,0.4)" visible="false" textAlign="center" verticalAlign="middle" font="normal 7pt/normal &quot;Arial&quot;" width="6"/>
+              <Static id="Static01" taborder="11" text="6" left="120" top="10" width="6" background="rgba(255,0,0,0.4)" bottom="113" visible="false" textAlign="center"/>
+              <Static id="Static01_00" taborder="12" text="6" left="587" top="268" width="6" background="rgba(255,0,0,0.4)" bottom="-535" visible="false" textAlign="center"/>
+              <Static id="Static01_01" taborder="13" text="6" top="120" width="6" background="rgba(255,0,0,0.4)" bottom="53" visible="false" textAlign="center" right="0"/>
+              <Button id="btnSearch" taborder="14" text="조회" top="4" width="70" height="23" cssclass="btn_WF_basic01" onclick="divMasterFile_btnSearch_onclick" right="144"/>
+              <Button id="btnSave" taborder="15" text="저장" top="4" width="70" height="23" cssclass="btn_WF_basic01" onclick="divMasterFile_btnSave_onclick" right="72"/>
+              <Button id="btnDelete" taborder="16" text="삭제" top="4" width="70" height="23" cssclass="btn_WF_basic01" onclick="divMasterFile_btnDelete_onclick" right="0"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divListFile" taborder="6" text="Div00" left="10" top="794" height="236" width="778">
+          <Layouts>
+            <Layout>
+              <Static id="Static34_00" taborder="12" top="90" cssclass="sta_WF_td01L" right="0" left="526" bottom="15"/>
+              <Grid id="grdList" taborder="0" left="0" top="30" width="396" height="192" binddataset="dsList" autofittype="col" cellclickbound="cell">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="80"/>
+                      <Column size="435"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="28" band="head"/>
+                      <Row size="26"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="NO"/>
+                      <Cell col="1" text="BOARD_TITLE"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="expr:currow+1"/>
+                      <Cell col="1" text="bind:BOARD_TITLE"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="Static18" taborder="1" text="리스트 첨부파일 예제" left="0" top="0" height="30" width="450" cssclass="sta_WF_title02"/>
+              <Static id="Static01" taborder="2" text="10" left="396" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="-593" visible="false" textAlign="center"/>
+              <Static id="staUserIdT" taborder="3" text="제목" left="406" top="30" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+              <Static id="Static33" taborder="4" left="525" top="30" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Static id="Static33_00" taborder="6" left="525" top="60" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Static id="staUserNmT" taborder="5" text="내용" left="406" top="60" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+              <Edit id="edtUserId" taborder="7" left="532" top="35" height="21" readonly="true" onchanged="divDetail_edtUserId_onchanged" right="6"/>
+              <Edit id="edtUserNm" taborder="8" left="532" top="65" height="21" readonly="true" onchanged="divDetail_edtUserId_onchanged" right="6"/>
+              <Static id="Static01_00" taborder="9" text="6" left="526" top="11" width="6" background="rgba(255,0,0,0.4)" bottom="97" visible="false" textAlign="center"/>
+              <Div id="divComFile" taborder="11" text="Div00" left="532" top="90" url="frm::com/comFileSYS.xfdl" bottom="15" right="6" takefile="{&quot;isSingle&quot;:false,&quot;isVisibleTypeCd&quot;:false,&quot;addDelBtnEnable&quot;:true,&quot;saveBtnEnable&quot;:false,&quot;atchFileTypeCd&quot;:&quot;04&quot;}"/>
+              <Static id="staUserNmT00" taborder="10" text="첨부파일" left="406" top="90" width="120" cssclass="sta_WF_th01Limport" bottom="15"/>
+              <Button id="btnAddRow" taborder="13" text="신규" top="4" width="70" height="23" cssclass="btn_WF_basic01" onclick="divListFile_btnAddRow_onclick" right="144"/>
+              <Button id="btnSave" taborder="14" text="저장" top="4" width="70" height="23" cssclass="btn_WF_basic01" onclick="divListFile_btnSave_onclick" right="72"/>
+              <Button id="btnDelete" taborder="15" text="삭제" top="4" width="70" height="23" cssclass="btn_WF_basic01" onclick="divListFile_btnDelete_onclick" right="0"/>
+              <Button id="btnSearch" taborder="16" text="조회" top="4" width="70" height="23" cssclass="btn_WF_basic01" onclick="divListFile_btnSearch_onclick" right="216"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divPopup" taborder="7" text="Div00" left="10" top="1056" height="194" width="780">
+          <Layouts>
+            <Layout>
+              <Static id="Static18" taborder="0" text="팝업 첨부파일 예제" left="0" top="0" height="30" width="450" cssclass="sta_WF_title02"/>
+              <Grid id="grdList" taborder="1" left="0" top="30" binddataset="dsPopup" autofittype="col" cellclickbound="cell" bottom="0" right="0" oncellclick="divPopup_grdList_oncellclick" autoupdatetype="itemselect">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="80"/>
+                      <Column size="435"/>
+                      <Column size="178"/>
+                      <Column size="48"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="28" band="head"/>
+                      <Row size="26"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="NO"/>
+                      <Cell col="1" text="BOARD_TITLE"/>
+                      <Cell col="2" text="BOARD_ATTACH"/>
+                      <Cell col="3" text="첨부"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="expr:currow+1"/>
+                      <Cell col="1" text="bind:BOARD_TITLE"/>
+                      <Cell col="2" text="bind:BOARD_ATTACH"/>
+                      <Cell col="3" displaytype="buttoncontrol" text="첨부" cursor="pointer" editautoselect="true"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Button id="btnSearch" taborder="2" text="조회" top="4" width="70" height="23" cssclass="btn_WF_basic01" onclick="divPopup_btnSearch_onclick" right="216"/>
+              <Button id="btnAddRow" taborder="3" text="행추가" top="4" width="70" height="23" cssclass="btn_WF_basic01" right="72" onclick="divPopup_btnAddRow_onclick"/>
+              <Button id="btnSave" taborder="4" text="저장" top="4" width="70" height="23" cssclass="btn_WF_basic01" right="144" onclick="divPopup_btnSave_onclick"/>
+              <Button id="btnDelete" taborder="5" text="행삭제" top="4" width="70" height="23" cssclass="btn_WF_basic01" right="0" onclick="divPopup_btnDelete_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <TextArea id="TextArea00" taborder="8" left="798" top="489" height="251" value="takefile userproperty&#10;&#10;{&#10;  &quot;isSingle&quot;: false,//탐색기 단건선택 여부(default:false)&#10;  &quot;isVisibleTypeCd&quot;: false, //파일구분 컬럼 표시 여부(default:false)&#10;  &quot;addDelBtnEnable&quot;: true, //파일추가/삭제 버튼 표시 여부(default:true)&#10;  &quot;saveBtnEnable&quot;: false, //저장 버튼 표시 여부(default:true)&#10;  &quot;atchFileTypeCd&quot;: &quot;04&quot; //파일구분공통코드(default:기타(06) -&gt; 첨부유형코드(00007) 참조)&#10;}" readonly="true" right="8"/>
+        <TextArea id="TextArea00_00" taborder="9" left="797" top="794" height="222" value="takefile userproperty&#10;&#10;{&#10;  &quot;isSingle&quot;: false,//탐색기 단건선택 여부(default:false)&#10;  &quot;isVisibleTypeCd&quot;: false, //파일구분 컬럼 표시 여부(default:false)&#10;  &quot;addDelBtnEnable&quot;: true, //파일추가/삭제 버튼 표시 여부(default:true)&#10;  &quot;saveBtnEnable&quot;: false, //저장 버튼 표시 여부(default:true)&#10;  &quot;atchFileTypeCd&quot;: &quot;04&quot; //파일구분공통코드(default:기타(06) -&gt; 첨부유형코드(00007) 참조)&#10;}&#10;&#10;Dataset onrowposchanged 연동" readonly="true" right="9"/>
+        <TextArea id="TextArea00_00_00" taborder="10" left="797" top="1055" height="195" value="  var oArg = {&#10;      argInDsPopup        : this.dsPopup //목록 Dataset&#10;    , argInColIdPopup     : 'BOARD_ATTACH' //목록 Dataset의 첨부파일ID컬럼&#10;    , argInAtchFileTypeCd : this.FILETYPE_BOARD //파일유형코드&#10;    , argInAtchFileId     : this.dsPopup.getColumn(e.row, 'BOARD_ATTACH') //첨부파일ID&#10;    , argInIsReadOnly     : false  //읽기전용여부&#10;  };&#10;&#10;take.openPopup(this, &quot;comFilePop&quot;, &quot;frm::com/comFilePop.xfdl&quot;, oArg, sOpt);" readonly="true" right="9"/>
+        <Div id="divSingle" taborder="11" text="Div00" left="10" top="10" height="159" right="10">
+          <Layouts>
+            <Layout>
+              <Button id="btnNew" taborder="0" text="신규파일ID생성" top="48" width="90" height="23" cssclass="btn_WF_basic01" left="160" onclick="divSingle_btnNew_onclick"/>
+              <Edit id="edtAtchFileId" taborder="1" left="13" top="48" width="140" height="23" takefile="{isSingle : true,isVisibleTypeCd : false,addDelBtnEnable : true,saveBtnEnable : true,atchFileTypeCd : ''}" text="{isSingle:&quot;true&quot;,isVisibleTypeCd:&quot;true&quot;,addDelBtnEnable:&quot;true&quot;,saveBtnEnable:&quot;true&quot;,atchFileTypeCd:&quot;06&quot;}"/>
+              <Button id="btnSearch" taborder="2" text="파일조회" top="48" width="70" height="23" cssclass="btn_WF_basic01" left="252" onclick="divSingle_btnSearch_onclick"/>
+              <Static id="Static18" taborder="3" text="단순 첨부파일(단건)" left="0" top="0" height="30" width="450" cssclass="sta_WF_title02"/>
+              <TextArea id="TextArea00" taborder="4" left="786" top="8" height="142" value="takefile userproperty&#10;&#10;{&#10;  &quot;addDelBtnEnable&quot;: true, //파일추가/삭제 버튼 표시 여부(default:true)&#10;  &quot;atchFileTypeCd&quot;: &quot;06&quot; //파일구분공통코드(default:기타(06) -&gt; 첨부유형코드(00007) 참조)&#10;  &quot;maxLength&quot;: 1024 //Kbyte&#10;}" readonly="true" right="0"/>
+              <Div id="divComFileSingle" taborder="5" left="13" top="81" width="527" height="25" url="frm::com/comFileSingle.xfdl" takefile="{&quot;addDelBtnEnable&quot;:true,&quot;atchFileTypeCd&quot;:&quot;06&quot;,&quot;maxLength&quot;:1024}" formscrollbartype="none none" formscrolltype="none"/>
+              <Button id="btnSave" taborder="6" text="저장" top="48" width="70" height="23" cssclass="btn_WF_basic01" left="330" onclick="divSingle_btnSave_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    1Depth > 2Depth
+*  @FileName    *.xfdl 
+*  @Creator     홍길동
+*  @CreateDate  yyyy.MM.DD 
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    Date          Modifier            Description
+*******************************************************************************
+*  YYYY.MM.DD      홍길동             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+this.fvMasterFile;
+this.FILETYPE_BOARD = "04";
+
+this.fvListFile;
+this.fv_divFile;
+this.fv_divSingleFile;
+this.FILETYPE_ETC = "06";
+
+this.form_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+	{
+		
+		// 단순 첨부파일 활성화
+		this.fv_divSingleFile = this.divSingle.form.divComFileSingle.form;
+		this.fv_divFile = this.divBasic.form.divComFile.form;
+
+		// 마스터정보 첨부파일 예제 활성화
+		this.fvMasterFile = this.divMasterFile.form.divComFile.form;
+// 		this.fvMasterFile.fn_setAddDelBtnEnable(true);					//추가,삭제버튼 보이기(default:true)
+// 		this.fvMasterFile.fn_setSaveBtnEnable(false);					//저장버튼 보이기(default:true)
+// 		this.fvMasterFile.fn_setVisibleTypeCd(false);					//파일구분 보이기(default:false)
+// 		this.fvMasterFile.fn_setAtchFileTypeCd(this.FILETYPE_BOARD);	//파일타입(공통코드사용)
+// 		this.fvMasterFile.fnInitComponent(this);
+		
+		// 리스트정보 첨부파일 예제 활성화
+		this.fvListFile = this.divListFile.form.divComFile.form;
+// 		this.fvListFile.fn_setAddDelBtnEnable(true);				//추가,삭제버튼 보이기(default:true)
+// 		this.fvListFile.fn_setSaveBtnEnable(false);					//저장버튼 보이기(default:true)
+// 		this.fvListFile.fn_setVisibleTypeCd(false);					//파일구분 보이기(default:false)
+// 		this.fvListFile.fn_setAtchFileTypeCd(this.FILETYPE_BOARD);	//파일타입(공통코드사용)
+// 		this.fvListFile.fnInitComponent(this);
+	}
+};
+
+
+
+this.btnInit_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fv_divFile.fnInitTakefile(this.divBasic.form.edtTakeFile.value);
+};
+
+this.divSingle_btnNew_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fv_divSingleFile.fnSearchAtchFileId(this, function(rtnValue){
+		this.divSingle.form.edtAtchFileId.set_value(rtnValue.resultData);
+		this.fv_divSingleFile.fn_setAtchFileId(rtnValue.resultData);
+	});
+};
+
+this.divSingle_btnSearch_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fv_divSingleFile.fn_setAtchFileId(this.divSingle.form.edtAtchFileId.value);
+	this.fv_divSingleFile.fnSearchFileList(this);
+};
+
+this.divSingle_btnSave_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	//데이터변경 / 파일 수정 여부
+	if (!this.fv_divSingleFile.fn_isUpdate()){
+		take.alert(this, "info", "변경된 내역이 없습니다.");
+		return;
+	}
+	
+	//파일 업로드 / 저장
+	this.fv_divSingleFile.fnUploadSaveFileList(this,
+		function(rtnValue){
+			if(rtnValue.result){
+				//reload하기
+			}
+		}
+	);
+};
+
+this.btnNew_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	//첨부파일 ID생성
+	this.fv_divFile.fnSearchAtchFileId(this, function(rtnValue){
+		this.divBasic.form.edtAtchFileId.set_value(rtnValue.resultData);
+		this.fv_divFile.fn_setAtchFileId(rtnValue.resultData);
+	});
+};
+
+this.btnSearch_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fv_divFile.fn_setAtchFileId(this.divBasic.form.edtAtchFileId.value);
+	this.fv_divFile.fnSearchFileList(this);
+};
+
+
+
+//마스터정보 첨부파일 예제
+//조회
+this.divMasterFile_btnSearch_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.dsMaster.clearData();
+
+    take.tranSelect
+	(
+		  this
+		, "boardInfoDetail"
+		, "BoardManagement.boardInfoDetail"
+		, "dsSearch"
+		, "dsMaster"
+		, ""
+		, function(sId, nErrCd, sErrMsg){
+			var atchFileId = this.dsMaster.getColumn(0, 'BOARD_ATTACH');
+			if(take.isEmpty(atchFileId)){
+				//첨부파일 코드가 없을시 기준에 맞게 코드 생성
+				this.fvMasterFile.fnSearchAtchFileId(this, function(rtnValue){
+					this.dsMaster.setColumn(0, 'BOARD_ATTACH', rtnValue.resultData);
+					this.fvMasterFile.fn_setAtchFileId(rtnValue.resultData);
+					this.fvMasterFile.fnSearchFileList(this);
+				});
+			}else{
+				this.fvMasterFile.fn_setAtchFileId(atchFileId);
+				this.fvMasterFile.fnSearchFileList(this);
+			}
+		}
+	);
+};
+
+//저장
+this.divMasterFile_btnSave_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	//데이터변경 / 파일 수정 여부
+	if (!take.isDsModified(this.dsMaster) && !this.fvMasterFile.fn_isUpdate()){
+		take.alert(this, "info", "변경된 내역이 없습니다.");
+		return;
+	}
+	
+	//파일 업로드 / 저장
+	this.fvMasterFile.fnUploadSaveFileList(this, function(rtnValue){
+		if(rtnValue.result){
+			//마스터 정보 저장
+			take.alert(this, "info", "마스터정보 save하기");
+		}
+	});
+};
+
+//삭제
+this.divMasterFile_btnDelete_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	take.alert(this, "info", "서버에서 삭제");
+};
+
+
+
+
+
+//리스트정보 첨부파일 예제
+//조회
+this.divListFile_btnSearch_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.dsList.clearData();
+	
+	take.tranSelect
+	(
+		  this
+		, "boardInfoList"
+		, "BoardManagement.boardInfoList"
+		, ""
+		, "dsList"
+		, "PROJECT_CD=PM00000001 MENU_CD=M0028"
+		, function(sId, nErrCd, sErrMsg){
+			
+		}
+	);
+};
+
+/*
+ * dsList_canrowposchange : 행 이동 전
+ */
+this.dsList_canrowposchange = function(obj:nexacro.NormalDataset,e:nexacro.DSRowPosChangeEventInfo)
+{
+	//현재row의 첨부파일 수정여부 확인
+	var isUpdate = this.fvListFile.fn_isUpdate();
+	if(isUpdate){
+		return take.confirm(this, "question", "첨부파일이 저장되지 않습니다.\r\n계속 진행하시겠습니까?");
+	}
+	
+	return true;
+};
+
+/*
+ * dsList_onrowposchanged : 행 이동 후
+ */
+this.dsList_onrowposchanged = function(obj:nexacro.NormalDataset,e:nexacro.DSRowPosChangeEventInfo)
+{
+	//첨부파일 reload
+	var atchFileId = this.dsList.getColumn(e.newrow, 'BOARD_ATTACH');
+	if(take.isEmpty(atchFileId)){
+		//첨부파일 코드가 없을시 기준에 맞게 코드 생성
+		this.fvListFile.fnSearchAtchFileId(this, function(rtnValue){
+			this.dsList.setColumn(e.newrow, 'BOARD_ATTACH', rtnValue.resultData);
+			this.fvListFile.fn_setAtchFileId(rtnValue.resultData);
+			this.fvListFile.fnSearchFileList(this);
+		});
+	}else{
+		this.fvListFile.fn_setAtchFileId(atchFileId);
+		this.fvListFile.fnSearchFileList(this);
+	}
+};
+
+//신규
+this.divListFile_btnAddRow_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	if(take.isDsModified(this.dsList)){
+		take.alert(this, "info", "저장 후 진행해주시기 바랍니다.");
+		return;
+	}else{
+		var nRow = this.dsList.addRow();
+		this.dsList.setColumn(nRow, 'BOARD_TITLE', "테스트");
+		this.fvListFile.fnSearchAtchFileId(this, function(rtnValue){
+			this.dsList.setColumn(nRow, 'BOARD_ATTACH', rtnValue.resultData);
+			this.fvListFile.fn_setAtchFileId(rtnValue.resultData);
+			this.fvListFile.fnSearchFileList(this);
+		});
+	}
+};
+
+//저장
+this.divListFile_btnSave_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	//데이터변경 / 파일 수정 여부
+	if (!take.isDsModified(this.dsList) && !this.fvListFile.fn_isUpdate()){
+		take.alert(this, "info", "변경된 내역이 없습니다.");
+		return;
+	}
+	
+	//파일 업로드 / 저장
+	this.fvListFile.fnUploadSaveFileList(this, function(rtnValue){
+		if(rtnValue.result){
+			//리스트 정보 저장
+			take.alert(this, "info", "리스트정보 save하기");
+		}
+	});
+};
+
+//삭제
+this.divListFile_btnDelete_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	take.alert(this, "info", "서버에서 삭제");
+};
+
+
+
+
+//팝업 첨부파일 예제
+//조회
+this.divPopup_btnSearch_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.dsPopup.clearData();
+	
+	take.tranSelect
+	(
+		  this
+		, "boardInfoList"
+		, "BoardManagement.boardInfoList"
+		, ""
+		, "dsPopup"
+		, "PROJECT_CD=PM00000001 MENU_CD=M0028"
+		, function(sId, nErrCd, sErrMsg){
+			
+		}
+	);
+};
+
+this.divPopup_grdList_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	var sType = obj.getCellProperty("body", e.cell, "displaytype");
+	if(sType.indexOf('button') == -1){
+		return;
+	}
+	
+	var sOpt = "";
+	var oArg = {
+		  argInDsPopup			: this.dsPopup
+		, argInColIdPopup		: 'BOARD_ATTACH'
+		, argInAtchFileTypeCd	: this.FILETYPE_BOARD
+		, argInAtchFileId		: this.dsPopup.getColumn(e.row, 'BOARD_ATTACH')
+		, argInIsReadOnly		: false	//읽기전용여부
+	};
+
+	take.openPopup(this, "comFilePop", "frm::com/comFilePop.xfdl", oArg, sOpt,
+		function(sId, oArgs){
+			
+		}
+	);
+};
+
+//행추가
+this.divPopup_btnAddRow_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.dsPopup.addRow();
+};
+
+//행삭제
+this.divPopup_btnDelete_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	take.alert(this, "info", "행삭제");
+};
+
+//저장
+this.divPopup_btnSave_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	take.alert(this, "info", "저장");
+};
+
+
+
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	
+	take.transaction
+	(
+		this,
+		"Save",
+		"SVC_LOC::tm/test.do",
+		"dsTest=dsTest dsFile=dsFile",
+		"",
+		"",
+		"fnCallback"
+	);
+};
+
+this.Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var objDsFile = this.fv_divFile.fn_getFileListDs();
+	this.dsFile.copyData(objDsFile);
+	trace(this.dsFile.saveXML());
+};
+
+
+
+
+
+
+
+
+]]></Script>
+    <Objects>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="MENU_CD" type="STRING" size="256"/>
+          <Column id="BOARD_SEQ" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="PROJECT_CD">PM00000001</Col>
+            <Col id="MENU_CD">M0028</Col>
+            <Col id="BOARD_SEQ">0000000001</Col>
+            <Col id="ATTACH_CD"/>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsMaster">
+        <ColumnInfo>
+          <Column id="NO" type="STRING" size="256"/>
+          <Column id="BOARD_TITLE" type="STRING" size="256"/>
+          <Column id="USER_NM" type="STRING" size="256"/>
+          <Column id="REG_DT" type="STRING" size="256"/>
+          <Column id="READ_CNT" type="STRING" size="256"/>
+          <Column id="REPLY_CNT" type="STRING" size="256"/>
+          <Column id="ATTACH_CNT" type="STRING" size="256"/>
+          <Column id="BOARD_TXT" type="BLOB" size="256"/>
+          <Column id="DEPT_NM" type="STRING" size="256"/>
+          <Column id="BOARD_ATTACH" type="STRING" size="256"/>
+          <Column id="IMPORT_YN" type="STRING" size="256"/>
+          <Column id="POPUP_YN" type="STRING" size="256"/>
+          <Column id="POPUP_START_DT" type="STRING" size="256"/>
+          <Column id="POPUP_END_DT" type="STRING" size="256"/>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="MENU_CD" type="STRING" size="256"/>
+          <Column id="BOARD_SEQ" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsList" onrowposchanged="dsList_onrowposchanged" canrowposchange="dsList_canrowposchange">
+        <ColumnInfo>
+          <Column id="NO" type="STRING" size="256"/>
+          <Column id="BOARD_TITLE" type="STRING" size="256"/>
+          <Column id="USER_NM" type="STRING" size="256"/>
+          <Column id="REG_DT" type="STRING" size="256"/>
+          <Column id="READ_CNT" type="STRING" size="256"/>
+          <Column id="REPLY_CNT" type="STRING" size="256"/>
+          <Column id="ATTACH_CNT" type="STRING" size="256"/>
+          <Column id="BOARD_TXT" type="BLOB" size="256"/>
+          <Column id="DEPT_NM" type="STRING" size="256"/>
+          <Column id="BOARD_ATTACH" type="STRING" size="256"/>
+          <Column id="IMPORT_YN" type="STRING" size="256"/>
+          <Column id="POPUP_YN" type="STRING" size="256"/>
+          <Column id="POPUP_START_DT" type="STRING" size="256"/>
+          <Column id="POPUP_END_DT" type="STRING" size="256"/>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="MENU_CD" type="STRING" size="256"/>
+          <Column id="BOARD_SEQ" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsPopup">
+        <ColumnInfo>
+          <Column id="NO" type="STRING" size="256"/>
+          <Column id="BOARD_TITLE" type="STRING" size="256"/>
+          <Column id="USER_NM" type="STRING" size="256"/>
+          <Column id="REG_DT" type="STRING" size="256"/>
+          <Column id="READ_CNT" type="STRING" size="256"/>
+          <Column id="REPLY_CNT" type="STRING" size="256"/>
+          <Column id="ATTACH_CNT" type="STRING" size="256"/>
+          <Column id="BOARD_TXT" type="BLOB" size="256"/>
+          <Column id="DEPT_NM" type="STRING" size="256"/>
+          <Column id="BOARD_ATTACH" type="STRING" size="256"/>
+          <Column id="IMPORT_YN" type="STRING" size="256"/>
+          <Column id="POPUP_YN" type="STRING" size="256"/>
+          <Column id="POPUP_START_DT" type="STRING" size="256"/>
+          <Column id="POPUP_END_DT" type="STRING" size="256"/>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="MENU_CD" type="STRING" size="256"/>
+          <Column id="BOARD_SEQ" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsTest">
+        <ColumnInfo>
+          <Column id="COL" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="COL">1111</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsFile">
+        <ColumnInfo>
+          <Column id="FILE_PATH" type="STRING" size="256"/>
+          <Column id="FILE_NM" type="STRING" size="256"/>
+          <Column id="FILE_SAVE_NM" type="STRING" size="256"/>
+          <Column id="IMPORT_YN" type="STRING" size="256"/>
+          <Column id="FILE_TYPE" type="STRING" size="256"/>
+          <Column id="FILE_SIZE" type="STRING" size="256"/>
+          <Column id="FILE_BLOB" type="STRING" size="256"/>
+          <Column id="DESC_TXT" type="STRING" size="256"/>
+          <Column id="DELETE_YN" type="STRING" size="256"/>
+          <Column id="USER_CD" type="STRING" size="256"/>
+          <Column id="FILE_DEL_YN" type="STRING" size="256"/>
+          <Column id="ATTACH_CD" type="STRING" size="256"/>
+          <Column id="FILE_SEQ" type="STRING" size="256"/>
+          <Column id="CHK" type="STRING" size="256"/>
+          <Column id="REG_DT" type="STRING" size="256"/>
+          <Column id="REG_NM" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item1" compid="divMasterFile.form.edtUserId" propid="value" datasetid="dsMaster" columnid="BOARD_TITLE"/>
+      <BindItem id="item0" compid="divMasterFile.form.edtUserNm" propid="value" datasetid="dsMaster" columnid="BOARD_TXT"/>
+      <BindItem id="item4" compid="divListFile.form.edtUserId" propid="value" datasetid="dsList" columnid="BOARD_TITLE"/>
+      <BindItem id="item2" compid="divListFile.form.edtUserNm" propid="value" datasetid="dsList" columnid="BOARD_TXT"/>
+    </Bind>
+  </Form>
+</FDL>

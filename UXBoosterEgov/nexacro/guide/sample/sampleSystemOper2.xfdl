@@ -1,0 +1,338 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="sampleSystemOper" width="600" height="320" titletext="CPU정보" onload="sampleSystemOper_onload" ontimer="sampleSystemOper_ontimer">
+    <Layouts>
+      <Layout height="320" mobileorientation="landscape" width="600">
+        <Div id="divTop" taborder="0" left="0" top="0" height="40" right="0">
+          <Layouts>
+            <Layout>
+              <Static id="staTitle" taborder="0" text="시스템정보" left="5" top="0" height="40" cssclass="sta_MF_Title" verticalAlign="middle" right="80"/>
+              <Button id="btnReload" taborder="1" top="10" height="20" cssclass="btn_WF_reset01" width="20" right="55" onclick="divTop_btnReload_onclick"/>
+              <Button id="btnHelp" taborder="2" top="10" height="20" cssclass="btn_WF_advice01" width="20" right="30" onclick="divTop_btnHelp_onclick"/>
+              <Button id="btnView" taborder="3" top="10" height="20" cssclass="btn_WF_more" width="20" right="5" onclick="divTop_btnView_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divMain" taborder="1" left="0" top="40" right="0" bottom="0">
+          <Layouts>
+            <Layout>
+              <Static id="staToday" taborder="0" top="0" width="100" height="15" cssclass="sta_MF_Date" left="5" text="기준날짜(년,월,일)"/>
+              <Static id="staUnit" taborder="1" text="기준(단위, 출처등)" top="0" width="100" height="15" cssclass="sta_MF_Unit" right="5" textAlign="right"/>
+              <Div id="divBlock" taborder="2" left="5" top="20" bottom="5" background="#FFFFFF" width="246">
+                <Layouts>
+                  <Layout>
+                    <Static id="staText" taborder="0" left="30" width="62" color="green" textAlign="center" bottom="50" height="20" text="100 %"/>
+                    <Static id="staBlock0" taborder="1" left="30" width="62" textAlign="center" bottom="staText:0" height="10" background="green"/>
+                    <Static id="staBlock1" taborder="2" left="30" width="62" textAlign="center" bottom="82" height="10" background="green"/>
+                    <Static id="staBlock2" taborder="3" left="30" width="62" textAlign="center" bottom="94" height="10" background="green"/>
+                    <Static id="staBlock3" taborder="4" left="30" width="62" textAlign="center" bottom="106" height="10" background="green"/>
+                    <Static id="staBlock4" taborder="5" left="30" width="62" textAlign="center" bottom="118" height="10" background="green"/>
+                    <Static id="staBlock5" taborder="6" left="30" width="62" textAlign="center" bottom="130" height="10" background="green"/>
+                    <Static id="staBlock6" taborder="7" left="30" width="62" textAlign="center" bottom="142" height="10" background="green"/>
+                    <Static id="staBlock7" taborder="8" left="30" width="62" textAlign="center" bottom="154" height="10" background="green"/>
+                    <Static id="staBlock8" taborder="9" left="30" width="62" textAlign="center" bottom="166" height="10" background="green"/>
+                    <Static id="staBlock9" taborder="10" left="30" width="62" textAlign="center" bottom="178" height="10" background="green"/>
+                    <Static id="staAchieveRateTitle" taborder="11" text="물리적 코어" left="110" top="53" width="120" height="30" cssclass="sta_MF_TitleS01" textAlign="center"/>
+                    <Static id="staPCores" taborder="12" text="0" left="110" cssclass="sta_MF_NumberB" usedecorate="true" top="76" textAlign="center" width="120" height="50"/>
+                    <Static id="staAchieveRateTitle00" taborder="13" text="CPU 개수" left="110" top="125" width="120" height="30" cssclass="sta_MF_TitleS01" textAlign="center"/>
+                    <Static id="staLCores" taborder="14" text="0" left="110" cssclass="sta_MF_NumberB" usedecorate="true" top="150" textAlign="center" width="120" height="50"/>
+                    <Static id="Static09" taborder="15" text="Static03" left="127" top="125" width="85" height="1" background="darkgray"/>
+                    <Static id="Static18" taborder="16" text="CPU 사용률" left="5" top="0" height="30" cssclass="sta_WF_title02" right="5"/>
+                  </Layout>
+                </Layouts>
+              </Div>
+              <Div id="divBlock00" taborder="3" top="20" bottom="5" background="#FFFFFF" right="5" text="" width="333">
+                <Layouts>
+                  <Layout>
+                    <Static id="staText" taborder="0" left="40" width="62" color="green" textAlign="center" bottom="50" height="20" text="100 %"/>
+                    <Static id="staBlock0" taborder="1" left="40" width="62" textAlign="center" bottom="70" height="10" background="green"/>
+                    <Static id="staBlock1" taborder="2" left="40" width="62" textAlign="center" bottom="82" height="10" background="green"/>
+                    <Static id="staBlock2" taborder="3" left="40" width="62" textAlign="center" bottom="94" height="10" background="green"/>
+                    <Static id="staBlock3" taborder="4" left="40" width="62" textAlign="center" bottom="106" height="10" background="green"/>
+                    <Static id="staBlock4" taborder="5" left="40" width="62" textAlign="center" bottom="118" height="10" background="green"/>
+                    <Static id="staBlock5" taborder="6" left="40" width="62" textAlign="center" bottom="130" height="10" background="green"/>
+                    <Static id="staBlock6" taborder="7" left="40" width="62" textAlign="center" bottom="142" height="10" background="green"/>
+                    <Static id="staBlock7" taborder="8" left="40" width="62" textAlign="center" bottom="154" height="10" background="green"/>
+                    <Static id="staBlock8" taborder="9" left="40" width="62" textAlign="center" bottom="166" height="10" background="green"/>
+                    <Static id="staBlock9" taborder="10" left="40" width="62" textAlign="center" bottom="178" height="10" background="green"/>
+                    <Static id="staAchieveRateTitle01" taborder="11" text="총 메모리 (GB)" top="53" width="130" height="30" cssclass="sta_MF_TitleS01" textAlign="left" left="125"/>
+                    <Static id="staTotal" taborder="12" text="0" cssclass="sta_MF_NumberB" usedecorate="true" top="76" textAlign="left" height="50" left="125" right="10"/>
+                    <Static id="Static09" taborder="13" text="Static03" left="125" top="125" height="1" background="darkgray" right="10"/>
+                    <Static id="staAchieveRateTitle01_00" taborder="14" text="사용량  (GB)" top="123" width="130" height="30" cssclass="sta_MF_TitleS01" textAlign="left" left="125"/>
+                    <Static id="staUse" taborder="15" text="0" cssclass="sta_MF_NumberB" usedecorate="true" top="146" textAlign="left" height="50" left="125" right="10"/>
+                    <Static id="Static18" taborder="16" text="메모리 사용현황" left="5" top="0" height="30" cssclass="sta_WF_title02" right="5"/>
+                  </Layout>
+                </Layouts>
+              </Div>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/**
+*  Menu Name
+*
+*  @MenuPath    1DEPTH > 2DEPTH
+*  @FileName    *.xfdl 
+*  @Creator     홍길동
+*  @CreateDate  yyyy.MM.DD 
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  YYYY.MM.DD      홍길동             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.sampleSystemOper_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {    
+		this.fnGetOperation();
+		this.fnGetSystem();
+		
+        this.setTimer(0, 1000);
+   }
+}
+
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리   
+    switch(sId)
+    {
+        case "Search" : //조회 콜백
+            //Script
+			var sCores = this.dsList.getColumn(0, "CPU_CORES");
+			var sLCores = this.dsList.getColumn(0, "CPU_CNT");
+			var sCpuUse = this.dsList.getColumn(0, "CPU_USE");
+			var sMemoryUseRate = this.dsList.getColumn(0, "MEMORY_USE_RATE");
+			var sMemoryUse = this.dsList.getColumn(0, "MEMORY_USE");
+			var sMemoryTotal = this.dsList.getColumn(0, "MEMORY_TOTAL");
+			var sMemoryFree = this.dsList.getColumn(0, "MEMORY_FREE");
+			
+			this.divMain.form.divBlock.form.staPCores.set_text(sCores);
+			this.divMain.form.divBlock.form.staLCores.set_text(sLCores);
+			
+			this.divMain.form.divBlock00.form.staTotal.set_text(sMemoryTotal);
+			this.divMain.form.divBlock00.form.staUse.set_text(sMemoryUse);			
+			
+			//CPU사용률 차트			
+			this.setCpuChart(sCpuUse);
+			
+			//메모리사용률 차트
+			this.setMemoryChart(sMemoryUseRate);
+			
+            //this.setWaitCursor(true);
+            break;            
+        default :
+            break;
+    }
+} 
+
+/*********************************************************
+* 3 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Search";	
+
+	take.transaction(this, sTranId, "SVC_LOC::viewOperation.do", "dsSearch=dsSearch", "dsList=dsList", "", "fnCallback", false);
+}
+
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {N/A}    N/A
+ * @return {N/A}    N/A
+ * @example this.fnSave();
+ */
+this.fnSave = function()
+{
+    this.fnTran("Save")
+}
+
+/**
+ * fnDel : 삭제 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {N/A}    N/A
+ * @return {N/A}    N/A
+ * @example this.fnDel();
+ */
+this.fnDel = function()
+{
+    this.fnTran("Del")
+}
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+
+
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+//CPU 사용률 차트 생성
+this.setCpuChart = function(sCpuUse)
+{	
+	var objDiv = this.divMain.form.divBlock.form;
+	
+	//차트 초기화
+	for( var i=0; i<10; i++ )
+	{
+		var objBlock = objDiv.components["staBlock" + i];		
+		objBlock.set_height(0);		
+	}
+		
+	var sCpuUse2 = sCpuUse.split(".")[0];
+	var nFirstBlock, nSecBlock;
+	var objLastBlock;	
+	
+	objDiv.staText.set_text(sCpuUse + "%");
+	
+	nFirstBlock = parseInt(sCpuUse2.substring(0, 1));
+	
+	var nCpuUse = parseInt(sCpuUse2);	
+	if( nCpuUse < 10 )
+	{
+		objLastBlock = objDiv.components["staBlock0"];
+		nSecBlock = nFirstBlock;
+	}
+	else
+	{
+		nSecBlock = parseInt(sCpuUse2.substring(1, 2));		
+		for( var i=0; i<10; i++ )
+		{
+			var objBlock = objDiv.components["staBlock" + i];
+			if( i < nFirstBlock )
+			{
+				objBlock.set_height(10);
+			}
+		}
+		
+		objLastBlock = objDiv.components["staBlock"+(nFirstBlock)];
+	}
+	var nHeight = 10 * (nSecBlock * 10) / 100;	
+	objLastBlock.set_height(nHeight);
+}
+
+//메모리 사용률 차트 생성
+this.setMemoryChart = function(sMemoryUse)
+{	
+	var objDiv = this.divMain.form.divBlock00.form;
+	
+	//차트 초기화
+	for( var i=0; i<10; i++ )
+	{
+		var objBlock = objDiv.components["staBlock" + i];		
+		objBlock.set_height(0);
+	}
+		
+	var sMemoryUse2 = sMemoryUse.split(".")[0];
+	var nFirstBlock, nSecBlock;
+	var objLastBlock;	
+	
+	objDiv.staText.set_text(sMemoryUse + "%");
+	
+	nFirstBlock = parseInt(sMemoryUse2.substring(0, 1));
+	
+	var nMemoryUse = parseInt(sMemoryUse2);	
+	if( nMemoryUse < 10 )
+	{
+		objLastBlock = objDiv.components["staBlock0"];
+		nSecBlock = nFirstBlock;
+	}
+	else
+	{
+		nSecBlock = parseInt(sMemoryUse2.substring(1, 2));		
+		for( var i=0; i<10; i++ )
+		{
+			var objBlock = objDiv.components["staBlock" + i];
+			if( i < nFirstBlock )
+			{
+				objBlock.set_height(10);
+			}
+		}
+		
+		objLastBlock = objDiv.components["staBlock"+(nFirstBlock)];
+	}
+	var nHeight = 10 * (nSecBlock * 10) / 100;	
+	objLastBlock.set_height(nHeight);
+}
+
+/*********************************************************
+* 5.1 TRANSACTION 서비스 호출 처리
+ ********************************************************/
+
+/*********************************************************
+ * 5.2 CALLBACK 콜백 처리부분
+ ********************************************************/
+
+this.fnGetSystem = function()
+{
+    this.setWaitCursor(false);
+	take.transaction(this, "Search", "SVC_LOC::viewSystem.do", "dsSearch=dsSearch", "dsList=dsList", "", "fnCallback", false);
+}
+
+this.fnGetOperation = function()
+{
+    this.setWaitCursor(false);
+	take.transaction(this, "Search", "SVC_LOC::viewOperation.do", "dsSearch=dsSearch", "dsList=dsList", "", "fnCallback", false);
+}
+
+this.sampleSystemOper_ontimer = function(obj:nexacro.Form,e:nexacro.TimerEventInfo)
+{
+	if (e.timerid == 0)
+	{
+		this.fnGetOperation();
+	}
+};
+]]></Script>
+    <Objects>
+      <Dataset id="dsList">
+        <ColumnInfo>
+          <Column id="LOG_TXT" type="STRING" size="256"/>
+          <Column id="CPU_USE" type="STRING" size="256"/>
+          <Column id="CPU_CORES" type="STRING" size="256"/>
+          <Column id="CPU_LCORES" type="STRING" size="256"/>
+          <Column id="MEMORY_USE" type="STRING" size="256"/>
+          <Column id="MEMORY_TOTAL" type="STRING" size="256"/>
+          <Column id="MEMORY_FREE" type="STRING" size="256"/>
+          <Column id="MEMORY_USE_RATE" type="STRING" size="256"/>
+          <Column id="CPU_CNT" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="CMD_TXT" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

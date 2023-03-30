@@ -1,0 +1,508 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="PM100" width="1659" height="832" titletext="대시보드_대시보드 권한관리" onload="PM100_onload">
+    <Layouts>
+      <Layout height="832" mobileorientation="landscape" width="1659">
+        <Div id="divSearch" taborder="0" left="10" top="0" height="43" right="10" cssclass="div_WF_searchBox01" text="" minwidth="1300" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Static id="staProjectNmT" taborder="3" text="프로젝트" left="20" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Static id="Static07_00_01" taborder="10" text="50" left="305" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="staRoleT" taborder="4" text="권한명" left="355" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="edtRole" taborder="1" left="staRoleT:10" top="10" width="195" height="21" onkeyup="divSearch_edtRole_onkeyup"/>
+              <Static id="staUseYnT" taborder="5" text="사용여부" left="690" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="cboUseYn" taborder="2" text="" left="staUseYnT:10" top="10" width="195" height="21" innerdataset="dsCboUseYn" codecolumn="CODE" datacolumn="NAME" onitemchanged="divSearch_Combo_onitemchanged"/>
+              <Combo id="cboProjectNm" taborder="0" text="Combo00" left="staProjectNmT:10" top="10" width="195" height="21" innerdataset="dsCboProjectCd" codecolumn="CODE" datacolumn="NAME" readonly="true" onitemchanged="divSearch_Combo_onitemchanged" cssclass="cmb_WF_essential"/>
+              <Static id="Static07_00_00" taborder="6" text="285" left="20" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00" taborder="7" text="20" left="0" top="0" width="20" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static07_00_00_01" taborder="8" text="285" left="20" top="31" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="11"/>
+              <Static id="Static07_00_00_00" taborder="9" text="285" left="355" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00_00_01_00" taborder="11" text="285" left="355" top="31" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="11"/>
+              <Static id="Static07_00_00_00_00" taborder="12" text="285" left="690" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00_01_00" taborder="13" text="50" left="640" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static07_00_00_01_00_00" taborder="14" text="285" left="690" top="31" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="11"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnShowHide" taborder="2" left="48.16%" top="42" width="60" height="10" cssclass="btn_WF_fold01"/>
+        <Static id="Static09" taborder="3" text="Static03" left="0" top="52" height="20" background="rgba(255,0,0,0.4)" visible="false" right="0"/>
+        <Static id="Static23" taborder="4" text="Static23" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" visible="false" bottom="0"/>
+        <Div id="divDetail" taborder="1" left="0" top="btnShowHide:20" right="0" bottom="0" text="" minwidth="1300" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Grid id="grdRoleList" taborder="0" left="10" top="26" width="440" bottom="10" onselectchanged="grdRoleList_onselectchanged" binddataset="dsProjectRoleList" autofittype="col">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="40"/>
+                      <Column size="100"/>
+                      <Column size="244"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="No."/>
+                      <Cell col="1" text="권한코드" autosizecol="default"/>
+                      <Cell col="2" text="권한명" displaytype="normal" autosizecol="default"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="expr:currow+1" textAlign="center"/>
+                      <Cell col="1" text="bind:ROLE_CD" autosizecol="default" textAlign="center"/>
+                      <Cell col="2" text="bind:ROLE_NM" displaytype="text" autosizecol="default" editmaxlength="10"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Grid id="grdRoleMenu" taborder="1" left="470" top="26" right="10" bottom="10" autofittype="col" treeusecheckbox="false" treeinitstatus="expand,all" cellclickbound="cell" binddataset="dsDashDetailList">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="40"/>
+                      <Column size="300"/>
+                      <Column size="100"/>
+                      <Column size="60"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="No." edittype="none" displaytype="normal" autosizecol="default"/>
+                      <Cell col="1" text="대시보드명" autosizecol="default"/>
+                      <Cell col="2" text="유형" edittype="checkbox" autosizecol="default"/>
+                      <Cell col="3" text="View" edittype="checkbox" autosizecol="default"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="expr:currow+1" checkboxfalsevalue="N" checkboxtruevalue="Y" autosizecol="default" textAlign="center"/>
+                      <Cell col="1" text="bind:DASH_NM" checkboxfalsevalue="N" checkboxtruevalue="Y" autosizecol="default" textAlign="left"/>
+                      <Cell col="2" text="bind:DASH_TYPE_NM" checkboxfalsevalue="N" checkboxtruevalue="Y" autosizecol="default" textAlign="center"/>
+                      <Cell col="3" text="bind:R_USE" displaytype="checkboxcontrol" edittype="checkbox" checkboxfalsevalue="N" checkboxtruevalue="Y" autosizecol="default"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="staRoleListT" taborder="2" text="권한 목록" left="10" top="0" height="21" width="440" cssclass="sta_WF_title02"/>
+              <Static id="staRoleMapT" taborder="3" text="대시보드 목록" left="470" top="0" height="21" cssclass="sta_WF_title02" right="90"/>
+              <Static id="Static45" taborder="4" text="Static00" left="450" top="0" width="20" background="rgba(255,0,0,0.4)" visible="false" bottom="0"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsCboUseYn">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsProjectRoleList" onrowposchanged="dsProjectRoleList_onrowposchanged" oncolumnchanged="dsProjectRoleList_oncolumnchanged">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="255" description="프로젝트코드"/>
+          <Column id="ROLE_CD" type="STRING" size="255" description="권한코드"/>
+          <Column id="ROLE_NM" type="STRING" size="255" description="권한명"/>
+          <Column id="ROLE_ENG_NM" type="STRING" size="255" description="권한영문명"/>
+          <Column id="DESC_TXT" type="STRING" size="255" description="상세설명"/>
+          <Column id="USE_YN" type="STRING" size="255" description="사용여부"/>
+          <Column id="REG_DT" type="STRING" size="255" description="등록일시"/>
+          <Column id="REG_CD" type="STRING" size="255" description="등록자코드"/>
+          <Column id="REG_NM" type="STRING" size="255" description="등록자명"/>
+          <Column id="MOD_DT" type="STRING" size="255" description="수정일시"/>
+          <Column id="MOD_CD" type="STRING" size="255" description="수정자코드"/>
+          <Column id="MOD_NM" type="STRING" size="255" description="수정자명"/>
+          <Column id="MAIN_URL" type="STRING" size="256" description="메인 Form Url"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsCboProjectCd">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="ROLE_CD" type="STRING" size="256"/>
+          <Column id="USE_YN" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsDashDetailList">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="ROLE_CD" type="STRING" size="256"/>
+          <Column id="DASH_NM" type="STRING" size="256"/>
+          <Column id="DASH_CD" type="STRING" size="256"/>
+          <Column id="DASH_TYPE" type="STRING" size="256"/>
+          <Column id="DASH_TYPE_NM" type="STRING" size="256"/>
+          <Column id="R_USE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    PM > PM100
+*  @FileNAME    PM100.xfdl 
+*  @Creator     김대승
+*  @CreateDate  2020.09.08 
+*  @Version     1.0
+*  @Desction    대시보드 권한관리
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2020.09.08      김대승             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+this.fv_sSelectRow = "";
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.PM100_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+	{
+		// 초기화
+		this.fnInit();
+	}
+};
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnInit, fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnInit : 초기화 함수 검색조건 초기화 및 온로드 세팅
+ * @return {N/A}    N/A
+ * @example this.fnInit();
+ */
+this.fnInit = function()
+{   
+	var objDiv, objDivSearch;	
+	objDiv = this.divSearch.form;
+	
+	// 접속한 사용자가 프로젝트 관리자인 경우에만 검색조건 프로젝트 선택 가능
+	var sProjectCd = UXBooster.gdsUserInfo.getColumn(0, "PROJECT_CD");	// gds _ 프로젝트코드
+	objDiv.cboProjectNm.set_value(sProjectCd);
+	
+	var sAdminYn = UXBooster.gdsUserInfo.getColumn(0, "ADMIN_YN"); 		// gds _ 관리자권한 여부
+	objDiv.cboProjectNm.set_readonly(sAdminYn != "Y");
+	
+	// 공통 코드조회 함수 호출
+    this.fnCommonCode();
+	
+	//필수 검색조건 추가
+	takeval.add
+	(
+        this, 
+        "Search",                  //벨리데이션 그룹 아이디(그룹별로 추가할 수 있음)
+        objDiv.cboProjectNm,       //체크 대상 컴포넌트
+        objDiv.staProjectNmT.text, //체크할 명칭(ex:"사용여부")
+        "value",                   //체크대상 (컴포넌트:Properti, Grid:Cell, Dataset:Column 명)
+        true,                      //null check
+        "string",                  //타입(string, number, date등)체크
+        "",                        //체크수(문자는 자릿수, 숫자는 구간[form,to])
+        ""
+	);                      	   //체크 완료후 Call Back function 명(생략가능)
+}
+
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "projectRoleList";
+	
+	//벨리데이션 체크
+	if(!takeval.check(this, "Search")) return;
+	
+	this.dsProjectRoleList.clearData();
+	this.dsDashDetailList.clearData();
+	this.divDetail.form.staRoleListT.set_text("권한 목록");
+	take.tranSelect
+	(
+		this, 
+		"projectRoleList", 
+		"ProjectManagement.projectRoleList", 
+		"dsSearch", 
+		"dsProjectRoleList", 
+		"USE_YN='Y'",
+		"fnCallBack"
+	)
+}
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+this.fnSave = function(sTranId)
+{    
+    if (!take.isDsModified(this.dsDashDetailList))
+	{
+		take.alert(this, "info", "변경된 내역이 없습니다.");
+		return;
+	}
+
+	take.transaction
+	(
+		this
+		, "dashRoleSave"
+		, "SVC_LOC::dh/dashRoleInfoSave.do"
+		, "dsDashDetailList=dsDashDetailList:U"
+		, ""
+		, ""
+		, "fnCallback"
+	);
+}
+/**
+ * fnAddRow : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+ * @example this.fnAddRow(sGrdId, nRow);
+ */
+this.fnAddRow = function(sGrdId, nRow)
+{
+	
+};
+
+/**
+ * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number, Array} arrnRow    deleteRow 리턴값
+ * @return {N/A} N/A
+ * @example this.fnDelRow(sGrdId, nRow); 
+ */
+this.fnDelRow = function(sGrdId, arrnRow)
+{    
+    //공통 행추가에서 호출할 디폴트값 세팅
+    if (take.nvl(sGrdId, "")=="") sGrdId = "grdRoleMenu";
+	
+	if(this.dsProjectRoleList.getRowCount() <= 0) {
+		take.alert(this, "info", "권한 목록이 없습니다.");
+		return;
+	}
+	
+	var nRow       	= this.dsProjectRoleList.rowposition;
+	var sProjectCd 	= this.dsProjectRoleList.getColumn(nRow, "PROJECT_CD");
+	var sRoleCd    	= this.dsProjectRoleList.getColumn(nRow, "ROLE_CD");
+	var sRoleNm   	= this.dsProjectRoleList.getColumn(nRow, "ROLE_NM");
+	var bRowChange = take.confirm(this, "question", "{NAME}을(를) {text}하시겠습니까?", { NAME : sRoleNm, text : "삭제"});
+	
+	if (!bRowChange) return;
+	
+	take.transaction (
+		this,
+		"projectRoleAllDelete",
+		"SVC_LOC::dh/projectRoleAllDelete.do",
+		"",
+		"",
+		"PROJECT_CD='" + sProjectCd + "' ROLE_CD ='" + sRoleCd + "'",
+		"fnCallBack"
+	);
+};
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+/*
+* grdRoleList_onselectchanged : 좌측 프로젝트목록 선택 값 변경시 선택된 row의 프로젝트 상세 정보 조회
+*/
+this.grdRoleList_onselectchanged = function(obj:nexacro.Grid,e:nexacro.GridSelectEventInfo)
+{
+	var objDiv 		= this.divDetail.form;
+	var nPreSelRow  = parseInt(take.nvl(this.fv_sSelectRow, "-1"));
+	var nCurrSelRow = parseInt(take.nvl(objDiv.grdRoleList.getSelectedRows(), "-1"));
+	var sRowType;
+	var bRowChange;
+	
+	if( nCurrSelRow != -1 && (nPreSelRow != nCurrSelRow) )
+	{
+		sRowType   = this.dsProjectRoleList.getRowType(nPreSelRow);
+		bRowChange = true;
+		
+		if( "2" == sRowType || "4" == sRowType )
+		{
+			bRowChange = take.confirm(this, "String", "작업중인 데이터는 저장되지 않습니다.\n그래도 이동하시겠습니까?");
+		}
+		
+		if(bRowChange)
+		{
+			this.fnDetailSearch();
+		}
+		else
+		{
+			//nPreSelRow = ( "2" == sRowType ) ? -1 : nPreSelRow;
+			objDiv.grdRoleList.selectRow(nPreSelRow);
+		}
+	}
+	if (nPreSelRow == 0 && (nPreSelRow == nCurrSelRow) && this.fv_sProjectCd != "")
+	{
+		this.fnDetailSearch();
+	}
+};
+
+/*
+* divSearch_edtRole_onkeyup : 검색조건 권한명 엔터 값
+*/
+this.divSearch_edtRole_onkeyup = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+	if (e.keycode == 13) {
+		this.fnSearch("projectRoleList");
+	}
+};
+
+/*
+* divSearch_Combo_onitemchanged : 검색조건 콤보 아이템 변경시 조회
+*/
+this.divSearch_Combo_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	this.fnSearch("projectRoleList");
+};
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnCommonCode : 공통 코드조회
+ * @example this.fnCommonCode();
+ */
+this.fnCommonCode = function ()
+{
+	// 00009 검색조건  사용유무 	   (dsCboUseYn)
+	take.tranCode(this, "00009", "dsCboUseYn", "ALL",
+		function(sId, nErrCd, sErrMsg)
+		{
+			if (this.dsCboUseYn.rowcount > 0){
+				this.divSearch.form.cboUseYn.set_value("Y");
+			}
+			// 프로젝트 코드
+			take.tranSelect
+			(
+				this,
+				"projectInfoCode", 
+				"ProjectManagement.projectInfoCode", 
+				"", 
+				"dsCboProjectCd", 
+				"", 
+				function(sId, nErrCd, sErrMsg)
+				{
+					var objDsCboProj = this.dsCboProjectCd;
+					if (objDsCboProj.rowcount>0)
+					{
+						var addInsertRow = objDsCboProj.insertRow(0)
+						objDsCboProj.setColumn(addInsertRow, "CODE", "");
+						objDsCboProj.setColumn(addInsertRow, "NAME", "선택");
+					}
+					
+					this.fnSearch("projectRoleList");
+				}
+			);
+		});
+};
+
+/**
+ * fnDetailSearch : 좌측 그리드 메뉴목록 선택시 우측 디테일 데이터 조회 트랜잭션
+ * @example this.fnDetailSearch();
+ */
+this.fnDetailSearch = function ()
+{
+	this.dsDashDetailList.clearData();
+	this.fv_sSelectRow = this.divDetail.form.grdRoleList.getSelectedRows();
+	
+	var objDsRoleList = this.dsProjectRoleList;
+	var nRow 	   	  = objDsRoleList.rowposition;
+	var sProjectCd 	  = take.nvl(objDsRoleList.getColumn(nRow, "PROJECT_CD"), "");	// 프로젝트명
+	var sRoleCd    	  = take.nvl(objDsRoleList.getColumn(nRow, "ROLE_CD"), "");		// 사용자코드
+	
+	take.tranSelect
+	(
+		this, 
+		"dashRoleList", 
+		"DashManagement.dashRoleList", 
+		"",
+		"dsDashDetailList", 
+		"PROJECT_CD='" + sProjectCd + "' ROLE_CD='" + sRoleCd + "'", 
+		"fnCallBack"
+	)
+}
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallBack : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallBack = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "projectRoleList" :		// 좌측 권한목록 조회 콜백
+			var objDs 	     = this.dsProjectRoleList;
+			var objDivDetail = this.divDetail.form;
+			var nRowCount    = objDs.rowcount;
+			
+			if (nRowCount > 0){
+				objDivDetail.staRoleListT.set_text("권한 목록 ("+nRowCount+"건)");
+				objDivDetail.grdRoleList.selectRow(0);
+			} else {
+				objDivDetail.staRoleListT.set_text("권한 목록 (0건)");
+			}
+            break;
+			
+        case "dashRoleList" :			// 우측 권한목록 조회 콜백
+            break;
+			
+        case "dashRoleSave" : 			// 우측 권한목록 저장 콜백
+            break;
+			
+        case "projectRoleAllDelete" :  	// 삭제 콜백
+            this.fnSearch("projectRoleList");
+            break;
+		
+			
+        default :
+            break;
+    }        
+};
+
+]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="divSearch.form.cboProjectNm" propid="value" datasetid="dsSearch" columnid="PROJECT_CD"/>
+      <BindItem id="item1" compid="divSearch.form.edtRole" propid="value" datasetid="dsSearch" columnid="ROLE_CD"/>
+      <BindItem id="item2" compid="divSearch.form.cboUseYn" propid="value" datasetid="dsSearch" columnid="USE_YN"/>
+    </Bind>
+  </Form>
+</FDL>

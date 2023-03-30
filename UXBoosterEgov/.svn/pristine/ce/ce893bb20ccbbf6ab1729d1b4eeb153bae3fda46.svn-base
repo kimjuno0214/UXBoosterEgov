@@ -1,0 +1,539 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Snippets version="2.0">
+  <Script>
+    <Group name="TAKE">
+      <Snippet name="take.addDsColumn" shortcut="takeaddDsColumn" description="* 해당 데이터셋에 컬럼 추가&#13;&#10;* @ param {Object}    objDs      &#13;&#10;* @ param {String}     sColNm  컬럼 이름&#13;&#10;* @ param {String}     sType       컬럼 타입&#13;&#10;* @ param {String}     sSize        컬럼 사이즈&#13;&#10;* @ return {Number}  nIdx        데이터셋 컬럼 인덱스 &#13;&#10;* @ example take.addDsColumn(this.dataSet00, &quot;column00&quot;, &quot;string&quot;, &quot;120&quot;);">take.addDsColumn(objDs{Object}, "sColNm{String}", "sType{String}", "sSize{String}");</Snippet>
+      <Snippet name="take.alert" shortcut="takealert" description=" * 공통 Alert Error시에만 별도 로직이 추가됨&#13;&#10; * @param  {Object} pThis   폼 오브젝트&#13;&#10; * @param  {String} sType   메세지 타입 (Error, Info, Warning등)&#13;&#10; * @param  {String} sMsgId  다국어 메세지 아이디&#13;&#10; * @param  {Array} arrParam 파라메터&#13;&#10; * @example take.alert(this, &quot;Info&quot;, &quot;ML001&quot;, { name : &quot;test&quot;, text : &quot;정의&quot;});&#13;&#10; *          take.alert(this, &quot;Info&quot;, &quot;{name}가 {text}되지 않았습니다.&quot;, { name : &quot;test&quot;, text : &quot;정의&quot;});&#13;&#10; * @return {N/A}   alert">take.alert(this, "sType{String}", "sMsgId{String}", "arrParam{Array}");</Snippet>
+      <Snippet name="take.ArrayIndexOf" shortcut="takeArrayIndexOf" description=" * @class 지정된 항목이 처음 나오는 배열 위치를 반환한다.&#13;&#10; * @param {Array} arrData  배열&#13;&#10; * @param {Object} item 찾고자 하는 Item.&#13;&#10; * @param {Number} from 검색의 시작 위치 (default: 0).&#13;&#10; * @param {Booleans} strict true: 형변환 없이 비교('==='), false: 형변환 후 비교('==') (default: false).&#13;&#10; * @return {Number} 검색된 배열 위치. 없다면 -1 리턴.&#13;&#10; * @example&#13;&#10; * var mon = [&quot;Jan&quot;,&quot;Feb&quot;,&quot;Mar&quot;,&quot;Apr&quot;];&#13;&#10; * var index = take.ArrayIndexOf(mon, &quot;Mar&quot;); // trace(&quot;index==&gt;&quot; + index);&#9;// output : index==&gt;2&#13;&#10; * var index = take.ArrayIndexOf(mon, &quot;May&quot;); // trace(&quot;index==&gt;&quot; + index);&#9;// output : index==&gt;-1">take.ArrayIndexOf(arrData{Array}, item{Object}, from{Number}, strict{Boolean});</Snippet>
+      <Snippet name="take.ArrayLastindexOfProp" shortcut="takeArrayLastindexOfProp" description=" * @class  지정된 속성의 값이 처음으로 일치하는 객체의 배열 위치를 뒤에서부터 찾아 반환한다.&lt;br&gt;&#13;&#10; * 배열의 각 항목은 하나 이상의 속성을 가진 객체이다.&lt;br&gt;&#13;&#10; * @param {Array} arrData  배열&#13;&#10; * @param {String} prop 기준 속성.&#13;&#10; * @param {String} item 기준 값.&#13;&#10; * @param {Number} from 검색 시작 위치(default: 0).&#13;&#10; * @param {Boolean} strict true: 형변환 없이 비교('==='), false: 형변환 후 비교('==') (default: false).&#13;&#10; * @return {Number} 검색된 배열 위치. 없다면 -1 리턴.&#13;&#10; * @example&#13;&#10; * var users = [];&#13;&#10; * users[0] = {id:&quot;milk&quot;, name:&quot;park&quot;, age:33};&#13;&#10; * users[1] = {id:&quot;apple&quot;, name:&quot;kim&quot;};&#13;&#10; * users[2] = {id:&quot;oops&quot;, name:&quot;joo&quot;, age:44};&#13;&#10; * users[3] = {id:&quot;beans&quot;, name:&quot;lee&quot;, age:50};&#13;&#10; * users[4] = {id:&quot;zoo&quot;, age:65};&#13;&#10; * users[5] = {id:&quot;milk&quot;, name:&quot;&quot;, age:33};&#13;&#10; * users[6] = {id:&quot;milk&quot;, name:&quot;lee&quot;, age:33};&#13;&#10; * var index = take.ArrayLastindexOfProp(users, &quot;name&quot;, &quot;lee&quot;);&#13;&#10; * trace(&quot;index==&gt;&quot; + index);&#9;// output : index==&gt;6&#13;&#10; * var index = take.ArrayLastindexOfProp(users,&quot;name&quot;, &quot;lee&quot;, 5);&#13;&#10; * trace(&quot;index==&gt;&quot; + index);&#9;// output : index==&gt;3">take.ArrayLastindexOfProp(arrData{Array}, prop{String}, item{String}, from{Number}, strict{Boolean});</Snippet>
+      <Snippet name="take.ArrayPluck" shortcut="takeArrayPluck" description=" * 배열의 특정 위치의 값을 축출&#13;&#10; * @param  {Array} arrData  배열&#13;&#10; * @param  {Number} key     축출할 배열 인덱스&#13;&#10; * @return {Array}          배열&#13;&#10; * @example : arrData = new Array();&#13;&#10; *            take.ArrayPluck(arrData, 1);">take.ArrayPluck(arrData{Array}, key{Number});</Snippet>
+      <Snippet name="take.ArrayTrim" shortcut="takeArrayTrim" description="* 배열에 빈값 제거&#13;&#10;* @param  {Array} arrData  배열&#13;&#10;* @return {Array} 진값 제거된 배열&#13;&#10;* @example arrData = [&quot;a&quot;, &quot;&quot;, &quot;&quot;, &quot;c&quot;];&#13;&#10;*          take.ArrayTrim(arrData); //--&gt; a,c">take.ArrayTrim(arrData{Array});</Snippet>
+      <Snippet name="take.ArrayUnique" shortcut="takeArrayUnique" description="* 배열에 중복제거&#13;&#10;* @param {Array} arrData  배열&#13;&#10;* @return {Array} 중복 제거된 배열&#13;&#10;* @example arrData = [&quot;a&quot;, &quot;b&quot;, &quot;b&quot;, &quot;c&quot;]&#13;&#10;*          take.ArrayUnique(arrData); //--&gt; a,b,c&#13;&#10;">take.ArrayUnique(arrData{Array});</Snippet>
+      <Snippet name="take.codePopUp" shortcut="takecodePopUp" description=" * 공통 데이터 팝업&#13;&#10; * @param  {Object}  pThis       nexacro form object&#13;&#10; * @param  {String}  sPopId      팝업아이디&#13;&#10; * @param  {String}  sTitle      팝업타이틀&#13;&#10; * @param  {String}  sTxt        검색어&#13;&#10; * @param  {Object}  objDs       데이터셋&#13;&#10; * @param  {Object}  objDsIn     검색조건 데이터셋&#13;&#10; * @param  {String}  sCode       그룹코드&#13;&#10; * @param  {Array}   arrColInfo  대상 컬럼  (컬럼id, 컬럼명, 컬럼 사이즈)&#13;&#10; * @param  {Boolean} bMulti      멀티 선택 여부&#13;&#10; * @param  {String}  sCallBack   완료후 실행할 CallBack 함수&#13;&#10; * @return {Function} CallBack Function&#13;&#10; * @example take.codePopUp(this, &quot;test&quot;, &quot;테스트팝업&quot;, &quot;테스트&quot;, this.dsCode, &quot;&quot;, null, &quot;&quot;, [[&quot;Column1&quot;, &quot;컬럼이번&quot;, &quot;30&quot;],[&quot;Column0&quot;, &quot;컬럼일번&quot;, &quot;20&quot;]], true, &quot;fnCallBack&quot;);&#13;&#10;">take.codePopUp(pThis{Object}, "sPopId{String}", "sTitle{String}", "sTxt{String}", objDs{Object}, objDsIn{Object}, "sCode{String}", ["sColId", "sColNm", "sColSize"], true{Boolean}, "fnCallBack");</Snippet>
+      <Snippet name="take.comBtnRoleAll" shortcut="takecomBtnRoleAll" description=" * 버튼 롤 세팅&#13;&#10; * @param  {Form Object} pThis     대상 폼&#13;&#10; * @param  {String}      sBtnRole   버튼 권한 5자리 'YYYYN' 엑셀, 출력, 신규, 삭제, 저장&#13;&#10; * @return {Boolean}     true:성공/false:실패&#13;&#10; * @example take.comBtnRole(this, &quot;YYYYNN&quot;);"> take.comBtnRole(pThis{Form Object}, "sBtnRole{String}");</Snippet>
+      <Snippet name="take.comBtnRoleOne" shortcut="takecomBtnRoleOne" description=" * 버튼 롤 세팅&#13;&#10; * @param  {Form Object} pThis   대상 폼&#13;&#10; * @param  {String}      sBtnId  버튼 아이디 (등록:Add,수정:Save,삭제:Del,엑셀:Excel,출력:Report)&#13;&#10; * @param  {Boolean}     bRole   권한 여부&#13;&#10; * @return {Boolean}     true:성공/false:실패&#13;&#10; * @example take.comBtnRoleOne(this, &quot;Excel&quot;, true);">take.comBtnRoleOne(pThis, "sBtnId{String}", bRole{Boolean});</Snippet>
+      <Snippet name="take.ComBtnShow" shortcut="takeComBtnShow" description=" * 퀵뷰일경우 Ctrl+Alt+T 단축키로 공통 버튼 팝업 오픈&#13;&#10; * @param  {Object}  Form object&#13;&#10; * @return {Object}  e">take.ComBtnShow("Form object{Object}");</Snippet>
+      <Snippet name="take.comBtnType" shortcut="takecomBtnType" description=" * 버튼 타입 세팅&#13;&#10; * @param  {Form Object} pThis   대상 폼&#13;&#10; * @param  {String}      sType   버튼 타입 (grid : 그리드형, default : 기본형);&#13;&#10; * @return {Boolean}     true:성공/false:실패&#13;&#10; * @example take.comBtnType(this, &quot;Excel&quot;, true);">take.comBtnType(pThis, sType{String});</Snippet>
+      <Snippet name="take.CompList" shortcut="takeCompList" description=" * 컴포넌트 리스트 가져오기&#13;&#10; * @param  {Object} objForm From Object&#13;&#10; * @return {Array}  배열값(컴포넌트 정보)&#13;&#10; * @example take.CompList(this) //--&gt; Grid00.0|순번,Grid00.1|선택,Div.Static00|검색조건,Button00|조회">take.CompList(pThis{Object})</Snippet>
+      <Snippet name="take.ComponentList" shortcut="takeComponentList" description=" * 폼 컴포넌트 리스트&#13;&#10; * @param {object} 폼형 컴포넌트( Form, Div, Tabpage등)&#13;&#10; * @return {array} arrList 컴포넌트 Array">take.ComponentList(this);</Snippet>
+      <Snippet name="take.CompType" shortcut="takeCompType" description=" * 컴포넌트 유형 반환.&#13;&#10; * @param {N/A} 없음&#13;&#10; * @return {Object} objRtn&#13;&#10; *                  objRtn.type {String} 컴포넌트 타입&#13;&#10; *                  objRtn.comp {Component Object} 컴포넌트 오브젝트">take.CompType(this, sCompTxt{String});</Snippet>
+      <Snippet name="take.CompTypeName" shortcut="takeCompTypeName" description=" * 컴포넌트 타입을 문자열로 반환&#13;&#10; * @param  {Object} objComp 넥사크로 컴포넌트&#13;&#10; * @return {String} 컴포넌트 타입 명&#13;&#10; * @example trace(take.compTypeName(this)) //--&gt; Form">take.CompTypeName(objComp{Object});</Snippet>
+      <Snippet name="take.confirm" shortcut="takeconfirm" description="  * 공통 Confirm&#13;&#10;  * @param  {Object} pThis   폼 오브젝트&#13;&#10;  * @param  {String} sType   컨펌 타입 (error&quot;, &quot;question&quot;, &quot;warning&quot;, &quot;information&quot;)&#13;&#10;  * @param  {String} sMsgId  다국어 메세지 아이디&#13;&#10;  * @param  {Array} arrParam 파라메터&#13;&#10;  * @example take.confirm(this, &quot;question&quot;, &quot;ML001&quot;, { name : &quot;test&quot;, text : &quot;정의&quot;});&#13;&#10;  *          take.confirm(this, &quot;question&quot;, &quot;{name}가 {text}되지 않았습니다.&quot;, { name : &quot;test&quot;, text : &quot;정의&quot;});&#13;&#10;  * @return {N/A}   alert">take.confirm(this, sType{String}, sMsgId{String}, arrParam{Array});</Snippet>
+      <Snippet name="take.copyDsLayout" shortcut="takecopyDsLayout" description=" * 데이타셋 스키마정보를 복사&#13;&#10; * @param  {Object} objRtnDs  대상(리턴할) 데이터셋&#13;&#10; * @param  {Object} objCopyDs 카피할 데이터셋&#13;&#10; * @return {Object} Dataset   리턴 데이터셋&#13;&#10; * @example take.gf_copyLayout(Dataset00, Dataset01); //--&gt; Dataset00">take.copyDsLayout(objRtnDs{Object}, objCopyDs{Object});</Snippet>
+      <Snippet name="take.CopyObject" shortcut="takeCopyObject" description=" * Object를 복사하여 반환&#13;&#10; * @param  {Object} objVal 복사 대상 Object&#13;&#10; * @param  {Object} objRtn 리턴 받을 Object (리턴받을 Object가 있을경우 Add)&#13;&#10; * @return {Object}        복사한 Object&#13;&#10; * @example take.CopyObject({key0:value0, 'key1':'value1', key2:'value2'});">take.CopyObject(objVal{Object}, objRtn{Object});</Snippet>
+      <Snippet name="take.dataSelPopUp" shortcut="takedataSelPopUp" description="* 공통 데이터 팝업&#13;&#10; * @param  {Object}  pThis       nexacro form object&#13;&#10; * @param  {String}  sPopId      팝업아이디&#13;&#10; * @param  {String}  sTitle      팝업타이틀&#13;&#10; * @param  {String}  sTxt        검색어&#13;&#10; * @param  {Object}  objDs       데이터셋&#13;&#10; * @param  {String}  sNameSpace  네임스페이스&#13;&#10; * @param  {Object}  objDsIn     검색조건 데이터셋&#13;&#10; * @param  {Array}   arrColInfo  대상 컬럼  (컬럼id, 컬럼명, 컬럼 사이즈)&#13;&#10; * @param  {Boolean} bMulti      멀티 선택 여부&#13;&#10; * @param  {String}  sCallBack   완료후 실행할 CallBack 함수&#13;&#10; * @return {Function} CallBack Function&#13;&#10; * @example take.dataSelPopUp(this, &quot;test&quot;, &quot;테스트팝업&quot;, &quot;테스트&quot;, this.dsCode, &quot;&quot;, null, [[&quot;Column1&quot;, &quot;컬럼이번&quot;, &quot;30&quot;],[&quot;Column0&quot;, &quot;컬럼일번&quot;, &quot;20&quot;]], true, &quot;fnCallBack&quot;);">take.dataSelPopUp(this, sPopId{String}, sTitle{String}, sTxt{String}, objDs{Object}, sNameSpace{String}, objDsIn{Object}, arrColInfo{Array}, bMulti{Boolean}, sCallBack{String});</Snippet>
+      <Snippet name="take.debug" shortcut="takedebug" description=" * debug를 출력한다.&#13;&#10; * @param  {Object/String} pThis FormObject또는 시스템 아이디&#13;&#10; * @param  {String}       sMsg  디버그메세지&#13;&#10; * @return {N/A}          N/A&#13;&#10; * @example take.debug(this, &quot;디버그입니다.&quot;);">take.debug(this, sMsg{String});</Snippet>
+      <Snippet name="take.debugWindow" shortcut="takedebugWindow" description=" * 퀵뷰일경우 Ctrl+Q 단축키로 공통 디버그 팝업 오픈&#13;&#10; * @param  {Object}  Form object&#13;&#10; * @return {Object}  e">take.debugWindow(Form object{Object});</Snippet>
+      <Snippet name="take.decode" shortcut="takedecode" description=" * @param  {String/Number}  decode 조건 값&#13;&#10; * @return {[type]}         decode 결과값&#13;&#10; * @example trace(take.decode(&quot;1&quot;, &quot;1&quot;, &quot;One&quot;, &quot;2&quot;, &quot;Two&quot;, &quot;Default&quot;)); // --&gt; output : One&#13;&#10; *          trace(take.decode(100, 1, &quot;일&quot;, 10, &quot;십&quot;, 100, &quot;백&quot;));&#9;   // --&gt; output : 백">take.decode();</Snippet>
+      <Snippet name="take.error" shortcut="takeerror" description=" * error log를 출력한다.&#13;&#10; * @param  {Object/String} pThis FormObject또는 시스템 아이디&#13;&#10; * @param  {String}       sMsg  에러메세지&#13;&#10; * @return {N/A}          N/A&#13;&#10; * @example take.error(this, &quot;에러입니다.&quot;);">take.error(this, sMsg{String});</Snippet>
+      <Snippet name="take.fnStrToObject" shortcut="takefnStrToObject" description=" * fnStrToObject : 문자열을 Object로 변환 (&quot;k1:v1|k2:v2|k3:v3&quot; =&gt; {k1:v1,k2:v2,k3:v3})">take.fnStrToObject(pObjStr{Object});</Snippet>
+      <Snippet name="take.formCenter" shortcut="takeformCenter" description=" * 컴포넌트를 폼에 중앙 정렬(Width)&#13;&#10; * @param   {Object}  objComp      nexacro Component Object&#13;&#10; * @param   {Number}  nFormWidth   Form Width&#13;&#10; * @param   {Number}  nMinWidth    최소 Width&#13;&#10; * @return  {boolean} true/false 성공 실패 여부&#13;&#10; * @example take.formCenter(this.div, 500, 300);">take.formCenter(objComp{Object}, nFormWidth{Number}, nMinWidth{Number});</Snippet>
+      <Snippet name="take.formOnLoad" shortcut="takeformOnLoad" description=" * 공통 Onload&#13;&#10; * @param   {Object}  pThis      nexacro Form Object&#13;&#10; * @return  {boolean} true/false 성공 실패 여부&#13;&#10; * @example trace(take.formOnLoad(this)); //--&gt; true">take.formOnLoad(this);</Snippet>
+      <Snippet name="take.FormTemp" shortcut="takeFormTemp" description="화면 개발 표준 샘플">/**&#13;
+*  SYSTEM FORM NAME&#13;
+*&#13;
+*  @MenuPath    1Depth &gt; 2Depth&#13;
+*  @FileName    *.xfdl &#13;
+*  @Creator     홍길동&#13;
+*  @CreateDate  yyyy.MM.DD &#13;
+*  @Version     1.0&#13;
+*  @Desction    설명&#13;
+* &#13;
+************** 소스 수정 이력 *************************************************&#13;
+*    Date          Modifier            Description&#13;
+*******************************************************************************&#13;
+*  YYYY.MM.DD      홍길동             최초 생성 &#13;
+*******************************************************************************&#13;
+*/&#13;
+&#13;
+//공통 라이브러리 호출&#13;
+&#13;
+/*********************************************************&#13;
+ * 1.1 FORM 변수 선언 영역&#13;
+ ********************************************************/&#13;
+//this.fv_nFormVal = null;     //용도&#13;
+&#13;
+/*********************************************************&#13;
+* 1.2 FORM EVENT 영역(onload등)&#13;
+********************************************************/&#13;
+/**&#13;
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)&#13;
+*/&#13;
+this.Form_onload = function(obj:Form, e:nexacro.LoadEventInfo)&#13;
+{&#13;
+   if (take.formOnLoad(this, true)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --&gt; 필수&#13;
+   {    &#13;
+        //Script  &#13;
+   }&#13;
+}&#13;
+&#13;
+/****************************************************************************************&#13;
+* 2 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow, fnExcel, fnPrint)&#13;
+****************************************************************************************/&#13;
+/**&#13;
+ * fnSearch : 조회 transaction (필수) --&gt; 공통 조회에서 호출할 디폴트값 세팅 필요&#13;
+ * @param  {String} sTranId 트랜젝션 아이디&#13;
+ * @return {N/A}    N/A&#13;
+ * @example this.fnSearch("ID");&#13;
+ */&#13;
+this.fnSearch = function(sTranId)&#13;
+{&#13;
+    //공통 조회에서 호출할 디폴트값 세팅 필요&#13;
+    if (take.nvl(sTranId, "")=="") sTranId = "Transation id";&#13;
+    //take.tranSelect(this,sTranId,"Namespace","sInDataset", "sOutDataset", "sParam", "fnCallBack");&#13;
+}&#13;
+&#13;
+/**&#13;
+ * fnSave : 저장 transaction (필수) --&gt;공통 저장에서 호출할 디폴트값 세팅 필요&#13;
+ * @param  {String} sTranId 트랜젝션 아이디&#13;
+ * @return {N/A}    N/A&#13;
+ * @example this.fnSave("ID");&#13;
+ */&#13;
+this.fnSave = function(sTranId)&#13;
+{    &#13;
+    //공통 조회에서 호출할 디폴트값 세팅 필요&#13;
+    if (take.nvl(sTranId, "")=="") sTranId = "Save transation id";&#13;
+    //take.tranSave(this, sTranId, "NAMESPACE", "sInDs", "sOutDs", "sParam", "fnCallBack");&#13;
+}&#13;
+&#13;
+/**&#13;
+ * fnAddRow : 행 추가 함수 (필수)--&gt; 공통 행추가에서 호출할 디폴트값 세팅 필요&#13;
+ * @param  {String} sGridId 그리드 아이디&#13;
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)&#13;
+ * @example this.fnAddRow(sGrdId, nRow);&#13;
+ */&#13;
+this.fnAddRow = function(sGrdId, nRow)&#13;
+{&#13;
+    //공통 행추가에서 호출할 디폴트값 세팅&#13;
+    if (take.nvl(sGrdId, "")=="") sGrdId = "Grid00";&#13;
+    &#13;
+    //Script&#13;
+}&#13;
+&#13;
+/**&#13;
+ * fnDelRow : 행 삭제 함수 (필수) --&gt; 공통 행삭제에서 호출할 디폴트값 세팅 필요&#13;
+ * @param  {String} sGridId 그리드 아이디&#13;
+ * @param  {Number, Array} arrnRow    deleteRow 리턴값&#13;
+ * @return {N/A} N/A&#13;
+ * @example this.fnDelRow(sGrdId, nRow); &#13;
+ */&#13;
+this.fnDelRow = function(sGrdId, arrnRow)&#13;
+{    &#13;
+    //공통 행추가에서 호출할 디폴트값 세팅&#13;
+    if (take.nvl(sGrdId, "")=="") sGrdId = "Grid00";&#13;
+    &#13;
+    //Script&#13;
+}&#13;
+&#13;
+/**&#13;
+ * fnExcel : 엑셀 다운로드 함수 (필수) --&gt; 공통 엑셀 다운로드에서 호출할 디폴트값 세팅 필요&#13;
+ * @param  {String} sGridId 그리드 아이디&#13;
+ * @return {N/A} N/A&#13;
+ * @example this.fnExcel(sGrdId, nRow); &#13;
+ */&#13;
+this.fnExcel = function(sGrdId)&#13;
+{&#13;
+    //ExportExcelGrid 파일명, 시트명, 타이틀명&#13;
+	//this.Grid00.ExportExcelGrid("testExcelFile", "userList", "");&#13;
+}&#13;
+&#13;
+/**&#13;
+ * fnPrint : 출력 함수 (필수)&#13;
+ * @param  {N/A} N/A&#13;
+ * @return {N/A} N/A&#13;
+ * @example this.fnPrint(); &#13;
+ */&#13;
+this.fnPrint = function()&#13;
+{    &#13;
+    //출력없음&#13;
+    return false;&#13;
+}&#13;
+&#13;
+/*********************************************************&#13;
+ * 3 각 COMPONENT 별 EVENT 영역&#13;
+ ********************************************************/&#13;
+//component_onclick : ~ 버튼 클릭&#13;
+&#13;
+this.component_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)&#13;
+{&#13;
+    //Script&#13;
+};&#13;
+&#13;
+/*********************************************************&#13;
+ * 4 사용자 FUNCTION 영역&#13;
+ ********************************************************/&#13;
+/**&#13;
+ * fnInit : 초기화 함수 검색조건 초기화 &#13;
+ * @return {N/A}    N/A&#13;
+ * @example this.fnInit();&#13;
+ */&#13;
+this.fnInit = function()&#13;
+{&#13;
+	//Script&#13;
+}&#13;
+&#13;
+/**&#13;
+ * fnUserFunction : 사용자 함수&#13;
+ * @param  {String} sParam 문자형 인자&#13;
+ * @param  {Number} nParam 숫자형 인자&#13;
+ * @example this.fnUserFunction(sParam, nParam);&#13;
+ */&#13;
+this.fnUserFunction = function(sParam, nParam)&#13;
+{    &#13;
+    //Script&#13;
+}&#13;
+&#13;
+/*********************************************************&#13;
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분&#13;
+ ********************************************************/&#13;
+/**&#13;
+* fnCallback : transaction callBack&#13;
+* @param  : sId      - 서비스 아이디 (공통 콜백에서 넘어옴)&#13;
+* @param  : nErrCd   - 에러코드 (공통 콜백에서 넘어옴)&#13;
+* @param  : sErrMsg  - 에러메세지 (공통 콜백에서 넘어옴)&#13;
+* @return : N/A&#13;
+* @example :  &#13;
+*/&#13;
+this.fnCallBack = function(sId, nErrCd, sErrMsg)&#13;
+{&#13;
+    //Transaction 에러는 공통에서 처리&#13;
+    &#13;
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리&#13;
+    if( sErrMsg == "SUCC" )&#13;
+    {&#13;
+        //Success Script      &#13;
+    } else {&#13;
+        //Etc Script&#13;
+    }   &#13;
+    &#13;
+    switch(sId)&#13;
+    {&#13;
+        case "Transation id 01" : //조회 콜백&#13;
+            //Script&#13;
+            break;&#13;
+        case "Transation id 02" :  //조회 콜백&#13;
+            //Script&#13;
+            break;&#13;
+        case "Transation id 03" : //조회 콜백&#13;
+            //Script&#13;
+            break;&#13;
+        case "Save transation id 01" :  //저장 콜백&#13;
+            //Script&#13;
+            break;&#13;
+        case "Save transation id 01" :  //저장 콜백&#13;
+            //Script&#13;
+            break;&#13;
+        default :&#13;
+            break;&#13;
+    }        &#13;
+} </Snippet>
+      <Snippet name="take.getActiveForm" shortcut="takegetActiveForm" description=" * 현재 선택된 탭의 폼 찾기&#13;&#10; * @param {object} obj 컴포넌트&#13;&#10; * @return {object} object Form">take.getActiveForm(objComp{Object});</Snippet>
+      <Snippet name="take.getAddDays" shortcut="takegetAddDays" description=" * 월 더하기&#13;&#10; * @param   {Anonymous} aDate  Date&#13;&#10; * @param   {Number} nVal 더할수&#13;&#10; * @return  {Number} 일을 더한 date&#13;&#10; * @example take.getAddDays(&quot;20180101&quot;,1)">take.getAddDays(aDate{Anonymous}, nVal{Number});</Snippet>
+      <Snippet name="take.getAddMonths" shortcut="takegetAddMonths" description=" * 월 더하기&#13;&#10; * @param   {Anonymous} aDate  Date&#13;&#10; * @param   {Number} nVal 더할수&#13;&#10; * @return  {Number} 월을 더한 date&#13;&#10; * @example take.getAddMonths(&quot;20180101&quot;,1)">take.getAddMonths(aDate{Anonymous}, nVal{Number});</Snippet>
+      <Snippet name="take.getBindColName" shortcut="takegetBindColName" description=" * body cell index로 binding 된 컬럼명을 얻어온다.&#13;&#10; * @param  {Object} objGrid Grid Component&#13;&#10; * @param  {Number} nIdx    Grid body Cell index&#13;&#10; * @return {String}         컬럼아이디&#13;&#10; * @example take.getBindColName(this.Grid00, 1);">take.getBindColName(objGrid{Object}, nIdx{Number});</Snippet>
+      <Snippet name="take.getBindGrid" shortcut="takegetBindGrid" description="* 데이터셋에 바인드된 그리드 가져오기&#13;&#10;* @param {Object} pThis object Form&#13;&#10;* @param {String} sDsNm DataSetName&#13;&#10;* @return  {Array} Grid List&#13;&#10;* @example take.getBindGrid(this, this.DataSet00);">take.getBindGrid(pThis{Object}, sDsNm{String});</Snippet>
+      <Snippet name="take.getByteLength" shortcut="takegetByteLength" description=" * 문자열의 바이트 길이를 반환한다. 한글의 경우 &quot;utf-8&quot;로 인코딩되면 3 bytes로 처리한다.&#13;&#10; * @param   {String/Number} sVal     체크할 문자열&#13;&#10; * @param   {String} sCharset 인코딩 [default utf-8]&#13;&#10; * @return  Number&#13;&#10; * @example trace(take.getByteLength(&quot;1234&quot;)); // --&gt; 4">take.getByteLength(sVal{String||Number}, sCharset{String});</Snippet>
+      <Snippet name="take.getChartColor" shortcut="takegetChartColor" description="/**&#13;&#10; * 차트 표준 색상 20가지 리턴&#13;&#10; * @param  {N/A}    N/A&#13;&#10; * @return {Array}  Color Array&#13;&#10; * @example  take.getChartColor() &#13;&#10; */">take.getChartColor();</Snippet>
+      <Snippet name="take.getChartData" shortcut="takegetChartData" description=" * 차트 데이터 생성 : 데이터셋 데이터를 Json Object로 변환&#13;&#10; * @param  {Object} objDs  넥사크로 Dataset 컴포넌트&#13;&#10; * @param  {Array}  arrKey 대상 컬럼 리스트(배열)&#13;&#10; * @return {Object}        Json Object">take.getChartData(objDs{Object Dataset}, arrKey{Array});</Snippet>
+      <Snippet name="take.getChkRow" shortcut="takegetChkRow" description=" * 체크박스(CHK컬럼)가 체크된 Row를 배열로 반환&#13;&#10; * @param  {Object} objDs   Dataset&#13;&#10; * @param  {String} sChkCol 체크컬럼명 (기본값 CHK)&#13;&#10; * @return {Array}          컬럼아이디&#13;&#10; * @example take.getChkRow(this.dsList);">take.getChkRow(objDs{Object}, sChkCol{String});</Snippet>
+      <Snippet name="take.getCompObjects" shortcut="takegetCompObjects" description=" * 타입별 컴포넌트 리스트 가져오기&#13;&#10; * @param  {Object} objForm From Object&#13;&#10; * @param  {String} sCompType 컴포넌트타입&#13;&#10; * @return {Array}  배열값(컴포넌트 정보)&#13;&#10; * @example take.getCompObjects(this, &quot;Grid&quot;);">take.getCompObjects(pThis, sCompType{String});</Snippet>
+      <Snippet name="take.getConvertDate" shortcut="takegetConvertDate" description=" * 날자 형식을 Object로 반환&#13;&#10; * @param {Anonymous} aDate 날자&#13;&#10; * @return {Object} 날자형 오브젝트 반환 (실패시 null)">take.getConvertDate(aDate{Anonymous});</Snippet>
+      <Snippet name="take.getDate" shortcut="takegetDate" description=" * getDate : 날짜 조회&#13;&#10; * @param : {baseDate:yyyyMMdd, addYear:int, addMonth:int, addDate:int}&#13;&#10; * @return : {year:yyyy, month:MM, day:dd, date:yyyyMMdd}">take.getDate(pOption);</Snippet>
+      <Snippet name="take.getDateTerm" shortcut="takegetDateTerm" description=" * 두개의 날자 기간 일로 반환&#13;&#10; * @param   {Anonymous}  aSDate 날자 1&#13;&#10; * @param   {Anonymous}  aEDate 날자 2&#13;&#10; * @return  {Number} 일수&#13;&#10; * @example take.getDateTerm(&quot;20180101&quot;,&quot;20180131&quot;)">take.getDateTerm(aSDate{Anonymous}, aEDate{Anonymous});</Snippet>
+      <Snippet name="take.getDateWeek" shortcut="take.getDateWeek" description=" * 요일 구하기&#13;&#10; * @param   {Object}  objDate&#13;&#10; * @param   {Boolean} bKor (default : korean, false: english)&#13;&#10; * @return  {String} '일', '월', '화', '수', '목', '금', '토'&#13;&#10; * @example take.getDateWeek(&quot;20180101&quot;)">take.getDateWeek(aDate{Object}, bKor{Boolean})</Snippet>
+      <Snippet name="take.getDaysInMonth" shortcut="takegetDaysInMonth" description=" * 해당 월의 마지막 날 리턴&#13;&#10; * @param   {Number} nYear  년도&#13;&#10; * @param   {Number} nMonth 월&#13;&#10; * @return  {Number} 마지막 일자&#13;&#10; * @example take.getDaysInMonth(2010,1)">take.getDaysInMonth(nYear{Number}, nMonth{Number}, bGbn);</Snippet>
+      <Snippet name="take.getDbTime" shortcut="takegetDbTime" description=" * 날짜 구하기&#13;&#10; * @param  {N/A} 없음&#13;&#10; * @return {Object} objDateTime&#13;&#10; *                  objDateTime.year  년&#13;&#10; *                  objDateTime.month 월&#13;&#10; *                  objDateTime.day   일&#13;&#10; *                  objDateTime.date  년월일&#13;&#10; *                  objDateTime.hh    시&#13;&#10; *                  objDateTime.mm    분&#13;&#10; *                  objDateTime.ss    초&#13;&#10; *                  objDateTime.time  시분초">take.getDbTime();</Snippet>
+      <Snippet name="take.getDsObjString" shortcut="takegetDsObjString" description="/**&#13;&#10; * Dataset을 Object String형으로 리턴&#13;&#10; * @param  {Object} objDs      Dataset&#13;&#10; * @return {String} Object String형&#13;&#10; * @example  take.getDsObjString(this.dsData) &#13;&#10; */">take.getDsObjString(objDs{Object});</Snippet>
+      <Snippet name="take.getFileExt" shortcut="takegetFileExt" description=" * 파일 확장자 확인&#13;&#10; * @param  {String} sFileName 파일 네임(풀)&#13;&#10; * @return {String} 확장자&#13;&#10; * @example take.getFileExt(&quot;C:\\abcd.exe&quot;); //--&gt; exe">take.getFileExt(sFileName{String});</Snippet>
+      <Snippet name="take.getFindRows" shortcut="takegetFindRows" description=" * 데이터 셋의 해당 컬럼에 일치하는 Row를 배열로 반환&#13;&#10; * @param  {Object}  objDs   Dataset&#13;&#10; * @param  {String}  aCol    컬럼명 / 컬럼 index&#13;&#10; * @param  {String}  sVal    찾을 값&#13;&#10; * @param  {boolean} bFilter 필터링 기준으로 처리 여부 (기본값 false)&#13;&#10; * @return {Array}          일치하는 Row를 배열로 반환&#13;&#10; * @example take.getChkRow(this.dsList);">take.getFindRows(objDs{Object Dataset}, aCol{String}, sVal{String}, bFilter{Boolean});</Snippet>
+      <Snippet name="take.getFindRowsExpr" shortcut="takegetFindRowsExpr" description=" * 데이터 셋의 해당 컬럼에 일치하는 Row를 배열로 반환&#13;&#10; * @param  {Object}  objDs   Dataset&#13;&#10; * @param  {String}  sExpr   Expr&#13;&#10; * @param  {boolean} bFilter 필터링 기준으로 처리 여부 (기본값 false)&#13;&#10; * @return {Array}           일치하는 Row를 배열로 반환&#13;&#10; * @example take.getFindRowsExpr(this.dsList, &quot;COLUMN00=='01', false);">take.getFindRowsExpr(objDs{Object Dataset}, sExpr{String}, bFilter{Boolean});</Snippet>
+      <Snippet name="take.getFunctionName" shortcut="takegetFunctionName" description=" * 폼에서 정의한 사용자 함수의 이름 반환&#13;&#10; * @param  {Object}   pThis  nexacro form object&#13;&#10; * @return {String}   함수명&#13;&#10; * @example take.getFunctionName(this)">take.getFunctionName(this, caller, nRtnCnt)</Snippet>
+      <Snippet name="take.getGridHeadInfo" shortcut="takegetGridHeadInfo" description=" * Grid Head 정보&#13;&#10; * @param  {Object} objGrid 그리드 Object&#13;&#10; * @return {Object}         cellcount : Head 셀 수, rowcount : head 로우 수, height : Head 높이 합을 Object로리턴&#13;&#10; * @example take.getGridHeadInfo(objGrid);">take.getGridHeadInfo(objGrid{Object});</Snippet>
+      <Snippet name="take.getHostUrl" shortcut="takegetHostUrl" description=" * 현재 서비스중인 호스트 가져오기 (typedefinition에서 가져오기)&#13;&#10; * @param  N/A&#13;&#10; * @example take.getSvcUrl();">take.getSvcUrl();</Snippet>
+      <Snippet name="take.getLocalData" shortcut="takegetLocalData" description=" * 로컬스토리지에 데이터셋을 저장&#13;&#10; * @param  {Dataset Object} objDs 로컬스토리에서 가져온 데이터를 담을 데이터셋&#13;&#10; * @return {boolean}       성공/실패 여부&#13;&#10; * @example trace(take.getLocalData(this.dsData)); --&gt; true/false">take.getLocalData(objDs{Dataset Object});</Snippet>
+      <Snippet name="take.getMdiForm" shortcut="takegetMdiForm" description=" * 해당 메뉴의 탭 폼 찾기&#13;&#10; * @param {object}  nexacro Form object&#13;&#10; * @return {object} object Form">take.getMdiForm(pThis, sMenuCd{String});</Snippet>
+      <Snippet name="take.getObjectAssign" shortcut="takegetObjectAssign" description=" * Object를 합쳐서 리턴&#13;&#10; * @param  {Object} objMain 리턴할 Object&#13;&#10; * @param  {Object} objCopy 복사할 Object&#13;&#10; * @return {Object} 합쳐진 Object&#13;&#10; * @example take.getFileExt(&quot;C:\\abcd.exe&quot;); //--&gt; exe">take.getObjectAssign(objMain{Object}, objCopy{Object});</Snippet>
+      <Snippet name="take.getOptionType" shortcut="takegetOptionType" description="">take.getOptionType(pThis);</Snippet>
+      <Snippet name="take.getOwnerForm" shortcut="takegetOwnerForm" description=" * 최상위 폼 찾기&#13;&#10; * @param {object} obj 컴포넌트&#13;&#10; * @return {object} object Form">take.getOwnerForm(objComp{object})</Snippet>
+      <Snippet name="take.getParam" shortcut="takegetParam" description="* 파라메터 가져오기&#13;&#10;* @param {Object} pThis&#13;&#10;* @return {String} 파라메터&#13;&#10;* @example take.getParam(this);">take.getParam(pThis);</Snippet>
+      <Snippet name="take.getParentForm" shortcut="takegetParentForm" description=" * 부모 폼 찾기&#13;&#10; * @param {object} obj 컴포넌트&#13;&#10; * @return {object} object Form">take.getParentForm(objComp{Object}, bCallee{Object});</Snippet>
+      <Snippet name="take.getParentXY" shortcut="takegetParentXY" description=" * 부모 폼 에서 내 xy 찾기&#13;&#10; * @param {object} obj 컴포넌트&#13;&#10; * @return {object} [x,y]">take.getParentXY(objComp{object}, bCallee{Boolean}, nX{Number}, nY{Number});</Snippet>
+      <Snippet name="take.getProgInfo" shortcut="takegetProgInfo" description=" * MDI 프로그램 정보&#13;&#10; * @param  {Object} pThis       nexacro Form&#13;&#10; * @return {Object} objProgInfo (ProgId, ProgNm)">take.getProgInfo(this);</Snippet>
+      <Snippet name="take.getSelectTab" shortcut="takegetSelectTab" description=" * take Button Tab 클릭 이벤트&#13;&#10; * @param  {Object} pThis   현재폼(탭 세팅시 세팅한 현재 폼)&#13;&#10; * @param  {String} sTabId  Tab Id&#13;&#10; * @example take.getSelectTab(this, &quot;testtab&quot;);">take.getSelectTab(pThis, sTabId{String});</Snippet>
+      <Snippet name="take.getSequenceId" shortcut="takegetSequenceId" description=" * Form 내에서 지정된 접두문자열에 순번이 붙여진 ID 를 반환&#13;&#10; * @param {Object} form&#13;&#10; * @param {String} prefix 순번 앞에 붙일 문자열&#13;&#10; * @return {String} id&#13;&#10; * @example&#13;&#10; * trace(take.getSequenceId(this, &quot;Button&quot;)); // output : Button0&#13;&#10; * trace(take.getSequenceId(this, &quot;Button&quot;)); // output : Button1&#13;&#10; * trace(take.getSequenceId(this, &quot;chk_&quot;)); // output : chk_0&#13;&#10; * trace(take.getSequenceId(this, &quot;chk_&quot;)); // output : chk_1">take.getSequenceId(form{Object}, prefix{String});</Snippet>
+      <Snippet name="take.getStrData" shortcut="takegetStrData" description=" * 날짜 구하기&#13;&#10; * @param  {N/A} 없음&#13;&#10; * @return {Object} objDateTime&#13;&#10; *                  objDateTime.year  년&#13;&#10; *                  objDateTime.month 월&#13;&#10; *                  objDateTime.day   일&#13;&#10; *                  objDateTime.date  년월일">take.getStrData(objDate{Object});</Snippet>
+      <Snippet name="take.getSvcUrl" shortcut="takegetSvcUrl" description=" * 현재 서비스되는 SVC URL을 확인하여 리턴한다&#13;&#10; * @return {String} String">take.getSvcUrl();</Snippet>
+      <Snippet name="take.getTelMask" shortcut="takegetTelMask" description=" * 휴대폰 번호에 뒷자리를 *처리&#13;&#10; * @param  {Number} sTel 휴대폰번호&#13;&#10; * @param  {boolean} bMask &#13;&#10; * @return {String}&#13;&#10; * @example trace(take.getTelMask(&quot;01012345678&quot;, true));    // --&gt; 010-1234-****">take.getTelMask(sTel{String}, bMask{Boolean});</Snippet>
+      <Snippet name="take.getTextlimitTo" shortcut="takegetTextlimitTo" description=" * 텍스트의 길이수를 체크하여 &quot;...&quot;반환&#13;&#10; * @param   {String}    sText       변환할 텍스트&#13;&#10; * @param   {Anonymous} aFont       폰트&#13;&#10; * @param   {Number}    nLimitSize  제한 사이즈&#13;&#10; * @return  {String}    sRtn&#13;&#10; * @example take.getTextlimitTo(&quot;텍스트&quot;, &quot;11px Gulim&quot;, 20); //텍...">take.getTextlimitTo(sText{String}, aFont{Anonymous}, nLimitSize{Number});</Snippet>
+      <Snippet name="take.getTextSize" shortcut="takegetTextSize" description="* 텍스트의 사이즈를 구해 리턴&#13;&#10; * @param {String} sText 텍스트의 사이즈를 구하고자하는 텍스트를 입력&#13;&#10; * @return {Number} 텍스트의 사이즈">take.getTextSize(sText{String}, aFont)</Snippet>
+      <Snippet name="take.getTodayTime" shortcut="takegetTodayTime" description=" * 날짜 구하기&#13;&#10; * @param  {N/A} 없음&#13;&#10; * @return {Object} objDateTime&#13;&#10; *                  objDateTime.year  년&#13;&#10; *                  objDateTime.month 월&#13;&#10; *                  objDateTime.day   일&#13;&#10; *                  objDateTime.date  년월일&#13;&#10; *                  objDateTime.hh    시&#13;&#10; *                  objDateTime.mm    분&#13;&#10; *                  objDateTime.ss    초&#13;&#10; *                  objDateTime.ms    밀리초&#13;&#10; *                  objDateTime.time  시분초">take.getTodayTime();</Snippet>
+      <Snippet name="take.getTreeChildRows" shortcut="takegetTreeChildRows" description=" * 트리 컬럼의 자식 노드를 배열로 리턴&#13;&#10; * @param  {Object} objGrid Grid Component&#13;&#10; * @param  {Number} nIdx    Grid body Tree Cell index&#13;&#10; * @param  {Number} nRow    Grid body Tree Row index&#13;&#10; * @return {Array}          Dataset Rows 해당하는 자식 노드 배열&#13;&#10; * @example take.getTreeChildRows(this.Grid00, 1, 1);">take.getTreeChildRows(objGrid{Object}, nIdx{Number}, nRow{Number});</Snippet>
+      <Snippet name="take.getTreeFamilyRows" shortcut="takegetTreeFamilyRows" description=" * 트리 컬럼의 하위 자손들의 노드를 배열로 리턴&#13;&#10; * @param  {Object}  objGrid Grid Component&#13;&#10; * @param  {Number}  nIdx    Grid body Tree Cell index&#13;&#10; * @param  {Number}  nRow    Grid body Tree Row index&#13;&#10; * @param  {Boolean} bCallee 재귀호출여부 사용자 호출시 제외&#13;&#10; * @return {Array}           Dataset Rows 해당하는 자식 노드 배열&#13;&#10; * @example take.getTreeFamilyRows(this.Grid00, 1, 1);">take.getTreeFamilyRows(objGrid{Object}, nIdx{Number}, nRow{Number});</Snippet>
+      <Snippet name="take.getTreeLevelInfo" shortcut="takegetTreeLevelInfo" description=" * Tree level 정보&#13;&#10; * @param  {Object} objGrid 그리드 Object&#13;&#10; * @param  {Number} nIdx    tree 컬럼 인덱스&#13;&#10; * @return {Object}         min 최소, max 최대 레벨 값을 Object로리턴&#13;&#10; * @example take.getTreeLevelInfo(objGrid, 1);">take.getTreeLevelInfo(objGrid{Object}, nIdx{Number});</Snippet>
+      <Snippet name="take.getTreeLevRows" shortcut="takegetTreeLevRows" description=" * 해당하는 레벨의 노드를 배열로 반환&#13;&#10; * @param  {Object} objGrid 그리드 Object&#13;&#10; * @param  {Number} nIdx    tree 컬럼 인덱스&#13;&#10; * @param  {Number} nLev    tree Level 값&#13;&#10; * @return {Array}          Dataset Rows 해당하는 노드 배열&#13;&#10; * @example take.getTreeLevRows(objGrid, 1, 1);">take.getTreeLevRows(objGrid{Object}, nIdx{Number}, nLev{Number});</Snippet>
+      <Snippet name="take.getTreeNodeRows" shortcut="takegetTreeNodeRows" description=" * 트리 컬럼의 형재 노드를 배열로 리턴&#13;&#10; * @param  {Object} objGrid Grid Component&#13;&#10; * @param  {Number} nIdx    Grid body Tree Cell index&#13;&#10; * @param  {Number} nRow    Grid body Tree Row index&#13;&#10; * @return {Array}          Dataset Rows 해당하는 형재 노드 배열&#13;&#10; * @example take.getTreeNodeRows(this.Grid00, 1, 1);">take.getTreeNodeRows(objGrid{Object}, nIdx{Number}, nRow{Number});</Snippet>
+      <Snippet name="take.getTrim" shortcut="takegetTrim" description=" * null 체크후 trim&#13;&#10; * @param  {String}  sValue 값&#13;&#10; * @return {String}  trim된 값&#13;&#10; * @example take.getTrim(&quot;te st&quot;); //--&gt; test">take.getTrim(sValue{String});</Snippet>
+      <Snippet name="take.getUniqueId" shortcut="takegetUniqueId" description=" * @class  유일한 ID 를 반환&#13;&#10; * @param {String} prefix id 앞에 붙일 문자열&#13;&#10; * @param {String} separator id 생성시 구분용 문자(default: '-' ).&#13;&#10; * @return {String} id&#13;&#10; * @example&#13;&#10; * trace(take.getUniqueId());                 // output : 3e52d1f6-f0d2-4970-a590-ba7656b07859&#13;&#10; * trace(take.getUniqueId(&quot;Button_&quot;));        // output : Button_4e601da1-63f4-4cfa-849b-01b8a7f14d40&#13;&#10; * trace(take.getUniqueId(&quot;&quot;, &quot;_&quot;));          // output : 4e601da1_63f4_4cfa_849b_01b8a7f14d40&#13;&#10; * trace(take.getUniqueId(&quot;Button_&quot;, &quot;_&quot;));  // output : Button_4e601da1_63f4_4cfa_849b_01b8a7f14d40">take.getUniqueId(prefix{String}, separator{String});</Snippet>
+      <Snippet name="take.getUrlParams" shortcut="takegetUrlParams" description="/**&#13;&#10; * Url에서 파라메터 축출후 리턴&#13;&#10; * @param  {String} Url&#13;&#10; * @return {Object} 파라메터 Object&#13;&#10; * @example take.getUrlParams(&quot;http://www.test.co.kr/?test=1&quot;)&#13;&#10; */">take.getUrlParams(sUrl);</Snippet>
+      <Snippet name="take.getUser" shortcut="takegetUser" description=" * User 정보 가져오기&#13;&#10; * @param {String}  sCol 컬럼명&#13;&#10; * @return {String} 데이터">take.getUser(sCol{String});</Snippet>
+      <Snippet name="take.getWord" shortcut="takegetWord" description=" * 다국어용 메세지를 찾는다.&#13;&#10; * @param  {Object} pThis   폼 오브젝트&#13;&#10; * @param  {String} sMsgId 메세지아이디&#13;&#10; * @return {[type]} take.getWord(this, &quot;ML000000001&quot;);">take.getWord(pThis, sMsgId{String});</Snippet>
+      <Snippet name="take.isArray" shortcut="takeisArray" description=" * value의 Array 여부 반환.&#13;&#10; * @param {*} aVal 확인할 value.&#13;&#10; * @return {boolean} Array 여부.&#13;&#10; * @example take.isArray(&quot;&quot;);">take.isArray(aVal);</Snippet>
+      <Snippet name="take.isCustNo" shortcut="takeisCustNo" description=" * 사업자등록번호 형식체크&#13;&#10; * @param  {String, Number} nCustNo 사업자등록번호&#13;&#10; * @return {Boolean}&#13;&#10; * @example trace(take.isCustNo(&quot;0123456789&quot;));     // --&gt; true/false">take.isCustNo(nCustNo{String||Number});</Snippet>
+      <Snippet name="take.isDate" shortcut="takeisDate" description=" * Date 형식 확인&#13;&#10; * @param  {String} sValue 날자&#13;&#10; * @return {boolean} true / false&#13;&#10; * @example take.isDate(&quot;20180328&quot;) //--&gt; true/false">take.isDate(sValue{String});</Snippet>
+      <Snippet name="take.isDsModified" shortcut="takeisDsModified" description=" * 데이터셋의 삭제, 수정, 추가등의 변경을 체크한다.&#13;&#10; * @param   {Object} dsObj   넥사크로 데이터셋 컴포넌트&#13;&#10; * @param   {Number} nRow 검사할 ROW 검색 표현식 [값이 없으면 전체]&#13;&#10; * @return  {Boolean}&#13;&#10; * @example trace(take.isDsModified(this.dsList,0)); //--&gt; true/false">take.isDsModified(dsObj{Object}, nRow{Number});</Snippet>
+      <Snippet name="take.isEmail" shortcut="takeisEmail" description=" * 이메일 형식 확인.&#13;&#10; * @param  {String}   sEmail 이메일&#13;&#10; * @return {Boolean} 값이 존재할 경우에 체크한다.&#13;&#10; * @example   trace(take.isEmail(&quot;aaa.test.com&quot;));  //--&gt; true/false">take.isEmail(sEmail{String});</Snippet>
+      <Snippet name="take.isEmpty" shortcut="takeisEmpty" description=" * Empty 체크&#13;&#10; * @param  {String}  sValue 값&#13;&#10; * @return {Boolean}        Empty 여부&#13;&#10; * @example take.isEmpty(&quot;test&quot;); //--&gt; true">take.isEmpty(sValue{String});</Snippet>
+      <Snippet name="take.isFromTo" shortcut="takeisFromTo" description=" * 시작일과 종료일을 체크한다.&#13;&#10; * @param  {String} sFDate    시작일자&#13;&#10; * @param  {String} sTDate    종료일자&#13;&#10; * @return {Boolean}&#13;&#10; * @example trace(take.isFromTo(&quot;20150101&quot;, &quot;20150101&quot;));  // --&gt; true/false">take.isFromTo(sFDate{String}, sTDate{String});</Snippet>
+      <Snippet name="take.isFunction" shortcut="takeisFunction" description=" * value의 Function 여부 반환.&#13;&#10; * @param {*} val 확인할 value.&#13;&#10; * @return {boolean} Function 여부.">take.isFunction(val{*});</Snippet>
+      <Snippet name="take.isHybrid" shortcut="takeisHybrid" description="* 안드로이드 환경에서 Hybrid 환경인지 리털&#13;&#10;* return {Boolean};">take.isHybrid();</Snippet>
+      <Snippet name="take.isJuminNo" shortcut="takeisJuminNo" description=" * 주민등록번호를 체크한다.&#13;&#10; * @param  {String/Number} sVal 주민등록번호&#13;&#10; * @return {boolean}&#13;&#10; * @example trace(take.isJuminNo(&quot;&quot;));    // --&gt; true/false">take.isJuminNo(sVal{String||Number});</Snippet>
+      <Snippet name="take.isLeapYear" shortcut="takeisLeapYear" description=" * 윤년여부&#13;&#10; * @param   {Number}  년도&#13;&#10; * @return  {Boolean} true/false&#13;&#10; * @example take.isLeapYear(2010)">take.isLeapYear(nYear{Number});</Snippet>
+      <Snippet name="take.isMobile" shortcut="takeisMobile" description=" * 모바일 / PC 여부 반환.&#13;&#10; * @param {N/A} 없음&#13;&#10; * @return {boolean} Function 여부.">take.isMobile();</Snippet>
+      <Snippet name="take.isNull" shortcut="takeisNull" description=" * Null Check&#13;&#10; * @param {*} val 체크할 값.&#13;&#10; * @return {boolean} null 여부">take.isNull(val{*});</Snippet>
+      <Snippet name="take.isNumber" shortcut="takeisNumber" description=" * 숫자 여부 확인&#13;&#10; * @param  {Anonymous}  aVal 확인 대상 값&#13;&#10; * @return {boolean}    true/false 숫자 여부">take.isNumber(aVal{Anonymous});</Snippet>
+      <Snippet name="take.isObject" shortcut="takeisObject" description=" * Object 체크&#13;&#10; * @param  {String}  sValue 값&#13;&#10; * @return {Boolean} Object 여부&#13;&#10; * @example take.isObject(objTest); //--&gt; true">take.isObject(objVal{String});</Snippet>
+      <Snippet name="take.isQuickView" shortcut="takeisQuickView" description=" * 퀵뷰 실행 여부&#13;&#10; * @return {boolean} true/false">take.isQuickView();</Snippet>
+      <Snippet name="take.isStudio" shortcut="takeisStudio" description=" 개발툴에서 실행하는지 여부&#13;&#10; * @return {boolean} true/false">take.isStudio();</Snippet>
+      <Snippet name="take.isValidDate" shortcut="takeisValidDate" description=" * 날짜포멧이 맞는지 체크한다&#13;&#10; * @param  {String} sDate    일자&#13;&#10; * @param  {String} sFormat  데이터 포멧 (yyyyMMdd, yyyy/MM/dd, yyyyMMddhhmmss, hhmmss)&#13;&#10; * @return {Boolean}&#13;&#10; * @example trace(take.isValidDate(&quot;20150101&quot;, &quot;yyyyMMdd&quot;));  // --&gt; true/false">take.isValidDate(sDate{String}, sFormat{String});</Snippet>
+      <Snippet name="take.JsonToString" shortcut="takeJsonToString" description=" * JSON Object를 문자형 Object text로 반환&#13;&#10; * @param  {Object} objJson   JSON Object {key0:value0, &quot;key1&quot;:&quot;value1&quot;...}&#13;&#10; * @return {String} 문자형 Object text&#13;&#10; * @example take.JsonToString({key0:'value0', key1:'value1', key2:'value2'});">take.JsonToString(objJson{Object});</Snippet>
+      <Snippet name="take.loadCss" shortcut="takeloadCss" description=" * css 로드&#13;&#10; * @param  {String} sId       아이디&#13;&#10; * @param  {String} sFilename 파일명&#13;&#10; * @return {N/A}    N/A&#13;&#10; * @example  take.loadCss(&quot;css01&quot;, &quot;mystyle.css&quot;, &quot;css&quot;) ////dynamically load and add this .css file">take.loadCss(sId{String}, sFilename{String});</Snippet>
+      <Snippet name="take.loadLibJs" shortcut="takeloadLibJs" description=" * nexin js 로드&#13;&#10; * @param  {String} sJsNm      js 이름&#13;&#10; * @return {N/A}    N/A&#13;&#10; * @example  take.loadLibJs(&quot;script01&quot;, &quot;myscript.js&quot;) //dynamically load and add this .js file&#13;&#10; *           take.loadLibJs(&quot;file01&quot;, &quot;javascript.php&quot;) //dynamically load &quot;javascript.php&quot; as a JavaScript file">take.loadLibJs(sJsNm{String});</Snippet>
+      <Snippet name="take.mdiClose" shortcut="takemdiClose" description=" * MDI창 닫기&#13;&#10; * @param  {Form Object} pThis     대상 폼&#13;&#10; * @param  {String}      sMenuId   메뉴아이디&#13;&#10; * @return {N/A}         N/A&#13;&#10; * @example take.mdiClose(this, &quot;MI2030&quot;);">take.mdiClose(pThis, sMenuId{String});</Snippet>
+      <Snippet name="take.mdiOpenMenu" shortcut="takemdiOpenMenu" description=" * MDI창 오픈&#13;&#10; * @param  {Form Object} pThis     대상 폼&#13;&#10; * @param  {String}      sMenuId   메뉴아이디&#13;&#10; * @param  {String}      sParam    파라메터&#13;&#10; * @param  {String}      sCallFunc 콜백 함수&#13;&#10; * @return {N/A}         N/A&#13;&#10; * @example take.mdiOpenMenu(this, &quot;MI2030&quot;, &quot;test|test1|test2&quot;, &quot;fnTest&quot;);">take.mdiOpenMenu(this, sMenuId{String}, sParam{String}, sCallFunc{String});</Snippet>
+      <Snippet name="take.nvl" shortcut="takenvl" description=" * empty값인 경우 대체 값으로 치환&#13;&#10; * @param {*} Val 치환대상.&#13;&#10; * @param {*} rtnValue 치환값.&#13;&#10; * @return {string} 치환값.">take.nvl("val{*}", "rtnVal{*}");</Snippet>
+      <Snippet name="take.ObjectPath" shortcut="takeObjectPath" description=" * 컴포넌트 전체 경로&#13;&#10; * @param {object} obj 컴포넌트&#13;&#10; * @return {string} Path 전체 PATH">take.ObjectPath(obj{Object});</Snippet>
+      <Snippet name="take.ObjectType" shortcut="takeObjectType" description=" * 오브젝트의 타입을 스트링으로 반&#13;&#10; * @param  {Object} obj 오브젝트&#13;&#10; * @return {String}     오브젝트 타입">take.ObjectType(obj{Object});</Snippet>
+      <Snippet name="take.openMenuPop" shortcut="takeopenMenuPop" description=" * openMenuPop 메뉴 팝업&#13;&#10; * @param  {String}   sMenuId       메뉴아이디&#13;&#10; * @param  {String}   sUserParam    파라메터&#13;&#10; * @param  {String}   sOption       팝업옵션&#13;&#10; * @param  {String}   sCallBack     콜백함수명 &#13;&#10; * @return {N/A}      N/A&#13;&#10; * @example take.openMenuPop(&quot;M0001&quot;, &quot;&quot;, &quot;&quot;, &quot;fnCallBack&quot;);">take.openMenuPop(sMenuId{String}, sUserParam{String}, sOption{String}, sCallBack{String});</Snippet>
+      <Snippet name="take.openPopup" shortcut="takeopenPopup" description=" * @param  {Object} pThis           Object Form&#13;&#10; * @param  {String} sFrameId        프레임 아이디&#13;&#10; * @param  {String} sFormUrl        Form URL&#13;&#10; * @param  {Object} objArgList      팝업에 넘길 인자값&#13;&#10; * @param  {String} sOptions        옵션&#13;&#10; * @param  {String} sPopupCallback  콜백 함수&#13;&#10; * @param  {boolean} bModeless      모달리스 여부&#13;&#10; * @return {N/A}                    팝업&#13;&#10; * @example take.openPopup(this, &quot;PopUp&quot;, &quot;sample::samplePop.xfdl&quot;, {param1: &quot;param1&quot;}, &quot;showtitlebar=false layered=true&quot;, &quot;fnCallBack&quot;, false);">take.openPopup(this, sFrameId{String}, sFormUrl{String}, objArgList{Object}, sOptions{String}, sPopupCallback{String}, bModeless{Boolean});</Snippet>
+      <Snippet name="take.openReport" shortcut="takeopenReport" description=" * openReport 공통 리포트 팝업&#13;&#10; * @param  {Object}   pThis        nexacro form object&#13;&#10; * @param  {String}   sPopId       Report popup id&#13;&#10; * @param  {Object}   objInfo      Report agument&#13;&#10; * @param  {String}   fnCallBack   완료후 실행할 CallBack 함수&#13;&#10; * @param  {String}   sType        Reprot 구분 (UBI, OZ, RD...)&#13;&#10; * @return {Function} CallBack Function&#13;&#10; * @example take.openReport(this, &quot;popid&quot;, objInfo, &quot;fnCallBack&quot;, &quot;UBI&quot;);">take.openReport(pThis, sPopId{String}, objInfo{Object}, fnCallBack{String}, sType{String});</Snippet>
+      <Snippet name="take.OZXml" shortcut="takeOZXml" description=" * OZXml OZReport XML 만들기&#13;&#10; * @param  {Object}  arrDs    nexacro Dataset object&#13;&#10; * @return {N/A}     N/A&#13;&#10; * @example take.OZXml([this.dsTest0, this.dsTest1]);">take.OZXml(arrDs{Object});</Snippet>
+      <Snippet name="take.parseDate" shortcut="takeparseDate" description=" * 날짜(시간)를 파싱해서 DateTime 객체를 생성&#13;&#10; * @param  {String} sDate    일자&#13;&#10; * @param  {String} sFormat  데이터 포멧 (yyyyMMdd, yyyy/MM/dd, yyyyMMddhhmmss, hhmmss)&#13;&#10; * @return {DateTime} 데이터 객체 실패시 null&#13;&#10; * @example trace(take.parseDate(&quot;20150101&quot;, &quot;yyyyMMdd&quot;));">take.parseDate(sValue{String}, sFormat{String});</Snippet>
+      <Snippet name="take.replaceFormat" shortcut="takereplaceFormat" description=" * 문자열에서 포맷된 부분를 파라메타로 치환한다.&#13;&#10; * @param  {String} 포멧 문자열&#13;&#10; * @param  {String} 파라메터 값 &quot;,&quot; 구분된 연속 값&#13;&#10; * @return  변환된 문자열&#13;&#10; * @example&#13;&#10; *      trace( take.replaceFormat(&quot;Hello {0}!&quot;,     &quot;take&quot;)); -&gt; &quot;Hello teke!&quot;&#13;&#10; *      trace( take.replaceFormat(&quot;Hello {0}!{1}!&quot;, &quot;take&quot;, &quot;test&quot;)); -&gt; &quot;Hello take!test!&quot;&#13;&#10; *      trace( take.replaceFormat(&quot;{} Hello {}!&quot;,   &quot;take&quot;, &quot;test&quot;)); -&gt; &quot;take Hello test!&quot;">take.replaceFormat();</Snippet>
+      <Snippet name="take.setComBtn" shortcut="takesetComBtn" description="* 공통버튼 셋팅&#13;&#10;* @param {Object} pThis&#13;&#10;* @example take.setComBtn(this);&#13;&#10;">take.setComBtn(pThis);</Snippet>
+      <Snippet name="take.setComma" shortcut="takesetComma" description=" * 숫자 또는 문자에 콤마 표시&#13;&#10; * @param  {String, Number} data 숫자인 문자형 또는 숫자형&#13;&#10; * @return {String} 콤마가 표시된 값&#13;&#10; * @example trace(take.setComma(123456.12)); // --&gt; 123,456.12">take.setComma(data{String || Number});</Snippet>
+      <Snippet name="take.setGridCheckAll" shortcut="takesetGridCheckAll" description=" * setGridCheckAll : 전체클릭 기능 실행&#13;&#10; * param : obj:nexacro.Grid&#13;&#10; * param : e:nexacro.GridClickEventInfo&#13;&#10; * param : pColId">take.setGridCheckAll(pObj{obj:nexacro.Grid}, pGridClickEventInfoCell{e:nexacro.GridClickEventInfo}, pColId);</Snippet>
+      <Snippet name="take.setLocalData" shortcut="takesetLocalData" description=" * 로컬스토리지에 데이터셋을 저장&#13;&#10; * @param  {Dataset Object} objDs 로컬스토리에 저장할 데이터셋&#13;&#10; * @return {boolean}       성공/실패 여부&#13;&#10; * @example trace(take.setLocalData(this.dsData)); --&gt; true/false">take.setLocalData(objDs{Dataset Object});</Snippet>
+      <Snippet name="take.setSystemInfo" shortcut="takesetSystemInfo" description=" * setSystemInfo 시스템 기본 정보 세팅&#13;&#10; * @param  {Object}  objSys 시스템 정보&#13;&#10; * @return {Boolean} 성공/실패">take.setSystemInfo(objSys{object});</Snippet>
+      <Snippet name="take.setUseWaitCursor" shortcut="takesetUseWaitCursor" description="">take.setUseWaitCursor(bUse{Boolean});</Snippet>
+      <Snippet name="take.StringToObject" shortcut="takeStringToObject" description=" * 문자형 Object를 Object로 반환&#13;&#10; * @param  {String} sObj   문자형 Object {key0:value0, &quot;key1&quot;:&quot;value1&quot;...}&#13;&#10; * @return {Object}        Object&#13;&#10; * @example take.StringToObject(&quot;{key0:value0, 'key1':'value1', key2:'value2'}&quot;);">take.StringToObject(sObj{String});</Snippet>
+      <Snippet name="take.substrByte" shortcut="takesubstrByte" description=" * 문자열을 바이트로 substring 한다.&#13;&#10; * @param   {String} sVal     문자열&#13;&#10; * @param   {Number} nStart   시작위치&#13;&#10; * @param   {Number} nLength  길이&#13;&#10; * @param   {String} sUnit    인코딩 값 utf8,ascii 만 가능&#13;&#10; * @return  {String}&#13;&#10; * @example trace(take.substrByte(&quot;1234&quot;,0,4)); // --&gt; 1234">take.substrByte(sVal{String}, nStart{Number}, nLength{Number}, sUnit{String});</Snippet>
+      <Snippet name="take.svcFindReplace" shortcut="takesvcFindReplace" description=" * 현재 화면이 실행되는 URL을 확인하여 svcid를 바꾼다.&#13;&#10; * @return {N/A} N/A">take.svcFindReplace();</Snippet>
+      <Snippet name="take.sysType" shortcut="takesysType" description="   * 모바일 / PC 여부 반환.&#13;&#10;   * @param  {N/A} 없음&#13;&#10;   * @return {String} 시스템 타입 반환. desktop, phone, tablet">take.sysType();</Snippet>
+      <Snippet name="take.TabClick" shortcut="takeTabClick" description=" * take Button Tab 클릭 이벤트&#13;&#10; * @param  {Object} objComp 버튼 컴포넌트&#13;&#10; * @param  {Object} e   nexacro.ClickEventInfo&#13;&#10; * @example take.TabClick(obj, e);">take.TabClick(objComp{Object}, e{Object});</Snippet>
+      <Snippet name="take.TabSetting" shortcut="takeTabSetting" description=" * take Button Tab 세팅&#13;&#10; * @param  {Object} this        현재 폼&#13;&#10; * @param  {String} sTabId      Tab 그룹 아이디&#13;&#10; * @param  {Object} objList     Tab 정보&#13;&#10; * @param  {Object} objLoadTab  최초 로드 되는 탭 (없으면 첫번째)&#13;&#10; * @param  {String} sTabOnCss   On Css (클릭 되었을때)&#13;&#10; * @param  {String} sTabOffCss  Off Css (클릭 안되었을때)&#13;&#10; * @return {Boolean} true/false 성공/실패&#13;&#10; * @example take.TabSetting(this, {this.btnTab:this.divTab,....}, &quot;&quot;, &quot;btn_WF_tab02&quot;, btn_WF_tab01&quot;);">take.TabSetting(pThis{Object}, sTabId{String}, objList{Object}, objLoadTab{Object}, sTabOnCss{String}, sTabOffCss{String});</Snippet>
+      <Snippet name="take.textLengthOverCut" shortcut="taketextLengthOverCut" description=" * take textLengthOverCut 문자열을 특정 길이만큼 자르고 대체 문자열을 이어 붙힌다. &#13;&#10; * @param  {Object} sText 원본 문자열&#13;&#10; * @param  {Object} nCnt  문자열 최대 길이 수&#13;&#10; * @param  {Object} sVal  대체 문자열&#13;&#10; * @example take.textLengthOverCut(sText, nCnt, sVal);">take.textLengthOverCut(sText{String}, nCnt{Number}, sVal{String});</Snippet>
+      <Snippet name="take.toDateString" shortcut="taketoDateString" description=" * DateTime 객체를 지정된 날짜(시간) 포맷 문자열로 변환한다.&#13;&#10; * @param  {DateTime} dtValue    일자&#13;&#10; * @param  {String} sFormat  데이터 포멧 (yyyyMMdd, yyyy/MM/dd, yyyyMMddhhmmss, hhmmss)&#13;&#10; * @return {String}&#13;&#10; * @example trace(take.toDateString(datetime, &quot;yyyyMMdd&quot;));  // --&gt; true/false">take.toDateString(objDate{DateTime}, sFormat{String});</Snippet>
+      <Snippet name="take.trace" shortcut="taketrace" description=" * Trace를 찍는다&#13;&#10; * @param  {String} sId  시스템아이디&#13;&#10; * @param  {String} sGbn 구분&#13;&#10; * @param  {String} sMsg 메세지&#13;&#10; * @return {[type]} take.trace(&quot;System&quot;, &quot;ERROR&quot;, &quot;메세지입니다.&quot;);">take.trace(sId{String}, sGbn{String}, sMsg{String});</Snippet>
+      <Snippet name="take.tranCode" shortcut="taketranCode" description=" * fnTranCode : 코드 데이터 Select&#13;&#10; * @param  {Object} pThis      Form Object&#13;&#10; * @param  {String} sGroupCode 코드 그룹코드&#13;&#10; * @param  {String} sOutDs     UI에서 받을 데이터셋 명&#13;&#10; * @param  {String} sCallBack  UI Transaction Call Back 함수명&#13;&#10; * @example take.tranCode(this, &quot;000001&quot;, &quot;dsCode&quot;, &quot;fnCallback&quot;);">take.tranCode(this, aGroupCode{String}, aOutDs{String}, sCallBack{String});</Snippet>
+      <Snippet name="take.transaction" shortcut="taketransaction" description="* 공통 트랜젝션&#13;&#10; * @param  {Object} pThis     nexacro form object&#13;&#10; * @param  {String} sTranId   서비스아이디&#13;&#10; * @param  {String} sUrl      서비스 URL&#13;&#10; * @param  {String} sInDs     서버로 보낼 데이터셋&#13;&#10; * @param  {String} sOutDs    서버에서 받을 데이터셋 (UI Dataset=Server Dataset)&#13;&#10; * @param  {String} sParam    파라메터&#13;&#10; * @param  {String} sCallBack 트랜젝션 완료후 실행할 CallBack 함수&#13;&#10; * @param  {boolen} bAsync    동기 비동기 여부&#13;&#10; * @param  {boolen} bErrRtn   트랜잭션 에러를 화면단에서 받을지 여부&#13;&#10; * @return {Function} CallBack Function&#13;&#10; * @example take.transaction(this, &quot;test&quot;, &quot;http://localhost/test.jsp&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;fnCallBack&quot;, true, false);">take.transaction(&#13;
+    this, &#13;
+    sTranId{String}, &#13;
+    sUrl{String}, &#13;
+    sInDs{String},  //(Server=UI)&#13;
+    sOutDs{String}, //(UI=Server)&#13;
+    sParam{String}, &#13;
+    sCallBack{String}, &#13;
+    bAsync{Boolean}, &#13;
+    bErrRtn{Boolean});</Snippet>
+      <Snippet name="while () {}" shortcut="while" description="">while ($end$)
+{
+$tab$
+}</Snippet>
+    </Group>
+    <Snippet name="/*" shortcut="" description="">/*
+ *	$end$
+ */
+ </Snippet>
+    <Snippet name="/**" shortcut="" description="">/************************************************************************
+ * $end$
+ ************************************************************************/
+</Snippet>
+    <Snippet name="alert();" shortcut="al" description="">alert($end$);</Snippet>
+    <Snippet name="do { } while();" shortcut="do" description="">do {
+$tab$$end$
+} while();</Snippet>
+    <Snippet name="File header" shortcut="" description="">/********************************************************************
+    created:	  $DATE$
+    filename: 	$FILE$
+    file path:	$FILE_PATH$
+    file base: 	$FILE_BASE$
+    file ext:	  $FILE_EXT$
+    author:		  
+
+    purpose:	  $end$
+*********************************************************************/
+</Snippet>
+    <Snippet name="function() {}" shortcut="func" description="">function ($end$)
+{
+$tab$
+};</Snippet>
+    <Snippet name="if () {}" shortcut="if" description="">if ($end$)
+{
+$tab$
+}</Snippet>
+    <Snippet name="if () {} else {}" shortcut="ifel" description="">if ($end$)
+{
+$tab$
+}
+else
+{
+$tab$
+}</Snippet>
+    <Snippet name="switch() { case : break..." shortcut="switch" description="">switch($end$) {
+case :
+$tab$break;
+case :
+$tab$break;
+default:
+}</Snippet>
+    <Snippet name="while () {}" shortcut="while" description="">while ($end$)
+{
+$tab$
+}</Snippet>
+  </Script>
+  <Xcss>
+    <Group name="Attribute">
+      <Snippet name="-nexa-background-odd" shortcut="-nexa-background-odd" description="">$tab$-nexa-background-odd : #ffffaa;</Snippet>
+      <Snippet name="-nexa-border" shortcut="-nexa-border" description="">$tab$-nexa-border : 1px solid #999999;</Snippet>
+      <Snippet name="-nexa-color-odd" shortcut="-nexa-color-odd" description="">$tab$-nexa-color-odd : red;</Snippet>
+      <Snippet name="-nexa-edge" shortcut="-nexa-edge" description="">$tab$-nexa-edge : url("theme://images/Titlebar_bg.png") 5px 5px;</Snippet>
+      <Snippet name="-nexa-edge-odd" shortcut="-nexa-edge-odd" description="">$tab$-nexa-edge-odd : url("theme://images/Titlebar_bg.png") 5px 5px;</Snippet>
+      <Snippet name="-nexa-icon" shortcut="-nexa-icon" description="">$tab$-nexa-icon : url("theme://images/Titlebar_bg.png");</Snippet>
+      <Snippet name="-nexa-icon-position" shortcut="-nexa-icon-position" description="">$tab$-nexa-icon-position : left;</Snippet>
+      <Snippet name="-nexa-padding" shortcut="-nexa-padding" description="">$tab$-nexa-padding : 5px 5px 5px 5px;</Snippet>
+      <Snippet name="-nexa-text-align" shortcut="-nexa-text-align" description="">$tab$-nexa-text-align : left;</Snippet>
+      <Snippet name="-nexa-text-padding" shortcut="-nexa-text-padding" description="">$tab$-nexa-text-padding : 5px 5px 5px 5px;</Snippet>
+      <Snippet name="-nexa-vertical-align" shortcut="-nexa-vertical-align" description="">$tab$-nexa-vertical-align : top;</Snippet>
+      <Snippet name="-nexa-word-wrap" shortcut="-nexa-word-wrap" description="">$tab$-nexa-word-wrap : char;</Snippet>
+      <Snippet name="background" shortcut="background" description="">$tab$background : #ffffaa;</Snippet>
+      <Snippet name="border-radius" shortcut="border-radius" description="">$tab$border-radius : 5px 5px 5px 5px;</Snippet>
+      <Snippet name="box-shadow" shortcut="box-shadow" description="">$tab$box-shadow : 5px 5px 3px #ffffff;</Snippet>
+      <Snippet name="color" shortcut="color" description="">$tab$color : transparent;</Snippet>
+      <Snippet name="cursor" shortcut="cursor" description="">$tab$cursor : default;</Snippet>
+      <Snippet name="font" shortcut="font" description="">$tab$font : 9pt "Tahoma";</Snippet>
+      <Snippet name="letter-spacing" shortcut="letter-spacing" description="">$tab$letter-spacing : normal;</Snippet>
+      <Snippet name="opacity" shortcut="opacity" description="">$tab$opacity : 0.8;</Snippet>
+      <Snippet name="text-decoration" shortcut="text-decoration" description="">$tab$text-decoration : underline;</Snippet>
+      <Snippet name="word-spacing" shortcut="word-spacing" description="">$tab$word-spacing : 30px;</Snippet>
+    </Group>
+    <Group name="Selector">
+      <Snippet name="Band" shortcut=".Band" description="">.Band
+{
+$tab$$end$
+}
+</Snippet>
+      <Snippet name="Button" shortcut=".Button" description="">.Button
+{
+$tab$$end$
+}
+</Snippet>
+      <Snippet name="Calendar" shortcut=".Calendar" description="">.Calendar
+{
+$tab$$end$
+}
+</Snippet>
+      <Snippet name="Cell" shortcut=".Cell" description="">.Cell
+{
+$tab$$end$
+}
+</Snippet>
+      <Snippet name="CheckBox" shortcut=".CheckBox" description="">.CheckBox
+{
+$tab$$end$
+}
+</Snippet>
+      <Snippet name="Combo" shortcut=".Combo" description="">.Combo
+{
+$tab$$end$
+}
+</Snippet>
+      <Snippet name="ComboControl" shortcut=".ComboControl" description="">.ComboControl
+{
+$tab$$end$
+}
+</Snippet>
+      <Snippet name="DatePicker" shortcut=".DatePicker" description="">.DatePicker
+{
+$tab$$end$
+}
+</Snippet>
+      <Snippet name="Div" shortcut=".Div" description="">.Div
+{
+$tab$$end$
+}
+</Snippet>
+      <Snippet name="Edit" shortcut=".Edit" description="">.Edit
+{
+$tab$$end$
+}
+</Snippet>
+      <Snippet name="FileDownload" shortcut=".FileDownload" description="">.FileDownload
+{
+$tab$$end$
+}
+</Snippet>
+      <Snippet name="FileUpload" shortcut=".FileUpload" description="">.FileUpload
+{
+$tab$$end$
+}
+</Snippet>
+      <Snippet name="FlashPlayer" shortcut=".FlashPlayer" description="">.FlashPlayer
+{
+$tab$$end$
+}
+</Snippet>
+      <Snippet name="Grid" shortcut=".Grid" description="">.Grid
+{
+$tab$$end$
+}
+</Snippet>
+      <Snippet name="GroupBox" shortcut=".GroupBox" description="">.GroupBox
+{
+$tab$$end$
+}
+</Snippet>
+      <Snippet name="ImageViewer" shortcut=".ImageViewer" description="">.ImageViewer
+{
+$tab$$end$
+}
+</Snippet>
+      <Snippet name="ListBox" shortcut=".ListBox" description="">.ListBox
+{
+$tab$$end$
+}
+</Snippet>
+      <Snippet name="Menu" shortcut=".Menu" description="">.FlashPlayer
+{
+$tab$$end$
+}
+</Snippet>
+      <Snippet name="Radio" shortcut=".Radio" description="">.Radio
+{
+$tab$$end$
+}
+</Snippet>
+    </Group>
+    <Group name="Status">
+      <Snippet name="deactivate" shortcut="deactivate" description="">[status=deactivate]</Snippet>
+      <Snippet name="disabled" shortcut="disabled" description="">[status=disabled]</Snippet>
+      <Snippet name="focused" shortcut="focused" description="">[status=focused]</Snippet>
+      <Snippet name="mouseover" shortcut="mouseover" description="">[status=mouseover]</Snippet>
+      <Snippet name="readonly" shortcut="readonly" description="">[status=readonly]</Snippet>
+    </Group>
+    <Snippet name="/*" shortcut="" description="">/***** $end$ *****/
+</Snippet>
+    <Snippet name="/**" shortcut="" description="">/************************************************************************
+ * $end$
+ ************************************************************************/
+</Snippet>
+    <Snippet name="File header" shortcut="" description="">/*******************************************************
+  PROJECT NAME : $end$
+  CREATION DATES : $YEAR$.$MONTH$.$DAY$
+  DRAFTER :
+  DISTRIBUTION DATE :
+  AMENDER :
+  MODIIFICATION DATES :
+*******************************************************/
+</Snippet>
+  </Xcss>
+</Snippets>

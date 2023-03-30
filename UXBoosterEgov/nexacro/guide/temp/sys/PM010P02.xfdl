@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="PM010P02" width="380" height="502" titletext="프로젝트조회" onload="Form_onload" background="#ffffff">
+    <Layouts>
+      <Layout height="502" mobileorientation="landscape" width="380">
+        <Div id="divSearch" taborder="5" text="" left="20" top="45" height="43" cssclass="div_WF_searchBox01" right="20">
+          <Layouts>
+            <Layout>
+              <Static id="staName" taborder="0" text="프로젝트" left="20" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="edtCode" taborder="1" left="staName:10" top="10" height="21" onkeyup="divSearch_edtCode_onkeyup" right="7"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnShowHide" taborder="6" left="42.11%" top="divSearch:0" width="60" height="10" cssclass="btn_WF_fold01" onclick="btnShowHide_onclick"/>
+        <Div id="divDetail" taborder="8" left="20" top="btnShowHide:20" right="20" bottom="63" text="">
+          <Layouts>
+            <Layout>
+              <Grid id="grdList" taborder="0" left="0" top="26" binddataset="dsList" autofittype="col" right="0" oncelldblclick="divSearch_grdList_oncelldblclick" bottom="0">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="102"/>
+                      <Column size="255"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="프로젝트코드"/>
+                      <Cell col="1" text="프로젝트명"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:CODE" textAlign="center"/>
+                      <Cell col="1" text="bind:NAME" textAlign="left"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="Static24" taborder="1" text="프로젝트 목록" left="0" top="0" height="21" cssclass="sta_WF_title02" right="0"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static01_00" taborder="0" text="H20" left="0" height="20" right="0" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" top="0"/>
+        <Static id="Static02_00_00" taborder="1" text="W&#13;&#10;20" background="#fd9da0" opacity="0.5" textAlign="center" top="0" bottom="0" visible="false" right="0" width="20"/>
+        <Static id="Static02_00" taborder="2" text="W&#13;&#10;20" background="#fd9da0" opacity="0.5" textAlign="center" width="20" top="0" bottom="0" visible="false" left="0"/>
+        <Static id="Static01" taborder="3" text="H20" left="0" height="20" bottom="0" right="0" background="#fd9da0" opacity="0.5" textAlign="center" visible="false"/>
+        <Static id="Static01_01" taborder="4" text="" left="0" height="20" right="0" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" top="439"/>
+        <Button id="btnSearch" taborder="7" text="조회" top="20" height="21" onclick="btnSearch_onclick" right="20" width="46" cssclass="btn_WF_search03"/>
+        <Button id="btnCancle" taborder="10" height="23" cssclass="btn_WF_cancel01" text="닫기" right="20" width="57" onclick="btnCancle_onclick" top="divDetail:20"/>
+        <Button id="btnEnter" taborder="9" height="23" cssclass="btn_WF_check01" text="확인" right="btnCancle:3" width="57" onclick="btnEnter_onclick" top="divDetail:20"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsList">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256" description="프로젝트코드"/>
+          <Column id="NAME" type="STRING" size="256" description="프로젝트명"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  그룹추가
+*
+*  @MenuPath    프로젝트관리 > 프로젝트 검색 팝업
+*  @FileName    PM010P02.xfdl 
+*  @Creator     정해원
+*  @CreateDate  2020.05.22
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2020.05.22      정해원             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.Form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	this.ProgId="GM00000115";
+    this.ProgNm="GM00000115";
+	
+    if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+    {    
+        this.fnInit();
+    }
+};
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "select";
+    this.dsList.clearData();
+	
+	take.tranSelect(this, sTranId, "ProjectManagement.projectInfoCode", "dsSearch", "dsList", "", "fnCallback");
+};
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+// 조회버튼 클릭 이벤트
+this.btnSearch_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    this.fnSearch();
+};
+
+//확인버튼 클릭 이벤트
+this.btnEnter_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    this.fnSendData();
+};
+
+// 그리드 더블버튼 클릭 이벤트
+this.divSearch_grdList_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	this.fnSendData();
+};
+
+// Enter 값 처리
+this.divSearch_edtCode_onkeyup = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+	if (e.keycode == 13)
+	{
+		this.fnSearch();
+	}
+};
+
+// 닫기 버튼
+this.btnCancle_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.close();
+};
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnInit : 초기화 함수
+ * @param  {String} N/A 
+ * @example this.fnInit();
+ */
+this.fnInit = function()
+{
+	if(!take.isEmpty(this.getOwnerFrame().argInSearchText)){
+		this.divSearch.form.edtCode.set_value(this.getOwnerFrame().argInSearchText);
+		this.fnSearch('initSearch');
+	}
+};
+
+/**
+ * fnSendData : 그리드의 선택된 데이터 값 넘기기
+ * @param  {String} N/A 
+ * @example this.fnSendData();
+ */
+this.fnSendData = function()
+{
+	var dsObj = this.dsList;
+	var returnObj;
+	
+	if(dsObj.rowposition > -1){
+		returnObj = this.fnDataset2Object(dsObj, dsObj.rowposition);
+	}
+	
+	this.fnClose(this, returnObj);
+};
+
+/**
+ * fnDataset2Object : dataset 특정행을 object로 변환
+ */
+this.fnDataset2Object = function(obj, nRow)
+{
+	var objRtn	= {};
+	
+	for (var i=0; i<obj.getColCount(); i++)
+	{
+		var strColId	 = obj.getColID(i);
+		objRtn[strColId] = obj.getColumn(nRow, strColId);
+	}
+	return objRtn;
+};
+
+/**
+ * fnClose : 부모창으로 변수 전달
+ */
+this.fnClose = function(o, variant)
+{
+	var pThis  = o;
+	
+	if (pThis.opener && typeof variant != "string") {
+		variant = take.nvl(variant, "");
+		pThis.opener.oProjectInfo = variant;
+		pThis.close();
+	}else{
+		pThis.close(variant);
+	}
+};
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+		case "initSearch" :
+			if(this.dsList.getRowCount() == 1){
+				//this.fnSendData();
+			}
+            break;
+        case "select" :
+            break;
+        default :
+            break;
+    }        
+};
+
+
+]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="divSearch.form.edtCode" propid="value" datasetid="dsSearch" columnid="CODE"/>
+    </Bind>
+  </Form>
+</FDL>

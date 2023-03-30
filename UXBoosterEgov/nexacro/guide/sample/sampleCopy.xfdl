@@ -1,0 +1,317 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="sampleCopy" width="990" height="690" titletext="(샘플)그리드복사" onload="sampleCopy_onload">
+    <Layouts>
+      <Layout height="690" width="990">
+        <Grid id="grdClip" taborder="0" left="10" top="36" width="292" height="129" binddataset="dsExcel" takegrid="empty">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="아이템코드"/>
+                <Cell col="1" text="Column1"/>
+                <Cell col="2" text="Column2"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0" edittype="text"/>
+                <Cell col="1" text="bind:Column1" edittype="text"/>
+                <Cell col="2" text="bind:Column2" edittype="text"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="staMlGroupTitle" taborder="1" text="단순복사 takegrid = empty" left="10" top="0" height="30" width="280" cssclass="sta_WF_title02"/>
+        <Static id="staMlGroupTitle00" taborder="2" text="multirow takegrid = empty" left="349" top="0" height="30" width="292" cssclass="sta_WF_title02"/>
+        <Grid id="grdClip00" taborder="3" left="349" top="36" width="292" height="129" binddataset="dsExcel" takegrid="empty" selecttype="multirow">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="아이템코드"/>
+                <Cell col="1" text="Column1"/>
+                <Cell col="2" text="Column2"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0" edittype="text"/>
+                <Cell col="1" text="bind:Column1" edittype="text"/>
+                <Cell col="2" text="bind:Column2" edittype="text"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="staMlGroupTitle00_00" taborder="4" text="multiarea takegrid = empty" left="689" top="0" height="30" width="286" cssclass="sta_WF_title02"/>
+        <Grid id="grdClip00_00" taborder="5" left="688" top="36" width="292" height="129" binddataset="dsExcel" takegrid="empty" selecttype="multiarea">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="아이템코드"/>
+                <Cell col="1" text="Column1"/>
+                <Cell col="2" text="Column2"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0" edittype="none"/>
+                <Cell col="1" text="bind:Column1" edittype="none"/>
+                <Cell col="2" text="bind:Column2" edittype="none"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="staMlGroupTitle01" taborder="6" text="엑셀 붙여넣기 takegrid = empty (Dataset onrowsetchanged 사용)" left="10" top="420" height="30" width="450" cssclass="sta_WF_title02"/>
+        <Grid id="grdClip01" taborder="7" left="10" top="458" width="460" binddataset="dsEmpty" takegrid="empty" bottom="10">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="49" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="아이템코드&#13;&#10;(수정가능)"/>
+                <Cell col="1" text="Column2&#13;&#10;(읽기전용)"/>
+                <Cell col="2" text="Column3&#13;&#10;(수정가능)"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:USER_CD" edittype="normal"/>
+                <Cell col="1" text="bind:USER_ID" edittype="readonly"/>
+                <Cell col="2" text="bind:USER_NM" edittype="normal"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="Grid00" taborder="8" left="8" top="246" width="462" height="148" binddataset="dsExcel" takegrid="empty" selecttype="multiarea" onlbuttonup="Grid00_onlbuttonup">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="아이템코드"/>
+                <Cell col="1" text="Column1"/>
+                <Cell col="2" text="Column2"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0"/>
+                <Cell col="1" text="bind:Column1"/>
+                <Cell col="2" text="bind:Column2"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="staMlGroupTitle00_00_00" taborder="9" text="multiarea takegrid = empty + transaction (Grid.onlbuttonup 사용)" left="8" top="214" height="30" width="450" cssclass="sta_WF_title02"/>
+        <Grid id="Grid01" taborder="10" left="480" top="247" width="500" height="147" binddataset="dsMat">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="30" band="head"/>
+                <Row size="32"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="USER_CD"/>
+                <Cell col="1" text="USER_ID"/>
+                <Cell col="2" text="USER_NM"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:USER_CD"/>
+                <Cell col="1" text="bind:USER_ID"/>
+                <Cell col="2" text="bind:USER_NM"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static00" taborder="11" text="take.grid 에러 발생&#13;&#10;붙혀넣기 기능 대기" left="480" top="458" width="409" height="50" background="#dbdbdb"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsExcel">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">2107003</Col>
+            <Col id="Column1">1</Col>
+            <Col id="Column2">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">2134012</Col>
+            <Col id="Column1">2</Col>
+            <Col id="Column2">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">2147004</Col>
+            <Col id="Column1">3</Col>
+            <Col id="Column2">한글테스트</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsEmpty" onrowsetchanged="dsEmpty_onrowsetchanged">
+        <ColumnInfo>
+          <Column id="USER_CD" type="STRING" size="256"/>
+          <Column id="USER_ID" type="STRING" size="256"/>
+          <Column id="USER_NM" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsMat">
+        <ColumnInfo>
+          <Column id="USER_CD" type="STRING" size="256"/>
+          <Column id="USER_ID" type="STRING" size="256"/>
+          <Column id="USER_NM" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[this.sampleCopy_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+	{
+		//this.divDetail.form.grdMultilanguageInfo.clearEventHandler("onkeydown");
+	}
+};
+
+this.dsEmpty_onrowsetchanged = function(obj:nexacro.NormalDataset,e:nexacro.DSRowsetChangeEventInfo)
+{
+	if(obj.getRowCount() > 0){
+		this.fnSearchMatNm();
+	}
+};
+
+this.fnSearchMatNm = function(){
+
+	//UserManagement.userInfoList
+	take.tranSelect
+	(
+		this,
+		"Empty",
+		"UserManagement.userInfoList",
+		"dsEmpty",
+		"dsEmpty",
+		"",
+		"fnCallback"
+	);
+};
+
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script
+    } else {
+        //Etc Script
+    }
+
+    switch(sId)
+    {
+        case "searchMatNm" : //조회 콜백
+			//this.alert("엑셀 검증 완료");
+            break;
+		case "Empty" : //조회 콜백
+			//this.alert("조회 완료");
+            break;
+    }
+};
+
+this.dsExcel_onrowposchanged = function(obj:nexacro.NormalDataset,e:nexacro.DSRowPosChangeEventInfo)
+{
+	trace('dsExcel_onrowposchanged');
+	this.fnSearchMatNm();
+};
+
+this.fvFnChanged = null;
+this.grdClip00_00_ondrag = function(obj:nexacro.Grid,e:nexacro.GridDragEventInfo)
+{
+	trace('drag true');
+	this.dsExcel.set_enableevent(false);
+	trace('drag ======>' + this.dsExcel.enableevent);
+	
+	return true;
+};
+
+this.grdClip00_00_ondrop = function(obj:nexacro.Grid,e:nexacro.GridDragEventInfo)
+{
+	trace('drop');
+	this.dsExcel.set_enableevent(true);
+	trace('drop ======>' + this.dsExcel.enableevent);
+	
+	return true;
+};
+
+this.grdClip00_00_00_onlbuttonup = function(obj:nexacro.Grid,e:nexacro.GridMouseEventInfo)
+{
+	this.fnSearchMatNm();
+};
+
+this.Grid00_onlbuttonup = function(obj:nexacro.Grid,e:nexacro.GridMouseEventInfo)
+{
+	this.fnSearchMat();
+};
+
+this.fnSearchMat = function(){
+	take.tranSelect
+	(
+		this,
+		"Empty",
+		"UserManagement.userInfoList",
+		"",
+		"dsMat",
+		"",
+		"fnCallback"
+	);
+};
+]]></Script>
+  </Form>
+</FDL>

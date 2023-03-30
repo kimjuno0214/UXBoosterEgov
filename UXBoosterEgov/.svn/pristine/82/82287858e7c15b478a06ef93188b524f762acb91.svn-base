@@ -1,0 +1,517 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="PL020S01" width="1239" height="625" background="#ffffff" onload="Form_onload" titletext="계획_품목관리">
+    <Layouts>
+      <Layout>
+        <Static id="staProgDetailT00_00" taborder="0" text="품목 목록" left="0" top="10" height="21" cssclass="sta_WF_title02" width="500" onclick="btnExcelUpload_onclick"/>
+        <Static id="Static24" taborder="1" text="20" left="0" height="10" background="rgba(255,0,0,0.4)" visible="false" right="0" textAlign="center" top="0"/>
+        <Static id="Static24_00" taborder="2" text="20" left="0" height="10" background="rgba(255,0,0,0.4)" visible="false" right="0" textAlign="center" bottom="0"/>
+        <Button id="btnAddGds" taborder="3" text="  품목추가  " top="10" height="21" cssclass="btn_WF_Custom" fittocontents="width" visible="true" right="0" width="105" onclick="btnAddGds_onclick"/>
+        <Grid id="gridGds" taborder="4" left="0" top="staProgDetailT00_00:5" autofittype="none" bottom="10" right="0" selecttype="row" selectscrollmode="default" binddataset="dsGds" oncellclick="gridGds_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="120"/>
+                <Column size="200"/>
+                <Column size="50"/>
+                <Column size="200"/>
+                <Column size="40"/>
+                <Column size="50"/>
+                <Column size="50"/>
+                <Column size="50"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+                <Column size="0"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="24" band="head"/>
+                <Row size="24" band="head"/>
+                <Row size="30"/>
+                <Row size="24" band="summ"/>
+              </Rows>
+              <Band id="head">
+                <Cell rowspan="3" text="인증종류"/>
+                <Cell col="1" rowspan="3" text="폼목명"/>
+                <Cell col="2" rowspan="3" text="품목&#13;&#10;계획&#13;&#10;수량"/>
+                <Cell col="3" rowspan="3" text="세부품목명"/>
+                <Cell col="4" rowspan="3" text="기관&#13;&#10;검토" autosizecol="none"/>
+                <Cell col="5" rowspan="2" colspan="3" text="수량"/>
+                <Cell col="8" colspan="24" text="시험기관"/>
+                <Cell row="1" col="8" colspan="2" text="KCL"/>
+                <Cell row="1" col="10" colspan="2" text="KTR"/>
+                <Cell row="1" col="12" colspan="2" text="KTC"/>
+                <Cell row="1" col="14" colspan="2" text="KATRI"/>
+                <Cell row="1" col="16" colspan="2" text="FITI"/>
+                <Cell row="1" col="18" colspan="2" text="KOTITI"/>
+                <Cell row="1" col="20" colspan="2" text="KTL"/>
+                <Cell row="1" col="22" colspan="2" text="INST_1"/>
+                <Cell row="1" col="24" colspan="2" text="기관2"/>
+                <Cell row="1" col="26" colspan="2" text="기관3"/>
+                <Cell row="1" col="28" colspan="2" text="기관4"/>
+                <Cell row="1" col="30" colspan="2" text="기관5"/>
+                <Cell row="2" col="5" text="목표"/>
+                <Cell row="2" col="6" text="가능"/>
+                <Cell row="2" col="7" text="계획"/>
+                <Cell row="2" col="8" text="가능"/>
+                <Cell row="2" col="9" text="계획"/>
+                <Cell row="2" col="10" text="가능"/>
+                <Cell row="2" col="11" text="계획"/>
+                <Cell row="2" col="12" text="가능"/>
+                <Cell row="2" col="13" text="계획"/>
+                <Cell row="2" col="14" text="가능"/>
+                <Cell row="2" col="15" text="계획"/>
+                <Cell row="2" col="16" text="가능"/>
+                <Cell row="2" col="17" text="계획"/>
+                <Cell row="2" col="18" text="가능"/>
+                <Cell row="2" col="19" text="계획"/>
+                <Cell row="2" col="20" text="가능"/>
+                <Cell row="2" col="21" text="계획"/>
+                <Cell row="2" col="22" text="가능"/>
+                <Cell row="2" col="23" text="계획"/>
+                <Cell row="2" col="24" text="가능"/>
+                <Cell row="2" col="25" text="계획"/>
+                <Cell row="2" col="26" text="가능"/>
+                <Cell row="2" col="27" text="계획"/>
+                <Cell row="2" col="28" text="가능"/>
+                <Cell row="2" col="29" text="계획"/>
+                <Cell row="2" col="30" text="가능"/>
+                <Cell row="2" col="31" text="계획"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:CERT_KND_NM" textAlign="left" suppress="1" displaytype="normal"/>
+                <Cell col="1" text="bind:GDS_NM" textAlign="left" suppress="2" displaytype="normal"/>
+                <Cell col="2" text="bind:GDS_PLAN_QY" suppress="3" textAlign="center" edittype="expr:ROW_ODR == '1'?'normal':'none'" editinputtype="number"/>
+                <Cell col="3" text="bind:DETAIL_GDS_NM" textAlign="left"/>
+                <Cell col="4" textAlign="center" displaytype="expr:POSBL_YN == 'N'?'buttoncontrol':'none'" edittype="none" cssclass="expr:POSBL_YN == 'N'?'grd_WF_note':''" autosizecol="none"/>
+                <Cell col="5" text="bind:GOAL_QY" textAlign="center" edittype="normal"/>
+                <Cell col="6" text="bind:POSBL_QY" textAlign="center" displaytype="number" edittype="none"/>
+                <Cell col="7" text="bind:PLAN_QY" textAlign="center"/>
+                <Cell col="8" text="bind:KCL_POSBL_QY" textAlign="right" displaytype="number" edittype="none"/>
+                <Cell col="9" text="bind:KCL_PLAN_QY" textAlign="right" displaytype="normal" edittype="expr:KCL_EDIT_YN == '1'?'normal':'none'" cssclass="expr:KCL_EDIT_YN == '1'?'grd_WF_sky':''"/>
+                <Cell col="10" text="bind:KTR_POSBL_QY" textAlign="right" displaytype="number" edittype="none"/>
+                <Cell col="11" text="bind:KTR_PLAN_QY" textAlign="right" displaytype="normal" edittype="expr:KTR_EDIT_YN == '1'?'normal':'none'" cssclass="expr:KTR_EDIT_YN == '1'?'grd_WF_sky':''"/>
+                <Cell col="12" text="bind:KTC_POSBL_QY" textAlign="right" displaytype="number" edittype="none"/>
+                <Cell col="13" text="bind:KTC_PLAN_QY" textAlign="right" displaytype="normal" edittype="expr:KTC_EDIT_YN == '1'?'normal':'none'" cssclass="expr:KTC_EDIT_YN == '1'?'grd_WF_sky':''"/>
+                <Cell col="14" text="bind:KATRI_POSBL_QY" textAlign="right" displaytype="number" edittype="none"/>
+                <Cell col="15" text="bind:KATRI_PLAN_QY" textAlign="right" displaytype="normal" edittype="expr:KATRI_EDIT_YN == '1'?'normal':'none'" cssclass="expr:KATRI_EDIT_YN == '1'?'grd_WF_sky':''"/>
+                <Cell col="16" text="bind:FITI_POSBL_QY" textAlign="right" displaytype="number" edittype="none"/>
+                <Cell col="17" text="bind:FITI_PLAN_QY" textAlign="right" displaytype="normal" edittype="expr:FITI_EDIT_YN == '1'?'normal':'none'" cssclass="expr:FITI_EDIT_YN == '1'?'grd_WF_sky':''"/>
+                <Cell col="18" text="bind:KOTITI_POSBL_QY" textAlign="right" displaytype="number" edittype="none"/>
+                <Cell col="19" text="bind:KOTITI_PLAN_QY" textAlign="right" displaytype="normal" edittype="expr:KOTITI_EDIT_YN == '1'?'normal':'none'" cssclass="expr:KOTITI_EDIT_YN == '1'?'grd_WF_sky':''"/>
+                <Cell col="20" text="bind:KTL_POSBL_QY" textAlign="right" displaytype="number" edittype="none"/>
+                <Cell col="21" text="bind:KTL_PLAN_QY" textAlign="right" displaytype="normal" edittype="expr:KTL_EDIT_YN == '1'?'normal':'none'" cssclass="expr:KTL_EDIT_YN == '1'?'grd_WF_sky':''"/>
+                <Cell col="22" text="bind:INST_1_POSBL_QY" textAlign="right" displaytype="number" edittype="none"/>
+                <Cell col="23" text="bind:INST_1_PLAN_QY" textAlign="right" displaytype="normal" edittype="expr:INST_1_EDIT_YN == '1'?'normal':'none'" cssclass="expr:INST_1_EDIT_YN == '1'?'grd_WF_sky':''"/>
+                <Cell col="24" text="bind:INST_2_POSBL_QY" textAlign="right" displaytype="number" edittype="none"/>
+                <Cell col="25" text="bind:INST_2_PLAN_QY" textAlign="right" displaytype="normal" edittype="expr:INST_2_EDIT_YN == '1'?'normal':'none'" cssclass="expr:INST_2_EDIT_YN == '1'?'grd_WF_sky':''"/>
+                <Cell col="26" text="bind:INST_3_POSBL_QY" textAlign="right" displaytype="number" edittype="none"/>
+                <Cell col="27" text="bind:INST_3_PLAN_QY" textAlign="right" displaytype="normal" edittype="expr:INST_3_EDIT_YN == '1'?'normal':'none'" cssclass="expr:INST_3_EDIT_YN == '1'?'grd_WF_sky':''"/>
+                <Cell col="28" text="bind:INST_4_POSBL_QY" textAlign="right" displaytype="number" edittype="none"/>
+                <Cell col="29" text="bind:INST_4_PLAN_QY" textAlign="right" displaytype="normal" edittype="expr:INST_4_EDIT_YN == '1'?'normal':'none'" cssclass="expr:INST_4_EDIT_YN == '1'?'grd_WF_sky':''"/>
+                <Cell col="30" text="bind:INST_5_POSBL_QY" textAlign="right" displaytype="number" edittype="none"/>
+                <Cell col="31" text="bind:INST_5_PLAN_QY" textAlign="right" displaytype="normal" edittype="expr:INST_5_EDIT_YN == '1'?'normal':'none'" cssclass="expr:INST_5_EDIT_YN == '1'?'grd_WF_sky':''"/>
+              </Band>
+              <Band id="summary">
+                <Cell colspan="2"/>
+                <Cell col="2" text="expr:dataset.getSum(&quot;GOAL_QY&quot;)"/>
+                <Cell col="3"/>
+                <Cell col="4"/>
+                <Cell col="5" text="expr:dataset.getSum(&quot;GOAL_QY&quot;)"/>
+                <Cell col="6" text="expr:dataset.getSum(&quot;POSBL_QY&quot;)"/>
+                <Cell col="7" text="expr:dataset.getSum(&quot;PLAN_QY&quot;)"/>
+                <Cell col="8" text="expr:dataset.getSum(&quot;KCL_POSBL_QY&quot;)"/>
+                <Cell col="9" text="expr:dataset.getSum(&quot;KCL_PLAN_QY&quot;)"/>
+                <Cell col="10" text="expr:dataset.getSum(&quot;KTR_POSBL_QY&quot;)"/>
+                <Cell col="11" text="expr:dataset.getSum(&quot;KTR_PLAN_QY&quot;)"/>
+                <Cell col="12" text="expr:dataset.getSum(&quot;KTC_POSBL_QY&quot;)"/>
+                <Cell col="13" text="expr:dataset.getSum(&quot;KTC_PLAN_QY&quot;)"/>
+                <Cell col="14" text="expr:dataset.getSum(&quot;KATRI_POSBL_QY&quot;)"/>
+                <Cell col="15" text="expr:dataset.getSum(&quot;KATRI_PLAN_QY&quot;)"/>
+                <Cell col="16" text="expr:dataset.getSum(&quot;FITI_POSBL_QY&quot;)"/>
+                <Cell col="17" text="expr:dataset.getSum(&quot;FITI_PLAN_QY&quot;)"/>
+                <Cell col="18" text="expr:dataset.getSum(&quot;KOTITI_POSBL_QY&quot;)"/>
+                <Cell col="19" text="expr:dataset.getSum(&quot;KOTITI_POSBL_QY&quot;)"/>
+                <Cell col="20" text="expr:dataset.getSum(&quot;KOTITI_PLAN_QY&quot;)"/>
+                <Cell col="21"/>
+                <Cell col="22" text="expr:dataset.getSum(&quot;INST_1_POSBL_QY&quot;)"/>
+                <Cell col="23" text="expr:dataset.getSum(&quot;INST_1_PLAN_QY&quot;)"/>
+                <Cell col="24" text="expr:dataset.getSum(&quot;INST_2_POSBL_QY&quot;)"/>
+                <Cell col="25" text="expr:dataset.getSum(&quot;INST_2_PLAN_QY&quot;)"/>
+                <Cell col="26" text="expr:dataset.getSum(&quot;INST_3_POSBL_QY&quot;)"/>
+                <Cell col="27" text="expr:dataset.getSum(&quot;INST_3_PLAN_QY&quot;)"/>
+                <Cell col="28" text="expr:dataset.getSum(&quot;INST_4_POSBL_QY&quot;)"/>
+                <Cell col="29" text="expr:dataset.getSum(&quot;INST_4_PLAN_QY&quot;)"/>
+                <Cell col="30" text="expr:dataset.getSum(&quot;INST_5_POSBL_QY&quot;)"/>
+                <Cell col="31" text="expr:dataset.getSum(&quot;INST_5_PLAN_QY&quot;)"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="btnSetPlanQy" taborder="5" text="  계획수량반영  " top="10" height="21" cssclass="btn_WF_Custom" fittocontents="width" visible="true" right="btnAddGds:3" width="105" onclick="btnAddGds_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsGds" oncolumnchanged="dsGds_oncolumnchanged"/>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="ODR_ID" type="STRING" size="256" description="프로젝트 코드"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsCertKndCd">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsGdsCd">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsInstCd">
+        <ColumnInfo>
+          <Column id="TEST_INST_CD" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="TEST_INST_CD">KCL</Col>
+          </Row>
+          <Row>
+            <Col id="TEST_INST_CD">KTL</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsTestInstCd">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  안전성조사 계획 품목 관리
+*
+*  @MenuPath    안전성조사 > 안전성조사계획 > 품목
+*  @FileName    PLN010S02.xfdl 
+*  @Creator     doore
+*  @CreateDate  2023.02.07 
+*  @Version     1.0
+*  @Desction    설명 : 안전성조사 계획 품목 관리 화면
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2023.02.07      doore               최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+//this.fv_nFormVal = null;     //용도
+this.fv_objGdsUserInfo = nexacro.getApplication().gdsUserInfo;
+this.fv_sProjectCd = nexacro.getApplication().av_sProjectCd;
+this.fv_parentForm;
+this.fv_sOdrId;
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* formid_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.Form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this)) 
+   {    
+		// 공통코드 조회
+		take.tranCode(this, ["CERT_KND_CD"
+							,"GDS_CD"
+							,"TEST_INST_CD"]
+		                  , ["dsCertKndCd"
+						    ,"dsGdsCd"
+							,"dsTestInstCd"]
+						  , ["", "", ""],
+		function(sId, nErrCd, sErrMsg)
+		{
+			this.fnSetGdsInst();
+		});
+   }
+};
+
+/*********************************************************
+ * 2.1 CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script
+    } else {
+        //Etc Script
+    }
+
+    switch(sId)
+    {
+		case "SearchInstList" :
+			this.fnSetGrid();
+			break;
+        default :
+            break;
+    }
+};
+
+/*********************************************************
+* 3 필수 FUNCTION 영역 (fnSearch, fnSave, fnAdd, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function()
+{
+	this.fv_sOdrId = this.fv_parentForm.dsOdr.getColumn(this.fv_parentForm.dsOdr.rowposition, "ODR_ID");
+	var sSttusCd = this.fv_parentForm.dsOdr.getColumn(this.fv_parentForm.dsOdr.rowposition, "PROGRS_STTUS_CD");
+	
+	// 시험중 04 이후 readonly 처리
+	if(sSttusCd >= "04") this.gridGds.set_readonly(true);
+	else this.gridGds.set_readonly(false);
+	
+	this.dsGds.clearData();
+	if(!take.isEmpty(this.fv_sOdrId))
+	{
+		this.dsSearch.setColumn(0, "ODR_ID", this.fv_sOdrId);
+		
+		take.tranSelect(this, "SearchOdrGds", "safety.odrGdsSelect", "dsSearch", "dsGds", "", "fnCallback");
+	}
+};
+
+/**
+ * fnAdd : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+ * @example this.fnAddRow(sGrdId, nRow);
+ */
+this.fnAddRow = function(sGrdId, nRow)
+{
+    
+};
+
+/**
+ * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number, Array} arrnRow    deleteRow 리턴값
+ * @return {N/A} N/A
+ * @example this.fnDelRow(sGrdId, nRow); 
+ */
+this.fnDelRow = function(sGrdId, arrnRow)
+{   
+    
+};
+
+/*********************************************************
+ * 4 각 COMPONENT 별 EVENT 영역
+ ********************************************************/
+
+/* 품목추가 버튼 Click 이벤트 처리 */
+this.btnAddGds_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var sOdrId = this.fv_parentForm.dsOdr.getColumn(this.fv_parentForm.dsOdr.rowposition, "ODR_ID");
+	var sCertFldCd = this.fv_parentForm.dsOdr.getColumn(this.fv_parentForm.dsOdr.rowposition, "CERT_FLD_CD");
+	
+	var arrParam = {
+				sOdrId : sOdrId,
+				sCertFldCd : sCertFldCd
+				};
+
+	take.openPopup(this, "addSchdulCd", "biz::pln/PLN010P02.xfdl",arrParam, "resizable=true", 
+		function(){
+			this.fnSetGdsInst();
+			// 기본정보/일정, 기관검토, 시험항목 조회
+			this.fv_parentForm.fnSearchSub();
+		}
+	);
+};
+
+/*********************************************************
+* 5 사용자 FUNCTION 영역
+********************************************************/
+/* 품목시험가능 기관 조회  */
+this.fnSetGdsInst = function() 
+{
+	this.dsInstCd.clearData();
+	this.fv_sOdrId = this.fv_parentForm.dsOdr.getColumn(this.fv_parentForm.dsOdr.rowposition, "ODR_ID");
+	this.dsSearch.setColumn(0, "ODR_ID", this.fv_sOdrId);
+	take.tranSelect(this, "SearchInstList", "safety.odrGdsInstList", "dsSearch", "dsInstCd", "", "fnCallback");
+}
+
+/* 폼목 그리드 숨김 처리  */
+this.fnSetGrid = function()
+{
+	var colCnt = this.gridGds.getCellCount("head");
+	var instCnt = this.dsInstCd.rowcount;
+	var colSize = 50;
+	//header 숨김처리
+	for(var i = 0; i < this.dsTestInstCd.rowcount; i++)
+	{
+		for(var j = 0; j < colCnt; j++)
+		{
+			var strBindCol = take.getBindColName(this.gridGds, j);
+			
+			if(strBindCol != null)
+			{
+				var strPosblQy = strBindCol.split("_POSBL_QY");
+				var strPlanQy = strBindCol.split("_PLAN_QY");
+				
+				if(strPosblQy[0] == this.dsTestInstCd.getColumn(i, "CODE")) {
+					this.gridGds.setFormatColProperty(j, "size", 0);
+				}
+				if(strPlanQy[0] == this.dsTestInstCd.getColumn(i, "CODE")) {
+					this.gridGds.setFormatColProperty(j, "size", 0);
+				}
+			}
+		}
+	}
+	
+	// column size 설정
+	for(var i = 0; i < this.dsInstCd.rowcount; i++)
+	{
+		for(var j = 0; j < colCnt; j++)
+		{
+			var strBindCol = take.getBindColName(this.gridGds, j);
+			if(strBindCol != null)
+			{
+				var strPosblQy = strBindCol.split("_POSBL_QY");
+				var strPlanQy = strBindCol.split("_PLAN_QY");
+				
+				if(strPosblQy[0] == this.dsInstCd.getColumn(i, "TEST_INST_CD")) this.gridGds.setFormatColProperty(j, "size", colSize);
+				if(strPlanQy[0] == this.dsInstCd.getColumn(i, "TEST_INST_CD")) this.gridGds.setFormatColProperty(j, "size", colSize);
+				
+				if(this.dsInstCd.getColumn(i, "TEST_INST_CD") == "INST_1" && this.gridGds.getCellProperty( "head", j, "text") == "INST_1") this.gridGds.setCellProperty( "head", j, "text", this.dsInstCd.getColumn(i, "CODE_NM"));
+				if(this.dsInstCd.getColumn(i, "TEST_INST_CD") == "INST_2" && this.gridGds.getCellProperty( "head", j, "text") == "INST_2") this.gridGds.setCellProperty( "head", j, "text", this.dsInstCd.getColumn(i, "CODE_NM"));
+				if(this.dsInstCd.getColumn(i, "TEST_INST_CD") == "INST_3" && this.gridGds.getCellProperty( "head", j, "text") == "INST_3") this.gridGds.setCellProperty( "head", j, "text", this.dsInstCd.getColumn(i, "CODE_NM"));
+				if(this.dsInstCd.getColumn(i, "TEST_INST_CD") == "INST_4" && this.gridGds.getCellProperty( "head", j, "text") == "INST_4") this.gridGds.setCellProperty( "head", j, "text", this.dsInstCd.getColumn(i, "CODE_NM"));
+				if(this.dsInstCd.getColumn(i, "TEST_INST_CD") == "INST_5" && this.gridGds.getCellProperty( "head", j, "text") == "INST_5") this.gridGds.setCellProperty( "head", j, "text", this.dsInstCd.getColumn(i, "CODE_NM"));
+				
+			}
+		}
+	}
+	
+	this.fnSearch();
+}
+
+/* 데이터 변경 시 이벤트 */
+this.dsGds_oncolumnchanged = function(obj:nexacro.NormalDataset,e:nexacro.DSColChangeEventInfo)
+{
+	this.dsGds.set_enableevent("false");
+	// 품목 계획 수랸 변경 시
+	if(e.columnid == "GDS_PLAN_QY")
+	{
+		var sGdsCd = this.dsGds.getColumn(e.row, "GDS_CD");
+		var sArry = new Array();
+		for(var i = 0; i < this.dsGds.rowcount; i++)
+		{
+			if(this.dsGds.getColumn(i, "GDS_CD") == sGdsCd)
+			{
+				this.dsGds.setColumn(i, "GDS_PLAN_QY", e.newvalue);
+				sArry.push(i); 
+			}
+		}
+		var nSum = 0;
+		// 세부품목별 목표수량
+		for(var i = 0; i < sArry.length; i++)
+		{
+			var nCalValue = nexacro.ceil(e.newvalue / sArry.length, 0);
+			
+			if(i != (sArry.length - 1))
+			{
+				nSum += nCalValue;
+				this.dsGds.setColumn(sArry[i], "GOAL_QY", nCalValue);
+			}
+			else
+			{
+				this.dsGds.setColumn(sArry[i], "GOAL_QY", e.newvalue - nSum);
+			}
+		}
+	}
+	else if(e.columnid == "GOAL_QY")
+	{
+		// 목표수량 변경시 목료계획수량 변경
+		var sGdsCd = this.dsGds.getColumn(e.row, "GDS_CD");
+		var nSum = 0;
+		for(var i = 0; i < this.dsGds.rowcount; i++)
+		{
+			if(this.dsGds.getColumn(i, "GDS_CD") == sGdsCd) nSum += nexacro.toNumber(this.dsGds.getColumn(i, "GOAL_QY"));
+		}
+		
+		for(var i = 0; i < this.dsGds.rowcount; i++)
+		{
+			if(this.dsGds.getColumn(i, "GDS_CD") == sGdsCd) this.dsGds.setColumn(i, "GDS_PLAN_QY", nSum);
+		}
+	}
+	this.dsGds.set_enableevent("true");
+};
+
+/* 기관검토 조회  */
+this.gridGds_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	if(e.clickitem == "control" && e.col == 4)	// 기관검토 클릭 시
+	{
+		var sOdrId = this.dsGds.getColumn(this.dsGds.rowposition, "ODR_ID");
+		var sDetailGdsId = this.dsGds.getColumn(this.dsGds.rowposition, "DETAIL_GDS_ID");
+	
+		var arrParam = {
+					sOdrId : sOdrId,
+					sDetailGdsId : sDetailGdsId
+					};
+
+		take.openPopup(this, "searchRn", "biz::pln/PLN010P04.xfdl",arrParam, "resizable=true", 
+			function(){
+			}
+		);
+	}
+};
+]]></Script>
+  </Form>
+</FDL>

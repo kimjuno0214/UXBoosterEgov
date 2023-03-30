@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:task="http://www.springframework.org/schema/task"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+	
+	<!-- ============================================================= -->
+    <!-- Excel 용 -->
+    <!-- ============================================================= -->
+    <mvc:resources location="/export/" mapping="/export/**"/>
+
+    <!-- ============================================================= -->
+    <!-- AOP -->
+    <!-- ============================================================= -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <mvc:annotation-driven />
+    
+    <!-- component scan -->
+	<context:component-scan base-package="kr.co.company,kr.co.takeit">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+	
+	<!-- ============================================================= -->
+    <!-- Interceptor -->
+    <!-- ============================================================= -->
+	<mvc:interceptors>
+		 <mvc:interceptor>
+		 	<mvc:mapping path="/**"/>
+		 	<mvc:exclude-mapping path="/main/init.do"/>
+		 	<mvc:exclude-mapping path="/langCd.do"/>
+		 	<mvc:exclude-mapping path="/loginOnLoad.do"/>
+		 	<mvc:exclude-mapping path="/login.do"/>
+		 	<mvc:exclude-mapping path="/logout.do"/>
+		 	<mvc:exclude-mapping path="/mn/policy.do"/>
+            <mvc:exclude-mapping path="/mn/loginpolicy.do"/>
+		 	<mvc:exclude-mapping path="/mn/dupCheck.do"/>
+		 	<mvc:exclude-mapping path="/mn/userPwUpdate.do"/>
+		 	<mvc:exclude-mapping path="/mn/userJoin.do"/>
+		 	<mvc:exclude-mapping path="/mn/getAuth.do"/>
+		 	<mvc:exclude-mapping path="/mn/authConfirm.do"/>
+		 	<mvc:exclude-mapping path="report.do"/>
+
+		 	<mvc:exclude-mapping path="/error/*exception.do"/>
+            <mvc:exclude-mapping path="/file/*.do"/>
+
+		 	<mvc:exclude-mapping path="/emailTest.do"/>
+
+		 	<mvc:exclude-mapping path="/srcmaker/*.do"/>
+		 	<mvc:exclude-mapping path="/sampleJsp.do"/>
+		 	<mvc:exclude-mapping path="/mapperSave.do"/>
+
+		 	<bean class="kr.co.company.util.SessionInterceptor"></bean>
+		 </mvc:interceptor>
+	</mvc:interceptors>
+	
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" />
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+        <property name="interceptors">
+            <list>
+                <ref bean="localeChangeInterceptor" />
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
+    <!-- 쿠키를 이용한 Locale 이용시 <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver"/> -->
+    <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+        <property name="paramName" value="language" />
+    </bean>
+
+    <bean class="org.springframework.web.servlet.view.UrlBasedViewResolver" p:order="1"
+	    p:viewClass="org.springframework.web.servlet.view.JstlView"
+	    p:prefix="/WEB-INF/jsp" p:suffix=".jsp"/>
+	    
+	<!--
+    Multipart Resolver : 최대 100MB 까지 업로드가 가능하도록 설정
+    TOMCAT의 maxSwallowSize가 default 2MB 까지여서 아래설정을 하더라도 ERR_CONNECTION_RESET이 발생 할 수 있음
+    maxSwallowSize="-1" 설정할 경우 이상 없음
+    -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="104857600" />
+        <property name="maxInMemorySize" value="104857600" />
+    </bean>
+</beans>

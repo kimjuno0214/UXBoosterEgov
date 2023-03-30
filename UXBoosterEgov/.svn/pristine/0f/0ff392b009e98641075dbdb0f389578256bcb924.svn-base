@@ -1,0 +1,435 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="frmLoginP01" width="520" height="364" titletext="로그인 아이디/비밀번호찾기 팝업" background="white" onload="Form_onload">
+    <Layouts>
+      <Layout height="364" width="520">
+        <Div id="divId" taborder="3" left="10" top="36" cssclass="dvi_WF_tabBox01" text="" bottom="10" width="500">
+          <Layouts>
+            <Layout>
+              <Static id="Static58" taborder="7" left="129" top="40" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Static id="Static59" taborder="8" left="129" top="70" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Static id="Static61" taborder="9" left="129" top="99" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Static id="Static63" taborder="4" text="이름" left="10" top="40" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+              <Edit id="edtEmail" taborder="1" left="137" top="75" height="21" right="142"/>
+              <Static id="Static65" taborder="5" text="이메일" left="10" top="70" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+              <Static id="staUserId" taborder="14" left="129" top="185" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Static id="Static70" taborder="13" text="아이디" left="10" top="185" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Edit id="edtUserNm" taborder="0" left="137" top="45" height="21" right="142"/>
+              <Edit id="edtAuth" taborder="2" left="137" top="104" height="21" right="142" enable="false"/>
+              <Button id="btnGetNum" taborder="10" text="인증코드받기" top="73" width="86" height="23" cssclass="btn_WF_basic02" left="edtEmail:7" onclick="btnGetNum_onclick"/>
+              <Static id="Static18" taborder="12" text="아이디 검색결과" left="10" top="155" height="30" width="450" cssclass="sta_WF_title02"/>
+              <Button id="btnNumCheck" taborder="11" text="인증코드확인" top="103" width="86" height="23" cssclass="btn_WF_basic02" left="edtAuth:7" onclick="btnNumCheck_onclick"/>
+              <Button id="btnLogin" taborder="15" text="로그인" top="221" width="86" height="23" cssclass="btn_WF_basic02" left="112" onclick="btnExit_onclick"/>
+              <Static id="Static02" taborder="6" text="인증번호" left="10" top="99" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+              <Button id="btnFindPw" taborder="16" text="비밀번호찾기" top="221" width="86" height="23" cssclass="btn_WF_basic02" left="btnLogin:7" onclick="divId_btnFindPw_onclick"/>
+              <Button id="btnExit" taborder="26" text="취소" top="221" width="86" height="23" cssclass="btn_WF_basic02" left="btnFindPw:7" onclick="btnExit_onclick"/>
+              <Static id="Static05" taborder="3" text="사용자 정보" left="10" top="10" height="20" width="440" cssclass="sta_WF_title02"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divPw" taborder="28" left="520" top="36" cssclass="dvi_WF_tabBox01" text="" bottom="10" visible="false" width="500">
+          <Layouts>
+            <Layout>
+              <Static id="Static58" taborder="10" left="129" top="70" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Static id="Static59" taborder="12" left="129" top="100" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Static id="Static61" taborder="15" left="129" top="129" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Static id="Static63" taborder="9" text="이름" left="10" top="70" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+              <Edit id="edtEmail" taborder="2" left="137" top="105" height="21" right="142"/>
+              <Static id="Static65" taborder="11" text="이메일" left="10" top="100" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+              <Static id="Static69" taborder="19" left="129" top="215" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Static id="Static70" taborder="18" text="비밀번호 변경" left="10" top="215" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+              <Edit id="edtUserNm" taborder="1" left="137" top="75" height="21" right="142"/>
+              <Edit id="edtAuth" taborder="3" left="137" top="134" height="21" right="142" enable="false"/>
+              <Button id="btnGetNum" taborder="13" text="인증코드받기" top="103" width="86" height="23" cssclass="btn_WF_basic02" left="363" onclick="btnGetNum_onclick"/>
+              <Static id="Static18" taborder="17" text="비밀번호 변경" left="10" top="185" height="30" width="450" cssclass="sta_WF_title02"/>
+              <Button id="btnNumCheck" taborder="16" text="인증코드확인" top="133" width="86" height="23" cssclass="btn_WF_basic02" left="363" onclick="btnNumCheck_onclick"/>
+              <Static id="Static02" taborder="14" text="인증번호" left="10" top="129" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+              <Button id="btnChgPw" taborder="22" text="비밀번호변경" width="86" height="23" cssclass="btn_WF_basic02" left="159" top="281" onclick="divPw_btnChgPw_onclick"/>
+              <Button id="btnExit" taborder="46" text="취소" top="281" width="86" height="23" cssclass="btn_WF_basic02" left="btnChgPw:7" onclick="btnExit_onclick"/>
+              <Static id="Static00" taborder="7" text="아이디" left="10" top="40" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+              <Static id="Static03" taborder="8" left="129" top="40" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Edit id="edtUserId" taborder="0" left="137" top="45" height="21" right="142"/>
+              <Edit id="edtNewPw" taborder="4" left="137" top="220" height="21" right="142" password="true"/>
+              <Static id="Static04" taborder="21" left="129" top="245" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Edit id="edtPwCheck" taborder="5" left="137" top="250" height="21" right="142" password="true"/>
+              <Static id="Static05" taborder="20" text="비밀번호 확인" left="10" top="245" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+              <Static id="Static06" taborder="6" text="사용자 정보" left="10" top="10" height="20" width="440" cssclass="sta_WF_title02"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static01" taborder="0" text="사용자 정보" left="10" top="10" height="20" width="440" cssclass="sta_WF_title02"/>
+        <Button id="btnFindId" taborder="1" text="아이디찾기" left="10" top="10" width="100" height="27" cssclass="btn_WF_tab02" onclick="btnFindId_onclick"/>
+        <Button id="btnFindPw" taborder="2" text="비밀번호찾기" left="112" top="10" width="110" height="27" cssclass="btn_WF_tab01" onclick="btnFindPw_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/**
+*  아이디/비밀번호찾기
+*
+*  @MenuPath    메인로그인 > 아이디/비밀번호찾기
+*  @FileName    MN010PT01.xfdl 
+*  @Creator     전영찬
+*  @CreateDate  2019.10.21
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2019.10.21      전영찬             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+//this.fv_nFormVal = null;     //용도
+this.fv_sAuthChk = "N";     //인증번호받기 확인
+this.fv_sAuthYn = "N";     //인증번호확인 완료
+this.fv_nSystemId = 'S000000001';     //시스템ID
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.Form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+	{    
+		//Script  
+	}
+};
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+this.fnSave = function(sTranId)
+{    
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Modify";
+    
+    var sParam = "sUserId='" + this.divPw.form.edtUserId.value + "' sUserPw='" + this.divPw.form.edtPwCheck.value 
+                + "' sUserNm='" + this.divPw.form.edtUserNm.value + "' sUserEmail='" + this.divPw.form.edtEmail.value + "' PW_CHG_YN='" + "Y" + "'";
+    
+    take.transaction(this, sTranId, "SVC_LOC::mn/userPwUpdate.do", "", "", sParam, "fnCallback");
+}
+
+/**
+ * fnTran : 트랜잭션
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @example this.fnTran("ID");
+ */
+this.fnTran = function(sTranId)
+{   
+    if (take.nvl(sTranId, "")=="") sTranId = "getAuth";
+    
+    var sParam;
+    if (this.divId.visible) {
+        if(sTranId == "getAuth") {
+            sParam = "sAuthType='" + "ID" + "' sUserNm='" + this.divId.form.edtUserNm.value + "' sUserEmail='" + this.divId.form.edtEmail.value + "'";
+        } else {
+            sParam = "sAuthType='" + "ID" + "' sUserNm='" + this.divId.form.edtUserNm.value 
+                    + "' sUserEmail='" + this.divId.form.edtEmail.value + "' sAuthVal='" + this.divId.form.edtAuth.value + "'";
+        }
+    } else {
+        if(sTranId == "getAuth") {
+            sParam = "sAuthType='" + "PW" + "' sUserId='" + this.divPw.form.edtUserId.value 
+                    + "' sUserNm='" + this.divPw.form.edtUserNm.value + "' sUserEmail='" + this.divPw.form.edtEmail.value + "'";
+        } else {
+            sParam = "sAuthType='" + "PW" + "' sUserId='" + this.divPw.form.edtUserId.value + "' sUserNm='" + this.divPw.form.edtUserNm.value 
+                    + "' sUserEmail='" + this.divPw.form.edtEmail.value + "' sAuthVal='" + this.divPw.form.edtAuth.value + "'";
+        }
+    }
+    
+    switch(sTranId)
+    {
+        case "getAuth" :        //인증번호 받기 확인
+            take.transaction(this, sTranId, "SVC_LOC::mn/getAuth.do", "", "", sParam, "fnCallback");
+            break;
+        case "authConfirm" :    //인증번호 확인
+            take.transaction(this, sTranId, "SVC_LOC::mn/authConfirm.do", "", "", sParam, "fnCallback");
+            break;
+        default :
+            break;
+    }
+}
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+//상단 ID찾기 버튼 클릭이벤트
+this.btnFindId_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.btnFindId.set_cssclass("btn_WF_tab02");
+    this.btnFindPw.set_cssclass("btn_WF_tab01");
+    
+    this.divId.set_visible(true);
+    this.divPw.set_visible(false);
+    
+    this.divId.set_left(10);
+    this.divPw.set_left(500);
+    
+    this.fv_sAuthChk = "N";
+    this.fv_sAuthYn = "N";
+};
+
+//상단 PW찾기 버튼 클릭이벤트
+this.btnFindPw_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.btnFindId.set_cssclass("btn_WF_tab01");
+    this.btnFindPw.set_cssclass("btn_WF_tab02");
+    
+    this.divId.set_visible(false);
+    this.divPw.set_visible(true);
+    
+    this.divId.set_left(500);
+    this.divPw.set_left(10);
+    
+    this.fv_sAuthChk = "N";
+    this.fv_sAuthYn = "N";
+};
+
+//하단 로그인/취소 버튼 클릭이벤트
+this.btnExit_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var sBtnGbn = obj.name.substr(3);
+    
+    if (sBtnGbn == "Login") {
+    	var sRtn = this.divId.form.staUserId.text;
+        this.close(sRtn);
+    } else {
+        this.close();
+    }
+};
+
+//Id탭 비밀번호찾기 버튼 클릭이벤트
+this.divId_btnFindPw_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	if(this.fnCheckForm()) {
+        this.btnFindId.set_cssclass("btn_WF_tab01");
+        this.btnFindPw.set_cssclass("btn_WF_tab02");
+        
+        this.divId.set_visible(false);
+        this.divPw.set_visible(true);
+        
+        this.divId.set_left(500);
+        this.divPw.set_left(10);
+        
+        this.fv_sAuthChk = "N";
+        this.fv_sAuthYn = "N";
+        
+        this.divPw.form.edtUserId.set_value(this.divId.form.staUserId.text);
+        this.divPw.form.edtUserNm.set_value(this.divId.form.edtUserNm.value);
+        this.divPw.form.edtEmail.set_value(this.divId.form.edtEmail.value);
+    }
+};
+
+//인증번호받기 버튼 클릭 이벤트
+this.btnGetNum_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var bDivVisible = this.divId.visible;
+    var objDivId, objDivPw;
+    var sUserId, sUserNm, sEmail;
+    
+    //this.divId.form.edtEmail.value
+    
+    if (bDivVisible) {
+        objDivId    = this.divId.form;
+        sUserNm     = take.nvl(objDivId.edtUserNm.value, "");
+        sEmail      = take.nvl(objDivId.edtEmail.value, "");
+    } else {
+    	objDivPw    = this.divPw.form;
+        sUserId     = take.nvl(objDivPw.edtUserId.value, "");
+        sUserNm     = take.nvl(objDivPw.edtUserNm.value, "");
+        sEmail      = take.nvl(objDivPw.edtEmail.value, "");
+    }
+    
+    if(!bDivVisible && sUserId == ""){
+        alert("ID를 작성해주세요.");
+        return false;
+    }
+    
+    if(sUserNm == ""){
+        alert("이름을 작성해주세요.");
+        return false;
+    }
+    
+    if(sEmail == ""){
+        alert("이메일을 작성해주세요.");
+        return false;
+    }
+    
+    if(!take.isEmail(sEmail)){
+        alert("이메일을 형식에 맞춰 주세요.");
+        return false;
+    }
+    
+    this.fv_sAuthChk = "Y";
+    
+    this.fnTran("getAuth");
+};
+
+// 인증번호 확인 버튼 클릭
+this.btnNumCheck_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    if(this.fv_sAuthChk != "Y") {
+        alert("인증번호받기를 먼저 진행해주세요.");
+        return;
+    }
+    var bDivId = this.divId.visible;
+    if (bDivId) {
+    	var sAuth = take.nvl(this.divId.form.edtAuth.value, "");
+    } else {
+    	var sAuth = take.nvl(this.divPw.form.edtAuth.value, "");
+    }
+    
+    if(sAuth == ""){
+        alert("인증번호를 작성해주세요.");
+        return false;
+    }
+    
+    this.fnTran("authConfirm");
+};
+
+// 비밀번호 변경 클릭
+this.divPw_btnChgPw_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	if(this.fv_sAuthYn != "Y") {
+        alert("인증번호받기를 먼저 진행해주세요.");
+        return;
+    }
+    
+    if(take.nvl(this.divPw.form.edtNewPw.value, "") == ""){
+        alert("새 비밀번호를 작성해주세요.");
+        this.divPw.form.edtNewPw.setFocus();
+        return;
+    }
+    
+    if(take.nvl(this.divPw.form.edtPwCheck.value, "") == ""){
+        alert("2차비밀번호를 작성해주세요.");
+        this.divPw.form.edtPwCheck.setFocus();
+        return;
+    }
+    
+    if (this.divPw.form.edtPwCheck.value != this.divPw.form.edtNewPw.value)
+    {
+    	alert("비밀번호를 확인해주세요.\n비밀번호가 같지않습니다.");
+        this.divPw.form.edtPwCheck.setFocus();
+        return;
+    }
+    
+    if(take.confirm(this, "question", "비밀번호 변경 하시겠습니까?")) {
+        this.fnSave("Modify");
+    }
+};
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnCheckForm : 저장전 유효성 체크
+ * @param  {String} sParam N/A
+ * @example this.fnCheckForm();
+ */
+this.fnCheckForm = function()
+{   
+    var objDivId = this.divId.form;
+    var sUserId   = take.nvl(objDivId.staUserId.text, "");
+    //var sCode   = take.nvl(objDivSearch.edtCode.text, "");
+    //this.divId.form.staID.
+    
+    //if(sUserId == ""){
+    if(sUserId == "test"){
+        alert("ID찾기를 먼저 진행해주세요.");
+        return false;
+    }
+    
+    return true;
+}
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }
+    var bDivId = this.divId.visible;
+    switch(sId)
+    {
+        case "getAuth" : //조회 콜백
+            alert("인증번호를 입력한 메일로 전송하였습니다.");
+            if (bDivId) {
+                this.divId.form.edtAuth.set_enable(true);
+                this.divId.form.edtAuth.setFocus();
+            } else {
+                this.divPw.form.edtAuth.set_enable(true);
+                this.divPw.form.edtAuth.setFocus();
+            }
+            break;
+        case "authConfirm" : //조회 콜백
+            if (bDivId) {
+                alert("인증 되었습니다.\n아이디는 '" + sErrMsg + "' 입니다.");
+                this.divId.form.staUserId.set_text(sErrMsg);
+            } else {
+                alert("인증되었습니다.\n비밀번호를 변경해주세요.");
+                this.fv_sAuthYn = "Y";
+            }
+            break;
+        case "Modify" :  //저장 콜백
+            alert("비밀번호 변경이 완료되었습니다.");
+            this.close();
+            break;
+        default :
+            break;
+    }        
+}
+]]></Script>
+    <Objects>
+      <Dataset id="dsParam" useclientlayout="true">
+        <ColumnInfo>
+          <Column id="USER_CD" size="256" type="STRING"/>
+          <Column id="USER_ID" size="256" type="STRING"/>
+          <Column id="USER_NM" size="256" type="STRING"/>
+          <Column id="USER_PW" size="256" type="STRING"/>
+          <Column id="USER_EMAIL" size="256" type="STRING"/>
+          <Column id="PW_CHG_YN" type="STRING" size="256"/>
+          <Column id="sAuthVal" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="divPw.form.edtUserId" propid="value" datasetid="dsParam" columnid="USER_ID"/>
+      <BindItem id="item1" compid="divPw.form.edtUserNm" propid="value" datasetid="dsParam" columnid="USER_NM"/>
+      <BindItem id="item2" compid="divPw.form.edtEmail" propid="value" datasetid="dsParam" columnid="USER_EMAIL"/>
+      <BindItem id="item3" compid="divPw.form.edtAuth" propid="value" datasetid="dsParam" columnid="sAuthVal"/>
+      <BindItem id="item5" compid="divPw.form.edtPwCheck" propid="value" datasetid="dsParam" columnid="USER_PW"/>
+    </Bind>
+  </Form>
+</FDL>

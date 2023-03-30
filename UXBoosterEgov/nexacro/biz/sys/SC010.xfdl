@@ -1,0 +1,1012 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="SC010" width="1040" height="659" titletext="시스템공통_시스템관리_시스템관리 Main" onload="take_onload">
+    <Layouts>
+      <Layout height="659" mobileorientation="landscape" width="1040">
+        <Static id="staSystemNmTitle" taborder="0" text="시스템 명" left="10" top="40" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="staSystemVersionTitle" taborder="1" text="Version" left="10" top="70" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="staSystemLicenseTitle" taborder="2" text="License 정보" left="10" top="100" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="Static10" taborder="3" left="128" top="40" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="Static11" taborder="4" left="128" top="70" height="31" cssclass="sta_WF_td01L" right="529"/>
+        <Static id="staSystemLicense" taborder="5" left="128" top="100" height="31" cssclass="sta_WF_td01L" right="10" text="License 정보"/>
+        <Static id="staManagerNmTitle" taborder="6" text="담당자" left="510" top="40" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Edit id="edtSystemNm" taborder="7" left="136" top="45" width="354" height="21" cssclass="edt_WF_essential"/>
+        <Edit id="edtSystemVersion" taborder="8" left="136" top="75" height="21" width="354" cssclass="edt_WF_essential"/>
+        <Static id="staDescTxtTitle" taborder="9" text="상세설명" left="10" top="130" width="120" height="94" cssclass="sta_WF_th01L"/>
+        <Static id="Static01" taborder="10" left="128" height="94" cssclass="sta_WF_td01L" right="10" top="130"/>
+        <Button id="btnManager" taborder="25" top="45" width="21" height="21" cssclass="btn_WF_search02" right="20" onclick="btnManager_onclick"/>
+        <Edit id="edtManagerNm" taborder="11" left="636" top="45" height="21" right="btnManager:3" onchanged="edtManagerNm_onchanged" cssclass="edt_WF_essential"/>
+        <Static id="staLastDeployDtTitle" taborder="12" text="최종배포일시" left="510" top="70" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="staLastDeployDt" taborder="13" left="629" top="70" height="31" cssclass="sta_WF_td01L" right="10" text="최종배포일시"/>
+        <TextArea id="txtDescTxt" taborder="14" left="138" top="135" right="20" height="85"/>
+        <Button id="btnTab02" taborder="15" text="약관등록" left="192" top="234" width="90" height="27" cssclass="btn_WF_tab01" onclick="btnTab02_onclick"/>
+        <Button id="btnTab01" taborder="16" text="이미지등록" left="101" top="234" width="90" height="27" cssclass="btn_WF_tab01" onclick="btnTab01_onclick"/>
+        <Button id="btnTab00" taborder="17" text="배포이력" left="10" top="234" width="90" height="27" cssclass="btn_WF_tab02" onclick="btnTab00_onclick"/>
+        <Div id="divTab00" taborder="18" left="10" top="261" cssclass="dvi_WF_tabBox01" bottom="10" right="10" text="divTab00">
+          <Layouts>
+            <Layout>
+              <Static id="Static17" taborder="4" text="Static03" left="798" top="28" width="220" height="3" background="red" visible="false"/>
+              <Grid id="gridSystemDeploy" taborder="0" left="10" top="31" right="10" bottom="28" autofittype="col" binddataset="dsSystemDeploy">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="50"/>
+                      <Column size="90"/>
+                      <Column size="60"/>
+                      <Column size="80"/>
+                      <Column size="500"/>
+                      <Column size="80"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="순번"/>
+                      <Cell col="1" text="배포일자"/>
+                      <Cell col="2" text="시간"/>
+                      <Cell col="3" text="구분"/>
+                      <Cell col="4" text="배포내용"/>
+                      <Cell col="5" text="배포자"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell textAlign="center" text="bind:ROWNUM"/>
+                      <Cell col="1" textAlign="center" text="bind:DEPLOY_DATE" displaytype="normal" edittype="date"/>
+                      <Cell col="2" textAlign="center" text="bind:DEPLOY_TIME" edittype="text"/>
+                      <Cell col="3" textAlign="center" displaytype="combotext" edittype="combo" combodataset="dsDeploytypeCode" combocodecol="CODE" combodatacol="NAME" text="bind:DEPLOY_TYPE"/>
+                      <Cell col="4" text="bind:DEPLOY_DESC" edittype="text"/>
+                      <Cell col="5" textAlign="center" text="bind:DEPLOY_NM" edittype="text"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Button id="btnDeploySave" taborder="1" text="저장" top="5" width="46" height="23" cssclass="btn_WF_basic01" right="10" onclick="divTab00_btnDeploySave_onclick"/>
+              <Button id="btnDeployDel" taborder="2" text="삭제" top="5" width="46" height="23" cssclass="btn_WF_basic01" right="60" onclick="divTab00_btnDeployDel_onclick"/>
+              <Button id="btnDeployAdd" taborder="3" text="추가" top="5" width="46" height="23" cssclass="btn_WF_basic01" right="110" onclick="divTab00_btnDeployAdd_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnTab03" taborder="19" text="로그인정책" left="283" top="234" width="90" height="27" cssclass="btn_WF_tab01"/>
+        <Button id="btnTab04" taborder="20" text="공통버튼단축키관리" left="374" top="234" width="140" height="27" cssclass="btn_WF_tab01" visible="false"/>
+        <Div id="divTab01" taborder="21" left="10" top="671" cssclass="dvi_WF_tabBox01" bottom="-350" right="10" text="divTab01" visible="false" enable="false">
+          <Layouts>
+            <Layout>
+              <Static id="Static05" taborder="0" left="408" cssclass="sta_WF_td01L" top="62" height="246" width="200"/>
+              <Static id="Static06" taborder="1" left="607" cssclass="sta_WF_td01L" top="62" height="246" width="200"/>
+              <Static id="Static07" taborder="2" left="806" cssclass="sta_WF_td01L" top="62" height="246" right="10"/>
+              <Button id="btnSaveSub" taborder="3" text="저장" top="5" width="46" height="23" cssclass="btn_WF_basic01" right="10" onclick="divTab01_btnSaveSub_onclick"/>
+              <Static id="Static17" taborder="4" text="Static03" left="798" width="220" height="3" background="red" visible="false" top="28"/>
+              <Static id="staLogo1" taborder="5" text="LOGIN LOGO" left="10" top="31" width="200" height="31" cssclass="sta_WF_th01Limport" textAlign="center"/>
+              <Static id="staLogo2" taborder="6" text="TOP LOGO" left="209" top="31" width="200" height="31" cssclass="sta_WF_th01Limport" textAlign="center"/>
+              <Static id="staBanner" taborder="7" text="LOGIN 배너" left="408" top="31" height="31" cssclass="sta_WF_th01L" textAlign="center" right="10"/>
+              <Static id="Static02" taborder="8" left="10" cssclass="sta_WF_td01L" top="62" width="200" height="246"/>
+              <Static id="Static04" taborder="9" left="209" cssclass="sta_WF_td01L" top="62" width="200" height="246"/>
+              <ImageViewer id="imgLogin" taborder="10" left="25" top="80" width="169" height="144" stretch="fit"/>
+              <ImageViewer id="imgTop" taborder="11" left="226" top="80" width="169" height="144" stretch="fit"/>
+              <ImageViewer id="imgBanner01" taborder="12" left="422" top="80" width="169" height="144" stretch="fit"/>
+              <ImageViewer id="imgBanner02" taborder="13" left="623" top="80" width="169" height="144" stretch="fit"/>
+              <ImageViewer id="imgBanner03" taborder="14" left="822" top="80" width="169" height="144" stretch="fit"/>
+              <Button id="btnLogoUploadSub1" taborder="15" text="업로드" top="imgLogin:55" width="69" height="23" cssclass="btn_WF_basic01" left="75" onclick="divTab01_btnLogoUploadSub1_onclick"/>
+              <Button id="btnLogoUploadSub2" taborder="16" text="업로드" top="imgTop:55" width="69" height="23" cssclass="btn_WF_basic01" left="275" onclick="divTab01_btnLogoUploadSub2_onclick"/>
+              <Button id="btnBannerUploadSub2" taborder="17" text="업로드" top="imgBanner02:55" width="69" height="23" cssclass="btn_WF_basic01" left="677" onclick="divTab01_btnBannerUploadSub2_onclick"/>
+              <Button id="btnBannerUploadSub1" taborder="18" text="업로드" top="imgBanner01:55" width="69" height="23" cssclass="btn_WF_basic01" left="474" onclick="divTab01_btnBannerUploadSub1_onclick"/>
+              <Button id="btnBannerUploadSub3" taborder="19" text="업로드" top="imgBanner03:55" width="69" height="23" cssclass="btn_WF_basic01" left="874" onclick="divTab01_btnBannerUploadSub3_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divTab02" taborder="22" left="10" top="1031" cssclass="dvi_WF_tabBox01" bottom="-710" right="10" text="divTab02" visible="false" enable="false">
+          <Layouts>
+            <Layout>
+              <Static id="Static17" taborder="0" text="Static03" left="798" top="28" width="220" height="10" background="red" visible="false"/>
+              <Tab id="tabPolicy" taborder="1" tabindex="0" left="10" top="12" right="10" bottom="28">
+                <Tabpages>
+                  <Tabpage id="tpgPolicyInfo" text="시스템이용약관">
+                    <Layouts>
+                      <Layout>
+                        <TextArea id="txtPolicyInfo" taborder="0" left="10" top="10" right="10" bottom="10" onchanged="divTab02_tabPolicy_tpgPolicyInfo_txtPolicyInfo_onchanged"/>
+                      </Layout>
+                    </Layouts>
+                  </Tabpage>
+                  <Tabpage id="tpgPrivacyInfo" text="개인정보처리방침">
+                    <Layouts>
+                      <Layout>
+                        <TextArea id="txtPrivacyInfo" taborder="0" left="10" top="10" right="10" bottom="10"/>
+                      </Layout>
+                    </Layouts>
+                  </Tabpage>
+                </Tabpages>
+              </Tab>
+              <Button id="btnPolicySave" taborder="2" text="저장" top="5" width="46" height="23" cssclass="btn_WF_basic01" right="10" onclick="divTab02_btnPolicySave_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divTab03" taborder="23" left="10" top="1391" cssclass="dvi_WF_tabBox01" bottom="-1070" right="10" text="divTab03" visible="false" enable="false">
+          <Layouts>
+            <Layout>
+              <Button id="btnLoginPolicySave" taborder="0" text="저장" top="5" width="46" height="23" cssclass="btn_WF_basic01" right="10" onclick="divTab03_btnLoginPolicySave_onclick"/>
+              <Static id="Static17" taborder="1" text="Static03" left="798" top="28" width="220" height="10" background="red" visible="false"/>
+              <Static id="staMixCdTitle" taborder="2" text="문자숫자혼합체크" left="10" top="37" width="220" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static10" taborder="3" left="229" top="37" height="31" cssclass="sta_WF_td01L" width="271"/>
+              <Static id="staMinLengthTitle" taborder="4" text="최소길이" left="10" top="67" width="220" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static11" taborder="5" left="229" top="67" height="31" cssclass="sta_WF_td01L" width="271"/>
+              <Static id="staErrorCntTitle" taborder="6" text="오류입력접속제한" left="10" top="97" width="220" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static13" taborder="7" left="229" top="97" height="31" cssclass="sta_WF_td01L" width="271"/>
+              <Static id="staRecentUseYnTitle" taborder="8" text="최근 사용한 비밀번호 사용금지" left="10" top="127" width="220" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static12" taborder="9" left="229" top="127" height="31" cssclass="sta_WF_td01L" width="271"/>
+              <Static id="staFirstChangeYnTitle" taborder="10" text="최초 로그인 비밀번호 변경여부" left="10" top="157" width="220" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static15" taborder="11" left="229" top="157" height="31" cssclass="sta_WF_td01L" width="271"/>
+              <Static id="staCheckCntTitle" taborder="12" text="비밀번호 체크일 수 (0~120일)" left="10" top="187" width="220" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static14" taborder="13" left="229" top="187" height="31" cssclass="sta_WF_td01L" width="271"/>
+              <Static id="staImpossibleTxtTitle" taborder="14" text="비밀번호 포함 불가 문자열" left="499" top="37" width="220" height="181" cssclass="sta_WF_th01L"/>
+              <Static id="Static00" taborder="15" left="718" top="37" cssclass="sta_WF_td01L" right="10" height="181"/>
+              <Combo id="cboMixCd" taborder="16" text="Combo00" left="237" top="42" width="250" height="21" innerdataset="dsMixCdCode" codecolumn="CODE" datacolumn="NAME" cssclass="cmb_WF_essential"/>
+              <Spin id="spnMinLength" taborder="17" left="237" top="72" width="250" height="21" increment="1" max="18" min="6" value="" cssclass="spn_WF_essential"/>
+              <Combo id="cboErrorCnt" taborder="18" text="Combo00" left="237" top="102" width="250" height="21" innerdataset="innerdataset" codecolumn="CODECOLUMN" datacolumn="DATACOLUMN" cssclass="cmb_WF_essential">
+                <Dataset id="innerdataset">
+                  <ColumnInfo>
+                    <Column id="CODECOLUMN" size="256"/>
+                    <Column id="DATACOLUMN" size="256"/>
+                  </ColumnInfo>
+                  <Rows>
+                    <Row>
+                      <Col id="CODECOLUMN">0</Col>
+                      <Col id="DATACOLUMN">0</Col>
+                    </Row>
+                    <Row>
+                      <Col id="CODECOLUMN">1</Col>
+                      <Col id="DATACOLUMN">1</Col>
+                    </Row>
+                    <Row>
+                      <Col id="CODECOLUMN">2</Col>
+                      <Col id="DATACOLUMN">2</Col>
+                    </Row>
+                    <Row>
+                      <Col id="CODECOLUMN">3</Col>
+                      <Col id="DATACOLUMN">3</Col>
+                    </Row>
+                    <Row>
+                      <Col id="CODECOLUMN">4</Col>
+                      <Col id="DATACOLUMN">4</Col>
+                    </Row>
+                    <Row>
+                      <Col id="CODECOLUMN">5</Col>
+                      <Col id="DATACOLUMN">5</Col>
+                    </Row>
+                  </Rows>
+                </Dataset>
+              </Combo>
+              <Combo id="cboRecentUseYn" taborder="19" text="Combo00" left="237" top="132" width="250" height="21" innerdataset="dsUseYnCode" codecolumn="CODE" datacolumn="NAME" cssclass="cmb_WF_essential"/>
+              <Combo id="cboFirstChangeYn" taborder="20" text="Combo00" left="237" top="162" width="250" height="21" innerdataset="dsUseYnCode" codecolumn="CODE" datacolumn="NAME" cssclass="cmb_WF_essential"/>
+              <Spin id="spnCheckCnt" taborder="21" left="237" top="192" width="250" height="21" max="120" min="0" value="" cssclass="spn_WF_essential"/>
+              <Button id="btnLoginPolicyPlus" taborder="22" width="23" height="23" cssclass="btn_WF_basic01" right="16" text="+" onclick="divTab03_btnLoginPolicyPlus_onclick" top="159"/>
+              <Button id="btnLoginPolicyMinus" taborder="23" width="23" height="23" cssclass="btn_WF_basic01" right="16" text="-" onclick="divTab03_btnLoginPolicyMinus_onclick" top="189"/>
+              <Grid id="grdImpossibleTxt" taborder="24" left="725" top="42" binddataset="dsImpossibleTxt" autofittype="col" right="52" height="171">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="80"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="body">
+                      <Cell text="bind:IMPOSSIBLE_STR" displaytype="editcontrol" edittype="text"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divTab04" taborder="24" left="10" top="1751" cssclass="dvi_WF_tabBox01" bottom="-1430" right="10" text="divTab04" visible="false" enable="false">
+          <Layouts>
+            <Layout>
+              <Button id="btnButtonSave" taborder="0" text="저장" top="5" width="46" height="23" cssclass="btn_WF_basic01" right="10" onclick="divTab04_btnButtonSave_onclick"/>
+              <Static id="Static17" taborder="1" text="Static03" left="798" top="28" width="220" height="10" background="red" visible="false"/>
+              <Static id="staShortcutInputTitle" taborder="2" text="입력" left="10" top="37" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static10" taborder="3" left="129" top="37" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Static id="staShortcutDeleteTitle" taborder="4" text="삭제" left="10" top="67" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static11" taborder="5" left="129" top="67" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Static id="staShortcutSaveTitle" taborder="6" text="저장" left="10" top="97" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static13" taborder="7" left="129" top="97" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Static id="staShortcutPrintTitle" taborder="8" text="인쇄" left="10" top="127" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static12" taborder="9" left="129" top="127" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Static id="staShortcutExcelTitle" taborder="10" text="엑셀" left="10" top="157" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static15" taborder="11" left="129" top="157" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Static id="staShortcutManualTitle" taborder="12" text="매뉴얼" left="10" top="187" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static14" taborder="13" left="129" top="187" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Edit id="edtShortcutInput" taborder="14" left="136" top="42" width="354" height="21"/>
+              <Edit id="edtShortcutDelete" taborder="15" left="136" top="72" width="354" height="21"/>
+              <Edit id="edtShortcutSave" taborder="16" left="136" top="102" width="354" height="21"/>
+              <Edit id="edtShortcutPrint" taborder="17" left="136" top="132" width="354" height="21"/>
+              <Edit id="edtShortcutExcel" taborder="18" left="136" top="162" width="354" height="21"/>
+              <Edit id="edtShortcutManual" taborder="19" left="136" top="192" width="354" height="21"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Edit id="edtManagerCd" taborder="26" top="45" height="21" readonly="true" width="80" right="btnManager:3" visible="false"/>
+        <Static id="staHolidayListT" taborder="27" text="기본정보" left="10" top="10" height="30" width="303" cssclass="sta_WF_title02"/>
+        <Button id="btnDemoId" taborder="28" text="데모ID생성" top="10" width="80" height="23" cssclass="btn_WF_basic01" right="10" onclick="btnDemoId_onclick" visible="false"/>
+        <Button id="btnFwDownload" taborder="29" text="Framework다운로드" top="10" width="130" height="22" cssclass="btn_WF_basic01" right="93" onclick="btnFwDownload_onclick" visible="false"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/**
+*  시스템관리 Main
+*
+*  @MenuPath    시스템공통 > 시스템관리 > 시스템관리 Main
+*  @FileName    SC010.xfdl 
+*  @Creator     천우성
+*  @CreateDate  2019.08.14 
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2019.08.14      천우성             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+this.fv_sGdsAdminYn   = UXBooster.gdsUserInfo.getColumn(0, "ADMIN_YN"); 	// gds _ 관리자권한 여부
+this.fv_nSystemId = 'S000000001';     //시스템ID
+this.fv_sFileType = "IMG";
+this.fv_sUploadGubun = "";
+this.fileConfig = {
+        //TODO URL
+        host         : take.getSvcUrl(),		
+        uploadUrl    : "sc/sysImageSave.do",
+        downloadUrl  : "file/download.do",
+        deleteUrl    : "delete.do",
+//         downImage    : "theme://images/img_file.png",
+//         delImage     : "theme://images/btn_del.png",
+        allowTypes   : ["jpg","jpeg","gif","png","bmp"],
+        maxCount     : 10,
+        maxSize      : "200MB",
+        maxTotalSize : "200MB"
+    };
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* formid_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.take_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+    if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+    {
+		var objList = {"btnTab00":this.divTab00, "btnTab01":this.divTab01, 
+                       "btnTab02":this.divTab02, "btnTab03":this.divTab03,
+                       "btnTab04":this.divTab04};
+        var sTabId = "tab01";
+        var objFirstLoad = this.btnTab00;
+        var sTabOnCss = "btn_WF_tab02";
+        var sTabOffCss = "btn_WF_tab01";
+        
+        take.TabSetting(this, sTabId, objList, objFirstLoad, sTabOnCss, sTabOffCss);
+		
+		if( this.fv_sGdsAdminYn == "Y" ){
+			this.btnFwDownload.set_visible(true);
+			this.btnDemoId.set_visible(true);
+		}
+		
+		take.tranCode(this, ["00008", "00009","00010"], ["dsDeploytypeCode", "dsUseYnCode","dsMixCdCode"], ["", "SEL", "SEL"], function ()
+		{
+			this.fnTran('Detail');
+		});
+    }
+}
+
+/*********************************************************
+* 2.1 TRANSACTION 서비스 호출 처리
+ ********************************************************/
+/**
+ * fnTran : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnTran("ID");
+ */
+this.fnTran = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Detail";
+    
+    //변수선언
+    var sCallBack  = "fnCallback" ; 
+    
+    switch(sTranId)
+    {
+        case "Detail" :  
+			this.dsSystemInfo.clearData();
+			this.dsSystemDeploy.clearData();
+			this.dsSystemPolicy.clearData();
+			this.dsSystemLoginPolicy.clearData();
+			this.dsSystemButton.clearData();
+			
+			var sOutDs 		= ["dsSystemInfo", "dsSystemDeploy", "dsSystemPolicy", "dsSystemLoginPolicy", "dsSystemButton"];
+			var sNameSpaces 	= ["SystemCommon.systemInfoDetail"
+									, "SystemCommon.systemDeployList"
+									, "SystemCommon.systemInfoDetail"
+									, "SystemCommon.systemLoginPolicyDetail"
+									, "SystemCommon.systemInfoDetail"];
+			var sParam 		= "SYSTEM_ID='" + this.fv_nSystemId + "'";
+			
+			take.tranSelect(this, "MultiSelect", sNameSpaces, "", sOutDs, sParam,
+				function(sId, nErrCd, sErrMsg){
+					var sImpossibleTxt = this.dsSystemLoginPolicy.getColumn(0, "IMPOSSIBLE_TXT");
+					if (take.nvl(sImpossibleTxt, "") != "")
+					{
+						var arrImpossibleTxt = sImpossibleTxt.split("\n");
+						this.dsImpossibleTxt.set_updatecontrol(false);
+						for( var i=0; i<arrImpossibleTxt.length-1; i++ )
+						{
+							var nRow = this.dsImpossibleTxt.addRow();
+							this.dsImpossibleTxt.setColumn(nRow, "IMPOSSIBLE_STR", arrImpossibleTxt[i]);
+						}
+						this.dsImpossibleTxt.set_updatecontrol(true);
+					}
+					
+					this.fnImgSetting();
+				});
+			
+            break;
+		case "Save" :
+		
+			//take.tranSave(this, "Save", "SystemCommon.systemInfoMain", "dsSystemInfo", "", "", sCallBack);
+			take.transaction(this, "Save", "SVC_LOC::sc/systemInfoMainSave.do", "dsSystemInfo=dsSystemInfo:U", "", "", sCallBack);
+            break;
+			
+		case "DeploySave" :
+		
+			//take.tranSave(this, "DeploySave", "SystemCommon.systemDeploy", "dsSystemDeploy", "", "", sCallBack);
+			take.transaction(this, "DeploySave", "SVC_LOC::sc/systemDeploySave.do", "dsSystemDeploy=dsSystemDeploy:U", "", "", sCallBack);
+            break;
+		
+		case "PolicySave" :
+		
+			//take.tranSave(this, "PolicySave", "SystemCommon.systemInfoPolicy", "dsSystemPolicy", "", "", sCallBack);
+			take.transaction(this, "PolicySave", "SVC_LOC::sc/systemInfoPolicySave.do", "dsSystemPolicy=dsSystemPolicy:U", "", "", sCallBack);
+            break;
+		
+		case "LoginPolicySave" :
+		
+			var sImpossibleTxt = "";
+			if( this.dsImpossibleTxt.rowcount > 0 ){
+				for(var i=0; i<this.dsImpossibleTxt.rowcount; i++){
+					var impossibleTxt = take.nvl(this.dsImpossibleTxt.getColumn(i, "IMPOSSIBLE_STR"), "");
+					if(!take.isEmpty(impossibleTxt)) {
+						sImpossibleTxt += impossibleTxt + "\n";
+					}
+				}
+			}
+			this.dsSystemLoginPolicy.setColumn(0, "IMPOSSIBLE_TXT", sImpossibleTxt);
+		
+			//take.tranSave(this, "LoginPolicySave", "SystemCommon.systemLoginPolicy", "dsSystemLoginPolicy", "", "", sCallBack);
+			take.transaction(this, "LoginPolicySave", "SVC_LOC::sc/systemLoginPolicySave.do", "dsSystemLoginPolicy=dsSystemLoginPolicy:A", "", "", sCallBack);
+            break;
+			
+		case "ButtonSave" :
+		
+			//take.tranSave(this, "Save", "SystemCommon.systemInfoButton", "dsSystemButton", "", "", sCallBack);
+			take.transaction(this, "LoginPolicySave", "SVC_LOC::sc/systemInfoButtonSave.do", "dsSystemButton=dsSystemButton:U", "", "", sCallBack);
+			
+            break;
+        default :
+            break;
+    }
+}
+
+/*********************************************************
+ * 2.2 CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        //case "Detail" : //조회 콜백
+            //this.tabSystemInfo.tpgDeploy.set_url("biz::sys/SC010T01.xfdl");
+        //    break;
+		case "Save" : //조회 콜백
+            
+			this.fnTran('Detail');
+            break;
+		case "DeploySave" : 
+		
+			this.fnTran('Detail');
+			break;
+		case "PolicySave" : 
+		
+			this.fnTran('Detail');
+			break;
+		case "LoginPolicySave" : 
+		
+			this.dsImpossibleTxt.clearData();
+			this.fnTran('Detail');
+			break;
+		case "ButtonSave" : 
+		
+			this.fnTran('Detail');
+			break;
+        default :
+            break;
+    }        
+} 
+
+/**
+* fnPopCallback : popup callback
+* @param  : N/A
+* @return : N/A
+* @example :  
+*/
+this.fnPopCallback = function(sPopId, sRtn)
+{
+    switch(sPopId)
+    {
+        case "SC010P01" : // 주소록추가 콜백
+            //trace("sRtn : " + sRtn);
+            var arrRtn = sRtn.split(',');
+            this.edtManagerCd.set_value(arrRtn[0]);
+            this.edtManagerNm.set_value(arrRtn[1]);
+            break;
+        default :
+            break;
+    }
+}
+
+/*********************************************************
+* 3 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Detail";
+    
+    if (sTranId == "Detail") {
+    	if(this.fnCheckForm()) {
+            this.fnTran(sTranId);
+        }
+    } else {
+    	this.fnTran(sTranId);
+    }
+}
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+this.fnSave = function(sTranId)
+{    
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Save";
+    
+    this.fnTran(sTranId);
+}
+/**
+ * fnAddRow : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+ * @example this.fnAddRow(sGrdId, nRow);
+ */
+this.fnAddRow = function(sGrdId, nRow)
+{
+    //공통 행추가에서 호출할 디폴트값 세팅
+    if (take.nvl(sGrdId, "")=="") sGrdId = "Grid00";
+    
+    //Script
+}
+
+/**
+ * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number, Array} arrnRow    deleteRow 리턴값
+ * @return {N/A} N/A
+ * @example this.fnDelRow(sGrdId, nRow); 
+ */
+this.fnDelRow = function(sGrdId, arrnRow)
+{    
+    //공통 행추가에서 호출할 디폴트값 세팅
+    if (take.nvl(sGrdId, "")=="") sGrdId = "Grid00";
+    
+    //Script
+}
+
+this.fnPrint = function()
+{
+	var agrKey = {
+					sPdfType:"sys/SC010"
+					, sNamespace:"SystemCommon.systemInfoDetail,SystemCommon.systemDeployList,SystemCommon.systemInfoDetail,SystemCommon.systemLoginPolicyDetail,SystemCommon.systemInfoDetail"
+				};
+	take.openPopup(this, "comPrintPop", "frm::com/comPrintPop.xfdl", agrKey, "", 
+		function(sId, sRtn){
+		},
+	false);
+}
+
+/*********************************************************
+ * 4 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+// 배포 이력 추가 버튼 클릭시
+this.divTab00_btnDeployAdd_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var objDateTime = take.getTodayTime();
+	
+	var nRow = this.dsSystemDeploy.addRow();
+	this.dsSystemDeploy.setColumn(nRow, "SYSTEM_ID", this.fv_nSystemId);
+	this.dsSystemDeploy.setColumn(nRow, "DEPLOY_DATE", objDateTime.date);
+	this.dsSystemDeploy.setColumn(nRow, "DEPLOY_TIME", objDateTime.hh + objDateTime.mm);
+	this.dsSystemDeploy.setColumn(nRow, "DEPLOY_TYPE", "01");
+};
+// 배포이력 삭제 버튼 클릭시
+this.divTab00_btnDeployDel_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.dsSystemDeploy.deleteRow(this.dsSystemDeploy.rowposition);
+};
+// 배포이력 저장 버튼 클릭시
+this.divTab00_btnDeploySave_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fnTran('DeploySave');
+};
+
+// 약관등록 저장 버튼 클릭시
+this.divTab02_btnPolicySave_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fnTran('PolicySave');
+};
+// 로그인정책 저장 버튼 클릭시
+this.divTab03_btnLoginPolicySave_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	if(!take.isDsModified(this.dsSystemLoginPolicy) && !take.isDsModified(this.dsImpossibleTxt)){
+		return;
+	}
+	this.fnTran('LoginPolicySave');
+};
+// 로그인정책 플러스 버튼 클릭시
+this.divTab03_btnLoginPolicyPlus_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.dsImpossibleTxt.addRow();
+};
+// 로그인정책 마이너스 버튼 클릭시
+this.divTab03_btnLoginPolicyMinus_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var nRow = this.dsImpossibleTxt.rowposition;
+	this.dsImpossibleTxt.deleteRow(nRow);
+};
+// 공통버튼단축키관리 저장 버튼 클릭시
+this.divTab04_btnButtonSave_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fnTran('ButtonSave');
+};
+
+//담당자 선택 버튼 클릭 팝업오픈
+this.btnManager_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	take.openPopup(this, "SC010P01", "biz::sys/SC010P01.xfdl", "", "showtitlebar=true layered=true", "fnPopCallback", false);
+};
+
+//담당자 이름 빈칸일때 담당자코드 리셋
+this.edtManagerNm_onchanged = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
+{
+	var sValue = take.nvl(obj.value, "");
+    
+    if (sValue == "")
+	{
+		this.edtManagerCd.set_value("");
+	}
+};
+
+/*********************************************************
+* 5 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnCheckForm : 저장전 유효성 체크
+ * @param  {String} sParam N/A
+ * @example this.fnCheckForm();
+ */
+this.fnCheckForm = function()
+{   
+    var sSystemNm   = take.nvl(this.edtSystemNm.text, "");
+    var sManagerNm  = take.nvl(this.edtManagerNm.text, "");
+    var sVersionNm  = take.nvl(this.edtSystemVersion.text, "");
+    
+    if(sSystemNm == ""){
+        take.alert(this, "Info", "시스템명을 작성해주세요.");
+        this.edtSystemNm.setFocus();
+        return false;
+    }
+    
+    if(sManagerNm == ""){
+        take.alert(this, "Info", "담당자명을 작성해주세요.");
+        this.edtManagerNm.setFocus();
+        return false;
+    }
+    
+    if(sVersionNm == ""){
+        take.alert(this, "Info", "시스템 버전명을 작성해주세요.");
+        this.edtSystemVersion.setFocus();
+        return false;
+    }
+    
+    return true;
+}
+
+// Login Logo업로드 버튼 클릭
+this.divTab01_btnLogoUploadSub1_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fv_sUploadGubun = "Login";
+	this.LoginFileDialog.open('nexacro17', FileDialog.MULTILOAD);
+};
+
+// TOP Logo업로드 버튼 클릭
+this.divTab01_btnLogoUploadSub2_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fv_sUploadGubun = "Top";
+	this.TopFileDialog.open('nexacro17', FileDialog.MULTILOAD);
+};
+
+// Banner Logo1업로드 버튼 클릭
+this.divTab01_btnBannerUploadSub1_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fv_sUploadGubun = "Banner01";
+	this.BannerFileDialog.open('nexacro17', FileDialog.MULTILOAD);
+};
+
+// Banner Logo2업로드 버튼 클릭
+this.divTab01_btnBannerUploadSub2_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fv_sUploadGubun = "Banner02";
+	this.BannerFileDialog.open('nexacro17', FileDialog.MULTILOAD);
+};
+
+// Banner Logo3업로드 버튼 클릭
+this.divTab01_btnBannerUploadSub3_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fv_sUploadGubun = "Banner03";
+	this.BannerFileDialog.open('nexacro17', FileDialog.MULTILOAD);
+};
+
+//파일추가 후처리 이벤트
+this.FileDialog_onclose = function(obj:nexacro.FileDialog,e:nexacro.FileDialogEventInfo)
+{
+	this.addFileList(e.virtualfiles, obj);
+};
+
+this.addFileList = function(filelist, objDialog)
+{
+	for (var i = 0, len = filelist.length, vFile; i < len; i++)
+	{
+		vFile = filelist[i];		
+ 		vFile.addEventHandler("onsuccess", this.FileList_onsuccess, this);
+ 		vFile.addEventHandler("onerror", this.FileList_onerror , this);
+
+		vFile.open(null, nexacro.VirtualFile.openBinary);
+	}
+}
+
+//파일추가 후처리 성공이벤트
+this.FileList_onsuccess = function(obj:nexacro.VirtualFile, e:nexacro.VirtualFileEventInfo)
+{
+	switch (e.reason)
+	{
+		case 1:				
+			obj.getFileSize();
+			
+			break;		
+		case 3: // read() 실행시 추가 실행			
+			this.divDetail.form.ivUser.set_image(e.binarydata);
+			this.fv_bData = e.binarydata;
+			
+			this.dsFile.clearData();
+			var addidx = this.dsFile.addRow();
+			this.dsFile.setColumn(addidx, "FILE_NM", nexacro.trim(obj.filename));
+			this.dsFile.setColumn(addidx, "FILE_BLOB", this.fv_bData);
+			this.dsFile.setColumn(addidx, "IMPORT_YN", "N");
+			this.dsFile.setColumn(addidx, "FILE_TYPE", this.fv_sFileType);
+			this.dsFile.setColumn(addidx, "FILE_SIZE", this.fv_sFileSize);
+			this.FileUpTransfer00.addFile(obj.filename, obj);
+			
+			break;		
+		case 9:	// getFileSize() 실행시 추가 실행	
+			if( nexacro._Browser == "Runtime" )
+			{
+				//파일 바이너리데이터 생성
+				obj.read();
+			}
+			else
+			{
+				var objIframe = window.document.getElementsByTagName('iframe');
+				var nIframeCnt = (objIframe.length - 1);
+				var objInput = objIframe[nIframeCnt].contentWindow.document.getElementsByTagName("input");				
+				var objImageView = this.divTab01.form.components["img"+this.fv_sUploadGubun];
+				var sImageNm = "imgTake" + this.fv_sUploadGubun + ".png";				
+				
+				var objDsFile = this.dsFile;				
+				var objFileUpTransfer = this.FileUpTransfer00;
+				//objFileUpTransfer.clearFileList();
+				
+				trace("!@!@>> objInput.length:   " + objInput.length);
+				for (var i = 0; i < objInput.length; i++) {
+					if (objInput[i].type == "file") {
+						if( objInput[i].files.length > 0 )
+						{
+							var reader  = new FileReader();
+							reader.addEventListener("load", function(){
+								objImageView.set_image(reader.result);
+								//objDsFile.setColumn(addidx, "FILE_BLOB", reader.result);								
+							});					
+						
+							reader.readAsDataURL(objInput[i].files[0], "EUC-KR");
+							var nFindRow = objDsFile.findRowAsNF("FILE_TYPE",this.fv_sUploadGubun);							
+							if( nFindRow != -1 )
+							{
+								var sDelFileNm = objDsFile.getColumn(nFindRow, "FILE_NM");
+								objFileUpTransfer.removeFile(sDelFileNm);
+								objDsFile.deleteRow(nFindRow);								
+							}
+							var addidx = objDsFile.addRow();							
+							objDsFile.setColumn(addidx, "FILE_NM", sImageNm);
+							//objDsFile.setColumn(addidx, "FILE_PATH", this.fv_sFileType);
+							objDsFile.setColumn(addidx, "FILE_TYPE", this.fv_sUploadGubun);
+							objDsFile.setColumn(addidx, "FILE_SIZE", e.filesize);
+							objDsFile.setColumn(addidx, "IMPORT_YN", "N");
+							
+							objFileUpTransfer.addFile(sImageNm, obj);
+						}
+					}
+				}				
+			}
+		
+			break;
+		default :			
+			break;
+	}	
+}
+
+this.divTab01_btnSaveSub_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	//trace("!@!@>> dsFile:  " + this.dsFile.saveXML());
+	this.fnUploadFiles();
+};
+
+// 파일업로드수행
+this.fnUploadFiles = function ()
+{
+	var url = this.fileConfig.host + this.fileConfig.uploadUrl;
+		
+	this.FileUpTransfer00.upload(url);
+};
+
+//업로드 성공이벤트
+this.FileUpTransfer00_onsuccess = function(obj:nexacro.FileUpTransfer,e:nexacro.FileUpTransferEventinfo)
+{
+	trace("succST-----------------------------------------------------------------");
+	var sMsg = "저장이 ";	
+	
+	take.alert(this, "", "{param1}완료되었습니다.", {param1 : sMsg});
+	
+// 	var sUrl = nexacro.getEnvironment().services[take.nvl(take.SvcId,"SVC_LOC")].url;
+// 	var sImg = "imgTakeLogin.png";
+// 	UXBooster.TopFrame.form.staTopLogo.set_background('url("'+sUrl+'/images/logo/'+ sImg +'") no-repeat left center');
+// 	
+// 	var sImg = "imgTakeTop.png";
+// 	UXBooster.TopFrame.form.staTopLogo.set_background('url("'+sUrl+'/images/logo/'+ sImg +'") no-repeat left center');	
+	
+	trace("succED-----------------------------------------------------------------");
+};
+
+//업로드 실패이벤트
+this.FileUpTransfer00_onerror = function(obj:nexacro.FileUpTransfer,e:nexacro.FileUpTransferErrorEventInfo)
+{
+	trace("errorST-----------------------------------------------------------------");
+	
+	trace("errorED-----------------------------------------------------------------");
+};
+
+this.fnImgSetting = function()
+{
+    
+    var sUrl, sDateTime;
+    var objDateTime = take.getTodayTime();
+
+    sDateTime = objDateTime.date + objDateTime.time;
+        
+	sUrl = take.getSvcUrl() + "images";
+    
+	this.divTab01.form.imgLogin.set_image('url("'+sUrl+'/logo/imgTakeLogin.png?'+ sDateTime +'")');	
+	this.divTab01.form.imgTop.set_image('url("'+sUrl+'/logo/imgTakeTop.png?'+ sDateTime +'")');	
+	this.divTab01.form.imgBanner01.set_image('url("'+sUrl+'/banner/imgTakeBanner01.png?'+ sDateTime +'")');	
+	this.divTab01.form.imgBanner02.set_image('url("'+sUrl+'/banner/imgTakeBanner02.png?'+ sDateTime +'")');	
+	this.divTab01.form.imgBanner03.set_image('url("'+sUrl+'/banner/imgTakeBanner03.png?'+ sDateTime +'")');	
+}
+
+this.btnFwDownload_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.alert("작업중입니다.");
+};
+
+this.btnDemoId_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	take.openPopup(this, "SC010P02", "biz::sys/SC010P02.xfdl", "", "", "fnPopCallback", false);
+};
+]]></Script>
+    <Objects>
+      <Dataset id="dsSystemInfo">
+        <ColumnInfo>
+          <Column id="DSSYSTEMINFO" type="STRING" size="256"/>
+          <Column id="SYSTEM_NM" type="STRING" size="256"/>
+          <Column id="MANAGER_CD" type="STRING" size="256"/>
+          <Column id="MANAGER_NM" type="STRING" size="256"/>
+          <Column id="LAST_DEPLOY_DT" type="STRING" size="256"/>
+          <Column id="LOGO_IMG" type="STRING" size="256"/>
+          <Column id="BANNER_IMG" type="STRING" size="256"/>
+          <Column id="POLICY_INFO" type="STRING" size="256"/>
+          <Column id="PRIVACY_INFO" type="STRING" size="256"/>
+          <Column id="SYSTEM_VERSION" type="STRING" size="256"/>
+          <Column id="SYSTEM_LICENSE" type="STRING" size="256"/>
+          <Column id="DESC_TXT" type="STRING" size="256"/>
+          <Column id="SHORTCUT_INPUT" type="STRING" size="256"/>
+          <Column id="SHORTCUT_DELETE" type="STRING" size="256"/>
+          <Column id="SHORTCUT_SAVE" type="STRING" size="256"/>
+          <Column id="SHORTCUT_PRINT" type="STRING" size="256"/>
+          <Column id="SHORTCUT_EXCEL" type="STRING" size="256"/>
+          <Column id="SHORTCUT_MANUAL" type="STRING" size="256"/>
+          <Column id="REG_DT" type="STRING" size="256"/>
+          <Column id="REG_CD" type="STRING" size="256"/>
+          <Column id="MOD_DT" type="STRING" size="256"/>
+          <Column id="MOD_CD" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsSystemDeploy">
+        <ColumnInfo>
+          <Column id="SYSTEM_ID" type="STRING" size="256"/>
+          <Column id="DEPLOY_SEQ" type="STRING" size="256"/>
+          <Column id="ROWNUM" type="STRING" size="256"/>
+          <Column id="DEPLOY_DATE" type="STRING" size="256"/>
+          <Column id="DEPLOY_TIME" type="STRING" size="256"/>
+          <Column id="DEPLOY_CD" type="STRING" size="256"/>
+          <Column id="DEPLOY_NM" type="STRING" size="256"/>
+          <Column id="DEPLOY_type" type="STRING" size="256"/>
+          <Column id="DEPLOY_DESC" type="STRING" size="256"/>
+          <Column id="USE_YN" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsDeploytypeCode">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsSystemPolicy">
+        <ColumnInfo>
+          <Column id="SYSTEM_ID" type="STRING" size="256"/>
+          <Column id="POLICY_INFO" type="STRING" size="256"/>
+          <Column id="PRIVACY_INFO" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsSystemLoginPolicy">
+        <ColumnInfo>
+          <Column id="SYSTEM_ID" type="STRING" size="256"/>
+          <Column id="POLICY_SEQ" type="STRING" size="256"/>
+          <Column id="MIX_CD" type="STRING" size="256"/>
+          <Column id="MIN_LENGTH" type="STRING" size="256"/>
+          <Column id="ERROR_CNT" type="STRING" size="256"/>
+          <Column id="RECENT_USE_YN" type="STRING" size="256"/>
+          <Column id="FIRST_CHANGE_YN" type="STRING" size="256"/>
+          <Column id="CHECK_CNT" type="STRING" size="256"/>
+          <Column id="IMPOSSIBLE_TXT" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsMixCdCode">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsUseYnCode">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsImpossibleTxt">
+        <ColumnInfo>
+          <Column id="IMPOSSIBLE_STR" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsSystemButton">
+        <ColumnInfo>
+          <Column id="SYSTEM_ID" type="STRING" size="256"/>
+          <Column id="SHORTCUT_INPUT" type="STRING" size="256"/>
+          <Column id="SHORTCUT_DELETE" type="STRING" size="256"/>
+          <Column id="SHORTCUT_SAVE" type="STRING" size="256"/>
+          <Column id="SHORTCUT_PRINT" type="STRING" size="256"/>
+          <Column id="SHORTCUT_EXCEL" type="STRING" size="256"/>
+          <Column id="SHORTCUT_MANUAL" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <FileDialog id="LoginFileDialog" onclose="FileDialog_onclose"/>
+      <FileDialog id="TopFileDialog" onclose="FileDialog_onclose"/>
+      <FileDialog id="BannerFileDialog" onclose="FileDialog_onclose"/>
+      <Dataset id="dsFile">
+        <ColumnInfo>
+          <Column id="FILE_PATH" type="STRING" size="256"/>
+          <Column id="FILE_NM" type="STRING" size="256"/>
+          <Column id="FILE_SAVE_NM" type="STRING" size="256"/>
+          <Column id="IMPORT_YN" type="STRING" size="256"/>
+          <Column id="FILE_TYPE" type="STRING" size="256"/>
+          <Column id="FILE_size" type="STRING" size="256"/>
+          <Column id="FILE_BLOB" type="STRING" size="256"/>
+          <Column id="DESC_TXT" type="STRING" size="256"/>
+          <Column id="DELETE_YN" type="STRING" size="256"/>
+          <Column id="USER_CD" type="STRING" size="256"/>
+          <Column id="FILE_DEL_YN" type="STRING" size="256"/>
+          <Column id="ATTACH_CD" type="STRING" size="256"/>
+          <Column id="FILE_SEQ" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <FileUpTransfer id="FileUpTransfer00" onerror="FileUpTransfer00_onerror" onsuccess="FileUpTransfer00_onsuccess"/>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="SYSTEM_ID" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="SYSTEM_ID">S000000001</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="edtSystemNm" propid="value" datasetid="dsSystemInfo" columnid="SYSTEM_NM"/>
+      <BindItem id="item1" compid="edtManagerNm" propid="value" datasetid="dsSystemInfo" columnid="MANAGER_NM"/>
+      <BindItem id="item2" compid="edtSystemVersion" propid="value" datasetid="dsSystemInfo" columnid="SYSTEM_VERSION"/>
+      <BindItem id="item3" compid="staLastDeployDt" propid="text" datasetid="dsSystemInfo" columnid="LAST_DEPLOY_DT"/>
+      <BindItem id="item4" compid="staSystemLicense" propid="text" datasetid="dsSystemInfo" columnid="SYSTEM_LICENSE"/>
+      <BindItem id="item5" compid="txtDescTxt" propid="value" datasetid="dsSystemInfo" columnid="DESC_TXT"/>
+      <BindItem id="item6" compid="divTab02.form.tabPolicy.tpgPolicyInfo.form.txtPolicyInfo" propid="value" datasetid="dsSystemPolicy" columnid="POLICY_INFO"/>
+      <BindItem id="item7" compid="divTab02.form.tabPolicy.tpgPrivacyInfo.form.txtPrivacyInfo" propid="value" datasetid="dsSystemPolicy" columnid="PRIVACY_INFO"/>
+      <BindItem id="item8" compid="divTab03.form.cboMixCd" propid="value" datasetid="dsSystemLoginPolicy" columnid="MIX_CD"/>
+      <BindItem id="item9" compid="divTab03.form.spnMinLength" propid="value" datasetid="dsSystemLoginPolicy" columnid="MIN_LENGTH"/>
+      <BindItem id="item10" compid="divTab03.form.cboErrorCnt" propid="value" datasetid="dsSystemLoginPolicy" columnid="ERROR_CNT"/>
+      <BindItem id="item11" compid="divTab03.form.cboRecentUseYn" propid="value" datasetid="dsSystemLoginPolicy" columnid="RECENT_USE_YN"/>
+      <BindItem id="item12" compid="divTab03.form.cboFirstChangeYn" propid="value" datasetid="dsSystemLoginPolicy" columnid="FIRST_CHANGE_YN"/>
+      <BindItem id="item13" compid="divTab03.form.spnCheckCnt" propid="value" datasetid="dsSystemLoginPolicy" columnid="CHECK_CNT"/>
+      <BindItem id="item14" compid="divTab04.form.edtShortcutInput" propid="value" datasetid="dsSystemButton" columnid="SHORTCUT_INPUT"/>
+      <BindItem id="item15" compid="divTab04.form.edtShortcutDelete" propid="value" datasetid="dsSystemButton" columnid="SHORTCUT_DELETE"/>
+      <BindItem id="item16" compid="divTab04.form.edtShortcutSave" propid="value" datasetid="dsSystemButton" columnid="SHORTCUT_SAVE"/>
+      <BindItem id="item17" compid="divTab04.form.edtShortcutPrint" propid="value" datasetid="dsSystemButton" columnid="SHORTCUT_PRINT"/>
+      <BindItem id="item18" compid="divTab04.form.edtShortcutExcel" propid="value" datasetid="dsSystemButton" columnid="SHORTCUT_EXCEL"/>
+      <BindItem id="item19" compid="divTab04.form.edtShortcutManual" propid="value" datasetid="dsSystemButton" columnid="SHORTCUT_MANUAL"/>
+      <BindItem id="item20" compid="edtManagerCd" propid="value" datasetid="dsSystemInfo" columnid="MANAGER_CD"/>
+    </Bind>
+  </Form>
+</FDL>

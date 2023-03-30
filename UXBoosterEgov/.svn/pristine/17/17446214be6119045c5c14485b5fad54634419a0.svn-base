@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="publishing025" width="1040" height="659" titletext="시스템사용이력" onload="formid_onload">
+    <Layouts>
+      <Layout height="659" mobileorientation="landscape" width="1040">
+        <Static id="Static00" taborder="0" text="Static00" left="0" top="0" width="10" background="red" bottom="0" visible="false"/>
+        <Static id="Static01" taborder="1" text="시스템사용이력" left="10" top="98" height="30" width="280" cssclass="sta_WF_title02"/>
+        <Grid id="grdHistoryLog" taborder="2" left="10" top="128" binddataset="dsHistoryLog" autofittype="col" right="10" bottom="10" fillareatype="none">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="90"/>
+                <Column size="60"/>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="110"/>
+                <Column size="200"/>
+                <Column size="100"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="순번"/>
+                <Cell col="1" text="이력일자"/>
+                <Cell col="2" text="이력시간"/>
+                <Cell col="3" text="접속기기"/>
+                <Cell col="4" text="접속환경"/>
+                <Cell col="5" text="프로젝트명"/>
+                <Cell col="6" text="메뉴명"/>
+                <Cell col="7" text="화면ID"/>
+                <Cell col="8" text="이력유형"/>
+                <Cell col="9" text="사용자ID"/>
+                <Cell col="10" text="사용자명"/>
+                <Cell col="11" text="로그인일시"/>
+                <Cell col="12" text="상세내용"/>
+                <Cell col="13" text="접속IP"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:rownum" textAlign="center"/>
+                <Cell col="1" text="bind:history_date" textAlign="center"/>
+                <Cell col="2" text="bind:history_time" textAlign="center"/>
+                <Cell col="3" text="bind:login_device"/>
+                <Cell col="4" text="bind:login_browser"/>
+                <Cell col="5" text="bind:project_nm"/>
+                <Cell col="6" text="bind:menu_nm"/>
+                <Cell col="7" text="bind:form_id"/>
+                <Cell col="8" text="bind:history_type_nm" textAlign="center"/>
+                <Cell col="9" text="bind:user_id" textAlign="center"/>
+                <Cell col="10" text="bind:user_nm" textAlign="center"/>
+                <Cell col="11" text="bind:login_dt" textAlign="center"/>
+                <Cell col="12" text="bind:history_desc"/>
+                <Cell col="13" text="bind:login_ip" textAlign="center"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Div id="Div01" taborder="3" left="10" top="0" height="72" right="10" cssclass="div_WF_searchBox01" text="">
+          <Layouts>
+            <Layout>
+              <Static id="staProjectInfoSearch" taborder="0" text="프로젝트" left="20" top="10" width="80" height="21" cssclass="sta_WF_textRImport"/>
+              <Static id="staLoginInfoSearch" taborder="1" text="접속기기/환경" left="359" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Static id="staUserInfoSearch" taborder="2" text="사용자" left="698" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Static id="staMlGroupSearch00" taborder="3" text="이력일시" left="19" top="40" width="80" height="21" cssclass="sta_WF_textRImport"/>
+              <Static id="staProgramInfoSearch" taborder="4" text="프로그램" left="359" top="40" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="edtProgramInfoSearch" taborder="5" left="443" top="40" width="226" height="21"/>
+              <Static id="staHistoryTypeSearch" taborder="6" text="이력유형" left="699" top="40" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="cboHistoryTypeSearch" taborder="7" text="Combo00" left="781" top="40" width="226" height="21" innerdataset="dsHistoryTypeCode" codecolumn="code" datacolumn="name"/>
+              <Edit id="edtProjectInfoSearch" taborder="8" left="99" top="10" width="200" height="21"/>
+              <Edit id="edtUserInfoSearch" taborder="9" left="781" top="10" width="200" height="21"/>
+              <Calendar id="calLoginDateFromSearch" taborder="10" left="101" top="40" width="70" height="21"/>
+              <Edit id="edtLoginTimeFromSearch" taborder="11" left="calLoginDateFromSearch:2" top="40" width="30" height="21"/>
+              <Calendar id="calLoginDateToSearch" taborder="12" left="226" top="40" width="70" height="21"/>
+              <Edit id="edtLoginTimeToSearch" taborder="13" left="calLoginDateToSearch:2" top="40" width="30" height="21"/>
+              <Button id="btnProjectSearch" taborder="14" top="10" width="21" height="21" cssclass="btn_WF_search02" left="edtProjectInfoSearch:4"/>
+              <Button id="btnUserSarch" taborder="15" top="10" width="21" height="21" cssclass="btn_WF_search02" left="edtUserInfoSearch:4"/>
+              <Static id="staMlGroupSearch01" taborder="16" text="~" left="204" top="40" width="22" height="20" cssclass="sta_WF_textR"/>
+              <Combo id="Combo00" taborder="17" text="Combo00" left="443" top="10" width="110" height="21"/>
+              <Edit id="edtLoginBrowserSearch" taborder="18" left="555" top="10" width="110" height="21"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="Button01" taborder="4" left="485" top="72" width="70" height="15" cssclass="btn_WF_fold01"/>
+        <Static id="Static09" taborder="5" text="Static03" left="0" top="87" height="10" background="red" visible="false" right="0"/>
+        <Static id="Static23" taborder="6" text="Static23" left="1" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static24" taborder="7" text="Static23" left="340" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static25" taborder="8" text="Static23" left="679" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static26" taborder="9" text="Static23" left="1018" top="-14" width="10" height="106" background="blue" visible="false"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsHistoryTypeCode">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="name" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsHistoryLog">
+        <ColumnInfo>
+          <Column id="rownum" type="STRING" size="256"/>
+          <Column id="history_seq" type="STRING" size="256"/>
+          <Column id="history_date" type="STRING" size="256"/>
+          <Column id="history_time" type="STRING" size="256"/>
+          <Column id="login_device" type="STRING" size="256"/>
+          <Column id="login_browser" type="STRING" size="256"/>
+          <Column id="project_cd" type="STRING" size="256"/>
+          <Column id="project_nm" type="STRING" size="256"/>
+          <Column id="menu_cd" type="STRING" size="256"/>
+          <Column id="menu_nm" type="STRING" size="256"/>
+          <Column id="form_id" type="STRING" size="256"/>
+          <Column id="history_type" type="STRING" size="256"/>
+          <Column id="history_type_nm" type="STRING" size="256"/>
+          <Column id="user_id" type="STRING" size="256"/>
+          <Column id="user_nm" type="STRING" size="256"/>
+          <Column id="login_dt" type="STRING" size="256"/>
+          <Column id="history_desc" type="STRING" size="256"/>
+          <Column id="login_ip" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  시스템사용이력
+*
+*  @MenuPath    통계 > 시스템사용이력 > 시스템사용이력
+*  @FileName    ST010.xfdl 
+*  @Creator     천우성
+*  @CreateDate  2019.08.18
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2019.08.18      천우성             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+//this.fv_nFormVal = null;     //용도
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* formid_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.formid_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {    
+        take.tranCode(this, "00019", "dsHistoryTypeCode", function (){
+			this.fnTran('List');
+		});
+   }
+}
+
+/*********************************************************
+* 2.1 TRANSACTION 서비스 호출 처리
+ ********************************************************/
+/**
+ * fnTran : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnTran("ID");
+ */
+this.fnTran = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "List";
+    
+    //변수선언
+    var sUrl   = "",      //서비스 URL
+        sInDs  = "",      //데이터셋을 검색조건으로 보낼경우 사용 -->선택
+        sOutDs = "",      //데이터를 받아올 데이터셋 지정
+        sParam = "",      //파라메터 사용 안 할 경우       
+        sCallBack = "";        //콜백 처리 함수
+
+    sCallBack  = "fnCallback" ; 
+    
+    switch(sTranId)
+    {
+        case "List" :  
+			this.dsHistoryLog.clearData();
+			
+			take.tranSelect(this, "List", "Statistics.historyLogList", "", "dsHistoryLog", "", sCallBack);
+			
+            break;
+        default :
+            break;
+    }
+}
+
+/*********************************************************
+ * 2.2 CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "List" : //조회 콜백
+            //Script
+            break;
+        default :
+            break;
+    }        
+} 
+
+/*********************************************************
+* 3 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "List";
+    
+    this.fnTran(sTranId);
+}
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+this.fnSave = function(sTranId)
+{    
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Save";
+    
+    this.fnTran(sTranId);
+}
+/**
+ * fnAddRow : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+ * @example this.fnAddRow(sGrdId, nRow);
+ */
+this.fnAddRow = function(sGrdId, nRow)
+{
+    //공통 행추가에서 호출할 디폴트값 세팅
+    if (take.nvl(sGrdId, "")=="") sGrdId = "Grid00";
+    
+    //Script
+}
+
+/**
+ * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number, Array} arrnRow    deleteRow 리턴값
+ * @return {N/A} N/A
+ * @example this.fnDelRow(sGrdId, nRow); 
+ */
+this.fnDelRow = function(sGrdId, arrnRow)
+{    
+    //공통 행추가에서 호출할 디폴트값 세팅
+    if (take.nvl(sGrdId, "")=="") sGrdId = "Grid00";
+    
+    //Script
+}
+
+/*********************************************************
+ * 4 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+/**
+* component_onclick : ~ 버튼 클릭
+*/
+this.component_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    //Script
+};
+
+/*********************************************************
+* 5 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnUserFunction : 사용자 함수
+ * @param  {String} sParam 문자형 인자
+ * @param  {Number} nParam 숫자형 인자
+ * @example this.fnUserFunction(sParam, nParam);
+ */
+this.fnUserFunction = function(sParam, nParam)
+{    
+    //Script
+}
+]]></Script>
+  </Form>
+</FDL>

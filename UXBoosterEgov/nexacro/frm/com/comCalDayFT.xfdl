@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="comCalCustom" width="400" height="302" titletext="기간 달력" scrollbartype="none none" onload="comCalCustom_onload" onclose="comCalCustom_onclose" background="#ffffff">
+    <Layouts>
+      <Layout height="302" mobileorientation="landscape" width="400">
+        <Calendar id="calFDay" taborder="0" left="0" top="77" type="monthonly" bottom="25" width="50%" canchange="calFDay_canchange"/>
+        <Button id="btnToday" taborder="1" text="오늘" width="24.50%" height="25" cssclass="btn_WF_basic01" onclick="btnDay_onclick" left="0" top="0"/>
+        <Button id="btnOne" taborder="2" text="어제/오늘" width="24.50%" height="25" cssclass="btn_WF_basic01" onclick="btnDay_onclick" left="btnToday:1" top="0"/>
+        <Button id="btnWeek" taborder="3" text="1주일(7일)" width="24.50%" height="25" cssclass="btn_WF_basic01" onclick="btnDay_onclick" left="btnOne:1" top="0"/>
+        <Button id="btnMonth" taborder="4" text="1개월" height="25" cssclass="btn_WF_basic01" onclick="btnDay_onclick" left="btnWeek:1" right="0" top="0"/>
+        <Static id="stFrom" taborder="5" text="시작일" left="0" top="52" width="50%" height="25"/>
+        <Static id="stFrom00" taborder="6" text="종료일" left="stFrom:00" top="52" width="50%" height="25"/>
+        <Calendar id="calTDay" taborder="7" left="calFDay:00" top="77" type="monthonly" bottom="25" width="50%" canchange="calTDay_canchange"/>
+        <Button id="btnThreeMonth" taborder="8" text="3개월" width="24.50%" height="25" cssclass="btn_WF_basic01" onclick="btnDay_onclick" left="0" top="26"/>
+        <Button id="btnSixMonth" taborder="9" text="6개월" width="24.50%" height="25" cssclass="btn_WF_basic01" onclick="btnDay_onclick" left="99" top="26"/>
+        <Button id="btnNineMonth" taborder="10" text="9개월" width="24.50%" height="25" cssclass="btn_WF_basic01" onclick="btnDay_onclick" left="198" top="26"/>
+        <Button id="btnYear" taborder="11" text="12개월" height="25" cssclass="btn_WF_basic01" onclick="btnDay_onclick" left="297" right="0" top="26"/>
+        <Button id="btnOk" taborder="12" text="확인" width="24.50%" height="25" cssclass="btn_WF_basic01" left="203" bottom="0" onclick="btnOk_onclick"/>
+        <Button id="btnClose" taborder="13" text="취소(닫기)" width="24.50%" height="25" cssclass="btn_WF_basic01" left="302" bottom="0" onclick="btnClose_onclick"/>
+        <Div id="divMsgBg" taborder="14" left="500" top="0" width="400" height="300">
+          <Layouts>
+            <Layout>
+              <Static id="staBg" taborder="0" left="0" top="0" background="#000000" right="0" bottom="0" onclick="divMsgBg_staBg_onclick" opacity="0.8"/>
+              <Div id="divMsg" taborder="1" left="50" top="89" width="300" height="122" background="#ffffff" border="1px solid #032e52" borderRadius="5px">
+                <Layouts>
+                  <Layout>
+                    <Static id="staMsg" taborder="0" text="메세지 입니다." left="83" top="10" height="51" right="22"/>
+                    <Button id="btnOk" taborder="1" text="확인" top="81" width="47" height="25" onclick="divMsgBg_divMsg_btnOk_onclick" right="124"/>
+                  </Layout>
+                </Layouts>
+              </Div>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    common
+*  @FileName    comCalDay.xfdl 
+*  @Creator     고영민
+*  @CreateDate  2021.01.24 
+*  @Version     1.0
+*  @Description    기간커스텀 달력
+* 
+************** 소스 수정 이력 *************************************************
+*    Date          Modifier            Description
+*******************************************************************************
+*  2021.01.24      고영민             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+this.fv_objComp      = null;  //그리드 컴포넌트    : 그리드형일 경우 사용
+this.fv_objDs        = null;  //데이터셋 컴포넌트  : 그리드형일 경우 사용
+this.fv_objParam     = null;  //파라메터            : 그리드형일 경우 사용
+this.fv_objFComp     = null;  //시작일 달력 컴포넌트
+this.fv_objTComp     = null;  //종료일 달력 컴포넌트
+this.fv_bPrev        = false; //버튼 클릭시 날짜를 미래로 할지 여부
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload등)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+//폼 onload 이벤트
+this.comCalCustom_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{   
+    var sFDate, sTDate, sToDay;
+    
+    sToDay = take.getDate("date").date;
+    
+    this.fv_objComp = this.parent.objComp;
+    
+    if ( take.CompTypeName(this.fv_objComp)=="Grid")
+    {
+        this.fv_objDs = take.nvl(this.parent.objDs,this.fv_objComp.getBindDataset());        
+        this.fv_objParam = take.nvl(this.parent.objParam, "");
+        this.fv_objFComp = take.nvl(this.fv_objParam.fromcol, "");
+        this.fv_objTComp = take.nvl(this.fv_objParam.tocol, "");
+        this.fv_bPrev    = take.nvl(this.fv_objParam.seltype, false);
+        
+        sFDate = take.nvl(this.fv_objDs.getColumn(this.fv_objParam.row,this.fv_objFComp), sToDay);
+        sTDate = take.nvl(this.fv_objDs.getColumn(this.fv_objParam.row,this.fv_objTComp), sToDay);
+        
+        this.calFDay.set_value(sFDate);
+        this.calTDay.set_value(sTDate);            
+    } else {
+        this.fv_objFComp = take.nvl(this.parent.objFComp, "");
+        this.fv_objTComp = take.nvl(this.parent.objTComp, "");
+        this.fv_bPrev    = take.nvl(this.parent.seltype, false);
+        
+        sFDate = take.nvl(this.fv_objFComp.value, sToDay);
+        sTDate = take.nvl(this.fv_objTComp.value, sToDay);
+        
+        this.calFDay.set_value(sFDate);
+        this.calTDay.set_value(sTDate);
+    }
+    //console.dir(this.calFDay);
+};
+
+// 상위 컴포넌트로 이벤즈 전파 중지
+this.comCalCustom_onclose = function(obj:nexacro.Form,e:nexacro.CloseEventInfo)
+{
+	e.stopPropagation();
+};
+
+/*********************************************************
+ * 2 각 COMPONENT 별 EVENT 영역
+ ********************************************************/
+//당일, 2일, 7일, 1개월, 3개월, 6개월, 9개월, 12개월 버튼 클릭 이벤트
+this.btnDay_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var sBtnId; 
+    var objDay
+    
+    sBtnId = obj.name.substr(3);
+    
+    objDay = new Date();
+    
+    if (this.fv_bPrev==false)
+    {
+        this.calTDay.set_value(take.toDateString(objDay,"yyyyMMdd"));
+        sRtnDay = this.fnRtnDay(objDay, sBtnId);
+        this.calFDay.set_value(sRtnDay);
+    } else {
+        this.calFDay.set_value(take.toDateString(objDay,"yyyyMMdd"));
+        sRtnDay = this.fnRtnDay(objDay, sBtnId);
+        this.calTDay.set_value(sRtnDay);
+    }
+        
+    this.fnSetValue();
+};
+
+//확인 버튼 클릭 이벤트
+this.btnOk_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fnSetValue();
+};
+
+//취소(닫기) 버튼 클릭 이벤트
+this.btnClose_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.parent.closePopup();
+};
+
+//시작일 변경전 이벤트
+this.calFDay_canchange = function(obj:nexacro.Calendar,e:nexacro.ChangeEventInfo)
+{
+	return this.fnValidate(e.postvalue, this.calTDay.value);
+};
+
+//종료일 변경전 이벤트
+this.calTDay_canchange = function(obj:nexacro.Calendar,e:nexacro.ChangeEventInfo)
+{
+	return this.fnValidate(this.calFDay.value, e.postvalue);
+};
+
+//메세지 백그라운드 클릭 이벤트
+this.divMsgBg_staBg_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	this.divMsgBg.set_visible(false);
+};
+
+//메세지 확인 버튼 클릭 이벤트
+this.divMsgBg_divMsg_btnOk_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.divMsgBg.set_visible(false);
+};
+/*********************************************************
+ * 3 사용자 FUNCTION 영역
+ ********************************************************/
+ /**
+ * fnValidate : 날짜 유효성 체크
+ * @param  {String}  sFDate 시작일
+ * @param  {String}  sTDate 종료일
+ * @param  {Boolean} true/false
+ * @example this.fnValidate(sFDate, sTDate);
+ */
+this.fnValidate = function(sFDate, sTDate)
+{
+    if (this.fv_bPrev) //미래
+    {
+        if (nexacro.toNumber(sFDate) > nexacro.toNumber(sTDate))
+        {
+            this.fnMessage("시작일이 종료일보다 큽니다.");
+            return false;
+        }    
+    } else { //과거
+        if (nexacro.toNumber(sFDate) < nexacro.toNumber(sTDate))
+        {
+            this.fnMessage("종료일이 시작일보다 큽니다.");
+            return false;
+        }
+    }
+    
+    return true;
+};
+
+ /**
+ * fnMessage : 메세지
+ * @param  {String}  sMsg  메세지
+ * @param  N/A
+ * @example this.fnMessage("메세지 입니다.");
+ */
+this.fnMessage = function(sMsg)
+{
+    var objDiv = this.divMsgBg;
+    
+    objDiv.move(0,0,null,null,0,0);
+    objDiv.set_visible(true);
+    objDiv.form.divMsg.form.staMsg.set_Text(sMsg);
+};
+
+/**
+ * fnRtnDay : 날짜 계산
+ * @param  {Object} objDay 문자형 인자
+ * @param  {String} sGbn   숫자형 인자
+ * @example this.fnRtnDay(objDay, sGbn);
+ */
+this.fnRtnDay = function(objDay, sGbn)
+{
+    var nPrev = this.fv_bPrev==true?1:-1;
+    
+    switch(sGbn) {
+        case "Today":
+            //objDay = new Date();
+            break;
+        case "One":
+            objDay.getAddDays(1*nPrev);
+            break;
+        case "Week":
+            objDay.getAddDays(6*nPrev);
+            break;
+        case "Month":
+            objDay.getAddMonths(1*nPrev);
+            objDay.getAddDays(-1*nPrev);
+            break;
+        case "ThreeMonth":
+            objDay.getAddMonths(3*nPrev);
+            objDay.getAddDays(-1*nPrev);
+            break;
+        case "SixMonth":
+            objDay.getAddMonths(6*nPrev);
+            objDay.getAddDays(-1*nPrev);
+            break;
+        case "NineMonth":
+            objDay.getAddMonths(9*nPrev);
+            objDay.getAddDays(-1*nPrev);
+            break;
+        case "Year":
+            objDay.getAddMonths(12*nPrev);
+            objDay.getAddDays(-1*nPrev);
+            break;
+        default:
+    }
+    
+    return take.toDateString(objDay,"yyyyMMdd");
+}
+
+/**
+ * fnSetValue : 날짜 계산
+ * @param  {Boolean} bClose 팝업 닫기 여부
+ * @example this.fnSetValue(bClose);
+ */
+this.fnSetValue = function(bClose)
+{
+    var sFDate, sTDate;
+    
+    bClose = nexacro._nvl(bClose, true);
+ 
+    sFDate = this.calFDay.value;
+    sTDate = this.calTDay.value;
+    
+    if ( take.CompTypeName(this.fv_objComp)=="Grid")
+    {
+        this.fv_objDs.setColumn(this.fv_objParam.row,this.fv_objFComp,sFDate);
+        this.fv_objDs.setColumn(this.fv_objParam.row,this.fv_objTComp,sTDate);
+        
+        trace("FromtoCalendar\n" + 
+              "from : " + this.fv_objDs.name + "." + this.fv_objFComp+") return value --> " + sFDate + "\n" +
+              "to   : " + this.fv_objDs.name + "." + this.fv_objTComp+") return value --> " + sTDate);
+    } else {
+        sPreVal = this.fv_objFComp.value;
+    
+        this.fv_objFComp.set_value(sFDate);
+        
+        if (take.nvl(this.fv_objFComp.onchanged,"")!="")
+        {
+            var objEvt = new nexacro.ChangedEventInfo(this.fv_objFComp, "onchanged", sPreVal, sPreVal, sFDate, sFDate);
+            this.fv_objFComp.onchanged._fireEvent(this.fv_objFComp, objEvt);
+        }
+        
+        sPreVal = this.fv_objTComp.value;
+        
+        this.fv_objTComp.set_value(sTDate);
+        
+        if (take.nvl(this.fv_objTComp.onchanged,"")!="")
+        {
+            var objEvt = new nexacro.ChangedEventInfo(this.fv_objTComp, "onchanged", sPreVal, sPreVal, sTDate, sTDate);
+            this.fv_objTComp.onchanged._fireEvent(this.fv_objTComp, objEvt);
+        }
+        
+        trace("FromtoCalendar\n" + 
+              "from : "+this.fv_objFComp.name+") return value --> " + sFDate + "\n" +
+              "to   : "+this.fv_objTComp.name+") return value --> " + sTDate);
+    }
+    if (bClose) 
+    {
+        this.parent.closePopup();
+    }
+};
+
+/*********************************************************
+ * 4 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+// N/A
+
+
+]]></Script>
+  </Form>
+</FDL>

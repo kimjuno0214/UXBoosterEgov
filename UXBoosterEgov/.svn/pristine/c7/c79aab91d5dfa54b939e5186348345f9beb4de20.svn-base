@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="MT010P03" width="380" height="500" titletext="참석자선택" onload="Form_onload">
+    <Layouts>
+      <Layout height="500" mobileorientation="landscape" width="380">
+        <Div id="divSearch" taborder="37" left="0" top="0" cssclass="dvi_WF_tabBox01" right="0" bottom="0" text="">
+          <Layouts>
+            <Layout>
+              <Static id="staTitle" taborder="4" text="검색 정보" left="10" top="10" height="20" cssclass="sta_WF_title02" right="10"/>
+              <Static id="staCode" taborder="0" text="참석자코드" left="10" top="40" width="100" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static10" taborder="1" left="108" top="40" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Static id="staName" taborder="2" text="참석자명" left="10" top="70" width="100" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static01" taborder="3" left="108" top="70" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Edit id="edtCode" taborder="5" left="115" top="44" right="16" height="23" onkeyup="Edit_onkeyup"/>
+              <Edit id="edtName" taborder="6" left="115" top="74" height="23" right="16" imemode="alpha" onkeyup="Edit_onkeyup"/>
+              <Button id="btnSearch" taborder="8" text="조회" top="staName:5" height="23" cssclass="btn_WF_basic01" left="10" right="10" onclick="btnSearch_onclick"/>
+              <Grid id="grdList" taborder="7" left="10" top="btnSearch:10" binddataset="dsApprover" autofittype="col" right="10" height="320" takegrid="checkbox,readonly">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="100"/>
+                      <Column size="110"/>
+                      <Column size="90"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="부서"/>
+                      <Cell col="1" text="직책"/>
+                      <Cell col="2" text="성명"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:DEPT_NM" textAlign="center"/>
+                      <Cell col="1" text="bind:USER_POSITION_NM" textAlign="center"/>
+                      <Cell col="2" text="bind:USER_NM" textAlign="center"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Button id="btnEnter" taborder="9" text="확인" height="23" cssclass="btn_WF_basic01" left="10" right="10" bottom="10" onclick="btnEnter_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsApprover">
+        <ColumnInfo>
+          <Column id="USER_CD" type="STRING" size="256"/>
+          <Column id="USER_NM" type="STRING" size="256"/>
+          <Column id="USER_MOBILE" type="STRING" size="256"/>
+          <Column id="USER_POSITION_NM" type="STRING" size="256"/>
+          <Column id="DEPT_NM" type="STRING" size="256"/>
+          <Column id="CHK" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="USER_CD" type="STRING" size="256"/>
+          <Column id="USER_NM" type="STRING" size="256"/>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/** 
+*  회의록 작성 
+*
+*  @MenuPath    회의록 > 회의록 작성
+*  @FileName    MT010P02.xfdl 
+*  @Creator     전영찬
+*  @CreateDate  2019.11.18 
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    Date          Modifier            Description
+*******************************************************************************
+*  2019.11.18      전영찬             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+this.fv_sProjectCd  = nexacro.getApplication().av_sProjectCd;    // ProjectCd
+this.fv_nChkRow     = null;
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.Form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+    if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+    {    
+        this.fnInit();
+    }
+}
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "userList";
+    
+    this.dsApprover.clearData();
+    this.dsSearch.setColumn(0,"PROJECT_CD", this.fv_sProjectCd);
+    
+    take.tranSelect(this, sTranId, "MeetingMinutesManagement.userList", "dsSearch", "dsApprover", "", "fnCallback");
+}
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+// 조회버튼 클릭 이벤트
+this.btnSearch_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+//     var sName = take.nvl(this.divSearch.form.edtName.text, "");
+//     var sCode = take.nvl(this.divSearch.form.edtCode.text, "");
+//     
+//     if (sName != "" || sCode != "") {
+//     	
+//     }
+//     if(this.fnCheckForm()) {
+//         this.fnSearch('userList');
+//     }
+    this.fnSearch('userList');
+};
+
+//확인버튼 클릭 이벤트
+this.btnEnter_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var objDsApp  = this.dsApprover;
+    var arrChkRow = take.getChkRow(objDsApp,"CHK");
+    var sRtn = "";
+    
+    if(arrChkRow.length == 0){
+        alert("참석자 선택을 부탁드립니다.");
+        return;
+    }
+    
+    for(var i=0; i<arrChkRow.length; i++){
+        if(i!=0){
+            sRtn += ',';
+        }
+        sRtn += this.dsApprover.getColumn(arrChkRow[i], "USER_CD") +','+ this.dsApprover.getColumn(arrChkRow[i], "USER_NM");
+    }
+    
+    //var arrRtn = this.dsApprover.getColumn(this.fv_nChkRow, "USER_CD") +','+ this.dsApprover.getColumn(this.fv_nChkRow, "USER_NM");
+    this.close(sRtn);
+};
+
+// Edit_onkeyup : 엔터로 강제 포커스아웃
+this.Edit_onkeyup = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+	if(e.keycode == 13){
+        var sEdtId = obj.name.substr(3);
+        
+        switch(sEdtId) {
+        case "Code":
+            this.divSearch.form.edtName.setFocus();
+        	break;
+        case "Name":
+            this.fnSearch('userList');
+        	break;
+        default:
+            break;
+        }
+    }
+};
+
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnInit : 초기화 함수
+ * @param  {String} N/A 
+ * @example this.fnInit();
+ */
+this.fnInit = function()
+{
+    var objDivSearch = this.divSearch.form;
+    var objParent = this.parent;
+    
+    objDivSearch.edtName.setFocus();
+}
+
+/**
+ * fnCheckForm : 저장전 유효성 체크
+ * @param  {String} sParam N/A
+ * @example this.fnCheckForm();
+ */
+this.fnCheckForm = function()
+{   
+    var objDivSearch = this.divSearch.form;
+    var sName   = take.nvl(objDivSearch.edtName.text, "");
+    //var sCode   = take.nvl(objDivSearch.edtCode.text, "");
+    
+    if(sName == ""){
+        alert("참석자명을 작성해주세요.");
+        return false;
+    }
+    
+//     if(sCode == ""){
+//         alert("참석자 코드를 작성해주세요.");
+//         return false;
+//     }
+    
+    return true;
+}
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "Save" :  //저장 콜백
+            
+            break;
+        default :
+            break;
+    }        
+}
+]]></Script>
+    <Bind>
+      <BindItem id="item1" compid="divSearch.form.edtCode" propid="value" datasetid="dsSearch" columnid="USER_CD"/>
+      <BindItem id="item2" compid="divSearch.form.edtName" propid="value" datasetid="dsSearch" columnid="USER_NM"/>
+    </Bind>
+  </Form>
+</FDL>

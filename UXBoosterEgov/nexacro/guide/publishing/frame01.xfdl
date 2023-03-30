@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="frame01" width="1280" height="800" titletext="New Form">
+    <Layouts>
+      <Layout height="800" mobileorientation="landscape" width="1280">
+        <Static id="Static00" taborder="0" left="0" top="0" height="40" cssclass="sta_top_bg01" width="1280"/>
+        <Div id="Div00" taborder="1" left="0" top="40" width="240" bottom="26">
+          <Layouts>
+            <Layout>
+              <Static id="Static01" taborder="0" left="0" top="0" width="60" cssclass="sta_LF_iconBg" height="734"/>
+              <Button id="Button00" taborder="1" left="0" top="0" width="60" height="61" cssclass="btn_LF_mymenu" text="마이메뉴"/>
+              <Button id="Button01" taborder="2" text="최근메뉴" left="0" top="60" width="60" height="61" cssclass="btn_LF_recent"/>
+              <Button id="Button02" taborder="3" left="0" top="120" width="60" height="61" cssclass="btn_LF_icon01"/>
+              <Button id="Button03" taborder="4" left="0" top="180" width="60" height="61" cssclass="btn_LF_icon02"/>
+              <Button id="Button04" taborder="5" left="0" top="240" width="60" height="61" cssclass="btn_LF_icon03"/>
+              <Button id="Button05" taborder="6" left="0" top="300" width="60" height="61" cssclass="btn_LF_icon04"/>
+              <Button id="Button06" taborder="7" left="0" top="360" width="60" height="61" cssclass="btn_LF_icon05"/>
+              <Static id="Static00" taborder="8" left="60" top="0" width="170" bottom="0" cssclass="sta_LF_menuBg"/>
+              <Grid id="Grid00" taborder="9" left="60" top="34" width="170" cssclass="grd_LF_menu" binddataset="LF_menu" autofittype="col" treeusecheckbox="false" treeuseimage="false" treeuseline="false" treeusebutton="no" bottom="0" treeinitstatus="expand,all">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="80"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="body">
+                      <Cell text="bind:Column0" displaytype="treeitemcontrol" edittype="tree" treelevel="bind:Column1"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Button id="Button07" taborder="10" text="메뉴&#13;&#13;&#10;두줄" left="1" top="142" width="58" height="39" cssclass="btn_LF_text"/>
+              <Button id="Button08" taborder="11" text="시스템" left="1" top="202" width="58" height="39" cssclass="btn_LF_text"/>
+              <Button id="Button09" taborder="12" text="프로그램&#13;&#10;관리" left="1" top="262" width="58" height="39" cssclass="btn_LF_text"/>
+              <Button id="Button10" taborder="13" text="사용자&#13;&#10;관리" left="1" top="322" width="58" height="39" cssclass="btn_LF_text"/>
+              <Button id="Button11" taborder="14" text="게시판" left="1" top="382" width="58" height="39" cssclass="btn_LF_text"/>
+              <Edit id="Edit00" taborder="15" left="68" top="5" width="156" height="23" cssclass="ed_LF_search01"/>
+              <Button id="Button12" taborder="16" left="230" top="0" width="10" bottom="0" cssclass="btn_LF_conFold"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="Div01" taborder="2" text="Div01" left="240" top="40" height="30" right="0">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" left="0" top="0" height="30" cssclass="sta_nav_bg" width="1040"/>
+              <Static id="Static01" taborder="1" left="0" top="0" width="31" height="30" cssclass="sta_nav_home"/>
+              <Button id="Button00" taborder="2" text="mdi tab 01" left="30" top="2" width="160" height="24" cssclass="btn_nav_tabSel"/>
+              <Button id="Button02" taborder="3" left="160" top="2" width="30" height="24" cssclass="btn_nav_extra02"/>
+              <Button id="Button03" taborder="4" text="mdi tab 02" left="194" top="2" width="160" height="24" cssclass="btn_nav_tab"/>
+              <Button id="Button05" taborder="5" left="324" top="2" width="30" height="24" cssclass="btn_nav_extra"/>
+              <Button id="Button06" taborder="6" text="mdi tab 03" left="358" top="2" width="160" height="24" cssclass="btn_nav_tab"/>
+              <Button id="Button08" taborder="7" left="488" top="2" width="30" height="24" cssclass="btn_nav_extra"/>
+              <Button id="Button09" taborder="8" top="0" width="31" height="30" right="0" cssclass="btn_nav_mdiClose"/>
+              <Button id="Button10" taborder="9" top="0" width="30" height="30" right="30" cssclass="btn_nav_mdiMenu"/>
+              <Button id="Button11" taborder="10" top="0" width="31" height="30" right="70" cssclass="btn_nav_tabNext"/>
+              <Button id="Button12" taborder="11" top="0" width="30" height="30" right="100" cssclass="btn_nav_tabPrev"/>
+              <Button id="Button01" taborder="12" left="30" top="2" width="30" height="24" cssclass="btn_nav_icon"/>
+              <Button id="Button04" taborder="13" left="194" top="2" width="30" height="24" cssclass="btn_nav_icon"/>
+              <Button id="Button07" taborder="14" left="358" top="2" width="30" height="24" cssclass="btn_nav_icon"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static01" taborder="3" left="10" top="0" width="170" height="40" cssclass="sta_top_logo"/>
+        <Static id="Static02" taborder="4" text="긴급공지사항긴급공지사항긴급공지사항긴급공지사항긴급공지사항긴급공지사항긴급공지사항긴..." left="240" top="0" width="610" height="40" cssclass="sta_top_notice"/>
+        <Static id="Static03" taborder="5" top="0" width="40" height="40" cssclass="sta_top_icon04" right="0"/>
+        <Static id="Static04" taborder="6" top="0" width="40" height="40" cssclass="sta_top_icon03" right="40"/>
+        <Static id="Static05" taborder="7" top="0" width="40" height="40" cssclass="sta_top_icon02" right="80"/>
+        <Static id="Static06" taborder="8" top="0" width="40" height="40" cssclass="sta_top_icon01" right="120"/>
+        <Static id="Static07" taborder="9" top="0" width="280" height="40" cssclass="sta_top_admin" right="165" text="XXXXX 시스템 IT 기획팀 김태규(관리자)"/>
+        <Div id="Div02" taborder="10" left="0" height="26" bottom="0" right="0">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="(07348)서울시 영등포구 도산로54길 6 (주)테이크 copyright (c)2019 Take CSS Corp. All rights reserved" left="0" top="0" height="26" right="0" cssclass="sta_btm_bg"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="Div03" taborder="11" left="240" top="115" url="guide::form/smpForm01.xfdl" text="" width="1040" height="659"/>
+        <Div id="Div04" taborder="12" left="250" top="70" height="45" width="1030">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="코드관리" left="0" top="13" height="19" cssclass="sta_WF_title01" width="610"/>
+              <Button id="Button00" taborder="1" text="조회" top="10" width="58" height="25" cssclass="btn_WF_search01" right="316"/>
+              <Button id="Button01" taborder="2" text="신규" top="10" width="58" height="25" cssclass="btn_WF_new01" right="253"/>
+              <Button id="Button02" taborder="3" text="삭제" top="10" width="58" height="25" cssclass="btn_WF_delete01" right="190"/>
+              <Button id="Button03" taborder="4" text="저장" top="10" width="58" height="25" cssclass="btn_WF_save01" right="127"/>
+              <Button id="Button04" taborder="5" text="인쇄" top="10" width="58" height="25" cssclass="btn_WF_print01" right="64"/>
+              <Button id="Button05" taborder="6" top="10" width="22" height="24" cssclass="btn_WF_advice01" right="10"/>
+              <Static id="Static01" taborder="7" text="시스템관리 &gt; 코드관리" left="86" top="13" width="250" height="19" cssclass="sta_WF_navi"/>
+              <Button id="Button06" taborder="8" top="10" width="22" height="24" cssclass="btn_WF_reset01" right="37"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="LF_menu">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">관리자1</Col>
+            <Col id="Column1">0</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">코드관리</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">프로그램관리</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">권한관리</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">사용자관리</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">관리자2</Col>
+            <Col id="Column1">0</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">코드관리</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">프로그램관리</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">권한관리</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">사용자관리</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">공지사항관리</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">품질보증서 LOG 관리</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">접속자 현황</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">시스템사용이력</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">DB테이블/쿼리질의</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">컨텐츠관리</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

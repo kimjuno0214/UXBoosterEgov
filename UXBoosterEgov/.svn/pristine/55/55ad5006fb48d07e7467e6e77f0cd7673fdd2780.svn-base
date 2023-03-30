@@ -1,0 +1,2047 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+* 메인 관련
+*
+* @filename mappers/mn/MainMapper.xml
+* @author takeit
+* @since 2019.08.06
+* @version 1.0
+* @see
+*
+* << 변경 이력(Modification Information) >>
+*
+* 변경번호 : #1
+* 변경일자 : 2019.08.06
+* 변경사람 : takeit
+* 변경내용 : 신규 생성
+ -->
+<mapper namespace="Main">
+    <resultMap type="takeResultMap" id="fileMap">
+        <result column="FILE_BLOB" property="FILE_BLOB" jdbcType="CLOB" javaType="java.lang.String" />
+    </resultMap>
+
+    <resultMap type="takeResultMap" id="manualMap">
+        <result column="MANUAL_TXT" property="MANUAL_TXT" jdbcType="CLOB" javaType="java.lang.String" />
+    </resultMap>
+
+    <resultMap type="takeResultMap" id="policyMap">
+        <result column="POLICY_INFO" property="POLICY_INFO" jdbcType="CLOB" javaType="java.lang.String" />
+        <result column="PRIVACY_INFO" property="PRIVACY_INFO" jdbcType="CLOB" javaType="java.lang.String" />
+    </resultMap>
+
+    <resultMap type="takeResultMap" id="gridMap">
+        <result column="GRID_FORMAT" property="GRID_FORMAT" jdbcType="CLOB" javaType="java.lang.String" />
+    </resultMap>
+
+	<!-- Login -->
+	<sql id="userLoginSelect" databaseId="Oracle">
+           , ( SELECT LISTAGG(R.ROLE_CD, ',') WITHIN GROUP(ORDER BY R.ROLE_CD)
+                 FROM PROJECT_USER_ROLE R
+                WHERE U.MAIN_PROJECT = R.PROJECT_CD
+                  AND U.USER_CD = R.USER_CD ) AS ROLE_CD               -- 사용자 권한(다중)
+           , TO_CHAR(TRUNC(SYSDATE - U.PW_CHANGE_DT)) AS PW_CHANGE_CNT -- 비밀번호 변경일수
+           , (CASE WHEN (SYSDATE BETWEEN TO_DATE(U.VALID_START_DATE, 'YYYYMMDD')
+                                     AND TO_DATE(U.VALID_END_DATE, 'YYYYMMDD'))
+                   THEN 'Y'
+                   ELSE 'N' END) AS VALID_DT_YN                        -- 데모사용자 만료여부
+           , TO_CHAR((SELECT COUNT(*) FROM PROJECT_USER X WHERE X.USER_CD = U.USER_CD)) AS PROJECT_CNT -- 소속 프로젝트 수
+           , '0' AS DASH_COUNT      -- 대시보드 페이지 개수
+	</sql>
+	<sql id="userLoginSelect" databaseId="PostgreSQL">
+           , ( SELECT ARRAY_TO_STRING(ARRAY_AGG(R.ROLE_CD ORDER BY R.ROLE_CD), ',')
+                 FROM PROJECT_USER_ROLE R
+                WHERE U.MAIN_PROJECT = R.PROJECT_CD
+                  AND U.USER_CD = R.USER_CD ) AS ROLE_CD               -- 사용자 권한(다중)
+           , TO_CHAR(DATE_PART('day', NOW() - U.PW_CHANGE_DT::timestamp), 'FM9999') AS PW_CHANGE_CNT -- 비밀번호 변경일수
+           , (CASE WHEN (NOW() BETWEEN TO_TIMESTAMP(U.VALID_START_DATE, 'YYYYMMDD')
+                                     AND TO_TIMESTAMP(U.VALID_END_DATE, 'YYYYMMDD'))
+                   THEN 'Y'
+                   ELSE 'N' END) AS VALID_DT_YN                        -- 데모사용자 만료여부
+           , TO_CHAR((SELECT COUNT(*) FROM PROJECT_USER X WHERE X.USER_CD = U.USER_CD), 'FM9999') AS PROJECT_CNT -- 소속 프로젝트 수
+           , COALESCE((SELECT MAX(PAGE_NO)
+                    FROM USER_DASH_CONFIG X
+                   WHERE X.PROJECT_CD = U.MAIN_PROJECT
+                     AND X.USER_CD = U.USER_CD), '0') AS DASH_COUNT      -- 대시보드 페이지 개수
+	</sql>
+	<sql id="userLoginSelect" databaseId="MySQL">
+			, ADMINROLE.ROLE_CD                     -- 사용자 권한
+			, TRUNCATE( CAST( (TO_DAYS(NOW()) - TO_DAYS(U.PW_CHANGE_DT)) AS UNSIGNED ), 0 ) AS PW_CHANGE_CNT	-- 비밀번호 변경일 수
+			, (CASE WHEN (NOW() BETWEEN DATE_FORMAT(U.VALID_START_DATE, '%Y-%m-%d') AND DATE_FORMAT(U.VALID_END_DATE, '%Y-%m-%d'))
+                    THEN 'Y'
+                    ELSE 'N' END) AS VALID_DT_YN
+			, IFNULL((SELECT COUNT(*) FROM PROJECT_USER X WHERE X.USER_CD = U.USER_CD), 0) AS PROJECT_CNT
+			, '0' AS DASH_COUNT      -- 대시보드 페이지 개수
+	</sql>
+	<select id="userLogin" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		 * Main.userLogin
+		 * 로그인 처리
+		 * @author takeit
+		 * @since 2019.08.18
+		 */
+		]]>
+        SELECT
+            U.USER_CD												-- 사용자코드
+           , U.USER_ID												-- 사용자ID
+           , U.USER_NM												-- 사용자명
+           , U.USER_ENG_NM											-- 사용자영문명
+           , U.USER_BIRTHDAY										-- 사용자생년월일
+           , U.LUNAR_CD												-- 양력음력구분
+           , U.USER_EMAIL											-- 사용자이메일
+           , U.USER_MOBILE											-- 사용자휴대폰번호
+           , U.USER_TEL												-- 사용자전화번호
+           , U.USER_FAX												-- 사용자FAX
+           , U.DEPT_CD												-- 부서코드
+           , '' AS DEPT_NM
+           , U.USER_POSITION										-- 사용자직위
+           , U.USER_GRADE											-- 사용자등급
+           , U.USER_STATUS											-- 사용자상태
+           , U.DESC_TXT												-- 상세설명
+           , U.USE_YN												-- 사용여부
+           , U.AGREE_YN												-- 동의여부
+           , U.AGREE_DT												-- 동의일시
+           , U.PW_CHANGE_DT											-- 비밀번호변경일시
+           , U.MAIN_PROJECT AS PROJECT_CD                           -- 기본 프로젝트
+           , U.OGDP_CD												-- 소속코드
+           , U.TEST_INST_CD											-- 시험기관코드
+           , P.PROJECT_NM AS PROJECT_NM                             -- 기본 프로젝트명
+           , '' AS MAIN_URL                                         -- 사용자 권한에 따른 메인 화면(사용안함)
+           , U.LOGIN_IP                                             -- 로그인 IP
+           , U.REG_DT                                               -- 등록일
+           , U.LOGIN_FAIL_CNT 				                        -- 로그인실패횟수
+           , (CASE WHEN U.INIT_YN IS NULL THEN 'Y' ELSE U.INIT_YN END) AS INIT_YN     -- 초기화여부
+           , (CASE WHEN U.VALID_YN IS NULL THEN 'Y' ELSE U.VALID_YN END) AS VALID_YN  -- 데모사용자 여부
+           , (CASE WHEN ADMINROLE.USER_CD IS NULL THEN 'N' ELSE 'Y' END ) AS ADMIN_YN -- 관리자 여부
+             <include refid="userLoginSelect" />
+        FROM USER_INFO U
+            LEFT OUTER JOIN PROJECT_INFO P ON U.MAIN_PROJECT = P.PROJECT_CD
+            LEFT OUTER JOIN PROJECT_USER_ROLE ADMINROLE ON ADMINROLE.PROJECT_CD = 'PM00000001' AND ADMINROLE.USER_CD = U.USER_CD
+        WHERE U.USER_ID = #{sUserId}
+          AND U.USER_PW = #{sUserPw}
+	</select>
+
+	<!-- 로그인 성공 -->
+	<update id="loginSuccessUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		 *
+		 * Main.loginSuccessUpdate
+		 * 로그인 성공시 Update
+		 * @author takeit
+		 * @since 2019.08.19
+		 */
+		]]>
+		UPDATE USER_INFO
+		SET
+			LOGIN_FAIL_CNT = '0'				-- 로그인실패횟수
+			, LAST_LOGIN_DT = <include refid="CommonInc.sysdate" />			-- 최종로그인일시
+			, LOGIN_DEVICE = #{LOGIN_DEVICE}	-- 접속기기
+			, LOGIN_BROWSER = #{LOGIN_BROWSER}	-- 접속환경
+			, LOGIN_IP = #{LOGIN_IP}			-- 접속IP
+		WHERE USER_CD = #{USER_CD}				-- 사용자코드
+	</update>
+
+	<!-- 로그인 실패 -->
+	<update id="loginFailUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		 *
+		 * Main.loginFailUpdate
+		 * 로그인 실패시 Update
+		 * @author takeit
+		 * @since 2019.08.19
+		 */
+		]]>
+        UPDATE USER_INFO
+           SET LOGIN_FAIL_CNT = <include refid="CommonInc.toNumber"><property name="arg1" value="LOGIN_FAIL_CNT" /></include> + 1     -- 로그인실패횟수
+         WHERE USER_ID = #{USER_ID} -- 사용자코드
+	</update>
+
+	<!-- document_download(문서다운로드이력) START -->
+	<select id="documentDownloadList" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* Main.documentDownloadList
+		* 문서다운로드이력 목록
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		SELECT
+			ATTACH_CD			-- 첨부파일코드
+			, FILE_SEQ			-- 첨부파일일련번호
+			, DOWNLOAD_SEQ			-- 다운로드일련번호
+			, USER_ID			-- 사용자ID
+			, DOWNLOAD_TYPE			-- 다운로드유형
+			, DOWNLOAD_DT			-- 다운로드일시
+		FROM DOCUMENT_DOWNLOAD
+		WHERE 1 = 1
+		<if test=" ATTACH_CD != null and ATTACH_CD != '' ">
+			AND ATTACH_CD = #{ATTACH_CD}
+		</if>
+		<if test=" FILE_SEQ != null and FILE_SEQ != '' ">
+			AND FILE_SEQ = #{FILE_SEQ}
+		</if>
+		<if test=" DOWNLOAD_SEQ != null and DOWNLOAD_SEQ != '' ">
+			AND DOWNLOAD_SEQ = #{DOWNLOAD_SEQ}
+		</if>
+	</select>
+
+	<select id="documentDownloadDetail" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* Main.documentDownloadDetail
+		* 문서다운로드이력 상세
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		SELECT
+			ATTACH_CD			-- 첨부파일코드
+			, FILE_SEQ			-- 첨부파일일련번호
+			, DOWNLOAD_SEQ			-- 다운로드일련번호
+			, USER_ID			-- 사용자ID
+			, DOWNLOAD_TYPE			-- 다운로드유형
+			, DOWNLOAD_DT			-- 다운로드일시
+		FROM DOCUMENT_DOWNLOAD
+		WHERE 1 = 1
+			AND ATTACH_CD = #{ATTACH_CD}
+			AND FILE_SEQ = #{FILE_SEQ}
+			AND DOWNLOAD_SEQ = #{DOWNLOAD_SEQ}
+	</select>
+
+	<insert id="documentDownloadInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* Main.documentDownloadInsert
+		* 문서다운로드이력 입력
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		<selectKey keyProperty="ID입력" resultType="String" order="BEFORE">
+			SELECT QUERY 작성
+		</selectKey>
+		INSERT INTO DOCUMENT_DOWNLOAD (
+			ATTACH_CD
+			, FILE_SEQ
+			, DOWNLOAD_SEQ
+			, USER_ID
+			, DOWNLOAD_TYPE
+			, DOWNLOAD_DT
+		)
+		VALUES (
+			#{ATTACH_CD}			-- 첨부파일코드
+			, #{FILE_SEQ}			-- 첨부파일일련번호
+			, #{DOWNLOAD_SEQ}			-- 다운로드일련번호
+			, #{USER_ID}			-- 사용자ID
+			, #{DOWNLOAD_TYPE}			-- 다운로드유형
+			, #{DOWNLOAD_DT}			-- 다운로드일시
+		)
+	</insert>
+
+	<update id="documentDownloadUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* Main.documentDownloadUpdate
+		* 문서다운로드이력 수정
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		UPDATE DOCUMENT_DOWNLOAD
+		SET
+			USER_ID = #{USER_ID}			-- 사용자ID
+			, DOWNLOAD_TYPE = #{DOWNLOAD_TYPE}			-- 다운로드유형
+			, DOWNLOAD_DT = #{DOWNLOAD_DT}			-- 다운로드일시
+		WHERE ATTACH_CD = #{ATTACH_CD}			-- 첨부파일코드
+			AND FILE_SEQ = #{FILE_SEQ}			-- 첨부파일일련번호
+			AND DOWNLOAD_SEQ = #{DOWNLOAD_SEQ}			-- 다운로드일련번호
+	</update>
+
+	<delete id="documentDownloadDelete" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* Main.documentDownloadDelete
+		* 문서다운로드이력 삭제
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		DELETE FROM DOCUMENT_DOWNLOAD
+		WHERE ATTACH_CD = #{ATTACH_CD}			-- 첨부파일코드
+			AND FILE_SEQ = #{FILE_SEQ}			-- 첨부파일일련번호
+			AND DOWNLOAD_SEQ = #{DOWNLOAD_SEQ}			-- 다운로드일련번호
+	</delete>
+	<!-- document_download(문서다운로드이력) END -->
+
+	<!-- user_grid_config(사용자그리드설정) START -->
+	<select id="userGridConfigList" parameterType="map" timeout="0" resultMap="gridMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* Main.userGridConfigList
+		* 사용자그리드설정 목록
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		SELECT
+			PROJECT_CD				-- 프로젝트코드
+			, USER_CD				-- 사용자코드
+			, MENU_CD				-- 메뉴코드
+			, GRID_NO				-- GRID번호
+			, GRID_FORMAT			-- GRID포맷정보
+			, ORDER_CONFIG			-- GRID정렬설정
+			, FILTER_CONFIG			-- GRID필터설정
+			, FIT_CONFIG			-- GRID고정설정
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="REG_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			</include> AS REG_DT	-- 등록일시
+			, REG_CD				-- 등록자코드
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="MOD_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			</include> AS MOD_DT	-- 수정일시
+			, MOD_CD				-- 수정자코드
+		FROM USER_GRID_CONFIG
+		WHERE 1 = 1
+		<if test=" PROJECT_CD != null and PROJECT_CD != '' ">
+			AND PROJECT_CD = #{PROJECT_CD}
+		</if>
+		<if test=" USER_CD != null and USER_CD != '' ">
+			AND USER_CD = #{USER_CD}
+		</if>
+		<if test=" MENU_CD != null and MENU_CD != '' ">
+			AND MENU_CD = #{MENU_CD}
+		</if>
+		<if test=" GRID_NO != null and GRID_NO != '' ">
+			AND GRID_NO = #{GRID_NO}
+		</if>
+	</select>
+
+	<select id="userGridConfigDetail" parameterType="map" timeout="0" resultMap="gridMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* Main.userGridConfigDetail
+		* 사용자그리드설정 상세
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		SELECT
+			PROJECT_CD				-- 프로젝트코드
+			, USER_CD				-- 사용자코드
+			, MENU_CD				-- 메뉴코드
+			, GRID_NO				-- GRID번호
+			, GRID_FORMAT			-- GRID포맷정보
+			, ORDER_CONFIG			-- GRID정렬설정
+			, FILTER_CONFIG			-- GRID필터설정
+			, FIT_CONFIG			-- GRID고정설정
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="REG_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			</include> AS REG_DT	-- 등록일시
+			, REG_CD				-- 등록자코드
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="MOD_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			</include> AS MOD_DT	-- 수정일시
+			, MOD_CD				-- 수정자코드
+		FROM USER_GRID_CONFIG
+		WHERE 1 = 1
+			AND PROJECT_CD = #{PROJECT_CD}
+			AND USER_CD = #{USER_CD}
+			AND MENU_CD = #{MENU_CD}
+			AND GRID_NO = #{GRID_NO}
+	</select>
+
+	<insert id="userGridConfigInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* Main.userGridConfigInsert
+		* 사용자그리드설정 입력
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		<selectKey keyProperty="ID입력" resultType="String" order="BEFORE">
+			SELECT QUERY 작성
+		</selectKey>
+		INSERT INTO USER_GRID_CONFIG (
+			PROJECT_CD
+			, USER_CD
+			, MENU_CD
+			, GRID_NO
+			, GRID_FORMAT
+			, ORDER_CONFIG
+			, FILTER_CONFIG
+			, FIT_CONFIG
+			, REG_DT
+			, REG_CD
+		)
+		VALUES (
+			#{PROJECT_CD}			-- 프로젝트코드
+			, #{USER_CD}			-- 사용자코드
+			, #{MENU_CD}			-- 메뉴코드
+			, #{GRID_NO}			-- GRID번호
+			<if test="_databaseId == 'MySQL'">
+			, #{GRID_FORMAT}			-- GRID포맷정보
+			</if>
+			<if test="_databaseId == 'PostgreSQL'">
+			, #{GRID_FORMAT,jdbcType=CLOB}			-- GRID포맷정보
+			</if>
+			<if test="_databaseId == 'Oracle'">
+			, #{GRID_FORMAT,jdbcType=CLOB}			-- GRID포맷정보
+			</if>
+			, #{ORDER_CONFIG}			-- GRID정렬설정
+			, #{FILTER_CONFIG}			-- GRID필터설정
+			, #{FIT_CONFIG}			-- GRID고정설정
+			, <include refid="CommonInc.sysdate" />			-- 등록일시
+			, #{REG_CD}			-- 등록자코드
+		)
+	</insert>
+
+	<update id="userGridConfigUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* Main.userGridConfigUpdate
+		* 사용자그리드설정 수정
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		UPDATE USER_GRID_CONFIG
+		SET
+			<if test="_databaseId == 'MySQL'">
+			GRID_FORMAT = #{GRID_FORMAT}			-- GRID포맷정보
+			</if>
+			<if test="_databaseId == 'PostgreSQL'">
+			GRID_FORMAT = #{GRID_FORMAT,jdbcType=CLOB}			-- GRID포맷정보
+			</if>
+			<if test="_databaseId == 'Oracle'">
+			GRID_FORMAT = #{GRID_FORMAT,jdbcType=CLOB}			-- GRID포맷정보
+			</if>
+			, ORDER_CONFIG = #{ORDER_CONFIG}			-- GRID정렬설정
+			, FILTER_CONFIG = #{FILTER_CONFIG}			-- GRID필터설정
+			, FIT_CONFIG = #{FIT_CONFIG}			-- GRID고정설정
+			, REG_CD = #{REG_CD}			-- 등록자코드
+			, MOD_DT = <include refid="CommonInc.sysdate" />			-- 수정일시
+			, MOD_CD = #{MOD_CD}			-- 수정자코드
+		WHERE PROJECT_CD = #{PROJECT_CD}			-- 프로젝트코드
+			AND USER_CD = #{USER_CD}			-- 사용자코드
+			AND MENU_CD = #{MENU_CD}			-- 메뉴코드
+			AND GRID_NO = #{GRID_NO}			-- GRID번호
+	</update>
+
+	<delete id="userGridConfigDelete" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* Main.userGridConfigDelete
+		* 사용자그리드설정 삭제
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		DELETE FROM USER_GRID_CONFIG
+		WHERE PROJECT_CD = #{PROJECT_CD}			-- 프로젝트코드
+			AND USER_CD = #{USER_CD}			-- 사용자코드
+			AND MENU_CD = #{MENU_CD}			-- 메뉴코드
+			AND GRID_NO = #{GRID_NO}			-- GRID번호
+	</delete>
+	<!-- user_grid_config(사용자그리드설정) END -->
+
+	<!-- user_dash_config(사용자대시보드설정) START -->
+	<select id="userDashConfigList" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* Main.userDashConfigList
+		* 사용자대시보드설정 목록
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		SELECT
+			PROJECT_CD				-- 프로젝트코드
+			, USER_CD				-- 사용자코드
+			, PAGE_NO				-- 페이지번호
+			, GRID_NO				-- GRID번호
+			, DASH_CD				-- 대시번호코드
+			, DASH_TYPE				-- 대시번호유형
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="REG_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			</include> AS REG_DT	-- 등록일시
+			, REG_CD				-- 등록자코드
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="MOD_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			</include> AS MOD_DT	-- 수정일시
+			, MOD_CD				-- 수정자코드
+		FROM USER_DASH_CONFIG
+		WHERE 1 = 1
+		<if test=" PROJECT_CD != null and PROJECT_CD != '' ">
+			AND PROJECT_CD = #{PROJECT_CD}
+		</if>
+		<if test=" USER_CD != null and USER_CD != '' ">
+			AND USER_CD = #{USER_CD}
+		</if>
+		<if test=" PAGE_NO != null and PAGE_NO != '' ">
+			AND PAGE_NO = #{PAGE_NO}
+		</if>
+		<if test=" GRID_NO != null and GRID_NO != '' ">
+			AND GRID_NO = #{GRID_NO}
+		</if>
+	</select>
+
+	<select id="userDashConfigDetail" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* Main.userDashConfigDetail
+		* 사용자대시보드설정 상세
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		SELECT
+			PROJECT_CD				-- 프로젝트코드
+			, USER_CD				-- 사용자코드
+			, PAGE_NO				-- 페이지번호
+			, GRID_NO				-- GRID번호
+			, DASH_CD				-- 대시번호코드
+			, DASH_TYPE				-- 대시번호유형
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="REG_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			</include> AS REG_DT	-- 등록일시
+			, REG_CD				-- 등록자코드
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="MOD_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			</include> AS MOD_DT	-- 수정일시
+			, MOD_CD				-- 수정자코드
+		FROM USER_DASH_CONFIG
+		WHERE 1 = 1
+			AND PROJECT_CD = #{PROJECT_CD}
+			AND USER_CD = #{USER_CD}
+			AND PAGE_NO = #{PAGE_NO}
+			AND GRID_NO = #{GRID_NO}
+	</select>
+
+	<insert id="userDashConfigInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* Main.userDashConfigInsert
+		* 사용자대시보드설정 입력
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		INSERT INTO USER_DASH_CONFIG (
+			  PROJECT_CD
+			, USER_CD
+			, PAGE_NO
+			, GRID_NO
+			, DASH_CD
+			, DASH_TYPE
+			, REG_DT
+			, REG_CD
+		)
+		VALUES (
+			  #{sProjectCd}			-- 프로젝트코드
+			, #{_sessionUserCd}		-- 사용자코드
+			, #{sPageNo}			-- 페이지번호
+			, #{GRID_NO}			-- GRID번호
+			, #{DASH_CD}			-- 대시번호코드
+			, #{DASH_TYPE}			-- 대시번호유형
+			, <include refid="CommonInc.sysdate" />			    -- 등록일시
+			, #{_sessionUserCd}		-- 등록자코드
+		)
+	</insert>
+
+	<update id="userDashConfigUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		 *
+		 * Main.userDashConfigUpdate
+		 * 사용자대시보드설정 수정
+		 * @author takeit
+		 * @since 2019.08.02
+		 */
+		]]>
+        UPDATE  USER_DASH_CONFIG
+           SET  DASH_CD    = #{DASH_CD}			-- 대시번호코드
+               ,DASH_TYPE  = #{DASH_TYPE}		-- 대시번호유형
+               ,MOD_DT     = <include refid="CommonInc.sysdate" />			-- 수정일시
+               ,MOD_CD     = #{_sessionUserCd}	-- 수정자코드
+         WHERE  PROJECT_CD = #{sProjectCd}		-- 프로젝트코드
+           AND  USER_CD    = #{_sessionUserCd}	-- 사용자코드
+           AND  PAGE_NO    = #{sPageNo}			-- 페이지번호
+           AND  GRID_NO    = #{GRID_NO}			-- GRID번호
+	</update>
+
+	<delete id="userDashConfigDelete" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* Main.userDashConfigDelete
+		* 사용자대시보드설정 삭제
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+        DELETE
+          FROM  USER_DASH_CONFIG
+         WHERE  PROJECT_CD = #{sProjectCd}	    -- 프로젝트코드
+           AND  USER_CD    = #{_sessionUserCd}	-- 사용자코드
+           AND  PAGE_NO    = #{sPageNo}			-- 페이지번호
+           AND  GRID_NO    = #{GRID_NO}			-- GRID번호
+	</delete>
+	<!-- user_dash_config(사용자대시보드설정) END -->
+
+	<select id="codeSimpleSelect" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<if test="sHeaderType != null and sHeaderType != '' and sHeaderType == 'ALL' ">
+			SELECT '' AS CODE, '전체' AS NAME
+                 , '' AS REF1
+                 , '' AS REF2
+                 , '' AS REF3
+                 , '' AS REF4
+				 , '' AS REF5
+                 , '' AS CODE_ORDER
+              <include refid="CommonInc.dual" />
+			UNION ALL
+		</if>
+		<if test="sHeaderType != null and sHeaderType != '' and sHeaderType == 'SEL' ">
+			SELECT '' AS CODE, '선택' AS NAME
+                 , '' AS REF1
+                 , '' AS REF2
+                 , '' AS REF3
+                 , '' AS REF4
+				 , '' AS REF5
+                 , '' AS CODE_ORDER
+              <include refid="CommonInc.dual" />
+			UNION ALL
+		</if>
+		SELECT CODE, NAME
+             , REF1
+             , REF2
+             , REF3
+             , REF4
+             , REF5
+             , CODE_ORDER
+		FROM (
+			SELECT C.CODE_ID AS CODE
+			     , <include refid="CommonInc.nvl">
+			     	<property name="arg1" value="M.ML_LANG_TXT"/>
+			     	<property name="arg2" value="C.CODE_NM"/>
+			     </include> AS NAME
+                 , C.REF1
+                 , C.REF2
+                 , C.REF3
+                 , C.REF4
+                 , C.REF5
+                 , C.CODE_ORDER
+			FROM CODE_INFO C
+            LEFT JOIN MULTILANGUAGE_DETAIL M
+              ON M.LANG_CD = #{sLangCd}
+             AND M.ML_CD = C.ML_CD
+			WHERE C.GROUP_ID =  #{sGroupId}
+			 AND C.USE_YN = 'Y'
+			<if test="sRef1 != null and sRef1 != '' ">
+		  		AND C.REF1 LIKE 
+		  		<if test="_databaseId == 'Oracle'">
+				('%' || #{sRef1} || '%')
+				</if>
+				<if test="_databaseId == 'SQL Server'">
+				('%' || #{sRef1} || '%')
+				</if>
+				<if test="_databaseId == 'MySQL'">
+				CONCAT('%' , #{sRef1} , '%')
+				</if>
+				<if test="_databaseId == 'PostgreSQL'">
+				('%' || #{sRef1} || '%')
+				</if> 
+			</if>
+			<if test="sRef2 != null and sRef2 != '' ">
+		  		AND C.REF2 LIKE 
+		  		<if test="_databaseId == 'Oracle'">
+		  		('%' || #{sRef2} || '%')
+				</if>
+				<if test="_databaseId == 'SQL Server'">
+				('%' || #{sRef2} || '%')
+				</if>
+				<if test="_databaseId == 'MySQL'">
+				CONCAT('%' , #{sRef2} , '%')
+				</if>
+				<if test="_databaseId == 'PostgreSQL'">
+				('%' || #{sRef2} || '%')
+				</if> 
+			</if>
+			<if test="sRef3 != null and sRef3 != '' ">
+		  		AND C.REF3 LIKE 
+		  		<if test="_databaseId == 'Oracle'">
+		  		('%' || #{sRef3} || '%')
+				</if>
+				<if test="_databaseId == 'SQL Server'">
+				('%' || #{sRef3} || '%')
+				</if>
+				<if test="_databaseId == 'MySQL'">
+				CONCAT('%' , #{sRef3} , '%')
+				</if>
+				<if test="_databaseId == 'PostgreSQL'">
+				('%' || #{sRef3} || '%')
+				</if> 
+			</if>
+			<if test="sRef4 != null and sRef4 != '' ">
+		  		AND C.REF4 LIKE 
+		  		<if test="_databaseId == 'Oracle'">
+		  		('%' || #{sRef4} || '%')
+				</if>
+				<if test="_databaseId == 'SQL Server'">
+				('%' || #{sRef4} || '%')
+				</if>
+				<if test="_databaseId == 'MySQL'">
+				CONCAT('%' , #{sRef4} , '%')
+				</if>
+				<if test="_databaseId == 'PostgreSQL'">
+				('%' || #{sRef4} || '%')
+				</if> 
+			</if>
+			<if test="sRef5 != null and sRef5 != '' ">
+		  		AND C.REF5 LIKE 
+		  		<if test="_databaseId == 'Oracle'">
+		  		('%' || #{sRef5} || '%')
+				</if>
+				<if test="_databaseId == 'SQL Server'">
+				('%' || #{sRef5} || '%')
+				</if>
+				<if test="_databaseId == 'MySQL'">
+				CONCAT('%' , #{sRef5} , '%')
+				</if>
+				<if test="_databaseId == 'PostgreSQL'">
+				('%' || #{sRef5} || '%')
+				</if> 
+			</if>
+			ORDER BY CAST(C.CODE_ORDER AS UNSIGNED), C.CODE_KEY
+		) C
+		ORDER BY CAST(CODE_ORDER AS UNSIGNED)
+	</select>
+
+	<!-- LeftFrame START -->
+	<!-- 사용자 메뉴 -->
+	<select id="userMenuSelect" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		SELECT PM.MENU_CD					-- 메뉴코드
+			, PM.DEVICE_TYPE				-- 디바이스 유형
+			, PM.ROOT_MENU					-- ROOT메뉴
+			, PM.PARENT_MENU				-- 부모 메뉴코드
+			, PM.MENU_LEVEL					-- 메뉴LEVEL
+			, <include refid="CommonInc.nvl">
+			  	<property name="arg1" value="ML.ML_LANG_TXT"/>
+			  	<property name="arg2" value="PM.MENU_NM"/>
+			  </include>  AS MENU_NM					-- 메뉴명
+			, PM.MENU_TYPE					-- 메뉴유형
+			, P.PROGRAM_ID AS MENU_URL		-- 메뉴URL(*.XFDL)
+			, PM.MENU_ORDER					-- 정렬순서
+			, PM.DISPLAY_YN					-- 메뉴표시여부
+			, PM.DESC_TXT					-- 상세설명
+			, P.PROGRAM_PREFIX 				-- 메뉴PREFIX
+			, PM.MENU_PARAM					-- 메뉴파라미터
+			, SI.FILE_NM AS MENU_ICON
+			, (CASE WHEN UM.MENU_CD IS NULL THEN 'N'
+				ELSE 'Y' END) AS MYMENU_YN
+		FROM PROJECT_USER_ROLE PUR
+			INNER JOIN PROJECT_ROLE_MENU PRM ON PUR.PROJECT_CD = PRM.PROJECT_CD
+					AND PUR.ROLE_CD = PRM.ROLE_CD
+					AND (
+						R_READ = 'Y' OR R_INPUT = 'Y' OR R_DELETE = 'Y' OR R_SAVE = 'Y' OR R_PRINT = 'Y' OR R_EXCEL = 'Y'
+					)
+			INNER JOIN PROJECT_MENU PM ON PRM.PROJECT_CD = PM.PROJECT_CD AND PRM.MENU_CD = PM.MENU_CD
+			LEFT OUTER JOIN SYSTEM_ICON SI ON SI.SYSTEM_ID = 'S000000001' AND PM.MENU_ICON = SI.ICON_SEQ
+			LEFT OUTER JOIN PROGRAM_INFO P ON P.USE_YN = 'Y' AND PM.PROGRAM_CD = P.PROGRAM_CD
+			LEFT OUTER JOIN CODE_INFO C ON C.GROUP_ID = '00006' AND P.PROGRAM_PREFIX = C.CODE_ID
+			LEFT OUTER JOIN USER_MYMENU UM ON PM.PROJECT_CD = UM.PROJECT_CD AND PM.MENU_CD = UM.MENU_CD AND UM.USER_CD = #{_sessionUserCd}
+            LEFT OUTER JOIN MULTILANGUAGE_DETAIL ML ON ML.ML_CD = PM.ML_CD AND ML.LANG_CD = #{sLangCd}
+		WHERE PM.USE_YN = 'Y'
+		    <!-- 20210120 정해원 숨김메뉴처리 -->
+		    AND <include refid="CommonInc.nvl">
+			  	<property name="arg1" value="PM.DISPLAY_YN"/>
+			  	<property name="arg2" value="'N'"/>
+			  </include> = 'Y'
+			AND PUR.PROJECT_CD = #{sProjectCd}
+			AND PUR.USER_CD = #{_sessionUserCd}
+			<if test=" MENU_NM != null and MENU_NM != '' " >				
+			
+				AND (   PM.MENU_NM LIKE
+						<if test="_databaseId == 'Oracle'">
+						('%' || #{MENU_NM} || '%')
+						</if>
+						<if test="_databaseId == 'SQL Server'">
+						('%' || #{MENU_NM} || '%')
+						</if>
+						<if test="_databaseId == 'MySQL'">
+						CONCAT('%' , #{MENU_NM} , '%')
+						</if>
+						<if test="_databaseId == 'PostgreSQL'">
+						('%' || #{MENU_NM} || '%')
+						</if>  
+				
+				
+				     OR PM.MENU_CD LIKE 
+				     	<if test="_databaseId == 'Oracle'">
+						('%' || #{MENU_NM} || '%')
+						</if>
+						<if test="_databaseId == 'SQL Server'">
+						('%' || #{MENU_NM} || '%')
+						</if>
+						<if test="_databaseId == 'MySQL'">
+						CONCAT('%' , #{MENU_NM} , '%')
+						</if>
+						<if test="_databaseId == 'PostgreSQL'">
+						('%' || #{MENU_NM} || '%')
+						</if>  
+					)
+			    AND (   PM.MENU_TYPE = '03'
+			         OR PM.MENU_TYPE = '05' )
+			</if>
+
+		GROUP BY PM.MENU_CD
+			, PM.DEVICE_TYPE
+			, PM.ROOT_MENU
+			, PM.PARENT_MENU
+			, PM.MENU_LEVEL
+			, PM.MENU_NM
+			, PM.MENU_TYPE
+            , ML.ML_LANG_TXT
+			, P.PROGRAM_ID
+			, PM.MENU_ORDER
+			, PM.DISPLAY_YN
+			, PM.DESC_TXT
+			, P.PROGRAM_PREFIX
+			, PM.TEMPLATE_CD
+			, SI.FILE_NM
+			, PM.MENU_PARAM
+			, UM.MENU_CD
+		ORDER BY PM.MENU_ORDER
+	</select>
+
+	<!-- 메뉴검색 -->
+	<select id="userMenuSearch" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		SELECT PRM.MENU_CD
+			, PM.PARENT_MENU
+			, PM.MENU_NM
+			, P.PROGRAM_ID AS MENU_URL
+			, CODE_NM AS PROGRAM_PREFIX
+			, PM.MENU_PARAM					-- 메뉴파라미터
+		FROM PROJECT_USER_ROLE PUR
+			INNER JOIN PROJECT_ROLE_MENU PRM ON PUR.PROJECT_CD = PRM.PROJECT_CD AND PUR.ROLE_CD = PRM.ROLE_CD
+			INNER JOIN PROJECT_MENU PM ON PRM.PROJECT_CD = PM.PROJECT_CD AND PRM.MENU_CD = PM.MENU_CD
+			LEFT OUTER JOIN PROGRAM_INFO P ON P.USE_YN = 'Y' AND PM.PROGRAM_CD = P.PROGRAM_CD
+			LEFT OUTER JOIN CODE_INFO C ON C.GROUP_ID = '00006' AND P.PROGRAM_PREFIX = C.CODE_ID
+		WHERE PM.USE_YN = 'Y'
+			AND PM.MENU_TYPE = '03'
+			AND PUR.PROJECT_CD = #{sProjectCd}
+			AND PUR.USER_CD = #{_sessionUserCd}
+			AND PM.MENU_NM LIKE 
+			<if test="_databaseId == 'Oracle'">
+			('%' || #{sSearchWord} || '%')
+			</if>
+			<if test="_databaseId == 'SQL Server'">
+			('%' || #{sSearchWord} || '%')
+			</if>
+			<if test="_databaseId == 'MySQL'">
+			CONCAT('%' , #{sSearchWord} , '%')
+			</if>
+			<if test="_databaseId == 'PostgreSQL'">
+			('%' || #{sSearchWord} || '%')
+			</if> 
+	</select>
+
+	<!-- user_mymenu_group(사용자마이메뉴그룹) START -->
+	<select id="userMymenuGroupList" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* Main.userMymenuGroupList
+		* 사용자마이메뉴그룹 목록
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		SELECT
+			PROJECT_CD				-- 프로젝트코드
+			, USER_CD				-- 사용자코드
+			, GROUP_CD				-- 그룹코드
+			, GROUP_NM				-- 그룹명
+			, MEMO_TXT				-- 메모
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="REG_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			</include> AS REG_DT	-- 등록일시
+			, REG_CD				-- 등록자코드
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="MOD_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			</include> AS MOD_DT	-- 수정일시
+			, MOD_CD				-- 수정자코드
+		FROM USER_MYMENU_GROUP
+		WHERE PROJECT_CD = #{PROJECT_CD}
+			AND USER_CD = #{_sessionUserCd}
+	</select>
+
+	<insert id="userMymenuGroupInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* Main.userMymenuGroupInsert
+		* 사용자마이메뉴그룹 입력
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		INSERT INTO USER_MYMENU_GROUP (
+			PROJECT_CD
+			, USER_CD
+			, GROUP_CD
+			, GROUP_NM
+			, MEMO_TXT
+			, REG_DT
+			, REG_CD
+		)
+		VALUES (
+			#{PROJECT_CD}			-- 프로젝트코드
+			, #{_sessionUserCd}		-- 사용자코드(세션)
+			, #{GROUP_CD}			-- 그룹코드
+			, #{GROUP_NM}			-- 그룹명
+			, #{MEMO_TXT}			-- 메모
+			, <include refid="CommonInc.sysdate" />					-- 등록일시
+			, #{_sessionUserCd}		-- 등록자코드(세션)
+		)
+	</insert>
+
+	<update id="userMymenuGroupUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* Main.userMymenuGroupUpdate
+		* 사용자마이메뉴그룹 수정
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		UPDATE USER_MYMENU_GROUP
+		SET
+			GROUP_NM = #{GROUP_NM}			-- 그룹명
+			, MEMO_TXT = #{MEMO_TXT}		-- 메모
+			, MOD_DT = <include refid="CommonInc.sysdate" />				-- 수정일시
+			, MOD_CD = #{_sessionUserCd}	-- 수정자코드(세션)
+		WHERE PROJECT_CD = #{PROJECT_CD}	-- 프로젝트코드
+			AND USER_CD = #{_sessionUserCd}	-- 사용자코드(세션)
+			AND GROUP_CD = #{GROUP_CD}		-- 그룹코드
+	</update>
+
+	<delete id="userMymenuGroupDelete" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* Main.userMymenuGroupDelete
+		* 사용자마이메뉴그룹 삭제
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		DELETE FROM USER_MYMENU_GROUP
+		WHERE PROJECT_CD = #{PROJECT_CD}		-- 프로젝트코드
+			AND USER_CD = #{_sessionUserCd}		-- 사용자코드(세션)
+			AND GROUP_CD = #{GROUP_CD}			-- 그룹코드
+	</delete>
+	<!-- user_mymenu_group(사용자마이메뉴그룹) END -->
+
+	<!-- user_mymenu(사용자마이메뉴) START -->
+	<select id="userMymenuList" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* Main.userMymenuList
+		* 사용자마이메뉴 목록
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		--SELECT *
+		--FROM (
+		--	SELECT group_cd AS menu_cd
+		--		, group_nm AS menu_nm
+		--		, '0' AS menu_level
+		--		, '02' AS menu_type
+		--		, '' AS menu_url
+		--		, '' AS program_prefix
+		--		, group_order AS menu_order
+		--		, '' AS menu_param
+		--	FROM user_mymenu_group
+		--	WHERE project_cd = sProjectCd
+		--		AND user_cd = _sessionUserCd
+		--	UNION ALL
+			SELECT UM.menu_cd
+				, PM.device_type				-- 디바이스 유형
+				, PM.root_menu					-- Root메뉴
+				, PM.parent_menu				-- 부모 메뉴코드
+				, PM.menu_level					-- 메뉴Level
+				, PM.menu_nm					-- 메뉴명
+				, PM.menu_type					-- 메뉴유형
+				, P.program_id AS menu_url		-- 메뉴URL(*.xfdl)
+				, PM.menu_order					-- 정렬순서
+				, PM.display_yn					-- 메뉴표시여부
+				, PM.desc_txt					-- 상세설명
+				, P.program_prefix 				-- 메뉴Prefix
+				, PM.menu_param					-- 메뉴파라미터
+				, '' AS menu_icon
+				, 'Y' AS mymenu_yn
+			FROM user_mymenu UM
+				INNER JOIN user_mymenu_group UMG ON UM.project_cd = UMG.project_cd AND UM.user_cd = UMG.user_cd AND UM.group_cd = UMG.group_cd
+				INNER JOIN project_menu PM ON UM.project_cd = PM.project_cd AND UM.menu_cd = PM.menu_cd
+				INNER JOIN program_info P ON PM.program_cd = P.program_cd
+				LEFT OUTER JOIN code_info C ON C.group_id = '00006' AND P.program_prefix = C.code_id
+			WHERE UM.project_cd = #{sProjectCd}
+				AND UM.user_cd = #{_sessionUserCd}
+		--) A
+		--ORDER BY menu_order
+	</select>
+
+	<insert id="userMymenuInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* Main.userMymenuInsert
+		* 사용자마이메뉴 입력
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		INSERT INTO USER_MYMENU (
+			PROJECT_CD
+			, USER_CD
+			, GROUP_CD
+			, MENU_CD
+			, REG_DT
+			, REG_CD
+		)
+		VALUES (
+			#{PROJECT_CD}			-- 프로젝트코드
+			, #{_sessionUserCd}		-- 사용자코드
+			, #{GROUP_CD}			-- 그룹코드
+			, #{MENU_CD}			-- 메뉴코드
+			, <include refid="CommonInc.sysdate" />					-- 등록일시
+			, #{_sessionUserCd}		-- 등록자코드
+		)
+	</insert>
+
+	<update id="userMymenuUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* Main.userMymenuUpdate
+		* 사용자마이메뉴 수정
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		UPDATE USER_MYMENU
+		SET
+			GROUP_CD = #{GROUP_CD}			-- 그룹코드
+			, MENU_CD = #{MENU_CD}			-- 메뉴코드
+			, MOD_DT = <include refid="CommonInc.sysdate" />				-- 수정일시
+			, MOD_CD = #{_sessionUserCd}	-- 수정자코드
+		WHERE PROJECT_CD = #{PROJECT_CD}	-- 프로젝트코드
+			AND USER_CD = #{_sessionUserCd}	-- 사용자코드
+	</update>
+
+	<delete id="userMymenuDelete" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* Main.userMymenuDelete
+		* 사용자마이메뉴 삭제
+		* @author takeit
+		* @since 2019.08.02
+		*/
+		]]>
+		DELETE FROM USER_MYMENU
+		WHERE PROJECT_CD = #{PROJECT_CD}		-- 프로젝트코드
+			AND USER_CD = #{_sessionUserCd}		-- 사용자코드
+			AND GROUP_CD = #{GROUP_CD}			-- 그룹코드
+			AND MENU_CD = #{MENU_CD}			-- 메뉴코드
+	</delete>
+	<!-- user_mymenu(사용자마이메뉴) END -->
+
+	<!-- user_recentmenu(사용자최근메뉴) START -->
+	<select id="userRecentmenuList" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* Main.userRecentmenuList
+		* 사용자최근메뉴 목록
+		* @author takeit
+		* @since 2019.09.05
+		*/
+		]]>
+		SELECT UM.MENU_CD
+			, PM.MENU_NM
+			, PM.MENU_TYPE
+			, P.PROGRAM_ID AS MENU_URL
+			, P.PROGRAM_PREFIX
+			
+			<if test="_databaseId == 'Oracle'">		        
+		    , TO_CHAR(NVL(UM.MOD_DT, UM.REG_DT), 'YYYY-MM-DD HH24:MI') AS REG_DT	-- 등록일시
+		    </if>
+			<if test="_databaseId == 'SQL Server'">
+			, CONVERT(CHAR, ISNULL(UM.MOD_DT, UM.REG_DT), 'YYYY-MM-DD HH24:MI') AS REG_DT	-- 등록일시		        
+		    </if>
+		    <if test="_databaseId == 'MySQL'">
+		    , DATE_FORMAT(IFNULL(UM.MOD_DT, UM.REG_DT), 'YYYY-MM-DD HH24:MI') AS REG_DT	-- 등록일시
+		    </if>
+		    <if test="_databaseId == 'PostgreSQL'">
+		    , TO_CHAR(COALESCE(UM.MOD_DT, UM.REG_DT), 'YYYY-MM-DD HH24:MI') AS REG_DT	-- 등록일시
+			</if>
+			
+			, PM.MENU_PARAM					-- 메뉴파라미터
+		FROM USER_RECENTMENU UM
+			INNER JOIN PROJECT_MENU PM ON UM.PROJECT_CD = PM.PROJECT_CD AND UM.MENU_CD = PM.MENU_CD
+			INNER JOIN PROGRAM_INFO P ON PM.PROGRAM_CD = P.PROGRAM_CD
+			<!-- 20210120 정해원 사용자권한 테이블 JOIN -->
+			INNER JOIN PROJECT_USER_ROLE PUR ON PUR.PROJECT_CD = UM.PROJECT_CD AND PUR.USER_CD = UM.USER_CD
+			INNER JOIN PROJECT_ROLE_MENU PRM ON PUR.PROJECT_CD = PRM.PROJECT_CD AND PUR.ROLE_CD = PRM.ROLE_CD AND PM.MENU_CD = PRM.MENU_CD
+			AND ( PRM.R_READ = 'Y' OR PRM.R_INPUT = 'Y' OR PRM.R_DELETE = 'Y' OR PRM.R_SAVE = 'Y' OR PRM.R_PRINT = 'Y' OR PRM.R_EXCEL = 'Y' )
+		WHERE UM.PROJECT_CD = #{sProjectCd}
+			AND UM.USER_CD = #{_sessionUserCd}
+			<!-- 20210120 정해원 미사용메뉴,숨김메뉴 제거 -->
+			AND PM.USE_YN = 'Y'
+			AND <include refid="CommonInc.nvl">
+					<property name="arg1" value="PM.DISPLAY_YN"/>
+					<property name="arg2" value="'N'"/>
+				</include> = 'Y'
+		ORDER BY
+			<include refid="CommonInc.nvl">
+				<property name="arg1" value="UM.MOD_DT"/>
+				<property name="arg2" value="UM.REG_DT"/>
+			</include> DESC
+	</select>
+
+	<select id="userRecentmenuCheck" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* Main.userRecentmenuCheck
+		* 최근메뉴 입력전 체크
+		* @author takeit
+		* @since 2019.09.10
+		*/
+		]]>
+		SELECT A.MENU_CNT
+			, (
+				SELECT COUNT(*) FROM USER_RECENTMENU WHERE PROJECT_CD = #{sProjectCd} AND USER_CD = #{_sessionUserCd} AND MENU_CD = #{sMenuId}
+			) AS CLICK_MENU_YN
+		FROM (
+				SELECT COUNT(*) AS MENU_CNT
+				FROM USER_RECENTMENU
+				WHERE PROJECT_CD = #{sProjectCd}
+					AND USER_CD = #{_sessionUserCd}
+			) A
+	</select>
+
+	<insert id="userRecentmenuInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* Main.userRecentmenuInsert
+		* 최근메뉴 입력
+		* @author takeit
+		* @since 2019.09.10
+		*/
+		]]>
+		INSERT INTO USER_RECENTMENU (
+			PROJECT_CD
+			, USER_CD
+			, MENU_CD
+			, REG_DT
+			, REG_CD
+		)
+		VALUES (
+			#{sProjectCd}		-- 프로젝트코드
+			, #{_sessionUserCd}	-- 사용자코드
+			, #{sMenuId}		-- 메뉴코드
+			, <include refid="CommonInc.sysdate" />				-- 등록일시
+			, #{_sessionUserCd}	-- 등록자코드
+		)
+	</insert>
+
+	<update id="userRecentmenuUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* Main.userRecentmenuUpdate
+		* 최근메뉴 수정
+		* @author takeit
+		* @since 2019.09.10
+		*/
+		]]>
+		UPDATE USER_RECENTMENU
+		SET
+			MOD_DT = <include refid="CommonInc.sysdate" />					-- 로그인실패횟수
+			, MOD_CD = #{_sessionUserCd}	-- 최종로그인일시
+		WHERE PROJECT_CD = #{sProjectCd}	-- 프로젝트코드
+			AND USER_CD = #{_sessionUserCd}	-- 사용자코드
+			AND MENU_CD = #{sMenuId}		-- 메뉴코드
+	</update>
+
+	<delete id="userRecentmenuLastDelete" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* Main.userRecentmenuLastDelete
+		* 마지막 최근메뉴 삭제
+		* @author takeit
+		* @since 2019.09.10
+		*/
+		]]>
+		DELETE FROM USER_RECENTMENU
+		WHERE PROJECT_CD = #{sProjectCd}	-- 프로젝트코드
+			AND USER_CD = #{_sessionUserCd}	-- 사용자코드
+			<if test="_databaseId == 'Oracle'">
+		    AND MENU_CD = (SELECT MENU_CD FROM (SELECT MENU_CD FROM USER_RECENTMENU ORDER BY (CASE WHEN MOD_DT IS NULL THEN REG_DT ELSE MOD_DT END)) A WHERE ROWNUM <![CDATA[ <=]]> 1)
+		    </if>
+			<if test="_databaseId == 'SQL Server'">
+			AND MENU_CD = (SELECT MENU_CD FROM (SELECT MENU_CD FROM USER_RECENTMENU ORDER BY (CASE WHEN MOD_DT IS NULL THEN REG_DT ELSE MOD_DT END)) A WHERE ROWNUM <![CDATA[ <=]]> 1)
+		    </if>
+			<if test="_databaseId == 'MySQL'">
+			AND MENU_CD = (SELECT MENU_CD FROM (
+												SELECT ROW_NUMBER() OVER (PARTITION BY USER_CD ORDER BY IFNULL(MOD_DT, REG_DT)) AS ROWNUM
+													,MENU_CD
+												FROM USER_RECENTMENU 
+												WHERE USER_CD = #{_sessionUserCd}
+												ORDER BY IFNULL(MOD_DT, REG_DT)
+											   ) A WHERE ROWNUM <![CDATA[ <=]]> 1)
+		    </if>
+			<if test="_databaseId == 'PostgreSQL'">
+			AND MENU_CD = (SELECT MENU_CD FROM (SELECT MENU_CD, (ROW_NUMBER() OVER()) AS ROWNUM FROM USER_RECENTMENU ORDER BY (CASE WHEN MOD_DT IS NULL THEN REG_DT ELSE MOD_DT END)) A WHERE ROWNUM <![CDATA[ <=]]> 1)
+		    </if>
+	</delete>
+	<!-- user_recentmenu(사용자최근메뉴) END -->
+	<!-- LeftFrame END -->
+
+	<!-- WorkFrame START -->
+	<!-- 화면 버튼 권한 START -->
+	<select id="userButtonRoleSelect" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		 *
+		 * Main.userButtonRoleSelect
+		 * 화면 버튼 권한 조회
+		 * @author takeit
+		 * @since 2019.09.05
+		 */
+		]]>
+	  SELECT 
+            <if test="_databaseId == 'Oracle'">
+			(  (CASE WHEN (MAX(PRM.R_READ)) IS NULL THEN 'N' ELSE MAX(PRM.R_READ) END)
+		     || (CASE WHEN (MAX(PRM.R_INPUT)) IS NULL THEN 'N' ELSE MAX(PRM.R_INPUT) END)
+		     || (CASE WHEN (MAX(PRM.R_DELETE)) IS NULL THEN 'N' ELSE MAX(PRM.R_DELETE) END)
+		     || (CASE WHEN (MAX(PRM.R_SAVE)) IS NULL THEN 'N' ELSE MAX(PRM.R_SAVE) END)
+		     || (CASE WHEN (MAX(PRM.R_PRINT)) IS NULL THEN 'N' ELSE MAX(PRM.R_PRINT) END)
+           ) AS BTN_ROLE
+			</if>
+			<if test="_databaseId == 'SQL Server'">
+			(  (CASE WHEN (MAX(PRM.R_READ)) IS NULL THEN 'N' ELSE MAX(PRM.R_READ) END)
+		     || (CASE WHEN (MAX(PRM.R_INPUT)) IS NULL THEN 'N' ELSE MAX(PRM.R_INPUT) END)
+		     || (CASE WHEN (MAX(PRM.R_DELETE)) IS NULL THEN 'N' ELSE MAX(PRM.R_DELETE) END)
+		     || (CASE WHEN (MAX(PRM.R_SAVE)) IS NULL THEN 'N' ELSE MAX(PRM.R_SAVE) END)
+		     || (CASE WHEN (MAX(PRM.R_PRINT)) IS NULL THEN 'N' ELSE MAX(PRM.R_PRINT) END)
+           ) AS BTN_ROLE
+			</if>
+			<if test="_databaseId == 'MySQL'">
+			CONCAT(
+					 IFNULL(MAX(PRM.R_READ),'N')
+			       , IFNULL(MAX(PRM.R_INPUT),'N')
+			       , IFNULL(MAX(PRM.R_DELETE),'N')
+			       , IFNULL(MAX(PRM.R_SAVE),'N')
+			       , IFNULL(MAX(PRM.R_PRINT),'N')
+		       ) AS BTN_ROLE
+			</if>
+			<if test="_databaseId == 'PostgreSQL'">
+			(  (CASE WHEN (MAX(PRM.R_READ)) IS NULL THEN 'N' ELSE MAX(PRM.R_READ) END)
+		     || (CASE WHEN (MAX(PRM.R_INPUT)) IS NULL THEN 'N' ELSE MAX(PRM.R_INPUT) END)
+		     || (CASE WHEN (MAX(PRM.R_DELETE)) IS NULL THEN 'N' ELSE MAX(PRM.R_DELETE) END)
+		     || (CASE WHEN (MAX(PRM.R_SAVE)) IS NULL THEN 'N' ELSE MAX(PRM.R_SAVE) END)
+		     || (CASE WHEN (MAX(PRM.R_PRINT)) IS NULL THEN 'N' ELSE MAX(PRM.R_PRINT) END)
+           ) AS BTN_ROLE
+			</if> 
+           
+		   , (CASE WHEN (MAX(PRM.R_READ)) IS NULL THEN 'N' ELSE MAX(PRM.R_READ) END)	 AS R_READ
+		   , (CASE WHEN (MAX(PRM.R_INPUT)) IS NULL THEN 'N' ELSE MAX(PRM.R_INPUT) END)	 AS R_INPUT
+		   , (CASE WHEN (MAX(PRM.R_DELETE)) IS NULL THEN 'N' ELSE MAX(PRM.R_DELETE) END)  AS R_DELETE
+		   , (CASE WHEN (MAX(PRM.R_SAVE)) IS NULL THEN 'N' ELSE MAX(PRM.R_SAVE) END)  AS R_SAVE
+		   , (CASE WHEN (MAX(PRM.R_PRINT)) IS NULL THEN 'N' ELSE MAX(PRM.R_PRINT) END)  AS R_PRINT
+		   , (CASE WHEN (MAX(PRM.R_EXCEL)) IS NULL THEN 'N' ELSE MAX(PRM.R_EXCEL) END)  AS R_EXCEL
+		FROM PROJECT_USER_ROLE PUR
+			INNER JOIN PROJECT_ROLE_MENU PRM ON PUR.PROJECT_CD = PRM.PROJECT_CD AND PUR.ROLE_CD = PRM.ROLE_CD
+			INNER JOIN PROJECT_MENU PM ON PRM.PROJECT_CD = PM.PROJECT_CD AND PRM.MENU_CD = PM.MENU_CD AND PROGRAM_CD IS NOT NULL
+			INNER JOIN PROGRAM_INFO P ON PM.PROGRAM_CD = P.PROGRAM_CD
+		WHERE PM.USE_YN = 'Y'
+			AND P.USE_YN = 'Y'
+			AND PUR.PROJECT_CD = #{sProjectCd}
+			AND PUR.USER_CD = #{_sessionUserCd}
+			AND PRM.MENU_CD = #{sMenuCd}
+		GROUP BY PUR.PROJECT_CD, PUR.USER_CD, PRM.MENU_CD
+	</select>
+	<!-- 화면 버튼 권한 END -->
+
+	<!-- 시스템메세지 START -->
+	<select id="systemMessageSelect" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* Main.systemMessageSelect
+		* 시스템 메세지 조회
+		* @author takeit
+		* @since 2019.09.05
+		*/
+		]]>
+		SELECT MD.ML_CD					-- 다국어 메세지코드
+			, MD.ML_LANG_TXT AS ML_NM	-- 다국어 메세지
+		FROM MULTILANGUAGE_INFO MI
+		   INNER JOIN MULTILANGUAGE_DETAIL MD ON MI.ML_CD = MD.ML_CD
+		WHERE MI.ML_GROUP = '002' AND MD.LANG_CD = #{sLangCd}
+	</select>
+	<!-- 시스템메세지 END -->
+
+	<!-- 프로그램메세지 START -->
+	<select id="programMessageSelect" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* Main.programMessageSelect
+		* 프로그램 메세지 조회 - 대시보드 부분은 나중에 추가
+		* @author takeit
+		* @since 2019.09.09
+		*/
+		]]>
+		SELECT MD.ML_CD					-- 다국어 메세지코드
+			, MD.ML_LANG_TXT AS ML_NM	-- 다국어 메세지
+		FROM PROGRAM_INFO P
+			INNER JOIN PROGRAM_COMPONENT PC ON P.PROGRAM_CD = PC.PROGRAM_CD
+			LEFT OUTER JOIN MULTILANGUAGE_DETAIL MD ON PC.ML_CD = MD.ML_CD
+		WHERE P.PROGRAM_ID = #{sProgramId}
+		   AND MD.LANG_CD = #{sLangCd}
+	</select>
+	<!-- 프로그램메세지 END -->
+	<!-- WorkFrame END -->
+
+	<!-- ID, Email 중복 체크 -->
+	<select id="dupCheck" parameterType="map" timeout="0" resultType="String" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* Main.dupCheck
+		* ID, Email 중복 체크
+		* @author takeit
+		* @since 2019.10.22
+		*/
+		]]>
+		SELECT COUNT(*) AS CNT
+		FROM USER_INFO
+		WHERE 1 = 1
+		<if test=" sUserId != null and sUserId != '' ">
+			AND USER_ID = #{sUserId}
+		</if>
+		<if test=" sUserEmail != null and sUserEmail != '' ">
+			AND USER_EMAIL = #{sUserEmail}
+		</if>
+	</select>
+
+	<!-- 비밀번호 변경 -->
+	<select id="userPwRecentUse" parameterType="map" timeout="0" resultType="String" useCache="false">
+        <![CDATA[
+        /*
+         * Main.userPwRecentUse
+         * 현재 비밀번호 조회
+         * @author takeit
+         * @since 2020.05.08
+         */
+        ]]>
+        SELECT USER_PW
+          FROM USER_INFO
+          <trim prefix="WHERE" prefixOverrides="AND |OR ">
+          <if test="@kr.co.takeit.util.MybatisUtil@notEmpty( sUserId )">
+          AND USER_ID = #{sUserId}       -- 사용자ID
+          </if>
+          <if test="@kr.co.takeit.util.MybatisUtil@notEmpty( sUserNm )">
+          AND USER_NM = #{sUserNm}       -- 사용자명
+          </if>
+          <if test="@kr.co.takeit.util.MybatisUtil@notEmpty( sUserEmail )">
+          AND USER_EMAIL = #{sUserEmail} -- 사용자이메일
+          </if>
+          <if test="@kr.co.takeit.util.MybatisUtil@notEmpty( _sessionUserCd )">
+          AND USER_CD = #{_sessionUserCd} -- 사용자코드
+          </if>
+          </trim>
+    </select>
+
+	<update id="userPwUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		 * Main.userPwUpdate
+		 * 비밀번호 찾기 업데이트
+		 * @author takeit
+		 * @since 2019.10.22
+		 */
+		]]>
+		UPDATE USER_INFO
+		SET
+			LOGIN_FAIL_CNT = '0'			-- 로그인실패횟수
+			, USER_PW = #{sUserPw}			-- 비밀번호
+			, PW_CHANGE_DT = <include refid="CommonInc.sysdate" />		-- 비밀번호 변경일
+            , INIT_YN = 'Y'                 -- 초기화 여부
+		WHERE USER_ID = #{sUserId}			-- 사용자ID
+			AND USER_NM = #{sUserNm}		-- 사용자명
+			AND USER_EMAIL = #{sUserEmail}	-- 이메일
+	</update>
+
+    <update id="userPwChange" parameterType="map" timeout="0">
+        <![CDATA[
+        /*
+         * Main.userPwChange
+         * 비밀번호 변경 업데이트
+         * @author takeit
+         * @since 2020.05.08
+         */
+        ]]>
+        UPDATE USER_INFO
+           SET LOGIN_FAIL_CNT = '0'        -- 로그인실패횟수
+             , USER_PW = #{USER_PW}        -- 비밀번호
+             , PW_CHANGE_DT = <include refid="CommonInc.sysdate" />      -- 비밀번호 변경일
+             , INIT_YN = 'Y'               -- 초기화 여부
+             , MOD_DT = <include refid="CommonInc.sysdate" />
+             , MOD_CD = #{_sessionUserCd}
+         WHERE USER_CD = #{_sessionUserCd}
+    </update>
+
+	<select id="policySelect" parameterType="map" timeout="0" resultMap="policyMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* Main.policySelect
+		* 이용약관 및 개인정보처리방침
+		* @author takeit
+		* @since 2019.10.29
+		*/
+		]]>
+		SELECT
+			S.POLICY_INFO				-- 시스템이용약관
+			, S.PRIVACY_INFO			-- 개인정보처리방침
+		FROM SYSTEM_INFO S
+		WHERE S.SYSTEM_ID = #{SYSTEM_ID}
+	</select>
+
+
+	<select id="userProjectSelect" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* Main.userProjectSelect
+		* 사용자 소속 프로젝트 가져오기
+		* @author takeit
+		* @since 2019.11.04
+		*/
+		]]>
+		SELECT PROJECT_CD, PROJECT_NM, SELECT_YN
+		FROM (
+			SELECT P.PROJECT_CD
+				, P.PROJECT_NM
+				, (CASE WHEN #{sProjectCd} = P.PROJECT_CD THEN 'Y' ELSE 'N' END) AS SELECT_YN	-- 현재 선택 프로젝트
+			FROM PROJECT_INFO P
+				INNER JOIN PROJECT_USER PU ON P.PROJECT_CD = PU.PROJECT_CD
+			WHERE P.USE_YN = 'Y'
+				AND PU.USE_YN = 'Y'
+				AND PU.USER_CD = #{_sessionUserCd}
+		) X
+		ORDER BY X.SELECT_YN DESC, X.PROJECT_CD
+	</select>
+
+	<select id="userMainProjectSelect" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* Main.userMainProjectSelect
+		* 사용자관리 메인 프로젝트 목록 가져오기
+		* @author takeit
+		* @since 2019.11.04
+		*/
+		]]>
+
+		SELECT P.PROJECT_CD
+			, P.PROJECT_NM
+		FROM PROJECT_INFO P
+			INNER JOIN PROJECT_USER PU ON P.PROJECT_CD = PU.PROJECT_CD
+		WHERE P.USE_YN = 'Y'
+			AND PU.USE_YN = 'Y'
+			AND PU.USER_CD = #{sUserCd}
+		ORDER BY P.PROJECT_CD
+	</select>
+
+	<select id="dbdatetime" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		 * dbdatetime
+		 * 현재 db시간 가져오기 take.getDbTime에서 사용
+		 * @author take
+		 * @since 2019.11.26
+		 * 사용안함
+		 */
+		]]>
+		<if test="_databaseId == 'Oracle'">
+	    SELECT TO_CHAR(SYSDATE, 'YYYYMMDD HH24MISS') AS DBDATE FROM DUAL
+	    </if>
+		<if test="_databaseId == 'SQL Server'">
+		SELECT (FORMAT(GETDATE(), 'yyyyMMdd HHmmss')) AS DBDATE
+	    </if>
+		<if test="_databaseId == 'MySQL'">
+		SELECT (DATE_FORMAT(NOW(), 'YYYYMMDD HH24MISS')) AS DBDATE
+	    </if>
+		<if test="_databaseId == 'PostgreSQL'">
+		SELECT (TO_CHAR(NOW(), 'YYYYMMDD HH24MISS')) AS DBDATE
+	    </if>
+	</select>
+
+
+	<!-- Main Dashboard -->
+    <select id="userDashCount" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+        <![CDATA[
+        /*
+         * Main.userDashCount
+         * 대시보드 페이지 카운트 조회
+         * @author 정해원
+         * @since 2021.01.26
+         */
+        ]]>
+      SELECT 
+      	
+      	<if test="_databaseId == 'Oracle'">
+	    NVL(MAX(D.PAGE_NO), 0) AS DASH_COUNT
+	    </if>
+		<if test="_databaseId == 'SQL Server'">
+		ISNULL(MAX(D.PAGE_NO), 0) AS DASH_COUNT
+	    </if>
+		<if test="_databaseId == 'MySQL'">
+		IFNULL(MAX(D.PAGE_NO), 0) AS DASH_COUNT
+	    </if>
+		<if test="_databaseId == 'PostgreSQL'">
+		COALESCE(MAX(D.PAGE_NO), 0) AS DASH_COUNT
+	    </if>
+      	
+        FROM USER_DASH_CONFIG D
+       WHERE D.USER_CD = #{_sessionUserCd}
+         AND D.PROJECT_CD = #{__tcsProjectCd}
+    </select>
+
+	<select id="userDashSelect" parameterType="map" timeout="0" resultMap="manualMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* Main.userDashSelect
+		* 사용자 대시보드 설정 정보 조회
+		* @author takeit
+		* @since 2019.11.28
+		*/
+		]]>
+		SELECT UDC.PAGE_NO
+			, UDC.GRID_NO
+			, UDC.DASH_CD
+			, DI.DASH_NM
+			, UDC.DASH_TYPE
+			, DI.DASH_URL
+			, DI.DETAIL_PROG
+			, DI.RELOAD_CNT
+		FROM USER_DASH_CONFIG UDC
+			INNER JOIN DASH_INFO DI ON UDC.DASH_CD = DI.DASH_CD
+		WHERE UDC.PROJECT_CD = #{sProjectCd}
+			AND UDC.USER_CD = #{_sessionUserCd}
+			AND UDC.PAGE_NO = #{sPageNo}
+	</select>
+
+	<insert id="userDashInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* Main.userDashInsert
+		* 사용자 대시보드 설정 정보 추가
+		* @author takeit
+		* @since 2019.11.28
+		*/
+		]]>
+		INSERT INTO USER_DASH_CONFIG
+		(
+		    PROJECT_CD
+		    , USER_CD
+		    , PAGE_NO
+		    , GRID_NO
+		    , DASH_ID
+		    , DASH_TYPE
+		    , REG_DT
+		)
+		VALUES
+		(
+		    #{PROJECT_CD}
+		    , #{_sessionUserCd}
+		    , #{PAGE_NO}
+		    , #{GRID_NO}
+		    , #{DASH_ID}
+		    , #{DASH_TYPE}
+		    , <include refid="CommonInc.sysdate" />
+		)
+	</insert>
+
+	<update id="userDashUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* Main.userDashUpdate
+		* 사용자 대시보드 설정 정보 수정
+		* @author takeit
+		* @since 2019.11.28
+		*/
+		]]>
+		UPDATE USER_DASH_CONFIG
+		SET
+			DASH_CD = #{DASH_CD}
+			, DASH_TYPE = #{DASH_TYPE}
+			, MOD_DT=<include refid="CommonInc.sysdate" />
+		WHERE PROJECT_CD = #{PROJECT_CD}
+			AND USER_CD = #{_sessionUserCd}
+			AND PAGE_NO = #{PAGE_NO}
+			AND GRID_NO = #{GRID_NO}
+	</update>
+
+	<delete id="userDashDelete" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* Main.userDashDelete
+		* 사용자 대시보드 설정 정보 삭제
+		* @author takeit
+		* @since 2019.11.28
+		*/
+		]]>
+		DELETE FROM USER_DASH_CONFIG
+		WHERE PROJECT_CD = #{PROJECT_CD}
+			AND USER_CD = #{_sessionUserCd}
+		<if test="PAGE_NO != null and PAGE_NO != '' ">
+			AND PAGE_NO=#{PAGE_NO}
+		</if>
+
+		<if test="GRID_NO != null and GRID_NO != '' ">
+			AND GRID_NO=#{GRID_NO}
+		</if>
+	</delete>
+
+	<update id="userDashCountUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* Main.userDashCountUpdate
+		* 대시보드 Count Update
+		* @author takeit
+		* @since 2019.11.28
+		*/
+		]]>
+		UPDATE USER_DASH_CONFIG
+		SET PAGE_NO = <include refid="CommonInc.toNumber" >
+					  		<property name="arg1" value="PAGE_NO"/>
+						</include> - 1,
+		
+			MOD_DT=<include refid="CommonInc.sysdate" />
+		WHERE PROJECT_CD = #{PROJECT_CD}
+			AND USER_CD = #{_sessionUserCd}
+		<if test="PAGE_NO != null and PAGE_NO != '' ">
+			AND PAGE_NO &gt; #{PAGE_NO}
+		</if>
+	</update>
+
+	<select id="dashConfigSelect" parameterType="map" timeout="0" resultMap="manualMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* Main.dashConfigSelect
+		* 대시보드 설정 정보 조회
+		* @author takeit
+		* @since 2019.11.28
+		*/
+		]]>
+		SELECT DASH_CD
+			, DASH_NM
+			, DASH_TYPE
+			, MINIMUM_YN
+			, RELOAD_CNT
+			, DASH_URL
+			, DETAIL_PROG
+			, MANUAL_TXT
+			, DESC_TXT
+			, USE_YN
+		FROM DASH_INFO
+		WHERE USE_YN = 'Y'
+		<if test="sDashType != null and sDashType != '' ">
+		    AND DASH_TYPE = #{sDashType}
+		</if>
+		ORDER BY DASH_CD
+	</select>
+
+	<update id="userConfigUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* Main.userConfigUpdate
+		* 사용자 설정정보 변경
+		* @author takeit
+		* @since 2019.11.28
+		*/
+		]]>
+		UPDATE USER_INFO
+		SET MOD_DT = <include refid="CommonInc.sysdate" />
+			, MOD_USER = #{_sessionUserCd}
+		<if test="DISTRICT_KEY != null and DISTRICT_KEY != '' ">
+		    , DISTRICT_KEY=#{DISTRICT_KEY}
+		</if>
+		<if test="GW_DISPLAY_YN != null and GW_DISPLAY_YN != '' ">
+		    , GW_DISPLAY_YN=#{GW_DISPLAY_YN}
+		</if>
+		<if test="DASH_COUNT != null and DASH_COUNT != '' ">
+		    , DASH_COUNT=#{DASH_COUNT}
+		</if>
+		<if test="CURRENCY_CD != null and CURRENCY_CD != '' ">
+		    , CURRENCY_CD=#{CURRENCY_CD}
+		</if>
+		<if test="WORLDTIME_CD != null and WORLDTIME_CD != '' ">
+		    , WORLDTIME_CD=#{WORLDTIME_CD}
+		</if>
+
+		WHERE USER_ID=#{_sessionUserCd}
+	</update>
+
+	<!-- PREFIX -->
+	<select id="prefixSelect" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* Main.prefixSelect
+		* Prefix 가져오기
+		* @author takeit
+		* @since 2019.08.18
+		*/
+		]]>
+		SELECT CODE_ID AS PREFIX
+			, CODE_NM AS PREFIX_NM
+		FROM CODE_INFO
+		WHERE GROUP_ID = '00006'
+		ORDER BY CODE_ORDER
+	</select>
+
+	<select id="prefixFormList" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		 *
+		 * Main.prefixFormList
+		 * 프로젝트권한별메뉴 목록
+		 * @author takeit
+		 * @since 2019.08.02
+		 */
+		]]>
+		SELECT
+			P.PROGRAM_CD			-- 프로그램코드
+			, P.PROGRAM_TYPE		-- 프로그램유형
+			, P.PROGRAM_PREFIX		-- 프로그램PREFIX
+			, C.CODE_NM AS PROGRAM_PREFIX_NM	-- 프로그램PREFIX명
+			, P.PROGRAM_ID			-- 프로그램ID
+			, P.PROGRAM_NM			-- 프로그램명
+			, P.ML_CD				-- 다국어코드
+			, P.DESC_TXT			-- 상세설명
+			, P.USE_YN				-- 사용여부
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="P.REG_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			  </include>  AS REG_DT	-- 등록일시
+			, P.REG_CD				-- 등록자코드
+			, U1.USER_NM AS REG_NM	-- 등록자명
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="P.MOD_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			  </include>  AS MOD_DT	-- 수정일시
+			, P.MOD_CD				-- 수정자코드
+			, U2.USER_NM AS MOD_NM	-- 수정자명
+		FROM PROGRAM_INFO P
+			LEFT OUTER JOIN USER_INFO U1 ON P.REG_CD = U1.USER_CD
+			LEFT OUTER JOIN USER_INFO U2 ON P.MOD_CD = U2.USER_CD
+			LEFT OUTER JOIN CODE_INFO C ON C.GROUP_ID = '00006' AND P.PROGRAM_PREFIX = C.CODE_ID
+		WHERE P.PROGRAM_PREFIX = #{PREFIX}
+		ORDER BY C.CODE_ORDER, P.PROGRAM_CD
+	</select>
+
+	<select id="columnInfoSelect" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		 *
+		 * Main.columnInfoSelect
+		 * 프로젝트권한별메뉴 목록
+		 * @author takeit
+		 * @since 2019.08.02
+		 */
+		]]>
+		SELECT COL_ID, COL_NM
+		FROM COLUMN_INFO
+	</select>
+
+	<select id="queryInfoSelect" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		* Main.queryInfoSelect
+		* Query정보 조회
+		* @author takeit
+		* @since 2021.01.05
+		*/
+		]]>
+		SELECT
+			SEQ				-- 일련번호
+			, GROUP_ID		-- 그룹
+			, QUERY_ID		-- Query ID
+			, FULL_ID		-- Full ID
+			, FILE_NM		-- 파일명
+			, QUERY_TYPE	-- Query 유형
+			, REG_DT		-- 등록일시
+			, REG_CD		-- 등록자코드
+        	, MOD_DT		-- 수정일시
+            , MOD_CD		-- 수정자코드
+		FROM QUERY_INFO
+		WHERE 1 = 1
+		<if test=" QUERY_TYPE != null and QUERY_TYPE != '' ">
+			AND QUERY_TYPE = #{QUERY_TYPE}
+		</if>
+		<if test=" GROUP_ID != null and GROUP_ID != '' ">
+			AND GROUP_ID = #{GROUP_ID}
+		</if>
+		<if test=" SEQ != null and SEQ != '' ">
+			AND SEQ = #{SEQ}
+		</if>
+		<if test=" FULL_ID != null and FULL_ID != '' ">
+			AND FULL_ID = #{FULL_ID}
+		</if>
+	</select>
+
+	<insert id="queryInfoInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		 * Main.queryInfoInsert
+		 * Query정보 입력
+		 * @author takeit
+		 * @since 2021.01.05
+		 */
+		]]>
+		<selectKey keyProperty="SEQ" resultType="String" order="BEFORE">
+			SELECT 
+			
+			<if test="_databaseId == 'Oracle'">		        
+			('Q' || LPAD(TO_NUMBER(NVL(MAX(SUBSTR(SEQ, 2, 9)), '0') + 1), 9, '0')) AS SEQ
+			</if>
+			<if test="_databaseId == 'SQL Server'">
+			('Q' || LPAD(CONVERT(NUMERIC, ISNULL(MAX(SUBSTR(SEQ, 2, 9)), '0') + 1), 9, '0')) AS SEQ		        
+			</if>
+			<if test="_databaseId == 'MySQL'">
+			('Q' || LPAD(CAST(IFNULL(MAX(SUBSTR(SEQ, 2, 9)), '0') + 1, AS UNSIGNED), 9, '0')) AS SEQ
+			</if>
+			<if test="_databaseId == 'PostgreSQL'">
+			('Q' || LPAD(TO_NUMBER(COALESCE(MAX(SUBSTR(SEQ, 2, 9)), '0') + 1), 9, '0')) AS SEQ
+			</if>
+			
+			FROM QUERY_INFO
+		</selectKey>
+		INSERT INTO QUERY_INFO (
+			SEQ
+			, GROUP_ID
+			, QUERY_ID
+			, FULL_ID
+			, FILE_NM
+			, QUERY_TYPE
+			, REG_DT
+			, REG_CD
+		)
+		VALUES (
+			#{SEQ}				-- 일련번호
+			, #{GROUP_ID}		-- 그룹
+			, #{QUERY_ID}		-- Query ID
+			, #{FULL_ID}		-- Full ID
+			, #{FILE_NM}		-- 파일명
+			, #{QUERY_TYPE}		-- Query 유형
+			, <include refid="CommonInc.sysdate" />			-- 등록일시
+			, #{_sessionUserCd}	-- 등록자코드
+		)
+	</insert>
+
+	<update id="queryInfoUpdate" parameterType="map" timeout="0">
+        <![CDATA[
+        /*
+		 * Main.queryInfoUpdate
+		 * Query정보 수정
+		 * @author takeit
+		 * @since 2021.01.05
+		 */
+        ]]>
+        UPDATE QUERY_INFO
+        SET GROUP_ID 		= #{GROUP_ID}		-- 그룹
+			, QUERY_ID 		= #{QUERY_ID}		-- Query ID
+			, FULL_ID 		= #{FULL_ID}		-- Full ID
+			, FILE_NM 		= #{FILE_NM}		-- 파일명
+			, QUERY_TYPE 	= #{QUERY_TYPE}		-- Query 유형
+        	, MOD_DT 		= <include refid="CommonInc.sysdate" />			-- 수정일시
+            , MOD_CD 		= #{_sessionUserCd}	-- 수정자코드
+        WHERE SEQ = #{SEQ}                  	-- 일련번호
+    </update>
+
+    <select id="selectUserFormRoleBtn" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+        <![CDATA[
+        /*
+         * Main.selectUserFormRoleBtn
+         * 화면 버튼 권한 정보
+         * @author takeit
+         * @since 2021.02.02
+         */
+        ]]>
+        SELECT BTN.BTN_ID
+             , BTN.USE_YN
+          FROM PROJECT_ROLE_MENU_BUTTON BTN
+          JOIN PROJECT_USER_ROLE ROLE
+            ON BTN.PROJECT_CD = ROLE.PROJECT_CD
+           AND BTN.USER_CD = ROLE.USER_CD
+           AND BTN.ROLE_CD = ROLE.ROLE_CD
+         WHERE BTN.PROJECT_CD = #{__tcsProjectCd}
+           AND BTN.USER_CD    = #{_sessionUserCd} 
+           AND BTN.MENU_CD    = #{sMenuId}        
+      GROUP BY BTN.BTN_ID, BTN.USE_YN
+    </select>
+
+    <select id="userFormRoleCheck" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+        <![CDATA[
+        /*
+         * Main.userFormRoleCheck
+         * 로그인사용자에 대한 화면 및 버튼권한 체크
+         * @author takeit
+         * @since 2021.02.24
+         */
+        ]]>
+        SELECT PM.PROJECT_CD
+			, PM.MENU_CD
+		    , <include refid="CommonInc.nvl">
+			  	<property name="arg1" value="CI.REF2"/>
+			  	<property name="arg2" value="PI.PROGRAM_PREFIX"/>
+			  </include> AS PROGRAM_PREFIX
+			, PI.PROGRAM_ID
+			, PU.USER_CD
+
+
+			, <include refid="CommonInc.nvl">
+			  	<property name="arg1" value="PRM.R_READ"/>
+			  	<property name="arg2" value="'N'"/>
+			  </include> AS R_READ                  -- 조회권한
+			, <include refid="CommonInc.nvl">
+			  	<property name="arg1" value="PRM.R_READ"/>
+			  	<property name="arg2" value="'N'"/>
+			  </include> AS R_INPUT     -- 신규권한
+			, <include refid="CommonInc.nvl">
+			  	<property name="arg1" value="PRM.R_DELETE"/>
+			  	<property name="arg2" value="'N'"/>
+			  </include> AS R_DELETE   -- 삭제권한
+			, <include refid="CommonInc.nvl">
+			  	<property name="arg1" value="PRM.R_SAVE"/>
+			  	<property name="arg2" value="'N'"/>
+			  </include> AS R_SAVE       -- 저장권한
+			, <include refid="CommonInc.nvl">
+			  	<property name="arg1" value="PRM.R_PRINT"/>
+			  	<property name="arg2" value="'N'"/>
+			  </include> AS R_PRINT     -- 인쇄권한
+			, <include refid="CommonInc.nvl">
+			  	<property name="arg1" value="PRM.R_EXCEL"/>
+			  	<property name="arg2" value="'N'"/>
+			  </include> AS R_EXCEL     -- 엑셀권한
+			, 'N' AS MENU_YN
+		FROM PROJECT_MENU PM
+			INNER JOIN PROJECT_USER PU ON PM.PROJECT_CD = PU.PROJECT_CD
+			INNER JOIN PROJECT_USER_ROLE PUR ON PU.PROJECT_CD = PUR.PROJECT_CD AND PU.USER_CD = PUR.USER_CD
+			INNER JOIN PROJECT_ROLE PR ON PR.PROJECT_CD = PUR.PROJECT_CD AND PR.ROLE_CD = PUR.ROLE_CD
+			INNER JOIN PROJECT_ROLE_MENU PRM ON PRM.PROJECT_CD = PM.PROJECT_CD AND PRM.MENU_CD = PM.MENU_CD AND PRM.ROLE_CD = PR.ROLE_CD
+			INNER JOIN PROGRAM_INFO PI ON PM.PROGRAM_CD = PI.PROGRAM_CD
+			INNER JOIN CODE_INFO CI ON CI.GROUP_ID = '00006' AND PI.PROGRAM_PREFIX = CI.CODE_ID
+		WHERE PM.PROJECT_CD = #{__tcsProjectCd}
+			AND PU.USER_CD = #{_sessionUserCd}
+			AND PM.MENU_CD = #{__tcsFormId}
+			AND PM.USE_YN = 'Y'
+		UNION ALL
+		SELECT #{__tcsProjectCd} AS PROJECT_CD
+			, PROGRAM_ID AS MENU_CD
+			, PROGRAM_PREFIX
+			, PROGRAM_ID
+			, #{_sessionUserCd} AS USER_CD
+			, 'Y' AS R_READ
+			, 'Y' AS R_INPUT
+			, 'Y' AS R_DELETE
+			, 'Y' AS R_SAVE
+			, 'Y' AS R_PRINT
+			, 'Y' AS R_EXCEL
+			, 'Y' AS MENU_YN
+		FROM NON_MENU_ROLE
+		WHERE PROGRAM_ID = #{__tcsFormId}
+    </select>
+    <!-- 프로그램메세지 START -->
+	<select id="selectMsgOne" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* Main.selectMsgOne
+		* 메세지 조회
+		* @author takeit
+		* @since 2022.07.11
+		*/
+		]]>
+		SELECT MD.ML_CD       AS MSG_ID					<!-- 다국어 메세지코드 -->
+			, MD.ML_LANG_TXT  AS MSG_NM                 <!-- 다국어 메세지 -->
+            , MI.ML_NM        AS MSG_KEY                 <!-- 다국어 메세지 -->
+		FROM MULTILANGUAGE_INFO MI
+		   INNER JOIN MULTILANGUAGE_DETAIL MD ON MI.ML_CD = MD.ML_CD
+		WHERE MD.LANG_CD = #{sLangCd}
+		  AND MD.ML_CD = #{sMsgId}
+	</select>
+	<!-- 프로그램메세지 END -->
+</mapper>

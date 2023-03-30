@@ -1,0 +1,669 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="frmTop" width="1280" height="40" titletext="메인 탑" onload="frmTop_onload">
+    <Layouts>
+      <Layout height="40" width="1280">
+        <Static id="Static00" taborder="0" left="0" top="0" height="40" cssclass="sta_top_bg01" right="0"/>
+        <Static id="staTopLogo" taborder="1" left="46" top="0" width="190" height="40" cursor="pointer" onclick="staTopLogo_onclick"/>
+        <Static id="staLogout" taborder="2" top="0" width="40" height="40" cssclass="sta_top_icon04" right="0" text="" onclick="staLogout_onclick"/>
+        <Static id="staProjectList" taborder="3" top="0" width="40" height="40" cssclass="sta_top_icon02" right="40" onclick="staProjectList_onclick"/>
+        <Static id="staUserInfo" taborder="4" top="0" width="280" height="40" cssclass="sta_top_admin" right="90" text="XXXXX 시스템 IT 기획팀 XXX(관리자)" onclick="staUserInfo_onclick" cursor="pointer"/>
+        <PopupDiv id="pDivUserInfo" visible="false" top="40" width="270" height="174" right="0" background="#ffffff" border="1px solid #f4553b">
+          <Layouts>
+            <Layout>
+              <Static id="Static45" taborder="0" text="Static00" left="0" top="0" width="10" background="red" visible="false" bottom="0"/>
+              <Static id="Static22" taborder="1" text="10" left="10" top="0" width="220" height="10" background="rgba(255,0,0,0.4)" visible="false" color="red" textAlign="center"/>
+              <Static id="staUserNm" taborder="2" left="99" top="40" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Static id="staLoginDt" taborder="3" left="99" top="70" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Static id="staUserNmT" taborder="4" text="사용자명" left="10" top="40" width="90" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="staLoginDtT" taborder="5" text="로그인 일시" left="10" top="70" width="90" height="31" cssclass="sta_WF_th01L"/>
+              <Button id="btnUserModify" taborder="6" text="비밀번호변경" top="141" width="100" height="23" cssclass="btn_WF_basic01" left="85" onclick="pDivUserInfo_btnUserModify_onclick"/>
+              <Static id="Static01" taborder="7" text="10" left="0" top="0" height="10" background="rgba(255,0,0,0.3)" visible="false" textAlign="center" color="#ff0000" right="0"/>
+              <Static id="staProjectNmT" taborder="8" text="프로젝트명" left="10" top="10" width="90" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="staProjectNm" taborder="9" left="99" top="10" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Static id="Static04" taborder="10" text="10" left="0" top="131" height="10" background="rgba(255,0,0,0.4)" visible="false" color="red" textAlign="center" right="2"/>
+              <Static id="staLoginIpT" taborder="11" text="로그인 IP" left="10" top="100" width="90" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="staLoginIp" taborder="12" left="99" top="100" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Static id="Static06" taborder="13" text="10" left="0" top="164" height="10" background="rgba(255,0,0,0.4)" visible="false" color="red" textAlign="center" right="2"/>
+            </Layout>
+          </Layouts>
+        </PopupDiv>
+        <PopupDiv id="pDivProjectList" text="PopupDiv00" visible="false" top="222" height="280" width="180" right="0" background="#ffffff" border="1px solid #f4553b">
+          <Layouts>
+            <Layout>
+              <Grid id="grdProjectList" taborder="0" left="0" top="0" scrollbartype="none autoindicator" nodatatext="No data." right="0" bottom="0" autofittype="col" border="0px none" binddataset="dsProjectList" oncellclick="pDivProjectList_grdProjectList_oncellclick">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="130"/>
+                      <Column size="50"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="35"/>
+                    </Rows>
+                    <Band id="body">
+                      <Cell text="bind:PROJECT_NM" border="0px none" padding="0px 0px 2px 10px"/>
+                      <Cell col="1" text="expr:SELECT_YN==&quot;Y&quot;?&quot;&quot;:&quot;이동&quot;" displaytype="expr:SELECT_YN==&quot;Y&quot;?&quot;normal&quot;:&quot;buttoncontrol&quot;" border="0px none" cursor="pointer"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </PopupDiv>
+        <PopupDiv id="pDivDashEdit" visible="false" top="42" height="400" width="235" right="-250" background="#ffffff" border="1px solid #f4553b" formscrollbartype="none none" formscrolltype="none">
+          <Layouts>
+            <Layout>
+              <Grid id="grdContents" taborder="0" left="5" top="105" scrollbartype="none autoindicator" nodatatext="No data." right="5" bottom="5" autofittype="col" binddataset="dsContent" oncellclick="pDivDashEdit_grdContents_oncellclick">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="20" band="left"/>
+                      <Column size="48"/>
+                      <Column size="134"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="35"/>
+                    </Rows>
+                    <Band id="body">
+                      <Cell text="bind:SEL_YN" displaytype="checkboxcontrol" border="1px solid #d7d7d7,1px none #d7d7d7,1px solid #d7d7d7,1px solid #d7d7d7" checkboxfalsevalue="N" checkboxtruevalue="Y"/>
+                      <Cell col="1" border="1px solid #d7d7d7,0px solid #d7d7d7" text="bind:DASH_TYPE_NM" textAlign="center"/>
+                      <Cell col="2" text="bind:DASH_NM" border="1px solid #d7d7d7, 1px none #d7d7d7, 1px solid #d7d7d7, 1px solid #d7d7d7"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Button id="btnAdd" taborder="1" text="페이지추가" top="40" width="110" height="30" cssclass="btn_WF_basic01" left="5" onclick="pDivDashEdit_btnDash_onclick"/>
+              <Button id="btnDel" taborder="2" text="페이지삭제" top="40" width="110" height="30" cssclass="btn_WF_basic01" left="119" onclick="pDivDashEdit_btnDash_onclick"/>
+              <Edit id="edtContents" taborder="3" left="5" top="75" height="25" right="5" displaynulltext="컨텐츠를 검색하세요.!!" onkeyup="pDivDashEdit_edtContents_onkeyup"/>
+              <Static id="staTitle" taborder="4" text="대시보드 설정" left="5" top="0" height="40" cssclass="sta_MF_Title" right="5"/>
+            </Layout>
+          </Layouts>
+        </PopupDiv>
+        <Button id="btnMenuShowHide" taborder="7" left="7" top="5" width="30" height="30" cssclass="btn_TF_show" onclick="btnShowHide_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    1DEPTH > 2DEPTH
+*  @FileName    *.xfdl 
+*  @Creator     홍길동
+*  @CreateDate  yyyy.MM.DD 
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  YYYY.MM.DD      홍길동             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+this.fv_objGdsUserInfo = nexacro.getApplication().gdsUserInfo;
+this.fv_sProjectCd = nexacro.getApplication().av_sProjectCd;
+this.fv_sProjectNm = nexacro.getApplication().av_sProjectNm;
+this.fv_sRoleCd	   = nexacro.getApplication().av_sRoleCd;
+this.fv_sDashCount = "";     //대시보드 추가/삭제
+this.fv_sDelYn = "N";        //대시보드 추가/삭제
+
+/*********************************************************
+ * 1.2 FORM EVENT 영역(onload)
+ ********************************************************/
+//formid_onload 최초 로드시 발생되는 이벤트 (필수)
+this.frmTop_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	//this.ProgId = "GM00000096";
+   if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {    
+        //Script  
+		//var sUrl = nexacro.getEnvironment().services[take.nvl(take.SvcId,"SVC_LOC")].url;
+		var sUrl, sDateTime;
+        var objDateTime = take.getTodayTime();
+		
+		sUrl = take.getSvcUrl();
+        sDateTime = objDateTime.date + objDateTime.time;
+		
+		var sImg = "imgTakeTop.png";
+		this.staTopLogo.set_background('url("'+sUrl+'/images/logo/'+ sImg + '?' + sDateTime + '") no-repeat left center');
+		
+		this.fnUserInfoSet(this.fv_objGdsUserInfo);
+		
+		this.fnSetDashList();
+   }
+}
+
+/*********************************************************
+ * 2 필수 Function 영역
+ ********************************************************/
+//N/A
+
+/*********************************************************
+ * 3 Component EVENT 영역
+ ********************************************************/
+//사용자 정보 스테틱 클릭 이벤트
+this.staUserInfo_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	var objPdiv, objApp;
+    
+    objPdiv = this.pDivUserInfo;
+    objApp = nexacro.getApplication();    
+    
+    if (objPdiv.isPopup()==false)
+    {   
+        objPdiv.trackPopupByComponent(obj, 100, 40, 270, 174);
+    }
+};
+
+//대시보드 컨텐츠 클릭 이벤트
+this.staDashEdit_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	var objPdiv, objApp;
+    
+    objPdiv = this.pDivDashEdit;
+    objApp = nexacro.getApplication();    
+    
+    if (objPdiv.isPopup()==false)
+    {   
+        objPdiv.trackPopupByComponent(obj, 0, 40, 235, 400);
+    }
+};
+
+//대시보드 컨텐츠 클릭 이벤트
+this.staProjectList_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	var objPdiv, objApp;
+    
+    objPdiv = this.pDivProjectList;
+    objApp = nexacro.getApplication();    
+    
+    if (objPdiv.isPopup()==false)
+    {   
+        objPdiv.trackPopupByComponent(obj, 0, 40, 180, 280);
+    }
+};
+
+//프로젝트 리스트 팝업 그리드 셀 클릭 이벤트
+this.pDivProjectList_grdProjectList_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+ 	if (e.cell == 1) 
+	{
+		if( obj.getCellPropertyValue(obj.getSelectedRows(), 1, "displaytype") == "buttoncontrol")
+		{
+			UXBooster.av_sProjectCd = this.dsProjectList.getColumn(this.dsProjectList.rowposition, "PROJECT_CD");
+			UXBooster.av_sProjectNm = this.dsProjectList.getColumn(this.dsProjectList.rowposition, "PROJECT_NM");
+			
+			//20210127 고영민 프로젝트 변경시 프로젝트명, 프로젝트 코드, 데시보드 카운트 갱신 처리
+            var objGdsUser = UXBooster.gdsUserInfo;
+			objGdsUser.setColumn(0,"PROJECT_CD",UXBooster.av_sProjectCd);
+            objGdsUser.setColumn(0,"PROJECT_NM",UXBooster.av_sProjectNm);
+	    
+			//20210129 정해원 프로젝트코드 변경 시 대시보드 카운트 리로드
+			this.fnGetDashCountAsync(this,
+				function(){
+					var nDashCount = this.dsDashCount.getColumn(0, "DASH_COUNT");
+					this.fnSetGdsDashCount(nDashCount);
+					this.getOwnerFrame().form.reload();
+				}
+			);
+		}
+ 	}
+};
+
+//사용자 정보 팝업 내 정보 수정 버튼 클릭 이벤트
+this.pDivUserInfo_btnUserModify_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	//20210115 정해원 주석처리
+	//개발이 안되어 있음 -> 비밀번호 변경창으로 대체
+	/*
+	var sParam = {sId:"kjp3904", sValue:"test"};
+	var sUrl = "frm::frmMainP02.xfdl";
+	take.mdiOpenMenu(this, sUrl, sParam, "", true, "내정보수정");	
+	
+	this.pDivUserInfo.closePopup();
+	*/
+	take.openPopup(this, "frmMainP02S01", "frm::frmMainP02S01.xfdl", "", "", "fnPopCallback");
+	this.pDivUserInfo.closePopup();
+};
+
+
+//탑 로고 클릭 이벤트
+this.staTopLogo_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	var objFrameForm;
+    
+    objFrameForm = this.getOwnerFrame().form;
+    
+	objFrameForm.divMain.set_visible(true);
+    objFrameForm.divMain.set_enable(true);
+    
+	objFrameForm.fnSearch("SearchNoticeTimer");
+// 	objFrameForm.divMain.set_url("");
+// 	objFrameForm.divMain.set_url("frm::frmHome.xfdl");
+	
+	objFrameForm.divMain.bringToFront();
+};
+
+
+//로그아웃 클릭 이벤트
+this.staLogout_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	nexacro.getApplication().afnLogOut(this);
+};
+
+//대시보드 컨텐츠 팝업 그리드 셀 클릭 이벤트
+this.pDivDashEdit_grdContents_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	//20210126 정해원 대시보드 맨위로
+	if(!this.fnBringToFront()){
+		return;
+	}
+	
+	var objDs, objDashData;
+    var sMinimumYn, sType, sGbn;
+    var bSucc;
+    var nIdx;
+    
+    nIdx = this.getOwnerFrame().form.divMain.form.getStepIndex();
+    
+    objDs = obj.getBindDataset();
+    objDashData = new Object();
+    
+	//20210127 정해원 이미 선택 된 경우 return
+	if(objDs.getColumn(e.row, "SEL_YN") == 'Y'){
+		return;
+	}
+	
+    sMinimumYn = objDs.getColumn(e.row, "MINIMUM_YN");
+    sType = objDs.getColumn(e.row, "DASH_TYPE");
+    
+    sGbn = take.nvl(objDs.filterstr, "");
+    
+    objDashData.dash_type = sType;
+    
+    if (sGbn=="")
+    {
+        if (sMinimumYn=="Y") 
+        {
+            //작은 컨텐츠가 있는 대쉬보드입니다. 작은 컨텐츠로 보시겠습니까.?
+            //bSucc = take.confirm(this, "question", "S0023", {text1:"E0025", text2:"E0009"});
+            bSucc = take.confirm(this, "question", "{text1}가 있는 {text2}입니다. {text1}로 보시겠습니까.?", {text1:"작은 컨텐츠", text2:"대쉬보드"});
+            
+            if (bSucc) objDashData.dash_type = "11";            
+        }
+    } else {
+        //'' 안에 있는 데이터를 가져온다.
+        sGbn = sGbn.match(/[\'][^\']+[\']/)[0];
+        
+        if (sGbn=="'Y'") objDashData.dash_type = "11"; 
+    }
+    
+    objDashData.dash_id = objDs.getColumn(e.row, "DASH_CD");
+    objDashData.dash_nm = objDs.getColumn(e.row, "DASH_NM");
+    objDashData.reload_cnt = objDs.getColumn(e.row, "RELOAD_CNT");
+    objDashData.dash_url = objDs.getColumn(e.row, "DASH_URL");
+    objDashData.detail_prog = objDs.getColumn(e.row, "DETAIL_PROG");
+    objDashData.reloadtime = objDs.getColumn(e.row, "RELOAD_CNT");
+    //objDashData.criterion_type = objDs.getColumn(e.row, "CRITERION_TYPE");
+    objDashData.dash_prefix = objDs.getColumn(e.row, "DASH_PREFIX");
+    objDashData.titlebar_yn = objDs.getColumn(e.row, "TITLEBAR_YN");
+    objDashData.dash_param = objDs.getColumn(e.row, "DASH_PARAM");
+    //trace(nIdx);
+    //this.getOwnerFrame().form.divMain.form.fv_arrDivComp[nIdx].form.fnEditDash(objDashData);
+    //~(대쉬보드)을 선택하셨습니다. \n원하는 위치에 아이콘을 마우스로 클릭해주세요. \n'ESC'키를 누루면 취소됩니다.
+    //take.alert(this, "Info", "S0018", {text1:objDashData.dash_nm});
+    take.alert(this, "Info", "{text1}(대쉬보드)을 선택하셨습니다. \n원하는 위치에 아이콘을 마우스로 클릭해주세요. \n'ESC'키를 누루면 취소됩니다.", {text1:objDashData.dash_nm});
+    
+    this.getOwnerFrame().form.divMain.form.fnEditMode(objDashData);
+};
+
+//대시보드 컨텐츠 팝업 컨텐츠 검색 에디터 키 업 이벤트
+this.pDivDashEdit_edtContents_onkeyup = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+    if (take.nvl(obj.value,"")=="")
+    {
+        this.dsContent.filter("");
+    } else {
+        this.dsContent.filter("DASH_NM.match('"+ obj.value +"')");
+    }
+};
+
+//+1을 해줘야 함
+//DASH_COUNT는 페이지 개수라기보단 0부터 시작하고 있으니 LAST INDEX를 의미함
+this.fnGetGdsDashCount = function(){
+	return nexacro.toNumber(take.nvl(nexacro.getApplication().gdsUserInfo.getColumn(0,"DASH_COUNT"),0)) + 1;
+};
+
+this.fnSetGdsDashCount = function(nDashCount){
+	nexacro.getApplication().gdsUserInfo.setColumn(0,"DASH_COUNT", nexacro.toNumber(take.nvl(nDashCount, 0)));
+};
+
+//대시보드 컨텐츠를 삭제하거나 페이지를 삭제 할 경우 gdsUserInfo의 dash_count를 다시 로드 해야 함
+//사용자의 현재 project_cd로 대시보드 카운트를 조회 해야 함
+//프로젝트 변경 시 gdsUserInfo의 dash_count또한 reload 할 수 있을까?
+//대입할 위치 : 컨텐츠 추가, 컨텐츠 삭제, 페이지 추가, 페이지 삭제
+//동기
+this.fnGetDashCountAsync = function(pThis, fnCallBack){
+	this.dsDashCount.clearData();
+	take.tranSelect(this, "dashCountSelect", "Main.userDashCount", "", "dsDashCount", "", 
+		function(){
+			try {
+				if (typeof fnCallBack == "function") {
+					fnCallBack.call(pThis);
+				} else if(typeof fnCallBack == "string") {
+					if (!take.isFunction(pThis[fnCallBack])){
+						return;
+					} else {
+						this[fnCallBack].call(objForm);
+					}
+				}
+			} catch(e) {
+				console.dir(e);
+			}
+		}
+	);
+};
+
+//대시보드 맨위로
+this.fnBringToFront = function(){
+	if(UXBooster.MdiFrame.form.divTab.objActiveWork){
+		//이미 열어놓은 페이지가 있을 경우
+		UXBooster.MdiFrame.form.divTab.objActiveWork = null;
+		
+		if(take.confirm(this, "question", "MS00000051", "작업중인 데이터는 저장되지 않습니다.\n그래도 이동하시겠습니까?")){
+			UXBooster.WorkFrame.set_visible(true);
+			UXBooster.WorkFrame.set_enable(true);
+			
+			this.getOwnerFrame().form.fnDisableMenu();
+			
+			UXBooster.WorkFrame.bringToFront();
+			
+			return true;
+		}
+		
+	}else{
+		return true;
+	}
+	
+	return false;
+};
+
+//삭제저장
+this.fnSaveDashBoard = function(nPage, fnCallback){
+	var sParam = "sProjectCd='" + this.fv_sProjectCd + "' sDelYn='Y' sPageNo='" + nPage + "'";
+
+	take.transaction(
+		this,
+		"delPage", 
+		"SVC_LOC::comm/userConfigUpdate.do", 
+		"", 
+		"", 
+		sParam, 
+		fnCallback
+	);
+};
+
+//대시보드 컨텐츠 팝업 설정 추가 삭제 버튼 클릭이벤트
+this.pDivDashEdit_btnDash_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	//20210126 정해원 대시보드 맨위로
+	if(!this.fnBringToFront()){
+		return;
+	}
+	
+    var nPage, nCnt, nMaxCnt;
+    var bSucc;
+    var objForm;
+    var sParam;
+    
+    nMaxCnt = 5;
+    nCnt = this.fnGetGdsDashCount();
+	
+	//CASE1) 기존에 페이지가 하나 있고 페이지 추가 후 기존페이지를 삭제하려 할 경우
+	//CASE2) 기존에 페이지가 하나 있고 페이지 추가 후 추가한 페이지를 삭제하려 할 경우
+	//CASE3) 이미 컨텐츠가 있는 상태에서 추가/삭제는 이상없어 보임
+	
+	//추가했는데 이미 있는경우?
+	objForm = this.getOwnerFrame().form.divMain.form;
+	
+    if (obj.name.substr(3)=="Add") 
+    {
+		//20210126 정해원 이미 추가한 페이지가 있을 경우(대시보드 컨텐츠 추가 전)
+		if(objForm.stepselector.stepcount == (nCnt+1)){
+			take.alert(this, "Info", "편집중인 페이지가 있습니다.");
+			objForm.setStepIndex(nCnt);	//추가한 페이지로 이동
+			return;
+		}
+		
+        if (nCnt<nMaxCnt)
+        {
+            nCnt++;
+            this.fv_sDelYn = "N";
+        } else {
+            //대시보드는 최대 5개까지만 추가할 수 있습니다.
+            //take.alert(this, "Info", "S0015", {name:"E0009"});
+            take.alert(this, "Info", "{name}는 최대 {count}개까지만 추가할 수 있습니다.", {name:"대시보드 페이지", count:nMaxCnt});
+            return;
+        }
+    } else {
+        if (nCnt>0) 
+        {
+            //현재 페이지를 삭제 하시겠습니까?
+            //bSucc = take.confirm(this, "Info", "S0019", {text:"E0024"});
+            bSucc = take.confirm(this, "Info", "{text}를 삭제 하시겠습니까?", {text:"현재 페이지"});
+            
+            if (bSucc) 
+            {
+                nCnt--;
+                this.fv_sDelYn = "Y";
+            } else {
+                return;
+            }
+            
+        } else {
+            //삭제할 대시보드 페이지가 업습니다.
+            //take.alert(this, "Info", "S0016", {name:"E0009"});
+            take.alert(this, "Info", "{name}할 {text}가 없습니다.", {name:"삭제",text:"대시보드 페이지"});
+            return;
+        }        
+    }
+    
+    if (this.fv_sDelYn=="Y")
+    {
+        nPage = objForm.getStepIndex();
+        objForm.fnRemovePage(nPage,true);
+        
+        objForm.stepselector.set_stepcount(nCnt);
+        objForm.setStepIndex(0);
+		
+		//페이지추가하고 컨텐츠 추가 없이 삭제했을 경우 transaction 불필요
+		//if (take.nvl(nexacro.getApplication().gdsUserInfo.getColumn(0,"DASH_COUNT"), "")==this.fv_sDashCount) return;
+		//DB의 DASH_COUNT와 현재 DASH_COUNT가 동일하다면 RETURN
+		this.fnGetDashCountAsync(this,
+			function(){
+				var nDashCount = this.dsDashCount.getColumn(0, "DASH_COUNT");
+				if(nDashCount == (nCnt-1)){
+					return;
+				}
+				
+				this.fnSaveDashBoard(nPage,
+					function(){
+						this.fnGetDashCountAsync(this,
+							function(){
+								var nDashCount = this.dsDashCount.getColumn(0, "DASH_COUNT");
+								this.fnSetGdsDashCount(nDashCount);
+								this.getOwnerFrame().form.divMain.form.reload();
+								
+								//대시보드 목록 재조회
+								this.fnSetDashList();
+							}
+						);
+					}
+				);
+			}
+		);
+    } else {
+        objForm.stepselector.set_stepcount(nCnt);
+        objForm.fnNewPage((nCnt-1),true);
+        objForm.setStepIndex((nCnt-1));
+    }
+};
+
+this.btnShowHide_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    var sCss;
+    var objMain;
+    
+    objMain = this.getOwnerFrame().form;
+    
+    sCss = obj.cssclass;
+        
+    if (sCss=="btn_TF_show")
+    {
+        obj.set_cssclass("btn_TF_hide");
+        objMain.btnFold.fnShowHide(true);
+    } else {
+        obj.set_cssclass("btn_TF_show");
+        objMain.btnFold.fnShowHide(false);
+    }
+};
+/*********************************************************
+ * 4 User Function 영역
+ ********************************************************/
+/**
+ * fnUserInfoSet : 사용자 정보 세팅
+ * @param  {Object} objDs UserInfo Dataset
+ * @return {N/A}    N/A
+ * @example this.fnUserInfoSet(nexacro.getApplication().gdsUserInfo);
+ */
+this.fnUserInfoSet = function(objDs)
+{
+	// 프로젝트 리스트
+	take.tranSelect(this, "ProjectList", "Main.userProjectSelect", "", "dsProjectList", "sProjectCd='" + UXBooster.av_sProjectCd + "'",
+				function(sId, nErrCd, sErrMsg){
+					
+				});
+	
+	var sDeptNm   	 = take.nvl(objDs.getColumn(0,"DEPT_NM")   ,"");
+    var sUserId      = take.nvl(objDs.getColumn(0,"USER_ID")    ,"");
+    var sUserNm      = take.nvl(objDs.getColumn(0,"USER_NM")    ,"");
+	var sLastLoginDt = take.nvl(objDs.getColumn(0,"LAST_LOGIN_DT") ,"");
+    var sLastLoginIp = take.nvl(objDs.getColumn(0,"LOGIN_IP")    ,"");
+	
+	//var sUserInfo = this.fv_sProjectNm + " " + sDeptNm + " " + sUserNm + " ( "+sUserId+" )";
+	var sUserInfo = sUserNm + " ( "+sUserId+" )";
+	this.staUserInfo.set_text(sUserInfo);
+	
+	this.pDivUserInfo.form.staProjectNm.set_text(this.fv_sProjectNm);
+	this.pDivUserInfo.form.staUserNm.set_text(sUserNm);
+	this.pDivUserInfo.form.staLoginDt.set_text(sLastLoginDt);
+	this.pDivUserInfo.form.staLoginIp.set_text(sLastLoginIp);
+}
+
+/**
+ * fnSetDashList : 대시보드 컨텐츠 목록 가져오기
+ * @param  {N/A}    N/A
+ * @return {N/A}    N/A
+ * @example this.fnSetDashList();
+ */
+this.fnSetDashList = function ()
+{
+	var sProjectCd = take.nvl(this.fv_objGdsUserInfo.getColumn(0, "PROJECT_CD"), "");
+	//210216 정해원 다중권한을 갖고 있을 수 있으므로
+	//권한코드를 넘기지 않고 쿼리에서 권한테이블 JOIN하도록 변경
+	//var sRoleCd    = take.nvl(this.fv_objGdsUserInfo.getColumn(0, "ROLE_CD"), "");
+	
+	//trace(sProjectCd)
+	//trace(sRoleCd)
+    
+	//take.tranSelect
+	//(
+	//	this,
+	//	"dashTopListSearch", 
+	//	"DashManagement.dashTopListSearch", 
+	//	"", 
+	//	"dsContent", 
+	//	"PROJECT_CD='" + sProjectCd + "'"/* ROLE_CD='" + sRoleCd + "'"*/, 
+	//	function(sId, nErrCd, sErrMsg)
+	//	{
+	//		//trace(this.dsContent.saveXML());
+	//	}
+ 	//);
+};
+
+/**
+ * fnDashCheck : 대시보드 체크
+ * @param  {Boolean} bCheck  체크 여부
+ * @param  {String}  sDashId 대시보드 아이디
+ * @example this.fnDashCheck(true, "D000000001");
+*/
+this.fnDashCheck = function(bCheck, sDashId)
+{
+    //변수 선언
+    var nFRow, nFCnt;
+    var objDs = this.dsContent;
+    
+    //해당 대쉬보드 갯수 확인
+    nFCnt = objDs.getCaseCount( "DASH_CD == '"+ sDashId +"'" );
+    
+    //2개인상인 경우 리턴
+    if (nFCnt>1) return;
+    
+    //대쉬보드 아이디로 해당 Row 찾기
+    nFRow = objDs.findRow("DASH_CD", sDashId);
+    
+    //해당 조건의 대시보드 아이디가 있을경우
+    if (nFRow>=0)
+    {
+        //체크값 세팅
+        if (!objDs.setColumn(nFRow, "SEL_YN", (bCheck?"Y":"N")))
+        {
+            //take.trace("System", "ERROR", "대시보드리스트 체크 실패");
+            take.trace("System", "Info", sDashId + "(" + nFRow + ")대시보드리스트 체크 실패");
+        }
+    } else {
+        //take.trace("System", "ERROR", "대시보드리스트 체크 실패");
+        take.trace("System", "Info", sDashId + "(" + nFRow + ")대시보드리스트 체크 실패");
+    }
+}
+]]></Script>
+    <Objects>
+      <Dataset id="dsProjectList">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="PROJECT_NM" type="STRING" size="256"/>
+          <Column id="SELECT_YN" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsContent">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="DASH_CD" type="STRING" size="256"/>
+          <Column id="DASH_NM" type="STRING" size="256"/>
+          <Column id="DASH_TYPE" type="STRING" size="256"/>
+          <Column id="DASH_TYPE_NM" type="STRING" size="256"/>
+          <Column id="MINIMUM_YN" type="STRING" size="256"/>
+          <Column id="RELOAD_CNT" type="STRING" size="256"/>
+          <Column id="DASH_URL" type="STRING" size="256"/>
+          <Column id="DASH_PREFIX" type="STRING" size="256"/>
+          <Column id="PROGRAM_CD" type="STRING" size="256"/>
+          <Column id="DETAIL_PROG" type="STRING" size="256"/>
+          <Column id="DASH_PARAM" type="STRING" size="256"/>
+          <Column id="ROLE_CD" type="STRING" size="256"/>
+          <Column id="SEL_YN" TYPE="STRING" SIZE="256" type="STRING" size="256"/>
+          <Column id="TITLEBAR_YN" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsDashCount">
+        <ColumnInfo>
+          <Column id="DASH_COUNT" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

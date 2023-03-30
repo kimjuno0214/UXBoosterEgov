@@ -1,0 +1,379 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="PM040" width="1040" height="659" titletext="화면설계서" onload="PM040_onload">
+    <Layouts>
+      <Layout height="659" mobileorientation="landscape" width="1040">
+        <Div id="divSearch" taborder="0" left="10" top="0" height="43" right="10" cssclass="div_WF_searchBox01" text="" minwidth="1020" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Static id="staProjectNmT" taborder="3" text="Prefix" left="20" top="10" width="80" height="21" cssclass="sta_WF_textRImport"/>
+              <Static id="staRoleT" taborder="4" text="Prefix명" left="354" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="edtRole" taborder="1" left="438" top="10" width="231" height="21" onkeyup="divSearch_edtRole_onkeyup"/>
+              <Static id="staUseYnT" taborder="5" text="사용여부" left="688" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="cboUseYn" taborder="2" text="Combo00" left="772" top="10" width="227" height="21" innerdataset="dsCboUseYn" codecolumn="CODE" datacolumn="NAME"/>
+              <Combo id="cboProjectNm" taborder="0" text="Combo00" left="104" top="10" width="231" height="21" innerdataset="dsCboProjectCd" codecolumn="CODE" datacolumn="NAME" readonly="true"/>
+            </Layout>
+            <Layout name="default0">
+              <Static id="staProjectNmT" taborder="2" text="프로젝트" left="20" top="10" width="80" height="21" cssclass="sta_WF_textRImport"/>
+              <Static id="staRoleT" taborder="3" text="권한" left="354" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="edtRole" taborder="0" left="438" top="10" width="231" height="21"/>
+              <Static id="staUseYnT" taborder="4" text="사용여부" left="688" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="cboUseYn" taborder="1" text="Combo00" left="772" top="10" width="227" height="21" innerdataset="dsCboUseYn" codecolumn="CODE" datacolumn="NAME"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnShowHide" taborder="2" left="46.63%" top="42" width="70" height="10" cssclass="btn_WF_fold01"/>
+        <Static id="Static09" taborder="3" text="Static03" left="0" top="52" height="10" background="red" visible="false" right="0"/>
+        <Static id="Static23" taborder="4" text="Static23" left="1" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static24" taborder="5" text="Static23" left="340" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static25" taborder="6" text="Static23" left="679" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static26" taborder="7" text="Static23" left="1018" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Div id="divDetail" taborder="1" left="0" top="62" right="0" bottom="0" text="" minwidth="1020" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Grid id="grdPrefixList" taborder="0" left="10" top="30" width="440" bottom="10" autoenter="select" binddataset="dsPrefixList" oncellclick="divDetail_grdPrefixList_oncellclick">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="97"/>
+                      <Column size="293"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="24" band="head"/>
+                      <Row size="24"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="PREFIX"/>
+                      <Cell col="1" text="PREFIX명"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:PREFIX" textAlign="center"/>
+                      <Cell col="1" text="bind:PREFIX_NM"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Grid id="grdForm" taborder="1" left="460" top="30" right="10" bottom="10" binddataset="dsFormList" autofittype="col" autosizingtype="col" autosizebandtype="allband" cellclickbound="cell" autoupdatetype="itemselect">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="104"/>
+                      <Column size="401"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="24" band="head"/>
+                      <Row size="24"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="프로그램ID"/>
+                      <Cell col="1" text="프로그램명"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:PROGRAM_ID" textAlign="center"/>
+                      <Cell col="1" text="bind:PROGRAM_NM"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="staRoleListT" taborder="2" text="Prefix" left="10" top="0" height="30" width="450" cssclass="sta_WF_title02"/>
+              <Static id="staRoleMapT" taborder="3" text="화면목록" left="460" top="0" height="30" cssclass="sta_WF_title02" right="100"/>
+              <Button id="btnFormDesign" taborder="4" text="화면설계서 다운로드" top="3" width="134" height="23" cssclass="btn_WF_basic01" right="10" onclick="divDetail_btnFormDesign_onclick"/>
+              <Static id="Static45" taborder="5" text="Static00" left="450" top="30" width="10" background="red" visible="false" height="200"/>
+            </Layout>
+            <Layout name="default0">
+              <Grid id="grdForm" taborder="0" left="320" top="30" right="8" bottom="10" binddataset="dsProjectRoleMenuList" autofittype="col" treeusecheckbox="false" autosizingtype="col" oncellclick="grdRoleMenu_oncellclick"/>
+              <Static id="staRoleListT" taborder="1" text="권한 목록" left="0" top="0" height="30" width="450" cssclass="sta_WF_title02"/>
+              <Grid id="grdPrefixList" taborder="2" left="10" top="30" width="300" binddataset="dsProjectRoleList" bottom="10" autosizingtype="col" onselectchanged="grdRoleList_onselectchanged"/>
+              <Static id="staRoleMapT" taborder="3" text="권한 매핑" left="318" top="0" height="30" cssclass="sta_WF_title02" right="162"/>
+              <Button id="btnFormDesign" taborder="4" text="저장" top="3" width="46" height="23" cssclass="btn_WF_basic01" right="8" onclick="btnRoleSave_onclick"/>
+              <Static id="Static45" taborder="5" text="Static00" left="310" top="30" width="10" background="red" visible="false" height="200"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+      <Layout height="659" mobileorientation="landscape" width="1040" name="default0">
+        <Div id="divSearch" taborder="0" left="10" top="0" height="43" right="10" cssclass="div_WF_searchBox01" text=""/>
+        <Button id="btnShowHide" taborder="1" left="485" top="42" width="70" height="10" cssclass="btn_WF_fold01"/>
+        <Static id="Static09" taborder="2" text="Static03" left="0" top="52" height="10" background="red" visible="false" right="0"/>
+        <Static id="Static23" taborder="3" text="Static23" left="1" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static24" taborder="4" text="Static23" left="340" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static25" taborder="5" text="Static23" left="679" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static26" taborder="6" text="Static23" left="1018" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Div id="divDetail" taborder="7" left="0" top="62" right="0" bottom="0" text=""/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsPrefixList">
+        <ColumnInfo>
+          <Column id="PREFIX" type="STRING" size="255" description="PREFIX"/>
+          <Column id="PREFIX_NM" type="STRING" size="255" description="PREFIX_NM명"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsCboUseYn">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsFormList" onrowposchanged="dsFormList_onrowposchanged" oncolumnchanged="dsFormList_oncolumnchanged">
+        <ColumnInfo>
+          <Column id="PROGRAM_CD" type="STRING" size="255" description="프로그램코드"/>
+          <Column id="PROGRAM_TYPE" type="STRING" size="255" description="프로그램유형"/>
+          <Column id="PROGRAM_PREFIX" type="STRING" size="255" description="PREFIX"/>
+          <Column id="PROGRAM_PREFIX_NM" type="STRING" size="255" description="PREFIX명"/>
+          <Column id="PROGRAM_ID" type="STRING" size="255" description="프로그램ID"/>
+          <Column id="PROGRAM_NM" type="STRING" size="255" description="프로그램명"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsCboProjectCd">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <FileDownTransfer id="FileDownTransfer00"/>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    PM > PM040
+*  @FileNAME    PM040.xfdl 
+*  @Creator     김대승
+*  @CreateDate  2019.08.16 
+*  @Version     1.0
+*  @Desction    프로젝트 권한관리
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2019.08.16      김대승             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+this.fv_sGdsAdminYn   = UXBooster.gdsUserInfo.getColumn(0, "ADMIN_YN"); 	// gds _ 관리자권한 여부
+this.fv_sGdsProjectCd = UXBooster.av_sProjectCd;  		 // 글로변 변수_프로젝트코드
+ 
+this.fv_sProjectCd = "";// 권한 목록의 선택된 row 프로젝트코드
+this.fv_sRoleCd = "";	// 권한 목록의 선택된 row 권한코드
+this.fv_sRoleCd = "";	// 권한 목록의 선택된 row 메뉴코드
+
+this.fv_nRAllIndex;
+
+this.fv_sSelectRow = "";
+this.fv_sProjectCd = "";
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.PM040_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {    
+		// 초기화
+        this.fnInit();  
+   }
+}
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "prefixList";	
+	
+	if( sTranId == 'formList' ){
+		this.dsFormList.clearData();
+		
+		var sPrefix = this.dsPrefixList.getColumn(this.dsPrefixList.rowposition, "PREFIX");
+		take.tranSelect
+		(
+			this, 
+			"formList", 
+			"Main.prefixFormList", 
+			"", 
+			"dsFormList", 
+			"PREFIX='" + sPrefix + "'",
+			"fnCallback"
+		)
+	}else{
+		this.dsPrefixList.clearData();
+	
+		var objDivSearch = this.divSearch.form;
+		var sProjectCd = take.nvl(objDivSearch.cboProjectNm.value, "");	// 프로젝트명
+		var sRoleCd    = take.nvl(objDivSearch.edtRole.value, "");		// 권한
+		var sUseYn     = take.nvl(objDivSearch.cboUseYn.value, "");		// 사용여부
+	
+		this.fv_sProjectCd = sProjectCd;
+		take.tranSelect
+		(
+			this, 
+			"prefixList", 
+			"Main.prefixSelect", 
+			"", 
+			"dsPrefixList", 
+			"PROJECT_CD='" + sProjectCd + "' ROLE_CD='" + sRoleCd + "' USE_YN='" + sUseYn + "'",
+			"fnCallback"
+		)
+	}
+}
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+this.fnSave = function(sTranId)
+{    
+    
+}
+/**
+ * fnAddRow : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+ * @example this.fnAddRow(sGrdId, nRow);
+ */
+this.fnAddRow = function(sGrdId, nRow)
+{
+    
+};
+
+/**
+ * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number, Array} arrnRow    deleteRow 리턴값
+ * @return {N/A} N/A
+ * @example this.fnDelRow(sGrdId, nRow); 
+ */
+this.fnDelRow = function(sGrdId, arrnRow)
+{    
+    
+};
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnInit : 초기화 함수
+ * @example this.fnUserFunction();
+ */
+this.fnInit = function()
+{    
+	// 공통 코드조회 함수 호출
+    this.fnCommonCode();
+	
+	// 접속한 사용자가 프로젝트 관리자인 경우에만 검색조건 프로젝트 선택 가능
+	this.divSearch.form.cboProjectNm.set_readonly(false);
+}
+
+/**
+ * fnCommonCode : 공통 코드조회
+ * @example this.fnCommonCode();
+ */
+this.fnCommonCode = function ()
+{
+	take.tranCode(this, "00009", "dsCboUseYn", "ALL",
+	function(sId, nErrCd, sErrMsg)
+	{
+		if (this.dsCboUseYn.rowcount > 0){
+			this.divSearch.form.cboUseYn.set_value("Y");
+		}
+		// 프로젝트 코드
+		take.tranSelect
+		(
+			this,
+			"projectInfoCode", 
+			"ProjectManagement.projectInfoCode", 
+			"", 
+			"dsCboProjectCd", 
+			"", 
+			function(sId, nErrCd, sErrMsg)
+			{
+				var objDsCboProj = this.dsCboProjectCd;
+				if (objDsCboProj.rowcount>0)
+				{
+					var addInsertRow = objDsCboProj.insertRow(0)
+					objDsCboProj.setColumn(addInsertRow, "CODE", "");
+					objDsCboProj.setColumn(addInsertRow, "NAME", "선택");
+				}
+			}
+		);
+
+		this.fnSearch("prefixList");
+	});
+};
+
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "prefixList" :		// 좌측 권한목록 조회 콜백
+			this.fnSearch('formList');
+            break;
+			
+        default :
+            break;
+    }        
+};
+
+this.dsPrefixList_canrowposchange = function(obj:nexacro.NormalDataset,e:nexacro.DSRowPosChangeEventInfo)
+{
+	this.fnSearch('formList');
+};
+
+this.divDetail_btnFormDesign_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var sPrefix = this.dsPrefixList.getColumn(this.dsPrefixList.rowposition, "PREFIX");
+	var downloadUrl = take.getSvcUrl() + "formDesignDownload.do";
+	downloadUrl += "?sPrefix="+sPrefix;
+	
+	this.FileDownTransfer00.set_url(downloadUrl);
+	this.FileDownTransfer00.download();
+};
+
+this.divDetail_grdPrefixList_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	this.fnSearch('formList');
+};
+]]></Script>
+  </Form>
+</FDL>

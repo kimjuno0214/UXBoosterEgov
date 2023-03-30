@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="smpForeach" width="1040" height="659" titletext="New Form" onload="smpForeach_onload">
+    <Layouts>
+      <Layout height="659" width="1040">
+        <Button id="btnParam" taborder="1" text="Foreash Param" left="58" top="4" width="194" height="39" onclick="btnParam_onclick"/>
+        <Grid id="grdDetail" taborder="1" left="10" top="80" right="10" bottom="10" binddataset="dsList" autosizingtype="row" autoenter="select" takegrid="all" cellsizingtype="col" extendsizetype="row">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="110"/>
+                <Column size="120"/>
+                <Column size="160"/>
+                <Column size="110"/>
+                <Column size="110"/>
+                <Column size="110"/>
+                <Column size="80"/>
+                <Column size="200"/>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="80"/>
+                <Column size="140"/>
+                <Column size="140"/>
+                <Column size="120"/>
+                <Column size="110"/>
+                <Column size="120"/>
+                <Column size="120"/>
+                <Column size="120"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="ID"/>
+                <Cell col="1" text="성명"/>
+                <Cell col="2" text="생년월일"/>
+                <Cell col="3" text="이메일"/>
+                <Cell col="4" text="모바일"/>
+                <Cell col="5" text="유선전화"/>
+                <Cell col="6" text="팩스"/>
+                <Cell col="7" text="우편번호"/>
+                <Cell col="8" text="주소"/>
+                <Cell col="9" text="부서코드"/>
+                <Cell col="10" text="상태"/>
+                <Cell col="11" text="사용유무"/>
+                <Cell col="12" text="동의유무"/>
+                <Cell col="13" text="로그인일자"/>
+                <Cell col="14" text="비밀번호 변경일자"/>
+                <Cell col="15" text="로그인 브라우저"/>
+                <Cell col="16" text="로그인 IP"/>
+                <Cell col="17" text="가입 일자"/>
+                <Cell col="18" text="유효시작일자"/>
+                <Cell col="19" text="유효종료일자"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:userId" autosizerow="limitmin" textAlign="center" wordWrap="char"/>
+                <Cell col="1" text="bind:userNm" wordWrap="char" autosizerow="limitmin" textAlign="center"/>
+                <Cell col="2" text="bind:userBirthday" autosizerow="limitmin" wordWrap="char"/>
+                <Cell col="3" text="bind:userEmail" wordWrap="char" autosizerow="limitmin"/>
+                <Cell col="4" text="bind:userMobile" autosizerow="limitmin" textAlign="center" wordWrap="char"/>
+                <Cell col="5" text="bind:userTel" autosizerow="limitmin" textAlign="center" wordWrap="char"/>
+                <Cell col="6" text="bind:userFax" autosizerow="limitmin" textAlign="center" wordWrap="char"/>
+                <Cell col="7" text="bind:postCd" autosizerow="limitmin" textAlign="center" wordWrap="char"/>
+                <Cell col="8" text="bind:userAddr" wordWrap="char" autosizerow="limitmin"/>
+                <Cell col="9" text="bind:deptCd" autosizerow="limitmin" wordWrap="char"/>
+                <Cell col="10" text="bind:userStatus" autosizerow="limitmin" wordWrap="char"/>
+                <Cell col="11" text="bind:useYn" autosizerow="limitmin" wordWrap="char"/>
+                <Cell col="12" text="bind:agreeYn" autosizerow="limitmin" textAlign="center" wordWrap="char"/>
+                <Cell col="13" text="bind:lastLoginDt" wordWrap="char" autosizerow="limitmin"/>
+                <Cell col="14" text="bind:pwChangeDt" wordWrap="char" autosizerow="limitmin"/>
+                <Cell col="15" text="bind:loginBrowser" wordWrap="char" autosizerow="limitmin" textAlign="center"/>
+                <Cell col="16" text="bind:loginIp" autosizerow="limitmin"/>
+                <Cell col="17" text="bind:joinDate" autosizerow="limitmin" textAlign="center"/>
+                <Cell col="18" text="bind:validStartDate" autosizerow="limitmin" textAlign="center"/>
+                <Cell col="19" text="bind:validEndDate" autosizerow="limitmin" textAlign="center"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="staTitle" taborder="2" text="사용자 목록" top="50" cssclass="sta_WF_title02" usedecorate="true" height="30" left="10" right="10"/>
+        <Button id="btnDataset" taborder="3" text="Foreash Dataset" left="270" top="4" width="194" height="39" onclick="btnDataset_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[this.smpForeach_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+    if (take.formOnLoad(this))
+    {
+    
+    }
+};
+
+this.btnParam_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{    
+    this.staTitle.set_text("사용자 목록");
+     
+    this.dsList.clearData();
+    
+    var sForeach = "";
+    //sForeach = "{sDeptCd:[D0003,D0001,D0002,D0004]}";
+
+    sForeach = take.getDsObjString(this.dsDept);
+
+    trace("sForeach -->" + sForeach);
+    this.dsList.clearData();
+    
+    this.staTitle.set_text("사용자 목록");
+    
+    take.tranSelect(
+        this,
+        "selForeachParam",
+        "Sample.smpForeach",
+        "",
+        "dsList",
+        "",
+        function(sId, nErrCd, sMsg) {
+            return null;
+        },
+        false,
+        "",
+        false,
+        sForeach);
+ };
+
+this.btnDataset_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    this.dsList.clearData();
+    
+    this.staTitle.set_text("사용자 목록");
+    
+    take.tranSelect(
+        this,
+        "selForeachDataset",
+        "Sample.smpForeach",
+        "",
+        "dsList",
+        "",
+        function(sId, nErrCd, sMsg) {
+            return null;
+        },
+        true,
+        "",
+        false,
+        ["dsDept"]);
+};
+
+
+]]></Script>
+    <Objects>
+      <Dataset id="dsList">
+        <ColumnInfo>
+          <Column id="userCd" type="STRING" size="256"/>
+          <Column id="userId" type="STRING" size="255"/>
+          <Column id="userNm" type="STRING" size="255"/>
+          <Column id="userBirthday" type="STRING" size="255"/>
+          <Column id="userEmail" type="STRING" size="255"/>
+          <Column id="userMobile" type="STRING" size="255"/>
+          <Column id="userTel" type="STRING" size="255"/>
+          <Column id="userFax" type="STRING" size="255"/>
+          <Column id="postCd" type="STRING" size="255"/>
+          <Column id="userAddr" type="STRING" size="255"/>
+          <Column id="deptCd" type="STRING" size="255"/>
+          <Column id="userStatus" type="STRING" size="255"/>
+          <Column id="useYn" type="STRING" size="255"/>
+          <Column id="agreeYn" type="STRING" size="255"/>
+          <Column id="lastLoginDt" type="STRING" size="255"/>
+          <Column id="pwChangeDt" type="STRING" size="255"/>
+          <Column id="loginBrowser" type="STRING" size="255"/>
+          <Column id="loginIp" type="STRING" size="255"/>
+          <Column id="joinDate" type="STRING" size="255"/>
+          <Column id="validStartDate" type="STRING" size="255"/>
+          <Column id="validEndDate" type="STRING" size="255"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsDept">
+        <ColumnInfo>
+          <Column id="sDeptCd" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="sDeptCd">D0001</Col>
+          </Row>
+          <Row>
+            <Col id="sDeptCd">D0002</Col>
+          </Row>
+          <Row>
+            <Col id="sDeptCd">D0003</Col>
+          </Row>
+          <Row>
+            <Col id="sDeptCd">D0004</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

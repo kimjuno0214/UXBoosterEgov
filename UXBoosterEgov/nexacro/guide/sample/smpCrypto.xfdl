@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="smpCrypto" width="1280" height="720" titletext="New Form" onload="smpCrypto_onload">
+    <Layouts>
+      <Layout height="720" width="1280">
+        <Static id="staTextT" taborder="6" text="평문" left="10" top="85" width="80" height="25"/>
+        <Edit id="edtText" taborder="0" left="staTextT:3" top="85" width="200" height="25" text="bmV4aW512349qc0tleQ=="/>
+        <Button id="btnEncrypt" taborder="1" text="-- 암호화 --&gt;" left="edtText:3" top="85" width="112" height="25" onclick="btnEncrypt_onclick"/>
+        <Edit id="edtEcryptData00" taborder="2" left="btnEncrypt:3" top="85" width="300" height="25"/>
+        <Static id="Static18" taborder="3" text="암호화" left="0" top="0" height="30" cssclass="sta_WF_title02" right="560"/>
+        <Static id="staBase64KeyT" taborder="5" text="암호화키" left="10" top="45" width="80" height="25"/>
+        <Edit id="edtBase64Key" taborder="4" left="staBase64KeyT:3" top="45" width="618" height="25" value="test" text="test"/>
+        <Edit id="edtDecrypt" taborder="7" left="93" top="125" width="200" height="25" text="test"/>
+        <Button id="btnDecrypt" taborder="8" text="&lt;-- 복호화 --" left="296" top="125" width="112" height="25" onclick="btnDecrypt_onclick"/>
+        <Edit id="edtEcryptData01" taborder="9" left="411" top="125" width="300" height="25"/>
+        <Static id="Static18_00" taborder="10" text="라이센스키발급" left="0" top="190" height="30" cssclass="sta_WF_title02" right="560"/>
+        <Static id="staTakeKeyT" taborder="11" text="take key" left="10" top="230" width="80" height="25"/>
+        <Edit id="edtTakeKey" taborder="12" left="90" top="230" width="618" height="25" value="take" text="take"/>
+        <Static id="staCustT" taborder="13" text="customer key" left="10" top="260" width="80" height="25"/>
+        <Edit id="edtCust" taborder="14" left="90" top="260" width="618" height="25" text="test"/>
+        <Static id="staLicType" taborder="15" text="License type" left="10" top="320" width="80" height="25"/>
+        <Edit id="edtLicType" taborder="16" left="90" top="320" width="618" height="25" text="test"/>
+        <Static id="staProjectKey" taborder="17" text="Project key" left="10" top="350" width="80" height="25"/>
+        <Edit id="edtProjectKey" taborder="18" left="90" top="350" width="618" height="25" text="test"/>
+        <Static id="staSDateT" taborder="19" text="Use term" left="10" top="380" width="80" height="25"/>
+        <Calendar id="calSDate" taborder="20" left="90" top="380" width="100" height="25"/>
+        <Calendar id="calEDate" taborder="21" left="210" top="380" width="100" height="25"/>
+        <Static id="staDateGbn" taborder="22" text="~" left="195" top="380" width="10" height="25"/>
+        <TextArea id="taLicEnc" taborder="23" left="90" top="410" width="620" height="80"/>
+        <Static id="staLicEnc" taborder="24" text="License" left="10" top="410" width="80" height="25"/>
+        <Static id="staLicDec" taborder="25" text="License" left="10" top="495" width="80" height="25"/>
+        <TextArea id="taLicDec" taborder="26" left="90" top="495" width="620" height="80"/>
+        <Button id="btnKey" taborder="27" text="발급" left="730" top="230" width="120" height="50" onclick="btnKey_onclick"/>
+        <Static id="staKeyT" taborder="28" text="Key" left="10" top="290" width="80" height="25"/>
+        <Edit id="edtKey" taborder="29" left="90" top="290" width="618" height="25" text="test"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.smpCrypto_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+    take.loadLib(
+        this, 
+        "cryptojs", 
+        "./_extlib_/Take/crypto-js.min.js", 
+        function() {
+            take.debug(this, "cryptojs load");
+        });
+        
+        //['DEV','ssts','20221010','20221231']
+        //take --> ssts ==> KzhaeFpwYURjaXhZUC9waFdrcHU0Zz09
+        //KzhaeFpwYURjaXhZUC9waFdrcHU0Zz09 --> ['DEV','ssts','20221010','20221231'] ==> 
+        
+};
+
+//암호화
+this.btnEncrypt_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    var sBaseKey, sText, sEncryptData;
+    
+    sBaseKey =this.edtBase64Key.value;
+    sText = this.edtText.value;
+    
+    sEncryptData = take.Crypto.getDataEncrypt(sText, sBaseKey);
+    
+    this.edtEcryptData00.set_value(sEncryptData);
+    this.edtEcryptData01.set_value(sEncryptData);
+};
+
+//복호화
+this.btnDecrypt_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    var sBaseKey, sEncryptData, sVal;
+    
+    sBaseKey =this.edtBase64Key.value;
+    sEncryptData = this.edtEcryptData01.value;
+    
+	sVal = take.Crypto.getDataDecrypt(sEncryptData, sBaseKey);
+    alert(sVal);
+    this.edtDecrypt.set_value(sVal);
+};
+
+
+this.btnKey_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var sTakeKey, sCust, sKey, sLicText, sLic;
+    var objLic;
+    
+    sTakeKey =this.edtTakeKey.value;
+    sCust = this.edtCust.value;
+    
+    sKey = take.Crypto.getDataEncrypt(sCust, sTakeKey);
+    
+    this.edtKey.set_value(sKey);
+    
+    objLic = {
+        'licenseType' : this.edtLicType.value,
+        'subject'     : this.edtProjectKey.value,
+        'issuedTime'  : this.calSDate.value,
+        'expiryTime'  : this.calEDate.value
+    };
+    
+    sLicText = JSON.stringify(objLic);
+    
+    sLic = take.Crypto.getDataEncrypt(sLicText, sKey);
+    
+    sLicText = "";
+    
+    this.taLicEnc.set_value(sLic);
+    
+    sLicText = take.Crypto.getDataDecrypt(sLic, sKey);
+    
+    this.taLicDec.set_value(sLicText);
+};
+]]></Script>
+  </Form>
+</FDL>

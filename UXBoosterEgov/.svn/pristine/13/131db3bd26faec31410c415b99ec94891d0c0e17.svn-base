@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="publishing002" width="1018" height="318" titletext="배포이력">
+    <Layouts>
+      <Layout height="318" mobileorientation="landscape" width="1018">
+        <Grid id="Grid00" taborder="0" left="10" top="38" right="10" bottom="10" autofittype="col" binddataset="">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="30" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="Column0"/>
+                <Cell col="1" text="Column1"/>
+                <Cell col="2" text="Column2"/>
+                <Cell col="3" text="Column3"/>
+                <Cell col="4" text="Column4"/>
+                <Cell col="5" text="Column5"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0"/>
+                <Cell col="1" text="bind:Column1"/>
+                <Cell col="2" text="bind:Column2"/>
+                <Cell col="3" text="bind:Column3"/>
+                <Cell col="4" text="bind:Column4"/>
+                <Cell col="5" text="bind:Column5"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="Button01" taborder="1" text="저장" top="5" width="46" height="23" cssclass="btn_WF_basic01" right="10"/>
+        <Button id="Button00" taborder="2" text="삭제" top="5" width="46" height="23" cssclass="btn_WF_basic01" right="60"/>
+        <Button id="Button02" taborder="3" text="추가" top="5" width="46" height="23" cssclass="btn_WF_basic01" right="110"/>
+        <Static id="Static17" taborder="4" text="Static03" left="798" top="28" width="220" height="10" background="red" visible="false"/>
+      </Layout>
+    </Layouts>
+    <Objects/>
+  </Form>
+</FDL>

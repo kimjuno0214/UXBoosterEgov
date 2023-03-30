@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="smpKeyCopyPaste" width="1280" height="720" titletext="복사 및 붙여넣기">
+    <Layouts>
+      <Layout height="720" width="1280">
+        <Div id="divSearch" taborder="0" left="0" top="130" height="47" right="0" minwidth="1355" maxwidth="" onrbuttondown="divSearch_onrbuttondown" cssclass="div_WF_searchBox01" text="" keycomp="dsData" keyvalue="pstNo">
+          <Layouts>
+            <Layout>
+              <Static id="staUserIdT" taborder="2" text="Key" left="30" top="10" width="120" height="25" cssclass="sta_WF_textR"/>
+              <Edit id="edtKey" taborder="0" left="staUserIdT:10" top="10" width="170" height="25" text="TEXT" onkeydown="divSearch_edtUserId_onkeydown" accessibilitylabel="ID 입력"/>
+              <Static id="staUseYnT" taborder="3" text="사용여부" left="edtKey:30" top="10" width="120" height="25" cssclass="sta_WF_textR"/>
+              <Combo id="cboUseYn" taborder="1" left="staUseYnT:10" top="10" width="170" height="25" index="0" innerdataset="dsCboUseYn" codecolumn="code" datacolumn="name" text="사용" value="Y" onitemchanged="divSearch_cboUseYn_onitemchanged" cssclass="cmb_WF_essential" accessibilitylabel="사용여부 선택"/>
+              <Static id="Static07_00_00_01_00_01" taborder="4" text="183 (공통버튼영역)" top="0" width="183" background="RGBA(0,0,255,0.40)" visible="false" color="blue" textAlign="center" right="0" bottom="0"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divSearch00" taborder="1" left="0" top="250" height="47" cssclass="div_WF_searchBox01" right="0" minwidth="1355" maxwidth="" keycomp="edtTest" keyvalue="value">
+          <Layouts>
+            <Layout>
+              <Static id="staUserIdT" taborder="0" text="Key" left="30" top="10" width="120" height="25" cssclass="sta_WF_textR"/>
+              <Static id="Static07_00_00_01_00_01" taborder="1" text="183 (공통버튼영역)" top="0" width="183" background="RGBA(0,0,255,0.40)" visible="false" color="blue" textAlign="center" right="0" bottom="0"/>
+              <Edit id="edtTest" taborder="2" left="staUserIdT:10" top="10" width="170" height="25"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static52" taborder="2" text="※ Dataset 값을 Copy&amp;Paste 적용 예" left="15" top="85" width="231" height="21" usedecorate="true" color="#e37a0c"/>
+        <Static id="Static52_00" taborder="3" text="※ Edit Component 값을 Copy&amp;Paste 설정한 예" left="15" top="205" width="275" height="21" usedecorate="true" color="#e37a0c"/>
+        <Static id="Static24" taborder="4" text="20" left="0" height="20" background="rgba(255,0,0,0.4)" visible="false" right="1" textAlign="center" top="110"/>
+        <Static id="Static24_00" taborder="5" text="20" left="0" height="20" background="rgba(255,0,0,0.4)" visible="false" right="1" textAlign="center" top="230"/>
+        <Static id="Static61" taborder="6" text="복사 및 붙여넣기" left="10" top="10" width="210" height="35" cssclass="sta_WF_title01"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[// 
+// this.divSearch_onrbuttondown = function(obj:nexacro.Div,e:nexacro.MouseEventInfo)
+// {
+//     if (take.nvl(obj.keycomp,"")!=="" && take.nvl(obj.keyvalue,"")!=="") obj._xfnCopyPaste(obj, e);
+// };
+// 
+// this.divSearch._xfnCopyPaste = function(objComp, objEvt)
+// {
+//     var pThis = objComp.parent;
+//     var sId, sDsataset;
+//     var objPmenu, objDs;
+//     var nMenuCnt=3;
+// 
+//     pThis = take.nvl(objComp._objParent,"");
+//     
+//     if (pThis=="")
+//     {
+//         objComp._objParent = take.nvl(take.getOwnerForm(objComp),"");
+//         if (objComp._objParent=="")
+//         {
+//             take.debug(pThis, "부모폼을 찾을수 없습니다.");
+//             return;
+//         }
+//         
+//         pThis = objComp._objParent;
+//     }
+//     
+//     sId      = "_pmn_" + objComp.name;
+//     objPmenu = take.nvl(pThis[sId],"")
+// 
+//     objDs = _application.tgdsCopy;
+//     
+//     objDs.filter("");
+//     
+//     //붙혀넣기할 데이터가 있는지 여부에 따라서 팝업 메뉴 enable처리
+//     if (objDs.rowcount>nMenuCnt)
+//     {
+//         objDs.setColumn(nMenuCnt-2, "enablecolumn", "true");
+//     } else {
+//         objDs.setColumn(nMenuCnt-2, "enablecolumn", "false");
+//     }
+//     
+//     if (take.nvl(objPmenu,"")=="")
+//     {
+//         objPmenu	= new PopupMenu();
+//         objPmenu.init(sId, "absolute", 0, 0, 0, 0, null, null);
+//         pThis.addChild(sId, objPmenu);
+// 
+//         // Grid 공통 마우스 우측 메뉴 onmenuclickHandler Event
+//         objPmenu.addEventHandler(
+//             "onmenuclick", function (obj, e)
+//             {
+//                 switch(e.id)
+//                 {
+//                     case "copy" : 
+//                         objComp._xfnCopy(objComp);
+//                         break;
+//                     case "paste": 
+//                         objComp._xfnPaste(objComp);
+//                         break;
+//                 }
+//             },
+//             pThis);
+// 
+//         objPmenu.set_innerdataset(objDs.name);
+//         objPmenu.set_captioncolumn("captioncolumn");
+//         objPmenu.set_idcolumn("idcolumn");
+//         objPmenu.set_levelcolumn("levelcolumn");
+//         objPmenu.set_enablecolumn("enablecolumn");
+//         objPmenu.set_userdatacolumn("userdatacolumn");
+// 
+//         objPmenu.set_itemheight(30);
+// 
+//         objPmenu.show();
+//     }
+//     
+//     if (take.nvl(objComp._objKeyComp,"")=="")
+//     {
+//         //데이터셋 컴포넌트부터 확인
+//         objComp._objKeyComp = take.nvl(take.getFormCompByPathName(pThis, objComp.keycomp),"");
+//         
+//         if (objComp._objKeyComp=="")
+//         {
+//             //데이터셋이 아닐경우 해당 div에 컴포넌트 확인
+//             objComp._objKeyComp = take.nvl(take.getFormCompByPathName(objComp.form, objComp.keycomp),"");
+//             if (objComp._objKeyComp=="")
+//             {
+//                 take.debug(pThis, "key 컴포넌트를 찾을수 없습니다.");
+//                 return;
+//             } else {
+//                 objComp._sKeyCompType = take.nvl(take.CompTypeName(objComp._objKeyComp),"");
+//             }
+//         } else {
+//             objComp._sKeyCompType = take.nvl(take.CompTypeName(objComp._objKeyComp),"");
+//         }
+//     }
+//     
+//     objDs.filter("visible!='false'");
+//     
+//     objPmenu.trackPopupByComponent(objComp, objEvt.canvasx, objEvt.canvasy);
+// }
+// 
+// this.divSearch._xfnCopy = function(objComp)
+// {
+//     var pThis = objComp._objParent;
+//     var objKeyComp, objDs;
+//     var sKeyValue, sVal, sType;
+//     var nRow, nCnt, nHisCnt=5, nIdx, nMenuCnt=3;
+//     
+//     objKeyComp = objComp._objKeyComp;
+//     sType = objComp._sKeyCompType;
+//     
+//     sKeyValue = objComp.keyvalue;
+//     
+//     if (sType=="Dataset")
+//     {
+//         sVal = objKeyComp.getColumn(0, sKeyValue);
+//         if (sVal=="undefined")
+//         {
+//             take.debug(pThis, "key 컬럼(" + sKeyValue + ")에서 데이터 가져오기 실패");
+//             return false;
+//         }
+//         
+//         sVal = take.nvl(sVal,"");
+//     } else {
+//         if (objKeyComp.hasOwnProperty(sKeyValue))
+//         {
+//             sVal = take.nvl(objKeyComp[sKeyValue],"");
+//         } else {
+//             take.debug(pThis, "key 프러퍼티(" + sKeyValue + ")에서 데이터 가져오기 실패");
+//             return false;
+//         }
+//     }
+//     
+//     if (sVal=="")
+//     {
+//         take.alert(pThis, "Info", "복사할 값이 없습니다.", "", "xfnCopyAlert0");
+//         return false;
+//     }
+//     
+//     objDs = _application.tgdsCopy;
+//     objDs.filter("");
+//     
+//     nRow = objDs.insertRow(nMenuCnt); //3번째 row부터 삽입
+//     
+//     objDs.setColumn(nRow, "captioncolumn", sVal);
+//     nIdx = objDs.setColumn(nRow, "idcolumn", sVal);
+//     nIdx = objDs.setColumn(nRow, "levelcolumn", "0");
+//     objDs.setColumn(nRow, "enablecolumn", "false");
+//     //objDs.setColumn(nRow, "visiblecolumn", "true");
+//     objDs.setColumn(nRow, "visible", "false");
+//     
+//     nCnt = objDs.rowcount;
+//     
+//     if (nCnt>nHisCnt+nMenuCnt)
+//     {
+//         objDs.deleteRow(nCnt-1);
+//     }
+//     
+//     objDs.filter("visible!='false'");
+//     
+//     if (nIdx<0)
+//     {
+//         take.debug(pThis, "데이터 복사 실패");
+//         return false;
+//     } else {
+//         return true;
+//     }
+// }
+// 
+// this.divSearch._xfnPaste = function(objComp)
+// {
+//     var pThis = objComp._objParent;
+//     var objDs, objKeyComp;
+//     var sVal, sType, sKeyValue;
+//     var nIdx, nMenuCnt=3;
+//     
+//     objDs = _application.tgdsCopy;
+//     objDs.filter("");
+//     
+//     if (objDs.rowcount<=nMenuCnt)
+//     {
+//         take.alert(pThis, "Info", "붙혀 넣기할 데이터가 없습니다.", "", "xfnPasteAlert0");
+//         return false;
+//     }
+//     
+//     objKeyComp = objComp._objKeyComp;
+//     sType = objComp._sKeyCompType;
+//     
+//     sKeyValue = objComp.keyvalue;
+//     sVal = objDs.getColumn(nMenuCnt, "idcolumn");
+//     
+//     if (sVal=="")
+//     {
+//         take.alert(pThis, "Info", "붙혀 넣기할 값이 없습니다.", "", "xfnPasteAlert1");
+//         return false;
+//     }
+//     
+//     if (sType=="Dataset")
+//     {
+//         nIdx = objKeyComp.setColumn(objKeyComp.rowpostion, sKeyValue, sVal);
+//         if (nIdx==-1)
+//         {
+//             take.debug(pThis, "key 컬럼(" + sKeyValue + ")에서 데이터 붙혀넣기 실패");
+//             return false;
+//         }
+//     } else {
+//         if (objKeyComp.hasOwnProperty(sKeyValue))
+//         {
+//             objKeyComp[sKeyValue] = sVal;
+//             objKeyComp.updateToDataset();
+//         } else {
+//             take.debug(pThis, "key 프러퍼티(" + sKeyValue + ")에서 데이터 붙혀넣기 실패");
+//             return false;
+//         }
+//     }
+//     
+//     return true;
+// }]]></Script>
+    <Objects>
+      <Dataset id="dsData">
+        <ColumnInfo>
+          <Column id="pstNo" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="pstNo">12345678</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="divSearch.form.edtKey" propid="value" datasetid="dsData" columnid="pstNo"/>
+    </Bind>
+  </Form>
+</FDL>

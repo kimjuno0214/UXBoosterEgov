@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="smpBtnList" width="1659" height="832" titletext="New Form">
+    <Layouts>
+      <Layout height="832" width="1659">
+        <Edit id="edtUrl" taborder="0" left="31" top="28" width="260" height="27"/>
+        <Button id="btnLoad" taborder="1" text="폼 불러오기" left="edtUrl:3" top="29" width="120" height="27" onclick="btnLoad_onclick"/>
+        <Button id="btnGetComp" taborder="2" text="버튼 컴포넌트 가져오기" left="btnLoad:3" top="29" width="120" height="27" onclick="btnGetComp_onclick"/>
+        <Div id="divForm" taborder="3" left="btnGetComp:3" top="31" width="200" height="27" border="1px solid"/>
+        <Grid id="grdList" taborder="4" left="36" top="76" width="813" height="369" binddataset="dsComp">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="200"/>
+                <Column size="200"/>
+                <Column size="100"/>
+                <Column size="300"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="버튼 아이디"/>
+                <Cell col="1" text="버튼명"/>
+                <Cell col="2" text="구분"/>
+                <Cell col="3" text="Scope"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:btnId"/>
+                <Cell col="1" text="bind:btnText"/>
+                <Cell col="2" text="bind:comGbn"/>
+                <Cell col="3" text="bind:scope"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsComp">
+        <ColumnInfo>
+          <Column id="btnId" type="STRING" size="256"/>
+          <Column id="btnText" type="STRING" size="256"/>
+          <Column id="comGbn" type="STRING" size="256"/>
+          <Column id="scope" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[
+this.btnLoad_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	//변수 선언 및 세팅
+    var objDivForm;
+    var sUrl;
+    
+    objDivForm = this.divForm;
+    sUrl = this.edtUrl.value;
+    
+    //초기화
+    objDivForm._bOnLoad = false;
+    objDivForm.set_url("");
+    this.dsComp.clearData();
+    this.grdList.set_binddataset("");
+    
+    //메뉴 URL 연결
+    if (this._orgurl==sUrl) //현재 폼 URL과 같을경우 처리
+    {
+        objDivForm.set_url("");
+    } else {
+        objDivForm.set_url(sUrl);
+    }    
+};
+
+this.btnGetComp_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var objMdiForm = kamco.getOwnerWorkForm(this);
+    
+    if (objMdiForm!="")
+    {
+        if (!take.isQuickView())
+        {
+            this.fnCompInfo(this, objMdiForm.form, "Com");
+        } 
+    }
+    
+    if (this.divForm.url=="")
+    {
+        this.fnCompInfo(this, this, "Form");
+    } else {
+        this.fnCompInfo(this, this.divForm.form, "Form");
+    }
+    
+    this.grdList.setBindDataset(this.dsComp);
+};
+
+this.fnCompInfo = function(pThis, objForm, sGbn, sParent)
+{
+    var arrComp = new Array();
+    var objComp, objDs;
+    var nCnt, nRow;
+    var sType, sScope;
+    
+    sParent =take.nvl(sParent,"this");
+    objDs = pThis.dsComp;
+    
+    if (objForm._type_name=="Tab")
+    {
+        arrComp = arrComp.concat(objForm.tabpages._idArray);
+    } else if (objForm._type_name=="Div")
+    {
+        arrComp = arrComp.concat(objForm.form.components._idArray);
+    } else {
+        arrComp = arrComp.concat(objForm.components._idArray);
+    }
+    
+    nCnt = arrComp.length;
+    
+    if (nCnt<=0) return ;
+    
+    objDs.set_enableevent(false);
+    
+    for (var i=0; i<nCnt; i++)
+    {
+        objComp = objForm[arrComp[i]];
+        sScope = sParent + "." + objComp.name;
+        sType = objComp._type_name;
+        
+        switch(sType)
+        {
+            case "Tab":
+                if (sGbn!="Com") arguments.callee(pThis, objComp, sGbn, sScope);
+                break;
+            case "Div":
+            case "TabpageControl":
+            case "PopupDiv":
+                if (sGbn!="Com") arguments.callee(pThis, objComp.form, sGbn, sScope);
+                break;
+            case "Button":
+                nRow = objDs.addRow();
+                objDs.setColumn(nRow, "scope", sScope);
+                objDs.setColumn(nRow, "btnId", objComp.name);
+                objDs.setColumn(nRow, "btnText", objComp.text);
+                objDs.setColumn(nRow, "comGbn", sGbn);
+                break;
+            default:
+        }
+    }
+    
+    objDs.set_rowposition(0);
+    objDs.set_enableevent(true);
+}]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="Guide004" width="1659" height="832" titletext="Guide016">
+    <Layouts>
+      <Layout height="832" mobileorientation="landscape" width="1659">
+        <Static id="Static00" taborder="0" text="10" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" textAlign="center"/>
+        <Static id="Static22" taborder="1" text="10" left="0" height="10" background="rgba(255,0,0,0.4)" visible="false" right="0" bottom="0" textAlign="center"/>
+        <Static id="Static23" taborder="2" text="10" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" textAlign="center" right="0"/>
+        <Static id="Static79" taborder="3" text="모든 화면기준&#13;&#10;divSearch = 검색조건영역&#13;&#10;btnShowHide = 검색조건 접기버튼&#13;&#10;divDetail   = 상세영역" left="1666" top="18" width="134" height="72" background="red" visible="false" enable="false"/>
+        <Button id="Button03" taborder="6" left="824" top="0" width="10" bottom="10" cssclass="btn_WF_splitter" text=""/>
+        <Div id="divLeft" taborder="4" left="10" top="0" bottom="10" right="Button03:5" minwidth="670" maxwidth="" minheight="800" maxheight="">
+          <Layouts>
+            <Layout>
+              <Div id="divSearch" taborder="0" left="0" top="0" height="72" right="0" cssclass="div_WF_searchBox01" text="" formscrolltype="none" minwidth="670" maxwidth="">
+                <Layouts>
+                  <Layout>
+                    <Static id="Static00" taborder="0" text="Label" left="20" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+                    <Combo id="Combo00" taborder="3" text="Combo00" left="Static00:10" top="10" width="195" height="21" cssclass="cmb_WF_essential"/>
+                    <Static id="Static07_01" taborder="6" text="50" left="305" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+                    <Static id="Static05" taborder="1" text="Label" left="355" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+                    <Edit id="Edit11" taborder="2" left="Static05:10" top="10" width="195" height="21"/>
+                    <Static id="Static07_00_00_00" taborder="7" text="285" left="355" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+                    <Static id="Static07_00_00" taborder="4" text="285" left="20" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+                    <Static id="Static08_00_00_00" taborder="8" text="20" left="640" top="0" width="20" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+                    <Static id="Static00_00" taborder="9" text="Label" left="20" top="39" width="80" height="21" cssclass="sta_WF_textR"/>
+                    <Combo id="Combo00_00" taborder="10" text="Combo00" left="110" top="39" width="195" height="21" cssclass="cmb_WF_essential"/>
+                    <Static id="Static05_00" taborder="11" text="Label" left="355" top="39" width="80" height="21" cssclass="sta_WF_textR"/>
+                    <Edit id="Edit11_00" taborder="12" left="445" top="39" width="195" height="21"/>
+                    <Static id="Static07_00" taborder="5" text="20" left="0" top="0" width="20" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+                  </Layout>
+                </Layouts>
+              </Div>
+              <Button id="btnShowHide" taborder="1" left="46.23%" top="72" width="60" height="10" cssclass="btn_WF_fold01"/>
+              <Div id="divDetail" taborder="2" left="0" top="102" right="0" bottom="0">
+                <Layouts>
+                  <Layout>
+                    <Static id="Static01" taborder="0" text="Test" left="0" top="0" height="21" width="450" cssclass="sta_WF_title02"/>
+                    <Static id="Static32" taborder="1" left="19" top="21" width="47" background="rgba(255,0,0,0.4)" visible="false" height="5" color="red" textAlign="center"/>
+                    <Static id="Static38" taborder="2" text="5" left="70" top="6" width="27" height="32" color="red" font="normal 11px/normal &quot;Arial&quot;" visible="false"/>
+                    <Grid id="Grid00" taborder="3" left="0" top="26" binddataset="Dataset00" bottom="0" autoenter="select" right="0">
+                      <Formats>
+                        <Format id="default">
+                          <Columns>
+                            <Column size="59"/>
+                            <Column size="150"/>
+                            <Column size="150"/>
+                            <Column size="150"/>
+                            <Column size="150"/>
+                            <Column size="150"/>
+                          </Columns>
+                          <Rows>
+                            <Row size="32" band="head"/>
+                            <Row size="30"/>
+                          </Rows>
+                          <Band id="head">
+                            <Cell text="Column0"/>
+                            <Cell col="1" text="Column1"/>
+                            <Cell col="2" text="Column2"/>
+                            <Cell col="3" text="Column3"/>
+                            <Cell col="4" text="Column4"/>
+                            <Cell col="5" text="Column5"/>
+                          </Band>
+                          <Band id="body">
+                            <Cell text="bind:Column0" displaytype="checkboxcontrol" edittype="checkbox"/>
+                            <Cell col="1" text="bind:Column1"/>
+                            <Cell col="2" text="bind:Column2"/>
+                            <Cell col="3" text="bind:Column3"/>
+                            <Cell col="4" text="bind:Column4"/>
+                            <Cell col="5" text="bind:Column5"/>
+                          </Band>
+                        </Format>
+                      </Formats>
+                    </Grid>
+                  </Layout>
+                </Layouts>
+              </Div>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static24" taborder="5" text="20" left="0" height="20" background="rgba(255,0,0,0.4)" visible="false" right="0" textAlign="center" top="82"/>
+        <Static id="Static23_01_00" taborder="7" text="5" left="833" top="139" width="27" height="30" color="red" font="normal 11px/normal &quot;Arial&quot;" visible="false"/>
+        <Static id="Static21_01_00" taborder="8" left="834" top="106" width="5" height="40" background="rgba(255,0,0,0.4)" visible="false" color="red" textAlign="center"/>
+        <Static id="Static23_01_00_00" taborder="9" text="5" left="818" top="139" width="27" height="30" color="red" font="normal 11px/normal &quot;Arial&quot;" visible="false"/>
+        <Static id="Static21_01_00_00" taborder="10" left="819" top="106" width="5" height="40" background="rgba(255,0,0,0.4)" visible="false" color="red" textAlign="center"/>
+        <Div id="divRight" taborder="11" left="Button03:5" top="0" bottom="10" right="10" text="" minwidth="670" maxwidth="" minheight="800" maxheight="">
+          <Layouts>
+            <Layout>
+              <Div id="divSearch" taborder="0" left="0" top="0" height="72" right="0" cssclass="div_WF_searchBox01" text="" formscrolltype="none" minwidth="670" maxwidth="">
+                <Layouts>
+                  <Layout>
+                    <Static id="Static00" taborder="0" text="Label" left="20" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+                    <Combo id="Combo00" taborder="3" text="Combo00" left="Static00:10" top="10" width="195" height="21" cssclass="cmb_WF_essential"/>
+                    <Static id="Static07_01" taborder="6" text="50" left="305" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+                    <Static id="Static05" taborder="1" text="Label" left="355" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+                    <Edit id="Edit11" taborder="2" left="Static05:10" top="10" width="195" height="21"/>
+                    <Static id="Static07_00_00_00" taborder="7" text="285" left="355" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+                    <Static id="Static07_00_00" taborder="4" text="285" left="20" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+                    <Static id="Static08_00_00_00" taborder="8" text="20" left="640" top="0" width="20" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+                    <Static id="Static00_00" taborder="9" text="Label" left="20" top="39" width="80" height="21" cssclass="sta_WF_textR"/>
+                    <Combo id="Combo00_00" taborder="10" text="Combo00" left="110" top="39" width="195" height="21" cssclass="cmb_WF_essential"/>
+                    <Static id="Static05_00" taborder="11" text="Label" left="355" top="39" width="80" height="21" cssclass="sta_WF_textR"/>
+                    <Edit id="Edit11_00" taborder="12" left="445" top="39" width="195" height="21"/>
+                    <Static id="Static07_00" taborder="5" text="20" left="0" top="0" width="20" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+                  </Layout>
+                </Layouts>
+              </Div>
+              <Button id="btnShowHide" taborder="1" left="46.23%" top="72" width="60" height="10" cssclass="btn_WF_fold01"/>
+              <Div id="divDetail" taborder="2" left="0" top="102" right="0" text="" height="207">
+                <Layouts>
+                  <Layout>
+                    <Static id="Static10_00" taborder="28" top="56" height="31" cssclass="sta_WF_td01L" left="118" right="0"/>
+                    <Static id="Static01" taborder="0" text="Test" left="0" top="0" height="21" width="450" cssclass="sta_WF_title02"/>
+                    <Static id="Static32" taborder="1" left="19" top="21" width="47" background="rgba(255,0,0,0.4)" visible="false" height="5" color="red" textAlign="center"/>
+                    <Static id="Static38" taborder="2" text="5" left="70" top="6" width="27" height="32" color="red" font="normal 11px/normal &quot;Arial&quot;" visible="false"/>
+                    <Static id="Static10" taborder="3" top="26" height="31" cssclass="sta_WF_td01L" left="118" right="0"/>
+                    <Static id="Static13" taborder="4" top="86" height="31" cssclass="sta_WF_td01L" left="118" right="0"/>
+                    <Static id="Static12" taborder="5" top="116" height="31" cssclass="sta_WF_td01L" left="118" right="0"/>
+                    <Static id="Static14" taborder="6" top="146" height="31" cssclass="sta_WF_td01L" left="118" right="0"/>
+                    <Static id="Static09" taborder="7" top="176" height="31" cssclass="sta_WF_td01L" left="118" right="0"/>
+                    <CheckBox id="CheckBox00" taborder="8" text="CheckBox00" top="181" width="148" height="21" cssclass="chk_WF_essential" left="127"/>
+                    <Combo id="Combo01" taborder="9" text="Combo00" top="151" width="416" height="21" cssclass="cmb_WF_essential" left="127"/>
+                    <Edit id="Edit03" taborder="10" top="121" height="21" width="416" cssclass="edt_WF_essential" left="127"/>
+                    <Edit id="Edit02" taborder="11" top="91" height="21" width="416" cssclass="edt_WF_essential" left="127"/>
+                    <Edit id="Edit01" taborder="12" top="61" height="21" width="416" cssclass="edt_WF_essential" left="127"/>
+                    <Edit id="Edit00" taborder="13" top="31" height="21" width="416" cssclass="edt_WF_essential" left="127"/>
+                    <Static id="Static03" taborder="14" text="Label" top="26" width="120" height="31" cssclass="sta_WF_th01L" left="0"/>
+                    <Static id="Static04_00" taborder="15" text="Label" top="56" width="120" height="31" cssclass="sta_WF_th01L" left="0"/>
+                    <Static id="Static05" taborder="16" text="Label" top="86" width="120" height="31" cssclass="sta_WF_th01L" left="0"/>
+                    <Static id="Static06" taborder="17" text="Label" top="116" width="120" height="31" cssclass="sta_WF_th01L" left="0"/>
+                    <Static id="Static07" taborder="18" text="Label" top="146" width="120" height="31" cssclass="sta_WF_th01L" left="0"/>
+                    <Static id="Static08" taborder="19" text="Label" top="176" width="120" height="31" cssclass="sta_WF_th01L" left="0"/>
+                    <Static id="Static24_00" taborder="20" left="129" top="82" width="57" height="4" background="rgba(255,0,0,0.4)" visible="false" color="red" textAlign="center"/>
+                    <Static id="Static24" taborder="21" left="129" top="57" width="57" height="4" background="rgba(255,0,0,0.4)" visible="false" color="red" textAlign="center"/>
+                    <Static id="Static25" taborder="22" text="4" left="120" top="48" width="27" height="30" color="red" font="normal 11px/normal &quot;Arial&quot;" visible="false"/>
+                    <Static id="Static21_00" taborder="23" left="543" top="104" width="7" height="40" background="rgba(255,0,0,0.4)" visible="false" color="red" textAlign="center"/>
+                    <Static id="Static21" taborder="24" left="120" top="104" width="7" height="40" background="rgba(255,0,0,0.4)" visible="false" color="red" textAlign="center"/>
+                    <Static id="Static25_00" taborder="25" text="4" left="120" top="69" width="27" height="30" color="red" font="normal 11px/normal &quot;Arial&quot;" visible="false"/>
+                    <Static id="Static25_00_00" taborder="26" text="7" left="110" top="99" width="27" height="30" color="red" font="normal 11px/normal &quot;Arial&quot;" visible="false"/>
+                    <Static id="Static25_00_00_00" taborder="27" text="7" left="554" top="99" width="27" height="30" color="red" font="normal 11px/normal &quot;Arial&quot;" visible="false"/>
+                  </Layout>
+                </Layouts>
+              </Div>
+              <Button id="Button04" taborder="4" left="0" top="314" height="10" cssclass="btn_WF_splitter2" right="0"/>
+              <Div id="divSub" taborder="3" left="0" top="Button04:5" right="0" bottom="0">
+                <Layouts>
+                  <Layout>
+                    <Static id="Static01" taborder="0" text="Test" left="0" top="0" height="21" width="450" cssclass="sta_WF_title02"/>
+                    <Static id="Static32" taborder="1" left="19" top="21" width="47" background="rgba(255,0,0,0.4)" visible="false" height="5" color="red" textAlign="center"/>
+                    <Static id="Static38" taborder="2" text="5" left="70" top="6" width="27" height="32" color="red" font="normal 11px/normal &quot;Arial&quot;" visible="false"/>
+                    <Grid id="Grid00" taborder="3" left="0" top="26" binddataset="Dataset00" bottom="0" autoenter="select" right="0">
+                      <Formats>
+                        <Format id="default">
+                          <Columns>
+                            <Column size="59"/>
+                            <Column size="150"/>
+                            <Column size="150"/>
+                            <Column size="150"/>
+                            <Column size="150"/>
+                            <Column size="150"/>
+                          </Columns>
+                          <Rows>
+                            <Row size="32" band="head"/>
+                            <Row size="30"/>
+                          </Rows>
+                          <Band id="head">
+                            <Cell text="Column0"/>
+                            <Cell col="1" text="Column1"/>
+                            <Cell col="2" text="Column2"/>
+                            <Cell col="3" text="Column3"/>
+                            <Cell col="4" text="Column4"/>
+                            <Cell col="5" text="Column5"/>
+                          </Band>
+                          <Band id="body">
+                            <Cell text="bind:Column0" displaytype="checkboxcontrol" edittype="checkbox"/>
+                            <Cell col="1" text="bind:Column1"/>
+                            <Cell col="2" text="bind:Column2"/>
+                            <Cell col="3" text="bind:Column3"/>
+                            <Cell col="4" text="bind:Column4"/>
+                            <Cell col="5" text="bind:Column5"/>
+                          </Band>
+                        </Format>
+                      </Formats>
+                    </Grid>
+                  </Layout>
+                </Layouts>
+              </Div>
+              <Static id="Static22_00_01" taborder="5" left="662" top="309" width="57" height="5" background="rgba(255,0,0,0.4)" visible="false" color="red" textAlign="center"/>
+              <Static id="Static16_00_00" taborder="6" text="5" left="654" top="294" width="27" height="30" color="red" font="normal 11px/normal &quot;Arial&quot;" visible="false"/>
+              <Static id="Static22_00_01_00" taborder="7" left="662" top="324" width="57" height="5" background="rgba(255,0,0,0.4)" visible="false" color="red" textAlign="center"/>
+              <Static id="Static16_00_00_00" taborder="8" text="5" left="654" top="309" width="27" height="30" color="red" font="normal 11px/normal &quot;Arial&quot;" visible="false"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+          <Column id="Column5" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

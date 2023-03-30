@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="publishing029_2" width="1040" height="659" titletext="공지사항목록">
+    <Layouts>
+      <Layout height="659" mobileorientation="landscape" width="1040">
+        <Div id="Div01" taborder="0" left="10" top="0" height="43" right="10" cssclass="div_WF_searchBox01" text="">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="제목" left="20" top="10" width="80" height="21" cssclass="sta_WF_textRImport"/>
+              <Static id="Static05" taborder="1" text="작성자" left="359" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="Edit11" taborder="2" left="442" top="10" width="110" height="21"/>
+              <Edit id="Edit00" taborder="3" left="103" top="10" width="110" height="21"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static18" taborder="1" text="공지사항 목록조회" left="10" top="67" height="30" width="450" cssclass="sta_WF_title02"/>
+        <Grid id="Grid00" taborder="2" left="10" top="97" binddataset="Dataset00" autofittype="col" bottom="10" right="10">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="100"/>
+                <Column size="160"/>
+              </Columns>
+              <Rows>
+                <Row size="30" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="순번"/>
+                <Cell col="1" text="코드"/>
+                <Cell col="2" text="프로젝트 명"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0" displaytype="checkboxcontrol" edittype="checkbox"/>
+                <Cell col="1" text="bind:Column1"/>
+                <Cell col="2" text="bind:Column2"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="Button01" taborder="3" left="485" top="42" width="70" height="15" cssclass="btn_WF_fold01"/>
+        <Static id="Static09" taborder="4" text="Static03" left="0" top="57" height="10" background="red" visible="false" right="0"/>
+        <Static id="Static23" taborder="5" text="Static23" left="1" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static24" taborder="6" text="Static23" left="340" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static25" taborder="7" text="Static23" left="679" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static26" taborder="8" text="Static23" left="1018" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Div id="Div00" taborder="9" text="Div00" left="1050" top="40" width="400" height="300">
+          <Layouts>
+            <Layout>
+              <Grid id="Grid00" taborder="0" left="0" top="-29" binddataset="Dataset00" autofittype="col" bottom="29" right="0">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="40"/>
+                      <Column size="100"/>
+                      <Column size="160"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="30" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="순번"/>
+                      <Cell col="1" text="코드"/>
+                      <Cell col="2" text="프로젝트 명"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:Column0" displaytype="checkboxcontrol" edittype="checkbox"/>
+                      <Cell col="1" text="bind:Column1"/>
+                      <Cell col="2" text="bind:Column2"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+          <Column id="Column5" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

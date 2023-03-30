@@ -1,0 +1,426 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="frmMainP02S01" width="520" height="140" titletext="비밀번호변경" onload="form_onload" background="#ffffff">
+    <Layouts>
+      <Layout height="140" mobileorientation="landscape" width="520">
+        <Static id="Static03" taborder="0" text="기존비밀번호" left="10" top="10" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+        <Static id="Static04" taborder="1" text="새비밀번호" left="10" top="40" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+        <Static id="Static10" taborder="3" left="128" top="10" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="Static11" taborder="4" left="128" top="40" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Edit id="edtUserPwOld" taborder="6" left="136" top="15" height="21" right="16" password="true" maxlength="18" onsetfocus="edtUserPwChk_onsetfocus"/>
+        <Edit id="edtUserPw" taborder="7" left="136" top="45" height="21" right="16" password="true" displaynulltext="최소 6자리" maxlength="18" oninput="edtUserPw_oninput" onkeyup="edtUserPw_onkeyup"/>
+        <Button id="btnChange" taborder="9" text="변경" top="111" height="23" cssclass="btn_WF_basic01" onclick="btnChange_onclick" width="46" left="40.77%"/>
+        <Button id="btnCancel" taborder="10" text="취소" top="111" width="46" height="23" cssclass="btn_WF_basic01" left="btnChange:3" onclick="btnCancel_onclick"/>
+        <Static id="Static00" taborder="2" text="새비밀번호확인" left="10" top="70" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+        <Static id="Static01" taborder="5" left="128" top="70" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Edit id="edtUserPwChk" taborder="8" left="136" top="75" height="21" right="16" password="true" displaynulltext="최소 6자리" maxlength="18" onsetfocus="edtUserPwChk_onsetfocus"/>
+        <PopupDiv id="pDivLoginPolicy" visible="false" left="138" top="165" width="284" height="130" background="#ffffff" border="1px solid">
+          <Layouts>
+            <Layout>
+              <Static id="stcLoginPolicy" taborder="1" text="패스워드 정책" left="5" top="5" height="25" cssclass="sta_WF_SubTitle2" right="5" border="0px none,0px none,1px solid #e8e8e8" background="#ffffff"/>
+              <Grid id="grdLoginPolicy" taborder="0" left="0" top="35" bottom="10" right="0" binddataset="dsCheck" border="0px none" useselcolor="false" readonly="true" autofittype="col">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="30" band="left"/>
+                      <Column size="256"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="24"/>
+                    </Rows>
+                    <Band id="body">
+                      <Cell text="bind:chk" border="0px none" displaytype="checkboxcontrol"/>
+                      <Cell col="1" text="bind:policyName" border="0px none"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </PopupDiv>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsUserInfo" useclientlayout="true">
+        <ColumnInfo>
+          <Column id="USER_CD" size="256" type="STRING"/>
+          <Column id="USER_PW_OLD" size="256" type="STRING"/>
+          <Column id="USER_PW" type="STRING" size="256"/>
+          <Column id="USER_PW_CHK" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsLoginPolicy">
+        <ColumnInfo>
+          <Column id="SYSTEM_ID" type="STRING" size="255"/>
+          <Column id="POLICY_SEQ" type="STRING" size="255"/>
+          <Column id="MIX_CD" type="STRING" size="255"/>
+          <Column id="MIN_LENGTH" type="STRING" size="255"/>
+          <Column id="ERROR_CNT" type="STRING" size="255"/>
+          <Column id="RECENT_USE_YN" type="STRING" size="255"/>
+          <Column id="FIRST_CHANGE_YN" type="STRING" size="255"/>
+          <Column id="CHECK_CNT" type="STRING" size="255"/>
+          <Column id="IMPOSSIBLE_TXT" type="STRING" size="255"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsRegExp">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="255"/>
+          <Column id="NAME" type="STRING" size="255"/>
+          <Column id="REF1" type="STRING" size="255"/>
+          <Column id="REF2" type="STRING" size="255"/>
+          <Column id="REF3" type="STRING" size="255"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsCheck">
+        <ColumnInfo>
+          <Column id="chk" type="STRING" size="256"/>
+          <Column id="policyCd" type="STRING" size="256"/>
+          <Column id="policyName" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="chk">0</Col>
+            <Col id="policyCd">1</Col>
+            <Col id="policyName">정책1</Col>
+          </Row>
+          <Row>
+            <Col id="chk">0</Col>
+            <Col id="policyCd">2</Col>
+            <Col id="policyName">정책2</Col>
+          </Row>
+          <Row>
+            <Col id="chk">0</Col>
+            <Col id="policyCd">3</Col>
+            <Col id="policyName">정책3</Col>
+          </Row>
+          <Row>
+            <Col id="chk">0</Col>
+            <Col id="policyCd">4</Col>
+            <Col id="policyName">정책4</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+ *  비밀번호 변경
+ *
+ *  @MenuPath    메인로그인 > 비밀번호 변경
+ *  @FileName    frmMainP02S01.xfdl
+ *  @Creator     정해원
+ *  @CreateDate  2020.05.08
+ *  @Version     1.0
+ *  @Desction    설명
+ * 
+ ************** 소스 수정 이력 *************************************************
+ *    date          Modifier            Description
+ *******************************************************************************
+ *  2020.05.08      정해원             최초 생성 
+ *******************************************************************************
+ */
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+this.fv_nSystemId = 'S000000001';     //시스템ID
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {    
+		this.edtUserPw.setFocus();
+		this.edtUserPwChk.setFocus();
+		this.edtUserPwOld.setFocus();
+		//Script  
+		//공통코드(문자숫자혼합구분 00010)
+		take.tranCode(this
+					, "00010"
+					, "dsRegExp"
+					, ""
+					, function(sId, nErrCd, sErrMsg) {
+						this.fnTran("LoginPolicy");
+					}
+		);
+   }
+};
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+this.fnSave = function(sTranId)
+{    
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Modify";
+    
+	take.transaction(this, sTranId, "SVC_LOC::mn/userPwChange.do", "dsUserInfo=dsUserInfo:U", "", "", "fnCallback");
+};
+
+/**
+ * fnTran : 트랜잭션
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @example this.fnTran("ID");
+ */
+this.fnTran = function(sTranId)
+{   
+    if (take.nvl(sTranId, "")=="") sTranId = "LoginPolicy";
+    
+    switch(sTranId)
+    {
+		case "LoginPolicy" :        //로그인 정책
+			var sParam = "SYSTEM_ID='" + this.fv_nSystemId + "'";
+            take.transaction(this, sTranId, "SVC_LOC::mn/loginpolicy.do", "", "dsLoginPolicy=dsLoginPolicy", sParam, "fnCallback");
+            break;
+        default :
+            break;
+    }
+};
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+ ********************************************************/
+// 취소 클릭
+this.btnCancel_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.close();
+};
+
+// 비밀번호 변경 클릭
+this.btnChange_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var sUserPwOld 	= this.edtUserPwOld.value;
+	var sUserPw 	= this.edtUserPw.value;
+	var sUserPwChk 	= this.edtUserPwChk.value;
+	
+	if(take.nvl(sUserPwOld, "") == ""){
+        take.alert(this, "", "이전 비밀번호를 작성해주세요.");
+        this.edtUserPwOld.setFocus();
+        return;
+    }
+	
+	if(take.nvl(sUserPw, "") == ""){
+        take.alert(this, "", "새 비밀번호를 작성해주세요.");
+        this.edtUserPw.setFocus();
+        return;
+    }
+    
+    if(take.nvl(sUserPwChk, "") == ""){
+        take.alert(this, "", "2차비밀번호를 작성해주세요.");
+        this.edtUserPwChk.setFocus();
+        return;
+    }
+    
+    if (sUserPwChk != sUserPw)
+    {
+    	take.alert(this, "", "비밀번호를 확인해주세요.\n비밀번호가 같지않습니다.");
+        this.edtUserPwChk.setFocus();
+        return;
+    }
+	
+	if(this.dsCheck.getRowCount() > 0){
+		var chkRow = this.dsCheck.findRow("chk", "0");
+		if(chkRow > -1){
+			var policyCd = this.dsCheck.getColumn(chkRow, "policyCd");
+			var policyNm = this.dsCheck.getColumn(chkRow, "policyName");
+			if(policyCd == "IMPOSSIBLE_TXT"){
+				//비밀번호 사용불가 텍스트
+				var sImpossibleTxt 	 = take.nvl(this.dsLoginPolicy.getColumn(0, "IMPOSSIBLE_TXT"), "");
+				var arrImpossibleTxt = sImpossibleTxt.split('\n');
+				for(var i = 0 ; i < arrImpossibleTxt.length - 1 ; i++){	//뒤에 공백때문에 -1까지 loop
+					if(sUserPw.indexOf(arrImpossibleTxt[i]) > -1){
+						take.alert(this, "", arrImpossibleTxt[i] + " 은(는) 사용할 수 없는 비밀번호입니다.");
+						this.edtUserPw.setFocus();
+						return false;
+					}
+				}
+				
+			}else if(policyCd == "MIX_CD"){
+				//비밀번호 혼합체크
+				var sMixCd = take.nvl(this.dsLoginPolicy.getColumn(0, "MIX_CD"), "");
+				if(!take.isEmpty(sMixCd)){
+					var sMixCdName 	= this.dsRegExp.lookup("CODE", sMixCd, "NAME");
+					take.alert(this, "", sMixCdName + " 하여 비밀번호를 입력해주시기 바랍니다.");
+					this.edtUserPw.setFocus();
+					return false;
+				}
+				
+			}else if(policyCd == "MIN_LENGTH"){
+				//비밀번호 최소길이 체크
+				take.alert(this, "", policyNm + " 입력해주시기 바랍니다.");
+				this.edtUserPw.setFocus();
+				return false;
+			}
+		}
+	}
+    
+    if(take.confirm(this, "question", "비밀번호 변경 하시겠습니까?")) {
+        this.fnSave("Modify");
+    }
+};
+
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+ * fnCallback : transaction callback
+ * @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+ * @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+ * @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+ * @return : N/A
+ * @example :  
+ */
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }
+	
+    switch(sId)
+    {
+		//저장 콜백
+        case "Modify" :
+            take.alert(this, "", "비밀번호 변경이 완료되었습니다.");
+            this.close();
+            break;
+			
+		//로그인정책
+		case "LoginPolicy":
+			if(this.dsLoginPolicy.getRowCount() > 0){
+				var nRow = -1;
+				this.dsCheck.clearData();
+				
+				var nMinLength = take.nvl(this.dsLoginPolicy.getColumn(0, "MIN_LENGTH"), 6);				
+				nRow = this.dsCheck.addRow();
+				this.dsCheck.setColumn(nRow, "chk"			, "0");
+				this.dsCheck.setColumn(nRow, "policyCd"		, "MIN_LENGTH");
+				this.dsCheck.setColumn(nRow, "policyName"	, "최소 " + nMinLength + "자리");
+				
+				//비밀번호 사용불가 문자열
+				var sImpossibleTxt = take.nvl(this.dsLoginPolicy.getColumn(0, "IMPOSSIBLE_TXT"), "");
+				if(!take.isEmpty(sImpossibleTxt)){
+					var arrImpossibleTxt = sImpossibleTxt.split('\n');
+					arrImpossibleTxt.pop();
+					
+					if(arrImpossibleTxt.length > 0){ 
+						nRow = this.dsCheck.addRow();
+						this.dsCheck.setColumn(nRow, "chk"			, "0");
+						this.dsCheck.setColumn(nRow, "policyCd"		, "IMPOSSIBLE_TXT");
+						this.dsCheck.setColumn(nRow, "policyName"	, "사용할 수 없는 비밀번호 : " + arrImpossibleTxt.toString());
+					}
+				}
+				
+				//비밀번호 혼합체크
+				var sMixCd = take.nvl(this.dsLoginPolicy.getColumn(0, "MIX_CD"), "");
+				if(!take.isEmpty(sMixCd)){
+					var sMixCdName = this.dsRegExp.lookup("CODE", sMixCd, "NAME");
+
+					nRow = this.dsCheck.addRow();
+					this.dsCheck.setColumn(nRow, "chk"			, "0");
+					this.dsCheck.setColumn(nRow, "policyCd"		, "MIX_CD");
+					this.dsCheck.setColumn(nRow, "policyName"	, sMixCdName);
+				}
+				
+				var nTop	= parseInt(this.pDivLoginPolicy.form.stcLoginPolicy.height) + 5;
+				var nBodyH 	= this.pDivLoginPolicy.form.grdLoginPolicy.getRealRowFullSize("body");
+				this.pDivLoginPolicy.form.grdLoginPolicy.set_height(nBodyH);
+				this.pDivLoginPolicy.set_height(nBodyH + nTop + 10);
+				//this.pDivLoginPolicy.set_width(this.edtUserPw.getOffsetWidth());
+			}
+			break;
+			
+        default :
+            break;
+    }        
+};
+
+this.edtUserPw_oninput = function(obj:nexacro.Edit,e:nexacro.InputEventInfo)
+{
+	if (!this.pDivLoginPolicy.isPopup()){
+		this.pDivLoginPolicy.trackPopupByComponent(obj, 10, parseInt(obj.height) + 3);
+	}
+	obj.setFocus();
+	obj.updateToDataset();
+};
+
+this.edtUserPw_onkeyup = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+	var sUserPw = obj.value;
+	
+	var nMinLength = 6;
+	if(this.dsLoginPolicy.getRowCount() > 0){
+		//비밀번호 사용불가 텍스트
+		var sImpossibleTxt 	 = take.nvl(this.dsLoginPolicy.getColumn(0, "IMPOSSIBLE_TXT"), "");
+		var arrImpossibleTxt = sImpossibleTxt.split('\n');
+		for(var i = 0 ; i < arrImpossibleTxt.length - 1 ; i++){	//뒤에 공백때문에 -1까지 loop
+			if(sUserPw.indexOf(arrImpossibleTxt[i]) > -1){
+				this.dsCheck.setColumn(this.dsCheck.findRow("policyCd", "IMPOSSIBLE_TXT"), "chk", "0");
+				break;
+			}
+			this.dsCheck.setColumn(this.dsCheck.findRow("policyCd", "IMPOSSIBLE_TXT"), "chk", "1");
+		}
+		
+		//비밀번호 혼합체크
+		var sMixCd = take.nvl(this.dsLoginPolicy.getColumn(0, "MIX_CD"), "");
+		if(!take.isEmpty(sMixCd)){
+			var sMixCdName 	= this.dsRegExp.lookup("CODE", sMixCd, "NAME");
+			var sMixCdExp 	= this.dsRegExp.lookup("CODE", sMixCd, "REF1");
+			var regExp		= new RegExp(sMixCdExp);
+			
+			if(!regExp.test(sUserPw)){
+				this.dsCheck.setColumn(this.dsCheck.findRow("policyCd", "MIX_CD"), "chk", "0");
+			}else{
+				this.dsCheck.setColumn(this.dsCheck.findRow("policyCd", "MIX_CD"), "chk", "1");
+			}
+		}
+		
+		//비밀번호 최소길이 체크
+		nMinLength = take.nvl(this.dsLoginPolicy.getColumn(0, "MIN_LENGTH")	, 6);
+	}
+	
+	//비밀번호 최소길이 체크
+	if(sUserPw.length < nMinLength){
+		this.dsCheck.setColumn(this.dsCheck.findRow("policyCd", "MIN_LENGTH"), "chk", "0");
+	}else{
+		this.dsCheck.setColumn(this.dsCheck.findRow("policyCd", "MIN_LENGTH"), "chk", "1");
+	}
+};
+
+this.edtUserPwChk_onsetfocus = function(obj:nexacro.Edit,e:nexacro.SetFocusEventInfo)
+{
+	if (this.pDivLoginPolicy.isPopup()){
+		this.pDivLoginPolicy.closePopup();
+	}
+};
+]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="edtUserPwOld" propid="value" datasetid="dsUserInfo" columnid="USER_PW_OLD"/>
+      <BindItem id="item1" compid="edtUserPw" propid="value" datasetid="dsUserInfo" columnid="USER_PW"/>
+      <BindItem id="item2" compid="edtUserPwChk" propid="value" datasetid="dsUserInfo" columnid="USER_PW_CHK"/>
+    </Bind>
+  </Form>
+</FDL>

@@ -1,0 +1,1361 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="SourceMaker" width="1040" height="659" titletext="UXBooster 화면생성기" onload="take_onload">
+    <Layouts>
+      <Layout height="659" mobileorientation="landscape" width="1040">
+        <Div id="divSearch" taborder="0" left="10" top="0" height="43" right="10" cssclass="div_WF_searchBox01" text="" minwidth="1020" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Static id="staTemplateT" taborder="1" text="템플릿" left="20" top="10" width="80" height="21" cssclass="sta_WF_textRImport"/>
+              <Combo id="cboTemplate" taborder="0" text="Combo00" left="104" top="10" width="231" height="21" innerdataset="dsCboTemplate" codecolumn="CODE" datacolumn="NAME" onitemchanged="divSearch_cboTemplate_onitemchanged"/>
+            </Layout>
+            <Layout name="default0">
+              <Static id="staTemplateT" taborder="1" text="프로젝트" left="20" top="10" width="80" height="21" cssclass="sta_WF_textRImport"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnShowHide" taborder="2" left="46.63%" top="42" width="70" height="10" cssclass="btn_WF_fold01"/>
+        <Static id="Static09" taborder="3" text="Static03" left="0" top="52" height="10" background="red" visible="false" right="0"/>
+        <Static id="Static23" taborder="4" text="Static23" left="1" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static24" taborder="5" text="Static23" left="340" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static25" taborder="6" text="Static23" left="679" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static26" taborder="7" text="Static23" left="1018" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Div id="divDetail" taborder="1" left="0" top="62" right="0" bottom="0" text="" minwidth="1020" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Static id="staTemplateT" taborder="0" text="템플릿" left="10" top="0" height="30" width="320" cssclass="sta_WF_title02"/>
+              <Static id="Static45" taborder="1" text="Static00" left="330" top="30" width="10" background="red" visible="false" height="200"/>
+              <Static id="Static34" taborder="2" left="105" top="30" height="31" cssclass="sta_WF_td01L" width="225"/>
+              <Static id="staPrefixT" taborder="3" text="Prefix" left="6" top="30" width="100" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static34_00" taborder="4" left="105" top="60" height="31" cssclass="sta_WF_td01L" width="225"/>
+              <Edit id="edtFormId" taborder="5" left="112" top="65" height="21" maxlength="15" inputfilter="space,symbol" width="150"/>
+              <Static id="staFormIdT" taborder="6" text="화면ID" left="6" top="60" width="100" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static34_01" taborder="7" left="105" top="90" height="31" cssclass="sta_WF_td01L" width="225"/>
+              <Edit id="edtFormNm" taborder="8" left="112" top="95" height="21" maxlength="15" inputfilter="space,symbol" width="211"/>
+              <Static id="staFormNmT" taborder="9" text="화면명" left="6" top="90" width="100" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static34_02" taborder="10" left="105" top="120" height="31" cssclass="sta_WF_td01L" width="225"/>
+              <Static id="staCrudT" taborder="11" text="입력/수정/삭제" left="6" top="120" width="100" height="31" cssclass="sta_WF_th01L"/>
+              <Combo id="cboPrefix" taborder="12" text="Combo00" top="35" width="211" innerdataset="dsCboPrefix" codecolumn="CODE" datacolumn="NAME" height="21" left="112" onitemchanged="divDetail_cboSearchLayer_onitemchanged"/>
+              <Combo id="cboCrudYn" taborder="13" text="Combo00" top="125" width="211" innerdataset="dsCboCrud" codecolumn="CODE" datacolumn="NAME" height="21" left="112" onitemchanged="divDetail_cboSearchLayer_onitemchanged"/>
+              <Static id="Static01" taborder="14" text=".xfdl" top="65" width="50" height="23" left="263"/>
+              <Button id="btnSave" taborder="15" text="화면생성" top="0" height="30" cssclass="btn_WF_basic01" right="10" font="normal 700 14pt/normal &quot;Arial&quot;" width="200" onclick="divDetail_btnSave_onclick"/>
+            </Layout>
+            <Layout name="default0">
+              <Static id="staTemplateT" taborder="0" text="권한 목록" left="0" top="0" height="30" width="450" cssclass="sta_WF_title02"/>
+              <Static id="Static45" taborder="1" text="Static00" left="310" top="30" width="10" background="red" visible="false" height="200"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divTab01" taborder="8" left="340" top="93" cssclass="dvi_WF_tabBox01" bottom="10" right="10" text="divTab00">
+          <Layouts>
+            <Layout>
+              <Grid id="grdSearch" taborder="0" left="10" top="30" binddataset="dsSearchLayout" autofittype="col" onheadclick="grid_onheadclick" autoenter="select" right="10" bottom="10">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="48"/>
+                      <Column size="48"/>
+                      <Column size="80"/>
+                      <Column size="100"/>
+                      <Column size="100"/>
+                      <Column size="100"/>
+                      <Column size="80"/>
+                      <Column size="100"/>
+                      <Column size="200"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="24" band="head"/>
+                      <Row size="24"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="구분"/>
+                      <Cell col="1" text="사용"/>
+                      <Cell col="2" text="ID"/>
+                      <Cell col="3" text="Title"/>
+                      <Cell col="4" text="Require"/>
+                      <Cell col="5" text="컴포넌트"/>
+                      <Cell col="6" text="공통코드"/>
+                      <Cell col="7" text="Inner Dataset"/>
+                      <Cell col="8" text="Sql Mapper or 공통코드그룹키"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:GUBUN" textAlign="center"/>
+                      <Cell col="1" text="bind:CHK" displaytype="checkboxcontrol" edittype="checkbox" textAlign="center"/>
+                      <Cell col="2" text="bind:LABEL_ID" edittype="text" displaytype="text"/>
+                      <Cell col="3" text="bind:LABEL_NAME" displaytype="text" edittype="text"/>
+                      <Cell col="4" text="bind:REQ_YN" displaytype="checkboxcontrol" edittype="checkbox"/>
+                      <Cell col="5" text="bind:SEARCH_TYPE" displaytype="combocontrol" edittype="combo" combodataset="dsComponentType" combocodecol="CODE" combodatacol="NAME"/>
+                      <Cell col="6" displaytype="checkboxcontrol" edittype="checkbox" text="bind:CODE_YN"/>
+                      <Cell col="7" text="bind:BIND_DATASET" displaytype="text" edittype="text" combodataset="dsDataset" combocodecol="DATASET_NAME" combodatacol="DATASET_NAME"/>
+                      <Cell col="8" text="bind:MAPPER_ID" displaytype="text" edittype="text"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="staSearchLayerT" taborder="1" text="* 검색Layout 선택: " top="5" width="100" height="23" left="10"/>
+              <Combo id="cboSearchLayer" taborder="2" text="Combo00" top="5" width="111" innerdataset="dsCboSearchLayer" codecolumn="CODE" datacolumn="NAME" height="24" left="119" onitemchanged="divTab01_cboSearchLayer_onitemchanged"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divTab02" taborder="9" left="340" top="663" cssclass="dvi_WF_tabBox01" bottom="-561" right="10" text="divTab00">
+          <Layouts>
+            <Layout>
+              <Static id="staGridIdT" taborder="0" text="Grid1 ID" left="10" top="40" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static34_01" taborder="1" left="129" top="40" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Edit id="edtGridId" taborder="2" left="136" top="45" height="21" inputfilter="space,symbol" width="211" value="grdList1" text="grdList1"/>
+              <Static id="staDatasetNmT" taborder="3" text="Dataset 명" left="10" top="70" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static34_01_00" taborder="4" left="129" top="70" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Edit id="edtDatasetNm" taborder="5" left="136" top="75" height="21" inputfilter="space,symbol" width="211" value="dsList1" text="dsList1"/>
+              <Static id="staSqlMapperT" taborder="6" text="Sql Mapper" left="10" top="100" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static34_01_00_00" taborder="7" left="129" top="100" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Edit id="edtSqlMapper" taborder="8" left="136" top="105" height="21" inputfilter="space,symbol" width="211"/>
+              <Grid id="grdGrid" taborder="9" left="10" top="137" right="10" binddataset="dsViewLayout1" autofittype="none" bottom="10" autoenter="select" visible="true">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="140"/>
+                      <Column size="140"/>
+                      <Column size="70"/>
+                      <Column size="40"/>
+                      <Column size="48"/>
+                      <Column size="80"/>
+                      <Column size="120"/>
+                      <Column size="50"/>
+                      <Column size="70"/>
+                      <Column size="120"/>
+                      <Column size="50"/>
+                      <Column size="50"/>
+                      <Column size="100"/>
+                      <Column size="160"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="24" band="head"/>
+                      <Row size="24"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="컬럼"/>
+                      <Cell col="1" text="컬럼명"/>
+                      <Cell col="2" text="View Y/N"/>
+                      <Cell col="3" text="순서"/>
+                      <Cell col="4" text="검색 Y/N"/>
+                      <Cell col="5" text="DETAIL 매핑 Y/N"/>
+                      <Cell col="6" text="Display Type"/>
+                      <Cell col="7" text="Size"/>
+                      <Cell col="8" text="정렬"/>
+                      <Cell col="9" text="Edit Type"/>
+                      <Cell col="10" text="필수"/>
+                      <Cell col="11" text="공통코드"/>
+                      <Cell col="12" text="Bind Dataset"/>
+                      <Cell col="13" text="Sql Mapper or 공통코드그룹키"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell displaytype="text" edittype="text" textAlign="left" text="bind:COL_ID"/>
+                      <Cell col="1" displaytype="text" edittype="text" textAlign="left" text="bind:COL_NAME"/>
+                      <Cell col="2" displaytype="checkboxcontrol" edittype="checkbox" combodataset="dsCboYn" combocodecol="CODE" combodatacol="NAME" textAlign="center" text="bind:DISPLAY_YN"/>
+                      <Cell col="3" displaytype="text" edittype="text" textAlign="center" text="bind:DISPLAY_ORDER"/>
+                      <Cell col="4" displaytype="checkboxcontrol" edittype="checkbox"/>
+                      <Cell col="5" displaytype="checkboxcontrol" edittype="checkbox" text="bind:DTL_MAPPING_YN"/>
+                      <Cell col="6" displaytype="combocontrol" edittype="combo" textAlign="center" text="bind:DISPLAY_TYPE" combodataset="dsDisplayType" combocodecol="CODE" combodatacol="NAME"/>
+                      <Cell col="7" displaytype="text" edittype="text" textAlign="center" text="bind:SIZE"/>
+                      <Cell col="8" displaytype="combocontrol" edittype="combo" text="bind:ALIGN" combodataset="dsCboAlign" combocodecol="CODE" combodatacol="NAME"/>
+                      <Cell col="9" displaytype="combocontrol" edittype="combo" textAlign="center" text="bind:EDIT_TYPE" combodataset="dsEditType" combocodecol="CODE" combodatacol="NAME"/>
+                      <Cell col="10" displaytype="checkboxcontrol" edittype="checkbox" combodataset="dsCboYn" combocodecol="CODE" combodatacol="NAME" textAlign="center" text="bind:INPUT_YN"/>
+                      <Cell col="11" displaytype="checkboxcontrol" edittype="checkbox" text="bind:CODE_YN"/>
+                      <Cell col="12" displaytype="text" edittype="text" textAlign="left" text="bind:BIND_DATASET" combodataset="dsDataset" combocodecol="DATASET_NAME" combodatacol="DATASET_NAME"/>
+                      <Cell col="13" text="bind:MAPPER_ID" displaytype="text" edittype="text"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Button id="btnExec" taborder="10" text="실행" top="105" width="46" height="23" cssclass="btn_WF_basic01" left="353" onclick="divTab02_btnExec_onclick"/>
+              <Static id="staGridIdT00" taborder="11" text="Grid1 제목" left="10" top="10" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static34_01_01" taborder="12" left="129" top="10" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Edit id="edtGridTitle" taborder="13" left="136" top="15" height="21" inputfilter="space,symbol" width="211" text="grdList1"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divTab03" taborder="10" left="340" top="1223" cssclass="dvi_WF_tabBox01" bottom="-1121" right="10" text="divTab00">
+          <Layouts>
+            <Layout>
+              <Static id="staGridIdT" taborder="0" text="Grid2 ID" left="10" top="40" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static34_01" taborder="1" left="129" top="40" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Edit id="edtGridId" taborder="2" left="136" top="45" height="21" maxlength="15" inputfilter="space,symbol" width="211" value="grdList2" text="grdList2"/>
+              <Static id="staDatasetNmT" taborder="3" text="Dataset 명" left="10" top="70" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static34_01_00" taborder="4" left="129" top="70" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Edit id="edtDatasetNm" taborder="5" left="136" top="75" height="21" maxlength="15" inputfilter="space,symbol" width="211" value="dsList2" text="dsList2"/>
+              <Static id="staSqlMapperT" taborder="6" text="Sql Mapper" left="10" top="100" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static34_01_00_00" taborder="7" left="129" top="100" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Edit id="edtSqlMapper" taborder="8" left="136" top="105" height="21" inputfilter="space,symbol" width="211"/>
+              <Grid id="grdGrid" taborder="9" left="10" top="137" right="10" binddataset="dsViewLayout2" autofittype="none" onheadclick="grid_onheadclick" bottom="10" autoenter="select" visible="true">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="150"/>
+                      <Column size="150"/>
+                      <Column size="70"/>
+                      <Column size="60"/>
+                      <Column size="80"/>
+                      <Column size="150"/>
+                      <Column size="60"/>
+                      <Column size="80"/>
+                      <Column size="150"/>
+                      <Column size="70"/>
+                      <Column size="80"/>
+                      <Column size="150"/>
+                      <Column size="200"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="24" band="head"/>
+                      <Row size="24"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="컬럼"/>
+                      <Cell col="1" text="컬럼명"/>
+                      <Cell col="2" text="View Y/N"/>
+                      <Cell col="3" text="순서"/>
+                      <Cell col="4" text="DETAIL매핑Y/N"/>
+                      <Cell col="5" text="Display Type"/>
+                      <Cell col="6" text="Size"/>
+                      <Cell col="7" text="정렬"/>
+                      <Cell col="8" text="Edit Type"/>
+                      <Cell col="9" text="필수"/>
+                      <Cell col="10" text="공통코드"/>
+                      <Cell col="11" text="Bind Dataset"/>
+                      <Cell col="12" text="Sql Mapper or 공통코드그룹키"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell displaytype="text" edittype="text" textAlign="left" text="bind:COL_ID"/>
+                      <Cell col="1" displaytype="text" edittype="text" textAlign="left" text="bind:COL_NAME"/>
+                      <Cell col="2" displaytype="checkboxcontrol" edittype="checkbox" combodataset="dsCboYn" combocodecol="CODE" combodatacol="NAME" textAlign="center" text="bind:DISPLAY_YN"/>
+                      <Cell col="3" displaytype="text" edittype="text" textAlign="center" text="bind:DISPLAY_ORDER"/>
+                      <Cell col="4" displaytype="checkboxcontrol" edittype="checkbox" text="bind:DTL_MAPPING_YN"/>
+                      <Cell col="5" displaytype="combocontrol" edittype="combo" textAlign="center" text="bind:DISPLAY_TYPE" combodataset="dsDisplayType" combocodecol="CODE" combodatacol="NAME"/>
+                      <Cell col="6" displaytype="text" edittype="text" textAlign="center" text="bind:SIZE"/>
+                      <Cell col="7" displaytype="combocontrol" edittype="combo" text="bind:ALIGN" combodataset="dsCboAlign" combocodecol="CODE" combodatacol="NAME"/>
+                      <Cell col="8" displaytype="combocontrol" edittype="combo" textAlign="center" text="bind:EDIT_TYPE" combodataset="dsEditType" combocodecol="CODE" combodatacol="NAME"/>
+                      <Cell col="9" displaytype="checkboxcontrol" edittype="checkbox" combodataset="dsCboYn" combocodecol="CODE" combodatacol="NAME" textAlign="center" text="bind:INPUT_YN"/>
+                      <Cell col="10" displaytype="checkboxcontrol" edittype="checkbox" text="bind:CODE_YN"/>
+                      <Cell col="11" displaytype="text" edittype="text" textAlign="left" text="bind:BIND_DATASET" combodataset="dsDataset" combocodecol="DATASET_NAME" combodatacol="DATASET_NAME"/>
+                      <Cell col="12" text="bind:MAPPER_ID" displaytype="text" edittype="text"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Button id="btnExec" taborder="10" text="실행" top="105" width="46" height="23" cssclass="btn_WF_basic01" left="353" onclick="divTab03_btnExec_onclick"/>
+              <Static id="staGridIdT00" taborder="11" text="Grid2 제목" left="10" top="10" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static34_01_01" taborder="12" left="129" top="10" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Edit id="edtGridTitle" taborder="13" left="136" top="15" height="21" inputfilter="space,symbol" width="211" text="grdList1"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divTab04" taborder="11" left="340" top="1783" cssclass="dvi_WF_tabBox01" bottom="-1681" right="10" text="divTab00">
+          <Layouts>
+            <Layout>
+              <Static id="staGridIdT" taborder="0" text="Grid3 ID" left="10" top="40" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static34_01" taborder="1" left="129" top="40" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Edit id="edtGridId" taborder="2" left="136" top="45" height="21" maxlength="15" inputfilter="space,symbol" width="211" value="grdList3" text="grdList3"/>
+              <Static id="staDatasetNmT" taborder="3" text="Dataset 명" left="10" top="70" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static34_01_00" taborder="4" left="129" top="70" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Edit id="edtDatasetNm" taborder="5" left="136" top="75" height="21" maxlength="15" inputfilter="space,symbol" width="211" value="dsList3" text="dsList3"/>
+              <Static id="staSqlMapperT" taborder="6" text="Sql Mapper" left="10" top="100" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static34_01_00_00" taborder="7" left="129" top="100" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Edit id="edtSqlMapper" taborder="8" left="136" top="105" height="21" inputfilter="space,symbol" width="211"/>
+              <Grid id="grdGrid" taborder="9" left="10" top="137" right="10" binddataset="dsViewLayout3" autofittype="none" onheadclick="grid_onheadclick" bottom="10" autoenter="select" visible="true">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="150"/>
+                      <Column size="150"/>
+                      <Column size="70"/>
+                      <Column size="60"/>
+                      <Column size="150"/>
+                      <Column size="60"/>
+                      <Column size="80"/>
+                      <Column size="150"/>
+                      <Column size="70"/>
+                      <Column size="80"/>
+                      <Column size="150"/>
+                      <Column size="200"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="24" band="head"/>
+                      <Row size="24"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="컬럼"/>
+                      <Cell col="1" text="컬럼명"/>
+                      <Cell col="2" text="View Y/N"/>
+                      <Cell col="3" text="순서"/>
+                      <Cell col="4" text="Display Type"/>
+                      <Cell col="5" text="Size"/>
+                      <Cell col="6" text="정렬"/>
+                      <Cell col="7" text="Edit Type"/>
+                      <Cell col="8" text="필수"/>
+                      <Cell col="9" text="공통코드"/>
+                      <Cell col="10" text="Bind Dataset"/>
+                      <Cell col="11" text="Sql Mapper or 공통코드그룹키"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell displaytype="text" edittype="text" textAlign="left" text="bind:COL_ID"/>
+                      <Cell col="1" displaytype="text" edittype="text" textAlign="left" text="bind:COL_NAME"/>
+                      <Cell col="2" displaytype="checkboxcontrol" edittype="checkbox" combodataset="dsCboYn" combocodecol="CODE" combodatacol="NAME" textAlign="center" text="bind:DISPLAY_YN"/>
+                      <Cell col="3" displaytype="text" edittype="text" textAlign="center" text="bind:DISPLAY_ORDER"/>
+                      <Cell col="4" displaytype="combocontrol" edittype="combo" textAlign="center" text="bind:DISPLAY_TYPE" combodataset="dsDisplayType" combocodecol="CODE" combodatacol="NAME"/>
+                      <Cell col="5" displaytype="text" edittype="text" textAlign="center" text="bind:SIZE"/>
+                      <Cell col="6" displaytype="combocontrol" edittype="combo" text="bind:ALIGN" combodataset="dsCboAlign" combocodecol="CODE" combodatacol="NAME"/>
+                      <Cell col="7" displaytype="combocontrol" edittype="combo" textAlign="center" text="bind:EDIT_TYPE" combodataset="dsEditType" combocodecol="CODE" combodatacol="NAME"/>
+                      <Cell col="8" displaytype="checkboxcontrol" edittype="checkbox" combodataset="dsCboYn" combocodecol="CODE" combodatacol="NAME" textAlign="center" text="bind:INPUT_YN"/>
+                      <Cell col="9" displaytype="checkboxcontrol" edittype="checkbox" text="bind:CODE_YN"/>
+                      <Cell col="10" displaytype="text" edittype="text" textAlign="left" text="bind:BIND_DATASET" combodataset="dsDataset" combocodecol="DATASET_NAME" combodatacol="DATASET_NAME"/>
+                      <Cell col="11" text="bind:MAPPER_ID" displaytype="text" edittype="text"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Button id="btnExec" taborder="10" text="실행" top="105" width="46" height="23" cssclass="btn_WF_basic01" onclick="divTab00_btnDeploySave_onclick" left="353"/>
+              <Static id="staGridIdT00" taborder="11" text="Grid3 제목" left="10" top="10" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static34_01_01" taborder="12" left="129" top="10" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Edit id="edtGridTitle" taborder="13" left="136" top="15" height="21" inputfilter="space,symbol" width="211" text="grdList1"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divTab05" taborder="12" left="340" top="2343" cssclass="dvi_WF_tabBox01" bottom="-2241" right="10" text="divTab00">
+          <Layouts>
+            <Layout>
+              <Static id="staDatasetNmT" taborder="0" text="Dataset 명" left="10" top="10" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+              <Static id="Static34_01_00" taborder="1" left="129" top="10" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Edit id="edtDatasetNm" taborder="2" left="136" top="15" height="21" maxlength="15" inputfilter="space,symbol" width="211" value="dsDetail" text="dsDetail"/>
+              <Static id="staSqlMapperT" taborder="3" text="Sql Mapper" left="10" top="40" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+              <Static id="Static34_01_00_00" taborder="4" left="129" top="40" height="31" cssclass="sta_WF_td01L" right="10"/>
+              <Edit id="edtSqlMapper" taborder="5" left="136" top="45" height="21" inputfilter="space,symbol" width="211"/>
+              <Grid id="grdGrid" taborder="6" left="10" top="76" right="10" binddataset="dsViewLayout4" autofittype="none" onheadclick="grid_onheadclick" bottom="10" autoenter="select" visible="true">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="150"/>
+                      <Column size="150"/>
+                      <Column size="70"/>
+                      <Column size="60"/>
+                      <Column size="150"/>
+                      <Column size="60"/>
+                      <Column size="80"/>
+                      <Column size="150"/>
+                      <Column size="70"/>
+                      <Column size="80"/>
+                      <Column size="150"/>
+                      <Column size="200"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="24" band="head"/>
+                      <Row size="24"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="컬럼"/>
+                      <Cell col="1" text="컬럼명"/>
+                      <Cell col="2" text="View Y/N"/>
+                      <Cell col="3" text="순서"/>
+                      <Cell col="4" text="Display Type"/>
+                      <Cell col="5" text="Size"/>
+                      <Cell col="6" text="정렬"/>
+                      <Cell col="7" text="Edit Type"/>
+                      <Cell col="8" text="필수"/>
+                      <Cell col="9" text="공통코드"/>
+                      <Cell col="10" text="Bind Dataset"/>
+                      <Cell col="11" text="Sql Mapper or 공통코드그룹키"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell displaytype="text" edittype="text" textAlign="left" text="bind:COL_ID"/>
+                      <Cell col="1" displaytype="text" edittype="text" textAlign="left" text="bind:COL_NAME"/>
+                      <Cell col="2" displaytype="checkboxcontrol" edittype="checkbox" combodataset="dsCboYn" combocodecol="CODE" combodatacol="NAME" textAlign="center" text="bind:DISPLAY_YN"/>
+                      <Cell col="3" displaytype="text" edittype="text" textAlign="center" text="bind:DISPLAY_ORDER"/>
+                      <Cell col="4" displaytype="combocontrol" edittype="combo" textAlign="center" text="bind:DISPLAY_TYPE" combodataset="dsDisplayType" combocodecol="CODE" combodatacol="NAME"/>
+                      <Cell col="5" displaytype="text" edittype="text" textAlign="center" text="bind:SIZE"/>
+                      <Cell col="6" displaytype="combocontrol" edittype="combo" text="bind:ALIGN" combodataset="dsCboAlign" combocodecol="CODE" combodatacol="NAME"/>
+                      <Cell col="7" displaytype="combocontrol" edittype="combo" textAlign="center" text="bind:EDIT_TYPE" combodataset="dsEditType" combocodecol="CODE" combodatacol="NAME"/>
+                      <Cell col="8" displaytype="checkboxcontrol" edittype="checkbox" combodataset="dsCboYn" combocodecol="CODE" combodatacol="NAME" textAlign="center" text="bind:INPUT_YN"/>
+                      <Cell col="9" displaytype="checkboxcontrol" edittype="checkbox" text="bind:CODE_YN"/>
+                      <Cell col="10" displaytype="text" edittype="text" textAlign="left" text="bind:BIND_DATASET" combodataset="dsDataset" combocodecol="DATASET_NAME" combodatacol="DATASET_NAME"/>
+                      <Cell col="11" text="bind:MAPPER_ID" displaytype="text" edittype="text"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Button id="btnExec" taborder="7" text="실행" top="45" width="46" height="23" cssclass="btn_WF_basic01" onclick="divTab00_btnDeploySave_onclick" left="353"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnTab01" taborder="13" text="검색영역" left="340" top="66" width="90" height="27" cssclass="btn_WF_tab02" onclick="btnTab_onclick"/>
+        <Button id="btnTab02" taborder="14" text="Grid1" left="431" top="66" width="90" height="27" cssclass="btn_WF_tab01" onclick="btnTab_onclick"/>
+        <Button id="btnTab03" taborder="15" text="Grid2" left="522" top="66" width="90" height="27" cssclass="btn_WF_tab01" onclick="btnTab_onclick"/>
+        <Button id="btnTab04" taborder="16" text="Grid3" left="613" top="66" width="90" height="27" cssclass="btn_WF_tab01" onclick="btnTab_onclick"/>
+        <Button id="btnTab05" taborder="17" text="Detail" left="704" top="66" width="90" height="27" cssclass="btn_WF_tab01" onclick="btnTab_onclick"/>
+        <Div id="divLayout01" taborder="18" left="6" top="222" cssclass="dvi_WF_tabBox01" text="divLayout00" width="324" height="318" visible="false">
+          <Layouts>
+            <Layout>
+              <Button id="btnTab01" taborder="0" text="검색영역" left="20" top="60" height="50" right="20" onclick="divLayout_btn_onclick" background="#959595" color="#ffffff"/>
+              <Button id="btnTab02" taborder="1" text="Grid1" left="20" top="115" height="150" right="20" onclick="divLayout_btn_onclick" background="#959595" color="#ffffff"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divLayout02" taborder="19" left="6" top="542" cssclass="dvi_WF_tabBox01" text="divLayout00" width="324" height="318" visible="false">
+          <Layouts>
+            <Layout>
+              <Button id="btnTab01" taborder="0" text="검색영역" left="20" top="60" height="50" right="20" background="#959595" color="#ffffff" onclick="divLayout_btn_onclick"/>
+              <Button id="btnTab03" taborder="1" text="Grid2" left="109" top="115" height="150" right="20" background="#959595" color="#ffffff" onclick="divLayout_btn_onclick"/>
+              <Button id="btnTab02" taborder="2" text="Grid1" left="20" top="115" height="150" right="219" background="#959595" color="#ffffff" onclick="divLayout_btn_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divLayout03" taborder="20" left="6" top="872" cssclass="dvi_WF_tabBox01" text="divLayout00" width="324" height="318" visible="false">
+          <Layouts>
+            <Layout>
+              <Button id="btnTab01" taborder="0" text="검색영역" left="20" top="60" height="50" right="20" background="#959595" color="#ffffff" onclick="divLayout_btn_onclick"/>
+              <Button id="btnTab03" taborder="1" text="Grid2" left="109" top="115" height="72" right="20" background="#959595" color="#ffffff" onclick="divLayout_btn_onclick"/>
+              <Button id="btnTab02" taborder="2" text="Grid1" left="20" top="115" height="150" right="219" background="#959595" color="#ffffff" onclick="divLayout_btn_onclick"/>
+              <Button id="btnTab04" taborder="3" text="Grid3" left="109" top="195" height="70" right="20" background="#959595" color="#ffffff" onclick="divLayout_btn_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divLayout04" taborder="21" left="6" top="1202" cssclass="dvi_WF_tabBox01" text="divLayout00" width="324" height="318" visible="false">
+          <Layouts>
+            <Layout>
+              <Button id="btnTab01" taborder="0" text="검색영역" left="20" top="60" height="50" right="20" background="#959595" color="#ffffff" onclick="divLayout_btn_onclick"/>
+              <Button id="btnTab05" taborder="1" text="Detail" left="109" top="115" height="150" right="20" background="#959595" color="#ffffff" onclick="divLayout_btn_onclick"/>
+              <Button id="btnTab02" taborder="2" text="Grid1" left="20" top="115" height="150" right="219" background="#959595" color="#ffffff" onclick="divLayout_btn_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divLayout05" taborder="22" left="6" top="1532" cssclass="dvi_WF_tabBox01" text="divLayout00" width="324" height="318" visible="false">
+          <Layouts>
+            <Layout>
+              <Button id="btnTab01" taborder="0" text="검색영역" left="20" top="60" height="50" right="20" background="#959595" color="#ffffff" onclick="divLayout_btn_onclick"/>
+              <Button id="btnTab03" taborder="1" text="Grid2" left="109" top="115" height="72" right="20" background="#959595" color="#ffffff" onclick="divLayout_btn_onclick"/>
+              <Button id="btnTab02" taborder="2" text="Grid1" left="20" top="115" height="150" right="219" background="#959595" color="#ffffff" onclick="divLayout_btn_onclick"/>
+              <Button id="btnTab05" taborder="3" text="Detail" left="109" top="195" height="70" right="20" background="#959595" color="#ffffff" onclick="divLayout_btn_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divLayout06" taborder="23" left="6" top="1862" cssclass="dvi_WF_tabBox01" text="divLayout00" width="324" height="318" visible="false">
+          <Layouts>
+            <Layout>
+              <Button id="btnTab01" taborder="0" text="검색영역" left="20" top="60" height="50" right="20" background="#959595" color="#ffffff" onclick="divLayout_btn_onclick"/>
+              <Button id="btnTab03" taborder="1" text="Grid" left="109" top="115" height="150" right="20" background="#959595" color="#ffffff" onclick="divLayout_btn_onclick"/>
+              <Button id="btnTab02" taborder="2" text="Tree" left="20" top="115" height="150" right="219" background="#959595" color="#ffffff" onclick="divLayout_btn_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divLayout07" taborder="24" left="6" top="2192" cssclass="dvi_WF_tabBox01" text="divLayout00" width="324" height="318" visible="false">
+          <Layouts>
+            <Layout>
+              <Button id="btnTab01" taborder="0" text="검색영역" left="20" top="60" height="50" right="20" background="#959595" color="#ffffff" onclick="divLayout_btn_onclick"/>
+              <Button id="btnTab05" taborder="1" text="Detail" left="109" top="115" height="150" right="20" background="#959595" color="#ffffff" onclick="divLayout_btn_onclick"/>
+              <Button id="btnTab02" taborder="2" text="Tree" left="20" top="115" height="150" right="219" background="#959595" color="#ffffff" onclick="divLayout_btn_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+      <Layout height="659" mobileorientation="landscape" width="1040" name="default0">
+        <Div id="divSearch" taborder="0" left="10" top="0" height="43" right="10" cssclass="div_WF_searchBox01" text=""/>
+        <Button id="btnShowHide" taborder="1" left="485" top="42" width="70" height="10" cssclass="btn_WF_fold01"/>
+        <Static id="Static09" taborder="2" text="Static03" left="0" top="52" height="10" background="red" visible="false" right="0"/>
+        <Static id="Static23" taborder="3" text="Static23" left="1" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static24" taborder="4" text="Static23" left="340" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static25" taborder="5" text="Static23" left="679" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static26" taborder="6" text="Static23" left="1018" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Div id="divDetail" taborder="7" left="0" top="62" right="0" bottom="0" text=""/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsCboTemplate">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">01</Col>
+            <Col id="NAME">템플릿01</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">02</Col>
+            <Col id="NAME">템플릿02</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">03</Col>
+            <Col id="NAME">템플릿03</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">04</Col>
+            <Col id="NAME">템플릿04</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">05</Col>
+            <Col id="NAME">템플릿05</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">06</Col>
+            <Col id="NAME">템플릿06</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">07</Col>
+            <Col id="NAME">템플릿07</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsCboCrud">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">N</Col>
+            <Col id="NAME">미사용</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">Y</Col>
+            <Col id="NAME">사용</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsCboSearchLayer">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">1</Col>
+            <Col id="NAME">1단</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">2</Col>
+            <Col id="NAME">2단</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">3</Col>
+            <Col id="NAME">3단</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsInitInfo">
+        <ColumnInfo>
+          <Column id="SRC_PATH" type="STRING" size="256"/>
+          <Column id="GEN_PATH" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsCboPrefix">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsSearchLayout">
+        <ColumnInfo>
+          <Column id="GUBUN" type="STRING" size="256"/>
+          <Column id="CHK" type="STRING" size="256"/>
+          <Column id="LABEL_ID" type="STRING" size="256"/>
+          <Column id="LABEL_NAME" type="STRING" size="256"/>
+          <Column id="REQ_YN" type="STRING" size="256"/>
+          <Column id="SEARCH_TYPE" type="STRING" size="256"/>
+          <Column id="CODE_YN" type="STRING" size="256"/>
+          <Column id="BIND_DATASET" type="STRING" size="256"/>
+          <Column id="MAPPER_ID" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsViewLayout1">
+        <ColumnInfo>
+          <Column id="CHK" type="STRING" size="256"/>
+          <Column id="COL_ID" type="STRING" size="256"/>
+          <Column id="COL_NAME" type="STRING" size="256"/>
+          <Column id="DISPLAY_YN" type="STRING" size="256"/>
+          <Column id="DISPLAY_ORDER" type="STRING" size="256"/>
+          <Column id="DISPLAY_TYPE" type="STRING" size="256"/>
+          <Column id="SIZE" type="STRING" size="256"/>
+          <Column id="ALIGN" type="STRING" size="256"/>
+          <Column id="EDIT_YN" type="STRING" size="256"/>
+          <Column id="EDIT_TYPE" type="STRING" size="256"/>
+          <Column id="INPUT_YN" type="STRING" size="256"/>
+          <Column id="CODE_YN" type="STRING" size="256"/>
+          <Column id="BIND_DATASET" type="STRING" size="256"/>
+          <Column id="MAPPER_ID" type="STRING" size="256"/>
+          <Column id="DTL_MAPPING_YN" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsViewLayout2">
+        <ColumnInfo>
+          <Column id="CHK" type="STRING" size="256"/>
+          <Column id="COL_ID" type="STRING" size="256"/>
+          <Column id="COL_NAME" type="STRING" size="256"/>
+          <Column id="DISPLAY_YN" type="STRING" size="256"/>
+          <Column id="DISPLAY_ORDER" type="STRING" size="256"/>
+          <Column id="DISPLAY_TYPE" type="STRING" size="256"/>
+          <Column id="SIZE" type="STRING" size="256"/>
+          <Column id="ALIGN" type="STRING" size="256"/>
+          <Column id="EDIT_YN" type="STRING" size="256"/>
+          <Column id="EDIT_TYPE" type="STRING" size="256"/>
+          <Column id="INPUT_YN" type="STRING" size="256"/>
+          <Column id="CODE_YN" type="STRING" size="256"/>
+          <Column id="BIND_DATASET" type="STRING" size="256"/>
+          <Column id="MAPPER_ID" type="STRING" size="256"/>
+          <Column id="DTL_MAPPING_YN" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsViewLayout3">
+        <ColumnInfo>
+          <Column id="CHK" type="STRING" size="256"/>
+          <Column id="COL_ID" type="STRING" size="256"/>
+          <Column id="COL_NAME" type="STRING" size="256"/>
+          <Column id="DISPLAY_YN" type="STRING" size="256"/>
+          <Column id="DISPLAY_ORDER" type="STRING" size="256"/>
+          <Column id="DISPLAY_TYPE" type="STRING" size="256"/>
+          <Column id="SIZE" type="STRING" size="256"/>
+          <Column id="ALIGN" type="STRING" size="256"/>
+          <Column id="EDIT_YN" type="STRING" size="256"/>
+          <Column id="EDIT_TYPE" type="STRING" size="256"/>
+          <Column id="INPUT_YN" type="STRING" size="256"/>
+          <Column id="CODE_YN" type="STRING" size="256"/>
+          <Column id="BIND_DATASET" type="STRING" size="256"/>
+          <Column id="MAPPER_ID" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsViewLayout4">
+        <ColumnInfo>
+          <Column id="CHK" type="STRING" size="256"/>
+          <Column id="COL_ID" type="STRING" size="256"/>
+          <Column id="COL_NAME" type="STRING" size="256"/>
+          <Column id="DISPLAY_YN" type="STRING" size="256"/>
+          <Column id="DISPLAY_ORDER" type="STRING" size="256"/>
+          <Column id="DISPLAY_TYPE" type="STRING" size="256"/>
+          <Column id="SIZE" type="STRING" size="256"/>
+          <Column id="ALIGN" type="STRING" size="256"/>
+          <Column id="EDIT_YN" type="STRING" size="256"/>
+          <Column id="EDIT_TYPE" type="STRING" size="256"/>
+          <Column id="INPUT_YN" type="STRING" size="256"/>
+          <Column id="CODE_YN" type="STRING" size="256"/>
+          <Column id="BIND_DATASET" type="STRING" size="256"/>
+          <Column id="MAPPER_ID" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsBaseInfo">
+        <ColumnInfo>
+          <Column id="PREFIX" type="STRING" size="256" description="Prefix명"/>
+          <Column id="FORM_ID" type="STRING" size="256" description="화면ID"/>
+          <Column id="FORM_NAME" type="STRING" size="256" description="화면명"/>
+          <Column id="CRUD_YN" type="STRING" size="256" description="입력,수정,삭제여부"/>
+          <Column id="FORM_LAYOUT" type="STRING" size="256" description="템플릿"/>
+          <Column id="SEARCH_LAYOUT" type="STRING" size="256" description="검색Layout"/>
+          <Column id="SOURCE_PATH" type="STRING" size="256" description="소스경로"/>
+          <Column id="GENERATE_PATH" type="STRING" size="256" description="Generate경로"/>
+          <Column id="VIEW_TITLE1" type="STRING" size="256" description="ViewLayout1-타이틀"/>
+          <Column id="VIEW_TITLE2" type="STRING" size="256" description="ViewLayout2-타이틀"/>
+          <Column id="VIEW_TITLE3" type="STRING" size="256" description="ViewLayout3-타이틀"/>
+          <Column id="VIEW_TITLE4" type="STRING" size="256" description="ViewLayout4-타이틀"/>
+          <Column id="VIEW_GRID1" type="STRING" size="256" description="ViewLayout1-그리드"/>
+          <Column id="VIEW_GRID2" type="STRING" size="256" description="ViewLayout2-그리드"/>
+          <Column id="VIEW_GRID3" type="STRING" size="256" description="ViewLayout3-그리드"/>
+          <Column id="VIEW_GRID4" type="STRING" size="256" description="ViewLayout4-그리드"/>
+          <Column id="VIEW_LAYOUT1" type="STRING" size="256" description="ViewLayout1-데이터셋"/>
+          <Column id="VIEW_LAYOUT2" type="STRING" size="256" description="ViewLayout2-데이터셋"/>
+          <Column id="VIEW_LAYOUT3" type="STRING" size="256" description="ViewLayout3-데이터셋"/>
+          <Column id="VIEW_LAYOUT4" type="STRING" size="256" description="ViewLayout4-데이터셋"/>
+          <Column id="VIEW_NAMESPACE1" type="STRING" size="256" description="ViewLayout1-쿼리"/>
+          <Column id="VIEW_NAMESPACE2" type="STRING" size="256" description="ViewLayout2-쿼리"/>
+          <Column id="VIEW_NAMESPACE3" type="STRING" size="256" description="ViewLayout3-쿼리"/>
+          <Column id="VIEW_NAMESPACE4" type="STRING" size="256" description="ViewLayout4-쿼리"/>
+          <Column id="VIEW_NAMESPACE5" type="STRING" size="256" description="ViewLayout5-쿼리"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsComponentType">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">01</Col>
+            <Col id="NAME">Edit</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">02</Col>
+            <Col id="NAME">Combo</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">03</Col>
+            <Col id="NAME">Checkbox</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsDisplayType">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">normal</Col>
+            <Col id="NAME">normal</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">none</Col>
+            <Col id="NAME">none</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">buttoncontrol</Col>
+            <Col id="NAME">buttoncontrol</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">calendarcontrol</Col>
+            <Col id="NAME">calendarcontrol</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">checkboxcontrol</Col>
+            <Col id="NAME">checkboxcontrol</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">combocontrol</Col>
+            <Col id="NAME">combocontrol</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">combotext</Col>
+            <Col id="NAME">combotext</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">currency</Col>
+            <Col id="NAME">currency</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">date</Col>
+            <Col id="NAME">date</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">decoratetext</Col>
+            <Col id="NAME">decoratetext</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">editcontrol</Col>
+            <Col id="NAME">editcontrol</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">imagecontrol</Col>
+            <Col id="NAME">imagecontrol</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">mask</Col>
+            <Col id="NAME">mask</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">maskeditcontrol</Col>
+            <Col id="NAME">maskeditcontrol</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">number</Col>
+            <Col id="NAME">number</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">progressbarcontrol</Col>
+            <Col id="NAME">progressbarcontrol</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">text</Col>
+            <Col id="NAME">text</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">textareacontrol</Col>
+            <Col id="NAME">textareacontrol</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">treeitemcontrol</Col>
+            <Col id="NAME">treeitemcontrol</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsEditType">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">normal</Col>
+            <Col id="NAME">normal</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">none</Col>
+            <Col id="NAME">none</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">button</Col>
+            <Col id="NAME">button</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">checkbox</Col>
+            <Col id="NAME">checkbox</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">combo</Col>
+            <Col id="NAME">combo</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">date</Col>
+            <Col id="NAME">date</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">mask</Col>
+            <Col id="NAME">mask</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">readonly</Col>
+            <Col id="NAME">readonly</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">text</Col>
+            <Col id="NAME">text</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">textarea</Col>
+            <Col id="NAME">textarea</Col>
+          </Row>
+          <Row>
+            <Col id="CODE"> tree</Col>
+            <Col id="NAME"> tree</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsCboAlign">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">left</Col>
+            <Col id="NAME">Left</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">center</Col>
+            <Col id="NAME">Center</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">right</Col>
+            <Col id="NAME">Right</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsDataset">
+        <ColumnInfo>
+          <Column id="CHK" type="STRING" size="256"/>
+          <Column id="DATASET_NAME" type="STRING" size="256"/>
+          <Column id="LAYOUT_TYPE" type="STRING" size="256"/>
+          <Column id="QUERY_ID" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  화면 자동 생성기
+*
+*  @MenuPath    가이드 > 화면생성기
+*  @FileNAME    SourceMaker.xfdl 
+*  @Creator     천우성
+*  @CreateDate  2020.08.30 
+*  @Version     1.0
+*  @Desction    UXBooster 템플릿에 따른 자동 화면 생성기
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2020.08.30      천우성             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+this.fv_sGdsAdminYn   = UXBooster.gdsUserInfo.getColumn(0, "ADMIN_YN"); 	// gds _ 관리자권한 여부
+this.fv_sGdsProjectCd = UXBooster.av_sProjectCd;  		 // 글로변 변수_프로젝트코드
+ 
+this.fv_sProjectCd = "";// 권한 목록의 선택된 row 프로젝트코드
+this.fv_sRoleCd = "";	// 권한 목록의 선택된 row 권한코드
+this.fv_sRoleCd = "";	// 권한 목록의 선택된 row 메뉴코드
+
+this.fv_nRAllIndex;
+
+this.fv_sSelectRow = "";
+this.fv_sProjectCd = "";
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.take_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {    
+		// 초기화
+        this.fnInit();  
+   }
+}
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    
+}
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+this.fnSave = function(sTranId)
+{    
+    
+}
+/**
+ * fnAddRow : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+ * @example this.fnAddRow(sGrdId, nRow);
+ */
+this.fnAddRow = function(sGrdId, nRow)
+{
+    
+};
+
+/**
+ * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number, Array} arrnRow    deleteRow 리턴값
+ * @return {N/A} N/A
+ * @example this.fnDelRow(sGrdId, nRow); 
+ */
+this.fnDelRow = function(sGrdId, arrnRow)
+{    
+    
+};
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+  
+/*
+ * this.divSearch_cboTemplate_onitemchanged: 템플릿 변경시
+ */
+this.divSearch_cboTemplate_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	this.fnSetTemplate();
+};
+
+/*
+ * this.divLayout_btn_onclick: 레이아웃에 있는 버튼을 클릭시
+ */
+this.divLayout_btn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var objId 		= obj.name;
+	this.components[objId].click();
+};
+
+/*
+ * this.btnTab_onclick: 탭 버튼을 클릭시
+ */
+this.btnTab_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var sTemplate	= this.divSearch.form.cboTemplate.value;
+	
+	if( this.components["divLayout" + sTemplate].form.btnTab01 != null && this.components["divLayout" + sTemplate].form.btnTab01 != "" ){
+		this.components["divLayout" + sTemplate].form.btnTab01.set_background( (obj.id == "btnTab01")?"#f4553b":"#959595");
+	}
+	if( this.components["divLayout" + sTemplate].form.btnTab02 != null && this.components["divLayout" + sTemplate].form.btnTab02 != "" ){
+		this.components["divLayout" + sTemplate].form.btnTab02.set_background( (obj.id == "btnTab02")?"#f4553b":"#959595");
+	}
+	if( this.components["divLayout" + sTemplate].form.btnTab03 != null && this.components["divLayout" + sTemplate].form.btnTab03 != "" ){
+		this.components["divLayout" + sTemplate].form.btnTab03.set_background( (obj.id == "btnTab03")?"#f4553b":"#959595");
+	}
+	if( this.components["divLayout" + sTemplate].form.btnTab04 != null && this.components["divLayout" + sTemplate].form.btnTab04 != "" ){
+		this.components["divLayout" + sTemplate].form.btnTab04.set_background( (obj.id == "btnTab04")?"#f4553b":"#959595");
+	}
+	if( this.components["divLayout" + sTemplate].form.btnTab05 != null && this.components["divLayout" + sTemplate].form.btnTab05 != "" ){
+		this.components["divLayout" + sTemplate].form.btnTab05.set_background( (obj.id == "btnTab05")?"#f4553b":"#959595");
+	}
+};
+
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnInit : 초기화 함수
+ * @example this.fnUserFunction();
+ */
+this.fnInit = function()
+{    
+	this.divSearch.form.cboTemplate.set_index(0);
+	this.divDetail.form.cboCrudYn.set_index(0);
+	this.divTab01.form.cboSearchLayer.set_index(0);
+	
+	var objList = {"btnTab01":this.divTab01, "btnTab02":this.divTab02, 
+                       "btnTab03":this.divTab03, "btnTab04":this.divTab04,
+                       "btnTab05":this.divTab05};
+	var sTabId = "tab01";
+	var objFirstLoad = this.btnTab01;
+	var sTabOnCss = "btn_WF_tab02";
+	var sTabOffCss = "btn_WF_tab01";
+	
+	take.TabSetting(this, sTabId, objList, objFirstLoad, sTabOnCss, sTabOffCss);
+	
+	// 초기 환경 세팅
+    this.fnSetEnv();
+}
+
+/**
+ * fnSetPrefixId : TypeDefinition_Services_form_frefixID 가져오기
+ * @example this.fnSetPrefixId();
+ */
+this.fnSetPrefixId = function()
+{
+	var sType, sPfix;
+	var nNum=1;
+	var objDs		= this.dsCboPrefix;
+	var nCnt 		= nexacro.getEnvironment().services.length;
+	var arrType 	= new Array(); 
+	var arrPrefixId = new Array();
+	
+	objDs.setColumn(objDs.addRow(), "CODE", "");
+	objDs.setColumn(objDs.rowposition, "NAME", "- 선택 -");
+	// type=form 으로 등록된 prefixid 값 찾기
+	for (var i=1; i<nCnt; i++)
+	{
+		sType = nexacro.getEnvironment().services[i].type;
+		sPfix = nexacro.getEnvironment().services[i].prefixid;
+		
+		if(take.nvl(sType, "") != "") arrType[i] = sType;
+		if(take.nvl(sPfix, "") != "") arrPrefixId[i] = sPfix;
+		if (arrType[i] == "form")
+		{
+			objDs.setColumn(objDs.addRow(), "CODE", arrPrefixId[i]);
+			objDs.setColumn(objDs.rowposition, "NAME", arrPrefixId[i]);
+			nNum++;
+		}
+	}
+	
+	this.divDetail.form.cboPrefix.set_index(0);
+};
+
+/**
+ * fnSetEnv : 초기 환경 세팅
+ * @example this.fnSetEnv();
+ */
+this.fnSetEnv = function ()
+{
+	this.dsInitInfo.clearData(); // DataSet 데이터 초기화
+	take.transaction(this, "Init", "SVC_LOC::srcmaker/init.do", "", "dsInitInfo=dsInitInfo", ""
+		, function(sId, nErrCd, sErrMsg)
+		{
+			// Prefix 세팅
+			this.fnSetPrefixId();
+			// 최초실행은 템플릿 첫번째
+			this.fnSetTemplate();
+			
+			//this.divDetail.form.edtSrcPath.set_value(this.dsInitInfo.getColumn(0, "SRC_PATH"));
+			//this.divDetail.form.edtGenPath.set_value(this.dsInitInfo.getColumn(0, "GEN_PATH"));
+		});
+};
+
+/**
+ * fnSetTemplate : 템플릿에 따른 화면 구성
+ * @example this.fnSetTemplate();
+ */
+this.fnSetTemplate = function()
+{
+	var sTemplate	= this.divSearch.form.cboTemplate.value;
+	
+	this.divDetail.form.staTemplateT.set_text("템플릿" + sTemplate);
+	
+	// Layout Setting
+	for(var i=1; i<=7; i++)
+	{
+		this.components["divLayout0" + i].set_visible(false);
+        this.components["divLayout0" + i].set_enable(false);
+	}
+	this.components["divLayout" + sTemplate].set_visible(true);
+    this.components["divLayout" + sTemplate].set_enable(true);
+	this.components["divLayout" + sTemplate].set_top(252);
+	
+	// Tab Init Setting
+	//this.btnTab01.set_visible(true);	this.divTab01.set_visible(true);
+	//this.btnTab01.click();
+	this.components["divLayout" + sTemplate].form.btnTab01.click();
+	for(var i=2; i <=5; i++)
+	{
+		this.components["btnTab0" + i].set_visible(false);
+		this.components["divTab0" + i].set_visible(false);
+	}
+	
+	switch( sTemplate )
+    {
+        case "01" :		// 템플릿01		
+			this.btnTab02.set_visible(true);
+	
+            break;
+			
+		case "02" :		// 템플릿02
+			this.btnTab02.set_visible(true);
+			this.btnTab03.set_visible(true);
+			
+            break;
+			
+        case "03" :		// 템플릿03
+			this.btnTab02.set_visible(true);
+			this.btnTab03.set_visible(true);
+			this.btnTab04.set_visible(true);
+			
+            break;
+		
+		// 여기서부터는 작업 다시 해야 함(Detail, Tree부분)
+        case "04" :		// 템플릿04
+			this.btnTab02.set_visible(true);
+			this.btnTab05.set_visible(true);	// TODO: 탭버튼 위치 조정 필요
+			
+            break;
+			
+        case "05" :		// 템플릿05
+			this.btnTab02.set_visible(true);
+			this.btnTab03.set_visible(true);
+			this.btnTab05.set_visible(true);	// TODO: 탭버튼 위치 조정 필요
+			
+            break;
+		
+		case "06" :		// 템플릿06
+			this.btnTab02.set_visible(true);	// TODO: Tree화면 어떻게 구성할지 확인 필요 
+			this.btnTab03.set_visible(true);
+			
+            break;
+			
+		case "07" :		// 템플릿07
+			this.btnTab02.set_visible(true);	// TODO: Tree화면 어떻게 구성할지 확인 필요 
+			this.btnTab05.set_visible(true);	// TODO: 탭버튼 위치 조정 필요
+			
+            break;
+			
+        default :
+            break;
+    }
+	
+	// 검색 Layout 1단으로 세팅
+	this.fnSetSearchLayer();
+}
+
+/**
+ * fnSetSearchLayer : 템플릿에 따른 화면 구성
+ * @example this.fnSetSearchLayer();
+ */
+this.fnSetSearchLayer = function()
+{
+	var sSearchLayer	= this.divTab01.form.cboSearchLayer.value;
+	this.dsSearchLayout.clearData();
+	var nRow;
+	
+	var x = 0;
+	for(var i=1; i<=parseInt(sSearchLayer)*3; i++)
+	{
+		nRow = this.dsSearchLayout.addRow();
+		this.dsSearchLayout.setColumn(nRow, "GUBUN", Math.ceil(i/3) + "X" + (i-(x*3)) );
+		this.dsSearchLayout.setColumn(nRow, "CHK", "1");
+		this.dsSearchLayout.setColumn(nRow, "LABEL_ID", "");
+		this.dsSearchLayout.setColumn(nRow, "LABEL_NAME", "");
+		this.dsSearchLayout.setColumn(nRow, "REQ_YN", "");
+		this.dsSearchLayout.setColumn(nRow, "SEARCH_TYPE", "01");
+		this.dsSearchLayout.setColumn(nRow, "CODE_YN", "0");
+		this.dsSearchLayout.setColumn(nRow, "BIND_DATASET", "");
+		this.dsSearchLayout.setColumn(nRow, "REMARK", "");
+		
+		if( i == 3 || i == 6 || i == 9 )
+		{
+			x++;
+		}
+	}
+	
+	this.dsSearchLayout.set_rowposition(0);
+}
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "SourceMaker" :		// 화면생성
+			take.alert(this, "Info", "화면생성이 완료되었습니다.\nCRUD의 경우 Controller, Service Java가 생성되니 서버를 Re-Start한후 확인하세요.", "");
+            break;
+			
+        default :
+            break;
+    }        
+};
+
+this.divTab01_cboSearchLayer_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	this.fnSetSearchLayer();
+};
+
+this.divTab02_btnExec_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.dsViewLayout1.clearData();
+	var sCrudYn	 = this.divDetail.form.cboCrudYn.value;
+	var sQueryId = this.divTab02.form.edtSqlMapper.value;
+	take.transaction(this, "Exec1", "SVC_LOC::srcmaker/load.do", "", "dsViewLayout1=dsViewLayout", "sCrudYn='"+sCrudYn+"' sQueryId='"+sQueryId+"'", "fnCallback");
+};
+
+this.divTab03_btnExec_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.dsViewLayout2.clearData();
+	var sCrudYn	 = this.divDetail.form.cboCrudYn.value;
+	var sQueryId = this.divTab03.form.edtSqlMapper.value;
+	take.transaction(this, "Exec2", "SVC_LOC::srcmaker/load.do", "", "dsViewLayout2=dsViewLayout", "sCrudYn='"+sCrudYn+"' sQueryId='"+sQueryId+"'", "fnCallback");
+};
+
+this.divTab00_btnDeploySave_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.dsViewLayout3.clearData();
+	var sCrudYn	 = this.divDetail.form.cboCrudYn.value;
+	var sQueryId = this.divTab04.form.edtSqlMapper.value;
+	take.transaction(this, "Exec2", "SVC_LOC::srcmaker/load.do", "", "dsViewLayout3=dsViewLayout", "sCrudYn='"+sCrudYn+"' sQueryId='"+sQueryId+"'", "fnCallback");
+};
+
+this.divDetail_btnSave_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.dsBaseInfo.clearData();
+	var nRow	= this.dsBaseInfo.addRow();
+	var objDs	= this.dsBaseInfo;
+	
+	var sTemplate		= this.divSearch.form.cboTemplate.value;
+	var sPrefix 		= this.divDetail.form.cboPrefix.value;
+	var sFormId 		= this.divDetail.form.edtFormId.value;
+	var sFormNm 		= this.divDetail.form.edtFormNm.value;
+	var sCrudYn			= this.divDetail.form.cboCrudYn.value;
+	var sFormLayout 	= this.divSearch.form.cboTemplate.value;
+	var sSearchLayout 	= this.divTab01.form.cboSearchLayer.value;
+	var sSourcePath 	= this.dsInitInfo.getColumn(0, "SRC_PATH");
+	var sGeneratePath 	= this.dsInitInfo.getColumn(0, "GEN_PATH");
+	// ViewLayout1
+	var sGridTitle1		= this.divTab02.form.edtGridTitle.value;
+	var sGridId1		= this.divTab02.form.edtGridId.value;
+	var sViewDataset1 	= this.divTab02.form.edtDatasetNm.value;
+	var sViewNamespace1 = this.divTab02.form.edtSqlMapper.value;
+	
+	// ViewLayout2
+	var sGridTitle2		= this.divTab03.form.edtGridTitle.value;
+	var sGridId2		= this.divTab03.form.edtGridId.value;
+	var sViewDataset2 	= this.divTab03.form.edtDatasetNm.value;
+	var sViewNamespace2 = this.divTab03.form.edtSqlMapper.value;
+	
+	// ViewLayout3
+	var sGridTitle3		= this.divTab04.form.edtGridTitle.value;
+	var sGridId3		= this.divTab04.form.edtGridId.value;
+	var sViewDataset3 	= this.divTab04.form.edtDatasetNm.value;
+	var sViewNamespace3 = this.divTab04.form.edtSqlMapper.value;
+	
+	// dsDataset 세팅
+	var nDsRow = 0;
+	this.dsDataset.clearData();
+	
+	if( sTemplate == "01" || sTemplate == "02" || sTemplate == "03" ){
+		//dsDataset1
+		nDsRow = this.dsDataset.addRow();
+		this.dsDataset.setColumn(nDsRow, "DATASET_NAME", sViewDataset1);
+		this.dsDataset.setColumn(nDsRow, "LAYOUT_TYPE", "Grid");
+		this.dsDataset.setColumn(nDsRow, "QUERY_ID", this.divTab02.form.edtSqlMapper.value);
+	}
+	
+	if( sTemplate == "02" || sTemplate == "03" ){
+		//dsDataset2
+		nDsRow = this.dsDataset.addRow();
+		this.dsDataset.setColumn(nDsRow, "DATASET_NAME", sViewDataset2);
+		this.dsDataset.setColumn(nDsRow, "LAYOUT_TYPE", "Grid");
+		this.dsDataset.setColumn(nDsRow, "QUERY_ID", this.divTab03.form.edtSqlMapper.value);
+	}
+	
+	if( sTemplate == "02" || sTemplate == "03" ){
+		//dsDataset3
+		nDsRow = this.dsDataset.addRow();
+		this.dsDataset.setColumn(nDsRow, "DATASET_NAME", sViewDataset3);
+		this.dsDataset.setColumn(nDsRow, "LAYOUT_TYPE", "Grid");
+		this.dsDataset.setColumn(nDsRow, "QUERY_ID", this.divTab04.form.edtSqlMapper.value);
+	}
+	
+	
+	// validation check
+	
+	objDs.setColumn(nRow, "TEMPLATE"			, sTemplate);
+	objDs.setColumn(nRow, "PREFIX"			, sPrefix);
+	objDs.setColumn(nRow, "FORM_ID"			, sFormId);
+	objDs.setColumn(nRow, "FORM_NAME"		, sFormNm);
+	objDs.setColumn(nRow, "FORM_LAYOUT"		, sFormLayout);
+	objDs.setColumn(nRow, "CRUD_YN"			, sCrudYn);
+	objDs.setColumn(nRow, "SEARCH_LAYOUT"	, sSearchLayout);
+	objDs.setColumn(nRow, "SOURCE_PATH"		, sSourcePath);
+	objDs.setColumn(nRow, "GENERATE_PATH"	, sGeneratePath);
+	
+	objDs.setColumn(nRow, "VIEW_TITLE1"		, sGridTitle1);
+	objDs.setColumn(nRow, "VIEW_TITLE2"		, sGridTitle2);
+	objDs.setColumn(nRow, "VIEW_TITLE3"		, sGridTitle3);
+	objDs.setColumn(nRow, "VIEW_TITLE4"		, "");
+	
+	objDs.setColumn(nRow, "VIEW_GRID1"		, sGridId1);
+	objDs.setColumn(nRow, "VIEW_GRID2"		, sGridId2);
+	objDs.setColumn(nRow, "VIEW_GRID3"		, sGridId3);
+	objDs.setColumn(nRow, "VIEW_GRID4"		, "");
+	
+	objDs.setColumn(nRow, "VIEW_LAYOUT1"	, sViewDataset1);
+	objDs.setColumn(nRow, "VIEW_LAYOUT2"	, sViewDataset2);
+	objDs.setColumn(nRow, "VIEW_LAYOUT3"	, sViewDataset3);
+	objDs.setColumn(nRow, "VIEW_LAYOUT4"	, "");
+	
+	objDs.setColumn(nRow, "VIEW_NAMESPACE1"	, sViewNamespace1);
+	objDs.setColumn(nRow, "VIEW_NAMESPACE2"	, sViewNamespace2);
+	objDs.setColumn(nRow, "VIEW_NAMESPACE3"	, sViewNamespace3);
+	objDs.setColumn(nRow, "VIEW_NAMESPACE4"	, "");
+	
+	take.transaction(this, "SourceMaker"
+						, "SVC_LOC::srcmaker/save.do"
+						, "dsBaseInfo=dsBaseInfo dsDataset=dsDataset dsSearchLayout=dsSearchLayout"
+							+" dsViewLayout1=dsViewLayout1"
+							+" dsViewLayout2=dsViewLayout2"
+							+" dsViewLayout3=dsViewLayout3"
+							+" dsViewLayout4=dsViewLayout4"
+							+" dsViewLayout5=dsViewLayout5"
+						, ""
+						, ""
+						, "fnCallback");
+};]]></Script>
+  </Form>
+</FDL>

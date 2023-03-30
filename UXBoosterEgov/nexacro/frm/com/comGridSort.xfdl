@@ -1,0 +1,550 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="comSort" left="0" top="0" width="502" height="335" onload="comSort_onload" titletext="정렬" onkeydown="comSort_onkeydown" border="1px solid #c0c0c0">
+    <Layouts>
+      <Layout>
+        <Grid id="grdItem" taborder="2" binddataset="dsItem" left="20" top="48" width="151" oncelldblclick="grdItem_oncelldblclick" scrollbartype="autoindicator default" extendgridoption="false" autofittype="col" bottom="63">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="149"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="정렬대상항목" border="1px solid #c7c7c7,0px none"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:COLNM" textAlign="left" border="1px solid #e3e3e3,0px none"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="grdSort" taborder="5" binddataset="dsSort" formats="&lt;Formats&gt;&#10;  &lt;Format id=&quot;default&quot;&gt;&#10;    &lt;Columns&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;      &lt;Col size=&quot;80&quot;/&gt;&#10;    &lt;/Columns&gt;&#10;    &lt;Rows&gt;&#10;      &lt;Row band=&quot;head&quot; size=&quot;35&quot;/&gt;&#10;      &lt;Row band=&quot;body&quot; size=&quot;35&quot;/&gt;&#10;    &lt;/Rows&gt;&#10;    &lt;Band id=&quot;head&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;colnm&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;ordering&quot;/&gt;&#10;    &lt;/Band&gt;&#10;    &lt;Band id=&quot;body&quot;&gt;&#10;      &lt;Cell col=&quot;0&quot; disptype=&quot;normal&quot; text=&quot;bind:COLNM&quot;/&gt;&#10;      &lt;Cell col=&quot;1&quot; disptype=&quot;normal&quot; text=&quot;bind:ORDERING&quot;/&gt;&#10;    &lt;/Band&gt;&#10;  &lt;/Format&gt;&#10;&lt;/Formats&gt;&#10;" oncelldblclick="grdItem_oncelldblclick" cellmovingtype="col" cellsizingtype="col" top="48" autoenter="select" autoupdatetype="itemselect" left="191" scrolltype="both" scrollbartype="autoindicator default" extendgridoption="false" right="20" autofittype="col" bottom="63" cellclickbound="cell" oncellclick="grdSort_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="163"/>
+                <Column size="93"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="정렬항목"/>
+                <Cell col="1" text="정렬유형" border="1px solid #c7c7c7,0px none"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:COLNM" textAlign="left"/>
+                <Cell col="1" displaytype="combocontrol" edittype="combo" text="bind:TYPE" combodataset="dsOrdType" combocodecol="CODE" combodatacol="NAME" combodisplay="display" border="1px solid #e3e3e3,0px none"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="btnAddItem" taborder="3" left="176" top="123" width="10" height="30" onclick="btnAddItem_onclick" cssclass="btn_WF_next"/>
+        <Button id="btnDelItem" taborder="4" left="176" top="161" width="10" height="30" onclick="btnDelItem_onclick" cssclass="btn_WF_prev"/>
+        <Button id="btnUpItem" taborder="0" top="20" right="48" width="23" height="23" onclick="btnUpItem_onclick" cssclass="btn_WF_ShuttleT"/>
+        <Button id="btnDownItem" taborder="1" top="20" right="20" width="23" height="23" onclick="btnDownItem_onclick" cssclass="btn_WF_ShuttleB"/>
+        <Button id="btnCancel" taborder="7" text="닫기" width="57" height="23" onclick="btnClose_onclick" uWord="popup.close" cssclass="btn_WF_cancel01" bottom="20" left="425"/>
+        <Button id="btnConfirm" taborder="6" text="확인" height="23" tabstop="true" onclick="btnConfirm_onclick" uWord="popup.ok" cssclass="btn_WF_check01" bottom="20" left="365" right="btnCancel:3"/>
+        <Static id="Static09_00_01" taborder="8" text="h10" left="0" background="rgba(224,159,30,0.40)" visible="false" textAlign="center" verticalAlign="middle" font="normal 7pt/normal &quot;Arial&quot;" height="20" top="0" width="500"/>
+        <Static id="Static09_00_00_00" taborder="9" text="w&#13;&#10;20" left="0" top="20" background="RGBA(224,159,30,0.40)" visible="false" textAlign="center" verticalAlign="middle" font="normal 7pt/normal &quot;Arial&quot;" width="20" bottom="0"/>
+        <Static id="Static09_00_00_00_00" taborder="10" text="w&#13;&#10;20" top="20" background="RGBA(224,159,30,0.40)" visible="false" textAlign="center" verticalAlign="middle" font="normal 7pt/normal &quot;Arial&quot;" width="20" right="0" bottom="0"/>
+        <Static id="Static09_00_01_00" taborder="11" text="h20" left="20" background="rgba(224,159,30,0.40)" visible="false" textAlign="center" verticalAlign="middle" font="normal 7pt/normal &quot;Arial&quot;" top="315" height="20" right="20"/>
+        <Static id="Static09_00_01_00_00" taborder="12" text="h20" left="20" background="rgba(224,159,30,0.40)" visible="false" textAlign="center" verticalAlign="middle" font="normal 7pt/normal &quot;Arial&quot;" top="272" height="20" right="20"/>
+        <Static id="Static09_00_01_01" taborder="13" text="h10" left="20" background="rgba(224,159,30,0.40)" visible="false" textAlign="center" verticalAlign="middle" font="normal 7pt/normal &quot;Arial&quot;" height="5" top="43" right="20"/>
+        <Static id="Static09_00_00_00_01" taborder="14" text="w&#13;&#10;20" left="171" top="48" background="RGBA(224,159,30,0.40)" visible="false" textAlign="center" verticalAlign="middle" font="normal 7pt/normal &quot;Arial&quot;" width="5" bottom="63"/>
+        <Static id="Static09_00_00_00_01_00" taborder="15" text="w&#13;&#10;20" left="186" top="48" background="RGBA(224,159,30,0.40)" visible="false" textAlign="center" verticalAlign="middle" font="normal 7pt/normal &quot;Arial&quot;" width="5" bottom="63"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsSort" firenextcount="0">
+        <ColumnInfo>
+          <Column id="INDEX" type="INT" size="256"/>
+          <Column id="COLID" type="STRING" size="256"/>
+          <Column id="COLNM" type="STRING" size="256"/>
+          <Column id="HEADCELL" type="INT" size="256"/>
+          <Column id="TYPE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsItem" firenextcount="0" oncolumnchanged="dsItem_oncolumnchanged">
+        <ColumnInfo>
+          <Column id="INDEX" type="INT" size="256"/>
+          <Column id="COLID" type="STRING" size="256"/>
+          <Column id="COLNM" type="STRING" size="256"/>
+          <Column id="HEADCELL" type="INT" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsOrdType">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">1</Col>
+            <Col id="NAME">오름차순</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">0</Col>
+            <Col id="NAME">내림차순</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/***************************************************************************************************
+ * 업무구분		: UXBooster
+ * 화 면 명		: comSort.xfdl
+ * 화면설명		: 그리드 공통 정렬 팝업
+ * 작 성 자		: 주)테이크
+ * 작 성 일		:  
+ * 수정이력		
+ ***************************************************************************************************
+ *	수 정 일		수 정 자		수정 내용
+ ***************************************************************************************************
+ * 
+ ***************************************************************************************************/
+
+/***************************************************************************************************
+ *	FORM 변수 선언 영역
+ ***************************************************************************************************/
+this.fvGrd, this.fvDst;
+
+/***************************************************************************************************
+ *	FORM EVENT 영역 (onload)
+ ***************************************************************************************************/ 
+this.comSort_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	var objParamInfo= this.parent.gridInfo;
+
+	// 대상그리드에 대한 컬럼정보 수집
+	this.fvGrd	= objParamInfo["grid"];
+	this.fvDst	= this.fvGrd.getBindDataset();
+	
+	// 대상그리드에 대한 컬럼정보 수집
+	this.fnGatherColInfo(this.fvGrd);
+	
+	var sortInfos = this.fvGrd["_sortInfo"];
+	var sortItems = this.fvGrd["_sortItem"];
+	
+	// 대상 grid 에 정렬정보를 가지는 사용자 속성 확인/추가
+	// 정렬대상컬럼 (순서중요)
+	if (this.fvGrd._xfnIsEmpty(sortInfos)) sortInfos = {};
+	if (this.fvGrd._xfnIsEmpty(sortItems)) sortItems = [];
+	
+	// keystring 조합
+	for (var i=0; i<sortItems.length; i++) 
+	{	
+		sColumnName = sortItems[i];
+		oSortInfo   = sortInfos[sColumnName];
+		nStatus 	= oSortInfo.status;
+		nCell 	    = oSortInfo.refCell;
+		
+		var strExpr	= "";
+			strExpr	+= "COLID=='" 	+ sColumnName + "'";
+			strExpr	+= "&&";
+			strExpr	+= "HEADCELL==" + nCell._cellidx;
+			
+		if (nStatus==0) continue;
+		var bAsc	= nStatus == 1 ? true : false;
+		
+		var nRow	= this.dsItem.findRowExpr(strExpr);
+		if (nRow >= 0) 
+			this.fnAddSortInfo(nRow, bAsc);
+	}
+};
+
+/**
+ *	commFind_onkeydown	: onkeydown Event
+ *	@ return 			: N/A
+ *	@ example 			: N/A
+ */
+this.comSort_onkeydown = function(obj:Form, e:nexacro.KeyEventInfo)
+{
+	if (e.keycode == 27) this.fvGrd._xfnClose(this, "");
+};
+
+/***************************************************************************************************
+ *	TRANSACTION 서비스 호출 처리
+ ***************************************************************************************************/ 
+ 
+/***************************************************************************************************
+ *	CALLBACK 콜백 호출 처리   
+ ***************************************************************************************************/  
+ 
+/***************************************************************************************************
+ *	각 COMPONENT 별 EVENT 영역
+ ***************************************************************************************************/ 
+/**
+ *	grdItem_oncelldblclick	: oncelldblclick Event
+ *	@ return 			: N/A
+ *	@ example 			: N/A
+ */
+this.grdItem_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	var nRow = e.row;
+	
+	if (nRow < 0) return;
+
+	switch (obj.name)
+	{
+		case "grdItem" :
+			this.fnAddSortInfo(nRow, true);
+		break;
+
+		case "grdSort" :
+			if (e.cell == 2) return;
+			this.fnDelSortInfo(nRow);
+		break;
+	}
+};
+
+/**
+ *	dsItem_oncolumnchanged	: oncolumnchanged Event
+ *	@ return 			: N/A
+ *	@ example 			: N/A
+ */
+this.dsItem_oncolumnchanged = function(obj:Dataset, e:nexacro.DSColChangeEventInfo)
+{
+	obj.set_keystring("");
+	obj.set_keystring("S:INDEX");
+};
+
+/**
+ *	btnAddItem_onclick	: onclick Event
+ *	@ return 			: N/A
+ *	@ example 			: N/A
+ */
+this.btnAddItem_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var nRow	= this.dsItem.rowposition;
+	if (nRow < 0) return;
+
+	this.fnAddSortInfo(nRow, true);
+};
+
+/**
+ *	btnDelItem_onclick	: onclick Event
+ *	@ return 			: N/A
+ *	@ example 			: N/A
+ */
+this.btnDelItem_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var nRow	= this.dsSort.rowposition;
+	if (nRow < 0) return;
+
+	this.fnDelSortInfo(nRow);
+};
+
+/**
+ *	btnUpItem_onclick	: onclick Event
+ *	@ return 			: N/A
+ *	@ example 			: N/A
+ */
+this.btnUpItem_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var nRow	= this.dsSort.rowposition;
+	if (nRow <= 0) return;
+
+	this.dsSort.moveRow(nRow, nRow-1);
+};
+
+/**
+ *	btnDownItem_onclick	: onclick Event
+ *	@ return 			: N/A
+ *	@ example 			: N/A
+ */
+this.btnDownItem_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var nRow	= this.dsSort.rowposition;
+	if (nRow >= this.dsSort.getRowCount()-1) return;
+
+	this.dsSort.moveRow(nRow, nRow+1);
+};
+
+/**
+ *	btn_confirm_onclick	: onclick Event
+ *	@ return 			: N/A
+ *	@ example 			: N/A
+ */
+this.btnConfirm_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.fnSetSortInfo();
+};
+
+/**
+ *	btn_close_onclick	: onclick Event
+ *	@ return 			: N/A
+ *	@ example 			: N/A
+ */
+this.btnClose_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.fvGrd._xfnClose(this, "");
+};
+
+/***************************************************************************************************
+ *	사용자 FUNCTION 영역
+ ***************************************************************************************************/  
+/**
+ *	fnGatherColInfo 	: 정렬대상 Dataset 생성
+ *	@ return 			: N/A
+ *	@ example 			: N/A
+ */ 
+this.fnGatherColInfo = function(objGrid)
+{
+	this.dsItem.set_enableevent(false);
+	
+	for (var i=0; i<objGrid.getCellCount("body"); i++)
+	{
+		/* head와 body의 column index가 다른경우 확인해야함 */
+		var sCellText	= this.fvGrd._xfnTrim(objGrid.getCellProperty("body", i, "text"));
+		var nCellRow	= parseInt(this.fvGrd._xfnTrim(objGrid.getCellProperty("body", i, "row")));
+		var nCellCol	= parseInt(this.fvGrd._xfnTrim(objGrid.getCellProperty("body", i, "col")));
+		
+		if (sCellText.toLowerCase().indexOf("bind:") < 0) continue;
+			sCellText = sCellText.substr(5);
+
+		var objColInfo	= this.fvDst.getColumnInfo(sCellText);
+		
+		if (this.fvGrd._xfnIsEmpty(objColInfo)) continue;
+		
+		if (objGrid.getCellProperty("head", i, "displaytype") != "checkboxcontrol")
+		{
+            var objHeadInfo	= this.fnGetHeadInfo(objGrid, nCellCol, nCellRow);
+            if (this.fvGrd._xfnIsEmpty(objHeadInfo)) continue;
+        }  else {
+            continue;
+        }
+
+		var sHeadText	= this.fvGrd._xfnNvl(objHeadInfo["text"], sCellText);
+		var nHeadCell	= this.fvGrd._xfnNvl(objHeadInfo["cell"], i		  );
+
+		var strType = objGrid.getCellProperty("head", nHeadCell, "displaytype");
+		if (strType == "treeitemcontrol" || strType == "checkboxcontrol" || strType == "combocontrol") continue;
+		
+		var nAddRow = this.dsItem.addRow();
+		this.dsItem.setColumn(nAddRow, "INDEX"	  , nAddRow	 );
+		this.dsItem.setColumn(nAddRow, "COLID"	  , sCellText);
+		this.dsItem.setColumn(nAddRow, "COLNM"	  , sHeadText);
+		this.dsItem.setColumn(nAddRow, "HEADCELL" , nHeadCell);
+	}
+ 
+	this.dsItem.set_enableevent(true);
+	this.dsItem.set_rowposition(0); // Rowposition reset
+};
+
+/**
+ *	fnGetHeadInfo 		: 대상 그리드 Head 정보 가져오기
+ *	@ return 			: N/A
+ *	@ example 			: N/A
+ */ 
+this.fnGetHeadInfo = function(objGrid, nBodyCol, nBodyRow)
+{
+	var objHeadInfo	= {text : "", cell : -1};
+	var nHeadCnt	= objGrid.getCellCount("head");
+	var nBodyCnt	= objGrid.getCellCount("body");
+	var nHeadRowCnt = parseInt(objGrid.getCellProperty("head", nHeadCnt-1, "row"));
+	var nBodyRowCnt = parseInt(objGrid.getCellProperty("body", nBodyCnt-1, "row"));
+
+	for (var i=0; i<nHeadCnt; i++)
+	{		
+		var nHeadCol = objGrid.getCellProperty("head", i, "col");
+		var nHeadRow = objGrid.getCellProperty("head", i, "row");
+
+		if (nHeadRowCnt == nBodyRowCnt) 
+		{ 	
+			// Head, Body라인이 동일한 경우
+			if (nHeadRow > nBodyRow) break;
+		}
+		else if (nHeadRowCnt > nBodyRowCnt) 
+		{ 
+			// Head가 Body라인보다 많은경우
+			/* 전체Head라인 - 현재검색중인 Body라인 < 현재Head라인 */
+			if (nHeadRowCnt - (nBodyRowCnt - nBodyRow) < nHeadRow) break;
+		}
+		else 
+		{
+			//해당경우가 발생할 경우 제한사항 추가해야함
+		}
+
+		if (nHeadCol == nBodyCol) 
+		{
+			objHeadInfo["text"]	= this.fvGrd._xfnRemoveSortMarkText(objGrid.getCellProperty("head", i, "text"));
+			objHeadInfo["cell"]	= i;
+		}
+	}	
+	return objHeadInfo;
+};
+
+/**
+ *	fnSetSortInfo 		: 대상 그리드 정렬정보 셋팅 후 닫기
+ *	@ return 			: N/A
+ *	@ example 			: N/A
+ */ 
+this.fnSetSortInfo = function()
+{
+	if (this.dsSort.getRowCount() <= 0)
+	{
+		var sMsg	 = "";
+			sMsg	+= "정렬항목이 선택되어 있지 않아 초기화 됩니다.";
+			sMsg	+= "\r\n";
+			sMsg	+= "그래도 계속하시겠습니까?";
+			
+		if (!take.confirm(this, "question", sMsg)) return;
+	}
+
+	this.fvGrd._xfnRemoveSortMarkGrid(this.fvGrd);
+
+	// 정렬정보 초기화
+	this.fvGrd["_sortInfo"] = {};
+	this.fvGrd["_sortItem"] = [];
+
+	var bMultiple  = false;
+
+	var   sortInfos = this.fvGrd["_sortInfo"] 
+		, sortItems = this.fvGrd["_sortItem"]
+		, sortInfo, sortItem , status;
+
+	for (var i=0; i<this.dsSort.getRowCount(); i++)
+	{
+		var nHeadCell  = parseInt(this.dsSort.getColumn(i, "HEADCELL"));
+		var nBodyCell  = this.fvGrd._xfnGridGetBodyCellIndex(this.fvGrd, nHeadCell);
+		var sColumnName= this.fvGrd._xfnGridGetBindColumnNameByIndex(this.fvGrd, nBodyCell);
+		var sortStatus = this.dsSort.getColumn(i, "TYPE") == "0" ? 2 : 1;
+		
+		sortInfo = sortInfos[sColumnName];
+		
+		if (i>0) bMultiple = true;
+		
+		if (this.fvGrd._xfnIsEmpty(sortInfo))
+		{
+			var headText = this.fvGrd.getCellText(-1, nHeadCell);
+			
+			// executeSort에서 정렬 표시를 위해 cell index 가 필요한데
+			// cell moving 될 경우 index는 변하므로 cell object 를 참조하여 값을 얻어온다. 		
+			var refCell = this.fvGrd._xfnGridGetGridCellObject(this.fvGrd, "head", nHeadCell  );
+			sortInfo = sortInfos[sColumnName] = {status: 0, text : headText, refCell : refCell};		
+		}
+		
+		// set sort status
+		if (bMultiple) 
+		{
+			status = sortInfo.status;
+			
+			if (sortStatus == -1) 
+			{
+					 if (status == 0) sortInfo.status = 1;
+				else if (status == 1) sortInfo.status = 2;
+				else if (status == 2) sortInfo.status = (this.fvGrd.sortToggleCancel ? 0 : 1);
+			}
+			else 
+				sortInfo.status = sortStatus;
+		}
+		else 
+		{
+			for (var p in sortInfos) 
+			{
+				if (sortInfos.hasOwnProperty(p))
+				{
+					sortInfo = sortInfos[p];
+					
+					// 해당 컬럼은 정렬 상태를 변경 아니면 초기화
+					if (p == sColumnName) 
+					{
+						status = sortInfo.status;
+						if (sortStatus == -1) 
+						{
+								 if (status == 0) sortInfo.status = 1;
+							else if (status == 1) sortInfo.status = 2;
+							else if (status == 2) sortInfo.status = (this.fvGrd.sortToggleCancel ? 0 : 1);
+						}
+						else 
+						{
+							sortInfo.status = sortStatus;
+						}
+					} 
+					else 
+						sortInfo.status = 0;
+					
+					// 초기화 하면서 sortItem 에서 컬럼제거
+					if (sortInfo.status == 0)
+					{
+						for (var j=0, len2=sortItems.length; j<len2; j++) 
+						{
+							if (sortItems[j] !== sColumnName) 
+							{
+								sortItems.splice(j, 1);
+								break;
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		// 정렬대상컬럼 (순서중요)
+		var bHasItem = false;
+		for (var i=0, len=sortItems.length; i<len; i++) 
+		{
+			if (sortItems[i] == sColumnName) 
+			{
+				bHasItem = true;
+				break;
+			}
+		}	
+				
+		if (!bHasItem)
+			sortItems.push(sColumnName);
+	}	
+	
+	this.fvGrd._xfnClose(this);
+};
+
+/**
+ *	fnAddSortInfo 		: 정렬대상 그리드 이동
+ *	@ return 			: N/A
+ *	@ example 			: N/A
+ */ 
+this.fnAddSortInfo = function(nRow, bAsc)
+{
+	var nIdx = this.dsItem.getColumn(nRow, "INDEX");	
+		bAsc = (bAsc == false ? "0" : "1");
+
+	if (this.dsSort.findRow("INDEX", nIdx) < 0)
+	{
+		var nAddRow = this.dsSort.addRow();
+		
+		this.dsSort.setColumn(nAddRow, "INDEX"	 	, nIdx								 	  );
+		this.dsSort.setColumn(nAddRow, "COLID"	  	, this.dsItem.getColumn(nRow, "COLID"	 ));
+		this.dsSort.setColumn(nAddRow, "COLNM"	  	, this.dsItem.getColumn(nRow, "COLNM"	 ));
+		this.dsSort.setColumn(nAddRow, "HEADCELL"	, this.dsItem.getColumn(nRow, "HEADCELL" ));
+		this.dsSort.setColumn(nAddRow, "TYPE"		, bAsc									  );
+		
+		this.dsItem.deleteRow(nRow);
+	}
+};
+
+/**
+ *	fnDelSortInfo 		: 정렬대상 그리드 제외
+ *	@ return 			: N/A
+ *	@ example 			: N/A
+ */ 
+this.fnDelSortInfo = function(nRow)
+{
+	var nAddRow	= this.dsItem.addRow();
+	
+	if (this.dsItem.copyRow(nAddRow, this.dsSort, nRow)) 
+		this.dsSort.deleteRow(nRow);
+};
+
+this.grdSort_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	obj.dropdownCombo();
+};
+]]></Script>
+  </Form>
+</FDL>

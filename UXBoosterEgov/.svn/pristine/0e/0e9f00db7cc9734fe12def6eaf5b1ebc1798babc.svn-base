@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="SC010T06" width="1040" height="685" titletext="시스템관리_backup">
+    <Layouts>
+      <Layout height="685" mobileorientation="landscape" width="1040"/>
+    </Layouts>
+  </Form>
+</FDL>

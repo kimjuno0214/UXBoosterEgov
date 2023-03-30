@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="comUserPop" width="380" height="500" titletext="사원검색" onload="Form_onload" background="white">
+    <Layouts>
+      <Layout height="500" mobileorientation="landscape" width="380">
+        <Div id="divSearch" taborder="1" left="20" top="46" height="72" cssclass="div_WF_searchBox01" right="20">
+          <Layouts>
+            <Layout>
+              <Static id="staName" taborder="3" text="사원명" left="10" top="39" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="edtName" taborder="0" left="staName:10" top="39" height="21" right="7" imemode="alpha" onkeyup="Edit_onkeyup"/>
+              <Static id="staCode" taborder="2" text="사원코드" left="10" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="edtCode" taborder="1" left="staCode:10" top="10" right="7" height="21" onkeyup="Edit_onkeyup"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnShowHide" taborder="3" left="42.11%" top="divSearch:0" width="60" height="10" cssclass="btn_WF_fold01" tabstop="false" text=""/>
+        <Div id="divDetail" taborder="0" left="20" top="btnShowHide:20" right="20" bottom="63" text="">
+          <Layouts>
+            <Layout>
+              <Grid id="grdList" taborder="1" left="0" top="26" binddataset="dsApprover" autofittype="col" right="0" oncellclick="grdList_oncellclick" bottom="0">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="59"/>
+                      <Column size="155"/>
+                      <Column size="143"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="선택"/>
+                      <Cell col="1" text="직책"/>
+                      <Cell col="2" text="성명"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:CHK" displaytype="checkboxcontrol" edittype="checkbox" checkboxfalsevalue="0" checkboxtruevalue="1"/>
+                      <Cell col="1" text="bind:USER_POSITION_NM" textAlign="center"/>
+                      <Cell col="2" text="bind:USER_NM" textAlign="center"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="Static24" taborder="1" text="사원 검색 목록" left="0" top="0" height="21" cssclass="sta_WF_title02" right="0"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnSearch" taborder="2" text="조회" top="20" height="21" onclick="btnSearch_onclick" width="46" cssclass="btn_WF_search03" right="20"/>
+        <Static id="Static01_01" taborder="4" text="H20" left="20" height="20" right="20" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" top="437"/>
+        <Static id="Static01" taborder="5" text="H20" left="20" right="20" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" top="480" height="20"/>
+        <Button id="btnCancle" taborder="6" height="23" cssclass="btn_WF_cancel01" text="닫기" right="20" width="57" onclick="btnCancle_onclick" top="divDetail:20"/>
+        <Button id="btnEnter" taborder="7" height="23" cssclass="btn_WF_check01" text="확인" right="btnCancle:3" width="57" onclick="btnEnter_onclick" top="divDetail:20"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsApprover">
+        <ColumnInfo>
+          <Column id="CHK" type="STRING" size="256"/>
+          <Column id="USER_CD" type="STRING" size="256"/>
+          <Column id="USER_NM" type="STRING" size="256"/>
+          <Column id="USER_MOBILE" type="STRING" size="256"/>
+          <Column id="USER_POSITION_NM" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="USER_CD" type="STRING" size="256"/>
+          <Column id="USER_NM" type="STRING" size="256"/>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  사원찾기팝업
+*
+*  @MenuPath    공통 > 사원찾기팝업
+*  @FileName    comUserPop.xfdl 
+*  @Creator     전영찬
+*  @CreateDate  2019.12.03
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2019.12.03      전영찬             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+this.fv_sProjectCd  = nexacro.getApplication().av_sProjectCd;    // ProjectCd
+this.fv_nChkRow     = null; // 체크값
+this.fv_sFormId     = null; // 화면ID
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.Form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+    if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+    {    
+        this.fnInit();
+    }
+}
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "userList";
+    
+    this.dsApprover.clearData();
+    this.dsSearch.setColumn(0,"PROJECT_CD", this.fv_sProjectCd);
+    
+    take.tranSelect(this, sTranId, "HumanResourceManagement.userList", "dsSearch", "dsApprover", "", "fnCallback");
+}
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+// 그리드리스트 클릭이벤트(체크박스)
+this.grdList_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+    if(e.clickitem == "control"){
+        if(this.fv_nChkRow != e.row) {
+            if(e.row == 0 && this.fv_nChkRow == null) {
+                // null일때 0으로 검색된다.
+            } else {
+                if(this.dsApprover.getColumn(this.fv_nChkRow, "CHK") == '1') {
+                    this.dsApprover.setColumn(this.fv_nChkRow, "CHK", '0');
+                }
+            }
+        }
+        
+        var arrChkRow = take.getChkRow(this.dsApprover,"CHK");
+    
+        if(take.nvl(arrChkRow[0], "")!="") {
+            this.fv_nChkRow = arrChkRow[0];
+        } else {
+            this.fv_nChkRow = null;
+        }
+    }
+};
+
+// 조회버튼 클릭 이벤트
+this.btnSearch_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+//     var sName = take.nvl(this.divSearch.form.edtName.text, "");
+//     var sCode = take.nvl(this.divSearch.form.edtCode.text, "");
+//     
+//     if (sName != "" || sCode != "") {
+//     	
+//     }
+//     if(this.fnCheckForm()) {
+//         this.fnSearch('userList');
+//     }
+    this.fnSearch('userList');
+};
+
+//확인버튼 클릭 이벤트
+this.btnEnter_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	if(this.fv_nChkRow == null) {
+        //alert("선택 부탁드립니다.");
+		take.alert(this, "Info", "MS00000008");
+        return;
+    }
+    
+    var sRtn = this.dsApprover.getColumn(this.fv_nChkRow, "USER_CD") +','+ this.dsApprover.getColumn(this.fv_nChkRow, "USER_NM");
+    // 오픈 화면별 콜백함수(생성) 처리     ex) this.fnPopCallback
+    this.opener.fnPopCallback(sRtn);
+    this.close();
+};
+
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnInit : 초기화 함수
+ * @param  {String} N/A 
+ * @example this.fnInit();
+ */
+this.fnInit = function()
+{
+    var objDivSearch = this.divSearch.form;
+    var sFormId = this.opener.name;
+    this.fv_sFormId = sFormId;
+    
+    switch(sFormId)
+    {
+        case "HR010" :  // 개인휴가관리
+            objDivSearch.staCode.set_text("결재자코드");
+            objDivSearch.staName.set_text("결재자명");
+            
+            // 2020.01.20 추가 김태규수석님 고정
+            objDivSearch.edtCode.set_value("U000000004");
+            objDivSearch.edtName.set_value("김태규");
+            objDivSearch.edtCode.set_readonly(true);
+            objDivSearch.edtName.set_readonly(true);
+            break;
+        case "HR020" :  // 휴가승인관리
+            break;
+        case "HR030" :  // 휴가관리대장
+            break;
+        default :
+            break;
+    }
+    
+    objDivSearch.edtName.setFocus();
+}
+
+/**
+ * fnCheckForm : 저장전 유효성 체크
+ * @param  {String} sParam N/A
+ * @example this.fnCheckForm();
+ */
+this.fnCheckForm = function()
+{   
+    var objDivSearch = this.divSearch.form;
+    var sName   = take.nvl(objDivSearch.edtName.text, "");
+    if(sName == ""){
+        //alert(sText + "을 작성해주세요.");
+		take.alert(this, "Info", "MS00000014", {text:objDivSearch.staName.text});
+        return false;
+    }
+    
+    return true;
+}
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "Save" :  //저장 콜백
+            
+            break;
+        default :
+            break;
+    }        
+}
+
+// Edit_onkeyup : 엔터로 강제 포커스아웃
+this.Edit_onkeyup = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+	if(e.keycode == 13){
+        var sEdtId = obj.name.substr(3);
+        
+        switch(sEdtId) {
+        case "Code":
+            this.divSearch.form.edtName.setFocus();
+        	break;
+        case "Name":
+            this.fnSearch('userList');
+        	break;
+        default:
+            break;
+        }
+    }
+};
+this.btnCancle_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.close();
+};
+]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="divSearch.form.edtName" propid="value" datasetid="dsSearch" columnid="USER_NM"/>
+      <BindItem id="item1" compid="divSearch.form.edtCode" propid="value" datasetid="dsSearch" columnid="USER_CD"/>
+    </Bind>
+  </Form>
+</FDL>

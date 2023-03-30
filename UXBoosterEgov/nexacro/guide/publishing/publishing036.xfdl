@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="publishing036" width="1040" height="659" titletext="휴가관리">
+    <Layouts>
+      <Layout height="659" mobileorientation="landscape" width="1040">
+        <Div id="Div01" taborder="0" left="10" top="0" height="43" right="10" cssclass="div_WF_searchBox01" text="">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="년도" left="20" top="10" width="80" height="21" cssclass="sta_WF_textRImport"/>
+              <Static id="Static05" taborder="1" text="휴가사유" left="359" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Static id="Static01" taborder="2" text="승인여부" left="698" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="Combo01" taborder="3" text="Combo00" left="780" top="10" width="120" height="21"/>
+              <Calendar id="Calendar00" taborder="4" left="103" top="10" width="120" height="21"/>
+              <Combo id="Combo00" taborder="5" text="Combo00" left="442" top="10" width="120" height="21"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static18" taborder="1" text="휴가목록(00 건)" left="10" top="67" height="30" width="450" cssclass="sta_WF_title02"/>
+        <Static id="Static20" taborder="2" text="년도 별 잔여휴가 확인" left="518" top="67" height="30" cssclass="sta_WF_title02" right="0"/>
+        <Grid id="Grid00" taborder="3" left="10" top="97" width="500" binddataset="Dataset00" autofittype="col" bottom="10">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="100"/>
+                <Column size="160"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="순번"/>
+                <Cell col="1" text="코드"/>
+                <Cell col="2" text="프로그램 명"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0" displaytype="checkboxcontrol" edittype="checkbox"/>
+                <Cell col="1" text="bind:Column1"/>
+                <Cell col="2" text="bind:Column2"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static45" taborder="4" text="Static00" left="508" top="89" width="10" background="red" visible="false" height="200"/>
+        <Button id="Button01" taborder="5" left="485" top="42" width="70" height="15" cssclass="btn_WF_fold01"/>
+        <Static id="Static09" taborder="6" text="Static03" left="0" top="57" height="10" background="red" visible="false" right="0"/>
+        <Static id="Static23" taborder="7" text="Static23" left="1" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static24" taborder="8" text="Static23" left="340" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static25" taborder="9" text="Static23" left="679" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static26" taborder="10" text="Static23" left="1018" top="-14" width="10" height="106" background="blue" visible="false"/>
+        <Static id="Static00" taborder="11" left="637" top="259" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="Static10" taborder="12" left="637" top="289" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="Static11" taborder="13" left="637" top="349" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="Static12" taborder="14" left="637" top="319" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="Static15" taborder="16" left="636" top="379" cssclass="sta_WF_td01L" right="10" height="106"/>
+        <Static id="Static16" taborder="17" text="휴가명" left="518" top="259" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="Static17" taborder="18" text="프로그램 명" left="518" top="319" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+        <TextArea id="TextArea00" taborder="19" left="644" top="385" right="16" height="95"/>
+        <Static id="Static19" taborder="20" text="Static00" left="508" top="436" width="10" background="red" visible="false" height="200"/>
+        <Static id="Static21" taborder="21" text="휴가유형" left="518" top="289" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+        <Static id="Static22" taborder="22" text="Prefix" left="518" top="349" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+        <Static id="Static32" taborder="23" left="637" top="484" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="Static39" taborder="24" text="등록일" left="518" top="484" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="Static46" taborder="25" left="637" top="514" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="Static48" taborder="26" text="승인구분" left="518" top="514" width="120" height="31" cssclass="sta_WF_th01L"/>
+        <Static id="Static49" taborder="27" text="휴가계획 상세" left="518" top="229" height="30" cssclass="sta_WF_title02" right="0"/>
+        <Grid id="Grid01" taborder="28" left="518" top="97" binddataset="Dataset00" autofittype="col" right="10" height="122">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="50"/>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="100"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="구분"/>
+                <Cell col="1" text="발생일수"/>
+                <Cell col="2" text="사용일수"/>
+                <Cell col="3" text="잔여일수"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0"/>
+                <Cell col="1" text="bind:Column1"/>
+                <Cell col="2" text="bind:Column2"/>
+                <Cell col="3"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static01" taborder="29" text="Static03" left="-1" top="219" height="10" background="red" visible="false" right="1"/>
+        <Edit id="Edit00" taborder="30" left="645" top="264" height="21" right="16"/>
+        <Combo id="Combo00" taborder="31" text="Combo00" left="645" top="294" width="200" height="21"/>
+        <Calendar id="calLoginDateFromSearch" taborder="32" left="745" top="324" width="100" height="21"/>
+        <Calendar id="calLoginDateToSearch" taborder="33" left="870" top="324" width="101" height="21"/>
+        <Static id="staMlGroupSearch01" taborder="34" text="~" left="848" top="324" width="22" height="20" cssclass="sta_WF_textR"/>
+        <Edit id="Edit01" taborder="35" left="645" top="354" height="21" right="195"/>
+        <Combo id="Combo01" taborder="36" text="Combo00" left="645" top="324" width="94" height="21"/>
+        <Button id="Button00" taborder="37" text="선택" top="352" width="46" height="23" cssclass="btn_WF_basic01" right="143"/>
+        <Combo id="Combo02" taborder="38" text="Combo00" left="870" top="324" width="94" height="21"/>
+        <Static id="Static02" taborder="39" left="636" top="544" cssclass="sta_WF_td01L" right="10" height="105"/>
+        <TextArea id="TextArea01" taborder="40" left="644" top="550" right="16" height="94"/>
+        <Static id="Static03" taborder="41" text="승인내용" left="518" top="544" width="120" cssclass="sta_WF_th01L" height="105"/>
+        <Static id="Static14" taborder="15" text="상세설명" left="518" top="379" width="120" cssclass="sta_WF_th01L" height="106"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+          <Column id="Column5" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">test</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

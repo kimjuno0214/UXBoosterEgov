@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+* 메세지처리 관련
+*
+* @filename mapper/MessageMapper.xml
+* @author takeit
+* @since 2019.12.09
+* @version 1.0
+* @see
+*
+* << 변경 이력(Modification Information) >>
+*
+* 변경번호 : #1
+* 변경일자 : 2019.12.09
+* 변경사람 : takeit
+* 변경내용 : 신규 생성
+
+-->
+<mapper namespace="Message">
+
+
+    <select id="messageSelect" parameterType="string" timeout="0" resultType="string" useCache="false">
+        <![CDATA[
+        /*
+         * Message.messageSelect
+         * 메세지 조회
+         * @author takeit
+         * @since 2019.12.09
+         */
+        ]]>
+        SELECT ML_LANG_TXT AS MSG
+          FROM MULTILANGUAGE_DETAIL
+         WHERE ML_CD = #{messageId}
+           AND LANG_CD = 'ko_KR'
+          <!-- locale이 없는경우 ko_KR로 고정 -->
+    </select>
+
+</mapper>

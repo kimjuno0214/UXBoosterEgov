@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+*
+* @filename mappers/safety/SafetyMapper.xml
+* @author 	safety
+* @since 	2023.01.19
+* @version 	1.0
+* @see
+*
+* << 변경 이력(Modification Information) >>
+*
+* 변경번호 : #1
+* 변경일자 : 2023.01.19
+* 변경사람 : safety
+* 변경내용 : 신규 생성
+ -->
+<mapper namespace="safety">
+
+	<select id="testItemSelect" parameterType="map" timeout="0" resultType="map" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* safety.testItemSelect 
+		* TB_TEST_ITEM 조회
+		* @author dooresoft
+		* @since 2023.01.20
+		*/
+		]]>
+        SELECT  APLCN_YMD                                         -- 적용일자
+              , TEST_ID                                           -- 시험ID
+              , TEST_ITEM                                         -- 시험항목
+              , TEST_DIV_CD                                       -- TEST_DIV_CD
+              , CERT_FLD_CD                                       -- 인증분야코드
+              , CERT_DIV_CD                                       -- 인증구분코드
+              , CL_1                                              -- 분류1
+              , CL_2                                              -- 분류2
+              , CL_3                                              -- 분류3
+              , CL_4                                              -- 분류4
+              , CL_5                                              -- 분류5
+              , ATACH_DOC                                         -- 부속문서
+              , FAUL_DIV_CD                                       -- 결함구분코드
+              , UNIT                                              -- 단위
+              , USE_YN                                            -- 사용여부
+        FROM DOORE.TB_TEST_ITEM
+        WHERE 1 = 1
+        <if test=" TEST_ID != null and TEST_ID != '' " >
+        AND TEST_ID = #{TEST_ID}
+        </if>
+        ORDER BY
+	</select>
+
+	<insert id="testItemInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* safety.testItemInsert 
+		* TB_TEST_ITEM 등록
+		* @author dooresoft
+		* @since 2023.01.20
+		*/
+		]]>
+		INSERT INTO DOORE.TB_TEST_ITEM (
+                APLCN_YMD                                         -- 적용일자
+              , TEST_ID                                           -- 시험ID
+              , TEST_ITEM                                         -- 시험항목
+              , TEST_DIV_CD                                       -- TEST_DIV_CD
+              , CERT_FLD_CD                                       -- 인증분야코드
+              , CERT_DIV_CD                                       -- 인증구분코드
+              , CL_1                                              -- 분류1
+              , CL_2                                              -- 분류2
+              , CL_3                                              -- 분류3
+              , CL_4                                              -- 분류4
+              , CL_5                                              -- 분류5
+              , ATACH_DOC                                         -- 부속문서
+              , FAUL_DIV_CD                                       -- 결함구분코드
+              , UNIT                                              -- 단위
+              , USE_YN                                            -- 사용여부
+              , REG_DT                                            -- 등록일시
+              , RGTR_ID)                                          -- 등록자ID
+		VALUES (
+                #{APLCN_YMD}                                      -- 적용일자
+              , #{TEST_ID}                                        -- 시험ID
+              , #{TEST_ITEM}                                      -- 시험항목
+              , #{TEST_DIV_CD}                                    -- TEST_DIV_CD
+              , #{CERT_FLD_CD}                                    -- 인증분야코드
+              , #{CERT_DIV_CD}                                    -- 인증구분코드
+              , #{CL_1}                                           -- 분류1
+              , #{CL_2}                                           -- 분류2
+              , #{CL_3}                                           -- 분류3
+              , #{CL_4}                                           -- 분류4
+              , #{CL_5}                                           -- 분류5
+              , #{ATACH_DOC}                                      -- 부속문서
+              , #{FAUL_DIV_CD}                                    -- 결함구분코드
+              , #{UNIT}                                           -- 단위
+              , #{USE_YN}                                         -- 사용여부
+              , DATE_FORMAT(NOW(), '%Y%m%d%H%i%s')                -- 등록일시
+              , #{_sessionUserCd}                                 -- 등록자ID
+		)
+	</insert>
+
+	<update id="testItemUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* safety.testItemUpdate 
+		* TB_TEST_ITEM 수정
+		* @author dooresoft
+		* @since 2023.01.20
+		*/
+		]]>
+		UPDATE DOORE.TB_TEST_ITEM
+		SET    MDFCN_DT = DATE_FORMAT(NOW(), '%Y%m%d%H%i%s')
+		     , MDFR_ID = #{_sessionUserCd}
+		<if test=" TEST_ITEM != null and TEST_ITEM != '' ">
+		     , TEST_ITEM = #{TEST_ITEM}                                                        -- 시험항목
+		</if>
+		<if test=" TEST_DIV_CD != null and TEST_DIV_CD != '' ">
+		     , TEST_DIV_CD = #{TEST_DIV_CD}                                                    -- TEST_DIV_CD
+		</if>
+		<if test=" CERT_FLD_CD != null and CERT_FLD_CD != '' ">
+		     , CERT_FLD_CD = #{CERT_FLD_CD}                                                    -- 인증분야코드
+		</if>
+		<if test=" CERT_DIV_CD != null and CERT_DIV_CD != '' ">
+		     , CERT_DIV_CD = #{CERT_DIV_CD}                                                    -- 인증구분코드
+		</if>
+		<if test=" CL_1 != null and CL_1 != '' ">
+		     , CL_1 = #{CL_1}                                                                  -- 분류1
+		</if>
+		<if test=" CL_2 != null and CL_2 != '' ">
+		     , CL_2 = #{CL_2}                                                                  -- 분류2
+		</if>
+		<if test=" CL_3 != null and CL_3 != '' ">
+		     , CL_3 = #{CL_3}                                                                  -- 분류3
+		</if>
+		<if test=" CL_4 != null and CL_4 != '' ">
+		     , CL_4 = #{CL_4}                                                                  -- 분류4
+		</if>
+		<if test=" CL_5 != null and CL_5 != '' ">
+		     , CL_5 = #{CL_5}                                                                  -- 분류5
+		</if>
+		<if test=" ATACH_DOC != null and ATACH_DOC != '' ">
+		     , ATACH_DOC = #{ATACH_DOC}                                                        -- 부속문서
+		</if>
+		<if test=" FAUL_DIV_CD != null and FAUL_DIV_CD != '' ">
+		     , FAUL_DIV_CD = #{FAUL_DIV_CD}                                                    -- 결함구분코드
+		</if>
+		<if test=" UNIT != null and UNIT != '' ">
+		     , UNIT = #{UNIT}                                                                  -- 단위
+		</if>
+		<if test=" USE_YN != null and USE_YN != '' ">
+		     , USE_YN = #{USE_YN}                                                              -- 사용여부
+		</if>
+		WHERE  TEST_ID = #{TEST_ID}
+	</update>
+
+	<delete id="testItemDelete" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* safety.testItemDelete 
+		* TB_TEST_ITEM 삭제
+		* @author dooresoft
+		* @since 2023.01.20
+		*/
+		]]>
+		DELETE FROM DOORE.TB_TEST_ITEM
+		WHERE  1 = 1
+		AND APLCN_YMD = #{APLCN_YMD}
+		AND TEST_ID = #{TEST_ID}
+	</delete>
+	
+	<select id="aplcnYmdSelect" parameterType="map" timeout="0" resultType="map" useCache="false">
+		<![CDATA[
+			/*
+			*
+			* safety.aplcnYmdSelect 
+			* 적용일자 조회
+			* @author dooresoft
+			* @since 2023.01.20
+			*/
+		]]>	
+		SELECT DISTINCT APLCN_YMD CODE
+		                ,DATE_FORMAT(APLCN_YMD, '%Y-%m-%d') NAME
+		FROM   TB_TEST_ITEM
+		ORDER BY APLCN_YMD DESC 
+	</select>
+
+	
+</mapper>

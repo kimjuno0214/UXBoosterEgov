@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="DashboardCommon" width="432" height="195" titletext="dashboard common" onload="Form_onload">
+    <Layouts>
+      <Layout height="195" width="432">
+        <Button id="btnDel" taborder="6" top="0" height="41" width="42" right="0" onclick="commonbtn_onclick" cssclass="btn_MF_Delete"/>
+        <Button id="btnView" taborder="0" top="0" height="41" width="42" right="btnDel:0" onclick="commonbtn_onclick" cssclass="btn_MF_View"/>
+        <Button id="btnHelp" taborder="1" top="0" height="41" width="42" right="btnView:0" onclick="commonbtn_onclick" cssclass="btn_MF_Help"/>
+        <Button id="btnReload" taborder="2" top="0" height="41" width="42" right="btnHelp:0" onclick="commonbtn_onclick" cssclass="btn_MF_Refresh"/>
+        <Static id="staTitle" taborder="3" text="타이틀" left="20" top="0" height="41" cssclass="sta_MF_title01" right="btnReload:10"/>
+        <Div id="divCont" taborder="4" left="20" top="61" right="20" bottom="20">
+          <Layouts>
+            <Layout/>
+          </Layouts>
+        </Div>
+        <Static id="staLine" taborder="5" left="0" top="41" height="1" right="0" background="#dde0e5"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/**
+*  DashbozrdCommon
+*
+*  @MenuPath    가이드 > DashbozrdCommon
+*  @FileName    DashbozrdCommon.xfdl 
+*  @Creator     고영민
+*  @CreateDate  2020.09.01 
+*  @Version     1.0
+*  @Desction    대시보드 컨텐츠 공통
+* 
+************** 소스 수정 이력 *************************************************
+*    Date          Modifier            Description
+*******************************************************************************
+*  2020.09.01      고영민             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+//this.fv_nFormVal = null;     //용도
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload등)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.Form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+    //변수 선언
+    var sUrl, sTtitle;
+    var bTran;
+    
+    //대시보드 URL가져오기
+    sUrl = this.parent.dashurl;
+    sTtitle = this.parent.dashnm;
+    
+    this.divCont.btran      = this.parent.btran;
+    this.divCont.dashid     = this.parent.dashid;
+    this.divCont.dashtype   = this.parent.dashtype;
+    this.divCont.reloadtime = this.parent.reloadtime;
+    this.divCont.dashparam  = this.parent.dashparam;
+	this.divCont.progid  = this.parent.progid;
+    
+    this.staTitle.set_text(sTtitle);
+    //trace("URL --> " + sUrl);
+    //대시보드 컨텐츠 div url 초기화
+    this.divCont.set_url("");
+    
+    //대시보드 컨텐츠 url 세팅
+    this.divCont.set_url(sUrl);
+}
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnReload, fnInfo, fnDetail)
+********************************************************/
+//
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+ ********************************************************/
+this.commonbtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var sBtnGbn;
+    sBtnGbn = obj.name.substr(3);	
+	
+    switch(sBtnGbn)
+    {
+		case "Reload" :   //데이터 새로고침
+			this.fnSearch();
+            break;
+			
+		case "Help" :   //매뉴얼
+            var agrKey = {sDashCd:take.nvl(this.parent.dashid, ""),sMenuGbn:"Dash"};
+	
+			take.openPopup(
+                this, 
+                "comMenualPop", 
+                "frm::com/comMenualPop.xfdl", 
+                agrKey, 
+                "", 
+				function(sId, sRtn){ 
+                    //script is null
+				},
+                false);
+            break;
+            
+        case "View" :   //더보기
+			take.mdiOpenMenu(this, this.parent.progid, "", "", true);
+            break;
+            
+		case "Del" :   //컨텐츠 제거
+			this.parent.parent.parent.form.fnDelContents(this.parent);
+            break;
+		    
+        default :
+            break;
+    }   
+};
+
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnSearch : 데이터 조회 함수
+ * @param  {N/A} 
+ * @example this.fnSearch();
+ */
+this.fnSearch = function()
+{
+	if(this.divCont.form.fnSearch){
+		this.divCont.form.fnSearch();
+	}
+}
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : sId      - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : nErrCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : sErrMsg  - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "Transation id 01" : //조회 콜백
+            //Script
+            break;
+        case "Transation id 02" :  //조회 콜백
+            //Script
+            break;
+        case "Transation id 03" : //조회 콜백
+            //Script
+            break;
+        case "Save transation id 01" :  //저장 콜백
+            //Script
+            break;
+        case "Save transation id 01" :  //저장 콜백
+            //Script
+            break;
+        default :
+            break;
+    }        
+} 
+]]></Script>
+  </Form>
+</FDL>

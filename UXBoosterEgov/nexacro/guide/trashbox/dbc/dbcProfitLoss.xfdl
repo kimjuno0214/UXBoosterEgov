@@ -1,0 +1,414 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="dbcProfitLoss" width="354" height="315" titletext="01 손익현황Main" onload="dashProfitLoss_onload" ontimer="dashProfitLoss_ontimer">
+    <Layouts>
+      <Layout height="315" mobileorientation="landscape" width="354">
+        <Div id="divMain" taborder="0" left="0" top="20" right="0" bottom="0" background="#ffffff">
+          <Layouts>
+            <Layout>
+              <BasicChart id="BasicChart00" taborder="3" left="0" top="20" bottom="0" binddataset="dsList" categorycolumn="bind:NAME" right="0" enableanimation="true">
+                <Contents><![CDATA[{
+	"tooltip": {
+		"id": "tooltip",
+		"background": "#4b4b4b",
+		"linestyle": "0px none",
+		"textcolor": "white",
+		"textfont": "12px \"NanumGothic\"",
+		"padding": "0px 0px 0px 10px"
+	},
+	"board": {
+		"id": "board",
+		"visible": false
+	},
+	"categoryaxis": {
+		"id": "categoryaxis",
+		"titletextcolor": "#838383",
+		"titletextfont": "12px \"NanumGothic\"",
+		"labeltextcolor": "#838383",
+		"labeltextfont": "12px \"NanumGothic\"",
+		"axislinestyle": "1px solid #f6f6f6",
+		"ticklinestyle": "1px solid #dcdcdc",
+		"boardlinestyle": "1px solid #f6f6f6",
+		"gap": "0",
+		"labelgap": "5"
+	},
+	"seriesset": [
+		{
+			"id": "series0",
+			"barvisible": true,
+			"barsize": "60",
+			"itemtextvisible": true,
+			"itemtextcolor": "#ffffff",
+			"itemtextfont": "normal 600 13px \"NanumGothic\"",
+			"valuecolumn": "bind:AMT",
+			"itemtext": "bind:AMT",
+			"itemtexttype": "number",
+			"tooltiptext": "bind:AMT",
+			"barfillstyle": "#81ddc6,#f35e58,#edc683",
+			"barlinestyle": "0px",
+			"tooltiptexttype": "number",
+			"selecttype": "unselect",
+			"barradius": "4"
+		}
+	],
+	"valueaxes": [
+		{
+			"id": "valueaxis0",
+			"boardlinevisible": "true",
+			"boardlinestyle": "1px solid #f6f6f6",
+			"labeltextfont": "12px \"NanumGothic\"",
+			"titletextcolor": "#838383",
+			"titletextfont": "12px \"NanumGothic\"",
+			"axislinestyle": "0px",
+			"ticklinestyle": "0px",
+			"labeltextcolor": "#838383",
+			"labeltype": "number"
+		}
+	]
+}]]></Contents>
+              </BasicChart>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="staToday" taborder="1" top="0" width="120" height="20" cssclass="sta_MF_Time" left="0" text="2020년 10월 20일" onclick="staToday_onclick"/>
+        <Static id="staUnit" taborder="2" text="(단위 : 백만원)" top="0" width="86" height="20" cssclass="sta_MF_Unit" right="0"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsList">
+        <ColumnInfo>
+          <Column id="NAME" type="STRING" size="256"/>
+          <Column id="AMT" type="STRING" size="256"/>
+          <Column id="SELECT" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="NAME">목표</Col>
+            <Col id="AMT">49919</Col>
+            <Col id="SELECT">false</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">실적</Col>
+            <Col id="AMT">49213</Col>
+            <Col id="SELECT">true</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">전년</Col>
+            <Col id="AMT">43535</Col>
+            <Col id="SELECT">false</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="yearCd" type="STRING" size="256"/>
+          <Column id="lastYearCd" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsList00">
+        <ColumnInfo>
+          <Column id="COLUMN0" type="STRING" size="256"/>
+          <Column id="SERIES01" type="STRING" size="256"/>
+          <Column id="SERIES02" type="STRING" size="256"/>
+          <Column id="SERIES03" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="SERIES01">49919</Col>
+            <Col id="SERIES02">49213</Col>
+            <Col id="SERIES03">43535</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    1DEPTH > 2DEPTH
+*  @FileName    *.xfdl 
+*  @Creator     홍길동
+*  @CreateDate  yyyy.MM.DD 
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  YYYY.MM.DD      홍길동             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+//this.fv_nFormVal = null;     //용도
+var fv_sProfitLossFrame = "";
+this.fv_sTitle = "";
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* formid_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.dashProfitLoss_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+    this.divMain.form.BasicChart00.runAnimation();
+    //this.fnTran("profitLoss");
+    console.dir(this.divMain.form.BasicChart00.tooltip);
+}
+
+// "titletextcolor": "#838383",
+// 		"titletextfont": "12px \"NanumGothic\"",
+// 		"labeltextcolor": "#838383",
+// 		"labeltextfont": "12px \"NanumGothic\"",
+// 		"axislinestyle": "1px solid #f6f6f6",
+// 		"ticklinestyle": "1px solid #dcdcdc",
+// 		"visible": true,
+// 		"gap": "0",
+// 		"labelgap": "5",
+// 		"boardlinestyle": "1px solid #f6f6f6"
+/*********************************************************
+* 2.1 TRANSACTION 서비스 호출 처리
+ ********************************************************/
+/**
+ * fnTran : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnTran("ID");
+ */
+this.fnTran = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "profitLoss";
+    
+    if(!this.objects["tgdsMsg"]){
+        takedomain.LangService(this); // 다국어 설정 
+    }
+    
+    //변수선언
+    var sTranId = "profitLoss",                                     //Transaction 아이디       
+        sUrl    = "SVC_LOC::dash/profitLossMainSelect.do",        //서비스 URL
+        sInDs   = "dsSearch=dsSearch",                        //데이터셋을 검색조건으로 보낼경우 사용 -->선택
+        sOutDs  = "dsList=dsList",                            //데이터를 받아올 데이터셋 지정       
+        sParam  = "",                                         //파라메터 사용 안 할 경우       
+        sCallBack = "";        //콜백 처리 함수
+
+    sCallBack  = "fnCallback" ; 
+    
+    switch(sTranId)
+    {
+        case "profitLoss" :              
+                        
+            //reloadtime, manualurl
+            var reloadtime = this.parent.form.parent.reloadtime;            
+            if( "" != reloadtime && null != reloadtime && "undefined" != reloadtime ){            
+                var nMin = 60000;
+                var nTimeMin = nMin*parseInt(reloadtime);
+                this.setTimer(1,nTimeMin);
+            }
+            break;
+        default :
+            break;
+    }
+    
+    this.fnSetUsewaitcursor(false);    
+    //트랜젝션 공통함수 호출 -->필수(모든 트랜젝션을 공통으로 처리)
+    take.transaction(this,sTranId, sUrl, sInDs, sOutDs, sParam, sCallBack);
+}
+
+/*********************************************************
+ * 2.2 CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "profitLoss" : //조회 콜백
+            //Script
+            if( this.dsList.getRowCount() > 0 ){
+                var sYear = this.dsList.getColumn(0, "BASE_YEAR");
+                var sMonth = this.dsList.getColumn(0, "BASE_MONTH");
+                var sTitle = sMonth + "월 " + this.fv_sTitle;            
+                this.staTitle.set_text(sTitle);
+                
+                var sDatetime = this.dsList.getColumn(0, "CRDT");
+                this.staToday.set_text( sDatetime + " 기준" ); 
+                
+                var objData = [
+                     { 
+                           "title"      : "영업이익"
+                         , "goal"       : this.dsList.getColumn(0,"GOAL_OPERATIONG_PROFIT")
+                         , "result"     : this.dsList.getColumn(0,"RESULT_OPERATIONG_PROFIT")
+                         , "lastyear"   : this.dsList.getColumn(0,"LASTYEAR_OPERATIONG_PROFIT")
+                     }
+                    ,{ 
+                           "title"      : "매출이익"
+                         , "goal"       : this.dsList.getColumn(0,"GOAL_SALES_PROFIT")
+                         , "result"     : this.dsList.getColumn(0,"RESULT_SALES_PROFIT")
+                         , "lastyear"   : this.dsList.getColumn(0,"LASTYEAR_SALES_PROFIT")
+                     }                
+                    ,{ 
+                           "title"      : "매출"
+                         , "goal"       : this.dsList.getColumn(0,"GOAL_SALES_AMT")
+                         , "result"     : this.dsList.getColumn(0,"RESULT_SALES_AMT")
+                         , "lastyear"   : this.dsList.getColumn(0,"LASTYEAR_SALES_AMT")
+                     }
+                ] 
+                this.fnChartCreate(objData);
+            }
+            
+            break;        
+        default :
+            break;
+    }
+    
+    this.fnSetUsewaitcursor(true);
+} 
+
+/*********************************************************
+* 3 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "profitLoss";
+    
+    //this.fnTran(sTranId);
+}
+
+/*********************************************************
+ * 4 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+/**
+* 상세버튼 클릭시 발생되는 이벤트
+*/
+this.divMain_divTop_btnView_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var sProgId;
+    var objWinNx;
+    
+    sProgId = this.parent.form.parent.progid;
+
+    this.getOwnerFrame().form.divMain.form.fnDashMenu(sProgId);
+       
+};
+
+/**
+* 새로고침 버튼 클릭시 발생되는 이벤트
+*/
+this.divMain_divTop_btnReload_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    this.dsList.clearData();
+    this.fnSearch("profitLoss");
+};
+
+/**
+* 도움말 버튼 클릭시 발생되는 이벤트
+*/
+this.divMain_divTop_btnHelp_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    var manualurl = this.parent.form.parent.manualurl;
+    window.open(manualurl, "Popmanual", "height=700,width=600");
+	//system.execBrowser(manualurl);
+};
+
+/**
+* 타이머 이벤트
+*/
+this.dashProfitLoss_ontimer = function(obj:nexacro.Form,e:nexacro.TimerEventInfo)
+{
+	if (e.timerid==1)
+    {
+        if (!this.getOwnerFrame().form.divMdi.visible)
+        {
+            this.killTimer(1);
+            this.fnTran("profitLoss");
+        }
+    }
+};
+
+/*********************************************************
+* 5 사용자 FUNCTION 영역
+********************************************************/
+/**
+* fnTest - progress bar 세팅
+* @param  : sMsg   - 메세지
+* @param  : sCode   - 메세지 코드
+* @return : N/A
+* @example :  
+*/
+this.fnSetUsewaitcursor = function(rtn)
+{
+    nexacro.getEnvironment().set_usewaitcursor(rtn);
+
+}
+
+/**
+* fnTest - 차트 새로고침
+* @param  : sMsg   - 메세지
+* @param  : sCode   - 메세지 코드
+* @return : N/A
+* @example :  
+*/
+this.fnReDraw = function()
+{
+   takerchart.reDraw(this.divMain.form.divChart, "chart1");
+};
+
+/**
+* fnSetChartUnit - 차트 아이템 클릭 이벤트
+* @return : N/A
+* @example :  
+*/
+this.itemClickFunc = function(seriesId, displayText, index, data, values)
+{
+    var sProgId;
+    var objTemp;
+    var objWinNx;
+    objTemp = eval("window." + fv_sProfitLossFrame);
+    sProgId = objTemp.parent.form.parent.progid;
+    
+    objTemp.getOwnerFrame().form.divMain.form.fnDashMenu(sProgId);
+    
+}
+
+this.staToday_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+    this.divMain.form.BasicChart00.set_enableanimation(false);
+	this.divMain.form.BasicChart00.set_enableanimation(true);
+    
+    this.divMain.form.BasicChart00.tooltip.set
+};
+]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,477 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="PM030P04" width="500" height="535" titletext="프로젝트관리_메뉴관리_파라미터팝업" background="#ffffff" onload="PM030P04_onload">
+    <Layouts>
+      <Layout height="535" mobileorientation="landscape" width="500">
+        <Static id="Static01_00" taborder="0" text="H20" left="0" height="20" right="0" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" top="0"/>
+        <Static id="Static02_00" taborder="1" text="W&#13;&#10;20" background="#fd9da0" opacity="0.5" textAlign="center" width="20" top="0" bottom="0" visible="false" left="0"/>
+        <Static id="Static02" taborder="2" text="W&#13;&#10;20" background="#fd9da0" opacity="0.5" textAlign="center" width="20" top="0" bottom="0" right="0" visible="false"/>
+        <Static id="Static01_00_00" taborder="3" text="H20" left="0" height="20" right="0" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" top="472"/>
+        <Static id="Static01_00_00_00" taborder="4" text="H20" left="0" height="20" right="0" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" bottom="0"/>
+        <Button id="btnCancel" taborder="6" height="23" cssclass="btn_WF_cancel01" text="닫기" right="20" onclick="btnCancel_onclick" bottom="20" width="57"/>
+        <Button id="btnConfirm" taborder="5" height="23" cssclass="btn_WF_check01" text="확인" right="80" width="57" onclick="btnConfirm_onclick" bottom="20"/>
+        <Static id="Static24_00" taborder="7" text="파라미터 관리" left="20" top="20" height="21" cssclass="sta_WF_title02" right="160"/>
+        <Button id="btnAdd" taborder="8" text="추가" top="20" width="46" height="21" cssclass="btn_WF_plus01" right="69" onclick="btnAdd_onclick"/>
+        <Button id="btnDel" taborder="9" text="삭제" top="20" width="46" height="21" cssclass="btn_WF_cancel02" right="20" onclick="btnDel_onclick"/>
+        <Grid id="grdList" taborder="10" left="20" top="46" binddataset="dsParam" autofittype="col" right="20" bottom="63" autoenter="select">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="60"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="Key"/>
+                <Cell col="1" text="Value"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:KEY" textAlign="center" displaytype="text" edittype="text" tooltiptext="bind:GUIDE"/>
+                <Cell col="1" text="bind:VALUE" textAlign="center" displaytype="text" edittype="text" tooltiptext="bind:GUIDE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsParam">
+        <ColumnInfo>
+          <Column id="KEY" type="STRING" size="256"/>
+          <Column id="VALUE" type="STRING" size="256"/>
+          <Column id="GUIDE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsCboSchStartTime">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">00</Col>
+            <Col id="NAME">00</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">01</Col>
+            <Col id="NAME">01</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">02</Col>
+            <Col id="NAME">02</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">03</Col>
+            <Col id="NAME">03</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">04</Col>
+            <Col id="NAME">04</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">05</Col>
+            <Col id="NAME">05</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">06</Col>
+            <Col id="NAME">06</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">07</Col>
+            <Col id="NAME">07</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">08</Col>
+            <Col id="NAME">08</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">09</Col>
+            <Col id="NAME">09</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">10</Col>
+            <Col id="NAME">10</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">11</Col>
+            <Col id="NAME">11</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">12</Col>
+            <Col id="NAME">12</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">13</Col>
+            <Col id="NAME">13</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">14</Col>
+            <Col id="NAME">14</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">15</Col>
+            <Col id="NAME">15</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">16</Col>
+            <Col id="NAME">16</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">17</Col>
+            <Col id="NAME">17</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">18</Col>
+            <Col id="NAME">18</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">19</Col>
+            <Col id="NAME">19</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">20</Col>
+            <Col id="NAME">20</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">21</Col>
+            <Col id="NAME">21</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">22</Col>
+            <Col id="NAME">22</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">23</Col>
+            <Col id="NAME">23</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsCboSchEndTime">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">00</Col>
+            <Col id="NAME">00</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">01</Col>
+            <Col id="NAME">01</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">02</Col>
+            <Col id="NAME">02</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">03</Col>
+            <Col id="NAME">03</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">04</Col>
+            <Col id="NAME">04</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">05</Col>
+            <Col id="NAME">05</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">06</Col>
+            <Col id="NAME">06</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">07</Col>
+            <Col id="NAME">07</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">08</Col>
+            <Col id="NAME">08</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">09</Col>
+            <Col id="NAME">09</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">10</Col>
+            <Col id="NAME">10</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">11</Col>
+            <Col id="NAME">11</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">12</Col>
+            <Col id="NAME">12</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">13</Col>
+            <Col id="NAME">13</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">14</Col>
+            <Col id="NAME">14</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">15</Col>
+            <Col id="NAME">15</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">16</Col>
+            <Col id="NAME">16</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">17</Col>
+            <Col id="NAME">17</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">18</Col>
+            <Col id="NAME">18</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">19</Col>
+            <Col id="NAME">19</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">20</Col>
+            <Col id="NAME">20</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">21</Col>
+            <Col id="NAME">21</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">22</Col>
+            <Col id="NAME">22</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">23</Col>
+            <Col id="NAME">23</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsCboDocType">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    1Depth > 2Depth
+*  @FileName    *.xfdl 
+*  @Creator     홍길동
+*  @CreateDate  yyyy.MM.DD 
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    Date          Modifier            Description
+*******************************************************************************
+*  YYYY.MM.DD      홍길동             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+//this.fv_nFormVal = null;     //용도
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload등)
+********************************************************/
+/**
+* PM030P04_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.PM030P04_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {    
+        var sTitle = take.nvl(this.parent.sTitle, "");
+        
+        if (sTitle!="")
+        {
+            this.set_titletext(sTitle);
+        }
+        
+        this.fnInit(take.nvl(this.parent.sProgramCd, ""));
+   }
+}
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnSearch, fnAddRow, fnSave, fnDelRow, fnExcel...)
+********************************************************/
+//N/A
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+ ********************************************************/
+//추가 버튼 클릭 이벤트
+this.btnAdd_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    var objDs = this.dsParam;
+    var nRow;
+    
+	nRow = objDs.addRow();
+    objDs.setColumn(nRow,"KEY","");
+    objDs.setColumn(nRow,"VALUE","");
+    objDs.setColumn(nRow,"DISPLAYTYPE","text");
+    objDs.setColumn(nRow,"EDITTYPE","text");
+};
+
+//삭제 버튼 클릭 이벤트
+this.btnDel_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    var objDs = this.dsParam;
+    var nRow = objDs.rowposition;
+    
+	objDs.deleteRow(nRow);
+};
+
+//btnConfirm_onclick 확인 버튼 클릭 이벤트
+this.btnConfirm_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    var objDs;
+    var nCnt;
+    var sRtn;
+    
+    objDs = this.dsParam;
+    
+    nCnt = objDs.rowcount;
+    
+    if (nCnt<=0) 
+    {
+        sRtn = "";
+    } else {
+        
+        sRtn = "{"
+        for (var i=0;i<nCnt;i++)
+        {
+            sKey = take.nvl(objDs.getColumn(i,"KEY"), "");
+            sVal = take.nvl(objDs.getColumn(i,"VALUE"), "");
+            
+            if (sKey=="")
+            {
+                take.alert(this, "Info", "key 값은 필수입니다.");
+                sRtn = "";
+                break;
+            }
+            
+            sRtn += nexacro.wrapQuote(sKey) + ":" + nexacro.wrapQuote(sVal) + (i==nCnt-1?"":", ");
+        }
+        
+        if (sRtn!="")
+        {
+            sRtn+="}";
+        } else {
+            return;
+        }
+    }
+    
+    this.close(sRtn);
+};
+
+/**
+* btnCancel_onclick : 닫기 버튼 클릭
+*/
+this.btnCancel_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.close();
+};
+
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnUserFunction : 사용자 함수
+ * @param  {String} sParam 문자형 인자
+ * @param  {Number} nParam 숫자형 인자
+ * @example this.fnUserFunction(sParam, nParam);
+ */
+this.fnInit = function(sType)
+{    
+   //화면구분 프로그램코드 CODE->GM00000040   // NAME->게시판 목록
+   //화면구분 프로그램코드 CODE->GM00000043   // NAME->일정관리 Main
+   //화면구분 프로그램코드 CODE->GM00000057   // NAME->문서관리
+    
+    var objDs;
+    var nRow;
+    
+    objDs = this.dsParam;
+    
+    if (sType=="") return;
+    
+    switch(sType) 
+    {
+        case "GM00000040": //게시판
+            nRow = objDs.addRow();
+            objDs.setColumn(nRow,"KEY","attach_yn");
+            objDs.setColumn(nRow,"VALUE","Y");
+            objDs.setColumn(nRow,"GUIDE","첨부여부 Y / N");
+            
+            nRow = objDs.addRow();
+            objDs.setColumn(nRow,"KEY","reply_yn");
+            objDs.setColumn(nRow,"VALUE","Y");
+            objDs.setColumn(nRow,"GUIDE","답글여부 Y / N");
+            
+            nRow = objDs.addRow();
+            objDs.setColumn(nRow,"KEY","push_yn");
+            objDs.setColumn(nRow,"VALUE","Y");
+            objDs.setColumn(nRow,"GUIDE","Push여부 Y / N");
+            
+            nRow = objDs.addRow();
+            objDs.setColumn(nRow,"KEY","template_cd");
+            objDs.setColumn(nRow,"VALUE","");
+            objDs.setColumn(nRow,"GUIDE","양식 코드");
+            
+            break;
+            
+        case "GM00000057": //자료실
+            nRow = objDs.addRow();
+            objDs.setColumn(nRow,"KEY","document_type");
+            objDs.setColumn(nRow,"VALUE","");
+            objDs.setColumn(nRow,"GUIDE","문서유형 코드");
+            
+            break;
+            
+        case "GM00000043": //일정            
+            
+            nRow = objDs.addRow();
+            objDs.setColumn(nRow,"KEY","schedule_start_time");
+            objDs.setColumn(nRow,"VALUE","07");
+            objDs.setColumn(nRow,"GUIDE","시작시간 01~24");
+            
+            nRow = objDs.addRow();
+            objDs.setColumn(nRow,"KEY","schedule_end_time");
+            objDs.setColumn(nRow,"VALUE","19");
+            objDs.setColumn(nRow,"GUIDE","종료시간 01~24");
+            
+            nRow = objDs.addRow();
+            objDs.setColumn(nRow,"KEY","breaking_txt");
+            objDs.setColumn(nRow,"VALUE","12시 ~ 13시 점심시간");
+            objDs.setColumn(nRow,"GUIDE","휴계시간 Text");
+            
+            nRow = objDs.addRow();
+            objDs.setColumn(nRow,"KEY","concent_txt");
+            objDs.setColumn(nRow,"VALUE","10시 ~ 12시");
+            objDs.setColumn(nRow,"GUIDE","집중근무시간 Text");
+            
+            break;
+            
+        default:
+    }
+}
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+//N/A]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="PLN010S04" width="1659" height="625" titletext="계획_시험항목" onload="Form_onload" background="#ffffff">
+    <Layouts>
+      <Layout>
+        <Static id="staProgDetailT00_00" taborder="0" text="품목" left="10" top="10" height="21" cssclass="sta_WF_title02" width="125" onclick="staProgDetailT00_00_onclick"/>
+        <Grid id="gridGds" taborder="4" top="36" autofittype="col" onselectchanged="grdProgList_onselectchanged" binddataset="dsList" bottom="0" left="10" width="430">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="61"/>
+                <Column size="120"/>
+                <Column size="120"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="인증종류"/>
+                <Cell col="1" text="품목명"/>
+                <Cell col="2" text="세부품목명"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:CERT_KND_NM" suppress="1" displaytype="normal" edittype="none"/>
+                <Cell col="1" text="bind:GDS_NM" textAlign="left" suppress="1" displaytype="normal" edittype="none"/>
+                <Cell col="2" text="bind:DETAIL_GDS_NM" textAlign="left"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="gridTestItem" taborder="5" top="36" autofittype="col" binddataset="dsTestItemList" bottom="0" width="240" left="gridGds:10">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="150"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="구분"/>
+                <Cell col="1" text="시험항목"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:TEST_DIV_NM" textAlign="center" suppress="1"/>
+                <Cell col="1" text="bind:TEST_ITEM_NM" textAlign="left"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="grdProgList01" taborder="1" top="36" autofittype="col" onselectchanged="grdProgList_onselectchanged" binddataset="dsTestItem" bottom="0" left="gridTestItem:10" right="0">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="150"/>
+                <Column size="120"/>
+                <Column size="120"/>
+                <Column size="120"/>
+                <Column size="120"/>
+                <Column size="60"/>
+                <Column size="60"/>
+                <Column size="60"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="분류1"/>
+                <Cell col="1" text="분류2"/>
+                <Cell col="2" text="분류3"/>
+                <Cell col="3" text="분류4"/>
+                <Cell col="4" text="분류5"/>
+                <Cell col="5" text="결함구분"/>
+                <Cell col="6" text="검출한계"/>
+                <Cell col="7" text="단위"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:CL_1" textAlign="left" suppress="1"/>
+                <Cell col="1" text="bind:CL_2" textAlign="left" suppress="2"/>
+                <Cell col="2" text="bind:CL_3" textAlign="left" suppress="3"/>
+                <Cell col="3" text="bind:CL_4" textAlign="left" suppress="4"/>
+                <Cell col="4" textAlign="left" text="bind:CL_5"/>
+                <Cell col="5" text="bind:FAUL_DIV_NM" textAlign="center"/>
+                <Cell col="6" text="bind:DETC_LIMIT" textAlign="center"/>
+                <Cell col="7" text="bind:UNIT" textAlign="center"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="btnAddTestItem" taborder="2" text="시험항목선택" top="9" height="23" cssclass="btn_WF_basic01" width="90" right="grdProgList01:10" onclick="btnAddTestItem_onclick"/>
+        <Static id="staProgDetailT00_00_00" taborder="3" text="시험항목" left="gridGds:10" top="10" height="21" cssclass="sta_WF_title02" width="125" onclick="staProgDetailT00_00_onclick"/>
+        <Static id="staProgDetailT00_00_00_00" taborder="6" text="시험세부항목" left="gridTestItem:10" top="10" height="21" cssclass="sta_WF_title02" width="125" onclick="staProgDetailT00_00_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsCertFldCd">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsCertKndCd">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsGdsCd">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsList" onrowposchanged="dsList_onrowposchanged"/>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="ODR_ID" type="STRING" size="256" description="프로젝트 코드"/>
+          <Column id="DETAIL_GDS_ID" type="STRING" size="256"/>
+          <Column id="TEST_ITEM_CD" type="STRING" size="256"/>
+          <Column id="TEST_DIV_CD" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsTestItemList" onrowposchanged="dsTestItemList_onrowposchanged"/>
+      <Dataset id="dsTestItem"/>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  안전성조사 계획 시험항목 관리
+*
+*  @MenuPath    안전성조사 > 안전성조사계획 > 시험항목
+*  @FileName    PLN010S04.xfdl 
+*  @Creator     doore
+*  @CreateDate  2023.03.06 
+*  @Version     1.0
+*  @Desction    설명 : 안전성조사 계획 시험항목 관리 화면
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2023.03.06      doore               최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+//this.fv_nFormVal = null;     //용도
+this.fv_objGdsUserInfo = nexacro.getApplication().gdsUserInfo;
+this.fv_sProjectCd = nexacro.getApplication().av_sProjectCd;
+this.fv_parentForm;
+this.fv_sOdrId;
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* formid_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.Form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this)) 
+   {    
+		
+   }
+};
+
+/*********************************************************
+ * 2.1 CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        default :
+            break;
+    }        
+};
+
+/*********************************************************
+* 3 필수 FUNCTION 영역 (fnSearch, fnSave, fnAdd, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function()
+{
+	this.fv_sOdrId = this.fv_parentForm.dsOdr.getColumn(this.fv_parentForm.dsOdr.rowposition, "ODR_ID");
+	this.dsList.clearData();
+	if(!take.isEmpty(this.fv_sOdrId))
+	{
+		this.dsSearch.setColumn(0, "ODR_ID", this.fv_sOdrId);
+		take.tranSelect(this, "Search", "safety.odrGdsSelect", "dsSearch", "dsList", "", "fnCallback");
+	}
+};
+
+/**
+ * fnAdd : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+ * @example this.fnAddRow(sGrdId, nRow);
+ */
+this.fnAddRow = function(sGrdId, nRow)
+{
+    
+};
+
+/**
+ * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number, Array} arrnRow    deleteRow 리턴값
+ * @return {N/A} N/A
+ * @example this.fnDelRow(sGrdId, nRow); 
+ */
+this.fnDelRow = function(sGrdId, arrnRow)
+{   
+    
+};
+
+/*********************************************************
+ * 4 각 COMPONENT 별 EVENT 영역
+ ********************************************************/
+
+/* 시험항목 추가 버튼 클릭 이벤트 */
+this.btnAddTestItem_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var sOdrId = this.dsList.getColumn(this.dsList.rowposition, "ODR_ID");
+	var sDetailGdsId = this.dsList.getColumn(this.dsList.rowposition, "DETAIL_GDS_ID");
+	var sTitle = this.dsList.getColumn(this.dsList.rowposition, "GDS_NM") + " > " + this.dsList.getColumn(this.dsList.rowposition, "DETAIL_GDS_NM");
+	
+	var arrParam = {
+				sOdrId : sOdrId,
+				sDetailGdsId : sDetailGdsId,
+				sTitle : sTitle
+				};
+
+	take.openPopup(this, "AddTestItem", "biz::pln/PLN010P03.xfdl",arrParam, "resizable=true", 
+		function(){
+		
+			this.dsTestItemList.clearData();
+			var sDetailGdsId = this.dsList.getColumn(this.dsList.rowposition, "DETAIL_GDS_ID");
+			this.dsSearch.setColumn(0, "DETAIL_GDS_ID", sDetailGdsId);
+	
+			take.tranSelect(this, "SearchTestItemCd", "safety.odrTestGrpSelect", "dsSearch", "dsTestItemList", "", "fnCallback");
+			
+		}
+	);
+};
+
+/*********************************************************
+* 5 사용자 FUNCTION 영역
+********************************************************/
+
+/* 품목정보 onrowposchanged 이벤트 */
+this.dsList_onrowposchanged = function(obj:nexacro.NormalDataset,e:nexacro.DSRowPosChangeEventInfo)
+{
+	this.dsTestItemList.clearData();
+	var sDetailGdsId = this.dsList.getColumn(e.newrow, "DETAIL_GDS_ID");
+	this.dsSearch.setColumn(0, "DETAIL_GDS_ID", sDetailGdsId);
+	
+	take.tranSelect(this, "SearchTestItemCd", "safety.odrTestGrpSelect", "dsSearch", "dsTestItemList", "", "fnCallback");
+};
+
+/* 시험항목 onrowposchanged 이벤트 */
+this.dsTestItemList_onrowposchanged = function(obj:nexacro.NormalDataset,e:nexacro.DSRowPosChangeEventInfo)
+{
+	this.dsTestItem.clearData();
+	var sTestItemCd = this.dsTestItemList.getColumn(e.newrow, "TEST_ITEM_CD");
+	var sTestDivCd = this.dsTestItemList.getColumn(e.newrow, "TEST_DIV_CD");
+	
+	this.dsSearch.setColumn(0, "TEST_ITEM_CD", sTestItemCd);
+	this.dsSearch.setColumn(0, "TEST_DIV_CD", sTestDivCd);
+	take.tranSelect(this, "SearchTestItem", "safety.odrTestSelect", "dsSearch", "dsTestItem", "", "fnCallback");
+};
+]]></Script>
+  </Form>
+</FDL>

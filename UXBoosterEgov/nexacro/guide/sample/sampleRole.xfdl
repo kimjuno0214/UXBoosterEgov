@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="sampleRole" width="1040" height="630" titletext="(샘플)권한체크" onload="form_onload">
+    <Layouts>
+      <Layout height="630" mobileorientation="landscape" width="1040">
+        <Static id="Static01" taborder="0" text="10" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="141" visible="false" textAlign="center"/>
+        <Static id="Static00" taborder="1" text="10" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="141" visible="false" textAlign="center" right="0"/>
+        <Static id="Static24_00" taborder="2" text="10" left="10" height="10" background="rgba(255,0,0,0.4)" visible="false" right="-10" textAlign="center" top="0"/>
+        <Div id="divSearch" taborder="3" text="Div00" left="10" top="15" height="625" right="10">
+          <Layouts>
+            <Layout>
+              <Static id="Static33_01_00_00" taborder="16" left="116" top="378" height="175" cssclass="sta_WF_td01L" right="2" text=""/>
+              <Static id="staUserIdT00" taborder="3" text="로그인사용자&#13;&#10;권한코드조회" left="0" top="30" width="120" height="175" cssclass="sta_WF_th01Limport"/>
+              <Static id="Static33_01" taborder="4" left="118" top="30" height="175" cssclass="sta_WF_td01L" right="0"/>
+              <Button id="btnRoleCd" taborder="1" text="조회" top="35" width="70" height="21" cssclass="btn_WF_basic01" left="263" onclick="divSearch_btnRoleCd_onclick"/>
+              <Edit id="edtRoleCd" taborder="2" left="126" top="35" width="135" height="21" text="Sample.userSelect"/>
+              <Static id="Static18" taborder="5" text="권한조회" left="0" top="0" height="30" cssclass="sta_WF_title02" right="0"/>
+              <TextArea id="TextArea00" taborder="6" left="126" top="71" width="734" height="113" value="take.getUser(&quot;ROLE_CD&quot;)" readonly="true"/>
+              <Static id="Static33_01_00" taborder="7" left="117" top="204" height="175" cssclass="sta_WF_td01L" right="1" text=""/>
+              <Static id="staUserIdT00_00" taborder="8" text="현재화면의&#13;&#10;공통버튼&#13;&#10;권한조회" left="0" top="204" width="120" height="175" cssclass="sta_WF_th01Limport"/>
+              <Static id="Static01" taborder="0" text="6" left="120" top="35" width="6" background="rgba(255,0,0,0.4)" bottom="-13" visible="false" textAlign="center"/>
+              <Button id="btnInput" taborder="9" text="생성버튼" top="215" width="70" height="21" cssclass="btn_WF_basic01" left="202" onclick="divSearch_btnInput_onclick"/>
+              <Button id="btnRead" taborder="10" text="조회버튼" top="215" width="70" height="21" cssclass="btn_WF_basic01" left="126" onclick="divSearch_btnRead_onclick"/>
+              <Button id="btnSave" taborder="11" text="저장버튼" top="215" width="70" height="21" cssclass="btn_WF_basic01" left="276" onclick="divSearch_btnSave_onclick"/>
+              <Button id="btnDelete" taborder="12" text="삭제버튼" top="215" width="70" height="21" cssclass="btn_WF_basic01" left="352" onclick="divSearch_btnDelete_onclick"/>
+              <TextArea id="TextArea00_00" taborder="13" left="125" top="245" width="734" height="113" value="조회 take.getActiveForm(this).dsBtnRole.getColumn(0, &quot;R_READ&quot;)&#10;생성 take.getActiveForm(this).dsBtnRole.getColumn(0, &quot;R_INPUT&quot;)&#10;저장 take.getActiveForm(this).dsBtnRole.getColumn(0, &quot;R_SAVE&quot;)&#10;삭제 take.getActiveForm(this).dsBtnRole.getColumn(0, &quot;R_DELETE&quot;)" readonly="true"/>
+              <Div id="divComBtn" taborder="14" text="Div00" left="140" top="410" width="484" height="43" url="frm::com/comBtn.xfdl" border="1px solid"/>
+              <Static id="staUserIdT00_00_00" taborder="15" text="공통버튼&#13;&#10;div" left="0" top="378" width="120" height="175" cssclass="sta_WF_th01Limport"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    1Depth > 2Depth
+*  @FileName    *.xfdl 
+*  @Creator     홍길동
+*  @CreateDate  yyyy.MM.DD 
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    Date          Modifier            Description
+*******************************************************************************
+*  YYYY.MM.DD      홍길동             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+this.form_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+	{
+	}
+};
+
+this.divSearch_btnRoleCd_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var sRoleCd = take.getUser("ROLE_CD");
+	this.divSearch.form.edtRoleCd.set_value(sRoleCd);
+};
+
+
+
+this.divSearch_btnInput_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.alert(take.getActiveForm(this).dsBtnRole.getColumn(0, "R_INPUT"));
+};
+
+this.divSearch_btnRead_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.alert(take.getActiveForm(this).dsBtnRole.getColumn(0, "R_READ"));
+};
+
+this.divSearch_btnSave_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.alert(take.getActiveForm(this).dsBtnRole.getColumn(0, "R_SAVE"));
+};
+
+this.divSearch_btnDelete_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.alert(take.getActiveForm(this).dsBtnRole.getColumn(0, "R_DELETE"));
+};
+
+this.fnSearch = function(){
+	this.alert("fnSearch호출!!");
+};
+
+this.fnAddRow = function(){
+	this.alert("fnAddRow호출!!");
+};
+
+this.fnSave = function(){
+	this.alert("fnSave호출!!");
+};
+
+this.fnDelRow = function(){
+	this.alert("fnDelRow호출!!");
+};]]></Script>
+    <Objects/>
+  </Form>
+</FDL>

@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="CM050P01" width="661" height="549" titletext="팝업공지대상" onload="Form_onload" background="#fffff">
+    <Layouts>
+      <Layout height="549" mobileorientation="landscape" width="661">
+        <Div id="divSearch" taborder="1" left="20" top="46" height="101" cssclass="div_WF_searchBox01" right="20">
+          <Layouts>
+            <Layout>
+              <Static id="staCode" taborder="0" text="대상자 ID" left="10" top="39" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Static id="staName" taborder="1" text="대상자 성명" left="10" top="68" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="edtId" taborder="2" left="staCode:10" top="39" right="340" height="21" onkeyup="Edit_onkeyup"/>
+              <Edit id="edtName" taborder="3" left="staName:10" top="68" height="21" right="340" imemode="alpha" onkeyup="Edit_onkeyup"/>
+              <Static id="staName00" taborder="4" text="지점" left="10" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="cboBranCd" taborder="5" left="staName00:10" top="10" width="179" height="21" index="0" innerdataset="dsCboBranCd" codecolumn="CODE" datacolumn="NAME" value="Y" onkeyup="fn_NextWhenEnter"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnShowHide" taborder="7" left="45.39%" top="divSearch:0" width="60" height="10" cssclass="btn_WF_fold01" onclick="btnShowHide_onclick"/>
+        <Div id="divDetail" taborder="0" left="20" top="btnShowHide:20" right="20" bottom="63" text="">
+          <Layouts>
+            <Layout>
+              <Grid id="grdList" taborder="0" left="0" top="26" binddataset="dsTarget" autofittype="col" right="0" onheadclick="divSearch_grdList_onheadclick" cellclickbound="cell" bottom="0">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="48"/>
+                      <Column size="110"/>
+                      <Column size="110"/>
+                      <Column size="110"/>
+                      <Column size="90"/>
+                      <Column size="100"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell displaytype="checkboxcontrol" edittype="checkbox" text="0"/>
+                      <Cell col="1" text="지점"/>
+                      <Cell col="2" text="대리점"/>
+                      <Cell col="3" text="아이디"/>
+                      <Cell col="4" text="대상자"/>
+                      <Cell col="5" text="코드"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell displaytype="checkboxcontrol" edittype="checkbox" text="bind:CHK"/>
+                      <Cell col="1" text="expr:BRAN_NM" textAlign="center"/>
+                      <Cell col="2" text="expr:SHOP_NM" textAlign="left"/>
+                      <Cell col="3" text="bind:TARGET_ID" textAlign="center"/>
+                      <Cell col="4" text="bind:TARGET_NM" textAlign="left"/>
+                      <Cell col="5" text="bind:TARGET_CD" textAlign="center"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="Static24" taborder="1" text="대상자 목록" left="0" top="0" height="21" cssclass="sta_WF_title02" right="0"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static01_00_00" taborder="2" text="H20" left="20" height="20" right="20" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" top="486"/>
+        <Static id="Static01_00_00_00" taborder="3" text="H20" left="20" right="20" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" top="529" height="20"/>
+        <Button id="btnCancle" taborder="4" height="23" cssclass="btn_WF_cancel01" text="닫기" right="20" width="57" onclick="btnCancle_onclick" top="divDetail:20"/>
+        <Button id="btnEnter" taborder="5" height="23" cssclass="btn_WF_check01" text="확인" right="80" width="57" onclick="btnEnter_onclick" top="divDetail:20"/>
+        <Button id="btnSearch" taborder="6" top="20" height="21" cssclass="btn_WF_search03" onclick="btnSearch_onclick" text="조회" width="46" right="20"/>
+        <Static id="Static01_00_00_01" taborder="8" text="H20" left="20" height="20" right="20" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" top="157"/>
+        <Static id="Static01_00_00_01_00" taborder="9" text="H5" left="20" height="5" right="20" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" top="41"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsTarget">
+        <ColumnInfo>
+          <Column id="TARGET_CD" type="STRING" size="256"/>
+          <Column id="TARGET_ID" type="STRING" size="256"/>
+          <Column id="TARGET_NM" type="STRING" size="256"/>
+          <Column id="TARGET_GUBUN" type="STRING" size="256"/>
+          <Column id="CHK" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="USER_ID" type="STRING" size="256"/>
+          <Column id="USER_CD" type="STRING" size="256"/>
+          <Column id="USER_NM" type="STRING" size="256"/>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="BRAN_CD" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsCboBranCd"/>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/** 
+*  회의록 작성 
+*
+*  @MenuPath    회의록 > 회의록 작성
+*  @FileName    MT010P02.xfdl 
+*  @Creator     전영찬
+*  @CreateDate  2019.11.18 
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    Date          Modifier            Description
+*******************************************************************************
+*  2019.11.18      전영찬             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+this.fv_sProjectCd  = nexacro.getApplication().av_sProjectCd;    // ProjectCd
+this.fv_nChkRow     = null;
+this.fv_sUserDiv = UXBooster.gdsUserInfo.getColumn(0,"USER_DIV");  // USER_DIV 사용자구분(1:본사,2:지점,3:대리점)
+this.fv_sBranCd  = UXBooster.gdsUserInfo.getColumn(0,"BRAN_CD");   // USER_DIV='2' 일때 지점
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.Form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+    if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+    {    
+        this.fnInit();
+    }
+};
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "targetList";
+    
+    this.dsTarget.clearData();
+    
+    take.tranSelect(this, sTranId, "BoardManagement.popupTargetList", "dsSearch", "dsTarget", "", "fnCallback");
+}
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+// 조회버튼 클릭 이벤트
+this.btnSearch_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    this.fnSearch('targetList');
+};
+
+//확인버튼 클릭 이벤트
+this.btnEnter_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var objDs  = this.dsTarget;
+    var arrChkRow = take.getChkRow(objDs,"CHK");
+    var sRtn = "";
+    
+    if(arrChkRow.length == 0){
+        //take.alert(this, "", "대상자 선택을 부탁드립니다.");
+		take.alert(this, "Info", "MS00000008");
+        return;
+    }
+    
+    for(var i=0; i<arrChkRow.length; i++){
+        if(i!=0){
+            sRtn += '::';
+        }
+        sRtn += this.dsTarget.getColumn(arrChkRow[i], "TARGET_CD");
+		sRtn += ','+ this.dsTarget.getColumn(arrChkRow[i], "TARGET_NM");
+		sRtn += ','+ this.dsTarget.getColumn(arrChkRow[i], "TARGET_GUBUN");
+    }
+    
+    this.close(sRtn);
+};
+
+// Edit_onkeyup : 엔터로 강제 포커스아웃
+this.Edit_onkeyup = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+	if(e.keycode == 13){
+        var sEdtId = obj.name.substr(3);
+        
+        switch(sEdtId) {
+        case "Code":
+            this.divSearch.form.edtName.setFocus();
+        	break;
+        case "Name":
+            this.fnSearch('targetList');
+        	break;
+        default:
+            break;
+        }
+    }
+};
+
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnInit : 초기화 함수
+ * @param  {String} N/A 
+ * @example this.fnInit();
+ */
+this.fnInit = function()
+{
+	// 지점
+	take.tranSelect( this
+					,"__branList"
+					,"Com.branList"
+					,""
+					,"dsCboBranCd"
+					,"ALL='전체'"
+					,	function(sId, nErrCd, sErrMsg) {
+							if( this.fv_sUserDiv == "1" ) {  // USER_DIV 사용자구분(1:본사,2:지점,3:대리점)
+								this.divSearch.form.cboBranCd.set_index(0);
+							}
+							else {
+								this.divSearch.form.cboBranCd.set_value(this.fv_sBranCd);
+								this.divSearch.form.cboBranCd.set_enable(false);
+							}
+						}
+					,false  // sync
+					);
+
+    var objDivSearch = this.divSearch.form;
+    var objParent = this.parent;
+    
+    objDivSearch.edtName.setFocus();
+};
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "targetList" :  //조회 콜백	
+			var objDs = this.opener.dsNotiTarget;
+			var objBindDs = this.divSearch.form.grdList.getBindDataset();
+			
+			for( var i=0; i<objDs.rowcount; i++ )
+			{
+				var sTargetCd = objDs.getColumn(i, "TARGET_CD");
+				var nRow = objBindDs.findRowAsNF("TARGET_CD", sTargetCd);
+				
+				if( nRow != -1 )
+				{
+					objBindDs.setColumn(nRow, "CHK", "1");
+				}
+			}
+			
+            break;
+        default :
+            break;
+    }        
+};
+
+// this.divSearch_grdList_onselectchanged = function(obj:nexacro.Grid,e:nexacro.GridSelectEventInfo)
+// {
+// 	var objDs = this.opener.dsNotiTarget;
+//     var objBindDs = this.divSearch.form.grdList.getBindDataset();
+// 	
+// 	for( var i=0; i<objDs.rowcount; i++ )
+// 	{
+// 		var sTargetCd = objDs.getColumn(i, "TARGET_CD");
+// 		var nRow = objBindDs.findRowAsNF("TARGET_CD", sTargetCd);
+// 		
+// 		if( nRow != -1 )
+// 		{
+// 			trace( "!@!@>> target_cd:  " + objBindDs.getColumn(nRow, "TARGET_CD") );
+// 			
+// 			objBindDs.setColumn(nRow, "TARGET_ID", "1000");
+// 			objBindDs.setColumn(nRow, "CHK", "1");
+// 		}
+// 	}
+// };
+
+this.divSearch_grdList_onheadclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	var sHChk = obj.getCellProperty("head",0,"text");
+	var sVal = ( "0"  == sHChk ) ? "1" : "0";
+	obj.setCellProperty("head",0,"text", sVal);
+	
+	for( var i=0; i<this.dsTarget.rowcount; i++ )
+	{
+		this.dsTarget.setColumn(i, "CHK", sVal);
+	} 
+};
+
+this.divSearch_staCode_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
+]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="divSearch.form.edtId" propid="value" datasetid="dsSearch" columnid="USER_ID"/>
+      <BindItem id="item1" compid="divSearch.form.edtName" propid="value" datasetid="dsSearch" columnid="USER_NM"/>
+      <BindItem id="item2" compid="divSearch.form.cboBranCd" propid="value" datasetid="dsSearch" columnid="BRAN_CD"/>
+    </Bind>
+  </Form>
+</FDL>

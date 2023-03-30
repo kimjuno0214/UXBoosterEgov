@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="comMsg" width="350" height="300" titletext="New Form" onload="comMsg_onload" cssclass="frm_MF_bg">
+    <Layouts>
+      <Layout height="300" mobileorientation="landscape" width="350">
+        <Div id="divMsg" taborder="0" left="0" top="0" width="700" height="600" cssclass="dvi_WF_popBox01">
+          <Layouts>
+            <Layout>
+              <Static id="staTitle" taborder="0" text="Alert" left="0" top="0" height="49" right="0" cssclass="sta_TF_title"/>
+              <Button id="btnClose" taborder="1" top="0" width="99" height="99" cssclass="btn_TF_close" onclick="divMsg_btnClose_onclick" visible="false" right="0"/>
+              <Button id="btnCancle" taborder="2" text="취소" left="0" height="96" bottom="0" cssclass="btn_BF_button01" width="349" onclick="divMsg_btn_onclick"/>
+              <Button id="btnSub" taborder="6" text="서브" left="110" width="349" height="96" cssclass="btn_BF_button01" visible="false" onclick="divMsg_btn_onclick" bottom="0"/>
+              <Static id="staMsg" taborder="3" text="Alert Message text&#13;&#10;" left="10" top="staTitle:0" cssclass="sta_TF_title" usedecorate="true" wordWrap="char" right="10" bottom="btnSub:0"/>
+              <Button id="btnOk" taborder="4" text="확인" height="96" bottom="0" cssclass="btn_BF_button01" width="349" right="0" onclick="divMsg_btn_onclick"/>
+              <Static id="staType" taborder="5" left="60" top="80" width="230" height="98"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static02" taborder="1" left="860" top="170" width="230" height="98" cssclass="sta_WF_popAlertIcon02" visible="false" enable="false"/>
+        <Static id="Static00" taborder="2" left="860" top="278" width="230" height="98" cssclass="sta_WF_popAlertIcon03" visible="false" enable="false"/>
+        <Static id="Static01" taborder="3" left="860" top="60" width="230" height="98" cssclass="sta_WF_popAlertIcon01" visible="false" enable="false"/>
+      </Layout>
+    </Layouts>
+    <Objects/>
+    <Script type="xscript5.1"><![CDATA[// sta_WF_popAlertIcon01 : X
+// sta_WF_popAlertIcon02 : !
+// sta_WF_popAlertIcon03 : ?
+//"error" 설정 시 빨간색 "X" 모양 아이콘이 표시됩니다.
+//"question" 설정 시 물음표("?") 모양 아이콘이 표시됩니다.
+//"warning" 설정 시 노랑색 바탕에 느낌표("!") 모양 아이콘이 표시됩니다.
+//"information" 설정 시 파란색 바탕에 느낌표("!") 모양 아이콘이 표시됩니다.
+
+/**
+*  공통 메세지 팝업
+*
+*  @MenuPath    공통 메세지 팝업
+*  @FileName    comMsg.xfdl 
+*  @Creator     고영민
+*  @CreateDate  2019.12.30 
+*  @Version     1.0
+*  @Desction    공통 메세지 팝업
+* 
+************** 소스 수정 이력 *************************************************
+*    Date          Modifier            Description
+*******************************************************************************
+*  2019.12.30      고영민             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+this.fv_objFrame = this.getOwnerFrame();
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload등)
+********************************************************/
+/**
+* comMsg_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.comMsg_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+    var sGbn, sTitle, sMsg, sCss;
+    var arrBtnText, arrBtnObj;
+    var nCnt;
+    var objDiv, objCancle, objOk, objSub;
+    
+    objDiv = this.divMsg.form;
+    objCancle = objDiv.btnCancle;
+    objOk = objDiv.btnOk;
+    objSub = objDiv.btnSub;
+    
+    sGbn = this.fv_objFrame.argGbn;
+    sTitle = this.fv_objFrame.argTitle;
+    sMsg = this.fv_objFrame.argMsg;
+    sType = this.fv_objFrame.argType;
+    arrBtnText = this.fv_objFrame.arrBtnText;
+    
+	if(nexacro.trim(take.nvl(sTitle, "")) == "") {
+		objDiv.staTitle.set_text("알림메세지");
+	} else {
+		objDiv.staTitle.set_text(sTitle);
+	}
+	
+    if (!take.isNull(arrBtnText))
+    {
+		//if (typeof(arrBtnText)=="object")
+		if (typeof(arrBtnText)=="array")
+        {        
+            nCnt = arrBtnText.length;
+            
+            if (nCnt>0)
+            {
+                arrBtnObj = [objCancle,objOk,objSub];
+                
+                for (var i=0;i<nCnt;i++)
+                {
+                    //arrBtnObj[i].set_text(arrBtnText[i]);
+					arrBtnObj.set_text(arrBtnText[i]);
+                }
+            }
+        }
+    }
+    
+    if (sGbn=="alert")
+    {
+        objOk.set_left(0);
+        objOk.set_right(0);
+        objCancle.set_visible(false);
+        objOk.set_visible(true);
+        objSub.set_visible(false);
+    } else if (sGbn=="confirm") {
+        objCancle.set_visible(true);
+        objOk.set_visible(true);
+        objSub.set_visible(false);
+    } else {
+        objCancle.set_left(0);
+        objCancle.set_width(120);        
+        objSub.set_left(120);
+        objCancle.set_width(120);
+        objOk.set_left(240);
+        objCancle.set_width(120);
+        
+        objOk.set_cssclass("btn_WF_basic03");
+        
+        objCancle.set_visible(true);
+        objOk.set_visible(true);
+        objSub.set_visible(true);
+    }
+    
+    switch(sType) 
+    {
+        case "error":
+            sCss = "sta_WF_popAlertIcon01";
+            break;
+        case "question":
+            sCss = "sta_WF_popAlertIcon04";
+            //objDiv.staType.set_text("(?)question"); //임시
+            break;
+        case "warning":
+            sCss = "sta_WF_popAlertIcon05";
+            //objDiv.staType.set_text("Warning"); //임시
+            break;
+        case "info":
+            sCss = "sta_WF_popAlertIcon02";
+            break;
+        case "push":
+            sCss = "sta_WF_popAlertIcon03";
+            break;
+        default:
+    }
+    
+    objDiv.staType.set_cssclass(sCss);
+    
+    objDiv.staMsg.set_text(sMsg);
+}
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnSearch, fnAddRow, fnSave, fnDelRow, fnExcel...)
+********************************************************/
+//N/A
+
+/*********************************************************
+* 3 각 COMPONENT 별 EVENT 영역
+********************************************************/
+//divMsg_btn_onclick : 취소, 서브, 확인 버튼 클릭 이벤트
+this.divMsg_btn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var sGbn = obj.name.substr(3).toLowerCase();
+    
+    this.fnClose(sGbn);
+};
+
+//divMsg_btnClose_onclick : 닫기 버튼 클릭 이벤트
+this.divMsg_btnClose_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fnClose("close");
+};
+
+
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnClose : 닫기 함수
+ * @param  {String} sRtn return text
+ * @example this.fnClose(sParam);
+ */
+this.fnClose = function(sRtn)
+{    
+    take.trace(this.fv_objFrame.argProgInfo +".take."+ this.fv_objFrame.argType +".End", "INFO", this.fv_objFrame.argMsg + " return : " + sRtn);
+    this.close(sRtn);
+}
+
+/*********************************************************
+* 5 TRANSACTION OR CALLBACK 콜백 처리부분
+********************************************************/
+//N/A
+]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,14 @@
+{
+	"name": "Take",
+	"nexacroversion": "17.0.0.2100",
+	"description": "TAKE Library for Nexacro17",
+	"license": "",
+	"scripts": [
+			"Take/take.js",
+			"Take/takeuxb.js",
+			"Take/takeval.js",
+			"Take/takecomp.js",
+			"Take/takegrid.js",
+			"Doore/doore.js"	
+	]
+}

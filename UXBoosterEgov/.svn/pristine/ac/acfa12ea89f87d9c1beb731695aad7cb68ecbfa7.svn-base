@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="publishing019" width="420" height="556" titletext="로그인">
+    <Layouts>
+      <Layout height="556" mobileorientation="landscape" width="420">
+        <Static id="Static00" taborder="0" text="회원등록" top="25" width="84" height="25" cssclass="sta_WF_chgLoginBox" right="25"/>
+        <Static id="Static01" taborder="1" left="95" top="120" width="231" height="40" cssclass="sta_WF_loginLogo"/>
+        <Edit id="Edit00" taborder="2" left="95" top="180" width="231" height="30" displaynulltext="아이디"/>
+        <Edit id="Edit01" taborder="3" left="95" top="220" width="231" height="30" displaynulltext="비밀번호"/>
+        <CheckBox id="CheckBox00" taborder="4" text="아이디 저장" left="95" top="256" width="150" height="20"/>
+        <Static id="Static02" taborder="5" text="이 페이지는 &lt;fc v='#0066ff'&gt;개인정보처리방침&lt;/fc&gt; 및 &lt;fc v='#0066ff'&gt;서비스 약관&lt;/fc&gt;의 &#13;적용을 받습니다.&#13;" left="95" top="282" width="231" height="50" usedecorate="true"/>
+        <Button id="Button00" taborder="6" text="로그인" left="95" top="342" width="231" height="40" cssclass="btn_WF_login" onclick="Div00_Div01_Button00_onclick"/>
+        <Button id="Button01" taborder="7" text="아이디/비밀먼호 찾기" left="95" top="387" width="231" height="40" cssclass="btn_WF_findInfo"/>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>

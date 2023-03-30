@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="uses_intro" width="1070" height="720" titletext="New Form">
+    <Layouts>
+      <Layout height="720" mobileorientation="landscape" width="1070">
+        <Static id="stTitle" taborder="0" text="활용" left="0" top="0" height="34" cssclass="sta_WF_title01" right="0"/>
+        <Static id="stSubTitle" taborder="1" text="자주 사용하는 Pivot 컴포넌트를 활용 예시" left="0" top="42" height="24" cssclass="sta_WF_title02" right="0"/>
+        <ImageViewer id="img01" taborder="2" left="0" top="96" width="452" height="287" stretch="fixaspectratio" image="URL(&quot;imagerc::uses_sort_04.png&quot;)" onclick="img01_onclick"/>
+        <Static id="Static03" taborder="3" text="Sort 설정" left="0" top="70" height="20" cssclass="sta_WF_notice01" width="200"/>
+        <ImageViewer id="img02" taborder="4" left="470" top="96" width="452" height="287" stretch="fixaspectratio" image="URL(&quot;imagerc::uses_filter_06.png&quot;)" onclick="img02_onclick"/>
+        <Static id="Static00" taborder="5" text="Filter 설정" left="470" top="70" height="20" cssclass="sta_WF_notice01" width="200"/>
+        <Static id="Static01" taborder="6" text="집계 설정" left="0" top="400" height="20" cssclass="sta_WF_notice01" width="200"/>
+        <ImageViewer id="img03" taborder="7" left="0" top="426" width="452" height="287" stretch="fixaspectratio" image="URL(&quot;imagerc::uses_aggregator_04.png&quot;)" onclick="img03_onclick"/>
+        <Static id="Static02" taborder="8" text="사용자 집계 설정" left="470" top="400" height="20" cssclass="sta_WF_notice01" width="200"/>
+        <ImageViewer id="img04" taborder="9" left="470" top="426" width="452" height="287" stretch="fixaspectratio" image="URL(&quot;imagerc::uses_custom_aggregator_06.png&quot;)" onclick="img04_onclick"/>
+        <Edit id="Edit00" taborder="10" left="51" top="0" width="274" height="34" background="transparent" readonly="true" value="https://www.playnexacro.com/#list:opensource:1" text="https://www.playnexacro.com/#list:opensource:1" border="0px solid"/>
+        <Edit id="Edit00_00" taborder="11" left="336" top="0" width="331" height="34" value="https://www.playnexacro.com/nexacropivot/indexPivot.html" text="https://www.playnexacro.com/nexacropivot/indexPivot.html" readonly="true" background="transparent" border="0px solid"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="column0" type="STRING" size="256"/>
+          <Column id="column1" type="STRING" size="256"/>
+          <Column id="column2" type="STRING" size="256"/>
+          <Column id="column3" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[
+this.img01_onclick = function(obj:nexacro.ImageViewer,e:nexacro.ClickEventInfo)
+{
+	this.parent.set_url("guide::sample/nexapivot_사용안함/uses_sort.xfdl");
+};
+
+this.img02_onclick = function(obj:nexacro.ImageViewer,e:nexacro.ClickEventInfo)
+{
+	this.parent.set_url("guide::sample/nexapivot_사용안함/uses_filter.xfdl");
+};
+
+this.img03_onclick = function(obj:nexacro.ImageViewer,e:nexacro.ClickEventInfo)
+{
+	this.parent.set_url("guide::sample/nexapivot_사용안함/uses_aggregator.xfdl");
+};
+
+this.img04_onclick = function(obj:nexacro.ImageViewer,e:nexacro.ClickEventInfo)
+{
+	this.parent.set_url("guide::sample/nexapivot_사용안함/uses_custom_aggregator.xfdl");
+};
+]]></Script>
+  </Form>
+</FDL>

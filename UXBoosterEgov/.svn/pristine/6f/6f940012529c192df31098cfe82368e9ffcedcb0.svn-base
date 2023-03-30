@@ -1,0 +1,856 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="PM090" width="1659" height="832" titletext="대시보드_대시보드관리" onload="PM090_onload">
+    <Layouts>
+      <Layout height="832" mobileorientation="landscape" width="1659">
+        <Div id="divSearch" taborder="0" left="10" top="0" height="43" right="10" cssclass="div_WF_searchBox01" text="" minwidth="1300" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Static id="staProjectNmT" taborder="1" text="프로젝트" left="20" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="cboProjectNm" taborder="0" left="staProjectNmT:10" top="10" width="195" height="21" innerdataset="dsCboProjectCd" codecolumn="CODE" datacolumn="NAME" visible="true" readonly="true" onitemchanged="divSearch_Combo_onitemchanged" cssclass="cmb_WF_essential"/>
+              <Static id="Static07_00_01" taborder="12" text="50" left="305" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="staDashTypeT" taborder="2" text="대시보드 유형" left="355" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Static id="Static07_00_01_00" taborder="15" text="50" left="640" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="staDashNameT" taborder="3" text="대시보드명" left="Static07_00_01_00:0" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Static id="Static07_00_01_00_00" taborder="17" text="50" left="975" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="staUseYnT" taborder="4" text="사용유무" left="Static07_00_01_00_00:0" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="cboUseYn" taborder="5" text="Combo00" left="staUseYnT:10" top="10" width="194" height="21" innerdataset="dsCboUseYn" codecolumn="CODE" datacolumn="NAME" onitemchanged="divSearch_Combo_onitemchanged"/>
+              <Combo id="cboDashType" taborder="6" text="Combo00" left="445" top="10" width="195" height="21" innerdataset="dsCboDashType" codecolumn="CODE" datacolumn="NAME" onitemchanged="divSearch_Combo_onitemchanged"/>
+              <Edit id="edtDashName" taborder="7" left="staDashNameT:10" top="10" width="195" height="21" onkeyup="divSearch_edtDashName_onkeyup"/>
+              <Static id="Static07_00_00" taborder="8" text="285" left="20" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00" taborder="9" text="20" left="0" top="0" width="20" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static07_00_00_01" taborder="10" text="285" left="20" top="31" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="11"/>
+              <Static id="Static07_00_00_00" taborder="11" text="285" left="355" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00_00_01_00" taborder="13" text="285" left="355" top="31" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="11"/>
+              <Static id="Static07_00_00_01_00_00" taborder="14" text="285" left="690" top="31" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="11"/>
+              <Static id="Static07_00_00_00_00" taborder="16" text="285" left="690" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00_00_00_00_00" taborder="18" text="285" left="1025" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07_00_00_01_00_00_00" taborder="19" text="285" left="1025" top="31" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="11"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnShowHide" taborder="2" top="43" height="10" cssclass="btn_WF_fold01" left="48.16%" width="60"/>
+        <Static id="Static09" taborder="3" text="Static03" left="0" top="btnShowHide:0" height="20" background="rgba(255,0,0,0.4)" visible="false" right="0"/>
+        <Static id="Static23" taborder="4" text="Static23" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" visible="false" bottom="0"/>
+        <Div id="divDetail" taborder="1" left="10" top="73" right="10" bottom="10" text="" minwidth="1300" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Static id="Static02" taborder="20" text="Static03" left="308" top="26" background="rgba(255,0,0,0.4)" visible="false" width="20" bottom="0"/>
+              <Static id="staMenuListT" taborder="18" text="대시보드 목록" left="0" cssclass="sta_WF_title02" top="0" height="21" onclick="divDetail_staMenuListT_onclick" right="1331"/>
+              <Grid id="grdDashList" taborder="19" left="0" top="26" width="308" autofittype="col" bottom="0" treeusecheckbox="false" treeinitstatus="expand,all" oncellclick="divDetail_grdMenuList_oncellclick" autoenter="select" treeuseexpandkey="true" treeuseimage="false" taketree="{use:&quot;all&quot;, treeindex:0, parentcolid:&quot;PARENT_MENU&quot;, ordercolid:&quot;MENU_ORDER&quot;, treecallback:&quot;fnTreeCallBack&quot;, codecolid:&quot;MENU_CD&quot;}" binddataset="dsDashList" onselectchanged="divDetail_grdDashList_onselectchanged">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="40"/>
+                      <Column size="101"/>
+                      <Column size="200"/>
+                      <Column size="80"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="No."/>
+                      <Cell col="1" text="대시보드 ID"/>
+                      <Cell col="2" text="대시보드명"/>
+                      <Cell col="3" text="유형"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="expr:currow+1" textAlign="right"/>
+                      <Cell col="1" textAlign="center" text="bind:DASH_CD"/>
+                      <Cell col="2" textAlign="left" text="bind:DASH_NM"/>
+                      <Cell col="3" textAlign="center" text="bind:DASH_TYPE_NM"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="Static33" taborder="7" left="447" top="26" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Static id="Static34" taborder="8" left="447" top="56" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Static id="Static36" taborder="9" left="447" top="116" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Static id="staTitleBarT" taborder="10" text="타이틀바 생성여부" left="729" top="56" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="staDetailMenu" taborder="11" text="상세화면 메뉴" left="328" top="116" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="staDashTypeT" taborder="12" text="대시보드 유형" left="328" top="56" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="staModNm" taborder="31" left="447" top="312" height="31" cssclass="sta_WF_td01L" width="283"/>
+              <Static id="staModDt" taborder="33" left="848" top="312" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Static id="Static09" taborder="49" text="Static03" left="328" top="343" height="20" background="rgba(255,0,0,0.4)" visible="false" right="0"/>
+              <Static id="staMultiLanguageT" taborder="13" text="다국어 정보" left="328" top="363" height="21" cssclass="sta_WF_title02" right="151"/>
+              <Button id="btnMultiLanguage" taborder="14" text="다국어매핑" top="363" width="100" height="21" right="0" onclick="divDetail_btnMultiLanguage_onclick"/>
+              <Combo id="cboDashType" taborder="0" text="Combo00" left="455" top="61" height="21" width="168" onitemchanged="divDetail_cboMenuType_onitemchanged" innerdataset="dsCboDetailDashType" codecolumn="CODE" datacolumn="NAME" cssclass="cmb_WF_essential"/>
+              <Static id="Static00" taborder="16" left="447" top="86" height="31" cssclass="sta_WF_td01L" right="0" text=""/>
+              <Static id="staProgramT" taborder="17" text="프로그램" left="328" top="86" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Grid id="grdMultilanguageInfo" taborder="21" left="328" top="389" bottom="0" autofittype="col" binddataset="dsMultiLanguageInfo" right="0">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="100"/>
+                      <Column size="600"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="구분"/>
+                      <Cell col="1" text="다국어"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:LANG_NM" textAlign="center"/>
+                      <Cell col="1" text="bind:ML_LANG_TXT"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="staDetailTitleT" taborder="22" text="대시보드 상세" left="328" top="0" height="21" cssclass="sta_WF_title02" right="141"/>
+              <Static id="staDashNmT" taborder="23" text="대시보드명" left="328" top="26" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Edit id="edtProgram" taborder="1" left="455" top="91" width="139" height="21" readonly="true" cssclass="edt_WF_essential"/>
+              <Button id="btnProgram" taborder="2" top="91" width="21" height="21" cssclass="btn_WF_search02" left="edtProgram:3" enable="true" onclick="divDetail_btnProgram_onclick"/>
+              <Static id="staDescT" taborder="24" text="상세설명" left="328" top="176" width="120" cssclass="sta_WF_th01L" height="107"/>
+              <Static id="Static41" taborder="25" top="176" cssclass="sta_WF_td01L" height="107" left="447" right="0"/>
+              <Static id="staRegNmT" taborder="26" text="등록자" left="328" top="282" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="staRegNm" taborder="27" left="447" top="282" height="31" cssclass="sta_WF_td01L" width="283"/>
+              <Static id="staRegDtT" taborder="28" text="등록일" left="729" top="282" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="staRegDt" taborder="29" left="848" top="282" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Static id="staModNmT" taborder="30" text="수정자" left="328" top="312" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="staModDtT" taborder="32" text="수정일" left="729" top="312" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <TextArea id="txtDesc" taborder="5" top="181" height="97" left="455" right="7"/>
+              <Static id="staReloadCntT" taborder="15" text="새로고침 주기" left="729" top="86" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Combo id="cboUseYn" taborder="3" text="Combo00" left="856" top="31" height="21" innerdataset="dsCboDetailUseYn" codecolumn="CODE" datacolumn="NAME" width="169" cssclass="cmb_WF_essential"/>
+              <Static id="staUseYnT" taborder="34" text="사용여부" left="729" top="26" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="staMenuParamT" taborder="35" text="파라메터" left="328" top="146" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static01" taborder="36" left="447" top="146" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Static id="staMenuParam" taborder="37" left="517" top="146" height="31" right="0"/>
+              <Button id="btnParam" taborder="4" top="151" height="21" left="455" text="추가" onclick="divDetail_btnParam_onclick" cssclass="btn_WF_plus01" width="51"/>
+              <Static id="staProgramCd" taborder="6" left="551" top="96" width="37" height="15" visible="false"/>
+              <Edit id="edtDetailMenu" taborder="40" left="455" top="121" width="139" height="21" readonly="true"/>
+              <Button id="btnDetailMenu" taborder="38" top="121" width="21" height="21" cssclass="btn_WF_search02" left="edtDetailMenu:3" enable="true" onclick="divDetail_btnDetailMenu_onclick"/>
+              <Static id="staMenuCd" taborder="39" left="551" top="126" height="15" visible="false" width="37"/>
+              <Button id="btnMakeDash" taborder="41" top="91" width="101" height="21" left="btnProgram:3" text="대시보드 생성" onclick="divDetail_btnMakeDash_onclick"/>
+              <Static id="staManual" taborder="42" text="메뉴얼" left="729" top="116" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="staManualLink" taborder="43" text="미등록" left="856" top="116" width="105" height="31" textDecoration="underline" cursor="pointer" textAlign="left" onclick="divDetail_staManualLink_onclick"/>
+              <CheckBox id="chkMinimumYn" taborder="44" text="최소화여부" left="626" top="61" width="96" height="21" truevalue="Y" falsevalue="N"/>
+              <Edit id="edtReloadCnt" taborder="45" left="856" top="91" width="142" height="21"/>
+              <Static id="Static03" taborder="46" text="초" left="edtReloadCnt:3" top="91" width="16" height="21"/>
+              <Edit id="edtDashNm" taborder="47" left="455" top="31" height="21" cssclass="edt_WF_essential" width="267"/>
+              <CheckBox id="chkTitleBarYn" taborder="48" text="타이틀바 생성" left="856" top="61" width="91" height="21" truevalue="Y" falsevalue="N"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsCboUseYn">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsMultiLanguageInfo">
+        <ColumnInfo>
+          <Column id="ML_CD" type="STRING" size="255" description="다국어코드"/>
+          <Column id="LANG_CD" type="STRING" size="255" description="언어코드"/>
+          <Column id="LANG_NM" type="STRING" size="255" description="언어명"/>
+          <Column id="ML_LANG_TXT" type="STRING" size="255" description="다국어"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsCboProjectCd">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsCboDetailUseYn">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsCboDashType">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="DASH_TYPE" type="STRING" size="256"/>
+          <Column id="DASH_NM" type="STRING" size="256"/>
+          <Column id="USE_YN" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsDashList">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="DASH_CD" type="STRING" size="256"/>
+          <Column id="DASH_NM" type="STRING" size="256"/>
+          <Column id="DASH_TYPE" type="STRING" size="256"/>
+          <Column id="DASH_TYPE_NM" type="STRING" size="256"/>
+          <Column id="MINIMUM_YN" type="STRING" size="256"/>
+          <Column id="RELOAD_CNT" type="STRING" size="256"/>
+          <Column id="PROGRAM_CD" type="STRING" size="256"/>
+          <Column id="PROGRAM_NM" type="STRING" size="256"/>
+          <Column id="DETAIL_PROG" type="STRING" size="256"/>
+          <Column id="DETAIL_PROG_NM" type="STRING" size="256"/>
+          <Column id="MANUAL_TXT" type="STRING" size="256"/>
+          <Column id="MANUAL_URL" type="STRING" size="256"/>
+          <Column id="SVC_NAMESPACE" type="STRING" size="256"/>
+          <Column id="DASH_CONTENTS" type="STRING" size="256"/>
+          <Column id="DASH_OPTION" type="STRING" size="256"/>
+          <Column id="REFERENCE" type="STRING" size="256"/>
+          <Column id="UNIT" type="STRING" size="256"/>
+          <Column id="DASH_PARAM" type="STRING" size="256"/>
+          <Column id="DESC_TXT" type="STRING" size="256"/>
+          <Column id="ML_CD" type="STRING" size="256"/>
+          <Column id="USE_YN" type="STRING" size="256"/>
+          <Column id="REG_DT" type="STRING" size="256"/>
+          <Column id="REG_CD" type="STRING" size="256"/>
+          <Column id="REG_NM" type="STRING" size="256"/>
+          <Column id="MOD_DT" type="STRING" size="256"/>
+          <Column id="MOD_CD" type="STRING" size="256"/>
+          <Column id="MOD_NM" type="STRING" size="256"/>
+          <Column id="TITLEBAR_YN" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsCboDetailDashType">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    sys > pm090
+*  @FileName    pm090.xfdl 
+*  @Creator     김대승
+*  @CreateDate  2020.09.07 
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    Date          Modifier            Description
+*******************************************************************************
+*  2020.09.07      김대승             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+this.fv_sGdsAdminYn   = null; 	 // gds _ 관리자권한 여부
+this.fv_sGdsProjectCd = null;	 // gds _ 프로젝트코드
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload등)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.PM090_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this, true)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {    
+		this.fv_sGdsAdminYn   = UXBooster.gdsUserInfo.getColumn(0, "ADMIN_YN"); 	 // gds _ 관리자권한 여부
+		this.fv_sGdsProjectCd = UXBooster.gdsUserInfo.getColumn(0, "PROJECT_CD");	 // gds _ 프로젝트코드
+		
+        this.fnInit();  
+   }
+}
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnInit, fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnInit : 초기화 함수 검색조건 초기화 및 온로드 세팅
+ * @return {N/A}    N/A
+ * @example this.fnInit();
+ */
+this.fnInit = function()
+{
+	var objDiv;
+	this.dsDashList.clearData();
+	
+	objDiv = this.divSearch.form;
+	
+	// 접속한 사용자가 프로젝트 관리자인 경우에만 검색조건 프로젝트 선택 가능
+	objDiv.cboProjectNm.set_value(this.fv_sGdsProjectCd);
+	if(this.fv_sGdsAdminYn == "Y"){
+		objDiv.cboProjectNm.set_readonly(false);
+	}
+	
+	// 공통 코드조회 함수 호출
+    this.fnCommonCode();
+	
+	//필수 검색조건 추가
+	takeval.add
+	(
+        this, 
+        "Search",                  //벨리데이션 그룹 아이디(그룹별로 추가할 수 있음)
+        objDiv.cboProjectNm,       //체크 대상 컴포넌트
+        objDiv.staProjectNmT.text, //체크할 명칭(ex:"사용여부")
+        "value",                   //체크대상 (컴포넌트:Properti, Grid:Cell, Dataset:Column 명)
+        true,                      //null check
+        "string",                  //타입(string, number, date등)체크
+        "",                        //체크수(문자는 자릿수, 숫자는 구간[form,to])
+        ""
+	);                      	   //체크 완료후 Call Back function 명(생략가능)
+	
+}
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "dashInfoList";
+	
+	//벨리데이션 체크
+	if(!takeval.check(this, "Search")) return;
+	
+	this.dsDashList.clearData();
+	this.divDetail.form.staMenuListT.set_text("대시보드 목록");
+    take.tranSelect
+    (
+        this, 
+        "dashInfoList", 
+        "DashManagement.dashInfoList",
+        "dsSearch", 
+        "dsDashList", 
+        "", 
+        "fnCallBack"
+    )
+}
+
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+this.fnSave = function(sTranId)
+{    
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "dashInfoSave";
+    var bRowChange;
+	
+	if (   !take.isDsModified(this.dsDashList) 
+		&& !take.isDsModified(this.dsMultiLanguageInfo)
+		)
+	{
+		take.alert(this, "info", "변경된 내역이 없습니다.");
+		return;
+	}
+	
+	if(!this.fnValidation()) return;
+	
+	bRowChange = take.confirm(this, "question", "저장 하시겠습니까?");
+	if (bRowChange)
+	{
+// 		take.tranSave
+// 		(
+// 			this,
+// 			"dashInfoSave",
+// 			"DashManagement.dashInfoSave",
+// 			"dsDashList",
+// 			"",
+// 			"PROJECT_CD='"+this.fv_sGdsProjectCd+"'",
+// 			"fnCallBack"
+// 		);
+		if(take.nvl( this.divSearch.form.cboProjectNm.value , "") != "") {
+			this.fv_sGdsProjectCd = this.divSearch.form.cboProjectNm.value;
+		}
+		
+		take.transaction
+		(
+			this,
+			"dashInfoSave",
+			"SVC_LOC::dh/dashInfoSave.do",
+			"dsDashList=dsDashList:U",
+			"",
+			"PROJECT_CD='"+this.fv_sGdsProjectCd+"'",
+			"fnCallBack"
+		);
+	}
+	
+	
+}
+
+/**
+ * fnAddRow : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+ * @example this.fnAddRow(sGrdId, nRow);
+ */
+this.fnAddRow = function(sGrdId, nRow)
+{
+    //공통 행추가에서 호출할 디폴트값 세팅
+    if (take.nvl(sGrdId, "")=="") sGrdId = "grdMenuList";
+    
+	var objDs = this.dsDashList;
+	var nRowposition = this.dsDashList.rowposition;
+	var addRow;
+    
+	if(take.nvl(objDs.getColumn(nRowposition, "DASH_CD"), "") != "") {
+		addRow = objDs.addRow();
+		objDs.setColumn(addRow, "USE_YN", "Y");
+		objDs.setColumn(addRow, "TITLEBAR_YN", "Y");
+		this.divDetail.form.cboDashType.set_index(0);
+	}
+}
+
+/**
+ * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number, Array} arrnRow    deleteRow 리턴값
+ * @return {N/A} N/A
+ * @example this.fnDelRow(sGrdId, nRow); 
+ */
+this.fnDelRow = function(sGrdId, arrnRow)
+{    
+    //공통 행추가에서 호출할 디폴트값 세팅
+    if (take.nvl(sGrdId, "")=="") sGrdId = "grdDashList";
+    
+    var objDs;
+	var nRow;
+	var sNm;
+	var bRowChange;
+	
+	objDs = this.dsDashList;
+	nRow  = objDs.rowposition;
+	sNm   = objDs.getColumn(nRow, "DASH_NM");
+	
+	if(objDs.rowcount <= 0){
+		take.alert(this, "info", "메뉴 목록이 없습니다.");
+		return;
+	}
+	
+	bRowChange = take.confirm(this, "question", "{name}을(를) {text}하시겠습니까?", { name : sNm, text : "삭제"});
+	if(bRowChange)
+	{
+		this.fnDashInfoDelete();
+	}
+}
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+/*
+* divDetail_btnProgram_onclick : 프로그램선택 팝업 오픈
+*/
+this.divDetail_btnProgram_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var objDs;
+	var nRow;
+	var sCd, sNm;
+	
+	objDs = this.dsDashList;
+	nRow  = objDs.rowposition;
+	
+	// 프로그램선택 팝업 오픈
+	take.openPopup(this, "PM090P01", "biz::sys/PM090P01.xfdl", "", "", 
+		function(sId, sRtn)
+		{
+			if (take.nvl(sRtn, "")!="")
+			{	
+				sCd = sRtn.split(",")[0];
+				sNm = sRtn.split(",")[1];
+				
+				this.fv_sProgramCd = sCd;
+				
+				objDs.setColumn(nRow, "PROGRAM_CD", sCd);
+				objDs.setColumn(nRow, "PROGRAM_NM", sNm);
+			}
+		},
+	false);	
+};
+
+/*
+* divDetail_btnParam_onclick : 파라메터 팝업 오픈
+*/
+this.divDetail_btnParam_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var sProgramCd;
+	var objDs;
+	var nRow;
+	
+	objDs = this.dsDashList;
+	nRow  = objDs.rowposition;
+	sProgramCd = take.nvl(this.divDetail.form.staProgramCd.text, "");
+	
+	AgrKey = {sProgramCd:sProgramCd};
+	// 파라메터 팝업 오픈 PM030P04
+	take.openPopup(this, "PM030P04", "biz::sys/PM030P04.xfdl", AgrKey, "",
+		function(sId, sRtn)
+		{
+			if (take.nvl(sRtn, "")!="")
+			{
+				objDs.setColumn(nRow, "DASH_PARAM", sRtn);
+			}
+		}
+	);
+};
+
+/*
+* divDetail_btnDetailMenu_onclick : 상세연결 메뉴 팝업 오픈
+*/
+this.divDetail_btnDetailMenu_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var objDs;
+	var sCd, sNm;
+	var nRow;
+	
+	objDs = this.dsDashList;
+	nRow  = objDs.rowposition;
+	// 상세 메뉴 선택 팝업 오픈
+	take.openPopup(this, "PM090P02", "biz::sys/PM090P02.xfdl", "", "", 
+		function(sId, sRtn)
+		{
+			if (take.nvl(sRtn, "")!="")
+			{	
+				sCd = sRtn.split(",")[0];
+				sNm = sRtn.split(",")[1];
+				
+				objDs.setColumn(nRow, "DETAIL_PROG"   , sCd);
+				objDs.setColumn(nRow, "DETAIL_PROG_NM", sNm);
+			}
+		},
+	false);	
+};
+
+/*
+* divDetail_btnMultiLanguage_onclick : 다국어매팅 버튼 클릭
+*/
+this.divDetail_btnMultiLanguage_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	take.openPopup(this, "addMultiLanguage", "biz::sys/OM010P06.xfdl", "", "", "fnPopCallback", false);
+};
+
+/*
+* divDetail_btnMakeDash_onclick : 대시보드 생성 버튼 클릭
+*/
+this.divDetail_btnMakeDash_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	
+};
+
+/*
+* divDetail_staManualLink_onclick : 메뉴얼 버튼 클릭
+*/
+this.divDetail_staManualLink_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	var objDs;
+	var nRow;
+	var sProjectCd, sTemplateCd, sManualTxt;
+	
+	objDs 		= this.dsDashList;
+	nRow		= objDs.rowposition
+	sProjectCd  = this.divSearch.form.cboProjectNm.value;
+ 	sTemplateCd = "";
+	sManualTxt  = take.nvl(objDs.getColumn(nRow, "MANUAL_TXT"), "");
+	
+ 	AgrKey = {sProjectCd:sProjectCd, sManualTxt:sManualTxt};
+	
+	take.openPopup(this, "OM010P07", "biz::sys/OM010P07.xfdl", AgrKey, "", 
+		function(sId, sRtn)
+		{
+			if(take.nvl(sRtn, "")!="")
+			{
+				objDs.setColumn(nRow, "MANUAL_TXT", sRtn);
+				this.divDetail.form.staManualLink.set_text("등록됨");
+			}
+		},
+	false);
+};
+
+/*
+* divDetail_grdDashList_onselectchanged : 메인 그리드 ROW 변경 이벤트
+*/
+this.divDetail_grdDashList_onselectchanged = function(obj:nexacro.Grid,e:nexacro.GridSelectEventInfo)
+{
+	var objDs, objDivDetail;
+	var nRow;
+	var sMnualTxt;
+	
+	objDivDetail = this.divDetail.form;
+	objDs        = this.dsDashList;
+	nRow         = objDs.rowposition;
+	sMnualTxt    = take.nvl(objDs.getColumn(nRow, "MANUAL_TXT"), "");
+	
+	if(sMnualTxt == ""){
+		objDivDetail.staManualLink.set_text("미등록");
+	} else {
+		objDivDetail.staManualLink.set_text("등록됨");
+	}
+};
+
+/*
+* divSearch_edtDashName_onkeyup : 검색조건 대시보드명 엔터 값
+*/
+this.divSearch_edtDashName_onkeyup = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+	if (e.keycode == 13) {
+		this.fnSearch("dashMenuList");
+	}
+};
+
+/*
+* divSearch_Combo_onitemchanged : 검색조건 콤보 아이템 변경시 조회
+*/
+this.divSearch_Combo_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	this.fnSearch("dashMenuList");
+};
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnCommonCode : 공통 코드조회
+ * @example this.fnCommonCode();
+ */
+this.fnCommonCode = function ()
+{
+	// 00009 검색조건  사용유무 	   (dsCboUseYn)
+	// 00009 디테일    사용유무 	   (dsCboDetailUseYn)
+	// 00018 검색조건  대시보드유형 (dsCboDashType)
+	// 00018 디테일    대시보드유형 (dsCboDetailDashType)
+	
+	var arrGroupCodes = ["00009", "00009", "00018", "00018"];
+	var arrOutDs 	  = ["dsCboUseYn", "dsCboDetailUseYn", "dsCboDashType", "dsCboDetailDashType"];
+	var arrHeaderType = ["ALL", "", "ALL", ""];
+	
+	take.tranCode(this, arrGroupCodes, arrOutDs, arrHeaderType,
+		function(sId, nErrCd, sErrMsg)
+		{
+			var objDiv = this.divSearch.form;
+			if (this.dsCboUseYn.rowcount > 0){
+				objDiv.cboUseYn.set_index(0);
+			}
+			if (this.dsCboDashType.rowcount > 0){
+				objDiv.cboDashType.set_index(0);
+			}
+			
+			// 프로젝트 코드셀렉트
+			take.tranSelect
+			(
+				this,
+				"projectInfoCode", 
+				"ProjectManagement.projectInfoCode", 
+				"", 
+				"dsCboProjectCd", 
+				"", 
+				function(sId, nErrCd, sErrMsg)
+				{
+					var objDs = this.dsCboProjectCd;
+					if (objDs.rowcount>0)
+					{
+						var nRow = objDs.insertRow(0)
+						objDs.setColumn(nRow, "CODE", "");
+						objDs.setColumn(nRow, "NAME", "선택");
+					}
+					
+					this.fnSearch("dashInfoList");
+				}
+			)
+		});
+};
+
+/**
+ * fnValidation : 벨리데이션
+ * @example this.fnValidation();
+ */
+this.fnValidation = function ()
+{
+	var objDiv     = this.divDetail.form;
+	var sDashNm    = take.nvl(objDiv.edtDashNm.value, "");
+	var sDashType  = take.nvl(objDiv.cboDashType.value, "");
+	var sProgramCd = take.nvl(objDiv.staProgramCd.text, "");
+	var sUseYn     = take.nvl(objDiv.cboUseYn.value, "");
+	
+	if(sDashNm == ""){
+		take.alert(this, "info", "대시보드명은 필수 입력입니다.");
+		objDiv.edtDashNm.setFocus();
+		return false;
+	}
+	
+	if(sDashType == ""){
+		take.alert(this, "info", "대시보드 유형은 필수 입력입니다.");
+		objDiv.sDashType.setFocus();
+		return false;
+	}
+	
+	if(sProgramCd == ""){
+		take.alert(this, "info", "프로그램은 필수 입력입니다.");
+		return false;
+	}
+	
+	if(sUseYn == ""){
+		take.alert(this, "info", "사용유무는 필수 입력입니다.");
+		objDiv.sUseYn.setFocus();
+		return false;
+	}
+	
+	return true;
+}
+
+/**
+ * fnDashInfoDelete : 대시보드 삭제
+ * @example this.fnDashInfoDelete();
+ */
+this.fnDashInfoDelete = function ()
+{
+	var objDs = this.dsDashList;
+	var nRow  = objDs.rowposition;
+	objDs.set_enableevent(false);
+	objDs.set_updatecontrol(false);
+	objDs.setRowType(nRow, "D");
+	objDs.set_updatecontrol(true);
+	objDs.set_enableevent(true);
+	
+// 	take.tranSave
+// 	(
+// 		this,
+// 		"dashInfoListDelete",
+// 		"DashManagement.dashInfoList",
+// 		"dsDashList",
+// 		"",
+// 		"PROJECT_CD='"+this.fv_sGdsProjectCd+"'",
+// 		"fnCallBack"
+// 	);
+	var bRowChange = take.confirm(this, "question", "저장 하시겠습니까?");
+	if (bRowChange)
+	{
+		take.transaction
+		(
+			this,
+			"dashInfoSave",
+			"SVC_LOC::dh/dashInfoSave.do",
+			"dsDashList=dsDashList:U",
+			"",
+			"PROJECT_CD='"+this.fv_sGdsProjectCd+"'",
+			"fnCallBack"
+		);
+	}
+};
+
+/**
+* fnValCallBack : validation callback
+* @param  : objComp      - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnValCallBack = function(objComp)
+{
+    //벨리데이션 성공 후 스크립트
+    return;
+}
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallBack : transaction callback
+* @param  : sId      - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : nErrCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : sErrMsg  - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallBack = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "dashMenuList" : 		//조회 콜백
+			var objDs 	     = this.dsDashList;
+			var objDivDetail = this.divDetail.form;
+			var nRowCount    = objDs.rowcount;
+			
+			if (nRowCount > 0){
+				objDivDetail.staMenuListT.set_text("대시보드 목록 ("+nRowCount+"건)");
+				objDivDetail.grdDashList.selectRow(0);
+			} else {
+				objDivDetail.staMenuListT.set_text("대시보드 목록 (0건)");
+			}
+            break;
+			
+        case "dashInfoSave" :  		// 추가,수정,삭제 콜백
+			this.fnInit();
+            break;
+			
+//         case "dashInfoListDelete" : //삭제 콜백
+//             this.fnInit();
+//             break;
+			
+        case "Save transation id 01" :  //저장 콜백
+            //Script
+            break;
+        case "Save transation id 01" :  //저장 콜백
+            //Script
+            break;
+        default :
+            break;
+    }        
+} 
+
+this.fnPopCallback = function (sId, nReturnVal)
+{
+	switch(sId) {
+		case "addMultiLanguage":
+			var objDs = this.dsDashList;
+			var nRow  = objDs.rowposition;
+			
+			//팝업이 닫히면서 nReturnVal을 통해 값을 받을 수 있습니다
+			if(take.nvl(nReturnVal, "") != "") {
+				nReturnVal = nReturnVal.split(",")[0];
+				objDs.setColumn(nRow, "ML_CD", nReturnVal);
+			} else return;
+			
+			// 선택된 row의 다국어 정보 조회
+			this.dsMultiLanguageInfo.clearData();
+			take.tranSelect(this, "multilanguageDetailList", "SystemCommon.multilanguageDetailList", "", "dsMultiLanguageInfo", "sMlCd='" + nReturnVal + "'", "fnCallback");
+			
+			break;
+		default:
+	}
+};]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="divSearch.form.cboProjectNm" propid="value" datasetid="dsSearch" columnid="PROJECT_CD"/>
+      <BindItem id="item1" compid="divSearch.form.cboDashType" propid="value" datasetid="dsSearch" columnid="DASH_TYPE"/>
+      <BindItem id="item2" compid="divSearch.form.edtDashName" propid="value" datasetid="dsSearch" columnid="DASH_NM"/>
+      <BindItem id="item3" compid="divSearch.form.cboUseYn" propid="value" datasetid="dsSearch" columnid="USE_YN"/>
+      <BindItem id="item5" compid="divDetail.form.cboDashType" propid="value" datasetid="dsDashList" columnid="DASH_TYPE"/>
+      <BindItem id="item6" compid="divDetail.form.cboUseYn" propid="value" datasetid="dsDashList" columnid="USE_YN"/>
+      <BindItem id="item7" compid="divDetail.form.edtReloadCnt" propid="value" datasetid="dsDashList" columnid="RELOAD_CNT"/>
+      <BindItem id="item8" compid="divDetail.form.txtDesc" propid="value" datasetid="dsDashList" columnid="DESC_TXT"/>
+      <BindItem id="item9" compid="divDetail.form.staRegNm" propid="text" datasetid="dsDashList" columnid="REG_NM"/>
+      <BindItem id="item10" compid="divDetail.form.staRegDt" propid="text" datasetid="dsDashList" columnid="REG_DT"/>
+      <BindItem id="item11" compid="divDetail.form.staModNm" propid="text" datasetid="dsDashList" columnid="MOD_NM"/>
+      <BindItem id="item12" compid="divDetail.form.staModDt" propid="text" datasetid="dsDashList" columnid="MOD_DT"/>
+      <BindItem id="item4" compid="divDetail.form.edtDashNm" propid="value" datasetid="dsDashList" columnid="DASH_NM"/>
+      <BindItem id="item13" compid="divDetail.form.staProgramCd" propid="text" datasetid="dsDashList" columnid="PROGRAM_CD"/>
+      <BindItem id="item14" compid="divDetail.form.edtProgram" propid="value" datasetid="dsDashList" columnid="PROGRAM_NM"/>
+      <BindItem id="item15" compid="divDetail.form.staMenuCd" propid="text" datasetid="dsDashList" columnid="DETAIL_PROG"/>
+      <BindItem id="item16" compid="divDetail.form.edtDetailMenu" propid="value" datasetid="dsDashList" columnid="DETAIL_PROG_NM"/>
+      <BindItem id="item17" compid="divDetail.form.chkMinimumYn" propid="value" datasetid="dsDashList" columnid="MINIMUM_YN"/>
+      <BindItem id="item18" compid="divDetail.form.chkTitleBarYn" propid="value" datasetid="dsDashList" columnid="TITLEBAR_YN"/>
+    </Bind>
+  </Form>
+</FDL>

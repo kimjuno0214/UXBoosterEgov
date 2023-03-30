@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="dbcMainSafetyStat" width="354" height="315" titletext="메인부품 안전재고현황" onload="Form_onload" ontimer="Form_ontimer">
+    <Layouts>
+      <Layout height="315" mobileorientation="landscape" width="354">
+        <Static id="staToday" taborder="0" top="0" width="120" height="20" cssclass="sta_MF_Time" left="0" text="2020년 10월 20일" onclick="staToday_onclick"/>
+        <Static id="staUnit" taborder="1" text="단위 : E/A" top="0" width="86" height="20" cssclass="sta_MF_Unit" right="0"/>
+        <Static id="Static05" taborder="2" text="주의" left="-1" top="30" width="40" height="21" cssclass="sta_MF_orange"/>
+        <Static id="Static05_00" taborder="3" text="부족" left="39" top="30" width="40" height="21" cssclass="sta_MF_red"/>
+        <Grid id="Grid01" taborder="4" left="0" top="55" cssclass="grd_MF_content2" binddataset="dsList" autofittype="col" right="0" bottom="0" scrollbarsize="10">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="120"/>
+                <Column size="120"/>
+                <Column size="120"/>
+              </Columns>
+              <Rows>
+                <Row size="40" band="head"/>
+                <Row size="50"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="공장"/>
+                <Cell col="1" text="설비(부품)명"/>
+                <Cell col="2" text="부족재고&#13;&#10;(안전재고/현재고)"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0"/>
+                <Cell col="1" text="bind:Column1"/>
+                <Cell col="2" text="expr:&quot;&lt;b v='true'&gt;&lt;fs v='14'&gt;&quot; + Column2 + &quot;&lt;/fs&gt;&lt;/b&gt;&quot; +&quot;\n&quot;+Column3" cssclass="expr:parseInt(Column2)&lt;=0 ? 'grd_WF_orangeBg' : 'grd_WF_redBg'" textAlign="center" displaytype="decoratetext"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsList">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">김해1공장</Col>
+            <Col id="Column1">센서-01</Col>
+            <Col id="Column2">-1</Col>
+            <Col id="Column3">(5/6)</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">김해2공장</Col>
+            <Col id="Column1">스위치-03</Col>
+            <Col id="Column2">1</Col>
+            <Col id="Column3">(3/6)</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">김해3공장</Col>
+            <Col id="Column1">센서-01</Col>
+            <Col id="Column2">4</Col>
+            <Col id="Column3">(2/6)</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">김해4공장</Col>
+            <Col id="Column1">스위치-01</Col>
+            <Col id="Column2">-2</Col>
+            <Col id="Column3">(6/6)</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">김해5공장</Col>
+            <Col id="Column1">센서-01</Col>
+            <Col id="Column2">0</Col>
+            <Col id="Column3">(3/2)</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">김해6공장</Col>
+            <Col id="Column1">스위치-01</Col>
+            <Col id="Column2">-1</Col>
+            <Col id="Column3">(4/4)</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">김해7공장</Col>
+            <Col id="Column1">스위치-02</Col>
+            <Col id="Column2">4</Col>
+            <Col id="Column3">(5/6)</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">...</Col>
+            <Col id="Column1">...</Col>
+            <Col id="Column2">1</Col>
+            <Col id="Column3">(5/6)</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    1DEPTH > 2DEPTH
+*  @FileName    *.xfdl 
+*  @Creator     홍길동
+*  @CreateDate  yyyy.MM.DD 
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  YYYY.MM.DD      홍길동             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+//this.fv_nFormVal = null;     //용도
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+// formid_onload 최초 로드시 발생되는 이벤트 (필수)
+this.Form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+    if (take.nvl(this.parent.btran,false))
+    {
+        //this.fnTran("");    
+    }
+}
+
+//폼 타이머 이벤트
+this.Form_ontimer = function(obj:nexacro.Form,e:nexacro.TimerEventInfo)
+{
+	if (e.timerid==9999)
+    {
+        //if (!this.getOwnerFrame().form.divMdi.visible)
+        //{
+            this.killTimer(9999);
+            this.fnTran("profitLoss");
+        //}
+    }
+};
+
+/*********************************************************
+ * 2 필수 FUNCTION 영역 (fnSearch)
+ ********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "profitLoss";
+    
+    //this.fnTran(sTranId);
+}
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+ ********************************************************/
+//N/A
+
+/*********************************************************
+ * 4 사용자 FUNCTION 영역
+ ********************************************************/
+/**
+* fnTest - progress bar 세팅
+* @param  : sMsg   - 메세지
+* @param  : sCode   - 메세지 코드
+* @return : N/A
+* @example :  
+*/
+this.fnSetUsewaitcursor = function(rtn)
+{
+    nexacro.getEnvironment().set_usewaitcursor(rtn);
+}
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+ * fnTran : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnTran("ID");
+ */
+this.fnTran = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "profitLoss";
+      
+    this.fnSetUsewaitcursor(false);    
+    
+    //트랜젝션 공통함수 호출 -->필수(모든 트랜젝션을 공통으로 처리)
+    //take.transaction(this,sTranId, sUrl, sInDs, sOutDs, sParam, sCallBack);
+}
+
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "profitLoss" : //조회 콜백
+        
+            var nReloadn, nCnt;
+            
+            nCnt = this.dsList.getRowCount();
+            
+            if( nCnt > 0 )
+            {
+                
+            }
+            
+            nReloadn = parseInt(take.nvl(this.parent.reloadtime,"0"));
+            
+            if (nReloadn>0)
+            {
+                nReloadn = nReloadn*1000;
+                this.setTimer(9999,nReloadn);
+            }
+            
+            break;        
+        default :
+            break;
+    }
+    
+    this.fnSetUsewaitcursor(true);
+} 
+
+]]></Script>
+  </Form>
+</FDL>

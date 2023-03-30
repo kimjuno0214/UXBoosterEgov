@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+* 관리자 > 시스템관리 관련
+*
+* @filename mappers/doore/DooreMapper.xml
+* @author 	doore
+* @since 	2022.12.27
+* @version 	1.0
+* @see
+*
+* << 변경 이력(Modification Information) >>
+*
+* 변경번호 : #1
+* 변경일자 : 2022.12.27
+* 변경사람 : doore
+* 변경내용 : 신규 생성
+ -->
+<mapper namespace="Doore">
+
+	<select id="selectColumnList" parameterType="map" timeout="0" resultType="map" useCache="false">
+		<![CDATA[
+		/*
+		 *
+		 * CommonMapper.selectComCodeList
+		 * 공통코드 조회
+		 * @author dooresoft
+		 * @since 2021.12.20
+		 */
+		]]>		
+        SELECT UPPER(TABLE_SCHEMA) TABLE_SCHEMA
+             , UPPER(TABLE_NAME) TABLE_NAME
+             , ORDINAL_POSITION
+             , COLUMN_NAME
+             , COLUMN_TYPE
+             , COLUMN_KEY
+             , IS_NULLABLE, EXTRA
+             , COLUMN_COMMENT
+        FROM   INFORMATION_SCHEMA.COLUMNS
+        WHERE  UPPER(TABLE_SCHEMA) = UPPER(#{schema})
+        AND    UPPER(TABLE_NAME) = UPPER(#{tableName})
+        ORDER BY TABLE_SCHEMA, TABLE_NAME, ORDINAL_POSITION;
+	</select>
+	
+	<select id="docmSelect" parameterType="map" timeout="0" resultType="map" useCache="false">
+		<![CDATA[
+		/*
+		* 
+		* Doore.docmSelect 
+		* TB_DOCM 조회
+		* @author dooresoft
+		* @since 2023.01.04
+		*/
+		]]>
+        SELECT  DOC_ID                                            -- 문서ID
+              , SJ                                                -- 제목
+              , CN                                                -- 내용
+        FROM DOORE.TB_DOCM
+        WHERE 1 = 1
+        <if test=" DOC_ID != null " >
+        AND DOC_ID = #{DOC_ID}
+        </if>
+        ORDER BY DOC_ID
+	</select>
+
+	<insert id="docmInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* Doore.docmInsert 
+		* TB_DOCM 등록
+		* @author dooresoft
+		* @since 2023.01.04
+		*/
+		]]>
+		INSERT INTO DOORE.TB_DOCM (
+                DOC_ID                                            -- 문서ID
+              , SJ                                                -- 제목
+              , CN                                                -- 내용
+              , REG_DT                                            -- 등록일시
+              , RGTR_ID)                                          -- 등록자ID
+		VALUES (
+                FN_GET_KEY('TB_DOCM', 'DOC')                      -- 문서ID
+              , #{SJ}                                             -- 제목
+              , #{CN}                                             -- 내용
+              , DATE_FORMAT(NOW(), '%Y%m%d%H%i%s')                -- 등록일시
+              , #{_sessionUserCd}                                 -- 등록자ID
+		)
+	</insert>
+
+	<update id="docmUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* Doore.docmUpdate 
+		* TB_DOCM 수정
+		* @author dooresoft
+		* @since 2023.01.04
+		*/
+		]]>
+		UPDATE DOORE.TB_DOCM
+		SET    MDFCN_DT = DATE_FORMAT(NOW(), '%Y%m%d%H%i%s')
+		     , MDFR_ID = #{_sessionUserCd}
+		<if test=" SJ != null ">
+		     , SJ = #{SJ}                                                                      -- 제목
+		</if>
+		<if test=" CN != null ">
+		     , CN = #{CN}                                                                      -- 내용
+		</if>
+		WHERE  DOC_ID = #{DOC_ID}
+	</update>
+
+	<delete id="docmDelete" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* Doore.docmDelete 
+		* TB_DOCM 삭제
+		* @author dooresoft
+		* @since 2023.01.04
+		*/
+		]]>
+		DELETE FROM DOORE.TB_DOCM
+		WHERE  1 = 1
+		AND DOC_ID = #{DOC_ID}
+	</delete>
+	
+    <select id="selectToDay" parameterType="map" timeout="0" resultType="map" useCache="false">
+		<![CDATA[
+		/*
+		 *
+		 * Doore.selectToDay
+		 * 날짜조회
+		 * @author dooresoft
+		 * @since 2022.94.94
+		 */
+		]]>
+		SELECT DATE_FORMAT(NOW(), '%Y%m%d') RETURN_VALUE
+	</select>	
+	
+	<select id="codeInfoList" parameterType="map" timeout="0" resultType="takeResultMap" useCache="false">
+		<![CDATA[
+		/*
+		 *
+		 * Doore.codeInfoList
+		 * 코드정보 목록
+		 * @author doore
+		 * @since 2023.02.09
+		 */
+		]]>
+		SELECT
+			'0' AS CHK
+			, C.CODE_KEY			-- 코드KEY
+			, C.GROUP_ID			-- 그룹ID
+			, C.CODE_ID				-- 코드ID
+			, C.PARENT_KEY			-- 부모KEY
+			, C.CODE_NM				-- 코드명
+			, C.ML_CD				-- 다국어코드
+			, C.REF1				-- 참조1
+			, FN_GET_COM_NM(#{GROUP_REF1}, C.REF1) REF1_NM
+			, C.REF2				-- 참조2
+			, FN_GET_COM_NM(#{GROUP_REF2}, C.REF2) REF2_NM
+			, C.REF3				-- 참조3
+			, FN_GET_COM_NM(#{GROUP_REF3}, C.REF3) REF3_NM
+			, C.REF4				-- 참조4
+			, FN_GET_COM_NM(#{GROUP_REF4}, C.REF4) REF4_NM
+			, C.REF5				-- 참조5
+			, FN_GET_COM_NM(#{GROUP_REF5}, C.REF5) REF5_NM
+			, C.DESC_TXT			-- 상세설명
+			, <include refid="CommonInc.toNumber" >
+				<property name="arg1" value="C.CODE_ORDER"/>
+			  </include> AS CODE_ORDER			-- 코드정렬순서
+			, C.USE_YN              -- 사용여부
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="C.REG_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			  </include>  AS REG_DT	-- 등록일시
+			, C.REG_CD				-- 등록자코드
+			, U1.USER_NM AS REG_NM	-- 등록자명
+			, <include refid="CommonInc.toChar" >
+				<property name="arg1" value="C.MOD_DT"/>
+				<property name="fmt1" value="'YYYY-MM-DD HH24:MI'"/>
+				<property name="fmt3" value="'%Y-%m-%d %H:%i'"/>
+			  </include>  AS MOD_DT	-- 수정일시
+			, C.MOD_CD				-- 수정자코드
+			, U2.USER_NM AS MOD_NM	-- 수정자명
+		FROM CODE_INFO C
+			LEFT OUTER JOIN USER_INFO U1 ON C.REG_CD = U1.USER_CD
+			LEFT OUTER JOIN USER_INFO U2 ON C.MOD_CD = U2.USER_CD
+		WHERE 1 = 1
+		<if test="sParentKey != null and sParentKey != '' ">
+		    AND C.PARENT_KEY = #{sParentKey}
+		</if>
+		<if test="PARENT_KEY != null and PARENT_KEY != '' ">
+		    AND C.PARENT_KEY = #{PARENT_KEY}
+		</if>
+		<if test="GROUP_ID != null and GROUP_ID != '' ">
+		    AND C.GROUP_ID = #{GROUP_ID}
+		</if>
+		<if test="REF1 != null and REF1 != '' ">
+		    AND C.REF1 = #{REF1}
+		</if>
+		<if test="REF2 != null and REF2 != '' ">
+		    AND C.REF2 = #{REF2}
+		</if>
+		<if test="REF3 != null and REF3 != '' ">
+		    AND C.REF3 = #{REF3}
+		</if>
+		<if test="REF4 != null and REF4 != '' ">
+		    AND C.REF4 = #{REF4}
+		</if>
+		<if test="REF5 != null and REF5 != '' ">
+		    AND C.REF5 = #{REF5}
+		</if>
+		<if test=" CODE_NM != null and CODE_NM != '' ">
+			AND C.CODE_NM LIKE 
+			<if test="_databaseId == 'Oracle'">
+			('%' || #{CODE_NM} || '%')
+			</if>
+			<if test="_databaseId == 'SQL Server'">
+			('%' || #{CODE_NM} || '%')
+			</if>
+			<if test="_databaseId == 'MySQL'">
+			CONCAT('%' , #{CODE_NM} , '%')
+			</if>
+			<if test="_databaseId == 'PostgreSQL'">
+			('%' || #{CODE_NM} || '%')
+			</if>
+		</if>
+		<if test=" USE_YN != null and USE_YN != '' ">
+			AND C.USE_YN = #{USE_YN}
+		</if>
+		ORDER BY <include refid="CommonInc.toNumber" >
+			       <property name="arg1" value="C.CODE_ORDER"/>
+			     </include>
+			   , C.CODE_ID
+	</select>
+	
+	<select id="selectExcelFileNm" parameterType="map" timeout="0" resultType="map" useCache="false">
+		<![CDATA[
+		/*
+		 *
+		 * Doore.selectExcelFileNm
+		 * 엑셀파일명 조회
+		 * @author dooresoft
+		 * @since 2023.03.23
+		 */
+		]]>
+		SELECT FN_GET_EXCEL_NM(#{PARAM1}, #{PARAM2}) AS RETURN_VALUE
+	</select>
+	
+</mapper>

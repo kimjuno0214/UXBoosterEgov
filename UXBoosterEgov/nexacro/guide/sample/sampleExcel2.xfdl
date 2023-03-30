@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="sampleExcel" width="1779" height="894" titletext="엑셀 업/다운로드" onload="sampleFile_onload">
+    <Layouts>
+      <Layout height="894" mobileorientation="landscape" width="1779">
+        <Grid id="Grid00" taborder="0" left="45" top="82" width="558" height="198" autofittype="col" onselectchanged="Grid00_onselectchanged" extendgridoption="sort,find,filter,move,hide,excel,fix,reset,readonly,visible,personal" gridTitle="sampleFile,1" binddataset="dsList">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="컬럼0"/>
+                <Cell col="1" text="컬럼1"/>
+                <Cell col="2" text="컬럼2"/>
+                <Cell col="3" text="컬럼3"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0"/>
+                <Cell col="1" text="bind:Column1"/>
+                <Cell col="2" text="bind:DEPT_NM"/>
+                <Cell col="3" text="bind:Column3"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="Button03" taborder="1" text="엑셀업로드" left="45" top="33" width="95" height="41" onclick="Button03_onclick"/>
+        <Button id="Button04" taborder="2" text="엑셀다운로드" left="145" top="33" width="95" height="41" onclick="Button04_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/**
+*  Menu Name
+*
+*  @MenuPath    1DEPTH > 2DEPTH
+*  @FileName    *.xfdl 
+*  @Creator     홍길동
+*  @CreateDate  yyyy.MM.DD 
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  YYYY.MM.DD      홍길동             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.sampleFile_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {    
+        
+   }
+}
+
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리   
+    switch(sId)
+    {
+        case "Search" : //조회 콜백
+            //Script
+            
+            break;    
+        case "Save" : //조회 콜백
+            //Script
+			
+            break;         
+        default :
+            break;
+    }
+} 
+
+/*********************************************************
+* 3 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "Search";	
+}
+
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {N/A}    N/A
+ * @return {N/A}    N/A
+ * @example this.fnSave();
+ */
+this.fnSave = function()
+{
+    this.fnTran("Save")
+}
+
+/**
+ * fnDel : 삭제 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {N/A}    N/A
+ * @return {N/A}    N/A
+ * @example this.fnDel();
+ */
+this.fnDel = function()
+{
+    this.fnTran("Del")
+}
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+// 엑셀업로드 버튼 클릭
+this.Button03_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.dsList.clearData();
+	var sUrl = nexacro.getEnvironment().services[take.nvl(take.SvcId,"SVC_LOC")].url;//take.getSvcUrl();
+    var sSvcUrl = sUrl + "XImport.do";
+    
+	if(this.importObj == null){
+		this.importObj = new nexacro.ExcelImportObject("Import00",this);	
+		this.importObj.set_importtype(nexacro.ImportTypes.EXCEL);
+		this.importObj.addEventHandler("onsuccess", this.Import00_onsuccess, this);
+		this.importObj.addEventHandler("onerror", this.Import00_onerror, this);	
+	}
+	this.importObj.set_importurl(sSvcUrl);
+    //this.importObj.importData("", "[Command=getsheetlist;Output=sheetlist][Command=getsheetdata;Output=output1;Head=!A1:K1;Body=!A2:K15][Output=output2; Body=Sheet1!B7:Z207]", "ds_list=sheetlist, ds_Data1=output1, ds_Data2=output2");
+
+    //지정한 헤더대로 들어옴
+    //this.importObj.importData("","Sheet1!A1:F?","dsList");
+    this.importObj.importData("","Command=getsheetdata;Output=output1;Head=Sheet1!A1:F1;Body=Sheet1!A2:F?","dsList");
+    
+    //컬럼럼 순서대로 들어옴
+    //this.importObj.importData("","Command=getsheetdata;Output=output1;Body=Sheet1!A2:F?","dsList");
+    
+};
+
+// 엑셀다운로드 버튼 클릭
+this.Button04_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.Grid00.ExportExcelGrid("sampleTempleat", "Sheet1", "TEST EXCEL", "");
+};
+
+//onsuccess Event
+this.Import00_onsuccess = function(obj:ExcelImportObject,  e:nexacro.ExcelImportEventInfo)
+{
+	this.importObj = null;
+	trace("\n=========== onsuccess event start=============");
+	trace("\ne.eventid: " 				+ e.eventid			);
+	trace("\ne.fromobject: " 			+ e.fromobject		);
+	trace("\ne.fromreferenceobject: " 	+ e.fromreferenceobject);
+	trace("\ne.url: " 					+  e.url			);
+}; 
+     
+//onerror Event
+this.Import00_onerror = function(obj:ExcelImportObject,  e:nexacro.ExcelImportErrorEventInfo)
+{   
+	trace("\n=========== onerror event start===============");
+	trace("\ne.eventid: " 				+ e.eventid			);
+	trace("\ne.fromobject: " 			+ e.fromobject		);
+	trace("\ne.fromreferenceobject: " 	+ e.fromreferenceobject);
+	trace("\ne.errorcode: " 			+  e.errorcode		);
+	trace("\ne.errormsg: " 				+ e.errormsg		);
+};
+
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+
+/*********************************************************
+* 5.1 TRANSACTION 서비스 호출 처리
+ ********************************************************/
+
+/*********************************************************
+ * 5.2 CALLBACK 콜백 처리부분
+ ********************************************************/
+
+
+
+
+]]></Script>
+    <Objects>
+      <Dataset id="dsList_BAK">
+        <ColumnInfo>
+          <Column id="DEPT_NO" type="STRING" size="256"/>
+          <Column id="DEPT_NM" type="STRING" size="256"/>
+          <Column id="EMPLOYEE" type="STRING" size="256"/>
+          <Column id="TELNO" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="DEPT_NO">1</Col>
+            <Col id="DEPT_NM">a</Col>
+            <Col id="EMPLOYEE">ㄱ</Col>
+            <Col id="TELNO">!</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_NO">2</Col>
+            <Col id="DEPT_NM">b</Col>
+            <Col id="EMPLOYEE">ㄴ</Col>
+            <Col id="TELNO">@</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_NO">3</Col>
+            <Col id="DEPT_NM">c</Col>
+            <Col id="EMPLOYEE">ㄷ</Col>
+            <Col id="TELNO">#</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_NO">4</Col>
+            <Col id="DEPT_NM">d</Col>
+            <Col id="EMPLOYEE">ㄹ</Col>
+            <Col id="TELNO">$</Col>
+          </Row>
+          <Row>
+            <Col id="DEPT_NO">5</Col>
+            <Col id="DEPT_NM">e</Col>
+            <Col id="EMPLOYEE">ㅁ</Col>
+            <Col id="TELNO">%</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="file_path" type="STRING" size="256"/>
+          <Column id="file_nm" type="STRING" size="256"/>
+          <Column id="file_save_nm" type="STRING" size="256"/>
+          <Column id="import_yn" type="STRING" size="256"/>
+          <Column id="file_type" type="STRING" size="256"/>
+          <Column id="user_cd" type="STRING" size="256"/>
+          <Column id="file_del_yn" type="STRING" size="256"/>
+          <Column id="attach_cd" type="STRING" size="256"/>
+          <Column id="file_seq" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsList">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">1</Col>
+            <Col id="Column1">a</Col>
+            <Col id="Column2">ㄱ</Col>
+            <Col id="Column3">!</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">2</Col>
+            <Col id="Column1">b</Col>
+            <Col id="Column2">ㄴ</Col>
+            <Col id="Column3">@</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">3</Col>
+            <Col id="Column1">c</Col>
+            <Col id="Column2">ㄷ</Col>
+            <Col id="Column3">#</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">4</Col>
+            <Col id="Column1">d</Col>
+            <Col id="Column2">ㄹ</Col>
+            <Col id="Column3">$</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5</Col>
+            <Col id="Column1">e</Col>
+            <Col id="Column2">ㅁ</Col>
+            <Col id="Column3">%</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

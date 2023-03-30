@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="publishing003" width="1018" height="318" titletext="이미지 등록">
+    <Layouts>
+      <Layout height="318" mobileorientation="landscape" width="1018">
+        <Static id="Static05" taborder="15" left="408" cssclass="sta_WF_td01L" right="410" top="68" bottom="10"/>
+        <Static id="Static06" taborder="16" left="607" cssclass="sta_WF_td01L" right="211" top="68" bottom="10"/>
+        <Static id="Static07" taborder="17" left="806" cssclass="sta_WF_td01L" right="10" top="68" bottom="10"/>
+        <Button id="Button01" taborder="0" text="저장" top="5" width="46" height="23" cssclass="btn_WF_basic01" right="10"/>
+        <Static id="Static17" taborder="1" text="Static03" left="798" width="220" height="10" background="red" visible="false" top="28"/>
+        <Static id="Static03" taborder="2" text="LOGIN LOGO" left="10" top="38" width="200" height="31" cssclass="sta_WF_th01Limport" textAlign="center"/>
+        <Static id="Static00" taborder="3" text="TOP LOGO" left="209" top="38" width="200" height="31" cssclass="sta_WF_th01Limport" textAlign="center"/>
+        <Static id="Static01" taborder="4" text="LOGIN 베너" left="408" top="38" height="31" cssclass="sta_WF_th01L" right="10" textAlign="center"/>
+        <Static id="Static02" taborder="10" left="10" cssclass="sta_WF_td01L" right="808" top="68" bottom="10"/>
+        <Static id="Static04" taborder="11" left="209" cssclass="sta_WF_td01L" right="609" top="68" bottom="10"/>
+        <ImageViewer id="ImageViewer00" taborder="5" text="ImageViewer00" left="25" top="80" width="169" height="144"/>
+        <ImageViewer id="ImageViewer01" taborder="6" text="ImageViewer00" left="226" top="80" width="169" height="144"/>
+        <ImageViewer id="ImageViewer02" taborder="7" text="ImageViewer00" left="422" top="80" width="169" height="144"/>
+        <ImageViewer id="ImageViewer03" taborder="8" text="ImageViewer00" left="623" top="80" width="169" height="144"/>
+        <ImageViewer id="ImageViewer04" taborder="9" text="ImageViewer00" left="822" top="80" width="169" height="144"/>
+        <Button id="Button00" taborder="12" text="업로드" top="279" width="69" height="23" cssclass="btn_WF_basic01" right="874"/>
+        <Button id="Button02" taborder="13" text="업로드" top="279" width="69" height="23" cssclass="btn_WF_basic01" right="674"/>
+        <Button id="Button03" taborder="14" text="업로드" top="280" width="69" height="23" cssclass="btn_WF_basic01" right="272"/>
+        <Button id="Button04" taborder="18" text="업로드" top="280" width="69" height="23" cssclass="btn_WF_basic01" right="475"/>
+        <Button id="Button05" taborder="19" text="업로드" top="280" width="69" height="23" cssclass="btn_WF_basic01" right="75"/>
+      </Layout>
+    </Layouts>
+    <Objects/>
+  </Form>
+</FDL>

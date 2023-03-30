@@ -1,0 +1,485 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="comUserCode" width="207" height="21" titletext="코드" onload="form_onload">
+    <Layouts>
+      <Layout height="21" mobileorientation="landscape" width="207">
+        <Edit id="edtCode" taborder="0" left="0" top="0" width="70" height="21" onsetfocus="edtCode_onsetfocus" onkillfocus="edtCode_onkillfocus" onkeyup="edtCode_onkeyup" onkeydown="edtCode_onkeydown"/>
+        <Button id="btnCodeSearch" taborder="2" top="0" width="21" height="21" cssclass="btn_WF_search02" left="edtCode:3" onclick="btnCodeSearch_onclick" text=""/>
+        <Edit id="edtCodeName" taborder="1" left="btnCodeSearch:3" top="0" height="21" readonly="true" right="0" onchanged="edtCodeName_onchanged"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsReturn"/>
+      <Dataset id="dsSearchCode">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsList"/>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+ *  SYSTEM FORM NAME
+ *
+ *  @MenuPath    com
+ *  @FileName    comUserCode.xfdl 
+ *  @Creator     정해원
+ *  @CreateDate  2019.12.19
+ *  @Version     1.0
+ *  @Desction    코드검색
+ *               
+ * 
+ ************** 소스 수정 이력 *************************************************
+ *    date          Modifier            Description
+ *******************************************************************************
+ *  2019.12.19      정해원             최초 생성 
+ *******************************************************************************
+ */
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+this.fvObjForm 	= null;
+this.fvDataset 	= null;
+this.fvCodeId 	= null;
+this.fvCodeNm 	= null;
+
+this.fvCodeId_bak 	= null;
+this.fvCodeNm_bak 	= null;
+
+this.fvIsSearch = false;
+this.fvFnCodeCallBack = null;
+this.fvNamespace = null;
+this.fvSearchTitle = null;
+this.fvGridOption = null;
+this.fvSearchPopUrl = null;
+
+/*********************************************************
+ * 1.2 FORM EVENT 영역(onload)
+ ********************************************************/
+this.form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+	{
+	}
+};
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "searchcomcode";
+	
+	this.dsReturn.clearData();
+	this.dsList.clearData();
+	this.dsSearchCode.clearData();
+	
+	var sInDs 		= "dsSearchCode";
+    var sOutDs 		= "dsList";
+	var sNameSpaces = this.fnGetNamespace();
+
+	var nRow = this.dsSearchCode.addRow();
+	this.dsSearchCode.setColumn(nRow, 'CODE', this.edtCode.value);
+	
+	take.tranSelect(this, sTranId, sNameSpaces, sInDs, sOutDs, "", "fnCallback", true, "dsSearchCode");
+};
+
+this.oCodeInfo = null;
+this.fnSearchPop = function()
+{
+	this.oCodeInfo = null;
+	var sOpt = "titletext=" + this.fnGetSearchTitle();
+	var oArg = {
+	      argInNamespace 	: this.fnGetNamespace()
+		, argInGridOption	: this.fnGetGridOption()
+		, argInSearchTitle 	: this.fnGetSearchTitle()
+		, argInSearchText 	: this.edtCode.value
+		, argInMultiSel 	: false
+	};
+	
+	var sPopupUrl = take.nvl(this.fnGetSearchPopUrl(), "frm::com/comUserCodePop.xfdl");
+	var randomCd = take.getUniqueId("comUserCodePop");
+	take.openPopup(this, randomCd, sPopupUrl, oArg, sOpt, 
+		function(sId){
+			this.edtCode.set_enableevent(true);
+			
+			if(!take.isNull(this.oCodeInfo)){
+				for(var key in this.oCodeInfo){
+					this.fnAddSetColumn(this.dsReturn, key, this.oCodeInfo[key]);
+				}
+				
+				//단건 조회 후 콜백
+				this.fnCallback('searchresult');
+			}
+		}
+	);
+};
+
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+ ********************************************************/
+this.edtCode_onkeydown = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+	if( e.keycode == 13)
+    {   
+        this.fnSearchPop();
+        
+    } else if (e.keycode==8) {
+        if (take.nvl(this.edtCodeName.value, "")!="")
+        {
+            this.edtCode.set_value("");
+            this.edtCodeName.set_value("");
+        }
+    }
+};
+
+this.edtCode_onkeyup = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+	this.edtCodeName.set_value("");
+};
+
+this.edtCodeName_onchanged = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
+{
+	if (take.nvl(obj.vale, "")!="")
+    {
+        this.parent.parent.getNextComponent(this.parent).setFocus();
+    }
+};
+this.edtCode_onkeyup = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+	if(e.keycode == 13){
+		obj.set_enableevent(false);
+		this.fnSearch();
+	}
+};
+// 
+// /**
+//  * edtCode_onsetfocus : focus 시 backup
+//  */
+// this.edtCode_onsetfocus = function(obj:nexacro.Edit,e:nexacro.SetFocusEventInfo)
+// {
+// 	this.fnBackup();
+// };
+// 
+// /**
+//  * edtCode_onkillfocus : focus 이동시 조회
+//  */
+// this.edtCode_onkillfocus = function(obj:nexacro.Edit,e:nexacro.KillFocusEventInfo)
+// {
+// 	if(take.isEmpty(this.fnGetCode())){
+// 		this.fnReset();
+// 		return;
+// 	}
+// 	
+// 	if(this.fnGetCode() == this.fvCodeId_bak){
+// 		return;
+// 	}
+// 	
+// 	this.fnSearch();
+// };
+
+/**
+ * btnCodeSearch_onclick : 조회
+ */
+this.btnCodeSearch_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fnSearch();
+};
+
+/*********************************************************
+ * 4 사용자 FUNCTION 영역
+ ********************************************************/
+//초기화용 백업
+this.fnSetWidth = function(nWidth){
+	this.edtCode.set_width(nWidth);
+	this.btnCodeSearch.set_left("edtCode:3px");
+	this.edtCodeName.set_left("btnCodeSearch:3px");
+};
+
+//초기화용 백업
+this.fnBackup = function(){
+	this.fvCodeId_bak = this.edtCode.value;
+	this.fvCodeNm_bak = this.edtCodeName.value;
+};
+
+//초기화
+this.fnReset = function(){
+	if(this.fvIsSearch){
+		//검색조건
+		this.edtCode.set_value("");
+		this.edtCodeName.set_value("");
+		this.dsReturn.clearData();
+	}else{
+		//상세용
+		this.edtCode.set_value(this.fvCodeId_bak);
+		this.edtCodeName.set_value(this.fvCodeNm_bak);
+	}
+	
+	//값이 변경되었다면 업무callback호출
+	if(this.fvCodeId_bak != this.fnGetCode()){
+		this.fnBackup();
+		this.fnCallback("CodeCallBack");
+	}
+
+	this.fnBackup();
+};
+
+//코드 리턴
+this.fnGetCode = function(){
+	return this.edtCode.value;
+};
+
+//명 리턴
+this.fnGetCodeName = function(){
+	return this.edtCodeName.value;
+};
+
+//코드정보 리턴
+this.fnGetCodeInfo = function(){
+	return take.getChartData(this.dsReturn)[0];
+};
+
+//코드 set
+this.fnSetCode = function(sCode){
+	this.edtCode.set_value(sCode);
+	this.fnSearch();
+};
+
+//코드 set
+this.fnSetReadOnly = function(isReadOnly){
+	this.btnCodeSearch.set_enable(!isReadOnly);
+	this.edtCode.set_readonly(isReadOnly);
+};
+
+/**
+ * fnInitSearchComponent : 검색조건용 초기화
+ * @example this.fnInitSearchComponent();
+ */
+this.fnInitSearchComponent = function(objForm, objDataset, sCodeId, sCodeNm)
+{	
+	this.fnInitComponent(objForm, objDataset, sCodeId, sCodeNm, true);
+};
+
+/**
+ * fnInitComponent : 초기화
+ * @example this.fnInitComponent();
+ */
+this.fnInitComponent = function(objForm, objDataset, sCodeId, sCodeNm, isSearch)
+{
+	this.dsList.clearData();
+	this.dsSearchCode.clearData();
+	
+	this.fvObjForm	= objForm;
+	this.fvDataset 	= objDataset;
+	this.fvCodeId 	= sCodeId;
+	this.fvCodeNm 	= sCodeNm;
+	
+	var randomCd 	= take.getUniqueId("edtCode_");
+	var randomNm 	= take.getUniqueId("edtCodeName_");
+
+	var objBindItem = new BindItem();
+	objBindItem.init(randomCd, "edtCode", "value", this.fvDataset.id, this.fvCodeId);
+	this.addChild(randomCd, objBindItem);
+	objBindItem.bind();
+
+	if(!take.isEmpty(this.fvCodeNm)){
+		var objBindItemName = new BindItem();
+		objBindItemName.init(randomNm, "edtCodeName", "value", this.fvDataset.id, this.fvCodeNm);
+		this.addChild(randomNm, objBindItemName);
+		objBindItemName.bind();
+	}
+
+	if(!take.isEmpty(this.edtCode.value)){
+		this.fnSearch();
+	}
+	
+	this.fvIsSearch = isSearch;
+	if(isSearch){
+		//dataset에 column이 없다면 동적으로 추가 함
+		if(!take.isEmpty(sCodeId))
+		this.fnAddSetColumn(objDataset, sCodeId, "");
+		if(!take.isEmpty(sCodeNm))
+		this.fnAddSetColumn(objDataset, sCodeNm, "");
+	}
+	
+	this.fnBackup();
+};
+
+/**
+ * fnSetCallBack : 업무영역 콜백 세팅
+ */
+this.fnSetCallBack = function(fnCallBack){
+	if(!take.isNull(fnCallBack)){
+		this.fvFnCodeCallBack = fnCallBack;
+	}
+};
+
+/**
+ * fnSetNamespace : 조회쿼리 SET
+ */
+this.fnSetNamespace = function(sNamespace){
+	if(!take.isNull(sNamespace)){
+		this.fvNamespace = sNamespace;
+	}
+};
+
+/**
+ * fnGetNamespace : 조회쿼리 GET
+ */
+this.fnGetNamespace = function(){
+	return this.fvNamespace;
+};
+
+/**
+ * fnSetSearchTitle : 검색조건명 SET
+ */
+this.fnSetSearchTitle = function(sSearchTitle){
+	if(!take.isNull(sSearchTitle)){
+		this.fvSearchTitle = sSearchTitle;
+	}
+};
+
+/**
+ * fnGetSearchTitle : 검색조건명 GET
+ */
+this.fnGetSearchTitle = function(){
+	return this.fvSearchTitle;
+};
+
+/**
+ * fnSetGridOption : 그리드설정 SET
+ */
+this.fnSetGridOption = function(oGridOption){
+	if(!take.isNull(oGridOption)){
+		this.fvGridOption = oGridOption;
+	}
+};
+
+/**
+ * fnGetGridOption : 그리드설정 GET
+ */
+this.fnGetGridOption = function(){
+	return this.fvGridOption;
+};
+
+// Dataset에 column이 없으면 column 생성
+this.fnAddSetColumn = function(objDs, strColId, strValue)
+{
+	this.fnAddColumn(objDs, strColId, "string");
+	var nRow = 0;
+	if (objDs.getRowCount() <= 0) {
+		nRow = objDs.addRow();
+	}
+	objDs.setColumn(nRow, strColId, strValue);
+};
+
+this.fnAddColumn = function(objDs, strColId, strColType, nColSize)
+{
+	if (objDs.getColumnInfo(strColId) == null) {
+		strColType	= take.nvl(strColType, "string");
+		nColSize	= take.nvl(nColSize, 256);
+		objDs.addColumn(strColId, strColType, nColSize);
+	}
+};
+
+this.fnSetSearchPopUrl = function(sPopupUrl){
+	this.fvSearchPopUrl = sPopupUrl;
+};
+
+this.fnGetSearchPopUrl = function(){
+	return this.fvSearchPopUrl;
+};
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+ * fnCallback : transaction callback
+ * @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+ * @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+ * @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+ * @return : N/A
+ * @example :  
+ */
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg != "SUCC" )
+	{
+        //Etc Script
+    }
+    
+    switch(sId)
+    {
+        case "searchcomcode" :
+			// 조회 콜백
+			// 리턴값이 1건일 경우 팝업창 오픈하지 않고 값 리턴.
+			if(this.dsList.getRowCount() == 1) {
+// 				this.edtCode.set_enableevent(true);
+// 				this.dsReturn.copyData(this.dsList);
+// 
+// 				//단건 조회 후 콜백
+// 				this.fnCallback('searchresult');
+				
+				this.fnSearchPop();
+			}else{
+				//팝업 오픈
+				this.fnSearchPop();
+			}
+			
+            break;
+			
+		case "searchresult" :
+			//단건 조회 후 콜백
+			if(this.dsReturn.getRowCount() > 0){
+				this.edtCode.set_value(this.dsReturn.getColumn(0, 'CODE'));
+				this.edtCodeName.set_value(this.dsReturn.getColumn(0, 'NAME'));
+
+				this.fnBackup();
+				this.fnCallback("CodeCallBack");
+			}
+			break;
+			
+		case "CodeCallBack" :
+			//업무영역 콜백
+			if(!take.isNull(this.fvFnCodeCallBack)){
+				var oRtn = take.getChartData(this.dsReturn)[0];
+				
+				var objForm = this.fvObjForm;
+				var strCallback = this.fvFnCodeCallBack;
+				
+				try {
+					if (typeof strCallback == "function") {
+						strCallback.call(objForm, oRtn);
+					} else if(typeof strCallback == "string") {
+						if (!take.isFunction(objForm[strCallback])){
+							return;
+						} else {
+							objForm[strCallback].call(objForm, oRtn);
+						}
+					}
+				} catch(e) {
+					console.dir(e);
+				}
+			}
+			
+			break;
+			
+        default :
+            break;
+    }
+};]]></Script>
+  </Form>
+</FDL>

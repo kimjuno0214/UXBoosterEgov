@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="SC010P02" width="380" height="232" titletext="데모ID 생성" onload="Form_onload">
+    <Layouts>
+      <Layout height="232" mobileorientation="landscape" width="380">
+        <Div id="divSearch" taborder="37" left="0" top="0" cssclass="dvi_WF_tabBox01" right="0" bottom="0" text="">
+          <Layouts>
+            <Layout>
+              <Static id="staTitle" text="데모ID 생성" left="20" top="20" height="21" cssclass="sta_WF_title02" right="20" taborder="9"/>
+              <Static id="staUserId" taborder="5" text="사용자ID" left="20" top="46" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static10" taborder="6" left="139" top="46" height="31" cssclass="sta_WF_td01L" right="20"/>
+              <Static id="staUserNm" taborder="7" text="사용자명" left="20" top="76" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static01" taborder="8" left="139" top="76" height="31" cssclass="sta_WF_td01L" right="20"/>
+              <Edit id="edtUserId" taborder="0" left="147" top="50" right="27" height="23"/>
+              <Edit id="edtUserNm" taborder="1" left="147" top="80" height="23" right="27" imemode="alpha" password="false"/>
+              <Static id="staUserPwOk" taborder="10" text="비밀번호" left="20" top="106" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static00" taborder="11" left="139" top="106" height="31" cssclass="sta_WF_td01L" right="20"/>
+              <Edit id="edtUserPw" taborder="2" left="147" top="110" height="23" right="27" imemode="alpha" password="false"/>
+              <Static id="staValidDt" taborder="12" text="유효기간" left="20" top="136" width="120" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static02" taborder="13" left="139" top="136" height="31" cssclass="sta_WF_td01L" right="20"/>
+              <Calendar id="calValidDtFr" taborder="3" left="147" top="141" width="91" height="21"/>
+              <Static id="Static03" taborder="14" text="~" left="calValidDtFr:0" top="139" width="21" height="21" cssclass="sta_WF_textC"/>
+              <Calendar id="calValidDtTo" taborder="4" left="Static03:4" top="141" width="91" height="21"/>
+              <Static id="Static01_01" taborder="15" text="H20" left="0" height="20" right="0" background="#fd9da0" opacity="0.5" textAlign="center" visible="false" top="167"/>
+              <Button id="btnCreate" taborder="16" height="23" cssclass="btn_WF_save01" text="생성" right="80" width="57" onclick="divSearch_btnCreate_onclick" top="Static01_01:0"/>
+              <Button id="btnCancle" taborder="17" height="23" cssclass="btn_WF_cancel01" text="닫기" right="20" width="57" onclick="btnCancle_onclick" top="Static01_01:0"/>
+              <Static id="Static01_00" taborder="18" text="H20" left="0" height="20" bottom="0" right="0" background="#fd9da0" opacity="0.5" textAlign="center" visible="false"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsDemoUser">
+        <ColumnInfo>
+          <Column id="USER_ID" type="STRING" size="256" description="사용자ID"/>
+          <Column id="USER_NM" type="STRING" size="256" description="사용자명"/>
+          <Column id="USER_PW" type="STRING" size="256" description="비밀번호"/>
+          <Column id="VALID_YN" type="STRING" size="256" description="유효여부"/>
+          <Column id="VALID_START_DATE" type="STRING" size="256" description="유효시작일자"/>
+          <Column id="VALID_END_DATE" type="STRING" size="256" description="유효종료일자"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  데모ID 생성
+*
+*  @MenuPath    시스템관리 > 데모ID 생성
+*  @FileName    SC010P02.xfdl 
+*  @Creator     천우성
+*  @CreateDate  2020.01.26
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2020.01.26      천우성             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.Form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+    if (take.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+    {    
+        this.fnInit();
+    }
+}
+
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnInit : 초기화 함수
+ * @param  {String} N/A 
+ * @example this.fnInit();
+ */
+this.fnInit = function()
+{
+	var today = new Date();
+	var st = take.getTodayTime().date.substr(0, 8);
+	var ed = take.toDateString(take.getAddMonths(take.getTodayTime().date, +1), "yyyyMMdd");
+						
+	this.divSearch.form.calValidDtFr.set_value(st);
+	this.divSearch.form.calValidDtTo.set_value(ed);
+	this.divSearch.form.edtUserId.setFocus();
+}
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "Save" :  //저장 콜백
+            //this.alert("데모용 ID가 생성되었습니다.");
+			take.alert(this, "Info", "MS00000002", {text:this.divSearch.form.staUserId.text});
+			this.close();
+            break;
+        default :
+            break;
+    }        
+}
+
+this.divSearch_btnCreate_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.dsDemoUser.clearData();
+	
+	var sUserId 	= take.nvl( this.divSearch.form.edtUserId.value, "" );
+	var sUserNm		= take.nvl( this.divSearch.form.edtUserNm.value, "" );
+	var sUserPw		= take.nvl( this.divSearch.form.edtUserPw.value, "" );
+	var sValidDtFr	= take.nvl( this.divSearch.form.calValidDtFr.value, "" );
+	var sValidDtTo	= take.nvl( this.divSearch.form.calValidDtTo.value, "" );
+	
+	if( sUserId == "" )		take.alert(this, "Info", "MS00000014", {text:this.divSearch.form.staUserId.text});//alert("사용자ID를 입력해 주세요.");
+	if( sUserNm == "" )		take.alert(this, "Info", "MS00000014", {text:this.divSearch.form.staUserNm.text});//alert("사용자명을 입력해 주세요.");
+	if( sUserPw == "" )		take.alert(this, "Info", "MS00000014", {text:this.divSearch.form.staUserPwOk.text});//alert("비밀번호를 입력해 주세요.");
+	if( sValidDtFr == "" )	take.alert(this, "Info", "MS00000014", {text:this.divSearch.form.staValidDt.text});//alert("유효기간 시작일을 입력해 주세요.");
+	if( sValidDtTo == "" )	take.alert(this, "Info", "MS00000014", {text:this.divSearch.form.staValidDt.text});//alert("유효기간 종료일을 입력해 주세요.");
+	
+	var nRow = this.dsDemoUser.addRow();
+	this.dsDemoUser.setColumn(nRow, "USER_ID", sUserId);
+	this.dsDemoUser.setColumn(nRow, "USER_NM", sUserNm);
+	this.dsDemoUser.setColumn(nRow, "USER_PW", sUserPw);
+	this.dsDemoUser.setColumn(nRow, "VALID_YN", "Y");
+	this.dsDemoUser.setColumn(nRow, "VALID_START_DATE", sValidDtFr);
+	this.dsDemoUser.setColumn(nRow, "VALID_END_DATE", sValidDtTo);
+	
+	take.transaction(this, "Save"
+					, "SVC_LOC::sc/demoUserCreate.do"
+					, "dsDemoUser=dsDemoUser"
+					, ""
+					, ""
+					, "fnCallback"
+					);
+};
+
+this.btnCancle_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.close();
+};
+]]></Script>
+    <Bind>
+      <BindItem id="item1" compid="divSearch.form.edtUserId" propid="value" datasetid="dsSearch" columnid="USER_CD"/>
+      <BindItem id="item2" compid="divSearch.form.edtUserNm" propid="value" datasetid="dsSearch" columnid="USER_NM"/>
+      <BindItem id="item0" compid="divSearch.form.edtUserPw" propid="value" datasetid="dsSearch" columnid="USER_NM"/>
+    </Bind>
+  </Form>
+</FDL>

@@ -1,0 +1,860 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="SM030P01" width="800" height="610" titletext="설문조사 참여공지팝업" onload="Form_onload" onstepchanged="CM040P01_onstepchanged" background="#ffffff" ontimer="CM040P01_ontimer" scrolltype="none">
+    <Layouts>
+      <Layout height="610" mobileorientation="landscape" width="800" stepcount="10">
+        <Div id="divMain00" taborder="0" left="10" top="10" right="10" bottom="10" text="">
+          <Layouts>
+            <Layout>
+              <Static id="staTitleT" taborder="0" text="설문제목" left="0" top="30" width="100" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static01" taborder="1" left="staTitleT:0" top="30" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Static id="staDateT" taborder="2" text="설문기간" left="0" top="staTitleT:-1" width="100" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static02" taborder="3" left="staDateT:0" top="Static01:-1" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Edit id="edtTitle" taborder="4" left="109" top="35" height="21" onkeyup="divTimeLineReg_edtTitle_onkeyup" maxlength="33" right="10" readonly="true"/>
+              <Calendar id="calRegForm" taborder="5" left="109" top="65" width="90" height="21" dateformat="yyyy-MM-dd" cssclass="cal_WF_essential" readonly="true"/>
+              <Static id="Static14" taborder="6" text="~" left="199" top="65" width="15" height="21" cssclass="sta_WF_textC"/>
+              <Calendar id="calRegTo" taborder="7" left="214" top="65" width="90" height="21" dateformat="yyyy-MM-dd" cssclass="cal_WF_essential" readonly="true"/>
+              <Static id="Static01_00" taborder="8" text="문항정보" left="0" top="100" height="21" width="430" cssclass="sta_WF_title02"/>
+              <Div id="divLine" taborder="9" left="0" top="126" height="1" right="0" border="2px solid #e8e9ec,0px solid,0px solid"/>
+              <Div id="divDetailItem" taborder="10" left="0" top="divLine:5" right="0" bottom="45" text="">
+                <Layouts>
+                  <Layout/>
+                </Layouts>
+              </Div>
+              <Button id="btnSave00" taborder="11" text="저장" top="0" width="46" height="25" visible="true" onclick="btnSave_onclick" cssclass="btn_WF_save02" right="0"/>
+              <CheckBox id="chkClose" taborder="12" text="오늘하루그만보기" left="0" width="114" height="20" onclick="chkClose_onclick" bottom="5"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divMain01" taborder="1" left="10" top="10" right="10" bottom="10" text="" positionstep="1">
+          <Layouts>
+            <Layout>
+              <Static id="Static01" taborder="0" left="0" top="30" height="31" cssclass="sta_WF_th01L" right="0"/>
+              <Static id="staTitleT" taborder="1" text="설문제목" left="0" top="30" width="100" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static01_00" taborder="2" left="100" top="30" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Static id="staDateT" taborder="3" text="설문기간" left="0" top="staTitleT:-1" width="100" height="31" cssclass="sta_WF_th01L"/>
+              <Static id="Static02" taborder="4" left="100" top="Static01_00:-1" height="31" cssclass="sta_WF_td01L" right="0"/>
+              <Edit id="edtTitle" taborder="5" left="109" top="35" height="21" onkeyup="divTimeLineReg_edtTitle_onkeyup" maxlength="33" right="10" readonly="true"/>
+              <Calendar id="calRegForm" taborder="6" left="109" top="65" width="90" height="21" dateformat="yyyy-MM-dd" cssclass="cal_WF_essential" readonly="true"/>
+              <Static id="Static14" taborder="7" text="~" left="199" top="65" width="15" height="21" cssclass="sta_WF_textC"/>
+              <Calendar id="calRegTo" taborder="8" left="214" top="65" width="90" height="21" dateformat="yyyy-MM-dd" cssclass="cal_WF_essential" readonly="true"/>
+              <Static id="Static01_00_00" taborder="9" text="문항정보" left="0" top="100" height="21" width="430" cssclass="sta_WF_title02"/>
+              <Div id="divLine" taborder="10" left="0" top="126" height="1" right="0" border="2px solid #e8e9ec,0px solid,0px solid"/>
+              <Div id="divDetailItem" taborder="11" left="0" top="divLine:5" right="0" bottom="45" text="">
+                <Layouts>
+                  <Layout/>
+                </Layouts>
+              </Div>
+              <Button id="btnSave01" taborder="12" text="저장" top="0" width="46" height="25" visible="true" onclick="btnSave_onclick" cssclass="btn_WF_save02" right="0"/>
+              <CheckBox id="chkClose" taborder="13" text="오늘하루그만보기" left="0" width="114" height="20" onclick="chkClose_onclick" bottom="5"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divMain02" taborder="2" left="10" top="10" right="10" bottom="10" text="" positionstep="2">
+          <Layouts>
+            <Layout>
+              <Static id="Static01" taborder="0" left="0" top="0" height="31" cssclass="sta_WF_th01L" right="0"/>
+              <Edit id="edtTitle" taborder="1" left="10" top="5" height="21" right="10" readonly="true"/>
+              <Static id="Static02" taborder="2" left="0" top="30" cssclass="sta_WF_th01L" right="0" bottom="99"/>
+              <Div id="divFile" taborder="3" left="0" height="57" cssclass="div_WF_replyBox01" right="0" formscrollbartype="auto none" bottom="33">
+                <Layouts>
+                  <Layout>
+                    <Button id="btnAllDown" taborder="0" text="일괄다운로드" top="16" height="21" right="8" width="90" onclick="divFile_btnAllDown_onclick"/>
+                  </Layout>
+                </Layouts>
+              </Div>
+              <CheckBox id="chkClose" taborder="4" text="오늘하루그만보기" left="0" width="114" height="20" bottom="13" onclick="chkClose_onclick"/>
+              <WebBrowser id="wbWebEditor" taborder="5" left="10" top="40" right="10" bottom="108"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divMain03" taborder="3" left="10" top="10" right="10" bottom="10" text="" positionstep="3">
+          <Layouts>
+            <Layout>
+              <Static id="Static01" taborder="0" left="0" top="0" height="31" cssclass="sta_WF_th01L" right="0"/>
+              <Edit id="edtTitle" taborder="1" left="10" top="5" height="21" right="10" readonly="true"/>
+              <Static id="Static02" taborder="2" left="0" top="30" cssclass="sta_WF_th01L" right="0" bottom="99"/>
+              <Div id="divFile" taborder="3" left="0" height="57" cssclass="div_WF_replyBox01" right="0" formscrollbartype="auto none" bottom="33">
+                <Layouts>
+                  <Layout>
+                    <Button id="btnAllDown" taborder="0" text="일괄다운로드" top="16" height="21" right="8" width="90" onclick="divFile_btnAllDown_onclick"/>
+                  </Layout>
+                </Layouts>
+              </Div>
+              <CheckBox id="chkClose" taborder="4" text="오늘하루그만보기" left="0" width="114" height="20" bottom="13" onclick="chkClose_onclick"/>
+              <WebBrowser id="wbWebEditor" taborder="5" left="10" top="40" right="10" bottom="108"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divMain04" taborder="4" left="10" top="10" right="10" bottom="10" text="" positionstep="4">
+          <Layouts>
+            <Layout>
+              <Static id="Static01" taborder="0" left="0" top="0" height="31" cssclass="sta_WF_th01L" right="0"/>
+              <Edit id="edtTitle" taborder="1" left="10" top="5" height="21" right="10" readonly="true"/>
+              <Static id="Static02" taborder="2" left="0" top="30" cssclass="sta_WF_th01L" right="0" bottom="99"/>
+              <Div id="divFile" taborder="3" left="0" height="57" cssclass="div_WF_replyBox01" right="0" formscrollbartype="auto none" bottom="33">
+                <Layouts>
+                  <Layout>
+                    <Button id="btnAllDown" taborder="0" text="일괄다운로드" top="16" height="21" right="8" width="90" onclick="divFile_btnAllDown_onclick"/>
+                  </Layout>
+                </Layouts>
+              </Div>
+              <CheckBox id="chkClose" taborder="4" text="오늘하루그만보기" left="0" width="114" height="20" bottom="13" onclick="chkClose_onclick"/>
+              <WebBrowser id="wbWebEditor" taborder="5" left="10" top="40" right="10" bottom="108"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divMain05" taborder="5" left="10" top="10" right="10" bottom="10" text="" positionstep="5">
+          <Layouts>
+            <Layout>
+              <Static id="Static01" taborder="0" left="0" top="0" height="31" cssclass="sta_WF_th01L" right="0"/>
+              <Edit id="edtTitle" taborder="1" left="10" top="5" height="21" right="10" readonly="true"/>
+              <Static id="Static02" taborder="2" left="0" top="30" cssclass="sta_WF_th01L" right="0" bottom="99"/>
+              <Div id="divFile" taborder="3" left="0" height="57" cssclass="div_WF_replyBox01" right="0" formscrollbartype="auto none" bottom="33">
+                <Layouts>
+                  <Layout>
+                    <Button id="btnAllDown" taborder="0" text="일괄다운로드" top="16" height="21" right="8" width="90" onclick="divFile_btnAllDown_onclick"/>
+                  </Layout>
+                </Layouts>
+              </Div>
+              <CheckBox id="chkClose" taborder="4" text="오늘하루그만보기" left="0" width="114" height="20" bottom="13" onclick="chkClose_onclick"/>
+              <WebBrowser id="wbWebEditor" taborder="5" left="10" top="40" right="10" bottom="108"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divMain06" taborder="6" left="10" top="10" right="10" bottom="10" text="" positionstep="6">
+          <Layouts>
+            <Layout>
+              <Static id="Static01" taborder="0" left="0" top="0" height="31" cssclass="sta_WF_th01L" right="0"/>
+              <Edit id="edtTitle" taborder="1" left="10" top="5" height="21" right="10" readonly="true"/>
+              <Static id="Static02" taborder="2" left="0" top="30" cssclass="sta_WF_th01L" right="0" bottom="99"/>
+              <Div id="divFile" taborder="3" left="0" height="57" cssclass="div_WF_replyBox01" right="0" formscrollbartype="auto none" bottom="33">
+                <Layouts>
+                  <Layout>
+                    <Button id="btnAllDown" taborder="0" text="일괄다운로드" top="16" height="21" right="8" width="90" onclick="divFile_btnAllDown_onclick"/>
+                  </Layout>
+                </Layouts>
+              </Div>
+              <CheckBox id="chkClose" taborder="4" text="오늘하루그만보기" left="0" width="114" height="20" bottom="13" onclick="chkClose_onclick"/>
+              <WebBrowser id="wbWebEditor" taborder="5" left="10" top="40" right="10" bottom="108"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divMain07" taborder="7" left="10" top="10" right="10" bottom="10" text="" positionstep="7">
+          <Layouts>
+            <Layout>
+              <Static id="Static01" taborder="0" left="0" top="0" height="31" cssclass="sta_WF_th01L" right="0"/>
+              <Edit id="edtTitle" taborder="1" left="10" top="5" height="21" right="10" readonly="true"/>
+              <Static id="Static02" taborder="2" left="0" height="261" cssclass="sta_WF_th01L" right="0" bottom="99"/>
+              <Div id="divFile" taborder="3" left="0" height="57" cssclass="div_WF_replyBox01" right="0" formscrollbartype="auto none" bottom="33">
+                <Layouts>
+                  <Layout>
+                    <Button id="btnAllDown" taborder="0" text="일괄다운로드" top="16" height="21" right="8" width="90" onclick="divFile_btnAllDown_onclick"/>
+                  </Layout>
+                </Layouts>
+              </Div>
+              <CheckBox id="chkClose" taborder="4" text="오늘하루그만보기" left="0" width="114" height="20" bottom="13" onclick="chkClose_onclick"/>
+              <WebBrowser id="wbWebEditor" taborder="5" left="10" right="10" height="242" bottom="108"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divMain08" taborder="8" left="10" top="10" right="10" bottom="10" text="" positionstep="8">
+          <Layouts>
+            <Layout>
+              <Static id="Static01" taborder="0" left="0" top="0" height="31" cssclass="sta_WF_th01L" right="0"/>
+              <Edit id="edtTitle" taborder="1" left="10" top="5" height="21" right="10" readonly="true"/>
+              <Static id="Static02" taborder="2" left="0" height="261" cssclass="sta_WF_th01L" right="0" bottom="99"/>
+              <Div id="divFile" taborder="3" left="0" height="57" cssclass="div_WF_replyBox01" right="0" formscrollbartype="auto none" bottom="33">
+                <Layouts>
+                  <Layout>
+                    <Button id="btnAllDown" taborder="0" text="일괄다운로드" top="16" height="21" right="8" width="90" onclick="divFile_btnAllDown_onclick"/>
+                  </Layout>
+                </Layouts>
+              </Div>
+              <CheckBox id="chkClose" taborder="4" text="오늘하루그만보기" left="0" width="114" height="20" bottom="13" onclick="chkClose_onclick"/>
+              <WebBrowser id="wbWebEditor" taborder="5" left="10" right="10" height="242" bottom="108"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divMain09" taborder="9" left="10" top="10" right="10" bottom="10" text="" positionstep="9">
+          <Layouts>
+            <Layout>
+              <Static id="Static01" taborder="0" left="0" top="0" height="31" cssclass="sta_WF_th01L" right="0"/>
+              <Edit id="edtTitle" taborder="1" left="10" top="5" height="21" right="10" readonly="true"/>
+              <Static id="Static02" taborder="2" left="0" height="261" cssclass="sta_WF_th01L" right="0" bottom="99"/>
+              <Div id="divFile" taborder="3" left="0" height="57" cssclass="div_WF_replyBox01" right="0" formscrollbartype="auto none" bottom="33">
+                <Layouts>
+                  <Layout>
+                    <Button id="btnAllDown" taborder="0" text="일괄다운로드" top="16" height="21" right="8" width="90" onclick="divFile_btnAllDown_onclick"/>
+                  </Layout>
+                </Layouts>
+              </Div>
+              <CheckBox id="chkClose" taborder="4" text="오늘하루그만보기" left="0" width="114" height="20" bottom="13" onclick="chkClose_onclick"/>
+              <WebBrowser id="wbWebEditor" taborder="5" left="10" right="10" height="242" bottom="108"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsSearch">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="SURVEY_SEQ" type="STRING" size="256"/>
+          <Column id="POPUP_YN" type="STRING" size="256"/>
+          <Column id="ANONNY_YN" type="STRING" size="256"/>
+          <Column id="ENC_USER_CD" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsSurveyItemInfo">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="SURVEY_SEQ" type="STRING" size="256"/>
+          <Column id="SURVEY_ITEM_SEQ" type="STRING" size="256"/>
+          <Column id="ITEM_TITLE" type="STRING" size="256"/>
+          <Column id="ITEM_TYPE" type="STRING" size="256"/>
+          <Column id="NECESSARY_YN" type="STRING" size="256"/>
+          <Column id="DUPL_YN" type="STRING" size="256"/>
+          <Column id="REG_DT" type="STRING" size="256"/>
+          <Column id="REG_CD" type="STRING" size="256"/>
+          <Column id="MOD_DT" type="STRING" size="256"/>
+          <Column id="MOD_CD" type="STRING" size="256"/>
+          <Column id="LEGEND_ETC_YN" type="STRING" size="256"/>
+          <Column id="ITEM_TEMP_SEQ" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsLegend">
+        <ColumnInfo>
+          <Column id="LEGEND_SEQ" type="STRING" size="256"/>
+          <Column id="LEGEND_NM" type="STRING" size="256"/>
+          <Column id="LEGEND_ETC_YN" type="STRING" size="256"/>
+          <Column id="SURVEY_ITEM_SEQ" type="STRING" size="256"/>
+          <Column id="SURVEY_SEQ" type="STRING" size="256"/>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsLegendTemp">
+        <ColumnInfo>
+          <Column id="LEGEND_SEQ" type="STRING" size="256"/>
+          <Column id="LEGEND_NM" type="STRING" size="256"/>
+          <Column id="LEGEND_ETC_YN" type="STRING" size="256"/>
+          <Column id="SURVEY_ITEM_SEQ" type="STRING" size="256"/>
+          <Column id="SURVEY_SEQ" type="STRING" size="256"/>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsSurvey">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="SURVEY_SEQ" type="STRING" size="256"/>
+          <Column id="TITLE" type="STRING" size="256"/>
+          <Column id="SURVEY_START_DT" type="STRING" size="256"/>
+          <Column id="SURVEY_END_DT" type="STRING" size="256"/>
+          <Column id="SURVEY_STATUS" type="STRING" size="256"/>
+          <Column id="OPEN_YN" type="STRING" size="256"/>
+          <Column id="ANONNY_YN" type="STRING" size="256"/>
+          <Column id="POPUP_YN" type="STRING" size="256"/>
+          <Column id="REG_DT" type="STRING" size="256"/>
+          <Column id="REG_CD" type="STRING" size="256"/>
+          <Column id="REG_NM" type="STRING" size="256"/>
+          <Column id="MOD_DT" type="STRING" size="256"/>
+          <Column id="MOD_CD" type="STRING" size="256"/>
+          <Column id="CNT" type="STRING" size="256"/>
+          <Column id="RESULT_CNT" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsResult">
+        <ColumnInfo>
+          <Column id="PROJECT_CD" type="STRING" size="256"/>
+          <Column id="SURVEY_SEQ" type="STRING" size="256"/>
+          <Column id="SURVEY_ITEM_SEQ" type="STRING" size="256"/>
+          <Column id="RESULT_SEQ" type="STRING" size="256"/>
+          <Column id="ITEM_LEGEND_RESULT" type="STRING" size="256"/>
+          <Column id="ITEM_RESULT" type="STRING" size="256"/>
+          <Column id="REG_CD" type="STRING" size="256"/>
+          <Column id="REG_DT" type="STRING" size="256"/>
+          <Column id="USER_NM AS REG_NM" type="STRING" size="256"/>
+          <Column id="MOD_CD" type="STRING" size="256"/>
+          <Column id="USER_NM AS MOD_NM" type="STRING" size="256"/>
+          <Column id="MOD_DT" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/**
+*  SYSTEM FORM NAME
+*
+*  @MenuPath    1Depth > 2Depth
+*  @FileName    *.xfdl 
+*  @Creator     홍길동
+*  @CreateDate  yyyy.MM.DD 
+*  @Version     1.0
+*  @Desction    설명
+* 
+************** 소스 수정 이력 *************************************************
+*    Date          Modifier            Description
+*******************************************************************************
+*  YYYY.MM.DD      홍길동             최초 생성 
+*******************************************************************************
+*/
+
+//공통 라이브러리 호출
+/*********************************************************
+ * 1.1 FORM 변수 선언 영역
+ ********************************************************/
+//this.fv_nFormVal = null;     //용도
+
+this.fv_sProjectCd = nexacro.getApplication().av_sProjectCd;
+this.fv_objDsUserInfo = nexacro.getApplication().gdsUserInfo;
+this.fv_objDsSurvey = null;
+this.fv_nStepIdx = "";
+
+/*********************************************************
+* 1.2 FORM EVENT 영역(onload등)
+********************************************************/
+/**
+* Form_onload 최초 로드시 발생되는 이벤트 (필수)
+*/
+this.Form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+   if (take.formOnLoad(this, true)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+   {    
+        //Script
+		this.fv_objDsSurvey = this.opener.dsSurveyPop;
+		
+		var nDsCnt = this.fv_objDsSurvey.rowcount;
+		var nStepCnt = this.getStepCount();
+		
+		if( nStepCnt > nDsCnt )
+		{
+			this.stepselector.set_stepcount(nDsCnt);
+		}
+		
+		this.fv_nStepIdx = 0;
+					
+		this.fnSearch("SurveyDetailSearch");		
+   }
+}
+
+/*********************************************************
+* 2 필수 FUNCTION 영역 (fnInit, fnSearch, fnSave, fnAddRow, fnDelRow)
+********************************************************/
+/**
+ * fnInit : 초기화 함수 검색조건 초기화 및 온로드 세팅
+ * @return {N/A}    N/A
+ * @example this.fnInit();
+ */
+this.fnInit = function(){
+	//검색조건
+	//var objDivSearch = this.divSearch.form;
+}
+/**
+ * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSearch("ID");
+ */
+this.fnSearch = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "SurveyDetailSearch";
+	
+	var arrNamespace = ["SurveyManagementMapper.surveyItemInfoList"
+							, "SurveyManagementMapper.surveyLegendInfoList"
+							];
+	var arrOutDs = ["dsSurveyItemInfo", "dsLegend"];
+	
+	var sProjectCd = this.fv_objDsSurvey.getColumn(this.fv_nStepIdx, "PROJECT_CD");
+	var sSurveySeq = this.fv_objDsSurvey.getColumn(this.fv_nStepIdx, "SURVEY_SEQ");
+	var sAnonnyYn = this.fv_objDsSurvey.getColumn(this.fv_nStepIdx, "ANONNY_YN");
+	
+	this.dsSearch.clearData();
+	var nRow = this.dsSearch.addRow();
+	this.dsSearch.setColumn(nRow, "PROJECT_CD", sProjectCd);
+	this.dsSearch.setColumn(nRow, "SURVEY_SEQ", sSurveySeq);
+	
+	this.dsSurveyItemInfo.clearData();
+	this.dsLegend.clearData();
+	
+	take.tranSelect
+	(
+		this, 
+		"SurveyDetailSearch", 
+		arrNamespace, 
+		["dsSearch"], 
+		arrOutDs, 
+		"", 
+		"fnCallback"
+	)
+}
+
+/**
+ * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sTranId 트랜젝션 아이디
+ * @return {N/A}    N/A
+ * @example this.fnSave("ID");
+ */
+this.fnSave = function(sTranId)
+{
+    //공통 조회에서 호출할 디폴트값 세팅 필요
+    if (take.nvl(sTranId, "")=="") sTranId = "SurveyResultSave";
+    
+	var sSurveySeq = this.opener.dsSurveyPop.getColumn(this.fv_nStepIdx, "SURVEY_SEQ");
+	var sAnonnyYn = this.opener.dsSurveyPop.getColumn(this.fv_nStepIdx, "ANONNY_YN");
+	take.transaction
+	(
+		this,
+		"SurveyResultSave",
+		"SVC_LOC::sm/SurveyResultSave.do",
+		"dsSurvey=dsSurvey:U dsResult=dsResult:U",
+		"",
+		"sAnonnyYn="+sAnonnyYn + " sSurveySeq="+sSurveySeq,
+		"fnCallback"
+	);
+}
+
+/**
+ * fnAddRow : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+ * @example this.fnAddRow(sGrdId, nRow);
+ */
+this.fnAddRow = function(sGrdId, nRow)
+{
+    //공통 행추가에서 호출할 디폴트값 세팅
+    if (take.nvl(sGrdId, "")=="") sGrdId = "Grid00";
+    
+    //Script
+}
+
+/**
+ * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+ * @param  {String} sGridId 그리드 아이디
+ * @param  {Number, Array} arrnRow    deleteRow 리턴값
+ * @return {N/A} N/A
+ * @example this.fnDelRow(sGrdId, nRow); 
+ */
+this.fnDelRow = function(sGrdId, arrnRow)
+{    
+    //공통 행추가에서 호출할 디폴트값 세팅
+    if (take.nvl(sGrdId, "")=="") sGrdId = "Grid00";
+    
+    //Script
+}
+
+/*********************************************************
+ * 3 각 COMPONENT 별 EVENT 영역
+  ********************************************************/
+/**
+* component_onclick : ~ 버튼 클릭
+*/
+this.component_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    //Script
+};
+
+/*********************************************************
+* 4 사용자 FUNCTION 영역
+********************************************************/
+/**
+ * fnUserFunction : 사용자 함수
+ * @param  {String} sParam 문자형 인자
+ * @param  {Number} nParam 숫자형 인자
+ * @example this.fnUserFunction(sParam, nParam);
+ */
+this.fnUserFunction = function(sParam, nParam)
+{    
+    //Script
+}
+
+/*********************************************************
+ * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+ ********************************************************/
+/**
+* fnCallback : transaction callback
+* @param  : sId      - 서비스 아이디 (공통 콜백에서 넘어옴)
+* @param  : nErrCd   - 에러코드 (공통 콜백에서 넘어옴)
+* @param  : sErrMsg  - 에러메세지 (공통 콜백에서 넘어옴)
+* @return : N/A
+* @example :  
+*/
+this.fnCallback = function(sId, nErrCd, sErrMsg)
+{
+    //Transaction 에러는 공통에서 처리
+    
+    //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+    if( sErrMsg == "SUCC" )
+    {
+        //Success Script      
+    } else {
+        //Etc Script
+    }   
+    
+    switch(sId)
+    {
+        case "SurveyDetailSearch" :  //조회 콜백
+            //Script
+			var nStepIdx = this.fv_nStepIdx;
+			nStepIdx = nStepIdx.toString().lpad(2, "0");
+			
+			var objMain = this.components["divMain" + nStepIdx];
+			var sTitle = this.opener.dsSurveyPop.getColumn( this.fv_nStepIdx, "TITLE" );
+			var sStartDt = this.opener.dsSurveyPop.getColumn( this.fv_nStepIdx, "SURVEY_START_DT" );
+			var sEndDt = this.opener.dsSurveyPop.getColumn( this.fv_nStepIdx, "SURVEY_END_DT" );
+			
+			objMain.form.edtTitle.set_value(sTitle);			
+			objMain.form.calRegForm.set_value(sStartDt);
+			objMain.form.calRegTo.set_value(sEndDt);
+			
+			for( var i=0; i<this.dsSurveyItemInfo.rowcount; i++ )
+			{
+				this.fnSetItemComp(this.fv_nStepIdx, i, "INIT");
+			}
+			
+            break;
+		case "SurveyResultSave"	 : //저장 콜백
+			take.alert(this, "Info", "저장이 완료되었습니다.");			
+			this.close();
+			
+			break;
+        default :
+            break;
+    }
+}
+
+this.CM040P01_onstepchanged = function(obj:nexacro.Form,e:nexacro.StepChangeEventInfo)
+{
+	var nStepIdx = this.getStepIndex();
+
+	this.fv_nStepIdx = nStepIdx;
+					
+	this.fnSearch("SurveyDetailSearch");
+};
+
+this.chkClose_onclick = function(obj:nexacro.CheckBox,e:nexacro.ClickEventInfo)
+{
+	var sUserId = this.fv_objDsUserInfo.getColumn(0, "USER_ID");
+	var sSurveySeq = this.opener.dsSurveyPop.getColumn( this.fv_nStepIdx, "SURVEY_SEQ" );
+	var sKey = sUserId + "_" + sSurveySeq;
+	
+	//20210107 정해원 cookie 정책에 따른 수정
+	//take.setCookie('notiPop'+sKey, 'Y' , 1 );
+	take.setCookie('surveyPop'+sKey, take.toDateString(new Date(), "yyyyMMdd"));
+	this.close();
+};
+
+// 문항 보기 체크박스 클릭
+this.chkLegend_onclick = function(obj:nexacro.CheckBox,e:nexacro.ClickEventInfo){
+	var sId = obj.name.replace("chkLegend", "");
+	var arrId = sId.split("_");
+	var nRow1 = parseInt(arrId[0]);
+	var nRow2 = parseInt(arrId[1]);
+	
+	var sDuplYn = this.dsSurveyItemInfo.getColumn(nRow1, "DUPL_YN");
+	
+	if( "Y" != sDuplYn ) //복수선택여부 Y일경우
+	{
+		var sVal = obj.value;
+		if( "Y" == sVal )
+		{
+			var nStepIdx = parseInt(this.fv_nStepIdx);
+			var sStepIdx = nStepIdx.toString().lpad(2, "0");
+			var objDs = this.objects["dsLegendTemp" + nStepIdx + "_" + nRow1];		
+			for( var i=0; i<objDs.rowcount; i++ )
+			{
+				if( i != nRow2 )
+				{
+					var objMainDiv = this.components["divMain"+sStepIdx];
+					var objDetailDiv = objMainDiv.form.divDetailItem;
+					var objDivItem = objDetailDiv.form.components["divItem" + nRow1];
+					var objChk = objDivItem.form.components["chkLegend" + nRow1 + "_" + i];
+					
+					objChk.set_value("N");
+				}
+				
+			}		
+		}
+	}	
+};
+
+/**
+ * fnSetItemComp : 문항정보 동적 생성
+ * @example this.fnSetItemComp();
+ */
+this.fnSetItemComp = function ( nStepIdx, nRow, sGbn )
+{
+	var nDivLeft = 10;
+	var nDivTop = 0;
+	var nDivWidth = 10;
+	var nDivHeight = 100;
+	var nDivRight = 10;
+	var sStepIdx = "";
+	
+	if( 10 > nStepIdx )
+	{
+		sStepIdx = "0"+ nStepIdx.toString();
+	}
+	
+	var objMainDiv = this.components["divMain"+sStepIdx];
+	var objDetailDiv = objMainDiv.form.divDetailItem;
+	
+	
+	//div생성
+	var objDiv = new Div();
+	var sDivNm = "divItem"+nRow;
+	
+	var objDivItem = objDetailDiv.form.components[sDivNm];
+	
+	if( null != take.nvl(objDivItem) )
+	{
+		//trace("컴포넌트 존재함");
+		return false;
+	}
+	
+	if( nRow > 0 )
+	{
+		nDivTop = "divItem"+(nRow-1) + ":5";
+	}
+	
+	objDiv.init(sDivNm, nDivLeft, nDivTop, null, nDivHeight, nDivRight, null);		
+	objDetailDiv.form.addChild(sDivNm, objDiv);
+	objDiv.show();
+	objDiv.set_border("0px solid,0px solid,2px solid #e8e9ec,0px solid");
+		
+	//staticTitle생성
+	var sTitle = this.dsSurveyItemInfo.getColumn(nRow, "ITEM_TITLE");
+	var objStatic = new Static();
+	var sTitleNm = "staTitle"+nRow;
+	var nTitleTop = 10;
+	var nTitleHeight = 30;
+	objStatic.init(sTitleNm, 10, nTitleTop, 420, nTitleHeight, null, null);
+	
+	objDiv.addChild(sTitleNm, objStatic);
+	objStatic.show();
+	
+	var sItemType = this.dsSurveyItemInfo.getColumn(nRow, "ITEM_TYPE");
+	var sSurveyItemSeq = this.dsSurveyItemInfo.getColumn(nRow, "SURVEY_ITEM_SEQ");	
+	var sNecessaryYn = this.dsSurveyItemInfo.getColumn(nRow, "NECESSARY_YN");
+	var sDuplYn = this.dsSurveyItemInfo.getColumn(nRow, "DUPL_YN");		
+	var sTitleTxt = (nRow+1) + ". " + sTitle;
+	
+	if( "Y" == sNecessaryYn && "Y" == sDuplYn )
+	{
+		sTitleTxt = sTitleTxt + " (필수, 복수선택 가능)";
+	}
+	else if( "Y" == sNecessaryYn && "Y" != sDuplYn )
+	{
+		sTitleTxt = sTitleTxt + " (필수)";
+	}
+	else if( "Y" != sNecessaryYn && "Y" == sDuplYn )
+	{
+		sTitleTxt = sTitleTxt + " (복수선택 가능)";
+	}
+	
+	objStatic.set_text( sTitleTxt );
+	objStatic.set_font("bold 14px NanumGothic");
+	
+	if( "01" == sItemType )//radio보기영역 생성(객관식일경우)
+	{
+		
+		this.dsLegendTemp.clearData();
+		for( var i=0; i<this.dsLegend.rowcount; i++ )
+		{
+			var sSurveyItemSeq2 = this.dsLegend.getColumn(i, "SURVEY_ITEM_SEQ");
+			if( sSurveyItemSeq == sSurveyItemSeq2 )
+			{
+				var nTempRow = this.dsLegendTemp.addRow();
+				this.dsLegendTemp.copyRow(nTempRow, this.dsLegend, i);
+			}				
+		}		
+		
+		var sDatasetId = "dsLegendTemp"+ nStepIdx + "_" +nRow;
+		var objLegendDs = new Dataset;
+		objLegendDs.set_name(sDatasetId);
+		this.addChild(sDatasetId, objLegendDs);
+		
+		objLegendDs.set_enableevent(false);
+		var nColId, sColInfo,sColSize,sColType;
+		var objDs = this.dsLegendTemp;
+		var nColCnt = this.dsLegendTemp.getColCount();
+		for(var i=0; i<nColCnt; i++)
+		{
+			nColId	 = objDs.getColID(i);
+			sColInfo = objDs.getColumnInfo(i);
+			sColSize = sColInfo.size;
+			sColType = sColInfo.type;
+			objLegendDs.addColumn(nColId,sColType,sColSize);
+		}
+		objLegendDs.set_enableevent(true);
+		objLegendDs.appendData(this.dsLegendTemp);
+		
+		var nChkLeft = 10;
+		var nChkRight = 50;
+		var nChkHeght = 25;
+ 		var nChkInterval = 25;
+		for( var i=0; i<objLegendDs.rowcount; i++ )
+		{
+			var objCheckBox = new CheckBox();
+			var sChkNm = "chkLegend" + nRow + "_" + i;
+			var sChkTop = ( 0 == i ) ? sTitleNm + ":5" : "chkLegend" + nRow + "_" + (i-1) + ":5";
+			objCheckBox.init(sChkNm, nChkLeft, sChkTop, null, nChkHeght, nChkRight, null);
+			objDiv.addChild(sChkNm, objCheckBox);
+			objCheckBox.show();
+
+			var sLegendSeq = objLegendDs.getColumn(i, "LEGEND_SEQ");
+			var sLegendNm = objLegendDs.getColumn(i, "LEGEND_NM");
+			objCheckBox.set_text(sLegendNm);
+			objCheckBox.set_falsevalue("N");
+			objCheckBox.set_truevalue("Y");			
+			objCheckBox.set_value("N");
+			
+			objCheckBox.addEventHandler( "onclick", this.chkLegend_onclick, this);
+		}
+		
+		//this.removeChild(sDatasetId);
+		
+		var sEtcYn = this.dsSurveyItemInfo.getColumn(nRow, "LEGEND_ETC_YN");
+		if( "Y" == sEtcYn )
+		{
+			//editbox 기타의견 생성
+			var sLastChkNm = "chkLegend" + nRow + "_" + (objLegendDs.rowcount-2);
+			var nEtcTop = sLastChkNm + ":5";
+			var objEtcEdit = new Edit();
+			var sEtcEditNm = "edtEtcAnswer"+nRow;
+			objEtcEdit.init(sEtcEditNm, 100, nEtcTop, null, 25, 100, null);
+			objDiv.addChild(sEtcEditNm, objEtcEdit);
+			objEtcEdit.show();
+		}
+		
+		var nRadioHeght = (nChkHeght * objLegendDs.rowcount) + (5*(objLegendDs.rowcount-1))
+ 		nDivHeight = (nDivHeight + nRadioHeght) - 30;
+ 		objDiv.set_height(nDivHeight);
+	}
+	else //주관식
+	{
+		//staticTitle생성
+		var objStatic01 = new Static();
+		var sTitleNm01 = "staTitle01"+nRow;
+		objStatic01.init(sTitleNm01, 20, sTitleNm + ":5", 50, 30, null, null);		
+		objDiv.addChild(sTitleNm01, objStatic01);
+		objStatic01.show();
+		objStatic01.set_text( "답변" );
+		
+		//editbox생성
+		var objEdit = new Edit();
+		var sEditNm = "edtAnswer"+nRow;
+		objEdit.init(sEditNm, sTitleNm01 + ":10", sTitleNm + ":10", null, 30, 100, null);
+		objDiv.addChild(sEditNm, objEdit);
+		objEdit.show();
+	}	
+	
+	objDetailDiv.form.resetScroll();
+};
+
+this.btnSave_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var bValid = false;
+	for( var i=0; i<this.dsSurveyItemInfo.rowcount; i++ )
+	{
+		this.dsLegendTemp.clearData();
+		var sItemType = this.dsSurveyItemInfo.getColumn(i, "ITEM_TYPE");
+		var sSurveySeq = this.dsSurveyItemInfo.getColumn(i, "SURVEY_SEQ");
+		var sItemSeq = this.dsSurveyItemInfo.getColumn(i, "SURVEY_ITEM_SEQ");
+		var sNecessaryYn = this.dsSurveyItemInfo.getColumn(i, "NECESSARY_YN");
+		var nChkCnt = 0;
+		
+		var arrLegendIdxs = take.getFindRows(this.dsLegend, "SURVEY_ITEM_SEQ", sItemSeq);
+		
+		for( var j=0; j<arrLegendIdxs.length; j++ )
+		{
+			var nTempRow = this.dsLegendTemp.addRow();
+			this.dsLegendTemp.copyRow(nTempRow, this.dsLegend, arrLegendIdxs[j]);
+		}
+		
+		var sStepIdx = this.fv_nStepIdx;
+		sStepIdx = sStepIdx.toString().lpad(2, "0");
+		
+		var objMainDiv = this.components["divMain"+sStepIdx];
+		var objDetailDiv = objMainDiv.form.divDetailItem;
+		var objDivItem = objDetailDiv.form.components["divItem" + i];
+		var objAnswer = objDivItem.form.components["edtAnswer" + i];
+		
+		if( "01" == sItemType )
+		{
+			for( var k=0; k<this.dsLegendTemp.rowcount; k++ )
+			{
+				var objChk = objDivItem.form.components["chkLegend" + i + "_" + k];
+				var sLegenChk = objChk.value;
+				if( "Y" == sLegenChk )
+				{
+					var nRow = this.dsResult.addRow();
+					var sResultLegendSeq = this.dsLegendTemp.getColumn(k, "LEGEND_SEQ");
+					var sResultLegendNm = this.dsLegendTemp.getColumn(k, "LEGEND_NM");
+					var sEtcYn = this.dsLegendTemp.getColumn(k, "LEGEND_ETC_YN");
+					
+					this.dsResult.setColumn(nRow, "SURVEY_SEQ", sSurveySeq);
+					this.dsResult.setColumn(nRow, "SURVEY_ITEM_SEQ", sItemSeq);
+					this.dsResult.setColumn(nRow, "ITEM_LEGEND_RESULT", sResultLegendSeq);
+					
+ 					if( "Y" == sEtcYn )
+ 					{
+						var objEtcAnswer = objDivItem.form.components["edtEtcAnswer" + i];
+						this.dsResult.setColumn(nRow, "ITEM_RESULT", objEtcAnswer.value);
+ 					}
+					nChkCnt++;
+				}
+			}
+		}
+		else
+		{
+			objAnswer = objDivItem.form.components["edtAnswer" + i];
+			var nRow = this.dsResult.addRow();
+			
+			this.dsResult.setColumn(nRow, "SURVEY_SEQ", sSurveySeq);
+			this.dsResult.setColumn(nRow, "SURVEY_ITEM_SEQ", sItemSeq);
+			this.dsResult.setColumn(nRow, "ITEM_RESULT", objAnswer.value);
+		}
+		
+		if( "Y" == sNecessaryYn )
+		{
+			var nResultFindRow = this.dsResult.findRowAsNF("SURVEY_ITEM_SEQ", sItemSeq);						
+			bValid = ( nResultFindRow < 0 ) ? true : false;			
+			bValid = ("01" == sItemType && nChkCnt < 1) ? true : false;
+			
+			if( "02" == sItemType && null != objAnswer )
+			{
+				bValid = ("" == take.nvl(objAnswer.value, "")) ? true : false;				
+			}
+			
+			if( bValid )
+			{
+				take.alert(this, "Info", "필수 답변인 문항을 확인해주세요.");
+				return false;
+			}
+		}		
+	}
+	
+	trace(this.fv_objDsSurvey.saveXML());
+	var nTotalCnt = parseInt(this.fv_objDsSurvey.getColumn(this.fv_nStepIdx, "CNT"));
+	var nResultCnt = parseInt(this.fv_objDsSurvey.getColumn(this.fv_nStepIdx, "RESULT_CNT"));	
+	
+	trace( "!@!@>> nTotalCnt:   " + nTotalCnt + "     !@!@>> nResultCnt:   " + nResultCnt );
+	
+	if( (nResultCnt + 1) == nTotalCnt )
+	{
+		this.dsSurvey.clearData();
+		this.dsSurvey.addRow();
+		this.dsSurvey.copyRow(0, this.fv_objDsSurvey, this.fv_nStepIdx);
+		this.dsSurvey.setColumn(0, "SURVEY_STATUS", "03");
+		
+		this.dsSurvey.set_updatecontrol(false);	
+		this.dsSurvey.setRowType(0, Dataset.ROWTYPE_UPDATE);
+		this.dsSurvey.set_updatecontrol(true);
+	}
+	
+	trace("!@!@>> RowType:  " + this.dsSurvey.getRowType());
+	
+	this.fnSave("SurveyResultSave");
+};
+]]></Script>
+  </Form>
+</FDL>

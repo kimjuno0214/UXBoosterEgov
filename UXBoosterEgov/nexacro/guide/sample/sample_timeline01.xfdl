@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="sample01" width="1040" height="800" titletext="New Form">
+    <Layouts>
+      <Layout height="800" mobileorientation="landscape" width="1040">
+        <Static id="Static00" taborder="0" text="10" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" color="red" textAlign="center"/>
+        <Static id="Static03" taborder="1" text="10" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" color="red" textAlign="center" right="0"/>
+        <Static id="Static01" taborder="2" text="타임라인 목록" left="10" top="0" height="30" width="450" cssclass="sta_WF_title02"/>
+        <Grid id="Grid00" taborder="3" left="10" top="30" height="184" right="10" binddataset="Dataset00" autofittype="col" cssclass="grd_WF_timeLine">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="61"/>
+                <Column size="212"/>
+                <Column size="109"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="순번"/>
+                <Cell col="1" text="제목"/>
+                <Cell col="2" text="작성일"/>
+                <Cell col="3" text="작성자"/>
+                <Cell col="4" text="등급"/>
+                <Cell col="5" text="상태"/>
+                <Cell col="6" text="타임라인"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0" textAlign="center"/>
+                <Cell col="1" text="bind:Column1"/>
+                <Cell col="2" text="bind:Column2" textAlign="center"/>
+                <Cell col="3" text="bind:Column3" textAlign="center"/>
+                <Cell col="4" text="bind:Column4" textAlign="center" cssclass="cellGrad02"/>
+                <Cell col="5" text="bind:Column5" textAlign="center" cssclass="cellGrad05"/>
+                <Cell col="6" text="bind:Column6" textAlign="center"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+          <Column id="Column5" type="STRING" size="256"/>
+          <Column id="Column6" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">1</Col>
+            <Col id="Column1">타임라인 테스트 입니다.</Col>
+            <Col id="Column2">2019-12-10 16:41</Col>
+            <Col id="Column3">홍길동</Col>
+            <Col id="Column4">A등급</Col>
+            <Col id="Column5">작성중</Col>
+            <Col id="Column6">2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">2</Col>
+            <Col id="Column1">타임라인 테스트 입니다.</Col>
+            <Col id="Column2">2019-12-10 16:41</Col>
+            <Col id="Column3">홍길동</Col>
+            <Col id="Column4">B등급</Col>
+            <Col id="Column5">작성중</Col>
+            <Col id="Column6">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">3</Col>
+            <Col id="Column1">타임라인 테스트 입니다.</Col>
+            <Col id="Column2">2019-12-10 16:41</Col>
+            <Col id="Column3">홍길동</Col>
+            <Col id="Column4">C등급</Col>
+            <Col id="Column5">진행중</Col>
+            <Col id="Column6">0</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">4</Col>
+            <Col id="Column1">타임라인 테스트 입니다.</Col>
+            <Col id="Column2">2019-12-10 16:41</Col>
+            <Col id="Column3">홍길동</Col>
+            <Col id="Column4">C등급</Col>
+            <Col id="Column5">진행중</Col>
+            <Col id="Column6">0</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">5</Col>
+            <Col id="Column1">타임라인 테스트 입니다.</Col>
+            <Col id="Column2">2019-12-10 16:41</Col>
+            <Col id="Column3">홍길동</Col>
+            <Col id="Column4">C등급</Col>
+            <Col id="Column5">진행중</Col>
+            <Col id="Column6">0</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

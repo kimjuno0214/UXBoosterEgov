@@ -1,0 +1,900 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+*
+* @filename mappers/basicInfo/BasicInfoMapper.xml
+* @author 	basicInfo
+* @since 	2023.01.19
+* @version 	1.0
+* @see
+*
+* << 변경 이력(Modification Information) >>
+*
+* 변경번호 : #1
+* 변경일자 : 2023.01.19
+* 변경사람 : basicInfo
+* 변경내용 : 신규 생성
+ -->
+<mapper namespace="basicInfo"> 
+
+	<select id="testItemSelect" parameterType="map" timeout="0" resultType="map" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* basicInfo.testItemSelect 
+		* TB_TEST_ITEM 조회
+		* @author dooresoft
+		* @since 2023.01.20
+		*/
+		]]>
+        SELECT  A.TEST_ID                                           -- 시험ID
+        	  , A.TEST_DIV_CD										-- 시험구분코드
+              , A.GDS_CD                                            -- 품목코드        
+              , A.TEST_ITEM_CD                                      -- 시험항목코드
+              , FN_GET_COM_NM('TEST_ITEM_CD', A.TEST_ITEM_CD) TEST_ITEM_NM        -- 시험항목명
+              , A.CERT_FLD_CD                                       -- 인증분야코드
+              , A.CERT_KND_CD                                       -- 인증종류코드
+              , TEST_DIV                                          -- 시험구분              
+              , A.CL_1                                              -- 분류1
+              , A.CL_2                                              -- 분류2
+              , A.CL_3                                              -- 분류3
+              , A.CL_4                                              -- 분류4
+              , A.CL_5                                              -- 분류5
+              , A.ATACH_DOC                                         -- 부속문서
+              , A.FAUL_DIV_CD                                       -- 결함구분코드
+              , A.DETC_LIMIT										-- 검출한계
+              , A.UNIT                                              -- 단위
+              , CALC_MTH_CD                                       	-- 계산방법코드
+              , HARM_INFO_CD                                      	-- 위해정보코드
+              , (SELECT MAX(REF2) FROM CODE_INFO WHERE GROUP_ID ='HARM_INFO_CD' AND CODE_ID = A.HARM_INFO_CD) AS HARM_INFO_NM	-- 위해정보
+              , FEE													-- 수수료		
+              , SN                                                	-- 순번
+              , A.USE_YN                                            -- 사용여부
+        FROM  TB_TEST_ITEM A, CODE_INFO B, CODE_INFO C, CODE_INFO D, CODE_INFO E
+        WHERE 1 = 1
+        AND   A.TEST_ITEM_CD = B.CODE_ID
+        AND   B.GROUP_ID = 'TEST_ITEM_CD'
+        AND   A.CERT_FLD_CD = B.REF1
+        AND   A.CERT_FLD_CD = C.CODE_ID
+        AND   C.GROUP_ID = 'CERT_FLD_CD'
+        AND   A.CERT_KND_CD = D.CODE_ID
+        AND   D.GROUP_ID = 'CERT_KND_CD'
+        AND   A.GDS_CD = E.CODE_ID
+        AND   A.CERT_FLD_CD = E.REF1
+        AND   E.GROUP_ID = 'GDS_CD'
+        <if test=" TEST_ID != null and TEST_ID != '' " >
+        AND   A.TEST_ID = #{TEST_ID}
+        </if>
+        <if test=" CERT_FLD_CD != null and CERT_FLD_CD != '' " >
+        AND   A.CERT_FLD_CD = #{CERT_FLD_CD}
+        </if>
+        <if test=" CERT_KND_CD != null and CERT_KND_CD != '' " >
+        AND   A.CERT_KND_CD = #{CERT_KND_CD}
+        </if>
+        <if test=" TEST_ITEM_CD != null and TEST_ITEM_CD != '' " >
+        AND   A.TEST_ITEM_CD = #{TEST_ITEM_CD} 
+        </if>
+        <if test=" USE_YN != null and USE_YN != '' " >
+        AND   A.USE_YN = #{USE_YN}
+        </if>
+        <if test=" SEARCH_GDS_CD != null and SEARCH_GDS_CD != '' " >
+        AND   A.GDS_CD = #{SEARCH_GDS_CD} 
+        </if>
+        <if test=" GDS_CD != null and GDS_CD != '' " >
+        AND   A.GDS_CD = #{GDS_CD} 
+        </if>
+        <if test=" TEST_NM != null and TEST_NM != '' " >
+        AND   FN_GET_COM_NM('TEST_ITEM_CD', A.TEST_ITEM_CD) LIKE CONCAT('%', #{TEST_NM}, '%') 
+        </if>
+        <if test=" TEST_DIV_CD != null and TEST_DIV_CD != '' " >
+        AND   A.TEST_DIV_CD = #{TEST_DIV_CD} 
+        </if>
+        ORDER BY CAST(C.CODE_ORDER AS UNSIGNED), CAST(D.CODE_ORDER AS UNSIGNED), CAST(E.CODE_ORDER AS UNSIGNED), CAST(B.CODE_ORDER AS UNSIGNED), SN
+	</select>
+
+	<insert id="testItemInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* basicInfo.testItemInsert 
+		* TB_TEST_ITEM 등록
+		* @author dooresoft
+		* @since 2023.01.20
+		*/
+		]]>
+		INSERT INTO TB_TEST_ITEM (
+                TEST_ID                                           -- 시험ID
+              , TEST_DIV_CD										  -- 시험구분코드
+              , GDS_CD                                            -- 품목코드                
+              , TEST_ITEM_CD                                      -- 시험항목코드
+              , CERT_FLD_CD                                       -- 인증분야코드
+              , CERT_KND_CD                                       -- 인증종류코드
+              , TEST_DIV                                          -- 시험구분              
+              , CL_1                                              -- 분류1
+              , CL_2                                              -- 분류2
+              , CL_3                                              -- 분류3
+              , CL_4                                              -- 분류4
+              , CL_5                                              -- 분류5
+              , ATACH_DOC                                         -- 부속문서
+              , FAUL_DIV_CD                                       -- 결함구분코드
+              , DETC_LIMIT                                        -- 검출한계
+              , UNIT                                              -- 단위
+              , CALC_MTH_CD                                       -- 계산방법코드
+              , HARM_INFO_CD                                      -- 위해정보코드
+              , FEE												  -- 수수료
+              , SN                                                -- 순번
+              , USE_YN                                            -- 사용여부
+              , REG_DT                                            -- 등록일시
+              , RGTR_ID)                                          -- 등록자ID
+		VALUES (
+                FN_GET_KEY('TB_TEST_ITEM', 'TST')                 -- 시험ID
+              , #{TEST_DIV_CD}									  -- 시험구분코드
+              , #{GDS_CD}                                         -- 품목코드                
+              , #{TEST_ITEM_CD}                                   -- 시험항목코드
+              , #{CERT_FLD_CD}                                    -- 인증분야코드
+              , #{CERT_KND_CD}                                    -- 인증종류코드
+              , #{TEST_DIV}                                       -- 시험구분              
+              , #{CL_1}                                           -- 분류1
+              , #{CL_2}                                           -- 분류2
+              , #{CL_3}                                           -- 분류3
+              , #{CL_4}                                           -- 분류4
+              , #{CL_5}                                           -- 분류5
+              , #{ATACH_DOC}                                      -- 부속문서
+              , #{FAUL_DIV_CD}                                    -- 결함구분코드
+              , #{DETC_LIMIT}                                     -- 검출한계
+              , #{UNIT}                                           -- 단위
+              , #{CALC_MTH_CD}                                    -- 계산방법코드
+              , #{HARM_INFO_CD}                                   -- 위해정보코드
+              , #{FEE}  										  -- 수수료
+              , #{SN}                                             -- 순번
+              , #{USE_YN}                                         -- 사용여부
+              , NOW()											  -- 등록일시
+              , #{_sessionUserCd}                                 -- 등록자ID
+		)
+	</insert>
+	
+	<update id="testItemUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* basicInfo.testItemUpdate 
+		* TB_TEST_ITEM 수정
+		* @author dooresoft
+		* @since 2023.01.20
+		*/
+		]]>
+		UPDATE TB_TEST_ITEM
+		SET    MDFCN_DT = NOW()
+		     , MDFR_ID = #{_sessionUserCd}	
+		<if test=" TEST_DIV_CD != null and TEST_DIV_CD != '' ">
+		     , TEST_DIV_CD = #{TEST_DIV_CD}                                                    -- 시험구분코드
+		</if>										 
+		<if test=" GDS_CD != null and GDS_CD != '' ">
+		     , GDS_CD = #{GDS_CD}                                                              -- 품목코드
+		</if>		     
+		<if test=" TEST_ITEM_CD != null and TEST_ITEM_CD != '' ">
+		     , TEST_ITEM_CD = #{TEST_ITEM_CD}                                                  -- 시험항목코드
+		</if>
+		<if test=" CERT_FLD_CD != null and CERT_FLD_CD != '' ">
+		     , CERT_FLD_CD = #{CERT_FLD_CD}                                                    -- 인증분야코드
+		</if>
+		<if test=" CERT_KND_CD != null and CERT_KND_CD != '' ">
+		     , CERT_KND_CD = #{CERT_KND_CD}                                                    -- 인증종류코드
+		</if>
+		<if test=" TEST_DIV != null and TEST_DIV != '' ">
+		     , TEST_DIV = #{TEST_DIV}                                                          -- 시험구분
+		</if>		
+		<if test=" CL_1 != null and CL_1 != '' ">
+		     , CL_1 = #{CL_1}                                                                  -- 분류1
+		</if>
+		<if test=" CL_2 != null">
+		     , CL_2 = #{CL_2}                                                                  -- 분류2
+		</if>
+		<if test=" CL_3 != null and CL_3 != '' ">
+		     , CL_3 = #{CL_3}                                                                  -- 분류3
+		</if>
+		<if test=" CL_4 != null and CL_4 != '' ">
+		     , CL_4 = #{CL_4}                                                                  -- 분류4
+		</if>
+		<if test=" CL_5 != null and CL_5 != '' ">
+		     , CL_5 = #{CL_5}                                                                  -- 분류5
+		</if>
+		<if test=" ATACH_DOC != null and ATACH_DOC != '' ">
+		     , ATACH_DOC = #{ATACH_DOC}                                                        -- 부속문서
+		</if>
+		<if test=" FAUL_DIV_CD != null and FAUL_DIV_CD != '' ">
+		     , FAUL_DIV_CD = #{FAUL_DIV_CD}                                                    -- 결함구분코드
+		</if>
+		<if test=" DETC_LIMIT != null and DETC_LIMIT != '' ">
+		     , DETC_LIMIT = #{DETC_LIMIT}                                                      -- 검출한계
+		</if>
+		<if test=" UNIT != null and UNIT != '' ">
+		     , UNIT = #{UNIT}                                                                  -- 단위
+		</if>
+		<if test=" CALC_MTH_CD != null and CALC_MTH_CD != '' ">
+		     , CALC_MTH_CD = #{CALC_MTH_CD}                                                    -- 계산방법코드
+		</if>
+		<if test=" HARM_INFO_CD != null and HARM_INFO_CD != '' ">
+		     , HARM_INFO_CD = #{HARM_INFO_CD}                                                  -- 위해정보코드
+		</if>
+		<if test=" FEE != null and FEE != '' ">
+		     , FEE = #{FEE}                                                                    -- 수수료
+		</if>
+		<if test=" SN != null and SN != '' ">
+		     , SN = #{SN}                                                                      -- 순번
+		</if>
+		<if test=" USE_YN != null and USE_YN != '' ">
+		     , USE_YN = #{USE_YN}                                                              -- 사용여부
+		</if>
+		WHERE  TEST_ID = #{TEST_ID}
+	</update>
+
+	<delete id="testItemDelete" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* basicInfo.testItemDelete 
+		* TB_TEST_ITEM 삭제
+		* @author dooresoft
+		* @since 2023.01.20
+		*/
+		]]>
+		DELETE FROM TB_TEST_ITEM
+		WHERE  1 = 1
+		AND APLCN_YMD = #{APLCN_YMD}
+		AND TEST_ID = #{TEST_ID}
+	</delete>
+	
+	<select id="aplcnYmdSelect" parameterType="map" timeout="0" resultType="map" useCache="false">
+		<![CDATA[
+			/*
+			*
+			* basicInfo.aplcYmdSelect 
+			* 적용일자 조회
+			* @author dooresoft
+			* @since 2023.01.20
+			*/
+		]]>	
+		SELECT DISTINCT APLCN_YMD AS CODE
+		                ,DATE_FORMAT(APLCN_YMD, '%Y-%m-%d') NAME
+		FROM   TB_TEST_ITEM
+		ORDER BY APLCN_YMD DESC 
+	</select>
+	
+	<insert id="mkAplcnYmd" parameterType="map" timeout="0">
+        <![CDATA[
+		/*
+		*
+		* basicInfo.mkAplcnYmd 
+		* 적용일자 추가
+		* @author dooresoft
+		* @since 2023.01.27
+		*/
+		]]>
+		<![CDATA[
+			{ call SP_MK_APLCNYMD(#{APLCN_YMD}, #{TEST_ID}, #{DETAIL_GDS_ID}, #{_sessionUserCd}) }
+		]]>
+	</insert>	
+	
+	<select id="aplcnRefeSelect" parameterType="map" timeout="0" resultType="map" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* basicInfo.aplcnRefeSelect 
+		* TB_APLCN_REFE 조회
+		* @author dooresoft
+		* @since 2023.02.03
+		*/
+		]]>
+        SELECT
+			  '0' AS CHK
+        	  , APLCN_YMD                                         -- 적용일자
+              , TEST_ID                                           -- 시험ID
+              , DETAIL_GDS_ID                                     -- 세부품목ID
+              , REFE                                              -- 기준치
+              , INEQ_CD                                           -- 부등호코드
+        FROM TB_APLCN_REFE
+        WHERE 1 = 1
+        <if test=" APLCN_YMD != null and APLCN_YMD != '' " >
+        AND APLCN_YMD = #{APLCN_YMD}
+        </if>
+        <if test=" TEST_ID != null and TEST_ID != '' " >
+        AND TEST_ID = #{TEST_ID}
+        </if>
+        <if test=" SEARCH_DETAIL_GDS_ID != null and SEARCH_DETAIL_GDS_ID != '' " >
+        AND DETAIL_GDS_ID = #{SEARCH_DETAIL_GDS_ID}
+        </if>
+        <if test=" DETAIL_GDS_ID != null and DETAIL_GDS_ID != '' " >
+        AND DETAIL_GDS_ID = #{DETAIL_GDS_ID}
+        </if>
+        ORDER BY APLCN_YMD DESC
+	</select>
+	
+<select id="aplcnRefe" parameterType="map" timeout="0" resultType="map" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* basicInfo.aplcnRefe 
+		* TB_APLCN_REFE 조회
+		* @author dooresoft
+		* @since 2023.02.03
+		*/
+		]]>
+        SELECT DISTINCT APLCN_YMD                                         -- 적용일자
+        FROM TB_APLCN_REFE
+        WHERE 1 = 1
+        <if test=" TEST_ID != null and TEST_ID != '' " >
+        AND TEST_ID = #{TEST_ID}
+        </if>
+        <if test=" DETAIL_GDS_ID != null and DETAIL_GDS_ID != '' " >
+        AND DETAIL_GDS_ID = #{DETAIL_GDS_ID}
+        </if>
+        ORDER BY APLCN_YMD DESC
+	</select>	
+
+	<insert id="aplcnRefeInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* basicInfo.aplcnRefeInsert 
+		* TB_APLCN_REFE 등록
+		* @author dooresoft
+		* @since 2023.02.03
+		*/
+		]]>
+		INSERT INTO TB_APLCN_REFE (
+                APLCN_YMD                                         -- 적용일자
+              , TEST_ID                                           -- 시험ID
+              , DETAIL_GDS_ID                                     -- 세부품목ID
+              , REFE                                              -- 기준치
+              , INEQ_CD                                           -- 부등호코드
+              , REG_DT                                            -- 등록일시
+              , RGTR_ID)                                          -- 등록자ID
+		VALUES (
+                #{APLCN_YMD}                                      -- 적용일자
+              , #{TEST_ID}                                        -- 시험ID
+              , #{DETAIL_GDS_ID}                                  -- 세부품목ID
+              , #{REFE}                                           -- 기준치
+              , #{INEQ_CD}                                        -- 부등호코드
+              , NOW()                                             -- 등록일시
+              , #{_sessionUserCd}                                 -- 등록자ID
+		)
+	</insert>
+
+	<update id="aplcnRefeUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* basicInfo.aplcnRefeUpdate 
+		* TB_APLCN_REFE 수정
+		* @author dooresoft
+		* @since 2023.02.03
+		*/
+		]]>
+		UPDATE TB_APLCN_REFE
+		SET    MDFCN_DT =NOW()		    
+		     , MDFR_ID = #{_sessionUserCd}
+		<if test=" REFE != null and REFE != '' ">
+		     , REFE = #{REFE}                                                                  -- 기준치
+		</if>
+		<if test=" INEQ_CD != null and INEQ_CD != '' ">
+		     , INEQ_CD = #{INEQ_CD}                                                            -- 부등호코드
+		</if>
+		WHERE  APLCN_YMD = #{APLCN_YMD}
+		AND    TEST_ID = #{TEST_ID}
+		AND    DETAIL_GDS_ID = #{DETAIL_GDS_ID}
+	</update>
+
+	<delete id="aplcnRefeDelete" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* basicInfo.aplcnRefeDelete 
+		* TB_APLCN_REFE 삭제
+		* @author dooresoft
+		* @since 2023.02.03
+		*/
+		]]>
+		DELETE FROM TB_APLCN_REFE
+		WHERE  1 = 1
+		AND APLCN_YMD = #{APLCN_YMD}
+		AND TEST_ID = #{TEST_ID}
+		AND DETAIL_GDS_ID = #{DETAIL_GDS_ID}
+	</delete>
+		
+	<select id="gdsSelect" parameterType="map" timeout="0" resultType="map" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* basicInfo.gdsSelect 
+		* TB_GDS 조회
+		* @author dooresoft
+		* @since 2023.01.30
+		*/
+		]]>
+        SELECT  A.DETAIL_GDS_ID                                     -- 세부품목ID        	  
+              , A.GDS_CD											-- 품목코드
+              , D.CODE_NM  GDS_NM            						-- 품목명
+              , D.REF3												-- 간사기관코드
+              , FN_GET_COM_NM('TEST_INST_CD', D.REF3) REF3_NM		-- 간사기관명
+              , A.CERT_FLD_CD                                       -- 인증분야코드
+              , B.CODE_NM  CERT_FLD_NM        						-- 인증분야명
+              , A.CERT_KND_CD                                       -- 인증종류코드
+              , C.CODE_NM  CERT_KND_NM        						-- 인증종류명
+              , A.DETAIL_GDS_NM                                     -- 세부품목명
+              , A.STTY_PRDUCT_CL_CD                                	-- 법정제품분류코드
+              , A.SN                                                -- 순번
+              , A.USE_YN                                            -- 사용여부
+              , '' GDS_CD
+        FROM TB_GDS A, CODE_INFO B, CODE_INFO C, CODE_INFO D
+        WHERE 1 = 1
+        AND   A.CERT_FLD_CD = B.CODE_ID
+        AND   B.GROUP_ID = 'CERT_FLD_CD'
+        AND   A.CERT_KND_CD = C.CODE_ID
+        AND   C.GROUP_ID = 'CERT_KND_CD'
+        AND   A.GDS_CD = D.CODE_ID
+        AND   D.GROUP_ID = 'GDS_CD'
+        <if test=" DETAIL_GDS_ID != null and DETAIL_GDS_ID != '' " >
+        AND   A.DETAIL_GDS_ID = #{DETAIL_GDS_ID}
+        </if>
+        <if test=" CERT_FLD_CD != null and CERT_FLD_CD != '' " >
+        AND   A.CERT_FLD_CD = #{CERT_FLD_CD}
+        </if>
+        <if test=" DETAIL_GDS_NM != null and DETAIL_GDS_NM != '' " >
+        AND   A.DETAIL_GDS_NM = #{DETAIL_GDS_NM}
+        </if>
+        <if test=" USE_YN != null and USE_YN != '' " >
+        AND   A.USE_YN = #{USE_YN}
+        </if>
+        <if test=" CERT_KND_CD != null and CERT_KND_CD != '' " >
+        AND   A.CERT_KND_CD = #{CERT_KND_CD}
+        </if>
+        <if test=" GDS_NM != null and GDS_NM != '' " >
+        AND   A.DETAIL_GDS_NM LIKE CONCAT('%', #{GDS_NM}, '%')
+        </if>
+        ORDER BY CAST(B.CODE_ORDER AS UNSIGNED), CAST(C.CODE_ORDER AS UNSIGNED), A.SN 
+	</select>
+
+	<insert id="gdsInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* basicInfo.gdsInsert 
+		* TB_GDS 등록
+		* @author dooresoft
+		* @since 2023.01.30
+		*/
+		]]>
+		INSERT INTO TB_GDS (
+            	DETAIL_GDS_ID                                     -- 세부품목ID
+              , GDS_CD                                            -- 품목코드
+              , CERT_FLD_CD                                       -- 인증분야코드
+              , CERT_KND_CD                                       -- 인증종류코드
+              , DETAIL_GDS_NM                                     -- 세부품목명         
+              , STTY_PRDUCT_CL_CD                                 -- 법정제품분류코드
+              , SN                                                -- 순번
+              , USE_YN                                            -- 사용여부
+              , REG_DT                                            -- 등록일시
+              , RGTR_ID)                                          -- 등록자ID
+		VALUES (
+                FN_GET_KEY('TB_GDS', 'GDS')               		  -- 세부품목ID
+              , #{GDS_CD}										  -- 품목코드	
+              , #{CERT_FLD_CD}                                    -- 인증분야코드
+              , #{CERT_KND_CD}                                    -- 인증종류코드
+              , #{DETAIL_GDS_NM}                                  -- 세부품목명
+              , #{STTY_PRDUCT_CL_CD}                              -- 법정제품분류코드 
+              , #{SN}                                             -- 순번
+              , #{USE_YN}                                         -- 사용여부
+              , NOW()											  -- 등록일시
+              , #{_sessionUserCd}                                 -- 등록자ID
+		)
+	</insert>
+
+	<update id="gdsUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* basicInfo.gdsUpdate 
+		* TB_GDS 수정
+		* @author dooresoft
+		* @since 2023.01.30
+		*/
+		]]>
+		UPDATE TB_GDS
+		SET    MDFCN_DT = NOW()
+		     , MDFR_ID = #{_sessionUserCd}
+		<if test=" GDS_CD != null ">
+		     , GDS_CD = #{GDS_CD}                                                              -- 품목코드
+		</if>
+		<if test=" CERT_FLD_CD != null and CERT_FLD_CD != '' ">
+		     , CERT_FLD_CD = #{CERT_FLD_CD}                                                    -- 인증분야코드
+		</if>
+		<if test=" CERT_KND_CD != null and CERT_KND_CD != '' ">
+		     , CERT_KND_CD = #{CERT_KND_CD}                                                    -- 인증종류코드
+		</if>
+		<if test=" DETAIL_GDS_NM != null and DETAIL_GDS_NM != '' ">
+		     , DETAIL_GDS_NM = #{DETAIL_GDS_NM}                                                -- 세부품목명
+		</if>
+		<if test=" STTY_PRDUCT_CL_CD != null ">
+		     , STTY_PRDUCT_CL_CD = #{STTY_PRDUCT_CL_CD}                                        -- 법정제품분류코드
+		</if>
+		<if test=" SN != null and SN != '' ">
+		     , SN = #{SN}                                                                      -- 순번
+		</if>
+		<if test=" USE_YN != null and USE_YN != '' ">
+		     , USE_YN = #{USE_YN}                                                              -- 사용여부
+		</if>
+		WHERE  DETAIL_GDS_ID = #{DETAIL_GDS_ID}
+	</update>
+
+	<delete id="gdsDelete" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* basicInfo.gdsDelete 
+		* TB_GDS 삭제
+		* @author dooresoft
+		* @since 2023.01.30
+		*/
+		]]>
+		DELETE FROM DOORE.TB_GDS
+		WHERE  1 = 1
+		AND DETAIL_GDS_ID = #{DETAIL_GDS_ID}
+	</delete>
+
+	<select id="gdsTestSelect" parameterType="map" timeout="0" resultType="map" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* basicInfo.gdsTestSelect 
+		* TB_GDS_TEST 조회
+		* @author dooresoft
+		* @since 2023.01.30
+		*/
+		]]>	
+		SELECT  A.TEST_ID
+	           ,A.TEST_ITEM_CD
+	           ,A.CERT_FLD_CD
+	           ,A.CERT_KND_CD
+	           ,A.GDS_CD
+	           ,A.TEST_DIV
+	           ,A.CL_1
+	           ,A.CL_2
+	           ,A.CL_3
+	           ,A.CL_4
+	           ,A.CL_5
+			   ,A.ATACH_DOC
+			   ,A.FAUL_DIV_CD
+			   ,A.DETC_LIMIT
+			   ,A.UNIT   
+			   ,A.CALC_MTH_CD
+			   ,A.HARM_INFO_CD
+			   ,#{DETAIL_GDS_ID} DETAIL_GDS_ID
+			   ,CASE WHEN B.DETAIL_GDS_ID IS NULL THEN 0  ELSE 1 END CHK
+		FROM    TB_TEST_ITEM A LEFT OUTER JOIN TB_GDS_TEST B ON A.TEST_ID = B.TEST_ID AND B.DETAIL_GDS_ID = #{DETAIL_GDS_ID}
+		       ,CODE_INFO C
+		WHERE   1 = 1
+		AND     A.TEST_ITEM_CD = C.CODE_ID
+		AND     C.GROUP_ID = 'TEST_ITEM_CD'
+		<if test=" GDS_CD != null and GDS_CD != '' " >
+        AND     A.GDS_CD = #{GDS_CD} 
+        </if>
+        <if test=" CERT_FLD_CD != null and CERT_FLD_CD != '' " >
+        AND     A.CERT_FLD_CD = #{CERT_FLD_CD}
+        </if>
+        <if test=" CERT_KND_CD != null and CERT_KND_CD != '' " >
+        AND     A.CERT_KND_CD = #{CERT_KND_CD}
+        </if>
+        <if test=" TEST_NM != null and TEST_NM != '' " >
+        AND     C.CODE_NM LIKE CONCAT('%', #{TEST_NM}, '%')
+        </if>
+         <if test=" TEST_DIV != null and TEST_DIV != '' " >
+        AND     A.TEST_DIV LIKE CONCAT('%', #{TEST_DIV}, '%')
+        </if>
+		ORDER BY CASE WHEN B.DETAIL_GDS_ID IS NULL THEN 0  ELSE 1 END DESC, A.SN
+	</select>	
+	
+	<select id="detailGdsTestSelect" parameterType="map" timeout="0" resultType="map" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* basicInfo.detailGdsTestSelect 
+		* TB_GDS_TEST 조회
+		* @author dooresoft
+		* @since 2023.01.30
+		*/
+		]]>	
+		SELECT  A.TEST_ID
+	           ,A.TEST_ITEM_CD
+	           ,A.CERT_FLD_CD
+	           ,A.CERT_KND_CD
+	           ,A.GDS_CD
+	           ,A.TEST_DIV
+	           ,A.CL_1
+	           ,A.CL_2
+	           ,A.CL_3
+	           ,A.CL_4
+	           ,A.CL_5
+			   ,A.ATACH_DOC
+			   ,A.FAUL_DIV_CD
+			   ,A.DETC_LIMIT
+			   ,A.UNIT   
+			   ,A.CALC_MTH_CD
+			   ,A.HARM_INFO_CD
+			   ,B.DETAIL_GDS_ID
+		FROM    TB_TEST_ITEM A, TB_GDS_TEST B, CODE_INFO C
+		WHERE   1 = 1
+		AND     A.TEST_ID = B.TEST_ID 
+		AND 	B.DETAIL_GDS_ID = #{SEARCH_DETAIL_GDS_ID}
+		AND     A.TEST_ITEM_CD = C.CODE_ID
+		AND     C.GROUP_ID = 'TEST_ITEM_CD'
+        <if test=" CERT_FLD_CD != null and CERT_FLD_CD != '' " >
+        AND     A.CERT_FLD_CD = #{CERT_FLD_CD}
+        </if>
+        <if test=" CERT_KND_CD != null and CERT_KND_CD != '' " >
+        AND     A.CERT_KND_CD = #{CERT_KND_CD}
+        </if>
+		ORDER BY CASE WHEN B.DETAIL_GDS_ID IS NULL THEN 0  ELSE 1 END DESC, A.SN
+	</select>		
+	
+	<insert id="gdsTestInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* basicInfo.gdsTestInsert 
+		* TB_GDS_TEST 등록
+		* @author dooresoft
+		* @since 2023.02.13
+		*/
+		]]>
+		INSERT INTO TB_GDS_TEST (
+                DETAIL_GDS_ID                                     -- 세부품목ID
+              , TEST_ID                                           -- 시험ID
+              , REG_DT                                            -- 등록일시
+              , RGTR_ID)                                          -- 등록자ID
+		VALUES (
+                #{DETAIL_GDS_ID}                                  -- 세부품목ID
+              , #{TEST_ID}                                        -- 시험ID
+              , NOW()                                             -- 등록일시
+              , #{_sessionUserCd}                                 -- 등록자ID
+		)
+	</insert>
+
+	<update id="gdsTestUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* basicInfo.gdsTestUpdate 
+		* TB_GDS_TEST 수정
+		* @author dooresoft
+		* @since 2023.02.13
+		*/
+		]]>
+		UPDATE TB_GDS_TEST
+		SET    MDFCN_DT =NOW()
+		     , MDFR_ID = #{_sessionUserCd}
+		WHERE  DETAIL_GDS_ID = #{DETAIL_GDS_ID}
+		AND    TEST_ID = #{TEST_ID}
+	</update>
+
+	<delete id="gdsTestDelete" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* basicInfo.gdsTestDelete 
+		* TB_GDS_TEST 삭제
+		* @author dooresoft
+		* @since 2023.02.13
+		*/
+		]]>
+		DELETE FROM TB_GDS_TEST
+		WHERE  1 = 1
+		AND DETAIL_GDS_ID = #{DETAIL_GDS_ID}
+		AND TEST_ID = #{TEST_ID}
+	</delete>	
+	
+	<insert id="codeInfoInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* basicInfo.codeInfoInsert
+		* 코드정보 입력
+		* @author takeit
+		* @since 2023.01.28
+		*/
+		]]>
+		INSERT INTO CODE_INFO (
+			CODE_KEY
+			, GROUP_ID
+			, CODE_ID
+			, PARENT_KEY
+			, CODE_NM
+			, ML_CD
+			<if test="REF1 != '' and REF1 != null">
+			, REF1																
+			</if>
+			<if test="REF2 != '' and REF2 != null">
+			, REF2																
+			</if>
+			<if test="REF3 != '' and REF3 != null">
+			, REF3																
+			</if>
+			<if test="REF4 != '' and REF4 != null">
+			, REF4
+			</if>
+			<if test="REF5 != '' and REF5 != null">
+			, REF5
+			</if>
+			, DESC_TXT
+			, CODE_ORDER
+			, USE_YN
+			, REG_DT
+			, REG_CD
+		)
+		VALUES (
+			  FN_GET_KEY('CODE_INFO', '')							                -- code key
+			, #{GROUP_ID}															-- 그룹ID
+			, FN_GET_KEY('CODE_ID', #{GROUP_ID})									-- 코드ID
+			, #{PARENT_KEY}															-- 부모KEY
+			, #{CODE_NM}															-- 코드명
+			, #{ML_CD}																-- 다국어코드
+			<if test="REF1 != '' and REF1 != null">
+			, #{REF1}																-- 참조1
+			</if>
+			<if test="REF2 != '' and REF2 != null">
+			, #{REF2}																-- 참조2
+			</if>
+			<if test="REF3 != '' and REF3 != null">
+			, #{REF3}																-- 참조3
+			</if>
+			<if test="REF4 != '' and REF4 != null">
+			, #{REF4}																-- 참조4
+			</if>
+			<if test="REF5 != '' and REF5 != null">
+			, #{REF5}																-- 참조5
+			</if>	
+			, #{DESC_TXT}															-- 상세설명
+			, #{CODE_ORDER}															-- 코드정렬순서
+			, #{USE_YN}						                                        -- 사용여부
+			, <include refid="CommonInc.sysdate" />									-- 등록일시
+			, #{_sessionUserCd}														-- 등록자코드
+		)
+	</insert>
+	
+
+	<select id="testPosblInstSelect" parameterType="map" timeout="0" resultType="map" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* basicInfo.testPosblInstSelect 
+		* TB_TEST_POSBL_INST 조회
+		* @author dooresoft
+		* @since 2023.01.30
+		*/
+		]]>		
+		SELECT A.CODE_ID TEST_INST_CD
+			  ,CASE WHEN B.TEST_INST_CD IS NULL THEN 0  ELSE 1 END CHK
+			  ,#{SEARCH_DETAIL_GDS_ID} AS DETAIL_GDS_ID
+		FROM   CODE_INFO A LEFT OUTER JOIN TB_TEST_POSBL_INST B ON A.CODE_ID = B.TEST_INST_CD AND B.DETAIL_GDS_ID = #{SEARCH_DETAIL_GDS_ID}
+		WHERE  A.GROUP_ID = 'TEST_INST_CD'
+		AND    (B.TEST_INST_CD IS NOT NULL OR A.USE_YN = 'Y')
+		ORDER BY CAST(A.CODE_ORDER AS UNSIGNED)
+	</select>
+	
+	<insert id="testPosblInstInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* basicInfo.testPosblInstInsert 
+		* TB_TEST_POSBL_INST 등록
+		* @author dooresoft
+		* @since 2023.01.31
+		*/
+		]]>
+		INSERT INTO TB_TEST_POSBL_INST (
+                DETAIL_GDS_ID                              		  -- 세부품목ID
+              , TEST_INST_CD                                      -- 시험기관CD
+              , REG_DT                                            -- 등록일시
+              , RGTR_ID)                                          -- 등록자ID
+		VALUES (
+                #{DETAIL_GDS_ID}		                          -- 세부품목ID
+              , #{TEST_INST_CD}                                   -- 시험기관CD
+              , NOW()                							  -- 등록일시
+              , #{_sessionUserCd}                                 -- 등록자ID
+		) 
+		ON DUPLICATE KEY UPDATE
+			    MDFCN_DT = NOW()
+		      , MDFR_ID = #{_sessionUserCd}
+	</insert>
+	
+	<delete id="testPosblInstDelete" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* basicInfo.testPosblInstDelete 
+		* TB_TEST_POSBL_INST 삭제
+		* @author dooresoft
+		* @since 2023.02.02
+		*/
+		]]>
+		DELETE FROM TB_TEST_POSBL_INST
+		WHERE  1 = 1
+		AND DETAIL_GDS_ID = #{DETAIL_GDS_ID}
+		AND TEST_INST_CD = #{TEST_INST_CD}
+	</delete>
+	
+	<update id="secrInstUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* basicInfo.secrInstUpdate 
+		* CODE_INFO 간사기관 업데이트
+		* @author dooresoft
+		* @since 2023.02.10
+		*/
+		]]>
+		UPDATE CODE_INFO
+		SET    REF3 = #{REF3}
+		WHERE  GROUP_ID = 'GDS_CD'
+		AND    CODE_ID = #{GDS_CD}
+	</update>		
+	
+	
+	<select id="commonTestItemSelect" parameterType="map" timeout="0" resultType="map" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* basicInfo.commonTestItemSelect 
+		* TB_TEST_ITEM 공통시험항목 조회(어린이제품 공통시험항목)
+		* @author dooresoft
+		* @since 2023.03.06
+		*/
+		]]>
+        SELECT  A.TEST_ID                                           -- 시험ID
+        	  , A.TEST_DIV_CD										-- 시험구분코드
+              , A.GDS_CD                                            -- 품목코드        
+              , A.TEST_ITEM_CD                                      -- 시험항목코드
+              , FN_GET_COM_NM('TEST_ITEM_CD', A.TEST_ITEM_CD) TEST_ITEM_NM        -- 시험항목명
+              , A.CERT_FLD_CD                                       -- 인증분야코드
+              , A.CERT_KND_CD                                       -- 인증종류코드
+              , A.TEST_DIV                                          -- 시험구분              
+              , A.CL_1                                              -- 분류1
+              , A.CL_2                                              -- 분류2
+              , A.CL_3                                              -- 분류3
+              , A.CL_4                                              -- 분류4
+              , A.CL_5                                              -- 분류5
+              , A.ATACH_DOC                                         -- 부속문서
+              , A.FAUL_DIV_CD                                       -- 결함구분코드
+              , A.DETC_LIMIT										-- 검출한계
+              , A.UNIT                                              -- 단위
+              , CALC_MTH_CD                                       	-- 계산방법코드
+              , HARM_INFO_CD                                      	-- 위해정보코드
+              , (SELECT MAX(REF2) FROM CODE_INFO WHERE GROUP_ID ='HARM_INFO_CD' AND CODE_ID = A.HARM_INFO_CD) AS HARM_INFO_NM	-- 위해정보
+              , FEE													-- 수수료		
+              , SN                                                	-- 순번
+              , A.USE_YN                                            -- 사용여부
+        FROM  TB_TEST_ITEM A
+        WHERE 1 = 1
+        <if test=" TEST_ID != null and TEST_ID != '' " >
+        AND   A.TEST_ID = #{TEST_ID}
+        </if>
+        <if test=" TEST_NM != null and TEST_NM != '' " >
+        AND   FN_GET_COM_NM('TEST_ITEM_CD', A.TEST_ITEM_CD) LIKE CONCAT('%', #{TEST_NM}, '%') 
+        </if>
+        <if test=" CERT_FLD_CD != null and CERT_FLD_CD != '' " >
+        AND   A.CERT_FLD_CD = #{CERT_FLD_CD}
+        </if>
+        <if test=" TEST_ITEM_CD != null and TEST_ITEM_CD != '' " >
+        AND   A.TEST_ITEM_CD = #{TEST_ITEM_CD} 
+        </if>
+        <if test=" USE_YN != null and USE_YN != '' " >
+        AND   A.USE_YN = #{USE_YN}
+        </if>
+        <if test=" TEST_DIV_CD != null and TEST_DIV_CD != '' " >
+        AND   A.TEST_DIV_CD = #{TEST_DIV_CD} 
+        </if>
+        ORDER BY SN
+	</select>	
+</mapper>

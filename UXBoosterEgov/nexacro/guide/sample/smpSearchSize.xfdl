@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="smpSearchSize" width="1659" height="832" titletext="New Form" onload="smpSearchSize_onload">
+    <Layouts>
+      <Layout height="832" width="1659">
+        <Div id="divSearch" taborder="0" left="0" top="0" height="73" cssclass="div_WF_searchBox01" right="0" onsize="divSearch_onsize">
+          <Layouts>
+            <Layout>
+              <Edit id="edtUserId" taborder="4" left="435" top="10" width="231" height="21" text="TEXT" onkeydown="divSearch_edtUserId_onkeydown"/>
+              <Static id="staDeptT" taborder="2" text="사용자 부서" left="19" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="cboDept" taborder="7" left="staDeptT:3" top="10" width="231" height="21" index="0" innerdataset="dsCboDept" codecolumn="CODE" datacolumn="NAME" value="Y" onitemchanged="divSearch_cboDept_onitemchanged"/>
+              <Static id="staUserIdT" taborder="3" text="ID" left="cboDept:19" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Static id="Static07" taborder="0" text="10" left="332" top="0" width="2" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static08" taborder="1" text="10" left="665" top="0" width="2" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="staUseYnT" taborder="5" text="사용여부" left="685" top="10" width="80" height="21" cssclass="sta_WF_textLImport"/>
+              <Combo id="cboUseYn" taborder="6" left="768" width="231" height="21" index="0" innerdataset="dsCboUseYn" codecolumn="CODE" datacolumn="NAME" text="사용" value="Y" onitemchanged="divSearch_cboUseYn_onitemchanged" top="10"/>
+              <Edit id="edtUserId00" taborder="8" left="435" top="38" width="231" height="21" text="TEXT" onkeydown="divSearch_edtUserId_onkeydown"/>
+              <Static id="staDeptT00" taborder="9" text="사용자 부서" left="689" top="38" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="cboDept00" taborder="10" left="768" top="38" width="231" height="21" index="0" innerdataset="dsCboDept" codecolumn="CODE" datacolumn="NAME" value="Y" onitemchanged="divSearch_cboDept_onitemchanged"/>
+              <Static id="staUserIdT00" taborder="11" text="ID" left="352" top="38" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Static id="staUseYnT00" taborder="12" text="사용여부" left="19" top="38" width="80" height="21" cssclass="sta_WF_textLImport"/>
+              <Combo id="cboUseYn00" taborder="13" left="102" width="231" height="21" index="0" innerdataset="dsCboUseYn" codecolumn="CODE" datacolumn="NAME" text="사용" value="Y" onitemchanged="divSearch_cboUseYn_onitemchanged" top="38"/>
+              <Static id="Static08_00" taborder="14" text="10" left="998" top="0" width="2" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="staUseYnT01" taborder="15" text="사용여부" left="1018" top="10" width="80" height="21" cssclass="sta_WF_textLImport"/>
+              <Combo id="cboUseYn01" taborder="16" left="1101" width="231" height="21" index="0" innerdataset="dsCboUseYn" codecolumn="CODE" datacolumn="NAME" text="사용" value="Y" onitemchanged="divSearch_cboUseYn_onitemchanged" top="10"/>
+              <Static id="Static08_00_00" taborder="17" text="20" left="1331" top="0" width="20" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static08_00_00_00" taborder="18" text="20" left="0" top="0" width="20" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <TextArea id="TextArea00" taborder="1" left="0" top="divSearch:30" right="0" bottom="0"/>
+        <Button id="Button00" taborder="2" text="정의" left="0" top="73" width="120" height="30" onclick="Button00_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+
+this.smpSearchSize_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	take.setCondInfo(this);
+};
+
+this.divSearch_onsize = function(obj:nexacro.Div,e:nexacro.SizeEventInfo)
+{
+	if (obj._tOrgWid != e.cx)
+    {
+        take.setLayout(this, obj, e.cx);
+    }
+};
+
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	
+};
+
+take.setCondInfo = function(pThis, objDiv)
+{
+    if (take.nvl(pThis,"")=="") return false;
+    
+    var objDiv, objCompList, objComp, arrCond;
+    var arrComps;
+    var nCnt;
+    
+    objDiv = take.nvl(objDiv, take.nvl(pThis["divSearch"],""));
+    
+    objDiv._tOrgWid = objDiv.getOffsetWidth();
+    
+    if (objDiv=="") return false;
+    
+    objCompList = objDiv.form.components;
+    arrComps = objCompList._idArray;
+    
+    nCnt = arrComps.length;
+    
+    if (nCnt<=0) return false;
+    
+    arrCond = pThis["_tArrCondInfo"] = new Array();
+    
+    for (var i=0; i<nCnt; i++)
+    {
+        objComp = objCompList[arrComps[i]];
+        
+        arrCond.push();
+        arrCond[i] = {
+            "id"    : objComp.name,
+            "order" : objComp.getOffsetTop().toString() + objComp.getOffsetLeft().toString(),
+            "comp"  : objComp,
+            "start" : objComp.getOffsetLeft(),
+            "end"   : objComp.getOffsetLeft() + objComp.getOffsetWidth()
+        };
+    }
+    
+    arrCond = arrCond.sort(function(a, b) { 
+        //return a["order"] - b["order"];  // 숫자일 경우
+        return a.order < b.order ? -1 : a.order > b.order ? 1 : 0;
+    });
+
+    nCnt = arrCond.length;
+    
+    for (var j=0;j<nCnt;j++)
+    {
+        arrCond[j].order = j;
+    }
+    
+    //console.dir(arrCond);
+
+}
+
+take.setLayout = function(pThis, objDiv, nWid)
+{
+    
+}
+
+take.condFind = function(arrCond, nWid)
+{
+    var nCnt;
+    
+    nCnt=arrCond.length;
+    
+    
+}
+
+// this.divSearch_onsize = function(obj:nexacro.Div,e:nexacro.SizeEventInfo)
+// {
+// //     if (obj.setOffsetWidth()==e.cx) return;
+// //     
+// //     var nCnt, nFormWid, nFormHeight, nHGap=8, nWGap=20, nCompGap=-3;
+// //     var objPForm, objCompList, objComp, objCompT;
+// //     var arrCompsId;
+// //     var sTempId;
+// //     
+// //     objPForm = obj.parent;
+// //     objCompList = obj.form.components;
+// //     arrCompsId = objCompList._idArray;
+// //     
+// //     nFormWid = e.cx;
+// //     nFormHeight = e.cy
+// //     nCnt = arrCompsId.length;
+// //     
+// //     for (var i=0; i<nCnt; i++)
+// //     {
+// //         sTempId = arrCompsId[i];
+// //         objComp = objCompList[sTempId];
+// //         
+// //         if (/^sta.*T$/.test(sTempId)) continue;
+// //         if (!objComp.visible) continue;
+// //         
+// //         if (objComp.getOffsetLeft()+objComp.getOffsetWidth()+nWGap>=e.cx)
+// //         {            
+// //             nMoveTop = objComp.getOffsetTop()+objComp.getOffsetHeight()+nHGap;
+// //             sTempId = "sta"+sTempId.substr(take.indexOfUpperCase(sTempId))+"T";
+// //             
+// //             if (arrCompsId.indexOf(sTempId)>=0)
+// //             {
+// //                 objCompT = objCompList[sTempId];
+// //                 objCompT.set_left(nWGap);
+// //                 objCompT.set_top(nMoveTop);
+// //                 
+// //                 trace("objCompT : " + objCompT.name+".left --> " + nWGap + " / top --> " + nMoveTop);
+// //                 
+// //                 objComp.set_left(objCompT.getOffsetLeft()+objCompT.getOffsetWidth()-nCompGap);
+// //                 objComp.set_top(nMoveTop);
+// //                 
+// //                 trace("objComp : " + objComp.name+".left --> " + (objCompT.getOffsetLeft()+objCompT.getOffsetWidth()-nCompGap) + " / top --> " + nMoveTop);
+// //             } else {
+// //                 objComp.set_left(nWGap);
+// //                 objComp.set_top(nMoveTop);
+// //                 
+// //                 trace("objComp : " + objComp.name+".left --> " + nWGap + " / top --> " + nMoveTop);
+// //             }
+// //             
+// //             nFormHeight+=objComp.getOffsetHeight()+nHGap;
+// //             
+// //             trace("nFormHeight --> " + nFormHeight);
+// //             
+// //             obj.set_height(nFormHeight);
+// //         }
+// //         
+// //     }
+// //     
+//     
+//     //obj.form.resetScroll();
+//     //objPForm.resetScroll();
+// };
+// 
+// take.indexOfUpperCase = function(sText)
+// {
+//     var nLen = sText.length;
+//     var sTxt;
+//     
+//     for (var i=0;i<nLen;i++)
+//     {
+//         sTxt = sText.charAt(i);
+//         
+//         if (!/[a-z]/.test(sTxt) && /[A-Z]/.test(sTxt)) return i;
+//     }
+//     
+//     return -1;
+// }
+
+]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="divSearch.form.edtUserId" propid="value" datasetid="dsSearch" columnid="USER_ID"/>
+      <BindItem id="item1" compid="divSearch.form.cboUseYn" propid="value" datasetid="dsSearch" columnid="USE_YN"/>
+      <BindItem id="item2" compid="divSearch.form.cboDept" propid="value" datasetid="dsSearch" columnid="DEPT_CD"/>
+      <BindItem id="item3" compid="divSearch.form.edtUserId00" propid="value" datasetid="dsSearch" columnid="USER_ID"/>
+      <BindItem id="item4" compid="divSearch.form.cboDept00" propid="value" datasetid="dsSearch" columnid="DEPT_CD"/>
+      <BindItem id="item5" compid="divSearch.form.cboUseYn00" propid="value" datasetid="dsSearch" columnid="USE_YN"/>
+      <BindItem id="item6" compid="divSearch.form.cboUseYn01" propid="value" datasetid="dsSearch" columnid="USE_YN"/>
+    </Bind>
+  </Form>
+</FDL>

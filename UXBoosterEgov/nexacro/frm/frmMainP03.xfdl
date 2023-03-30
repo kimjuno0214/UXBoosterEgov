@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="frmMainP03" width="1040" height="659" titletext="메인_메인_비밀번호변경">
+    <Layouts>
+      <Layout height="659" width="1040">
+        <Static id="Static03" taborder="0" text="기존비밀번호" left="10" top="10" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+        <Static id="Static04" taborder="1" text="새비밀번호" left="10" top="40" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+        <Static id="Static10" taborder="2" left="128" top="10" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Static id="Static11" taborder="3" left="128" top="40" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Edit id="Edit00" taborder="4" left="136" top="15" height="21" right="16"/>
+        <Edit id="Edit01" taborder="5" left="136" top="45" height="21" right="16"/>
+        <Button id="Button01" taborder="6" text="변경" top="111" width="46" height="23" cssclass="btn_WF_basic01" right="544"/>
+        <Static id="Static00" taborder="7" text="새비밀번호확인" left="10" top="70" width="120" height="31" cssclass="sta_WF_th01Limport"/>
+        <Static id="Static01" taborder="8" left="128" top="70" height="31" cssclass="sta_WF_td01L" right="10"/>
+        <Edit id="Edit02" taborder="9" left="136" top="75" height="21" right="16"/>
+        <Button id="Button00" taborder="10" text="취소" top="111" width="46" height="23" cssclass="btn_WF_basic01" right="491"/>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>

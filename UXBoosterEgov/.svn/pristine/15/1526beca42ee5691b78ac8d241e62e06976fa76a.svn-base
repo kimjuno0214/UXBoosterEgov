@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="Guide009" width="1659" height="832" titletext="Guide009">
+    <Layouts>
+      <Layout height="832" mobileorientation="landscape" width="1659">
+        <Static id="Static00" taborder="0" text="10" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" color="red" textAlign="center"/>
+        <Static id="Static05" taborder="1" text="10" left="10" height="10" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0" right="0"/>
+        <Static id="Static03" taborder="2" text="10" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" color="red" textAlign="center" right="0"/>
+        <Div id="divSearch" taborder="3" left="10" top="0" height="101" right="10" cssclass="div_WF_searchBox01" text="" formscrolltype="none" minwidth="1340" maxwidth="">
+          <Layouts>
+            <Layout>
+              <Static id="Static30" taborder="2" text="Label" left="690" top="10" width="80" height="21" cssclass="sta_WF_textR" minwidth="80" maxwidth=""/>
+              <Edit id="Edit00" taborder="0" left="Static30:10" top="10" height="21" width="195"/>
+              <Static id="Static01" taborder="11" text="Label" left="690" top="39" width="80" height="21" cssclass="sta_WF_textR" minwidth="80" maxwidth=""/>
+              <Edit id="Edit02" taborder="1" left="Static01:10" top="39" height="21" width="195"/>
+              <Static id="Static05" taborder="6" text="Label" left="355" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="Edit11" taborder="3" left="Static05:10" top="10" width="195" height="21"/>
+              <Static id="Static06" taborder="5" text="Label" left="355" top="39" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="Edit01" taborder="4" left="Static06:10" top="39" width="195" height="21"/>
+              <Static id="Static00" taborder="10" text="Label" left="20" top="10" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="Combo00" taborder="7" text="Combo00" left="Static00:10" top="10" width="195" height="21" cssclass="cmb_WF_essential"/>
+              <Static id="Static02" taborder="9" text="Label" left="20" top="39" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="Combo01" taborder="8" text="Combo00" left="Static02:10" top="39" width="195" height="21" cssclass="cmb_WF_essential"/>
+              <Static id="Static03" taborder="12" text="Label" left="20" top="68" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Combo id="Combo02" taborder="13" text="Combo00" left="Static03:10" top="68" width="195" height="21" cssclass="cmb_WF_essential"/>
+              <Static id="Static04" taborder="14" text="Label" left="355" top="68" width="80" height="21" cssclass="sta_WF_textR"/>
+              <Edit id="Edit03" taborder="15" left="Static04:10" top="68" width="195" height="21"/>
+              <Button id="Button00" taborder="16" text="가나다라마바" top="66" width="94" height="21" left="1119"/>
+              <Button id="Button01" taborder="17" text="가나다라마바" top="66" width="94" height="21" left="1216"/>
+              <Static id="Static07_00" taborder="18" text="20" left="0" top="0" width="20" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static07_00_00" taborder="19" text="285" left="20" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static07" taborder="20" text="50" left="305" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static07_00_00_00" taborder="21" text="285" left="355" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static08" taborder="22" text="50" left="640" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static07_00_00_00_00" taborder="23" text="285" left="690" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static08_00" taborder="24" text="50" left="975" top="0" width="50" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static07_00_00_00_00_00" taborder="25" text="285" left="1025" top="0" width="285" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" height="10"/>
+              <Static id="Static08_00_00" taborder="26" text="20" left="1310" top="0" width="20" background="rgba(255,0,0,0.4)" visible="false" color="#ff0000" textAlign="center" bottom="0"/>
+              <Static id="Static30_00" taborder="27" text="Label" left="1025" top="10" width="80" height="21" cssclass="sta_WF_textR" minwidth="80" maxwidth=""/>
+              <Static id="Static01_00" taborder="28" text="Label" left="1025" top="39" width="80" height="21" cssclass="sta_WF_textR" minwidth="80" maxwidth=""/>
+              <Edit id="Edit00_00" taborder="29" left="Static30_00:10" top="10" height="21" width="195"/>
+              <Edit id="Edit02_00" taborder="30" left="Static01_00:10" top="39" height="21" width="195"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btnShowHide" taborder="4" left="48.16%" top="101" width="60" height="10" cssclass="btn_WF_fold01"/>
+        <Static id="Static24" taborder="5" text="20" left="0" height="20" background="rgba(255,0,0,0.4)" visible="false" right="0" textAlign="center" top="111"/>
+        <Div id="divDetail" taborder="6" left="10" top="131" bottom="10" right="10" minwidth="1340" maxwidth="" minheight="690" maxheight="">
+          <Layouts>
+            <Layout>
+              <Static id="Static01" taborder="0" text="Test" left="0" top="0" height="21" cssclass="sta_WF_title02" width="280"/>
+              <Button id="Button03" taborder="8" left="295" top="26" width="10" bottom="0" cssclass="btn_WF_splitter" text=""/>
+              <Grid id="Grid00" taborder="2" left="0" top="26" binddataset="Dataset00" autofittype="col" treeinitstatus="expand,all" treeusecheckbox="false" treeuseline="false" bottom="0" fillareatype="linerow" scrollbarsize="10" right="Button03:5">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="80"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="body">
+                      <Cell text="bind:Column0" displaytype="treeitemcontrol" edittype="tree" treelevel="bind:Column1"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="Static02" taborder="1" text="Test" left="310" top="0" height="21" right="0" cssclass="sta_WF_title02"/>
+              <Grid id="Grid01" taborder="3" left="Button03:5" top="26" binddataset="Dataset01" autofittype="col" right="0" bottom="0" fillareatype="linerow">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="46"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="Column0"/>
+                      <Cell col="1" text="코드"/>
+                      <Cell col="2" text="코드명"/>
+                      <Cell col="3" text="상세설명" cssclass="cellImport"/>
+                      <Cell col="4" text="비고"/>
+                      <Cell col="5" text="정렬"/>
+                      <Cell col="6" text="사용"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:Column0" displaytype="checkboxcontrol" edittype="checkbox"/>
+                      <Cell col="1" text="bind:Column1" cssclass="cellC"/>
+                      <Cell col="2" text="bind:Column2"/>
+                      <Cell col="3" text="bind:Column3"/>
+                      <Cell col="4" text="bind:Column4"/>
+                      <Cell col="5" text="bind:Column5"/>
+                      <Cell col="6" text="bind:Column6" cssclass="cellC"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="Static23_01" taborder="4" text="5" left="281" top="83" width="27" height="30" color="red" font="normal 11px/normal &quot;Arial&quot;" visible="false"/>
+              <Static id="Static21_01" taborder="5" left="290" top="86" width="5" height="40" background="rgba(255,0,0,0.4)" visible="false" color="red" textAlign="center"/>
+              <Static id="Static21_01_00" taborder="6" left="305" top="86" width="5" height="40" background="rgba(255,0,0,0.4)" visible="false" color="red" textAlign="center"/>
+              <Static id="Static23_01_00" taborder="7" text="5" left="296" top="83" width="27" height="30" color="red" font="normal 11px/normal &quot;Arial&quot;" visible="false"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static79" taborder="7" text="모든 화면기준&#13;&#10;divSearch = 검색조건영역&#13;&#10;btnShowHide = 검색조건 접기버튼&#13;&#10;divDetail   = 상세영역" left="1666" top="18" width="134" height="72" background="red" visible="false" enable="false"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">가나다</Col>
+            <Col id="Column1">0</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0002]가나다라</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0003]가나다라_ABC</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0002]가나다라</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0003]가나다라_ABC</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0002]가나다라</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0003]가나다라_ABC</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0002]가나다라</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0003]가나다라_ABC</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0002]가나다라</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0003]가나다라_ABC</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0002]가나다라</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0003]가나다라_ABC</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="Dataset01">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+          <Column id="Column5" type="STRING" size="256"/>
+          <Column id="Column6" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column1">0002</Col>
+            <Col id="Column2">가나다라</Col>
+            <Col id="Column6">사용</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">0003</Col>
+            <Col id="Column2">가나다라</Col>
+            <Col id="Column6">사용</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">0004</Col>
+            <Col id="Column2">가나다라</Col>
+            <Col id="Column6">사용</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">0005</Col>
+            <Col id="Column2">가나다라</Col>
+            <Col id="Column6">사용</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">0002</Col>
+            <Col id="Column2">가나다라</Col>
+            <Col id="Column6">사용</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">0003</Col>
+            <Col id="Column2">가나다라</Col>
+            <Col id="Column6">사용</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">0004</Col>
+            <Col id="Column2">가나다라</Col>
+            <Col id="Column6">사용</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">0005</Col>
+            <Col id="Column2">가나다라</Col>
+            <Col id="Column6">사용</Col>
+          </Row>
+          <Row>
+            <Col id="Column2">가나다라</Col>
+            <Col id="Column1">0002</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">0003</Col>
+            <Col id="Column2">가나다라</Col>
+            <Col id="Column6">사용</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">0004</Col>
+            <Col id="Column2">가나다라</Col>
+            <Col id="Column6">사용</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">0005</Col>
+            <Col id="Column2">가나다라</Col>
+            <Col id="Column6">사용</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

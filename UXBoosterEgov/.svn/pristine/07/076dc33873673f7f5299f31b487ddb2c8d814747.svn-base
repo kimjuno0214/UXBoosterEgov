@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="sampleSha512" width="1280" height="720" titletext="New Form" cssclass="frm_work" onload="sampleSha512_onload">
+    <Layouts>
+      <Layout height="720" mobileorientation="landscape" width="1280">
+        <Edit id="edtInput" taborder="0" left="78" top="61" width="200" height="30"/>
+        <Static id="staSearchPopUp" taborder="1" text="- sha512 암호화" left="27" top="10" width="283" height="30" font="bold 11pt/normal &quot;Noto Sans CJK KR DemiLight&quot;,&quot;맑은 고딕&quot;"/>
+        <Static id="Static03" taborder="2" text="입력" left="27" top="61" width="50" height="30"/>
+        <TextArea id="txaReturn" taborder="3" left="78" top="101" width="200" height="68"/>
+        <Static id="Static00" taborder="4" text="결과" left="27" top="102" width="50" height="30"/>
+        <Button id="btnSha512" taborder="5" text="sha512 암호화" left="295" top="61" width="120" height="30" onclick="btnSha512_onclick"/>
+        <Static id="staSearchPopUp00" taborder="6" text="- AES 암호화" left="27" top="210" width="283" height="30" font="bold 11pt/normal &quot;Noto Sans CJK KR DemiLight&quot;,&quot;맑은 고딕&quot;"/>
+        <Static id="Static01" taborder="7" text="입력" left="27" top="251" width="50" height="30"/>
+        <Edit id="edtInput00" taborder="8" left="78" top="251" width="200" height="30"/>
+        <Static id="Static02" taborder="9" text="결과" left="27" top="292" width="50" height="30"/>
+        <TextArea id="txaReturn00" taborder="10" left="78" top="291" width="200" height="68"/>
+        <Button id="btnAESD" taborder="11" text="AES 암호화(Decrypt)" left="295" top="251" width="140" height="30" onclick="btnAESD_onclick"/>
+        <Button id="btnHEX" taborder="12" text="HEX" left="295" top="441" width="120" height="30" onclick="btnHEX_onclick"/>
+        <Static id="staSearchPopUp01" taborder="13" text="- String to HEX" left="27" top="400" width="283" height="30" font="bold 11pt/normal &quot;Noto Sans CJK KR DemiLight&quot;,&quot;맑은 고딕&quot;"/>
+        <Static id="Static04" taborder="14" text="입력" left="27" top="441" width="50" height="30"/>
+        <Edit id="edtInput01" taborder="15" left="78" top="441" width="200" height="30"/>
+        <Static id="Static05" taborder="16" text="결과" left="27" top="482" width="50" height="30"/>
+        <TextArea id="txaReturn01" taborder="17" left="78" top="481" width="200" height="68"/>
+        <Button id="btnAESE" taborder="18" text="AES 암호화(Encrypt)" left="445" top="251" width="140" height="30" onclick="btnAESE_onclick"/>
+        <Button id="Button00" taborder="19" text="CryptoJS.AES암호화" left="660" top="85" width="192" height="90" onclick="Button00_onclick"/>
+        <Button id="Button01" taborder="20" text="CryptoJS.AES복호화" left="660" top="202" width="192" height="90" onclick="Button01_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[take.loadJs(this, "sha512", "./_extlib_/Extend/sha512.js");
+take.loadJs(this, "aes", "./_extlib_/Extend/aes.js");
+
+this.fv_sVal = null;
+
+this.btnSha512_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var sVal, sRtn;
+
+    sVal = this.edtInput.value;
+    sRtn = hex_sha512(sVal);
+
+    this.txaReturn.set_value(sRtn);
+};
+
+this.btnHEX_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    var sVal, sRtn;
+
+	sVal = this.edtInput01.value;
+    sRtn = this.fnStrToHex(sVal);
+
+    this.txaReturn01.set_value(sRtn);
+};
+
+this.btnAESD_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var sVal, sRtn;
+
+	sVal = this.edtInput00.value;
+    sRtn = this.fnSecureData("D", "ab1b181d02abcd091234567823131017", "101112131415161718191a1b1c1d1e1f", sVal);
+
+    this.txaReturn00.set_value(sRtn);
+};
+
+this.btnAESE_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var sVal, sRtn;
+
+	sVal = this.edtInput00.value;
+    sRtn = this.fnSecureData("E", "ab1b181d02abcd091234567823131017", "101112131415161718191a1b1c1d1e1f", sVal);
+
+    this.txaReturn00.set_value(sRtn);
+};
+
+this.fnSecureData = function (sGbn, sKey, sIv, sVal)
+{
+	var sTemp;
+    var objDecrypt, objEncrypt;
+
+	if(sGbn == "D") //decrypted
+    {
+        //sTemp = CryptoJS.enc.Hex.parse("f90ea719fd70a5185dd4cfe57c7c53b9");//ciphertext를 hex=>base64화 하면 encrypted가 구해진다
+		//objDecrypt = CryptoJS.AES.decrypt(sTemp.toString(CryptoJS.enc.Base64), sKey, { iv: sIv });
+        sVal = CryptoJS.enc.Hex.parse(sVal);
+        sTemp = sVal.toString(CryptoJS.enc.Base64);
+        console.log("decrypt --> " + sTemp);
+        objDecrypt = CryptoJS.AES.decrypt(sTemp, sKey, { iv: sIv });
+        console.log(objDecrypt.toString(CryptoJS.enc.Utf8));
+		return objDecrypt.toString(CryptoJS.enc.Utf8);
+
+	} else { //encrypted
+		objEncrypt = CryptoJS.AES.encrypt(sVal, sKey, { iv: sIv });
+
+        console.log("edcrypt --> " + objEncrypt.toString());
+
+		return objEncrypt.ciphertext;
+	}
+}
+
+this.fnStrToHex = function(sVal)
+{
+    var sHex = "";
+
+    if (take.nvl(sVal,"")=="")
+    {
+        take.debug(this, "입력 데이터가 null 입니다.");
+        return false;
+    }
+
+    for(var i=0;i<sVal.length;i++)
+    {
+        sHex += ''+sVal.charCodeAt(i).toString(16);
+    }
+
+    return sHex;
+}
+
+
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var sVal = 'test';
+    var sKey = 'ab1b181d02abcd091234567823131017';
+    var sIv = '101112131415161718191a1b1c1d1e1f';
+    var encrypted = CryptoJS.AES.encrypt(sVal, sKey, { iv: sIv });
+    console.log(encrypted.toString());
+    //will output something like:
+    //U2FsdGVkX1/l/LqNSCQixd0iPv4neKAGZvbQDbYUovZE4OcM7l3ULNDgkZQmrweN
+    this.fv_sVal = encrypted.toString();
+};
+
+this.Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    var sKey = 'ab1b181d02abcd091234567823131017';
+    var sIv = '101112131415161718191a1b1c1d1e1f';
+    var encrypted = this.fv_sVal;
+    var decrypted = CryptoJS.AES.decrypt(encrypted, sKey, { iv: sIv });
+    console.log(decrypted.toString(CryptoJS.enc.Utf8));
+};
+
+this.sampleSha512_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	var fileref=document.createElement("script");
+
+    fileref=document.createElement("script");
+    fileref.id = "test";
+    fileref.type = "text/javascript";
+    fileref.src = "../SSYSTEM/nexacro17lib/component/ExtLib/aes.js";
+
+    if (typeof fileref!="undefined")
+        document.getElementsByTagName("head")[0].appendChild(fileref);
+};
+]]></Script>
+  </Form>
+</FDL>

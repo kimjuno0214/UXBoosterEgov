@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="smapleDateType" width="1280" height="720" titletext="날자 관련 함수 샘플">
+    <Layouts>
+      <Layout height="720" mobileorientation="landscape" width="1280">
+        <Static id="staDateTitle" taborder="0" text="날짜 관련 기능" left="5" top="5" width="190" height="30" font="bold 11pt/normal &quot;Noto Sans CJK KR DemiLight&quot;,&quot;맑은 고딕&quot;"/>
+        <Button id="btnProto00" taborder="1" text="00.Date.isLeapYear()" left="28" top="81" width="334" height="35" textAlign="left" padding="0px 0px 0px 10px" onclick="btnProto00_onclick"/>
+        <Edit id="edtProto00" taborder="2" left="412" top="81" width="137" height="35"/>
+        <Static id="Static00" taborder="3" text="--&gt;" left="362" top="81" width="50" height="35" textAlign="center"/>
+        <Button id="btnProto01" taborder="4" text="01.Date.getDaysInMonth()" left="28" top="121" width="334" height="35" textAlign="left" padding="0px 0px 0px 10px" onclick="btnProto01_onclick"/>
+        <Static id="Static01" taborder="5" text="--&gt;" left="362" top="121" width="50" height="35" textAlign="center"/>
+        <Edit id="edtProto01" taborder="6" left="412" top="121" width="137" height="35"/>
+        <Button id="btnProto02" taborder="7" text="02.Date.getAddMonths(2)" left="28" top="161" width="334" height="35" textAlign="left" padding="0px 0px 0px 10px" onclick="btnProto02_onclick"/>
+        <Static id="Static02" taborder="8" text="--&gt;" left="362" top="161" width="50" height="35" textAlign="center"/>
+        <Edit id="edtProto02" taborder="9" left="412" top="161" width="137" height="35"/>
+        <Static id="Static03" taborder="10" text="Date Prototype (Date=현재일자)" left="28" top="51" width="470" height="20"/>
+        <Button id="btnDateJs00" taborder="11" left="28" top="341" width="334" height="35" textAlign="left" padding="0px 0px 0px 10px" text="00.take.getConvertDate(&quot;20190101&quot;)" onclick="btnDateJs00_onclick"/>
+        <Edit id="edtDateJs00" taborder="12" left="412" top="341" width="137" height="35"/>
+        <Static id="Static04" taborder="13" text="--&gt;" left="362" top="341" width="50" height="35" textAlign="center"/>
+        <Button id="btnDateJs01" taborder="14" text="01.take.getConvertDate(&quot;2019-01-01&quot;)" left="28" top="381" width="334" height="35" textAlign="left" padding="0px 0px 0px 10px" onclick="btnDateJs01_onclick"/>
+        <Static id="Static05" taborder="15" text="--&gt;" left="362" top="381" width="50" height="35" textAlign="center"/>
+        <Edit id="edtDateJs01" taborder="16" left="412" top="381" width="137" height="35"/>
+        <Button id="btnDateJs02" taborder="17" text="02.take.getConvertDate(&quot;2019/01/01&quot;)" left="28" top="421" width="334" height="35" textAlign="left" padding="0px 0px 0px 10px" onclick="btnDateJs02_onclick"/>
+        <Static id="Static06" taborder="18" text="--&gt;" left="362" top="421" width="50" height="35" textAlign="center"/>
+        <Edit id="edtDateJs02" taborder="19" left="412" top="421" width="137" height="35"/>
+        <Button id="btnDateJs03" taborder="20" text="03.take.toDateString(Date,&quot;yyyyMMdd&quot;)" left="28" top="461" width="334" height="35" textAlign="left" padding="0px 0px 0px 10px" onclick="btnDateJs03_onclick"/>
+        <Edit id="edtDateJs03" taborder="21" left="412" top="461" width="137" height="35"/>
+        <Static id="Static07" taborder="22" text="--&gt;" left="362" top="461" width="50" height="35" textAlign="center"/>
+        <Button id="btnDateJs04" taborder="23" text="04.take.parseDate(&quot;20190101&quot;, &quot;yyyyMMdd&quot;)" left="28" top="501" width="334" height="35" textAlign="left" padding="0px 0px 0px 10px" onclick="btnDateJs04_onclick"/>
+        <Static id="Static08" taborder="24" text="--&gt;" left="362" top="501" width="50" height="35" textAlign="center"/>
+        <Edit id="edtDateJs04" taborder="25" left="412" top="501" width="137" height="35"/>
+        <Button id="btnDateJs05" taborder="26" text="05.take.getTodayTime()" left="611" top="81" width="334" height="35" textAlign="left" padding="0px 0px 0px 10px" onclick="btnDateJs05_onclick"/>
+        <Static id="Static09" taborder="27" text="--&gt;" left="945" top="81" width="50" height="35" textAlign="center"/>
+        <Edit id="edtDateJs05" taborder="28" left="995" top="81" width="137" height="35"/>
+        <Button id="btnDateJs06" taborder="29" text="06.take.getDbTime()" left="611" top="121" width="334" height="35" textAlign="left" padding="0px 0px 0px 10px" onclick="btnDateJs06_onclick"/>
+        <Static id="Static10" taborder="30" text="--&gt;" left="945" top="121" width="50" height="35" textAlign="center"/>
+        <Edit id="edtDateJs06" taborder="31" left="995" top="121" width="137" height="35"/>
+        <Static id="Static11" taborder="32" text="takeJs Date 관련 함수 Date 변환" left="28" top="311" width="470" height="20"/>
+        <Static id="Static12" taborder="33" text="takeJs Date 관련 함수 현재일자 가져오기" left="611" top="51" width="470" height="20"/>
+        <Static id="Static13" taborder="34" text="takeJs Date 관련 함수" left="611" top="181" width="470" height="20"/>
+        <Button id="btnDateJs07" taborder="35" text="07.take.getDateTerm(&quot;20190101&quot;, &quot;20190130&quot;)" left="611" top="211" width="334" height="35" textAlign="left" padding="0px 0px 0px 10px" onclick="btnDateJs07_onclick"/>
+        <Static id="Static14" taborder="36" text="--&gt;" left="945" top="211" width="50" height="35" textAlign="center"/>
+        <Edit id="edtDateJs07" taborder="37" left="995" top="211" width="137" height="35"/>
+        <Button id="btnDateJs08" taborder="38" text="08.take.getDaysInMonth(2019,1)" left="611" top="251" width="334" height="35" textAlign="left" padding="0px 0px 0px 10px" onclick="btnDateJs08_onclick"/>
+        <Static id="Static15" taborder="39" text="--&gt;" left="945" top="251" width="50" height="35" textAlign="center"/>
+        <Edit id="edtDateJs08" taborder="40" left="995" top="251" width="137" height="35"/>
+        <Button id="btnDateJs09" taborder="41" text="09.take.getAddMonths(&quot;20190101&quot;, 2)" left="611" top="291" width="334" height="35" textAlign="left" padding="0px 0px 0px 10px" onclick="btnDateJs09_onclick"/>
+        <Static id="Static16" taborder="42" text="--&gt;" left="945" top="291" width="50" height="35" textAlign="center"/>
+        <Edit id="edtDateJs09" taborder="43" left="995" top="291" width="137" height="35"/>
+        <Static id="Static17" taborder="44" text="takeJs Date 관련 함수 날짜체크" left="611" top="431" width="470" height="20"/>
+        <Button id="btnDateJs10" taborder="45" text="10.take.isLeapYear(2019)" left="611" top="461" width="334" height="35" textAlign="left" padding="0px 0px 0px 10px" onclick="btnDateJs10_onclick"/>
+        <Static id="Static18" taborder="46" text="--&gt;" left="945" top="461" width="50" height="35" textAlign="center"/>
+        <Edit id="edtDateJs10" taborder="47" left="995" top="461" width="137" height="35"/>
+        <Button id="btnDateJs11" taborder="48" text="11.take.isDate(&quot;20190101&quot;)" left="611" top="501" width="334" height="35" textAlign="left" padding="0px 0px 0px 10px" onclick="btnDateJs11_onclick"/>
+        <Static id="Static19" taborder="49" text="--&gt;" left="945" top="501" width="50" height="35" textAlign="center"/>
+        <Edit id="edtDateJs11" taborder="50" left="995" top="501" width="137" height="35"/>
+        <Button id="btnDateJs12" taborder="51" text="12.take.isValidDate(&quot;20190101&quot;, &quot;yyyyMMdd&quot;)" left="611" top="541" width="334" height="35" textAlign="left" padding="0px 0px 0px 10px" onclick="btnDateJs12_onclick"/>
+        <Static id="Static20" taborder="52" text="--&gt;" left="945" top="541" width="50" height="35" textAlign="center"/>
+        <Edit id="edtDateJs12" taborder="53" left="995" top="541" width="137" height="35"/>
+        <Button id="btnDateJs13" taborder="54" text="13.take.isFromTo(&quot;20190101&quot;, &quot;20190102&quot;)" left="611" top="581" width="334" height="35" textAlign="left" padding="0px 0px 0px 10px" onclick="btnDateJs13_onclick"/>
+        <Static id="Static21" taborder="55" text="--&gt;" left="945" top="581" width="50" height="35" textAlign="center"/>
+        <Edit id="edtDateJs13" taborder="56" left="995" top="581" width="137" height="35"/>
+        <Button id="btnDateJs14" taborder="57" text="14.take.getDateWeek(&quot;20190201&quot;)" left="611" top="331" width="334" height="35" textAlign="left" padding="0px 0px 0px 10px" onclick="btnDateJs14_onclick"/>
+        <Static id="Static22" taborder="58" text="--&gt;" left="945" top="331" width="50" height="35" textAlign="center"/>
+        <Edit id="edtDateJs14" taborder="59" left="995" top="331" width="137" height="35"/>
+        <Button id="btnProto03" taborder="60" text="03.Date.getDateWeek()" left="28" top="201" width="334" height="35" textAlign="left" padding="0px 0px 0px 10px" onclick="btnProto03_onclick"/>
+        <Static id="Static23" taborder="61" text="--&gt;" left="362" top="201" width="50" height="35" textAlign="center"/>
+        <Edit id="edtProto03" taborder="62" left="412" top="201" width="137" height="35"/>
+        <Button id="btnProto04" taborder="63" text="04.Date.getAddDays(2)" left="28" top="241" width="334" height="35" textAlign="left" padding="0px 0px 0px 10px" onclick="btnProto04_onclick"/>
+        <Static id="Static23_00" taborder="64" text="--&gt;" left="362" top="241" width="50" height="35" textAlign="center"/>
+        <Edit id="edtProto04" taborder="65" left="412" top="241" width="137" height="35"/>
+        <Button id="btnDateJs15" taborder="66" text="15.take.getAddDays(&quot;20190101&quot;, 2)" left="611" top="371" width="334" height="35" textAlign="left" padding="0px 0px 0px 10px" onclick="btnDateJs15_onclick"/>
+        <Static id="Static16_00" taborder="67" text="--&gt;" left="945" top="371" width="50" height="35" textAlign="center"/>
+        <Edit id="edtDateJs15" taborder="68" left="995" top="371" width="137" height="35"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[this.fv_objDate = new Date();
+
+this.btnProto00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{	
+    //윤년여부
+    this.edtProto00.set_value(this.fv_objDate.isLeapYear());
+};
+
+this.btnProto01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    //해당일자의 월의 마지막 날
+	this.edtProto01.set_value(this.fv_objDate.getDaysInMonth());
+};
+
+this.btnProto02_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    //몇달 후 날짜 가져오기
+	this.edtProto02.set_value(this.fv_objDate.getAddMonths(2));
+};
+
+this.btnProto04_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	//몇일 후 날짜 가져오기
+	this.edtProto04.set_value(this.fv_objDate.getAddDays(2));
+};
+
+this.btnDateJs00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    //데이트 형으로 변환
+	this.edtDateJs00.set_value(take.getConvertDate("20190101"));
+};
+
+this.btnDateJs01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    //데이트 형으로 변환
+	this.edtDateJs01.set_value(take.getConvertDate("2019-01-01"));
+};
+
+this.btnDateJs02_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    //데이트 형으로 변환
+	this.edtDateJs02.set_value(take.getConvertDate("2019/01/01"));
+};
+
+this.btnDateJs03_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    //데이트 형을 문자형으로 변환
+	this.edtDateJs03.set_value(take.toDateString(this.fv_objDate,"yyyyMMdd"));
+};
+
+this.btnDateJs04_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    //문자 형을 포멧에 맞는 데이트 형으로 변환
+	this.edtDateJs04.set_value(take.parseDate("20190101", "yyyyMMdd"));
+};
+
+this.btnDateJs05_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    var objToday = take.getTodayTime();
+    //Clinet PC 기준 현재 일자 및 시간 가져오기
+	this.edtDateJs05.set_value(objToday.date + " " + objToday.time);
+};
+
+this.btnDateJs06_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    //DB 기준 현재 일자 및 시간 가져오기
+    
+	var objToday = take.getDbTime();
+    
+	this.edtDateJs06.set_value(objToday.date + " " + objToday.time);
+};
+
+this.btnDateJs07_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    //두개의 날자 기간(일) 구하기
+	this.edtDateJs07.set_value(take.getDateTerm("20190101", "20190130"));
+};
+
+this.btnDateJs08_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    //마지막 일자 구하기
+	this.edtDateJs08.set_value(take.getDaysInMonth(2019,1));
+};
+
+this.btnDateJs09_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    //입력한 일자에서 몇달 후 날짜 가져오기
+	this.edtDateJs09.set_value(take.getAddMonths("20190101", 2));
+};
+
+this.btnDateJs10_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    //윤년여부
+	this.edtDateJs10.set_value(take.isLeapYear(2019));
+};
+
+this.btnDateJs11_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    //날자 형식 여부 확인
+	this.edtDateJs11.set_value(take.isDate("20190101"));
+};
+
+this.btnDateJs12_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    //날짜 형식 여부 확인(포멧)
+	this.edtDateJs12.set_value(take.isValidDate("20190101", "yyyyMMdd"));
+};
+
+this.btnDateJs13_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    //from to 날짜 체크
+	this.edtDateJs13.set_value(take.isFromTo("20190101", "20190102"));
+};
+
+this.btnDateJs14_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    //요일 구하기
+	this.edtDateJs14.set_value(take.getDateWeek("20190201"));
+};
+
+this.btnProto03_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    //요일 구하기
+	this.edtProto03.set_value(this.fv_objDate.getDateWeek());
+};
+
+this.btnDateJs15_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    //입력한 일자에서 몇달 후 날짜 가져오기
+	this.edtDateJs15.set_value(take.getAddDays("20190101", 2));
+};]]></Script>
+  </Form>
+</FDL>

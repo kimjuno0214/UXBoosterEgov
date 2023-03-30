@@ -1,0 +1,558 @@
+(function()
+{
+    return function()
+    {
+        if (!this._is_form)
+            return;
+        
+        var obj = null;
+        
+        this.on_create = function()
+        {
+            this.set_name("srcMakerCode_Popup");
+            this.set_titletext("EasyBAM Source Maker_PopUp");
+            if (Form == this.constructor)
+            {
+                this._setFormPosition(980,540);
+            }
+            
+            // Object(Dataset, ExcelExportObject) Initialize
+            obj = new Dataset("dsCCodeList", this);
+            obj._setContents("<ColumnInfo><Column id=\"CODE_NM\" type=\"STRING\" size=\"256\"/><Column id=\"CODE_KEY\" type=\"STRING\" size=\"256\"/><Column id=\"PARENT_KEY\" type=\"STRING\" size=\"256\"/><Column id=\"LEV\" type=\"STRING\" size=\"256\"/><Column id=\"GROUP_ID\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+
+            obj = new Dataset("dsCCodeDetail", this);
+            obj._setContents("<ColumnInfo><Column id=\"CODE_NM\" type=\"STRING\" size=\"256\"/><Column id=\"CODE_KEY\" type=\"STRING\" size=\"256\"/><Column id=\"GROUP_ID\" type=\"STRING\" size=\"256\"/><Column id=\"PARENT_KEY\" type=\"STRING\" size=\"256\"/><Column id=\"REF3\" type=\"STRING\" size=\"256\"/><Column id=\"USE_YN\" type=\"STRING\" size=\"256\"/><Column id=\"CODE_DESC\" type=\"STRING\" size=\"256\"/><Column id=\"REF2\" type=\"STRING\" size=\"256\"/><Column id=\"REF1\" type=\"STRING\" size=\"256\"/><Column id=\"CODE_ID\" type=\"STRING\" size=\"256\"/><Column id=\"CODE_ORD\" type=\"STRING\" size=\"256\"/><Column id=\"REF_ID\" type=\"STRING\" size=\"256\"/><Column id=\"CHK\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+
+            obj = new Dataset("dsCCboList", this);
+            obj._setContents("<ColumnInfo><Column id=\"code\" type=\"STRING\" size=\"256\"/><Column id=\"name\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"code\"/><Col id=\"name\">전체</Col></Row></Rows>");
+            this.addChild(obj.name, obj);
+
+
+            obj = new Dataset("dsCboUseYn", this);
+            obj._setContents("<ColumnInfo><Column id=\"CODE\" type=\"STRING\" size=\"256\"/><Column id=\"NAME\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+
+            obj = new Dataset("dsSearch", this);
+            obj._setContents("<ColumnInfo><Column id=\"GROUP_ID\" type=\"string\" size=\"255\"/><Column id=\"CODE_ID\" type=\"string\" size=\"255\"/><Column id=\"CODE_NM\" type=\"string\" size=\"255\"/><Column id=\"USE_YN\" type=\"string\" size=\"255\"/><Column id=\"GROUP_NM\" type=\"string\" size=\"255\"/></ColumnInfo><Rows><Row/></Rows>");
+            this.addChild(obj.name, obj);
+
+
+            obj = new Dataset("dsCboUseYnAll", this);
+            obj._setContents("<ColumnInfo><Column id=\"CODE\" type=\"STRING\" size=\"256\"/><Column id=\"NAME\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+            
+            // UI Components Initialize
+            obj = new Button("btnOk","910","10",null,"22","10",null,null,null,null,null,this);
+            obj.set_taborder("1");
+            obj.set_text("확인");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("staTitle01","0","0",null,"40","826",null,null,null,null,null,this);
+            obj.set_taborder("1");
+            obj.set_text("코드 대분류");
+            obj.set_cssclass("sta_WF_title02");
+            obj.set_usedecorate("true");
+            this.addChild(obj.name, obj);
+
+            obj = new Grid("grdComCodeMain","0","40","25.41%",null,null,"10",null,null,null,null,this);
+            obj.set_initvalueid("iv_Grid1");
+            obj.set_taborder("2");
+            obj.set_binddataset("dsCCodeList");
+            obj.set_autofittype("col");
+            obj.set_treeinitstatus("expand,all");
+            obj.set_cssclass("gid_WF_Noborder");
+            obj.set_treeusebutton("noclick");
+            obj.set_treeusecheckbox("false");
+            obj.set_treeuseline("false");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/></Columns><Rows><Row size=\"44\"/></Rows><Band id=\"body\"><Cell text=\"expr:LEV==1?&apos;[&apos;+CODE_ID+&apos;]&apos;+CODE_NM:CODE_NM\" treelevel=\"bind:LEV\" displaytype=\"treeitemcontrol\" edittype=\"tree\" font=\"15px/normal &quot;Arial&quot;,&quot;Malgun Gothic&quot;,&quot;Gulim&quot;\"/></Band></Format></Formats>");
+            this.addChild(obj.name, obj);
+
+            obj = new Grid("grdComCodeDetail","260","40",null,null,"0","10",null,null,null,null,this);
+            obj.set_taborder("3");
+            obj.set_binddataset("dsCCodeDetail");
+            obj.set_autofittype("col");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"40\"/><Column size=\"90\"/><Column size=\"130\"/><Column size=\"270\"/><Column size=\"100\"/><Column size=\"50\"/><Column size=\"100\"/></Columns><Rows><Row size=\"28\" band=\"head\"/><Row size=\"44\"/></Rows><Band id=\"head\"><Cell colspan=\"2\" displaytype=\"normal\" edittype=\"none\" text=\"코드\"/><Cell col=\"2\" text=\"코드명\" cssclass=\"CellEssential\"/><Cell col=\"3\" text=\"상세설명\"/><Cell col=\"4\" text=\"비고\"/><Cell col=\"5\" text=\"정렬\"/><Cell col=\"6\" text=\"사용\" cssclass=\"CellEssential\"/></Band><Band id=\"body\"><Cell text=\"bind:CHK\" edittype=\"checkbox\" textAlign=\"center\" displaytype=\"checkboxcontrol\"/><Cell col=\"1\" text=\"bind:CODE_ID\" edittype=\"none\" cssclass=\"CellDisabled\" textAlign=\"center\" font=\"15px/normal &quot;Arial&quot;,&quot;Malgun Gothic&quot;,&quot;Gulim&quot;\"/><Cell col=\"2\" text=\"bind:CODE_NM\" edittype=\"none\" textAlign=\"left\" font=\"15px/normal &quot;Arial&quot;,&quot;Malgun Gothic&quot;,&quot;Gulim&quot;\"/><Cell col=\"3\" edittype=\"none\" text=\"bind:CODE_DESC\" textAlign=\"left\" font=\"15px/normal &quot;Arial&quot;,&quot;Malgun Gothic&quot;,&quot;Gulim&quot;\"/><Cell col=\"4\" edittype=\"none\" text=\"bind:REF1\" textAlign=\"left\" font=\"15px/normal &quot;Arial&quot;,&quot;Malgun Gothic&quot;,&quot;Gulim&quot;\"/><Cell col=\"5\" edittype=\"none\" text=\"bind:CODE_ORD\" textAlign=\"center\" font=\"15px/normal &quot;Arial&quot;,&quot;Malgun Gothic&quot;,&quot;Gulim&quot;\"/><Cell col=\"6\" text=\"bind:USE_YN\" displaytype=\"combotext\" edittype=\"none\" combodataset=\"dsCboUseYn\" combocodecol=\"CODE\" combodatacol=\"NAME\" font=\"15px/normal &quot;Arial&quot;,&quot;Malgun Gothic&quot;,&quot;Gulim&quot;\"/></Band></Format></Formats>");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("staTitle02","260","0",null,"40","563",null,null,null,null,null,this);
+            obj.set_taborder("4");
+            obj.set_text("코드 리스트");
+            obj.set_cssclass("sta_WF_title02");
+            obj.set_usedecorate("true");
+            this.addChild(obj.name, obj);
+            // Layout Functions
+            //-- Default Layout : this
+            obj = new Layout("default","",980,540,this,function(p){});
+            obj.set_mobileorientation("landscape");
+            this.addLayout(obj.name, obj);
+            
+            // BindItem Information
+
+            
+            // TriggerItem Information
+
+        };
+        
+        this.loadPreloadList = function()
+        {
+
+        };
+        
+        // User Script
+        this.registerScript("srcMaker_QCodeY_Popup.xfdl", function() {
+        /**
+        *  SYSTEM FORM NAME
+        *
+        *  @MenuPath    관리자 > 공통코드관리
+        *  @FileName    sysComCode.xfdl
+        *  @Creator     천우성
+        *  @CreateDate  2018.08.28
+        *  @Version     1.0
+        *  @Desction    공통코드관리
+        *
+        ************** 소스 수정 이력 *************************************************
+        *    date          Modifier            Description
+        *******************************************************************************
+        *  2018.08.29      천우성             최초 생성
+        *******************************************************************************
+        */
+
+        //공통 라이브러리 호출
+
+        /*********************************************************
+         * 1.1 FORM 변수 선언 영역
+         ********************************************************/
+        this.fv_nCurRow = null;     //현재 선택된 코드 그룹 Row (코드 리스트 저장 후 재 조회시 사용)
+        this.fv_isSave = false;
+        this.fv_sGrdNm = null;		//그룹코드
+        this.fv_sFlag  = "QCodeY";  //폼 구분값
+        /*********************************************************
+        * 1.2 FORM EVENT 영역(onload)
+        ********************************************************/
+        /**
+        * sysComCode_onload 최초 로드시 발생되는 이벤트 (필수)
+        */
+        this.srcMakerCode_Popup_onload = function(obj, e)
+        {
+        	if (takeit.formOnLoad(this)) //공통 온로드(필수) : 최초 온로드시 공통으로 호출되는 함수 --> 필수
+        	{
+        		takeit.formRole(this);
+        		takeit.tranCode_HeaderSelect(this, "SEL", "0031", "dsCboUseYn",
+        			function(sId, nErrCd, sErrMsg){
+        				if (nErrCd>=0)
+        				{
+        					this.fnTran('Search');
+        				}
+        			});
+        	}
+        }
+
+        /*********************************************************
+        * 2.1 TRANSACTION 서비스 호출 처리
+         ********************************************************/
+        /**
+         * fnTran : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+         * @param  {String} sTranId 트랜젝션 아이디
+         * @return {N/A}    N/A
+         * @example this.fnTran("ID");
+         */
+        this.fnTran = function(sTranId)
+        {
+            //공통 조회에서 호출할 디폴트값 세팅 필요
+            if (takeit.nvl(sTranId, "")=="") sTranId = "Search";
+
+            //변수선언
+            var sUrl   = "",      //서비스 URL
+                sInDs  = "",      //데이터셋을 검색조건으로 보낼경우 사용 -->선택
+                sOutDs = "",      //데이터를 받아올 데이터셋 지정
+                sParam = "",      //파라메터 사용 안 할 경우
+                sCallBack = "";        //콜백 처리 함수
+
+        	var sParentKey, sCodeKey, sCodeId, sCodeNm, sLevel, sUseYn;
+            var objDs;
+            var nCurRow, nCnt;
+
+            sCallBack  = "fnCallback" ;
+
+            switch(sTranId)
+            {
+                case "Search" :
+
+        			this.dsCCodeList.clearData();
+        			this.dsCCodeDetail.clearData();
+
+        			takeit.tranSelect(this, "Search", "TakeSystemMapper.groupCodeSelect", "dsSearch", "dsCCodeList", "", sCallBack);
+
+                    break;
+                case "Detail" :  //코드 조회
+
+                    objDs = this.dsCCodeDetail;
+                    objDs.clearData();
+                    //그룹 리스트에 현재 선택된 행
+                    nCurRow = this.dsCCodeList.rowposition;
+                    //그룹 리스트에 선택된 행의 데이터 가져오기
+                    sLevel = this.dsCCodeList.getColumn(nCurRow, "LEV");
+                    sCodeKey  = this.dsCCodeList.getColumn(nCurRow, "CODE_KEY");
+                    sParentKey = this.dsCCodeList.getColumn(nCurRow, "PARENT_KEY");
+        			//그룹 코드값, 코드값이 없으면 리턴
+                    if (sParentKey==""||sCodeKey=="") return;
+
+        			if( sParentKey == "0" )
+        			{
+        				this.grdComCodeDetail.setCellProperty("head", 1, "cssclass", "CellDisabled");
+        				this.grdComCodeDetail.setCellProperty("body", 1, "cssclass", "CellDisabled");
+        				this.grdComCodeDetail.setCellProperty("body", 1, "edittype", "none");
+        			}else
+        			{
+        				this.grdComCodeDetail.setCellProperty("head", 1, "cssclass", "CellEssential");
+        				this.grdComCodeDetail.setCellProperty("body", 1, "cssclass", "");
+        				this.grdComCodeDetail.setCellProperty("body", 1, "edittype", "expr:dataset.getRowType(currow) == Dataset.ROWTYPE_INSERT ? 'text' : 'none'");
+        			}
+
+                    //최 하위 레벨이 아닌경우 나 자신이 그룹이 된다.
+                    if (sLevel!="2")
+                    {
+                        sParentKey = sCodeKey;
+                        sCodeKey = "";
+                    }
+
+        			takeit.tranSelect(this, "Detail", "TakeSystemMapper.codeSelect", "", "dsCCodeDetail", "sParentKey='" + sParentKey + "' sCodeKey='"+ sCodeKey + "'", sCallBack);
+                    break;
+                default :
+                    break;
+            }
+
+            //트랜젝션 공통함수 호출 -->필수(모든 트랜젝션을 공통으로 처리)
+            //takeit.transaction(this,sTranId, sUrl, sInDs, sOutDs, sParam, sCallBack);
+        }
+
+        /*********************************************************
+         * 2.2 CALLBACK 콜백 처리부분
+         ********************************************************/
+        /**
+        * fnCallback : transaction callback
+        * @param  : svcId   - 서비스 아이디 (공통 콜백에서 넘어옴)
+        * @param  : errCd   - 에러코드 (공통 콜백에서 넘어옴)
+        * @param  : errMsg   - 에러메세지 (공통 콜백에서 넘어옴)
+        * @return : N/A
+        * @example :
+        */
+        this.fnCallback = function(sId, nErrCd, sErrMsg)
+        {
+            //Transaction 에러는 공통에서 처리
+
+            //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+            if( sErrMsg == "SUCC" )
+            {
+                //Success Script
+            } else {
+                //Etc Script
+            }
+
+            switch(sId)
+            {
+                case "Search" : //조회 콜백
+                    break;
+                case "Detail" :  //조회 콜백
+                    break;
+                default :
+                    break;
+            }
+        }
+
+        /*********************************************************
+        * 3 필수 FUNCTION 영역 (fnSearch, fnSave, fnAddRow, fnDelRow)
+        ********************************************************/
+        /**
+         * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+         * @param  {String} sTranId 트랜젝션 아이디
+         * @return {N/A}    N/A
+         * @example this.fnSearch("ID");
+         */
+        this.fnSearch = function(sTranId)
+        {
+            //공통 조회에서 호출할 디폴트값 세팅 필요
+            if (takeit.nvl(sTranId, "")=="") sTranId = "Search";
+
+            this.fnTran(sTranId);
+        }
+        /**
+         * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+         * @param  {String} sTranId 트랜젝션 아이디
+         * @return {N/A}    N/A
+         * @example this.fnSave("ID");
+         */
+        this.fnSave = function(sTranId)
+        {
+            //공통 조회에서 호출할 디폴트값 세팅 필요
+            if (takeit.nvl(sTranId, "")=="") sTranId = "Save";
+
+            this.fnTran(sTranId);
+        }
+        /**
+         * fnAddRow : 행 추가 함수 (필수)--> 공통 행추가에서 호출할 디폴트값 세팅 필요
+         * @param  {String} sGridId 그리드 아이디
+         * @param  {Number} nRow    addRow 리턴값(추가된 행 위치)
+         * @example this.fnAddRow(sGrdId, nRow);
+         */
+        this.fnAddRow = function(sGrdId, nRow)
+        {
+            //공통에서 호출이 아닐 경우 기본 그리드를 코드리스트로 세팅
+            if (takeit.nvl(sGrdId, "")=="") sGrdId = "";
+        }
+
+        /**
+         * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+         * @param  {String} sGridId 그리드 아이디
+         * @param  {Number, Array} arrnRow    deleteRow 리턴값
+         * @return {N/A} N/A
+         * @example this.fnDelRow(sGrdId, nRow);
+         */
+        this.fnDelRow = function(sGrdId, arrnRow)
+        {
+            //공통에서 호출이 아닐 경우 기본 그리드를 코드리스트로 세팅
+            if (takeit.nvl(sGrdId, "")=="") sGrdId = "";
+        }
+
+        /**
+         * fnPrint : 인쇄
+         * @return {N/A}    N/A
+         * @example this.fnPrint();
+         */
+        this.fnPrint = function()
+        {
+        	/*
+        	objComponent 	{Object} 	이미지를 프린터로 출력할 컴포넌트의 오브젝트를 설정합니다.
+        	strComponentID 	{String} 	이미지를 프린터로 출력할 컴포넌트의 ID 를 문자열로 설정합니다.
+        	bHideDialog 	{Boolean} 	"true" 설정 시 프린터 설정창으로 표시하지 않고 출력합니다.
+        								"false" 설정 시 프린터로 출력 전에 프린터 설정창을 표시합니다.
+        								값 생략 시 "true" 로 적용됩니다.
+        	strVAlign 		{String} 	이미지가 용지에 출력될 수직위치를 설정합니다.
+        								"top" 설정 시 이미지가 용지의 상단에 출력됩니다.
+        								"middle" 설정 시 이미지가 용지의 중앙에 출력됩니다.
+        								"bottom" 설정 시 이미지가 용지의 하단에 출력됩니다.
+        								값 생략 시 "middle" 로 적용됩니다.
+        	strHAlign 		{String} 	이미지가 용지에 출력될 수평위치를 설정합니다.
+        								"left" 설정 시 이미지가 용지의 좌측에 출력됩니다.
+        								"center" 설정 시 이미지가 용지의 중앙에 출력됩니다.
+        								"right" 설정 시 이미지가 용지의 우측에 출력됩니다.
+        								값 생략 시 "center" 로 적용됩니다.
+        	bFitOnePage 	{Boolean} 	"true" 설정 시 이미지가 한페이지를 초과하는 경우 축소하여 한페이지로 출력합니다.
+        								"false" 설정 시 이미지 크기에 맞게 여러페이지로 출력합니다.
+        								"false" 설정 시 strVAlign 은 "top" 으로 적용되고, strHAlign 은 "left" 로 적용됩니다.
+        								값 생략 시 "false" 로 적용됩니다.
+        	*/
+            system.print(this.grdComCodeDetail, false, "top", "left", true);
+        }
+        /**
+
+        /*********************************************************
+         * 4 각 COMPONENT 별 EVENT 영역
+          ********************************************************/
+        /**
+        * component_onclick : ~ 버튼 클릭
+        */
+        this.component_onclick = function(obj,e)
+        {
+            //Script
+        };
+
+        /**
+        * dsCCodeList_onrowposchanged : 코드그룹 데이터셋의 Row 위치 변경 이벤트
+        */
+        this.dsCCodeList_onrowposchanged = function(obj,e)
+        {
+        	//변수 선언
+            var bRtn;
+
+            this.dsCCodeDetail.set_enableevent(false);
+        	//코드 리스트 조회
+        	this.fnSearch("Detail");
+            this.dsCCodeDetail.set_enableevent(true);
+        };
+
+        /**
+        * Button00_onclick : 저장 버튼 클릭 이벤트
+        */
+        this.Button00_onclick = function(obj,e)
+        {
+        	this.fnSave("Save");
+        };
+
+        /**
+        * Button01_onclick : 추가 버튼 클릭 이벤트
+        */
+        this.Button01_onclick = function(obj,e)
+        {
+        	this.fnAddRow("grdComCodeDetail");
+        };
+
+        /**
+        * Button02_onclick : 삭제 버튼 클릭 이벤트
+        */
+        this.Button02_onclick = function(obj,e)
+        {
+        	this.fnDelRow("grdComCodeDetail");
+        };
+
+        /**
+        * grdComCodeDetail_oncellclick : 코드리스트 그리드 셀 클릭 이벤트
+        */
+        this.grdComCodeDetail_oncellclick = function(obj,e)
+        {
+        	var objDs 	= this.dsCCodeDetail;
+        	if (e.cell == 0)
+        	{
+        		for(var i=0; i<objDs.rowcount; i++)
+        		{
+        			objDs.setColumn(i, "CHK", 0);
+        		}
+        		objDs.setColumn(e.row, "CHK", 1);
+        	}
+        };
+
+        /**
+        * grdComCodeMain_oncellclick : 코드대분류 그리드 셀 클릭 이벤트
+        */
+        this.grdComCodeMain_oncellclick = function(obj,e)
+        {
+        	 //변수 선언
+           var nTreeRow, nTreeStatus;
+           var bRtn;
+
+            //트리 Row
+           nTreeRow = obj.getTreeRow(this.dsCCodeList.rowposition);
+
+           //그리드 트리의 상태
+           nTreeStatus = obj.getTreeStatus(nTreeRow);
+
+            //그리드 이벤트 중지
+           obj.set_enableevent(false);
+
+            //그리드 상태별 처리
+           if (nTreeStatus==0) //collapse : 접힘 상태
+           {
+              bRtn = obj.setTreeStatus(nTreeRow, true);
+           } else if (nTreeStatus==1) { //expend : 펼침 상태
+              bRtn = obj.setTreeStatus(nTreeRow, false);
+           } else { //그 외 상태
+              return;
+           }
+
+            //그리드 이벤트 실행
+           obj.set_enableevent(true);
+        };
+
+        /**
+        * grdComCodeDetail_onheadclick : 코드리스트 그리드 셀 'head' 클릭 이벤트
+        */
+        this.grdComCodeDetail_onheadclick = function(obj,e)
+        {
+        	var chk;
+        	if( e.col == 0 )
+        	{
+        		chk = this.grdComCodeDetail.getCellProperty("head", 0, "text") == "0" ? "1" : "0";
+
+        		//this.grdComCodeDetail.setCellProperty("head", 0, "text", chk);
+        		for(var i=0; i<this.dsCCodeDetail.rowcount; i++ )
+        		{
+        			this.dsCCodeDetail.setColumn(i, "CHK", chk);
+        		}
+        	}
+        };
+
+        /**
+        * btnOk_onclick : 확인 버튼 클릭
+        */
+        this.btnOk_onclick = function(obj,e)
+        {
+        	var objDs = this.dsCCodeDetail;
+
+        	for (var i=0; i<objDs.rowcount; i++)
+        	{
+        		if (objDs.getColumn(i, "CHK") == 1)
+        		{
+        			var index = i;
+        			this.fv_sGrdNm = objDs.getColumn(i, "CODE_ID");
+        		}
+        	}
+        	this.fnSendChildValue(this.fv_sGrdNm,this.fv_sFlag);
+        };
+        /*********************************************************
+        * 5 사용자 FUNCTION 영역
+        ********************************************************/
+        /**
+         * findParentArr : 트리의 부모들을 배열로 리턴한다.
+         * @param  {Object} obj
+         * @param  {Number} idx
+        *  @return arr[0] =  인자로 넘어온 idx 값
+        *  @return arr[1~n] = 부모의 경로가 역순으로 넘어 온다.
+         * @example this.findParentArr(obj, idx);
+         */
+        this.findParentArr = function (obj, idx)
+        {
+        	var arr = [];
+        	arr[arr.length] = idx;
+        	for(;;)
+        	{
+        		var _p = obj.getTreeParentRow(arr[arr.length-1]);
+        		if(_p < 0){return arr;}
+        		arr[arr.length] = _p;
+        	}
+        }
+
+        /**
+         * fnSubBtnRole : 권한에 따른 화면별 버튼 처리
+         * @param  {String} code 프로그램ID
+          * @example this.fnSubBtnRole(objDs);
+         */
+        this.fnSubBtnRole = function(objDs)
+        {
+        	//권한에 따른 처리 필요
+        	//var bDelete	= objDs.getColumn(0, "R_DELETE"  )=="Y"?true:false;
+         	//var bSave  	= objDs.getColumn(0, "R_SAVE"  )=="Y"?true:false;
+         	//var bInput  = objDs.getColumn(0, "R_INPUT"  )=="Y"?true:false;
+         	//var bPrint  = objDs.getColumn(0, "R_PRINT"  )=="Y"?true:false;
+        	//var bExcel  = objDs.getColumn(0, "R_EXCEL"  )=="Y"?true:false;
+        	//var bRead   = objDs.getColumn(0, "R_READ"  )=="Y"?true:false;
+
+        	return;
+        }
+
+        /**
+         * fnSendChildValue : 부모창으로 선택한 그리드명칭을 전달
+         * @param  {String} name 선택한 그리드 명칭
+         * @param  {String} code 구분값
+         * @example this.fnSendChildValue(name);
+         */
+        this.fnSendChildValue = function(name, code)
+        {
+        	this.opener.fnSetChildValue(name, code);
+            this.close();
+        }
+        });
+        
+        // Regist UI Components Event
+        this.on_initEvent = function()
+        {
+            this.addEventHandler("onload",this.srcMakerCode_Popup_onload,this);
+            this.btnOk.addEventHandler("onclick",this.btnOk_onclick,this);
+            this.grdComCodeMain.addEventHandler("oncellclick",this.grdComCodeMain_oncellclick,this);
+            this.grdComCodeDetail.addEventHandler("onheadclick",this.grdComCodeDetail_onheadclick,this);
+            this.grdComCodeDetail.addEventHandler("oncellclick",this.grdComCodeDetail_oncellclick,this);
+            this.dsCCodeList.addEventHandler("onrowposchanged",this.dsCCodeList_onrowposchanged,this);
+            this.dsCCodeDetail.addEventHandler("onrowposchanged",this.dsCCodeDetail_onrowposchanged,this);
+        };
+        this.loadIncludeScript("srcMaker_QCodeY_Popup.xfdl");
+        this.loadPreloadList();
+        
+        // Remove Reference
+        obj = null;
+    };
+}
+)();

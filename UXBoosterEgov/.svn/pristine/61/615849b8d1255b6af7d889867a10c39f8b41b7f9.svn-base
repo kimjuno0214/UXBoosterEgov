@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="smpCalCustom" width="1040" height="659" titletext="(샘플)커스텀 달력" onload="smpCalCustom_onload">
+    <Layouts>
+      <Layout height="659" width="1040">
+        <Static id="Static03" taborder="0" text="&lt;b v='true'&gt;- 월 달력 컴포넌트&lt;/b&gt;&#13;&#10;&#13;&#10;   &lt;fc v='red'&gt;'calendartype'&lt;/fc&gt; user property 추가 후 &lt;fc v='red'&gt;'Month'&lt;/fc&gt; 입력" left="28" top="41" width="340" height="60" usedecorate="true"/>
+        <Static id="staDateTitle" taborder="1" text="달력 컴포넌트 관련 기능" left="5" top="5" width="190" height="30" font="normal 700 11px &quot;SpoqaHanSansNeo &quot;,&quot;맑은 고딕&quot;"/>
+        <Calendar id="calMonth" taborder="2" left="40" top="111" width="120" height="23" dateformat="yyyy-MM" editformat="yyyy-MM" calendartype="Month" onchanged="calMonth_onchanged"/>
+        <Static id="Static03_00" taborder="3" text="&lt;b v='true'&gt;- 커스텀 달력 컴포넌트&lt;/b&gt;&#13;&#10;&#13;&#10;   &lt;fc v='red'&gt;'calendartype'&lt;/fc&gt; user property 추가 후 &lt;fc v='red'&gt;'Day'&lt;/fc&gt; 입력" left="28" top="181" width="340" height="60" usedecorate="true"/>
+        <Calendar id="calDay" taborder="4" left="40" top="251" width="120" height="23" calendartype="Day" onchanged="calDay_onchanged"/>
+        <Button id="Button00" taborder="5" text="날짜 세팅" left="163" top="251" width="77" height="23" onclick="Button00_onclick" cssclass="btn_WF_basic01"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.calDay.set_value("20200101");
+};
+
+this.smpCalCustom_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	if (take.formOnLoad(this)){
+		
+	};
+};
+
+this.calMonth_onchanged = function(obj:nexacro.Calendar,e:nexacro.ChangeEventInfo)
+{
+	
+};
+
+this.calDay_onchanged = function(obj:nexacro.Calendar,e:nexacro.ChangeEventInfo)
+{
+	
+};
+]]></Script>
+  </Form>
+</FDL>

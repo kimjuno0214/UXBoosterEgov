@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="smpAccordion" width="800" height="640" titletext="New Form" onload="smpAccordion_onload">
+    <Layouts>
+      <Layout height="640" mobileorientation="landscape" width="800">
+        <Button id="Button00" taborder="0" text="대" left="20" top="25" width="150" height="25" onclick="Button00_onclick"/>
+        <Grid id="Grid00" taborder="3" left="20" top="Button00:0" width="150" height="170" binddataset="Dataset00" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="Column0"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="Button01" taborder="1" text="중" left="20" top="Grid00:0" width="150" height="25" onclick="Button01_onclick"/>
+        <Grid id="Grid01" taborder="4" left="20" top="Button01:0" width="150" height="0" binddataset="Dataset01" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="Column0"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="Button02" taborder="2" text="소" left="20" top="Grid01:0" width="150" height="25" onclick="Button02_onclick"/>
+        <Grid id="Grid02" taborder="5" left="20" top="Button02:0" width="150" height="0" binddataset="Dataset02" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="Column0"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="Button00_00" taborder="6" text="대" left="250" top="25" width="20" height="105" onclick="Button00_onclick"/>
+        <Button id="Button01_00" taborder="7" text="중" left="250" top="130" width="20" height="105" onclick="Button01_onclick"/>
+        <Button id="Button02_00" taborder="8" text="소" left="250" top="235" width="20" height="105" onclick="Button02_onclick"/>
+        <Grid id="Grid00_00" taborder="9" left="270" top="25" width="150" height="315" binddataset="Dataset00" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="Column0"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="Button00_00_00" taborder="10" text="대" left="460" top="25" width="20" height="315" onclick="Button00_onclick"/>
+        <Button id="Button01_00_00" taborder="11" text="중" left="630" top="25" width="20" height="315" onclick="Button01_onclick"/>
+        <Button id="Button02_00_00" taborder="12" text="소" left="650" top="25" width="20" height="315" onclick="Button02_onclick"/>
+        <Grid id="Grid00_00_00" taborder="13" left="480" top="25" width="150" height="315" binddataset="Dataset00" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="Column0"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">대1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">대2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">대3</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">대4</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">대5</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">대6</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">대7</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">대8</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">대9</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">대10</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="Dataset01">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">중1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">중2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">중3</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">중4</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">중5</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">중6</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">중7</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">중8</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">중9</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">중10</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="Dataset02">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">소1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">소2</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">소3</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">소4</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">소5</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">소6</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">소7</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">소8</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">소9</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">소10</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[this.smpAccordion_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+// 	this.Grid00.set_height(170);
+//     this.Grid01.set_height(1);
+//     this.Grid02.set_height(1);
+};
+
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+// 	this.Grid00.set_height(170);
+//     this.Grid01.set_height(1);
+//     this.Grid02.set_height(1);
+};
+
+this.Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+// 	this.Grid00.set_height(1);
+//     this.Grid01.set_height(170);
+//     this.Grid02.set_height(1);
+};
+
+this.Button02_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+// 	this.Grid00.set_height(1);
+//     this.Grid01.set_height(1);
+//     this.Grid02.set_height(170);
+};
+
+this.Button03_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.Grid00.set_height(1);
+};
+]]></Script>
+  </Form>
+</FDL>

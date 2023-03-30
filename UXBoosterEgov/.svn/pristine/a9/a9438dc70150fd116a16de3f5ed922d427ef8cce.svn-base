@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="sample01" width="1040" height="685" titletext="팝업샘플">
+    <Layouts>
+      <Layout height="685" mobileorientation="landscape" width="1040">
+        <Div id="Div02" taborder="4" left="10" top="10" width="800" height="409" cssclass="dvi_WF_tabBox01">
+          <Layouts>
+            <Layout>
+              <Static id="Static03" taborder="0" text="시스템이용약관" left="10" top="10" height="31" cssclass="sta_WF_th01C" width="778"/>
+              <TextArea id="TextArea00" taborder="1" left="10" top="41" width="778" height="121"/>
+              <CheckBox id="CheckBox00" taborder="2" text="동의합니다." left="10" top="162" width="150" height="21"/>
+              <Static id="Static00" taborder="3" text="개인정보이용동의" left="10" top="193" height="31" cssclass="sta_WF_th01C" width="778"/>
+              <TextArea id="TextArea01" taborder="4" left="10" top="224" width="778" height="121"/>
+              <CheckBox id="CheckBox01" taborder="5" text="동의합니다." left="10" top="345" width="150" height="21"/>
+              <Button id="Button02" taborder="6" text="동의" left="334" top="376" width="60" height="21" cssclass="btn_WF_basic01"/>
+              <Button id="Button00" taborder="7" text="취소" left="399" top="376" width="60" height="21" cssclass="btn_WF_basic01"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">Common Code</Col>
+            <Col id="Column1">0</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0002]언어코드</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0003]다국어_대분류</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0002]언어코드</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0003]다국어_대분류</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0002]언어코드</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0003]다국어_대분류</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0002]언어코드</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0003]다국어_대분류</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0002]언어코드</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0003]다국어_대분류</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0002]언어코드</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">[0003]다국어_대분류</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="Dataset01">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+          <Column id="Column5" type="STRING" size="256"/>
+          <Column id="Column6" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column1">0002</Col>
+            <Col id="Column2">언어코드</Col>
+            <Col id="Column6">사용</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">0003</Col>
+            <Col id="Column2">다국어대분류</Col>
+            <Col id="Column6">사용</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">0004</Col>
+            <Col id="Column2">시스템</Col>
+            <Col id="Column6">사용</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">0005</Col>
+            <Col id="Column2">화면유형</Col>
+            <Col id="Column6">사용</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">0002</Col>
+            <Col id="Column2">언어코드</Col>
+            <Col id="Column6">사용</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">0003</Col>
+            <Col id="Column2">다국어대분류</Col>
+            <Col id="Column6">사용</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">0004</Col>
+            <Col id="Column2">시스템</Col>
+            <Col id="Column6">사용</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">0005</Col>
+            <Col id="Column2">화면유형</Col>
+            <Col id="Column6">사용</Col>
+          </Row>
+          <Row/>
+          <Row>
+            <Col id="Column1">0003</Col>
+            <Col id="Column2">다국어대분류</Col>
+            <Col id="Column6">사용</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">0004</Col>
+            <Col id="Column2">시스템</Col>
+            <Col id="Column6">사용</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">0005</Col>
+            <Col id="Column2">화면유형</Col>
+            <Col id="Column6">사용</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

@@ -1,0 +1,175 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv='X-UA-Compatible' content='IE=edge' />
+<meta http-equiv="Cache-control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<link href="css/bootstrap/3.3.5/bootstrap.css" rel="stylesheet" />
+<script src="js/jquery/2.1.4/jquery.js"></script>
+<script src="js/bootstrap/3.3.5/bootstrap.js"></script>
+<link href="css/summernote/0.8.1/summernote.css" rel="stylesheet" />
+<!--     <script src="js/summernote/0.8.1/summernote-0.8.6.js"></script> -->
+<script src="js/summernote/0.8.1/summernote-0.8.12.js"></script>
+<script src="js/summernote/mergeCell.js"></script>
+<script src="js/summernote/mergeRow.js"></script>
+<script src="js/summernote/mergeCancel.js"></script>
+<script src="lang/summernote-ko-KR.js"></script>
+<script src="plugin/specialchars/summernote-ext-specialchars.js"></script>
+
+<!--     <script src="plugin/emoji/config.js"></script> -->
+<!--     <script src="plugin/emoji/summernote-ext-emojione.js"></script> -->
+<!--     <link rel="stylesheet" href="plugin/emoji/css/emoji.css" /> -->
+
+<title></title>
+<script type="text/javascript">
+
+    function fnEditorReady( nHeight, bDisable ){
+    	$('#summernote').summernote({
+			height : nHeight, // 에디터의 높이
+			minHeight : null,
+			maxHeight : null,
+			focus : true,
+			disableDragAndDrop: true,
+			toolbar: [
+// 			    ['style', ['style']],
+			    ['fontsize', ['fontsize']],
+			    ['font', ['bold', 'italic', 'underline', 'clear']],
+			    ['fontname', ['fontname']],
+			    ['color', ['color']],
+			    ['para', ['ul', 'ol', 'paragraph']],
+			    ['height', ['height']],
+			    ['insert', ['link', 'picture']], //'video', 'hr'
+			    ['table', ['table']],
+			    ['view', ['codeview']], //'fullscreen',
+			    //['mybutton', ['hello']],   //사용자정의 버튼
+			    ['custom', ['specialchars']], //, 'emoji' 이모티콘
+			    ['help', ['help']] // 도움말
+			  ],
+			//buttons: {hello: HelloButton},
+			fontNames: ['NanumGothic', '돋움', '궁서', '바탕', '굴림', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Helvetica', 'Impact', 'Tahoma', 'Times New Roman', 'Verdana', 'Roboto'],
+  			fontNamesIgnoreCheck: ['NanumGothic', '돋움', '궁서', '바탕', '굴림'],
+  			popatmouse: true,
+			popover: {
+				  image: [
+ 				    ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']]
+// 				    ['float', ['floatLeft', 'floatRight', 'floatNone']],
+// 				    ['remove', ['removeMedia']]
+				  ],
+				  link: [
+// 				    ['link', ['linkDialogShow', 'unlink']]
+				  ],
+				  table: [
+				    ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
+				    ['delete', ['deleteRow', 'deleteCol', 'deleteTable']],
+				    ['merge', ['mergeCell', 'mergeRow', 'mergeCancel']]
+				  ],
+				  air: [
+//  				['color', ['color']],
+// 				    ['font', ['bold', 'underline', 'clear']],
+// 				    ['para', ['ul', 'paragraph']],
+// 				    ['table', ['table']],
+// 				    ['insert', ['link', 'picture']]
+				  ]
+				},
+			lang : 'ko-KR' // 기본 메뉴언어 US->KR로 변경
+		});
+    	$('#summernote').summernote('fontName', 'NanumGothic');
+
+    	bDisable = (null == bDisable) ? false : bDisable;
+    	if(bDisable){
+    		disableSN();
+    	}
+    }
+
+
+    $(document).ready(function() {
+
+	});
+
+    $('textarea[name="contents"]').bind('paste',function(e){
+	    var el = $(this);
+	});
+
+	var postForm = function() {
+	    var contents =  $('textarea[name="contents"]').html($('#summernote').code());
+	}
+
+	//사용자정의 버튼
+	var HelloButton = function (context) {
+		  var ui = $.summernote.ui;
+
+		  // create button
+		  var button = ui.button({
+		    contents: '<i class="fa fa-child"/> Hello',
+		    tooltip: 'hello',
+		    click: function () {
+		      // invoke insertText method with 'hello' on editor module.
+		      context.invoke('editor.insertText', '안녕 ');
+		    }
+		  });
+
+		  return button.render();   // return button as jquery object
+	}
+
+	var getContents = function(){
+		var markupStr = $('#summernote').summernote('code');
+
+		//20200325 정해원 그냥 공백치환이 아님 &#65279; 를 변경하는 구문임
+		markupStr = markupStr.replace('﻿', '');
+		return markupStr;
+	}
+
+	var setContents = function(){
+		var iDiv = document.getElementById("inputData");
+		$('#summernote').summernote('code', iDiv.value);
+		if(iDiv.value == ''){
+			$('#summernote').summernote('fontName', 'NanumGothic');
+		}
+	}
+
+	var setHeight = function( nHeight ){
+		$('div.note-editable').height(nHeight);
+	}
+
+	function disableSN(){
+	    $("#summernote").summernote("disable");
+
+	    // Enables code button:
+	    $(".note-btn.btn-codeview").removeAttr("disabled").removeClass("disabled");
+
+	    // When switching from code to rich, toolbar buttons are clickable again, so we'll need to disable again in that case:
+	    $(".note-btn.btn-codeview").on("click", codeViewClick);
+
+	    // 에디트영역 disabled
+	    $("textarea.note-codable").attr("disabled", "disabled");
+
+	 	// 툴바제거
+	    $(".note-toolbar").attr('style', "display:none;");
+
+	    $(".note-editable").attr('style', "height:400px;");
+	}
+
+	function enableSN(){
+	    // Re-enables edition and unbinds codeview button eventhandler
+	    $("#summernote").summernote('enable');
+	    $(".note-btn.btn-codeview").off("click", codeViewClick);
+	    $("textarea.note-codable").removeAttr("disabled").removeClass("disabled");
+	    $(".note-toolbar").removeAttr('style', "display:none;");
+	    $(".note-editable").attr('style', "height:300px;");
+	}
+
+	function codeViewClick(){
+	    if(!$(this).is(".active")){
+	        $("#summernote").summernote("disable");
+	        $(".note-btn.btn-codeview").removeAttr("disabled").removeClass("disabled");
+	    }
+	}
+
+    </script>
+</head>
+<body style="overflow: hidden; border-bottom: none; border-left: none; border-right: none;">
+	<input id="inputData" name="inputData" value="" type="hidden" />
+	<div id="summernote" style="width:100%; height:100%"></div>
+</body>
+</html>

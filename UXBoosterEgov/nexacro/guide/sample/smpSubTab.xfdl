@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="Tab_Sample" width="1280" height="720" titletext="New Form">
+    <Layouts>
+      <Layout height="720" width="1280">
+        <Tab id="Tab00" taborder="0" tabindex="0" left="87" top="78" width="702" height="354">
+          <Tabpages>
+            <Tabpage id="Tabpage1" text="Tabpage1">
+              <Layouts>
+                <Layout>
+                  <Tab id="Tab00" taborder="0" tabindex="0" left="0" top="0" height="174" right="0" cssclass="tab_WF_subTab01">
+                    <Tabpages>
+                      <Tabpage id="Tabpage1" text="Tabpage1"/>
+                      <Tabpage id="Tabpage2" text="Tabpage2"/>
+                      <Tabpage id="Tabpage3" text="Tabpage3">
+                        <Layouts>
+                          <Layout/>
+                        </Layouts>
+                      </Tabpage>
+                      <Tabpage id="Tabpage4" text="Tabpage4">
+                        <Layouts>
+                          <Layout/>
+                        </Layouts>
+                      </Tabpage>
+                    </Tabpages>
+                  </Tab>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage2" text="Tabpage2"/>
+          </Tabpages>
+        </Tab>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>

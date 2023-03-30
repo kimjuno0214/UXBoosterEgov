@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ENV version="2.1">
+  <Environment themeid="theme::UXBooster" filesecurelevel="all">
+    <ScreenDefinition>
+      <Screen id="Desktop_screen" type="desktop" key="UXBooster" tracemode="append" httptimeout="100000000" themeid="theme::UXBooster"/>
+    </ScreenDefinition>
+    <Variables/>
+    <Cookies/>
+    <httpheader/>
+  </Environment>
+  <Script type="xscript5.1"><![CDATA[// window.addEventListener(
+//     'error', 
+//     function (msg, url, lineNo, columnNo, error) {
+//     
+//         var string = msg.toLowerCase();
+//         var substring = "script error";
+//         
+//         if (string.indexOf(substring) > -1)
+//         {
+//             alert('Script Error: See Browser Console for Detail');
+//         } else {
+//             var message = [
+//               'Message: ' + msg,
+//               'URL: ' + url,
+//               'Line: ' + lineNo,
+//               'Column: ' + columnNo,
+//               'Error object: ' + JSON.stringify(error)
+//             ].join(' - ');
+// 
+//             alert(message);
+//         }
+// 
+//         return false;
+//     }
+// )
+]]></Script>
+</ENV>

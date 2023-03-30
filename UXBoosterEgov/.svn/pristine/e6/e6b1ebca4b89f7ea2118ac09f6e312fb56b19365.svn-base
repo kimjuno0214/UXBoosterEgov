@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="sampleValidation" width="600" height="400" titletext="validation" onload="form_onload">
+    <Layouts>
+      <Layout height="400" mobileorientation="landscape" width="600">
+        <Button id="Button00" taborder="0" text="Button00" left="15" top="130" width="115" height="57" onclick="Button00_onclick"/>
+        <Div id="divSearch" taborder="1" left="27" top="23" width="443" height="81" border="1px solid">
+          <Layouts>
+            <Layout>
+              <Edit id="edtTest01" taborder="0" left="42" top="19" width="166" height="31"/>
+              <Edit id="edtTest02" taborder="1" left="226" top="19" width="166" height="31"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Grid id="Grid00" taborder="2" left="206" top="122" width="208" height="96" binddataset="Dataset00">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="Column0"/>
+                <Cell col="1" text="Column1"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0"/>
+                <Cell col="1" text="bind:Column1"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[// 1. 폼에 validation object 생성
+//    - object 구성
+//         체크그룹아이디,
+//         컴포넌트 object,
+//         Comp:Properti/Grid:Cell/Dataset:Column 명,
+//         null check,
+//         타입(number, date등)체크,
+//         체크수(문자는 자릿수, 숫자는 구간[form,to]),
+//         User function 명(생략가능)
+//      ex) this.takeval.add("Search", this.divSearch.edtTest01, "value", true, "number", [0,100], this.fnUserCheck01());
+//          this.takeval.add("Save", this.divSearch.edtTest02, "text", true, "string", [0,6], this.fnUserCheck02());
+//          this.takeval.add("Search", this.divList.grdList, "11", true, "string", [0,4] );
+//          this.takeval.add("Save", this.dsList, "Column01", true, "number", "" );
+// 
+// 2. validation 실행 함수 인자로 validation 그룹아이디를 넣는다 없으면 모두 시행
+//    validtion 그룹이 있을경우 그룹별로 실행, 예를 들어 조회시면 그룹아이디는
+//    "Search"(임의 그룹 아이디) 저장시면 그룹아이디는 "Save"등으로 표현
+//    ex) this.takeval.check("Search");
+//        this.takeval.check("Save");
+//        
+// 3. validation object 순서대로 순차적으로 체크
+//    
+// 4. validation에 User function을 사용할 수 있도록하여 호출해줌
+//    User function이 있는경우 기본 체크 후 User function 호출
+
+this.form_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	takeval.add(this, "Search", this.divSearch.form.edtTest01, "검색조건01", "value", true, "number", [0,100], "fnUserCheck01", true);
+    takeval.add(this, "Search", this.divSearch.form.edtTest02, "검색조건02", "value", true, "string", [2,6], "fnUserCheck02");
+    
+    takeval.add(this, "Save", this.divSearch.form.edtTest01, "저장체크01", "value", true, "string", "", "");
+    takeval.add(this, "Save", this.divSearch.form.edtTest02, "저장체크02", "value", true, "string", "", "");
+    
+    takeval.add(this, "Grid", this.Grid00, "검색조건01", "0", true, "number", [0,100], "fnUserCheck01", true);
+    takeval.add(this, "Grid", this.Grid00, "검색조건02", "1", true, "string", [2,6], "fnUserCheck02");
+    
+    takeval.add(this, "Dataset", this.Dataset00, "검색조건01", "Column0", true, "number", [0,100], "fnUserCheck01", true);
+    takeval.add(this, "Dataset", this.Dataset00, "검색조건02", "Column1", true, "string", [2,6], "fnUserCheck02");
+};
+
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+ 	takeval.print(this, "Search");
+//     
+//     trace("getGroupList : " + takeval.getGroupList(this));
+//     
+//     console.dir(takeval.getGroupArray(this, "Search"));
+//     trace("getGroupArray : " + takeval.getGroupArray(this, "Search"));
+    
+//    takeval.check(this, "Search");
+    
+//    takeval.check(this, "Grid");
+
+      takeval.check(this, "Save");
+};
+
+this.fnUserCheck01 = function(objComp, sChkProp, sName)
+{
+    alert("fnUserCheck01(" + objComp + "," + sChkProp + "," + sName + ")");
+    
+    return true;
+}
+
+this.fnUserCheck02 = function(objComp, sChkProp, sName)
+{
+    alert("fnUserCheck02(" + objComp + "," + sChkProp + "," + sName + ")");
+    
+    return true;
+}
+]]></Script>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">1</Col>
+            <Col id="Column1">2</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="divSearch.form.edtTest01" propid="value" datasetid="Dataset00" columnid="Column0"/>
+      <BindItem id="item1" compid="divSearch.form.edtTest02" propid="value" datasetid="Dataset00" columnid="Column1"/>
+    </Bind>
+  </Form>
+</FDL>

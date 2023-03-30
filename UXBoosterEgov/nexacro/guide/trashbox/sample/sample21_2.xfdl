@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="sample01" width="1040" height="800" titletext="New Form">
+    <Layouts>
+      <Layout height="800" mobileorientation="landscape" width="1040">
+        <Static id="Static00" taborder="0" text="10" left="0" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" color="red" textAlign="center"/>
+        <Static id="Static03" taborder="1" text="10" top="0" width="10" background="rgba(255,0,0,0.4)" bottom="0" visible="false" color="red" textAlign="center" right="0"/>
+        <Static id="Static01" taborder="2" text="타임라인 상세" left="10" top="0" height="30" width="450" cssclass="sta_WF_title02"/>
+        <Static id="Static02" taborder="3" left="10" top="30" height="40" right="10" cssclass="sta_WF_th01L"/>
+        <Static id="Static04" taborder="4" left="10" top="69" height="60" right="10" cssclass="sta_WF_th01L"/>
+        <Static id="Static05" taborder="5" text="사용자명" left="20" top="35" width="90" height="30" cssclass="sta_WF_timeLine01"/>
+        <Static id="Static06" taborder="6" text="2019-08-15 16:27:38" left="115" top="35" width="150" height="30" cssclass="sta_WF_timeLine01"/>
+        <Static id="Static07" taborder="7" text="제목제목제목제목제목제목제목제목제목" left="270" top="35" height="30" cssclass="sta_WF_timeLine02" width="750"/>
+        <Static id="Static08" taborder="8" text="내용" left="20" top="76" height="46" right="20" cssclass="sta_WF_subscript01"/>
+        <Static id="Static09" taborder="9" left="10" top="128" height="170" right="10" cssclass="sta_WF_td01L"/>
+        <ImageViewer id="ImageViewer00" taborder="10" text="ImageViewer00" left="20" top="138" width="120" height="150" onclick="ImageViewer00_onclick"/>
+        <Static id="Static10" taborder="11" left="10" top="297" height="40" right="10" cssclass="sta_WF_th01L"/>
+        <Static id="Static11" taborder="12" left="10" top="336" height="60" right="10" cssclass="sta_WF_th01L"/>
+        <Static id="Static12" taborder="13" text="사용자명" left="20" top="302" width="90" height="30" cssclass="sta_WF_timeLine01"/>
+        <Static id="Static13" taborder="14" text="2019-08-15 16:27:38" left="115" top="302" width="150" height="30" cssclass="sta_WF_timeLine01"/>
+        <Static id="Static14" taborder="15" text="제목제목제목제목제목제목제목제목제목" left="270" top="302" height="30" cssclass="sta_WF_timeLine02" width="750"/>
+        <Static id="Static15" taborder="16" text="내용" left="20" top="343" height="46" right="20" cssclass="sta_WF_subscript01"/>
+        <Static id="Static16" taborder="17" left="10" top="395" height="170" right="10" cssclass="sta_WF_td01L"/>
+        <ImageViewer id="ImageViewer01" taborder="18" text="ImageViewer00" left="20" top="405" width="1000" height="150"/>
+        <Button id="Button01" taborder="19" text="타임라인추가" top="570" width="90" height="23" cssclass="btn_WF_basic01" right="120"/>
+        <Button id="Button00" taborder="20" text="목록" top="570" width="50" height="23" cssclass="btn_WF_basic01" right="10"/>
+        <Button id="Button02" taborder="21" text="완료" top="570" width="50" height="23" cssclass="btn_WF_basic01" right="65"/>
+        <ImageViewer id="ImageViewer02" taborder="22" text="ImageViewer00" left="150" top="138" width="120" height="150" onclick="ImageViewer00_onclick"/>
+        <ImageViewer id="ImageViewer03" taborder="23" text="ImageViewer00" left="275" top="138" width="120" height="150" onclick="ImageViewer00_onclick"/>
+        <ImageViewer id="ImageViewer04" taborder="24" text="ImageViewer00" left="400" top="138" width="120" height="150" onclick="ImageViewer00_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+          <Column id="Column5" type="STRING" size="256"/>
+          <Column id="Column6" type="STRING" size="256"/>
+          <Column id="Column7" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[
+this.ImageViewer00_onclick = function(obj:nexacro.ImageViewer,e:nexacro.ClickEventInfo)
+{
+	
+};
+]]></Script>
+  </Form>
+</FDL>

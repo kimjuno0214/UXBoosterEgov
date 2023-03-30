@@ -1,0 +1,444 @@
+(function()
+{
+    return function()
+    {
+        if (!this._is_form)
+            return;
+        
+        var obj = null;
+        
+        this.on_create = function()
+        {
+            this.set_name("CM010P03");
+            this.set_titletext("시험기관 검토 조회");
+            this.set_cssclass("fm_work");
+            this.set_background("#ffffff");
+            if (Form == this.constructor)
+            {
+                this._setFormPosition(869,410);
+            }
+            
+            // Object(Dataset, ExcelExportObject) Initialize
+            obj = new Dataset("dsList", this);
+            obj._setContents("<ColumnInfo><Column id=\"Column0\" type=\"STRING\" size=\"256\"/><Column id=\"Column1\" type=\"STRING\" size=\"256\"/><Column id=\"Column2\" type=\"STRING\" size=\"256\"/><Column id=\"Column3\" type=\"STRING\" size=\"256\"/><Column id=\"Column4\" type=\"STRING\" size=\"256\"/><Column id=\"Column5\" type=\"STRING\" size=\"256\"/><Column id=\"Column6\" type=\"STRING\" size=\"256\"/><Column id=\"Column7\" type=\"STRING\" size=\"256\"/><Column id=\"Column8\" type=\"STRING\" size=\"256\"/><Column id=\"Column9\" type=\"STRING\" size=\"256\"/><Column id=\"Column10\" type=\"STRING\" size=\"256\"/><Column id=\"Column11\" type=\"STRING\" size=\"256\"/><Column id=\"Column12\" type=\"STRING\" size=\"256\"/><Column id=\"Column13\" type=\"STRING\" size=\"256\"/><Column id=\"Column14\" type=\"STRING\" size=\"256\"/><Column id=\"Column15\" type=\"STRING\" size=\"256\"/><Column id=\"Column16\" type=\"STRING\" size=\"256\"/><Column id=\"Column17\" type=\"STRING\" size=\"256\"/><Column id=\"Column18\" type=\"STRING\" size=\"256\"/><Column id=\"Column19\" type=\"STRING\" size=\"256\"/><Column id=\"Column20\" type=\"STRING\" size=\"256\"/><Column id=\"Column21\" type=\"STRING\" size=\"256\"/><Column id=\"Column22\" type=\"STRING\" size=\"256\"/><Column id=\"Column23\" type=\"STRING\" size=\"256\"/><Column id=\"Column24\" type=\"STRING\" size=\"256\"/><Column id=\"Column25\" type=\"STRING\" size=\"256\"/><Column id=\"Column26\" type=\"STRING\" size=\"256\"/><Column id=\"Column27\" type=\"STRING\" size=\"256\"/><Column id=\"Column28\" type=\"STRING\" size=\"256\"/><Column id=\"Column29\" type=\"STRING\" size=\"256\"/><Column id=\"Column30\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"Column0\">안전인증</Col><Col id=\"Column1\">어린이용 물놀이기구</Col><Col id=\"Column2\">공기주입 물놀이기구</Col><Col id=\"Column20\">1</Col></Row><Row><Col id=\"Column0\">안전인증</Col><Col id=\"Column1\">어린이용 물놀이기구</Col><Col id=\"Column2\">수영보조용품(착용형)</Col><Col id=\"Column20\">1</Col></Row><Row><Col id=\"Column0\">안전인증</Col><Col id=\"Column1\">어린이용 물놀이기구</Col><Col id=\"Column2\">수영보조용품(비착용형)</Col><Col id=\"Column20\">1</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">자동차용 어린이 보호장치</Col><Col id=\"Column2\">휴대용 유아침대</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">자동차용 어린이 보호장치</Col><Col id=\"Column2\">유아용좌석</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">자동차용 어린이 보호장치</Col><Col id=\"Column2\">부스터 좌석</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">유아용 섬유제품</Col><Col id=\"Column2\">하네스/조끼형 보호장치</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">유아용 섬유제품</Col><Col id=\"Column2\">외의류(유섬)</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">유아용 섬유제품</Col><Col id=\"Column2\">중의류(유섬)</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">유아용 섬유제품</Col><Col id=\"Column2\">내의류(유섬)</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">유아용 섬유제품</Col><Col id=\"Column2\">침구류(유섬)</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">유아용 섬유제품</Col><Col id=\"Column2\">신발류(유섬)</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">유아용 섬유제품</Col><Col id=\"Column2\">양말류(유섬)</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">유아용 섬유제품</Col><Col id=\"Column2\">장갑류(유섬)</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">유아용 섬유제품</Col><Col id=\"Column2\">모자류(유섬)</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">유아용 섬유제품</Col><Col id=\"Column2\">가방류(유섬)</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">유아용 섬유제품</Col><Col id=\"Column2\">신생아용품(유섬)</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">합성수지제 어린이용품</Col><Col id=\"Column2\">어린이용 침대가드</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">합성수지제 어린이용품</Col><Col id=\"Column2\">유아용 노리개젖꼭지</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">합성수지제 어린이용품</Col><Col id=\"Column2\">유아용 노리개젖꼭지 걸이</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">합성수지제 어린이용품</Col><Col id=\"Column2\">바닥매트</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">어린이용 스포츠 보호 용품(보호 장구 및 안전모)</Col><Col id=\"Column2\">보호장구</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">어린이용 스케이트보드</Col><Col id=\"Column2\">A등급</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">어린이용 스케이트보드</Col><Col id=\"Column2\">B등급</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">아동용 이단침대</Col><Col id=\"Column2\">어린이용 이단침대</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">완구</Col><Col id=\"Column2\">활동완구</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">완구</Col><Col id=\"Column2\">미술공예 완구</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">완구</Col><Col id=\"Column2\">퍼즐 완구</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">완구</Col><Col id=\"Column2\">파티완구</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">완구</Col><Col id=\"Column2\">봉제인형</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">완구</Col><Col id=\"Column2\">기능성 완구</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">완구</Col><Col id=\"Column2\">게임 완구</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">완구</Col><Col id=\"Column2\">승용 완구</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">완구</Col><Col id=\"Column2\">발사체 완구</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">완구</Col><Col id=\"Column2\">역할놀이 완구</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">완구</Col><Col id=\"Column2\">악기완구</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">완구</Col><Col id=\"Column2\">운동완구</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">완구</Col><Col id=\"Column2\">유아완구</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">완구</Col><Col id=\"Column2\">블록완구</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">완구</Col><Col id=\"Column2\">모형완구</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">완구</Col><Col id=\"Column2\">자석완구</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">완구</Col><Col id=\"Column2\">조종완구</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">완구</Col><Col id=\"Column2\">가구완구</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">완구</Col><Col id=\"Column2\">교육용 완구(교구)</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">완구</Col><Col id=\"Column2\">조립완구</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">완구</Col><Col id=\"Column2\">기타완구(작동완구)</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">유아용 삼륜차</Col><Col id=\"Column2\">유아용 삼륜차</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">어린이용 자전거</Col><Col id=\"Column2\">어린이용 자전거</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">학용품</Col><Col id=\"Column2\">크레용·크레파스</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">학용품</Col><Col id=\"Column2\">연필류·연필심</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">학용품</Col><Col id=\"Column2\">샤프연필·샤프연필심</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">학용품</Col><Col id=\"Column2\">지우개</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">학용품</Col><Col id=\"Column2\">파스텔</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">학용품</Col><Col id=\"Column2\">그림물감</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">학용품</Col><Col id=\"Column2\">분필</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">학용품</Col><Col id=\"Column2\">마킹펜류</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">학용품</Col><Col id=\"Column2\">연필깎이</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">학용품</Col><Col id=\"Column2\">필통</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">학용품</Col><Col id=\"Column2\">색종이</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">학용품</Col><Col id=\"Column2\">공책</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">학용품</Col><Col id=\"Column2\">스케치북</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">학용품</Col><Col id=\"Column2\">점토류</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">학용품</Col><Col id=\"Column2\">문구용 풀</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">학용품</Col><Col id=\"Column2\">악기류</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">유아용 캐리어</Col><Col id=\"Column2\">프레임 없는 캐리어</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">안전확인</Col><Col id=\"Column1\">유아용 캐리어</Col><Col id=\"Column2\">프레임 있는 캐리어</Col><Col id=\"Column20\">2</Col></Row><Row><Col id=\"Column0\">공급자적합성</Col><Col id=\"Column1\">어린이용 안경테 및 선글라스</Col><Col id=\"Column2\">안경테</Col><Col id=\"Column20\">3</Col></Row><Row><Col id=\"Column0\">공급자적합성</Col><Col id=\"Column1\">어린이용 안경테 및 선글라스</Col><Col id=\"Column2\">선글라스</Col><Col id=\"Column20\">3</Col></Row><Row><Col id=\"Column0\">공급자적합성</Col><Col id=\"Column1\">어린이용 우산 및 양산</Col><Col id=\"Column2\">우산</Col><Col id=\"Column20\">3</Col></Row><Row><Col id=\"Column0\">공급자적합성</Col><Col id=\"Column1\">어린이용 우산 및 양산</Col><Col id=\"Column2\">양산</Col><Col id=\"Column20\">3</Col></Row><Row><Col id=\"Column0\">공급자적합성</Col><Col id=\"Column1\">어린이용 우산 및 양산</Col><Col id=\"Column2\">우산 겸용 양산</Col><Col id=\"Column20\">3</Col></Row><Row><Col id=\"Column0\">공급자적합성</Col><Col id=\"Column1\">어린이용 바퀴달린 운동화</Col><Col id=\"Column2\">어린이용 바퀴달린 운동화</Col><Col id=\"Column20\">3</Col></Row><Row><Col id=\"Column0\">공급자적합성</Col><Col id=\"Column1\">어린이용 장신구</Col><Col id=\"Column2\">어린이용 장신구</Col><Col id=\"Column20\">3</Col></Row><Row><Col id=\"Column0\">공급자적합성</Col><Col id=\"Column1\">어린이용 킥보드</Col><Col id=\"Column2\">수동식</Col><Col id=\"Column20\">3</Col></Row><Row><Col id=\"Column0\">공급자적합성</Col><Col id=\"Column1\">어린이용 킥보드</Col><Col id=\"Column2\">전동식</Col><Col id=\"Column20\">3</Col></Row><Row><Col id=\"Column0\">공급자적합성</Col><Col id=\"Column1\">아동용 섬유제품</Col><Col id=\"Column2\">내의류(아섬)</Col><Col id=\"Column20\">3</Col></Row><Row><Col id=\"Column0\">공급자적합성</Col><Col id=\"Column1\">아동용 섬유제품</Col><Col id=\"Column2\">중의류(아섬)</Col><Col id=\"Column20\">3</Col></Row><Row><Col id=\"Column0\">공급자적합성</Col><Col id=\"Column1\">아동용 섬유제품</Col><Col id=\"Column2\">외의류(아섬)</Col><Col id=\"Column20\">3</Col></Row><Row><Col id=\"Column0\">공급자적합성</Col><Col id=\"Column1\">아동용 섬유제품</Col><Col id=\"Column2\">침구류(아섬)</Col><Col id=\"Column20\">3</Col></Row><Row><Col id=\"Column0\">공급자적합성</Col><Col id=\"Column1\">아동용 섬유제품</Col><Col id=\"Column2\">기타 제품류(아섬)</Col><Col id=\"Column20\">3</Col></Row><Row><Col id=\"Column0\">공급자적합성</Col><Col id=\"Column1\">아동용 섬유제품</Col><Col id=\"Column2\">양말류(아섬)</Col><Col id=\"Column20\">3</Col></Row><Row><Col id=\"Column0\">공급자적합성</Col><Col id=\"Column1\">아동용 섬유제품</Col><Col id=\"Column2\">장갑류(아섭)</Col><Col id=\"Column20\">3</Col></Row><Row><Col id=\"Column0\">공급자적합성</Col><Col id=\"Column1\">아동용 섬유제품</Col><Col id=\"Column2\">모자류(아섬)</Col><Col id=\"Column20\">3</Col></Row><Row><Col id=\"Column0\">공급자적합성</Col><Col id=\"Column1\">기타어린이제품</Col><Col id=\"Column2\">기타어린이제품</Col><Col id=\"Column20\">3</Col></Row></Rows>");
+            this.addChild(obj.name, obj);
+
+
+            obj = new Dataset("dsList00", this);
+            obj._setContents("<ColumnInfo><Column id=\"Column0\" type=\"STRING\" size=\"256\"/><Column id=\"Column1\" type=\"STRING\" size=\"256\"/><Column id=\"Column2\" type=\"STRING\" size=\"256\"/><Column id=\"Column3\" type=\"STRING\" size=\"256\"/><Column id=\"Column4\" type=\"STRING\" size=\"256\"/><Column id=\"Column5\" type=\"STRING\" size=\"256\"/><Column id=\"Column6\" type=\"STRING\" size=\"256\"/><Column id=\"Column7\" type=\"STRING\" size=\"256\"/><Column id=\"Column8\" type=\"STRING\" size=\"256\"/><Column id=\"Column9\" type=\"STRING\" size=\"256\"/><Column id=\"Column10\" type=\"STRING\" size=\"256\"/><Column id=\"Column11\" type=\"STRING\" size=\"256\"/><Column id=\"Column12\" type=\"STRING\" size=\"256\"/><Column id=\"Column13\" type=\"STRING\" size=\"256\"/><Column id=\"Column14\" type=\"STRING\" size=\"256\"/><Column id=\"Column15\" type=\"STRING\" size=\"256\"/><Column id=\"Column16\" type=\"STRING\" size=\"256\"/><Column id=\"Column17\" type=\"STRING\" size=\"256\"/><Column id=\"Column18\" type=\"STRING\" size=\"256\"/><Column id=\"Column19\" type=\"STRING\" size=\"256\"/><Column id=\"Column20\" type=\"STRING\" size=\"256\"/><Column id=\"Column21\" type=\"STRING\" size=\"256\"/><Column id=\"Column22\" type=\"STRING\" size=\"256\"/><Column id=\"Column23\" type=\"STRING\" size=\"256\"/><Column id=\"Column24\" type=\"STRING\" size=\"256\"/><Column id=\"Column25\" type=\"STRING\" size=\"256\"/><Column id=\"Column26\" type=\"STRING\" size=\"256\"/><Column id=\"Column27\" type=\"STRING\" size=\"256\"/><Column id=\"Column28\" type=\"STRING\" size=\"256\"/><Column id=\"Column29\" type=\"STRING\" size=\"256\"/><Column id=\"Column30\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"Column0\">KCL</Col><Col id=\"Column1\">어린이용 물놀이기구</Col><Col id=\"Column2\">공기주입 물놀이기구</Col><Col id=\"Column20\">1</Col><Col id=\"Column3\">N</Col><Col id=\"Column4\">0</Col><Col id=\"Column5\">20230102</Col><Col id=\"Column6\">20231010</Col><Col id=\"Column7\">시험장비 고장</Col></Row><Row><Col id=\"Column0\">KTR</Col><Col id=\"Column1\">어린이용 물놀이기구</Col><Col id=\"Column2\">공기주입 물놀이기구</Col><Col id=\"Column20\">1</Col><Col id=\"Column3\">N</Col><Col id=\"Column4\">0</Col><Col id=\"Column5\">20230102</Col><Col id=\"Column6\">20230910</Col><Col id=\"Column7\">시험장비 교정 중</Col></Row><Row><Col id=\"Column0\">KATRI</Col><Col id=\"Column1\">어린이용 물놀이기구</Col><Col id=\"Column2\">공기주입 물놀이기구</Col><Col id=\"Column20\">1</Col><Col id=\"Column3\">N</Col><Col id=\"Column4\">0</Col><Col id=\"Column5\">20230102</Col><Col id=\"Column6\">20230310</Col><Col id=\"Column7\">시험장비 교정 중</Col></Row></Rows>");
+            this.addChild(obj.name, obj);
+            
+            // UI Components Initialize
+            obj = new Static("staProgDetailT00_00","10","10","125","21",null,null,null,null,null,null,this);
+            obj.set_taborder("0");
+            obj.set_text("시험기관 검토");
+            obj.set_cssclass("sta_WF_title02");
+            this.addChild(obj.name, obj);
+
+            obj = new Grid("grdMultilanguageInfo","10","36",null,null,"10","10",null,null,null,null,this);
+            obj.set_taborder("1");
+            obj.set_autofittype("col");
+            obj.set_binddataset("dsList00");
+            obj.set_readonly("false");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"120\"/><Column size=\"94\"/><Column size=\"94\"/><Column size=\"120\"/><Column size=\"120\"/><Column size=\"300\"/></Columns><Rows><Row size=\"32\" band=\"head\"/><Row size=\"24\" band=\"head\"/><Row size=\"30\"/></Rows><Band id=\"head\"><Cell rowspan=\"2\" text=\"시험기관\"/><Cell col=\"1\" rowspan=\"2\" text=\"가능여부\" autosizecol=\"limitmin\"/><Cell col=\"2\" rowspan=\"2\" text=\"최대가능수량\" autosizecol=\"limitmin\"/><Cell col=\"3\" colspan=\"2\" text=\"시험 불가 기간\" autosizecol=\"limitmin\"/><Cell col=\"5\" rowspan=\"2\" text=\"비고\" autosizecol=\"limitmin\"/><Cell row=\"1\" col=\"3\" text=\"시작일\"/><Cell row=\"1\" col=\"4\" text=\"종료일\"/></Band><Band id=\"body\"><Cell text=\"bind:Column0\" suppress=\"1\"/><Cell col=\"1\" text=\"bind:Column3\" edittype=\"combo\" autosizecol=\"limitmin\" textAlign=\"center\" combodataset=\"dsCha00\" combodisplaynulltext=\"Y\" combocodecol=\"CODE\" combodatacol=\"NAME\" combodisplaynulltype=\"nulltext\"/><Cell col=\"2\" text=\"bind:Column4\" edittype=\"normal\" autosizecol=\"limitmin\" textAlign=\"center\"/><Cell col=\"3\" text=\"bind:Column5\" edittype=\"date\" autosizecol=\"limitmin\" textAlign=\"center\" displaytype=\"calendarcontrol\"/><Cell col=\"4\" text=\"bind:Column6\" edittype=\"date\" autosizecol=\"limitmin\" textAlign=\"center\" displaytype=\"calendarcontrol\"/><Cell col=\"5\" text=\"bind:Column7\" edittype=\"normal\" autosizecol=\"limitmin\" textAlign=\"left\"/></Band></Format></Formats>");
+            this.addChild(obj.name, obj);
+            // Layout Functions
+            //-- Default Layout : this
+            obj = new Layout("default","",869,410,this,function(p){});
+            obj.set_mobileorientation("landscape");
+            this.addLayout(obj.name, obj);
+            
+            // BindItem Information
+
+            
+            // TriggerItem Information
+
+        };
+        
+        this.loadPreloadList = function()
+        {
+
+        };
+        
+        // User Script
+        this.registerScript("PL010P06.xfdl", function() {
+        /**
+        *  SYSTEM FORM NAME
+        *
+        *  @MenuPath    1Depth > 2Depth
+        *  @FileName    *.xfdl
+        *  @Creator     홍길동
+        *  @CreateDate  yyyy.MM.DD
+        *  @Version     1.0
+        *  @Desction    설명
+        *
+        ************** 소스 수정 이력 *************************************************
+        *    Date          Modifier            Description
+        *******************************************************************************
+        *  YYYY.MM.DD      홍길동             최초 생성
+        *******************************************************************************
+        */
+
+        //공통 라이브러리 호출
+
+        /*********************************************************
+         * 1.1 FORM 변수 선언 영역
+         ********************************************************/
+        this.fv_bWebOnload = false;
+        this.fv_sProjectCd = nexacro.getApplication().av_sProjectCd;
+        this.fv_sMenuCd = take.nvl(this.parent.sMenuCd, "");
+        this.fv_sBoardSeq = take.nvl(this.parent.sBoardSeq, "");
+        this.fv_sAttachCd = take.nvl(this.parent.sBoardAttach, "");
+        this.fv_objGdsUserInfo  = nexacro.getApplication().gdsUserInfo;
+        this.fv_divFile;
+
+        /*********************************************************
+        * 1.2 FORM EVENT 영역(onload등)
+        ********************************************************/
+        /**
+        * Form_onload 최초 로드시 발생되는 이벤트 (필수)
+        */
+        this.CM010P03_onload = function(obj, e)
+        {
+
+        };
+
+        /*********************************************************
+        * 2 필수 FUNCTION 영역 (fnInit, fnSearch, fnSave, fnAddRow, fnDelRow)
+        ********************************************************/
+        /**
+         * fnSearch : 조회 transaction (필수) --> 공통 조회에서 호출할 디폴트값 세팅 필요
+         * @param  {String} sTranId 트랜젝션 아이디
+         * @return {N/A}    N/A
+         * @example this.fnSearch("ID");
+         */
+        this.fnSearch = function(sTranId)
+        {
+            //공통 조회에서 호출할 디폴트값 세팅 필요
+            if (take.nvl(sTranId, "")=="") sTranId = "Search";
+
+            this.dsSearch.clearData();
+        	this.dsSearch.addRow();
+        	this.dsSearch.setColumn(0, "PROJECT_CD"	, this.fv_sProjectCd);
+        	this.dsSearch.setColumn(0, "MENU_CD"	, this.fv_sMenuCd);
+        	this.dsSearch.setColumn(0, "BOARD_SEQ"	, this.fv_sBoardSeq);
+
+        	var sNamespaces = new Array();
+        		sNamespaces.push("BoardManagement.boardInfoDetail");
+        		sNamespaces.push("BoardManagement.boardTargetList");
+
+        	var sInDs = ["dsSearch"];
+
+        	var sOutDs = new Array();
+        		sOutDs.push("dsNotice");
+        		sOutDs.push("dsNotiTarget");
+
+        	//Script
+        	take.tranSelect(this, "Search", sNamespaces, sInDs, sOutDs, "", "fnCallback");
+        };
+
+        /**
+         * fnSave : 저장 transaction (필수) -->공통 저장에서 호출할 디폴트값 세팅 필요
+         * @param  {String} sTranId 트랜젝션 아이디
+         * @return {N/A}    N/A
+         * @example this.fnSave("ID");
+         */
+        this.fnSave = function(sTranId)
+        {
+            //공통 조회에서 호출할 디폴트값 세팅 필요
+            if (take.nvl(sTranId, "")=="") sTranId = "Save";
+
+        	var sContents = this.wbWebEditor.getProperty("window").callMethod("getContents", 1);
+
+        	this.dsNotice.setColumn(0, "PROJECT_CD"	, this.fv_sProjectCd);
+        	this.dsNotice.setColumn(0, "MENU_CD"	, this.fv_sMenuCd);
+         	this.dsNotice.setColumn(0, "BOARD_TXT"	, sContents);
+
+        	this.dsPushInfo.setColumn(0, "BOARD_TITLE", this.edtTitle.value);
+        	this.dsPushInfo.setColumn(0, "PROJECT_CD"	, this.fv_sProjectCd);
+        	this.dsPushInfo.setColumn(0, "MENU_CD"		, this.fv_sMenuCd);
+        	this.dsPushInfo.setColumn(0, "USER_NM"		, this.fv_objGdsUserInfo.getColumn(0,"USER_NM"));
+        	this.dsPushInfo.setColumn(0, "TOKEN_VAL"	, "1");
+
+        	var sCalFrom = this.divPopOption.form.calPopStartDt.value;
+        	var sCalTo	 = this.divPopOption.form.calPopEndDt.value;
+        	if( !take.isEmpty(sCalFrom) && !take.isEmpty(sCalTo) ){
+        		var bFromTo = take.isFromTo(sCalFrom, sCalTo);
+        		if( !bFromTo ){
+        			take.alert(this, "", "팝업공지일이 잘못되었습니다.");
+        			return;
+        		}
+        	}
+
+        	//공지사항에 "title" 글이 새로 올라왔습니다. (공지사항은 우선 하드코딩 --> 추후에 menu코드 가져와서 변경)
+        	//작성자 : 이동건
+
+        	//데이터변경 / 파일 수정 여부
+        	if (!take.isDsModified(this.dsNotice)
+        		&& !take.isDsModified(this.dsNotiTarget)
+        		&& !this.fv_divFile.fn_isUpdate())
+        	{
+        		take.alert(this, "info", "변경된 내역이 없습니다.");
+        		return;
+        	}
+
+        	//파일 업로드 / 저장
+        	this.fv_divFile.fnUploadSaveFileList(this,
+        		function(rtnValue){
+        			if(rtnValue.result){
+        				take.transaction(this, "Save", "SVC_LOC::cm/boardSave.do", "dsNotice=dsNotice:U dsNotiTarget=dsNotiTarget:U dsPushInfo=dsPushInfo:U", "", "", "fnCallback");
+        			}
+        		}
+        	);
+        };
+
+        /**
+         * fnDelRow : 행 삭제 함수 (필수) --> 공통 행삭제에서 호출할 디폴트값 세팅 필요
+         * @param  {String} sGridId 그리드 아이디
+         * @param  {Number, Array} arrnRow    deleteRow 리턴값
+         * @return {N/A} N/A
+         * @example this.fnDelRow(sGrdId, nRow);
+         */
+        this.fnDelRow = function(sGrdId, arrnRow)
+        {
+            //공통 행추가에서 호출할 디폴트값 세팅
+            if (take.nvl(sGrdId, "")=="") sGrdId = "";
+
+        	take.transaction(this, "Delete", "SVC_LOC::cm/boardSave.do", "dsNotice=dsNotice", "", "", "fnCallback");
+        };
+
+        /*********************************************************
+         * 3 각 COMPONENT 별 EVENT 영역
+          ********************************************************/
+        this.wbWebEditor_onloadcompleted = function(obj,e)
+        {
+        	if (e.url.indexOf("summer.html") != -1){
+        		this.fv_bWebOnload = true;
+        	}
+        };
+
+        this.wbWebEditor_onsize = function(obj,e)
+        {
+        	this.wbWebEditor.getProperty("window").callMethod("setHeight", (this.wbWebEditor.getOffsetHeight()-85));
+        };
+
+        this.CM010P03_ontimer = function(obj,e)
+        {
+        	if (e.timerid==1)
+        	{
+                if (this.fv_bWebOnload == true)
+        		{
+                    this.killTimer(1);
+                    this.wbWebEditor.getProperty("window").callMethod("fnEditorReady", (this.wbWebEditor.getOffsetHeight()-65));
+
+        			if(!take.isEmpty(this.fv_sBoardSeq)){
+        				this.fnSearch();
+        			}else{
+        				this.dsNotice.addRow();
+
+        				//첨부파일 코드가 없을시 기준에 맞게 코드 생성
+        				this.fv_divFile.fnSearchAtchFileId(this,
+        					function(rtnValue){
+        						this.dsNotice.setColumn(0, 'BOARD_ATTACH', rtnValue.resultData);
+        						this.fv_divFile.fn_setAtchFileId(rtnValue.resultData);
+        						this.fv_divFile.fnSearchFileList(this);
+        					}
+        				);
+        			}
+        		}
+        	}
+        };
+
+        this.btnSave_onclick = function(obj,e)
+        {
+        	this.fnSave();
+        };
+
+        this.btnDelete_onclick = function(obj,e)
+        {
+        	var bRowDel = take.confirm(this, "question", "삭제 하시겠습니까?");
+        	if (!bRowDel) return;
+
+        	this.fnDelRow();
+        };
+
+        this.btnPrev_onclick = function(obj,e)
+        {
+        	this.opener.fnCallPopup(this.fv_sBoardSeq, this.fv_sAttachCd, "CM010P02");
+        	this.close();
+        };
+
+        this.btnClose_onclick = function(obj,e)
+        {
+        	this.close();
+        };
+
+        // 팝업공지대상자 조회
+        this.divPopOption_btnSchPopTarget_onclick = function(obj,e)
+        {
+        	var arrParam = {};
+        	take.openPopup(this, "CM050P01", "frm::mod/CM050P01.xfdl", arrParam, "resizable=false", "fnPopCallback", false);
+        };
+
+        /*********************************************************
+        * 4 사용자 FUNCTION 영역
+        ********************************************************/
+        this.fnGoList = function()
+        {
+        	this.opener.fnSearch();
+        	this.close();
+        };
+
+        // 초기 ui 세팅
+        this.fnUISetting = function(objUserParam)
+        {
+        	var sAttachYn = "Y";
+
+        	if(objUserParam){
+        		if(objUserParam.attach_yn)
+        			sAttachYn = take.nvl(objUserParam.attach_yn, "Y");
+        	}
+
+        	var nFormHeight = this.getOffsetHeight();
+        	if( "N" == sAttachYn )
+        	{
+        		var nFileHegit = this.divFile.getOffsetHeight();
+        		nFormHeight = nFormHeight - nFileHegit;
+
+        		this.divFile.set_height(0);
+        	}
+
+        	this.set_height(nFormHeight);
+        	this.resetScroll();
+        };
+
+        /*********************************************************
+         * 5 TRANSACTION OR CALLBACK 콜백 처리부분
+         ********************************************************/
+        /**
+        * fnCallback : transaction callback
+        * @param  : sId      - 서비스 아이디 (공통 콜백에서 넘어옴)
+        * @param  : nErrCd   - 에러코드 (공통 콜백에서 넘어옴)
+        * @param  : sErrMsg  - 에러메세지 (공통 콜백에서 넘어옴)
+        * @return : N/A
+        * @example :
+        */
+        this.fnCallback = function(sId, nErrCd, sErrMsg)
+        {
+            //Transaction 에러는 공통에서 처리
+
+            //Transaction은 성공이나 실제 처리된게 없을 경우 처리
+            if( sErrMsg == "SUCC" )
+            {
+                //Success Script
+            } else {
+                //Etc Script
+            }
+
+            switch(sId)
+            {
+                case "Save" : //저장 콜백
+                    //Script
+        			take.alert(this, "", "저장이 완료되었습니다.");
+        			this.fnGoList();
+                    break;
+        		case "Delete" : //삭제 콜백
+        			take.alert(this, "", "삭제가 완료되었습니다.");
+        			this.fnGoList();
+
+        			break;
+                case "Search" :  //조회 콜백
+                    //Script
+        			var sContents = this.dsNotice.getColumn(0, "BOARD_TXT");
+        			//20210118 정해원 게시판 내용 조회 불가
+        			//callMethod의 파라미터에 html태그 있을 경우 호출 안 됨
+        			//this.wbWebEditor.getProperty("window").callMethod("setContents", sContents);
+        			var docWeb = this.wbWebEditor.getProperty("document").getProperty("all");
+        				docWeb.getProperty("inputData").setProperty("value", take.nvl(sContents, ""));
+
+        			this.wbWebEditor.getProperty("window").callMethod("setContents");
+
+        			//첨부파일 조회
+        			var atchFileId = this.dsNotice.getColumn(0, 'BOARD_ATTACH');
+        			this.fv_divFile.fn_setAtchFileId(atchFileId);
+        			this.fv_divFile.fnSearchFileList();
+
+        			var sTargets = "";
+        			for( var i=0; i<this.dsNotiTarget.rowcount; i++ )
+        			{
+        				var sTargetNm = this.dsNotiTarget.getColumn(i, "TARGET_NM");
+        				sTargets += "," + sTargetNm;
+        			}
+        			this.divPopOption.form.edtPopTarget.set_value(sTargets.substring(1));
+
+                    break;
+                default :
+                    break;
+            }
+        };
+
+        this.fnPopCallback = function(sPopId, sRtn)
+        {
+            switch(sPopId)
+            {
+                case "CM050P01" : // 공지대상추가 콜백
+        			if( "" == take.nvl(sRtn, "") ) return false;
+
+        			this.dsNotiTarget.deleteAll();
+        			this.divPopOption.form.edtPopTarget.set_value("");
+
+        			var arrTarget = sRtn.split("::");
+        			var nTargetCnt = arrTarget.length;
+        			var sPopTargets = take.nvl(this.divPopOption.form.edtPopTarget.value, "");
+
+        			for( var i=0; i<nTargetCnt; i++ )
+        			{
+        				var arrInfo = arrTarget[i].split(",");
+        				var sTargetCd = arrInfo[0];
+        				var sTargetNm = arrInfo[1];
+        				var sTargetType = arrInfo[2];
+
+        				if( i > 0 ) sPopTargets += ",";
+
+        				sPopTargets += sTargetNm;
+
+        				var nRow = this.dsNotiTarget.addRow();
+        				this.dsNotiTarget.setColumn(nRow, "TARGET_CD", sTargetCd);
+        				this.dsNotiTarget.setColumn(nRow, "TARGET_NM", sTargetNm);
+        				this.dsNotiTarget.setColumn(nRow, "TARGET_TYPE", sTargetType);
+        				this.dsNotiTarget.setColumn(nRow, "PROJECT_CD", this.fv_sProjectCd);
+        				this.dsNotiTarget.setColumn(nRow, "MENU_CD", this.fv_sMenuCd);
+        				this.dsNotiTarget.setColumn(nRow, "BOARD_SEQ", this.dsNotice.getColumn(0, "BOARD_SEQ"));
+        			}
+
+        			this.divPopOption.form.edtPopTarget.set_value(sPopTargets);
+
+                    break;
+                default :
+                    break;
+            }
+        };
+
+
+        this.btnCancel_onclick = function(obj,e)
+        {
+        	this.close();
+        };
+
+        });
+        
+        // Regist UI Components Event
+        this.on_initEvent = function()
+        {
+            this.addEventHandler("onload",this.CM010P03_onload,this);
+            this.addEventHandler("ontimer",this.CM010P03_ontimer,this);
+            this.staProgDetailT00_00.addEventHandler("onclick",this.staProgDetailT00_00_onclick,this);
+        };
+        this.loadIncludeScript("PL010P06.xfdl");
+        this.loadPreloadList();
+        
+        // Remove Reference
+        obj = null;
+    };
+}
+)();

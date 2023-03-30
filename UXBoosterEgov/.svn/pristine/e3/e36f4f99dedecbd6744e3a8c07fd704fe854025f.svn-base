@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="smpButtonRole" width="1659" height="832" titletext="New Form">
+    <Layouts>
+      <Layout height="832" width="1659">
+        <Grid id="Grid00" taborder="0" left="38" top="150" width="547" height="280" binddataset="_tdsBtnRole">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="257"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="32" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="BTN_ID"/>
+                <Cell col="1" text="USE_YN"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:BTN_ID"/>
+                <Cell col="1" text="bind:USE_YN"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="Button00" taborder="1" text="Button00" left="794" top="48" width="120" height="50" onclick="Button00_onclick"/>
+        <Div id="divDetail" taborder="2" text="Div00" left="40" top="24" width="549" height="123">
+          <Layouts>
+            <Layout>
+              <Button id="btnAddRow" taborder="0" text="btnAddRow" left="50" top="11" width="120" height="50"/>
+              <Button id="btnRoleCopy" taborder="1" text="btnRoleCopy" left="200" top="11" width="120" height="50"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="_tdsBtnRole">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    this.ProgId = "M0036";
+	take.formBtnRole(this);
+};
+
+take.formBtnRole = function(pThis)
+{
+	if (take.nvl(pThis,"")=="") return;
+
+	var objGridDs, objRoleDs;
+	var sProgId = take.nvl(pThis.ProgId, "");
+
+	//sProgId = "M0036"; //테스트 아이디
+	//trace("ProgId-->" + sProgId);
+
+	if (sProgId=="") return; //최상위 부모폼에만 프로그램 아이디가 존재하여 리턴 처리
+
+	if(!pThis.objects["_tdsBtnRole"])
+	{
+		//다국어용 데이터셋 생성
+		objRoleDs = new Dataset;
+		objRoleDs.set_name("_tdsBtnRole"); //데이터 셋 명
+
+		//해당 폼에 추가
+		pThis.addChild(objRoleDs.name, objRoleDs);
+
+	} else {
+		take.trace(pThis.name + "take.formBtnRole.DatasetCreate(_tdsBtnRole)", "INFO", "버튼 권한 데이터셋이 존재합니다.");
+		objRoleDs = pThis.objects["_tdsBtnRole"];
+	}
+
+	take.tranSelect(
+	    pThis, 
+        "selectUserFormRoleBtn", 
+        "Main.selectUserFormRoleBtn", 
+        "", 
+        "_tdsBtnRole", "sMenuId='" + sProgId +"'",
+		function(sId, nCd, sMsg)
+		{
+            take.debug(this, "프로그램 사용자 정보 및 권한 [" + sId + "] 데이터 가져오기 성공");
+            //trace(this._tdsBtnRole.saveXML());
+
+            var sFormBtn, sCompNm, sCompType;
+            var arrFormBtn;
+            var nCnt;
+            var objRtn, objComp, objDs;
+
+            objDs = take.nvl(this._tdsBtnRole,"");
+
+            if (objDs=="") return;
+            
+            nCnt = objDs.rowcount;
+
+            if (nCnt > 0)
+            {
+                for (var i=0; i<nCnt; i++)
+                {
+                    sCompNm = objDs.getColumn(i,"BTN_ID");
+                    
+                    objRtn = take.nvl(take.CompType(this, sCompNm), "");
+
+                    if (objRtn=="")
+                    {
+                        take.debug(this, this.name + "폼에 "+  sCompNm + " 컴포넌트가 존재하지 않음.");
+                        return;
+                    }
+
+                    sCompType = objRtn.type;
+                    objComp = objRtn.comp;
+
+                    //if (sCompType!="Button")
+                    //{
+                    //    take.debug(this, "버튼이 아닙니다. 버튼만 적용됩니다.");
+                    //    return;
+                    //}
+
+                    objComp.set_enable(false);
+                    //objComp.set_tooltiptext("권한이 없습니다.");
+                }
+            }
+		}, false);
+}]]></Script>
+  </Form>
+</FDL>

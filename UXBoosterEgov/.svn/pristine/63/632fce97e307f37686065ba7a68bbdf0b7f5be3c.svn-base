@@ -1,0 +1,632 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+*
+* @filename mappers/safety/SafetyMapper.xml
+* @author 	safety
+* @since 	2023.01.19
+* @version 	1.0
+* @see
+*
+* << 변경 이력(Modification Information) >>
+*
+* 변경번호 : #1
+* 변경일자 : 2023.01.19
+* 변경사람 : safety
+* 변경내용 : 신규 생성
+ -->
+<mapper namespace="safety">
+
+	<select id="odrSelect" parameterType="map" timeout="0" resultType="map" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* safety.odrSelect 
+		* TB_ODR 조회
+		* @author dooresoft
+		* @since 2023.02.08
+		*/
+		]]>
+        SELECT  ODR_ID                                            -- 차수ID
+              , ODR_YR                                            -- 차수연도
+              , ODR_DIV_CD                                        -- 차수구분코드
+              , ODR                                               -- 차수
+              , CERT_FLD_CD                                       -- 인증분야코드
+              , THEMA                                             -- 테마
+              , TOTQY                                             -- 총수량
+              , BGNG_YMD                                          -- 시작일자
+              , PROGRS_STTUS_CD                                   -- 진행상태코드
+        FROM TB_ODR
+        WHERE 1 = 1
+        <if test=" ODR_ID != null and ODR_ID != '' " >
+        AND ODR_ID = #{ODR_ID}
+        </if>
+        ORDER BY ODR_YR, BGNG_YMD, ODR
+	</select>
+
+	<insert id="odrInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* safety.odrInsert 
+		* TB_ODR 등록
+		* @author dooresoft
+		* @since 2023.02.08
+		*/
+		]]>
+		INSERT INTO TB_ODR (
+                ODR_ID                                            -- 차수ID
+              , ODR_YR                                            -- 차수연도
+              , ODR_DIV_CD                                        -- 차수구분코드
+              , ODR                                               -- 차수
+              , CERT_FLD_CD                                       -- 인증분야코드
+              , THEMA                                             -- 테마
+              , TOTQY                                             -- 총수량
+              , BGNG_YMD                                          -- 시작일자
+              , PROGRS_STTUS_CD                                   -- 진행상태코드
+              , REG_DT                                            -- 등록일시
+              , RGTR_ID)                                          -- 등록자ID
+		VALUES (
+                #{ODR_ID}                                         -- 차수ID
+              , #{ODR_YR}                                         -- 차수연도
+              , #{ODR_DIV_CD}                                     -- 차수구분코드
+              , #{ODR}                                            -- 차수
+              , #{CERT_FLD_CD}                                    -- 인증분야코드
+              , #{THEMA}                                          -- 테마
+              , #{TOTQY}                                          -- 총수량
+              , #{BGNG_YMD}                                       -- 시작일자
+              , #{PROGRS_STTUS_CD}                                -- 진행상태코드
+              , NOW()                                             -- 등록일시
+              , #{_sessionUserCd}                                 -- 등록자ID
+		)
+	</insert>
+
+	<update id="odrUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* safety.odrUpdate 
+		* TB_ODR 수정
+		* @author dooresoft
+		* @since 2023.02.08
+		*/
+		]]>
+		UPDATE TB_ODR
+		SET    MDFCN_DT = NOW()
+		     , MDFR_ID = #{_sessionUserCd}
+		<if test=" ODR_YR != null and ODR_YR != '' ">
+		     , ODR_YR = #{ODR_YR}                                                              -- 차수연도
+		</if>
+		<if test=" ODR_DIV_CD != null and ODR_DIV_CD != '' ">
+		     , ODR_DIV_CD = #{ODR_DIV_CD}                                                      -- 차수구분코드
+		</if>
+		<if test=" ODR != null and ODR != '' ">
+		     , ODR = #{ODR}                                                                    -- 차수
+		</if>
+		<if test=" CERT_FLD_CD != null and CERT_FLD_CD != '' ">
+		     , CERT_FLD_CD = #{CERT_FLD_CD}                                                    -- 인증분야코드
+		</if>
+		<if test=" THEMA != null and THEMA != '' ">
+		     , THEMA = #{THEMA}                                                                -- 테마
+		</if>
+		<if test=" TOTQY != null and TOTQY != '' ">
+		     , TOTQY = #{TOTQY}                                                                -- 총수량
+		</if>
+		<if test=" BGNG_YMD != null and BGNG_YMD != '' ">
+		     , BGNG_YMD = #{BGNG_YMD}                                                          -- 시작일자
+		</if>
+		<if test=" PROGRS_STTUS_CD != null and PROGRS_STTUS_CD != '' ">
+		     , PROGRS_STTUS_CD = #{PROGRS_STTUS_CD}                                            -- 진행상태코드
+		</if>
+		WHERE  ODR_ID = #{ODR_ID}
+	</update>
+
+	<delete id="odrDelete" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* safety.odrDelete 
+		* TB_ODR 삭제
+		* @author dooresoft
+		* @since 2023.02.08
+		*/
+		]]>
+		DELETE FROM TB_ODR
+		WHERE  1 = 1
+		AND ODR_ID = #{ODR_ID}
+	</delete>
+	
+	<select id="odrCheckKey" parameterType="map" timeout="0" resultType="map" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* safety.odrCheckKey 
+		* TB_ODR 조회
+		* @author dooresoft
+		* @since 2023.02.08
+		*/
+		]]>
+        SELECT ODR_YR
+              ,ODR_DIV_CD
+              ,ODR
+              ,CERT_FLD_CD
+        FROM   TB_ODR
+	</select>	
+	
+	<select id="schdulSelect" parameterType="map" timeout="0" resultType="map" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* safety.schdulSelect 
+		* TB_SCHDUL 조회
+		* @author dooresoft
+		* @since 2023.02.08
+		*/
+		]]>
+        SELECT  SCHDUL_ID                                         -- 일정ID
+              , ODR_ID                                            -- 차수ID
+              , SCHDUL_CD                                         -- 일정코드
+              , SCHDUL_NM                                         -- 일정명
+              , PLAN_YMD                                          -- 계획일자
+              , RM                                                -- 비고
+              , SN                                                -- 순번              
+        FROM TB_SCHDUL A, CODE_INFO B
+        WHERE A.SCHDUL_CD = B.CODE_ID
+        AND   B.GROUP_ID = 'SCHDUL_CD'
+        <if test=" ODR_ID != null and ODR_ID != '' " >
+        AND ODR_ID = #{ODR_ID}
+        </if>
+        ORDER BY SN, PLAN_YMD
+	</select>
+	
+	<insert id="schdulSelectInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* safety.schdulSelectInsert 
+		* TB_SCHDUL 등록
+		* @author dooresoft
+		* @since 2023.02.08
+		*/
+		]]>	
+		INSERT INTO TB_SCHDUL
+		     (	SCHDUL_ID                                         -- 일정ID
+              , ODR_ID                                            -- 차수ID
+              , SCHDUL_CD                                         -- 일정코드
+              , SCHDUL_NM                                         -- 일정명
+              , PLAN_YMD                                          -- 계획일자
+              , RM                                                -- 비고
+              , SN												  -- 순번		  
+		      , REG_DT                                            -- 등록일시
+              , RGTR_ID)                                          -- 등록자ID
+		SELECT  FN_GET_KEY('TB_SCHDUL', 'SCH')
+	          , #{ODR_ID}
+	          , CODE_ID
+	          , CODE_NM
+	          , NULL
+			  , NULL
+			  , CODE_ORDER
+			  , NOW()
+			  , #{_sessionUserCd}                               
+		FROM    CODE_INFO 
+		WHERE   GROUP_ID = 'SCHDUL_CD' 
+		AND     USE_YN = 'Y' 
+		AND     CODE_ID <![CDATA[<>]]> '00000'
+	
+	</insert>
+
+	<insert id="schdulInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* safety.schdulInsert 
+		* TB_SCHDUL 등록
+		* @author dooresoft
+		* @since 2023.02.08
+		*/
+		]]>
+		INSERT INTO TB_SCHDUL (
+                SCHDUL_ID                                         -- 일정ID
+              , ODR_ID                                            -- 차수ID
+              , SCHDUL_CD                                         -- 일정코드
+              , SCHDUL_NM                                         -- 일정명
+              , PLAN_YMD                                          -- 계획일자
+              , RM                                                -- 비고
+              , SN                                                -- 순번              
+              , REG_DT                                            -- 등록일시
+              , RGTR_ID)                                          -- 등록자ID
+		VALUES (
+                FN_GET_KEY('TB_SCHDUL', 'SCH')                    -- 일정ID
+              , #{ODR_ID}                                         -- 차수ID
+              , #{SCHDUL_CD}                                      -- 일정코드
+              , #{SCHDUL_NM}                                      -- 일정명
+              , #{PLAN_YMD}                                       -- 계획일자
+              , #{RM}                                             -- 비고
+              , #{SN}                                             -- 순번              
+              , NOW()                                             -- 등록일시
+              , #{_sessionUserCd}                                 -- 등록자ID
+		)
+	</insert>
+
+	<update id="schdulUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* safety.schdulUpdate 
+		* TB_SCHDUL 수정
+		* @author dooresoft
+		* @since 2023.02.08
+		*/
+		]]>
+		UPDATE TB_SCHDUL
+		SET    MDFCN_DT =NOW()
+		     , MDFR_ID = #{_sessionUserCd}
+		<if test=" ODR_ID != null and ODR_ID != '' ">
+		     , ODR_ID = #{ODR_ID}                                                              -- 차수ID
+		</if>
+		<if test=" SCHDUL_CD != null and SCHDUL_CD != '' ">
+		     , SCHDUL_CD = #{SCHDUL_CD}                                                        -- 일정코드
+		</if>
+		<if test=" SCHDUL_NM != null and SCHDUL_NM != '' ">
+		     , SCHDUL_NM = #{SCHDUL_NM}                                                        -- 일정명
+		</if>
+		<if test=" PLAN_YMD != null and PLAN_YMD != '' ">
+		     , PLAN_YMD = #{PLAN_YMD}                                                          -- 계획일자
+		</if>
+		<if test=" RM != null and RM != '' ">
+		     , RM = #{RM}                                                                      -- 비고
+		</if>
+		<if test=" SN != null and SN != '' ">
+		     , SN = #{SN}                                                                      -- 순번
+		</if>		
+		WHERE  SCHDUL_ID = #{SCHDUL_ID}
+	</update>
+
+	<delete id="schdulDelete" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* safety.schdulDelete 
+		* TB_SCHDUL 삭제
+		* @author dooresoft
+		* @since 2023.02.08
+		*/
+		]]>
+		DELETE FROM TB_SCHDUL
+		WHERE  1 = 1
+		AND SCHDUL_ID = #{SCHDUL_ID}
+	</delete>	
+	
+	<select id="selectId" parameterType="map" timeout="0" resultType="map" useCache="false">
+		<![CDATA[
+		/*
+		 *
+		 * safety.selectId
+		 * 날짜조회
+		 * @author dooresoft
+		 * @since 2023.02.94
+		 */
+		]]>
+		SELECT FN_GET_KEY(#{PARAM1}, #{PARAM2}) RETURN_VALUE
+	</select>
+	
+	
+	<select id="odrGdsList" parameterType="map" timeout="0" resultType="map" useCache="false">		
+		<![CDATA[
+		/*
+		*
+		* safety.odrGdsList 
+		* TB_ODR_GDS 조회
+		* @author dooresoft
+		* @since 2023.02.14
+		*/
+		]]>
+        SELECT A.DETAIL_GDS_ID
+	   	     , A.GDS_CD
+	   		 , A.CERT_FLD_CD
+	   		 , A.CERT_KND_CD
+	   		 , A.DETAIL_GDS_NM
+	   		 , A.STTY_PRDUCT_CL_CD
+	   		 , #{ODR_ID} ODR_ID
+	   		 , CASE WHEN B.DETAIL_GDS_ID IS NULL THEN 0  ELSE 1 END CHK
+        FROM   TB_GDS A LEFT OUTER JOIN TB_ODR_GDS  B ON A.DETAIL_GDS_ID = B.DETAIL_GDS_ID AND B.ODR_ID = #{ODR_ID}
+        WHERE 1 = 1
+       <if test=" CERT_FLD_CD != null and CERT_FLD_CD != '' " >        
+        AND   A.CERT_FLD_CD = #{CERT_FLD_CD}
+        </if>
+        <if test=" USE_YN != null and USE_YN != '' " >
+        AND   A.USE_YN = #{USE_YN}
+        </if>
+        ORDER BY FN_GET_COM_SN('CERT_KND_CD', A.CERT_KND_CD),  A.SN
+	</select>
+	
+	<select id="odrGdsInstList" parameterType="map" timeout="0" resultType="map" useCache="false">		
+		<![CDATA[
+		/*
+		*
+		* safety.odrGdsInstList 
+		* 시험가능기관 리스트 조회
+		* @author dooresoft
+		* @since 2023.02.14
+		*/
+		]]>	
+		SELECT DISTINCT B.TEST_INST_CD, c.CODE_NM
+		FROM   TB_ODR_GDS A, TB_TEST_POSBL_INST B, CODE_INFO C
+		WHERE  A.DETAIL_GDS_ID = B.DETAIL_GDS_ID
+		AND    B.TEST_INST_CD = C.CODE_ID
+		AND    C.GROUP_ID = 'TEST_INST_CD'   
+		AND    A.ODR_ID = #{ODR_ID}
+		ORDER BY CAST(C.CODE_ORDER AS UNSIGNED)	
+	
+	</select>	
+	
+	<select id="odrGdsSelect" parameterType="map" timeout="0" resultType="map" useCache="false">
+		<![CDATA[
+		/*
+		*
+		* safety.odrGdsSelect 
+		* TB_ODR_GDS 조회
+		* @author dooresoft
+		* @since 2023.02.14
+		*/
+		]]>
+        SELECT  A.ODR_ID                                            -- 차수ID
+        	  , B.GDS_CD                                            -- 폼목코드
+        	  , FN_GET_COM_NM('GDS_CD', B.GDS_CD) GDS_NM            -- 품목명
+              , A.DETAIL_GDS_ID                                     -- 세부품목ID
+              , B.DETAIL_GDS_NM                                     -- 세부품목명
+              , B.CERT_FLD_CD										-- 인증분야코드
+              , FN_GET_COM_NM('CERT_FLD_CD', B.CERT_FLD_CD) CERT_FLD_NM        -- 인증분야명
+              , B.CERT_KND_CD										-- 인증종류코드
+              , FN_GET_COM_NM('CERT_KND_CD', B.CERT_KND_CD) CERT_KND_NM        -- 인증코드명
+              , A.GDS_PLAN_QY                                       -- 품목계획수량
+              , A.GOAL_QY                                           -- 목표수량
+              , A.POSBL_QY                                          -- 가능수량
+              , A.PLAN_QY                                           -- 계획수량
+              , CASE WHEN (SELECT COUNT(*) FROM TB_TEST_POSBL_INST SA WHERE SA.DETAIL_GDS_ID = A.DETAIL_GDS_ID AND SA.TEST_INST_CD = 'KCL') > 0 THEN 1 ELSE 0 END KCL_EDIT_YN
+              , A.KCL_POSBL_QY                                      -- KCL가능수량
+              , A.KCL_PLAN_QY                                       -- KCL계획수량
+              , CASE WHEN (SELECT COUNT(*) FROM TB_TEST_POSBL_INST SA WHERE SA.DETAIL_GDS_ID = A.DETAIL_GDS_ID AND SA.TEST_INST_CD = 'KTR') > 0 THEN 1 ELSE 0 END KTR_EDIT_YN
+              , A.KTR_POSBL_QY                                      -- KTR가능수량
+              , A.KTR_PLAN_QY                                       -- KTR계획수량
+              , CASE WHEN (SELECT COUNT(*) FROM TB_TEST_POSBL_INST SA WHERE SA.DETAIL_GDS_ID = A.DETAIL_GDS_ID AND SA.TEST_INST_CD = 'KTC') > 0 THEN 1 ELSE 0 END KTC_EDIT_YN
+              , A.KTC_POSBL_QY                                      -- KTC가능수량
+              , A.KTC_PLAN_QY                                       -- KTC계획수량
+              , CASE WHEN (SELECT COUNT(*) FROM TB_TEST_POSBL_INST SA WHERE SA.DETAIL_GDS_ID = A.DETAIL_GDS_ID AND SA.TEST_INST_CD = 'KATRI') > 0 THEN 1 ELSE 0 END KATRI_EDIT_YN
+              , A.KATRI_POSBL_QY                                    -- KATRI_가능수량
+              , A.KATRI_PLAN_QY                                     -- KATRI_계획수량
+              , CASE WHEN (SELECT COUNT(*) FROM TB_TEST_POSBL_INST SA WHERE SA.DETAIL_GDS_ID = A.DETAIL_GDS_ID AND SA.TEST_INST_CD = 'FITI') > 0 THEN 1 ELSE 0 END FITI_EDIT_YN
+              , A.FITI_POSBL_QY                                     -- FITI_가능수량
+              , A.FITI_PLAN_QY                                      -- FITI_계획수량
+              , CASE WHEN (SELECT COUNT(*) FROM TB_TEST_POSBL_INST SA WHERE SA.DETAIL_GDS_ID = A.DETAIL_GDS_ID AND SA.TEST_INST_CD = 'KOTITI') > 0 THEN 1 ELSE 0 END KOTITI_EDIT_YN
+              , A.KOTITI_POSBL_QY                                   -- KOTITI_가능수량
+              , A.KOTITI_PLAN_QY                                    -- KOTITI_계획수량
+              , CASE WHEN (SELECT COUNT(*) FROM TB_TEST_POSBL_INST SA WHERE SA.DETAIL_GDS_ID = A.DETAIL_GDS_ID AND SA.TEST_INST_CD = 'KTL') > 0 THEN 1 ELSE 0 END KTL_EDIT_YN
+              , A.KTL_POSBL_QY                                      -- KTL_가능수량
+              , A.KTL_PLAN_QY                                       -- KTL_계획수량
+              , CASE WHEN (SELECT COUNT(*) FROM TB_TEST_POSBL_INST SA WHERE SA.DETAIL_GDS_ID = A.DETAIL_GDS_ID AND SA.TEST_INST_CD = 'INST_1') > 0 THEN 1 ELSE 0 END INST_1_EDIT_YN
+              , A.INST_1_POSBL_QY                                   -- 기관1_가능수량
+              , A.INST_1_PLAN_QY                                    -- 기관1_계획수량
+              , CASE WHEN (SELECT COUNT(*) FROM TB_TEST_POSBL_INST SA WHERE SA.DETAIL_GDS_ID = A.DETAIL_GDS_ID AND SA.TEST_INST_CD = 'INST_2') > 0 THEN 1 ELSE 0 END INST_2_EDIT_YN
+              , A.INST_2_POSBL_QY                                   -- 기관2_가능수량
+              , A.INST_2_PLAN_QY                                    -- 기관2_계획수량
+              , CASE WHEN (SELECT COUNT(*) FROM TB_TEST_POSBL_INST SA WHERE SA.DETAIL_GDS_ID = A.DETAIL_GDS_ID AND SA.TEST_INST_CD = 'INST_3') > 0 THEN 1 ELSE 0 END INST_3_EDIT_YN
+              , A.INST_3_POSBL_QY                                   -- 기관3_가능수량
+              , A.INST_3_PLAN_QY                                    -- 기관3_계획수량
+              , CASE WHEN (SELECT COUNT(*) FROM TB_TEST_POSBL_INST SA WHERE SA.DETAIL_GDS_ID = A.DETAIL_GDS_ID AND SA.TEST_INST_CD = 'INST_4') > 0 THEN 1 ELSE 0 END INST_4_EDIT_YN
+              , A.INST_4_POSBL_QY                                   -- 기관4_가능수량
+              , A.INST_4_PLAN_QY                                    -- 기관4_계획수량
+              , CASE WHEN (SELECT COUNT(*) FROM TB_TEST_POSBL_INST SA WHERE SA.DETAIL_GDS_ID = A.DETAIL_GDS_ID AND SA.TEST_INST_CD = 'INST_5') > 0 THEN 1 ELSE 0 END INST_5_EDIT_YN
+              , A.INST_5_POSBL_QY                                   -- 기관5_가능수량
+              , A.INST_5_PLAN_QY                                    -- 기관5_계획수량
+        FROM    TB_ODR_GDS A, TB_GDS B
+        WHERE   1 = 1
+        AND     A.DETAIL_GDS_ID = B.DETAIL_GDS_ID
+        <if test=" ODR_ID != null and ODR_ID != '' " >
+        AND     A.ODR_ID = #{ODR_ID}
+        </if>
+        <if test=" DETAIL_GDS_ID != null and DETAIL_GDS_ID != '' " >
+        AND     A.DETAIL_GDS_ID = #{DETAIL_GDS_ID}
+        </if>
+        ORDER BY FN_GET_COM_SN('CERT_KND_CD', B.CERT_KND_CD), FN_GET_COM_SN('GDS_CD', B.GDS_CD), B.SN 
+	</select>
+
+	<insert id="odrGdsInsert" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* safety.odrGdsInsert 
+		* TB_ODR_GDS 등록
+		* @author dooresoft
+		* @since 2023.02.14
+		*/
+		]]>
+		INSERT INTO TB_ODR_GDS (
+                ODR_ID                                            -- 차수ID
+              , DETAIL_GDS_ID                                     -- 세부품목ID
+              , GDS_PLAN_QY                                       -- 품목계획수량
+              , GOAL_QY                                           -- 목표수량
+              , POSBL_QY                                          -- 가능수량
+              , PLAN_QY                                           -- 계획수량
+              , KCL_POSBL_QY                                      -- KCL가능수량
+              , KCL_PLAN_QY                                       -- KCL계획수량
+              , KTR_POSBL_QY                                      -- KTR가능수량
+              , KTR_PLAN_QY                                       -- KTR계획수량
+              , KTC_POSBL_QY                                      -- KTC가능수량
+              , KTC_PLAN_QY                                       -- KTC계획수량
+              , KATRI_POSBL_QY                                    -- KATRI_가능수량
+              , KATRI_PLAN_QY                                     -- KATRI_계획수량
+              , FITI_POSBL_QY                                     -- FITI_가능수량
+              , FITI_PLAN_QY                                      -- FITI_계획수량
+              , KOTITI_POSBL_QY                                   -- KOTITI_가능수량
+              , KOTITI_PLAN_QY                                    -- KOTITI_계획수량
+              , KTL_POSBL_QY                                      -- KTL_가능수량
+              , KTL_PLAN_QY                                       -- KTL_계획수량
+              , INST_1_POSBL_QY                                   -- 기관1_가능수량
+              , INST_1_PLAN_QY                                    -- 기관1_계획수량
+              , INST_2_POSBL_QY                                   -- 기관2_가능수량
+              , INST_2_PLAN_QY                                    -- 기관2_계획수량
+              , INST_3_POSBL_QY                                   -- 기관3_가능수량
+              , INST_3_PLAN_QY                                    -- 기관3_계획수량
+              , INST_4_POSBL_QY                                   -- 기관4_가능수량
+              , INST_4_PLAN_QY                                    -- 기관4_계획수량
+              , INST_5_POSBL_QY                                   -- 기관5_가능수량
+              , INST_5_PLAN_QY                                    -- 기관5_계획수량
+              , REG_DT                                            -- 등록일시
+              , RGTR_ID)                                          -- 등록자ID
+		VALUES (
+                #{ODR_ID}                                         -- 차수ID
+              , #{DETAIL_GDS_ID}                                  -- 세부품목ID
+              , #{GDS_PLAN_QY}                                    -- 품목계획수량
+              , #{GOAL_QY}                                        -- 목표수량
+              , #{POSBL_QY}                                       -- 가능수량
+              , #{PLAN_QY}                                        -- 계획수량
+              , #{KCL_POSBL_QY}                                   -- KCL가능수량
+              , #{KCL_PLAN_QY}                                    -- KCL계획수량
+              , #{KTR_POSBL_QY}                                   -- KTR가능수량
+              , #{KTR_PLAN_QY}                                    -- KTR계획수량
+              , #{KTC_POSBL_QY}                                   -- KTC가능수량
+              , #{KTC_PLAN_QY}                                    -- KTC계획수량
+              , #{KATRI_POSBL_QY}                                 -- KATRI_가능수량
+              , #{KATRI_PLAN_QY}                                  -- KATRI_계획수량
+              , #{FITI_POSBL_QY}                                  -- FITI_가능수량
+              , #{FITI_PLAN_QY}                                   -- FITI_계획수량
+              , #{KOTITI_POSBL_QY}                                -- KOTITI_가능수량
+              , #{KOTITI_PLAN_QY}                                 -- KOTITI_계획수량
+              , #{KTL_POSBL_QY}                                   -- KTL_가능수량
+              , #{KTL_PLAN_QY}                                    -- KTL_계획수량
+              , #{INST_1_POSBL_QY}                                -- 기관1_가능수량
+              , #{INST_1_PLAN_QY}                                 -- 기관1_계획수량
+              , #{INST_2_POSBL_QY}                                -- 기관2_가능수량
+              , #{INST_2_PLAN_QY}                                 -- 기관2_계획수량
+              , #{INST_3_POSBL_QY}                                -- 기관3_가능수량
+              , #{INST_3_PLAN_QY}                                 -- 기관3_계획수량
+              , #{INST_4_POSBL_QY}                                -- 기관4_가능수량
+              , #{INST_4_PLAN_QY}                                 -- 기관4_계획수량
+              , #{INST_5_POSBL_QY}                                -- 기관5_가능수량
+              , #{INST_5_PLAN_QY}                                 -- 기관5_계획수량
+              , NOW()                                             -- 등록일시
+              , #{_sessionUserCd}                                 -- 등록자ID
+		)
+	</insert>
+
+	<update id="odrGdsUpdate" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* safety.odrGdsUpdate 
+		* TB_ODR_GDS 수정
+		* @author dooresoft
+		* @since 2023.02.14
+		*/
+		]]>
+		UPDATE TB_ODR_GDS
+		SET    MDFCN_DT =NOW()
+		     , MDFR_ID = #{_sessionUserCd}
+		<if test=" GDS_PLAN_QY != null and GDS_PLAN_QY != '' ">
+		     , GDS_PLAN_QY = #{GDS_PLAN_QY}                                                    -- 품목계획수량
+		</if>
+		<if test=" GOAL_QY != null and GOAL_QY != '' ">
+		     , GOAL_QY = #{GOAL_QY}                                                            -- 목표수량
+		</if>
+		<if test=" POSBL_QY != null and POSBL_QY != '' ">
+		     , POSBL_QY = #{POSBL_QY}                                                          -- 가능수량
+		</if>
+		<if test=" PLAN_QY != null and PLAN_QY != '' ">
+		     , PLAN_QY = #{PLAN_QY}                                                            -- 계획수량
+		</if>
+		<if test=" KCL_POSBL_QY != null and KCL_POSBL_QY != '' ">
+		     , KCL_POSBL_QY = #{KCL_POSBL_QY}                                                  -- KCL가능수량
+		</if>
+		<if test=" KCL_PLAN_QY != null and KCL_PLAN_QY != '' ">
+		     , KCL_PLAN_QY = #{KCL_PLAN_QY}                                                    -- KCL계획수량
+		</if>
+		<if test=" KTR_POSBL_QY != null and KTR_POSBL_QY != '' ">
+		     , KTR_POSBL_QY = #{KTR_POSBL_QY}                                                  -- KTR가능수량
+		</if>
+		<if test=" KTR_PLAN_QY != null and KTR_PLAN_QY != '' ">
+		     , KTR_PLAN_QY = #{KTR_PLAN_QY}                                                    -- KTR계획수량
+		</if>
+		<if test=" KTC_POSBL_QY != null and KTC_POSBL_QY != '' ">
+		     , KTC_POSBL_QY = #{KTC_POSBL_QY}                                                  -- KTC가능수량
+		</if>
+		<if test=" KTC_PLAN_QY != null and KTC_PLAN_QY != '' ">
+		     , KTC_PLAN_QY = #{KTC_PLAN_QY}                                                    -- KTC계획수량
+		</if>
+		<if test=" KATRI_POSBL_QY != null and KATRI_POSBL_QY != '' ">
+		     , KATRI_POSBL_QY = #{KATRI_POSBL_QY}                                              -- KATRI_가능수량
+		</if>
+		<if test=" KATRI_PLAN_QY != null and KATRI_PLAN_QY != '' ">
+		     , KATRI_PLAN_QY = #{KATRI_PLAN_QY}                                                -- KATRI_계획수량
+		</if>
+		<if test=" FITI_POSBL_QY != null and FITI_POSBL_QY != '' ">
+		     , FITI_POSBL_QY = #{FITI_POSBL_QY}                                                -- FITI_가능수량
+		</if>
+		<if test=" FITI_PLAN_QY != null and FITI_PLAN_QY != '' ">
+		     , FITI_PLAN_QY = #{FITI_PLAN_QY}                                                  -- FITI_계획수량
+		</if>
+		<if test=" KOTITI_POSBL_QY != null and KOTITI_POSBL_QY != '' ">
+		     , KOTITI_POSBL_QY = #{KOTITI_POSBL_QY}                                            -- KOTITI_가능수량
+		</if>
+		<if test=" KOTITI_PLAN_QY != null and KOTITI_PLAN_QY != '' ">
+		     , KOTITI_PLAN_QY = #{KOTITI_PLAN_QY}                                              -- KOTITI_계획수량
+		</if>
+		<if test=" KTL_POSBL_QY != null and KTL_POSBL_QY != '' ">
+		     , KTL_POSBL_QY = #{KTL_POSBL_QY}                                                  -- KTL_가능수량
+		</if>
+		<if test=" KTL_PLAN_QY != null and KTL_PLAN_QY != '' ">
+		     , KTL_PLAN_QY = #{KTL_PLAN_QY}                                                    -- KTL_계획수량
+		</if>
+		<if test=" INST_1_POSBL_QY != null and INST_1_POSBL_QY != '' ">
+		     , INST_1_POSBL_QY = #{INST_1_POSBL_QY}                                            -- 기관1_가능수량
+		</if>
+		<if test=" INST_1_PLAN_QY != null and INST_1_PLAN_QY != '' ">
+		     , INST_1_PLAN_QY = #{INST_1_PLAN_QY}                                              -- 기관1_계획수량
+		</if>
+		<if test=" INST_2_POSBL_QY != null and INST_2_POSBL_QY != '' ">
+		     , INST_2_POSBL_QY = #{INST_2_POSBL_QY}                                            -- 기관2_가능수량
+		</if>
+		<if test=" INST_2_PLAN_QY != null and INST_2_PLAN_QY != '' ">
+		     , INST_2_PLAN_QY = #{INST_2_PLAN_QY}                                              -- 기관2_계획수량
+		</if>
+		<if test=" INST_3_POSBL_QY != null and INST_3_POSBL_QY != '' ">
+		     , INST_3_POSBL_QY = #{INST_3_POSBL_QY}                                            -- 기관3_가능수량
+		</if>
+		<if test=" INST_3_PLAN_QY != null and INST_3_PLAN_QY != '' ">
+		     , INST_3_PLAN_QY = #{INST_3_PLAN_QY}                                              -- 기관3_계획수량
+		</if>
+		<if test=" INST_4_POSBL_QY != null and INST_4_POSBL_QY != '' ">
+		     , INST_4_POSBL_QY = #{INST_4_POSBL_QY}                                            -- 기관4_가능수량
+		</if>
+		<if test=" INST_4_PLAN_QY != null and INST_4_PLAN_QY != '' ">
+		     , INST_4_PLAN_QY = #{INST_4_PLAN_QY}                                              -- 기관4_계획수량
+		</if>
+		<if test=" INST_5_POSBL_QY != null and INST_5_POSBL_QY != '' ">
+		     , INST_5_POSBL_QY = #{INST_5_POSBL_QY}                                            -- 기관5_가능수량
+		</if>
+		<if test=" INST_5_PLAN_QY != null and INST_5_PLAN_QY != '' ">
+		     , INST_5_PLAN_QY = #{INST_5_PLAN_QY}                                              -- 기관5_계획수량
+		</if>
+		WHERE  ODR_ID = #{ODR_ID}
+		AND    DETAIL_GDS_ID = #{DETAIL_GDS_ID}
+	</update>
+
+	<delete id="odrGdsDelete" parameterType="map" timeout="0">
+		<![CDATA[
+		/*
+		*
+		* safety.odrGdsDelete 
+		* TB_ODR_GDS 삭제
+		* @author dooresoft
+		* @since 2023.02.14
+		*/
+		]]>
+		DELETE FROM TB_ODR_GDS
+		WHERE  1 = 1
+		AND ODR_ID = #{ODR_ID}
+		AND DETAIL_GDS_ID = #{DETAIL_GDS_ID}
+	</delete>
+
+</mapper>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <properties>
+		<property name="pattern">%d{HH:mm:ss.SSS} [%-5level] [%t] %logger{36} : %msg%n</property>
+		<property name="path">C:/UXBoosterEgov/data/logs</property>
+		<property name="fileName">UXBooster</property>
+	</properties>
+	
+	<Appenders>
+		<Console name="console" target="SYSTEM_OUT">
+			<PatternLayout pattern="${pattern}" />
+		</Console>
+		<RollingFile
+			name="file"
+			fileName="${path}/${fileName}.log"
+			filePattern="${path}/${fileName}_backup/${fileName}_%d{yyyy-MM-dd}.log">
+			<PatternLayout pattern="${pattern}" />
+			<DefaultRolloverStrategy>
+				<Delete basePath="${path}" maxDepth="2">
+					<IfLastModified age="5d" />
+				</Delete>
+			</DefaultRolloverStrategy>
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+		</RollingFile>
+	</Appenders>
+	
+	<Loggers>
+		<!-- attribute: name(Logger명), level(Log Level), additivity(중복로깅여부, true or false) -->
+		<!-- element: AppenderRef(Appender명) -->
+		<Logger name="org.springframework.core" level="INFO">
+			<AppenderRef ref="console" />
+		</Logger>
+		
+		<Logger name="org.springframework.beans" level="INFO">
+			<AppenderRef ref="console" />
+		</Logger>
+		
+		<Logger name="org.springframework.context" level="INFO">
+			<AppenderRef ref="console" />
+		</Logger>
+		
+		<Logger name="org.springframework.web" level="INFO">
+			<AppenderRef ref="console" />
+		</Logger>
+		
+		<Logger name="java.sql" level="ERROR">
+			<AppenderRef ref="console" />
+		</Logger>
+
+		<Logger name="jdbc.sqlonly" level="INFO" additivity="false">
+			<AppenderRef ref="console" />
+		</Logger>
+		
+		<Logger name="jdbc.sqltiming" level="ERROR">
+			<AppenderRef ref="console" />
+		</Logger>
+		
+		<Logger name="jdbc.audit" level="ERROR">
+			<AppenderRef ref="console" />
+		</Logger>
+
+		<Logger name="jdbc.resultset" level="ERROR">
+			<AppenderRef ref="console" />
+		</Logger>
+		
+		<Logger name="jdbc.resultsettable" level="INFO" additivity="false">
+			<AppenderRef ref="console" />
+		</Logger>
+		
+		<Logger name="jdbc.connection" level="ERROR">
+			<AppenderRef ref="console" />
+		</Logger>
+		
+		<Logger name="java.sql.connection" level="ERROR">
+			<AppenderRef ref="console" />
+		</Logger>
+
+		<Root level="INFO">
+			<AppenderRef ref="console" />
+			<AppenderRef ref="file" />
+		</Root>
+
+	</Loggers>
+</Configuration>
