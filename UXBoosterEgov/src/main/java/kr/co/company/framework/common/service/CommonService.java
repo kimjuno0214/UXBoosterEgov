@@ -60,7 +60,7 @@ public class CommonService {
 
 	@Autowired
 	private TakeDAO dao;
-
+	//1
 	@Autowired
 	ResourceLoader resourceLoader;
 
